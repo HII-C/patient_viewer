@@ -1,4 +1,4 @@
-# HealthCreek
+# HealthCreek (Austin Michne's and Kaan Aksoy's version)
 
 Front-end project for context-driven clinical transactions.
 

@@ -8,26 +8,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var fhir_service_1 = require('../services/fhir.service');
-var patient_model_1 = require('../models/patient.model');
+var core_1 = require("@angular/core");
+var fhir_service_1 = require("../services/fhir.service");
+var patient_model_1 = require("../models/patient.model");
 var ActivitiesComponent = (function () {
     function ActivitiesComponent(fhirService) {
         this.fhirService = fhirService;
         console.log("ActivityService created...");
     }
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', patient_model_1.Patient)
-    ], ActivitiesComponent.prototype, "patient", void 0);
-    ActivitiesComponent = __decorate([
-        core_1.Component({
-            selector: 'activities',
-            templateUrl: 'app/components/activities.html'
-        }), 
-        __metadata('design:paramtypes', [fhir_service_1.FhirService])
-    ], ActivitiesComponent);
     return ActivitiesComponent;
 }());
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", patient_model_1.Patient)
+], ActivitiesComponent.prototype, "patient", void 0);
+ActivitiesComponent = __decorate([
+    core_1.Component({
+        selector: 'activities',
+        templateUrl: 'app/components/activities.html'
+    }),
+    __metadata("design:paramtypes", [fhir_service_1.FhirService])
+], ActivitiesComponent);
 exports.ActivitiesComponent = ActivitiesComponent;
 //# sourceMappingURL=activities.component.js.map

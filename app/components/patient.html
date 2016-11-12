@@ -3,25 +3,30 @@
     display: -webkit-flex;
     display: flex;
     width: 100%;
-    height: 10%;
+    height: 80px;
     background-color: white;
+    border-bottom: grey;
 }
 
 .flex-item {
     background-color: white;
-    width: 40%;
     height: 100px;
     margin: 10px;
+	margin-bottom: 0px;
+}
+.patientInfoBox{
+	display: inline-block;
+	width: 20%;
+	margin-bottom: 10px;
+	margin-left: 10px;
+	margin-right: 10px;
 }
 </style>
 <div>
 	<aside id="sidebar" class="div" *ngIf="patients">
 		<section>
-
-			<!-- Nav tabs -->
-			<!-- Fixing columns height and width so it doesn't look like shit-->
 			<div class="flex-container">
-				<div class="flex-item">
+				<div class="patientInfoBox">
 					<label><span class="glyphicon glyphicon-user"></span> Patient</label>
 					<select class="form-control" id="patient_select" (change)="select($event.target.value)">
 					<option *ngFor="let p of patients" [value]="p.id" [selected]="patient && (p.id == patient.id)">
@@ -36,17 +41,16 @@
 					</small>
 					</p>
 				</div>
-				<div class="flex-item">
+				<div class="patientInfoBox">
 					<section *ngIf="selected">
 						<div class="identifier" *ngFor="let id of selected.identifier">
 							<b *ngIf="id['type'] && id['type']['coding']">{{id['type']['coding'][0]['display']}}</b>
 							<i>({{id['value']}})</i>
-							<br/>
 							<small>{{id['system']}} {{id['use']}}</small>
 						</div>
 					</section>
 				</div>
-				<div class="flex-item">
+				<div class="patientInfoBox">
 					<section *ngIf="selected">
 						<h4>Addresses</h4>
 						<address class="address" *ngFor="let a of selected.address">
@@ -56,21 +60,41 @@
 								<small>{{a['city']}}, {{a['country']}}, {{a['postalCode']}}</small>
 							</address>
 					</section>
-
 				</div>
-				<div flex-item>
-					<h3><font size="5"><span class="glyphicon glyphicon-fire"></span> Provider </font></h3>
+				<div class="patientInfoBox">
+					<font size="5"><span class="glyphicon glyphicon-fire"></span> Provider </font>
 				</div>
-				<div class="flex-item">
-					<h3>
+				<div class="patientInfoBox">
 					<select class="form-control" id="server_select" (change)="selectServerForUrl($event.target.value)">
 					<option *ngFor="let s of servers" [value]="s.url" [selected]="server && (s.url == server.url)">{{s.name}}</option>
 						</select>
-					</h3>
 				</div>
 			</div>
+            <div class="encounterBar"></div>
+            <div class="horizTimeLine">
+                <div class="encounterBox">
+                    <h2>Entry Title [Optional Header]</h2>
+                    Encounter Information [Not linked to FHIR as of now, working on it]
+                </div>
+                <div class="encounterBox">
+                    <h2>Entry Title [Optional Header]</h2>
+                    Encounter Information [Not linked to FHIR as of now, working on it]
+                </div>
+                <div class="encounterBox">
+                    <h2>Entry Title [Optional Header]</h2>
+                    Encounter Information [Not linked to FHIR as of now, working on it]
+                </div>
+                <div class="encounterBox">
+                    <h2>Entry Title [Optional Header]</h2>
+                    Encounter Information [Not linked to FHIR as of now, working on it]
+                </div>
+                <div class="encounterBox">
+                    <h2>Entry Title [Optional Header]</h2>
+                    Encounter Information [Not linked to FHIR as of now, working on it]
+                </div>
+            </div>
 			<!-- Tab panes -->
-			<table align="center" style="box-shadow: ;">
+			<table align="center">
 				<colgroup>
 				<col style="width:25%">
 				<col style="width:40%">

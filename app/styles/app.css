@@ -1,6 +1,8 @@
 body {
+    padding: 25px;
     background-color: none;
     background: url('/app/images/textures/wild_oliva.png') repeat;
+
 }
 
 input:invalid, textarea:invalid {
@@ -34,7 +36,7 @@ activities h2, observations h2 {
 aside#sidebar>section, activities>section, observations>section {
     /*margin: 0 0px;*/
     padding: 8px;
-    border-radius: 2px;
+    border-radius: 8px;
     box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
     background-color: none;
     background: url('/app/images/textures/crossword.png') repeat;
@@ -67,4 +69,81 @@ table.table tbody tr:hover:not(.selected) {
 h4 {
     border-bottom: 1px solid #ccc;
     /*text-decoration: underline;*/
+}
+.horizTimeLine {
+    white-space:nowrap;
+    overflow-x: scroll;
+    padding:30px 0 10px 0;
+    position:relative;
+}
+
+.encounterBox {
+    display:inline-block;
+    vertical-align:top;
+    background:#9DA8b0;
+    color:black;
+
+    font-size:12px;
+    text-align:center;
+    position:relative;
+    border-top:4px solid #3D4850;
+    border-radius:15px;
+    min-width:200px;
+    max-width:500px;
+
+}
+
+.encounterBox img {
+    display:block;
+    max-width:100%;
+    height:auto;
+    margin-bottom:10px;
+}
+
+.encounterBox:after {
+    content:'';
+    display:block;
+    background:#eee;
+    width:15px;
+    height:15px;
+    border-radius:20px;
+    border:3px solid #06182E;
+    position:absolute;
+    left:50%;
+    top:-30px;
+    margin-left:-9px;
+}
+
+.encounterBox:before {
+    content:'';
+    display:block;
+    background:#06182E;
+    width:5px;
+    height:20px;
+    position:absolute;
+    left:50%;
+    top:-20px;
+    margin-left:-4px;
+}
+
+.encounterBox h1 {
+    color:black;
+    font-size:18px;
+    padding: 0px;
+    font-weight:bold;
+
+}
+
+.encounterBox h2 {
+    font-weight:bolder;
+    font-size:12px;
+}
+
+.encounterBar {
+    height:4px;
+    background:#9DA8b0;
+    width:100%;
+    position:relative;
+    top:13px;
+    left:0;
 }

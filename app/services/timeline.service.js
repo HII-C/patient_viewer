@@ -12,26 +12,24 @@ var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
 require("rxjs/add/operator/map");
 var fhir_service_1 = require("./fhir.service");
-var EncounterService = (function () {
-    function EncounterService(fhirService, http) {
+var TimelineService = (function () {
+    function TimelineService(fhirService, http) {
         this.fhirService = fhirService;
         this.http = http;
-        this.path = '/Encounter';
+        this.path = '/Condition';
+        console.log("TimelineService created...");
     }
-    EncounterService.prototype.index = function () {
-        var url = this.fhirService.getUrl() + this.path;
-        return this.http.get(url).map(function (res) { return res.json(); });
+    TimelineService.prototype.index = function (patient) {
+        var url = this.fhirService.getUrl() + this.path + "?patient=" + patient.id;
+        // console.log("ESNUTH");
+        return this.http.get(url, this.fhirService.options()).map(function (res) { return res.json(); });
     };
-    EncounterService.prototype.get = function (id) {
-        var url = this.fhirService.getUrl() + this.path + '/' + id;
-        return this.http.get(url).map(function (res) { return res.json(); });
-    };
-    return EncounterService;
+    return TimelineService;
 }());
-EncounterService = __decorate([
+TimelineService = __decorate([
     core_1.Injectable(),
     core_1.Component({}),
     __metadata("design:paramtypes", [fhir_service_1.FhirService, http_1.Http])
-], EncounterService);
-exports.EncounterService = EncounterService;
-//# sourceMappingURL=encounter.service.js.map
+], TimelineService);
+exports.TimelineService = TimelineService;
+//# sourceMappingURL=timeline.service.js.map

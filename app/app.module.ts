@@ -8,6 +8,7 @@ import {HomeComponent} from './components/home.component';
 import {PatientComponent} from './components/patient.component';
 
 import {ConditionsComponent} from './components/conditions.component';
+import {TimelineComponent} from './components/timeline.component';
 import {ObservationsComponent} from './components/observations.component';
 import {ActivitiesComponent} from './components/activities.component';
 
@@ -20,6 +21,7 @@ import {PatientService} from './services/patient.service';
 import {SearchService} from './services/search.service';
 import {UserService} from './services/user.service';
 import {ConditionService} from './services/condition.service';
+import {TimelineService} from './services/timeline.service';
 import {ObservationService} from './services/observation.service';
 
 import {MomentModule} from 'angular2-moment';
@@ -56,7 +58,8 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
         PatientComponent,
         ObservationsComponent,
         ConditionsComponent,
-        ActivitiesComponent
+        ActivitiesComponent,
+        TimelineComponent
     ],   // components and directives
     providers: [
         appRoutingProviders,
@@ -69,7 +72,8 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
         SearchService,
         ObservationService,
         ConditionService,
-        UserService
+        UserService,
+        TimelineService
     ],                    // services
     bootstrap: [AppComponent]     // root component
 })

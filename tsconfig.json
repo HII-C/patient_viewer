@@ -28,6 +28,7 @@
         "app/components/home.component.ts",
         "app/components/observations.component.ts",
         "app/components/patient.component.ts",
+        "app/components/timeline.component.ts",
         "app/directives/auto-grow.directive.ts",
         "app/directives/highlight.directive.ts",
         "app/main.ts",
@@ -37,6 +38,7 @@
         "app/models/observation.model.ts",
         "app/models/patient.model.ts",
         "app/models/server.model.ts",
+        "app/models/timeline.model.ts",
         "app/models/user.model.ts",
         "app/pipes/humanizeBytes.pipe.ts",
         "app/services/client.service.ts",
@@ -48,6 +50,7 @@
         "app/services/patient.service.ts",
         "app/services/search.service.ts",
         "app/services/server.service.ts",
+        "app/services/timeline.service.ts",
         "app/services/user.service.ts"
     ]
 }

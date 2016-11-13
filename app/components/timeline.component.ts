@@ -22,7 +22,8 @@ export class TimelineComponent{
         if (this.patient) {
             this.timelineService.index(this.patient).subscribe(data => {
 				if(data.entry) {
-                	this.timeline = <Array<Timeline>>data.entry.map(r => r['resource']);
+                    this.timeline = <Array<Timeline>>data.entry.map(r => r['resource']);
+                    this.timeline = this.timeline.reverse();
                 	console.log("Loaded " + this.timeline.length + " timelines.");
 				} else {
 					this.timeline = new Array<Timeline>();

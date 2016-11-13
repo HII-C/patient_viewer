@@ -25,6 +25,7 @@ var TimelineComponent = (function () {
             this.timelineService.index(this.patient).subscribe(function (data) {
                 if (data.entry) {
                     _this.timeline = data.entry.map(function (r) { return r['resource']; });
+                    _this.timeline = _this.timeline.reverse();
                     console.log("Loaded " + _this.timeline.length + " timelines.");
                 }
                 else {

@@ -71,16 +71,20 @@ h4 {
     /*text-decoration: underline;*/
 }
 .horizTimeLine {
-    white-space: normal;
-    overflow-x: hidden;
+    white-space: nowrap;
+    overflow-x: scroll;
     padding:30px 0 10px 0;
     position:relative;
     width: 100%;
+    direction: rtl;
+
 }
 
 .encounterBox {
     display:inline-block;
+    direction: rtl;
     vertical-align:top;
+    white-space: normal;
     background:#9DA8b0;
     color:black;
     font-size:12px;

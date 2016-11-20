@@ -17,6 +17,7 @@ var home_component_1 = require("./components/home.component");
 var patient_component_1 = require("./components/patient.component");
 var conditions_component_1 = require("./components/conditions.component");
 var timeline_component_1 = require("./components/timeline.component");
+var timeline_popup_component_1 = require("./components/timeline_popup.component");
 var observations_component_1 = require("./components/observations.component");
 var activities_component_1 = require("./components/activities.component");
 var client_service_1 = require("./services/client.service");
@@ -65,7 +66,8 @@ AppModule = __decorate([
             observations_component_1.ObservationsComponent,
             conditions_component_1.ConditionsComponent,
             activities_component_1.ActivitiesComponent,
-            timeline_component_1.TimelineComponent
+            timeline_component_1.TimelineComponent,
+            timeline_popup_component_1.TimelinePopupComponent
         ],
         providers: [
             appRoutingProviders,

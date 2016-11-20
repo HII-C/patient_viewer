@@ -5,35 +5,14 @@ import {Timeline} from '../models/timeline.model';
 import {Patient} from '../models/patient.model';
 
 @Component({
-    selector: 'timelines',
+    selector: 'timeline-popup',
     templateUrl: 'app/components/timeline_popup.html'
 })
 export class TimelinePopupComponent{
-
-    selected: Timeline;
-    timeline: Array<Timeline> = [];
-    @Input() patient: Patient;
-
     constructor(private fhirService: FhirService, private timelineService: TimelineService) {
         console.log("TimelineService created...");
     }
 
     ngOnChanges() {
-        if (this.patient) {
-            this.timelineService.index(this.patient).subscribe(data => {
-				if(data.entry) {
-                    this.timeline = <Array<Timeline>>data.entry.map(r => r['resource']);
-                    this.timeline = this.timeline.reverse();
-                	console.log("Loaded " + this.timeline.length + " timelines.");
-				} else {
-					this.timeline = new Array<Timeline>();
-					console.log("No timelines for patient.");
-				}
-            });
-        }
-    }
-
-    click(event) {
-      console.log("Test");
     }
 }

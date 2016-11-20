@@ -9,6 +9,7 @@ import {PatientComponent} from './components/patient.component';
 
 import {ConditionsComponent} from './components/conditions.component';
 import {TimelineComponent} from './components/timeline.component';
+import {TimelinePopupComponent} from './components/timeline_popup.component';
 import {ObservationsComponent} from './components/observations.component';
 import {ActivitiesComponent} from './components/activities.component';
 
@@ -59,7 +60,8 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
         ObservationsComponent,
         ConditionsComponent,
         ActivitiesComponent,
-        TimelineComponent
+        TimelineComponent,
+        TimelinePopupComponent
     ],   // components and directives
     providers: [
         appRoutingProviders,

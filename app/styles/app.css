@@ -147,6 +147,11 @@ h4 {
     margin: 2px;
 }
 
+.encounterBox:hover {
+    background:#8D979E;
+    cursor: pointer;
+}
+
 .encounterBar {
     height:4px;
     background:#9DA8b0;

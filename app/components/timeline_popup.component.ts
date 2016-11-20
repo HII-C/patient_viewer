@@ -4,15 +4,23 @@ import {TimelineService} from '../services/timeline.service';
 import {Timeline} from '../models/timeline.model';
 import {Patient} from '../models/patient.model';
 
+declare var $:any; //Necessary in order to use jQuery to open popup.
+
 @Component({
     selector: 'timeline-popup',
     templateUrl: 'app/components/timeline_popup.html'
 })
 export class TimelinePopupComponent{
+
+    data:string = "Empty";
+
     constructor(private fhirService: FhirService, private timelineService: TimelineService) {
-        console.log("TimelineService created...");
+        console.log("TimelinePopupComponent created...");
     }
 
-    ngOnChanges() {
+    show(timelineItem) {
+      console.log("Timeline item clicked.");
+      this.data = JSON.stringify(timelineItem);
+      $('#timeline_popup').modal({});
     }
 }

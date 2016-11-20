@@ -35,11 +35,6 @@ var TimelineComponent = (function () {
             });
         }
     };
-    TimelineComponent.prototype.click = function (event, timelineItem) {
-        console.log("Timeline item clicked.");
-        console.log(timelineItem);
-        $('#timeline_popup').modal({});
-    };
     return TimelineComponent;
 }());
 __decorate([

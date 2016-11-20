@@ -4,8 +4,6 @@ import {TimelineService} from '../services/timeline.service';
 import {Timeline} from '../models/timeline.model';
 import {Patient} from '../models/patient.model';
 
-declare var $:any;
-
 @Component({
     selector: 'timelines',
     templateUrl: 'app/components/timeline.html'
@@ -33,11 +31,5 @@ export class TimelineComponent{
 				}
             });
         }
-    }
-
-    click(event, timelineItem) {
-      console.log("Timeline item clicked.");
-      console.log(timelineItem);
-      $('#timeline_popup').modal({});
     }
 }

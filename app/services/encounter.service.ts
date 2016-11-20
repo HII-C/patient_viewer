@@ -21,6 +21,7 @@ export class EncounterService {
 
 	get(id) {
 		console.log("Used the Encounter service.");
+		
 		var url = this.fhirService.getUrl() + this.path + '/' + id;
 		return this.http.get(url).map(res => res.json());
 	}

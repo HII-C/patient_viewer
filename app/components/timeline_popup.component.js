@@ -15,9 +15,13 @@ var TimelinePopupComponent = (function () {
     function TimelinePopupComponent(fhirService, timelineService) {
         this.fhirService = fhirService;
         this.timelineService = timelineService;
-        console.log("TimelineService created...");
+        this.data = "Empty";
+        console.log("TimelinePopupComponent created...");
     }
-    TimelinePopupComponent.prototype.ngOnChanges = function () {
+    TimelinePopupComponent.prototype.show = function (timelineItem) {
+        console.log("Timeline item clicked.");
+        this.data = JSON.stringify(timelineItem);
+        $('#timeline_popup').modal({});
     };
     return TimelinePopupComponent;
 }());

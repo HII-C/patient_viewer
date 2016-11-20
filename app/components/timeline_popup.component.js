@@ -15,12 +15,11 @@ var TimelinePopupComponent = (function () {
     function TimelinePopupComponent(fhirService, timelineService) {
         this.fhirService = fhirService;
         this.timelineService = timelineService;
-        this.data = "Empty";
+        this.condition = null;
         console.log("TimelinePopupComponent created...");
     }
     TimelinePopupComponent.prototype.show = function (timelineItem) {
-        console.log("Timeline item clicked.");
-        this.data = JSON.stringify(timelineItem);
+        this.condition = timelineItem;
         $('#timeline_popup').modal({});
     };
     return TimelinePopupComponent;

@@ -1,13 +1,17 @@
-Test123
-<div class="modal fade" tabindex="-1" role="dialog" id="timeline_popup">
+<div *ngIf="condition" class="modal fade" tabindex="-1" role="dialog" id="timeline_popup">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Encounter</h4>
+        <h4 class="modal-title">Encounter from {{condition.onsetDateTime | amTimeAgo}}</h4>
       </div>
       <div class="modal-body">
-        <p>{{data}}&hellip;</p>
+        <p>{{condition.code.coding[0].display}}</p>
+        <p>
+          <b>Code System:</b>
+          <a href="{{condition.code.coding[0].system}}">{{condition.code.coding[0].system}}</a>
+        </p>
+        <p><b>Code:</b> {{condition.code.coding[0].code}}</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

@@ -12,15 +12,14 @@ declare var $:any; //Necessary in order to use jQuery to open popup.
 })
 export class TimelinePopupComponent{
 
-    data:string = "Empty";
+    condition = null;
 
     constructor(private fhirService: FhirService, private timelineService: TimelineService) {
         console.log("TimelinePopupComponent created...");
     }
 
     show(timelineItem) {
-      console.log("Timeline item clicked.");
-      this.data = JSON.stringify(timelineItem);
+      this.condition = timelineItem;
       $('#timeline_popup').modal({});
     }
 }

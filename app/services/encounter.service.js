@@ -23,6 +23,7 @@ var EncounterService = (function () {
         return this.http.get(url).map(function (res) { return res.json(); });
     };
     EncounterService.prototype.get = function (id) {
+        console.log("Used the Encounter service.");
         var url = this.fhirService.getUrl() + this.path + '/' + id;
         return this.http.get(url).map(function (res) { return res.json(); });
     };

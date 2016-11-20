@@ -2,7 +2,7 @@
 	<div class="encounterBox" *ngIf="timeline.length == 0">
 		<i>(none)</i>
 	</div>
-	<div class="encounterBox" *ngFor="let t of timeline" style="margin-left: 10px;">
+	<div (click)="click($event)" class="encounterBox" *ngFor="let t of timeline" style="margin-left: 10px;">
 		<h2>{{t.code['text']}}</h2>
 		<h2>{{t.clinicalStatus}}</h2>
 		<h2>{{t.onsetDateTime | amTimeAgo}}</h2>

@@ -12,14 +12,14 @@ var core_1 = require("@angular/core");
 var fhir_service_1 = require("../services/fhir.service");
 var timeline_service_1 = require("../services/timeline.service");
 var patient_model_1 = require("../models/patient.model");
-var TimelineComponent = (function () {
-    function TimelineComponent(fhirService, timelineService) {
+var TimelinePopupComponent = (function () {
+    function TimelinePopupComponent(fhirService, timelineService) {
         this.fhirService = fhirService;
         this.timelineService = timelineService;
         this.timeline = [];
         console.log("TimelineService created...");
     }
-    TimelineComponent.prototype.ngOnChanges = function () {
+    TimelinePopupComponent.prototype.ngOnChanges = function () {
         var _this = this;
         if (this.patient) {
             this.timelineService.index(this.patient).subscribe(function (data) {
@@ -35,21 +35,21 @@ var TimelineComponent = (function () {
             });
         }
     };
-    TimelineComponent.prototype.click = function (event) {
+    TimelinePopupComponent.prototype.click = function (event) {
         console.log("Test");
     };
-    return TimelineComponent;
+    return TimelinePopupComponent;
 }());
 __decorate([
     core_1.Input(),
     __metadata("design:type", patient_model_1.Patient)
-], TimelineComponent.prototype, "patient", void 0);
-TimelineComponent = __decorate([
+], TimelinePopupComponent.prototype, "patient", void 0);
+TimelinePopupComponent = __decorate([
     core_1.Component({
         selector: 'timelines',
-        templateUrl: 'app/components/timeline.html'
+        templateUrl: 'app/components/timeline_popup.html'
     }),
     __metadata("design:paramtypes", [fhir_service_1.FhirService, timeline_service_1.TimelineService])
-], TimelineComponent);
-exports.TimelineComponent = TimelineComponent;
-//# sourceMappingURL=timeline.component.js.map
+], TimelinePopupComponent);
+exports.TimelinePopupComponent = TimelinePopupComponent;
+//# sourceMappingURL=timeline_popup.component.js.map

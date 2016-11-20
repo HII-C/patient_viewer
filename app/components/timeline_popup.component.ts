@@ -6,9 +6,9 @@ import {Patient} from '../models/patient.model';
 
 @Component({
     selector: 'timelines',
-    templateUrl: 'app/components/timeline.html'
+    templateUrl: 'app/components/timeline_popup.html'
 })
-export class TimelineComponent{
+export class TimelinePopupComponent{
 
     selected: Timeline;
     timeline: Array<Timeline> = [];
@@ -36,5 +36,4 @@ export class TimelineComponent{
     click(event) {
       console.log("Test");
     }
-
 }

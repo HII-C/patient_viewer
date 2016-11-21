@@ -30,6 +30,8 @@ export class ConditionsComponent {
     }
 
     ngOnChanges() {
+        this.selected = null;
+        
         if (this.patient) {
             this.conditionService.index(this.patient).subscribe(data => {
 				if(data.entry) {

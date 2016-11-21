@@ -30,6 +30,7 @@ var ConditionsComponent = (function () {
     };
     ConditionsComponent.prototype.ngOnChanges = function () {
         var _this = this;
+        this.selected = null;
         if (this.patient) {
             this.conditionService.index(this.patient).subscribe(function (data) {
                 if (data.entry) {

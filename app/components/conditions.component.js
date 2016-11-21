@@ -23,6 +23,10 @@ var ConditionsComponent = (function () {
     ConditionsComponent.prototype.selectCondition = function (condition) {
         this.selected = condition;
         this.conditionSelected.emit(this.selected);
+        for (var _i = 0, _a = this.conditions; _i < _a.length; _i++) {
+            var c = _a[_i];
+            c['selected'] = (c.id == this.selected.id);
+        }
     };
     ConditionsComponent.prototype.ngOnChanges = function () {
         var _this = this;

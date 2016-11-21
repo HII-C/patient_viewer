@@ -21,7 +21,7 @@ export class ObservationsComponent {
 
 	ngOnChanges() {
 		console.log("Observations ngOnChanges");
-		
+
 		if (this.patient) {
 			this.observationService.index(this.patient).subscribe(data => {
 				if(data.entry) {

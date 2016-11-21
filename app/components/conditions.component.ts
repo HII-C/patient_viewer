@@ -23,6 +23,10 @@ export class ConditionsComponent {
     selectCondition(condition: Condition) {
       this.selected = condition;
       this.conditionSelected.emit(this.selected);
+
+      for(let c of this.conditions) {
+        c['selected'] = (c.id == this.selected.id);
+      }
     }
 
     ngOnChanges() {

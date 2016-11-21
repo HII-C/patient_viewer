@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, Output, EventEmitter} from '@angular/core';
 import {FhirService} from '../services/fhir.service';
 import {ConditionService} from '../services/condition.service';
 import {Condition} from '../models/condition.model';
@@ -14,8 +14,15 @@ export class ConditionsComponent {
     conditions: Array<Condition> = [];
     @Input() patient: Patient;
 
+    @Output() conditionSelected:EventEmitter<Condition> = new EventEmitter();
+
     constructor(private fhirService: FhirService, private conditionService: ConditionService) {
         console.log("ConditionsService created...");
+    }
+
+    selectCondition(condition: Condition) {
+      this.selected = condition;
+      this.conditionSelected.emit(this.selected);
     }
 
     ngOnChanges() {

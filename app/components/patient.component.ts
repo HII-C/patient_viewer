@@ -6,6 +6,8 @@ import {PatientService} from '../services/patient.service';
 import {Patient} from '../models/patient.model';
 import {Server} from '../models/server.model';
 
+import {Condition} from '../models/condition.model';
+
 @Component({
     selector: 'patients',
     templateUrl: 'app/components/patient.html'
@@ -18,6 +20,7 @@ export class PatientComponent {
 
     servers: Server[] = ServerService.servers;
 
+    selectedCondition: Condition;
 
     constructor(private fhirService: FhirService, private patientService: PatientService, private compiler: Compiler) {
 		this.compiler.clearCache();
@@ -86,4 +89,8 @@ export class PatientComponent {
         return s;
     }
 
+    selectCondition(condition) {
+      this.selectedCondition = condition;
+      console.log(this.selectedCondition);
+    }
 }

@@ -23,7 +23,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr *ngFor="let c of conditions">
+			<tr *ngFor="let c of conditions" (click)="selectCondition(c)">
 				<!-- <td>{{c.id}}</td> -->
 				<td>{{c.code['text']}}</td>
 				<td>{{c.clinicalStatus}}</td>

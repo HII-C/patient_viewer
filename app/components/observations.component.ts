@@ -3,6 +3,7 @@ import {FhirService} from '../services/fhir.service';
 import {ObservationService} from '../services/observation.service';
 import {Observation} from '../models/observation.model';
 import {Patient} from '../models/patient.model';
+import {Condition} from '../models/condition.model';
 
 @Component({
 	selector: 'observations',
@@ -19,6 +20,8 @@ export class ObservationsComponent {
 	}
 
 	ngOnChanges() {
+		console.log("Observations ngOnChanges");
+		
 		if (this.patient) {
 			this.observationService.index(this.patient).subscribe(data => {
 				if(data.entry) {
@@ -32,4 +35,8 @@ export class ObservationsComponent {
 		}
 	}
 
+	updateHighlighted(condition: Condition) {
+		console.log("updateHighlighted!");
+		console.log(condition.code['text']);
+	}
 }

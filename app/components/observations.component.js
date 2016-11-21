@@ -8,10 +8,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var fhir_service_1 = require('../services/fhir.service');
-var observation_service_1 = require('../services/observation.service');
-var patient_model_1 = require('../models/patient.model');
+var core_1 = require("@angular/core");
+var fhir_service_1 = require("../services/fhir.service");
+var observation_service_1 = require("../services/observation.service");
+var patient_model_1 = require("../models/patient.model");
 var ObservationsComponent = (function () {
     function ObservationsComponent(fhirService, observationService) {
         this.fhirService = fhirService;
@@ -21,6 +21,7 @@ var ObservationsComponent = (function () {
     }
     ObservationsComponent.prototype.ngOnChanges = function () {
         var _this = this;
+        console.log("Observations ngOnChanges");
         if (this.patient) {
             this.observationService.index(this.patient).subscribe(function (data) {
                 if (data.entry) {
@@ -34,18 +35,22 @@ var ObservationsComponent = (function () {
             });
         }
     };
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', patient_model_1.Patient)
-    ], ObservationsComponent.prototype, "patient", void 0);
-    ObservationsComponent = __decorate([
-        core_1.Component({
-            selector: 'observations',
-            templateUrl: 'app/components/observations.html'
-        }), 
-        __metadata('design:paramtypes', [fhir_service_1.FhirService, observation_service_1.ObservationService])
-    ], ObservationsComponent);
+    ObservationsComponent.prototype.updateHighlighted = function (condition) {
+        console.log("updateHighlighted!");
+        console.log(condition.code['text']);
+    };
     return ObservationsComponent;
 }());
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", patient_model_1.Patient)
+], ObservationsComponent.prototype, "patient", void 0);
+ObservationsComponent = __decorate([
+    core_1.Component({
+        selector: 'observations',
+        templateUrl: 'app/components/observations.html'
+    }),
+    __metadata("design:paramtypes", [fhir_service_1.FhirService, observation_service_1.ObservationService])
+], ObservationsComponent);
 exports.ObservationsComponent = ObservationsComponent;
 //# sourceMappingURL=observations.component.js.map

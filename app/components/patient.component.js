@@ -8,10 +8,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var fhir_service_1 = require('../services/fhir.service');
-var server_service_1 = require('../services/server.service');
-var patient_service_1 = require('../services/patient.service');
+var core_1 = require("@angular/core");
+var fhir_service_1 = require("../services/fhir.service");
+var server_service_1 = require("../services/server.service");
+var patient_service_1 = require("../services/patient.service");
 var PatientComponent = (function () {
     function PatientComponent(fhirService, patientService, compiler) {
         this.fhirService = fhirService;
@@ -79,14 +79,18 @@ var PatientComponent = (function () {
         }
         return s;
     };
-    PatientComponent = __decorate([
-        core_1.Component({
-            selector: 'patients',
-            templateUrl: 'app/components/patient.html'
-        }), 
-        __metadata('design:paramtypes', [fhir_service_1.FhirService, patient_service_1.PatientService, core_1.Compiler])
-    ], PatientComponent);
+    PatientComponent.prototype.selectCondition = function (condition) {
+        this.selectedCondition = condition;
+        console.log(this.selectedCondition);
+    };
     return PatientComponent;
 }());
+PatientComponent = __decorate([
+    core_1.Component({
+        selector: 'patients',
+        templateUrl: 'app/components/patient.html'
+    }),
+    __metadata("design:paramtypes", [fhir_service_1.FhirService, patient_service_1.PatientService, core_1.Compiler])
+], PatientComponent);
 exports.PatientComponent = PatientComponent;
 //# sourceMappingURL=patient.component.js.map

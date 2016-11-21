@@ -17,8 +17,13 @@ var ConditionsComponent = (function () {
         this.fhirService = fhirService;
         this.conditionService = conditionService;
         this.conditions = [];
+        this.conditionSelected = new core_1.EventEmitter();
         console.log("ConditionsService created...");
     }
+    ConditionsComponent.prototype.selectCondition = function (condition) {
+        this.selected = condition;
+        this.conditionSelected.emit(this.selected);
+    };
     ConditionsComponent.prototype.ngOnChanges = function () {
         var _this = this;
         if (this.patient) {
@@ -40,6 +45,10 @@ __decorate([
     core_1.Input(),
     __metadata("design:type", patient_model_1.Patient)
 ], ConditionsComponent.prototype, "patient", void 0);
+__decorate([
+    core_1.Output(),
+    __metadata("design:type", core_1.EventEmitter)
+], ConditionsComponent.prototype, "conditionSelected", void 0);
 ConditionsComponent = __decorate([
     core_1.Component({
         selector: 'conditions',

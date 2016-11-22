@@ -17,6 +17,9 @@ var ObservationsComponent = (function () {
         this.fhirService = fhirService;
         this.observationService = observationService;
         this.observations = [];
+        this.testMap = {
+            "442311008": ["72166-2"]
+        };
         console.log("ObservationsComponent created...");
     }
     ObservationsComponent.prototype.ngOnChanges = function () {
@@ -36,8 +39,16 @@ var ObservationsComponent = (function () {
         }
     };
     ObservationsComponent.prototype.updateHighlighted = function (condition) {
-        console.log("updateHighlighted!");
-        console.log(condition.code['text']);
+        for (var key in this.testMap) {
+            if (condition.code['coding'][0]['code'] == key) {
+                for (var _i = 0, _a = this.observations; _i < _a.length; _i++) {
+                    var obs = _a[_i];
+                    if (obs.code['coding'][0]['code'] == this.testMap[key]) {
+                        obs['highlighted'] = true;
+                    }
+                }
+            }
+        }
     };
     return ObservationsComponent;
 }());

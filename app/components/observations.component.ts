@@ -15,6 +15,10 @@ export class ObservationsComponent {
 	observations: Array<Observation> = [];
 	@Input() patient: Patient;
 
+	testMap: { [key: string]: Array<string> } = {
+		"442311008": ["72166-2"]
+	};
+
 	constructor(private fhirService: FhirService, private observationService: ObservationService) {
 		console.log("ObservationsComponent created...");
 	}
@@ -36,7 +40,14 @@ export class ObservationsComponent {
 	}
 
 	updateHighlighted(condition: Condition) {
-		console.log("updateHighlighted!");
-		console.log(condition.code['text']);
+		for(let key in this.testMap) {
+			if(condition.code['coding'][0]['code'] == key) {
+				for(let obs of this.observations) {
+					if(obs.code['coding'][0]['code'] == this.testMap[key]) {
+						obs['highlighted'] = true;
+					}
+				}
+			}
+		}
 	}
 }

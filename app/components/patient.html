@@ -118,8 +118,8 @@
 				<col style="width:40%">
 				<col style="width:25%">
 			</colgroup>
-				<th><conditions (conditionSelected)="observations.updateHighlighted($event)" [patient]="selected"></conditions></th>
-				<th><observations [patient]="selected" #observations></observations></th>
+				<th><conditions (conditionSelected)="obs.updateHighlighted($event)" [patient]="selected"></conditions></th>
+				<th><observations [patient]="selected" #obs></observations></th>
 				<th><activities [patient]="selected"></activities></th>
 			</table>
 		</section>

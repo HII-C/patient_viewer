@@ -17,7 +17,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr *ngFor="let o of observations">
+			<tr *ngFor="let o of observations" [class.selected]="o.highlighted">
 				<td>{{o.effectiveDateTime | amTimeAgo}}</td>
 				<td>
 					<span>{{o.category['text']}}</span>

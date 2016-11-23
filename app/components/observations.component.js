@@ -39,13 +39,16 @@ var ObservationsComponent = (function () {
         }
     };
     ObservationsComponent.prototype.updateHighlighted = function (condition) {
-        for (var key in this.testMap) {
-            if (condition.code['coding'][0]['code'] == key) {
-                for (var _i = 0, _a = this.observations; _i < _a.length; _i++) {
-                    var obs = _a[_i];
-                    if (obs.code['coding'][0]['code'] == this.testMap[key]) {
-                        obs['highlighted'] = true;
-                    }
+        for (var _i = 0, _a = this.observations; _i < _a.length; _i++) {
+            var obs = _a[_i];
+            obs['highlighted'] = false;
+        }
+        var key = condition.code['coding'][0]['code'];
+        if (this.testMap[key] != null) {
+            for (var _b = 0, _c = this.observations; _b < _c.length; _b++) {
+                var obs = _c[_b];
+                if (this.testMap[key].indexOf(obs.code['coding'][0]['code']) > -1) {
+                    obs['highlighted'] = true;
                 }
             }
         }

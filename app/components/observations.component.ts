@@ -40,12 +40,15 @@ export class ObservationsComponent {
 	}
 
 	updateHighlighted(condition: Condition) {
-		for(let key in this.testMap) {
-			if(condition.code['coding'][0]['code'] == key) {
-				for(let obs of this.observations) {
-					if(obs.code['coding'][0]['code'] == this.testMap[key]) {
-						obs['highlighted'] = true;
-					}
+		for(let obs of this.observations) {
+			obs['highlighted'] = false;
+		}
+		
+		let key = condition.code['coding'][0]['code'];
+		if(this.testMap[key] != null) {
+			for(let obs of this.observations) {
+				if(this.testMap[key].indexOf(obs.code['coding'][0]['code']) > -1) {
+					obs['highlighted'] = true;
 				}
 			}
 		}

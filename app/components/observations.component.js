@@ -11,16 +11,21 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("@angular/core");
 var fhir_service_1 = require("../services/fhir.service");
 var observation_service_1 = require("../services/observation.service");
+var map_service_1 = require("../services/map.service");
 var patient_model_1 = require("../models/patient.model");
 var ObservationsComponent = (function () {
-    function ObservationsComponent(fhirService, observationService) {
+    function ObservationsComponent(fhirService, observationService, mapService) {
+        var _this = this;
         this.fhirService = fhirService;
         this.observationService = observationService;
+        this.mapService = mapService;
         this.observations = [];
-        this.testMap = {
-            "442311008": ["72166-2"]
-        };
+        this.mappings = {};
         console.log("ObservationsComponent created...");
+        this.mapService.load().subscribe(function (res) {
+            console.log("Loaded mappings...");
+            _this.mappings = res;
+        });
     }
     ObservationsComponent.prototype.ngOnChanges = function () {
         var _this = this;
@@ -44,10 +49,10 @@ var ObservationsComponent = (function () {
             obs['highlighted'] = false;
         }
         var key = condition.code['coding'][0]['code'];
-        if (this.testMap[key] != null) {
+        if (this.mappings[key] != null) {
             for (var _b = 0, _c = this.observations; _b < _c.length; _b++) {
                 var obs = _c[_b];
-                if (this.testMap[key].indexOf(obs.code['coding'][0]['code']) > -1) {
+                if (this.mappings[key].indexOf(obs.code['coding'][0]['code']) > -1) {
                     obs['highlighted'] = true;
                 }
             }
@@ -64,7 +69,9 @@ ObservationsComponent = __decorate([
         selector: 'observations',
         templateUrl: 'app/components/observations.html'
     }),
-    __metadata("design:paramtypes", [fhir_service_1.FhirService, observation_service_1.ObservationService])
+    __metadata("design:paramtypes", [fhir_service_1.FhirService,
+        observation_service_1.ObservationService,
+        map_service_1.MapService])
 ], ObservationsComponent);
 exports.ObservationsComponent = ObservationsComponent;
 //# sourceMappingURL=observations.component.js.map

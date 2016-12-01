@@ -18,7 +18,7 @@ var ConditionsComponent = (function () {
         this.conditionService = conditionService;
         this.conditions = [];
         this.conditionSelected = new core_1.EventEmitter();
-        console.log("ConditionsService created...");
+        console.log("ConditionsComponent created...");
     }
     ConditionsComponent.prototype.selectCondition = function (condition) {
         this.selected = condition;

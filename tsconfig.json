@@ -47,6 +47,7 @@
         "app/services/encounter.service.ts",
         "app/services/fhir.service.ts",
         "app/services/healthcreek.service.ts",
+        "app/services/map.service.ts",
         "app/services/observation.service.ts",
         "app/services/patient.service.ts",
         "app/services/search.service.ts",

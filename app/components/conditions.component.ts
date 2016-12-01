@@ -17,7 +17,7 @@ export class ConditionsComponent {
     @Output() conditionSelected:EventEmitter<Condition> = new EventEmitter();
 
     constructor(private fhirService: FhirService, private conditionService: ConditionService) {
-        console.log("ConditionsService created...");
+        console.log("ConditionsComponent created...");
     }
 
     selectCondition(condition: Condition) {
@@ -31,7 +31,7 @@ export class ConditionsComponent {
 
     ngOnChanges() {
         this.selected = null;
-        
+
         if (this.patient) {
             this.conditionService.index(this.patient).subscribe(data => {
 				if(data.entry) {

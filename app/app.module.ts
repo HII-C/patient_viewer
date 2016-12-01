@@ -24,6 +24,7 @@ import {UserService} from './services/user.service';
 import {ConditionService} from './services/condition.service';
 import {TimelineService} from './services/timeline.service';
 import {ObservationService} from './services/observation.service';
+import {MapService} from './services/map.service';
 
 import {MomentModule} from 'angular2-moment';
 
@@ -75,7 +76,8 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
         ObservationService,
         ConditionService,
         UserService,
-        TimelineService
+        TimelineService,
+        MapService
     ],                    // services
     bootstrap: [AppComponent]     // root component
 })

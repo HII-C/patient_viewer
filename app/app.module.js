@@ -31,6 +31,7 @@ var user_service_1 = require("./services/user.service");
 var condition_service_1 = require("./services/condition.service");
 var timeline_service_1 = require("./services/timeline.service");
 var observation_service_1 = require("./services/observation.service");
+var map_service_1 = require("./services/map.service");
 var angular2_moment_1 = require("angular2-moment");
 core_1.enableProdMode();
 var core_2 = require("@angular/core");
@@ -81,7 +82,8 @@ AppModule = __decorate([
             observation_service_1.ObservationService,
             condition_service_1.ConditionService,
             user_service_1.UserService,
-            timeline_service_1.TimelineService
+            timeline_service_1.TimelineService,
+            map_service_1.MapService
         ],
         bootstrap: [app_component_1.AppComponent] // root component
     }),

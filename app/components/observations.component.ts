@@ -1,6 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {FhirService} from '../services/fhir.service';
 import {ObservationService} from '../services/observation.service';
+import {MapService} from '../services/map.service';
 import {Observation} from '../models/observation.model';
 import {Patient} from '../models/patient.model';
 import {Condition} from '../models/condition.model';
@@ -15,12 +16,17 @@ export class ObservationsComponent {
 	observations: Array<Observation> = [];
 	@Input() patient: Patient;
 
-	testMap: { [key: string]: Array<string> } = {
-		"442311008": ["72166-2"]
-	};
+	mappings: { [key: string]: Array<string> } = {};
 
-	constructor(private fhirService: FhirService, private observationService: ObservationService) {
+	constructor(private fhirService: FhirService,
+							private observationService: ObservationService,
+							private mapService: MapService) {
 		console.log("ObservationsComponent created...");
+
+		this.mapService.load().subscribe(res => {
+			console.log("Loaded mappings...");
+			this.mappings = res;
+		});
 	}
 
 	ngOnChanges() {
@@ -43,11 +49,11 @@ export class ObservationsComponent {
 		for(let obs of this.observations) {
 			obs['highlighted'] = false;
 		}
-		
+
 		let key = condition.code['coding'][0]['code'];
-		if(this.testMap[key] != null) {
+		if(this.mappings[key] != null) {
 			for(let obs of this.observations) {
-				if(this.testMap[key].indexOf(obs.code['coding'][0]['code']) > -1) {
+				if(this.mappings[key].indexOf(obs.code['coding'][0]['code']) > -1) {
 					obs['highlighted'] = true;
 				}
 			}

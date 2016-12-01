@@ -24,6 +24,7 @@
 				</td>
 				<td>
 					<span>{{o.code['text']}}</span>
+					<span>[{{o.code['coding'][0]['code']}}]</span>
 				</td>
 				<td>
 					<span *ngIf="o.valueQuantity">{{o.valueQuantity['value']}} {{o.valueQuantity['unit']}}</span>

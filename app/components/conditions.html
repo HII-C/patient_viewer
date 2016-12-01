@@ -27,7 +27,10 @@
 				[class.selected]="c.selected"
 				(click)="selectCondition(c)">
 				<!-- <td>{{c.id}}</td> -->
-				<td>{{c.code['text']}}</td>
+				<td>
+					{{c.code['text']}}
+					[{{c.code['coding'][0]['code']}}]
+				</td>
 				<td>{{c.clinicalStatus}}</td>
 				<td>{{c.onsetDateTime | amTimeAgo}}</td>
 			</tr>

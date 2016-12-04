@@ -12,6 +12,7 @@ import {TimelineComponent} from './components/timeline.component';
 import {TimelinePopupComponent} from './components/timeline_popup.component';
 import {ObservationsComponent} from './components/observations.component';
 import {ActivitiesComponent} from './components/activities.component';
+import {ActionListComponent} from './components/actionList.component';
 
 import {ClientService} from './services/client.service';
 import {EncounterService} from './services/encounter.service';
@@ -62,7 +63,8 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
         ConditionsComponent,
         ActivitiesComponent,
         TimelineComponent,
-        TimelinePopupComponent
+        TimelinePopupComponent,
+        ActionListComponent
     ],   // components and directives
     providers: [
         appRoutingProviders,

@@ -20,6 +20,7 @@ var timeline_component_1 = require("./components/timeline.component");
 var timeline_popup_component_1 = require("./components/timeline_popup.component");
 var observations_component_1 = require("./components/observations.component");
 var activities_component_1 = require("./components/activities.component");
+var actionList_component_1 = require("./components/actionList.component");
 var client_service_1 = require("./services/client.service");
 var encounter_service_1 = require("./services/encounter.service");
 var server_service_1 = require("./services/server.service");
@@ -68,7 +69,8 @@ AppModule = __decorate([
             conditions_component_1.ConditionsComponent,
             activities_component_1.ActivitiesComponent,
             timeline_component_1.TimelineComponent,
-            timeline_popup_component_1.TimelinePopupComponent
+            timeline_popup_component_1.TimelinePopupComponent,
+            actionList_component_1.ActionListComponent
         ],
         providers: [
             appRoutingProviders,

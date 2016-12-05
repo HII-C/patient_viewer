@@ -1,41 +1,36 @@
 <section>
-<div class="left" style="background-color: white; border: 15px; padding: 7px; border-radius: 10px;">
-	<header style="text-align: center; margin-bottom: 5px"> Action Area </header>
-	<div style="text-align: center; margin-bottom: 3px;">
-		<img src="app/images/textures/me.jpg" style="width:100px;height:90px;float: middle;">
-	</div>
-	<div style="margin-left: 12.5%; margin-bottom: 2px">
-		<select class="form-control" id="patient_select" (change)="select($event.target.value)" style="width: 85%;">
-			<option *ngFor="let p of patients" [value]="p.id" [selected]="patient && (p.id == patient.id)">
-				<span *ngIf="p.name && p.name[0].given">{{p.name[0].given[0]}}</span>
-				<span *ngIf="p.name && p.name[0].family">{{p.name[0].family[0]}}</span>
-			</option>
-		</select>
-	</div>
-	<div style="margin-bottom: 0px">
-		<div *ngIf="selected" class="patientInfoBox" style="width: 110%; font-size: 90%">
-			<div class="identifier" *ngFor="let id of selected.identifier">
-				<div style="width: 110%;">Date of Birth: {{selected.birthDate | amDateFormat:'MM/DD/YYYY'}} ({{-1 * (selected.birthDate | amDifference:today:'years':false)}}yr)</div>
-				<div>Gender: {{selected.gender}}</div>
-				<div>MRN: {{id['value']}}</div>
-			</div>
-		</div>
-	</div>
+	<div class="left" style="background-color: white; border: 15px; padding: 7px; border-radius: 10px;">
 	<div style="text-align: center; margin-top: 0px;">
-		<font size="4"> Search </font>
-		<input class="doctorSearch" style="margin-bottom: 5px;">
+		<label> Search </label>
+		<input class="doctorSearch" style="margin-bottom: 5px; border-radius: 2px; width: 80%;">
 		<select class="form-control" style="margin-bottom: 15px;">
-			<option> Let doctor choose what he/she types searches? </option>
+			<option> Search Options </option>
 			<option> Could be patients? </option>
 			<option> Or something like past images on this patient? </option>
 		</select>
 	</div>
 	<div style="margin-bottom: 15px; text-align: center;">
-		<font size="3">Order Labs</font>
-		<select class="form-control" style="">
-			<option> Different types of labs? </option>
-			<option> Different types of labs? </option>
-			<option> Different types of labs? </option>
+		<label> Order Lab Test </label>
+		<select class="form-control" style="margin-bottom: 5px;">
+			<option> Different types of labs </option>
+			<option> Different types of labs </option>
+			<option> Different types of labs </option>
+		</select>
+		<label> Order Medication </label>
+		<select class="form-control" style="margin-bottom: 5px;">
+			<option> Order Medication </option>
+		</select>
+		<label> Schedule Follow-Up </label>
+		<select class="form-control" style="margin-bottom: 5px;">
+			<option> Schedule Follow-Up </option>
+		</select>
+		<label> Refer to Specialist </label>
+		<select class="form-control" style="margin-bottom: 5px;">
+			<option> Refer to Specialist </option>
+		</select>
+		<label> Order Procedure </label>
+		<select class="form-control" style="margin-bottom: 5px;">
+			<option> Order Procedure </option>
 		</select>
 	</div>
 	<div style="text-align: center;">

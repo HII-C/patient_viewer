@@ -34,6 +34,7 @@ var ObservationsComponent = (function () {
             this.observationService.index(this.patient).subscribe(function (data) {
                 if (data.entry) {
                     _this.observations = data.entry.map(function (r) { return r['resource']; });
+                    _this.observations = _this.observations.reverse();
                     console.log("Loaded " + _this.observations.length + " observations.");
                 }
                 else {

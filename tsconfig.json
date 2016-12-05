@@ -43,6 +43,7 @@
         "app/models/timeline.model.ts",
         "app/models/user.model.ts",
         "app/pipes/humanizeBytes.pipe.ts",
+        "app/pipes/orderBy.pipe.ts",
         "app/services/client.service.ts",
         "app/services/condition.service.ts",
         "app/services/encounter.service.ts",

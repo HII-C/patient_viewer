@@ -43,19 +43,48 @@
 
 <div class="whole-container">
 <aside class="actionBar">
+    <section>
+    <div class="left" style="background-color: white; border: 15px; padding: 7px; border-radius: 10px; margin-bottom: 3px;">
+    	<header style="text-align: center; margin-bottom: 5px"> Action Area </header>
+    	<div style="text-align: center; margin-bottom: 3px;">
+    		<img src="app/images/textures/me.jpg" style="width:100px;height:90px;float: middle;">
+    	</div>
+    	<div style="margin-left: 12.5%; margin-bottom: 2px">
+    		<select class="form-control" id="patient_select" (change)="select($event.target.value)" style="width: 85%;">
+    			<option *ngFor="let p of patients" [value]="p.id" [selected]="patient && (p.id == patient.id)">
+    				<span *ngIf="p.name && p.name[0].given">{{p.name[0].given[0]}}</span>
+    				<span *ngIf="p.name && p.name[0].family">{{p.name[0].family[0]}}</span>
+    			</option>
+    		</select>
+    	</div>
+    	<div style="margin-bottom: 0px">
+    		<div *ngIf="selected" class="patientInfoBox" style="width: 110%; font-size: 90%">
+    			<div class="identifier" *ngFor="let id of selected.identifier">
+    				<div style="width: 110%;">Date of Birth: {{selected.birthDate | amDateFormat:'MM/DD/YYYY'}} ({{-1 * (selected.birthDate | amDifference:today:'years':false)}}yr)</div>
+    				<div>Gender: {{selected.gender}}</div>
+    				<div>MRN: {{id['value']}}</div>
+    			</div>
+    		</div>
+    	</div>
+    </div>
+    </section>
     <actionList></actionList>
 </aside>
 
 <div class="patientBody">
 	<aside id="sidebar" class="div" *ngIf="patients">
 		<section>
-            <input style="width: 50%; height: 100%;">
-            <div class="patientInfoBox">
-            <section *ngIf="selected">
-                    <h4> Patient Vital Signs </h4>
-                    <div id="patient_vitals"></div>
-            </section>
+        <div class="flex-container">
+            <div class="flex-item" style="width: 50%; float: left;">
+                <textarea rows = "3" style="border: 3px solid #2a7999; border-radius: 5px; width: 100%;"> Reason for Visit </textarea>
             </div>
+            <div class="patientInfoBox" style="width=50%; float: right;">
+                    <div *ngIf="selected">
+                        <h4> Patient Vital Signs </h4>
+                        <div id="patient_vitals"></div>
+                    </div>
+            </div>
+        </div>
             <div class="encounterBar"></div>
             <timelines [patient]="selected"></timelines>
 			<!-- Tab panes -->
@@ -65,9 +94,9 @@
 				    <col style="width:40%">
 				    <col style="width:25%">
 			    </colgroup>
-                <th><conditions (conditionSelected)="obs.updateHighlighted($event)" [patient]="selected"></conditions></th>
-                <th><observations [patient]="selected" #obs></observations></th>
-                <th><activities [patient]="selected"></activities></th>
+                <th style="overflow-y: scroll"><conditions (conditionSelected)="obs.updateHighlighted($event)" [patient]="selected"></conditions></th>
+                <th style="overflow-y: scroll"><observations [patient]="selected" #obs></observations></th>
+                <th style="overflow-y: scroll"><activities [patient]="selected"></activities></th>
 			</table>
 		</section>
 	</aside>

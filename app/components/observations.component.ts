@@ -36,6 +36,7 @@ export class ObservationsComponent {
 			this.observationService.index(this.patient).subscribe(data => {
 				if(data.entry) {
 					this.observations = <Array<Observation>>data.entry.map(r => r['resource']);
+					this.observations = this.observations.reverse();
 					console.log("Loaded " + this.observations.length + " observations.");
 				} else {
 					this.observations = new Array<Observation>();

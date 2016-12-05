@@ -35,6 +35,7 @@ var ConditionsComponent = (function () {
             this.conditionService.index(this.patient).subscribe(function (data) {
                 if (data.entry) {
                     _this.conditions = data.entry.map(function (r) { return r['resource']; });
+                    _this.conditions = _this.conditions.reverse();
                     console.log("Loaded " + _this.conditions.length + " conditions.");
                 }
                 else {
@@ -57,7 +58,7 @@ __decorate([
 ConditionsComponent = __decorate([
     core_1.Component({
         selector: 'conditions',
-        templateUrl: 'app/components/conditions.html'
+        templateUrl: 'app/components/conditions.html',
     }),
     __metadata("design:paramtypes", [fhir_service_1.FhirService, condition_service_1.ConditionService])
 ], ConditionsComponent);

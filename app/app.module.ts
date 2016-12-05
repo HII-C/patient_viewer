@@ -36,6 +36,7 @@ import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import {OrderByPipe} from './pipes/OrderBy.pipe';
 
 const appRoutes: Routes = [
     { path: '', component: HomeComponent },
@@ -65,6 +66,7 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
         TimelineComponent,
         TimelinePopupComponent,
         ActionListComponent
+
     ],   // components and directives
     providers: [
         appRoutingProviders,

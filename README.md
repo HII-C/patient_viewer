@@ -6,7 +6,6 @@ Front-end project for context-driven clinical transactions.
 
 This most important technologies used in this project are:
 
-
 * Angular2: https://angular.io/
 * Bootstrap: http://getbootstrap.com/
 * jQuery: https://jquery.com/

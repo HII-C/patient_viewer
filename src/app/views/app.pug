@@ -1,0 +1,67 @@
+style.
+    .flex-container {
+    display: -webkit-flex;
+    display: flex;
+    width: 100%;
+    height: 8%;
+    flex-direction: row;
+    }
+    .flex-item {
+    width: 40%;
+    height: 100px;
+    margin: 10px;
+    }
+    .headerHyperLinks{
+    display: inline-block;
+    width: 33%;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    }
+.flex-container
+    .headerHyperLinks(style='padding: 10px;')
+        label.text-left
+            font(color='#337ab7', size='5')  Schedule
+    .headerHyperLinks(style='text-align: center; margin-bottom: -10px;')
+        a(routerlink='/', routerlinkactive='active')
+            span.glyphicon.glyphicon-user.text-center(style='font-size: 30px;')
+            font(size='7', color='#337ab7')
+                | Patient
+                span.text-info(style='color: #337ab7') Viewer
+            //
+                <small>
+                <b>&nbsp;&nbsp;&nbsp;/clinical_flows/</b>
+                </small>
+        //
+            <small>
+            <span class="tagline">&nbsp; Better Clinical Transactions
+        a#api_page_link.btn.btn-small.btn-default(style='margin-bottom: 19px; margin-left: 5px;', routerlink='/api', routerlinkactive='active')
+            span.glyphicon.glyphicon-transfer
+            |  API
+    .headerHyperLinks(style='text-align: right; padding: 10px;')
+        label
+            font(color='#337ab7', size='5')  Your account
+    //
+        </span>
+        </small>
+router-outlet
+footer.footer
+    br
+    .well
+        p.text-center
+            span.text-default
+                span.glyphicon.glyphicon-heart
+                |  Designed with love for desktop and tablet browsers.
+            br
+            small
+                span
+                    a(routerlink='/api', routerlinkactive='active')
+                        span.glyphicon.glyphicon-transfer
+                        |  API Usage
+                |  |
+                span
+                    a(href='https://github.com/preston/healthcreek/issues')
+                        span.glyphicon.glyphicon-flash
+                        |  Bug Reports & Feature Requests
+                |  |
+                span © 2016 Preston Lee.

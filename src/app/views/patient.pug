@@ -1,0 +1,84 @@
+style.
+    .flex-container {
+    display: -webkit-flex;
+    display: flex;
+    width: 100%;
+    height: 80px;
+    background-color: white;
+    border-bottom: grey;
+    }
+    .flex-item {
+    background-color: white;
+    height: 100px;
+    margin: 10px;
+    margin-bottom: 0px;
+    }
+    .patientInfoBox {
+    display: inline-block;
+    width: 20%;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    }
+    .whole-container {
+    display: -webkit-flex;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    }
+    .actionBar {
+    width: 15%;
+    margin-right: 5px;
+    }
+    .patientBody {
+    width: 85%;
+    }
+    .doctorSearch {
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    align-self: center;
+    }
+.whole-container
+    aside.actionBar
+        section
+            .left(style='background-color: white; border: 15px; padding: 7px; border-radius: 10px; margin-bottom: 3px;')
+                header(style='text-align: center; margin-bottom: 5px')  Action Area
+                div(style='text-align: center; margin-bottom: 3px;')
+                    img(src='/images/textures/me.jpg', style='width:100px;height:90px;float: middle;')
+                div(style='margin-left: 12.5%; margin-bottom: 2px')
+                    select#patient_select.form-control((change)='select($event.target.value)', style='width: 85%;')
+                        option("*ngFor"='let p of patients', "[value]"='p.id', [selected]='patient && (p.id == patient.id)')
+                            span("*ngIf"='p.name && p.name[0].given') {{p.name[0].given[0]}}
+                            span("*ngIf"='p.name && p.name[0].family') {{p.name[0].family[0]}}
+                div(style='margin-bottom: 0px')
+                    .patientInfoBox("*ngIf"='selected', style='width: 110%; font-size: 90%')
+                        .identifier("*ngFor"='let id of selected.identifier')
+                            div(style='width: 110%;')
+                                | Date of Birth: {{selected.birthDate | amDateFormat:'MM/DD/YYYY'}} ({{-1 * (selected.birthDate | amDifference:today:'years':false)}}yr)
+                            div Gender: {{selected.gender}}
+                            div MRN: {{id['value']}}
+        actionList
+    .patientBody
+        aside#sidebar.div("*ngIf"='patients')
+            section
+                .flex-container
+                    .flex-item(style='width: 50%; float: left;')
+                        textarea(rows='3', style='border: 3px solid #2a7999; border-radius: 5px; width: 100%;')  Reason for Visit
+                    .patientInfoBox(style='width=50%; float: right;')
+                        div("*ngIf"='selected')
+                            h4  Patient Vital Signs
+                            #patient_vitals
+                .encounterBar
+                timelines([patient]='selected')
+                // Tab panes
+                table(align='center', style='column-gap: 10px; overflow: scroll; height: 1000px')
+                    colgroup
+                        col(style='width:25%')
+                        col(style='width:40%')
+                        col(style='width:25%')
+                    th(style='overflow-y: scroll')
+                        conditions((conditionselected)='obs.updateHighlighted($event)', [patient]='selected')
+                    th(style='overflow-y: scroll')
+                        observations([patient]='selected', #obs='')
+                    th(style='overflow-y: scroll')
+                        activities([patient]='selected')

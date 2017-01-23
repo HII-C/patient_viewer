@@ -1,0 +1,24 @@
+.container-fluid
+  .row
+    .col-sm-3
+      .well
+        h2
+          span.glyphicon.glyphicon-transfer
+          |  Developer API
+        p
+          | HealthCreek supports a RESTful JSON API for building applications and integrating with existing systems.
+    .col-sm-9
+      #todo.well
+        h4
+          small GET
+          |  a global list of stuff
+        p
+          a([href]="healthCreekService.getUrl() + '/things.json'")
+            | TODO
+            // {{healthCreekService.getUrl()}}/things.json
+        button.btn.btn-primary(aria-controls='things_result', aria-expanded='false', data-target='#things_result', data-toggle='collapse', type='button')
+          span.glyphicon.glyphicon-eye-open
+          |  Show Result
+        pre#things_result.collapse.
+          \n\t\t\t\t\t
+          \t\t\t\t

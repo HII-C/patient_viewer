@@ -1,0 +1,8 @@
+timeline-popup(#popup='')
+.horizTimeLine("*ngIf"='patient')
+    .encounterBox("*ngIf"='timeline.length == 0')
+        i (none)
+    .encounterBox((click)='popup.show(t)', "*ngFor"='let t of timeline', style='margin-left: 10px;')
+        h2 {{t.code['text']}}
+        h2 {{t.clinicalStatus}}
+        h2 {{t.onsetDateTime | amTimeAgo}}

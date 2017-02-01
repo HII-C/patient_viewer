@@ -14,6 +14,8 @@ import {ObservationsComponent} from './app/components/observations.component';
 import {ActivitiesComponent} from './app/components/activities.component';
 import {ActionListComponent} from './app/components/actionList.component';
 
+import {LoupeExampleComponent} from './app/components/loupe-example.component'; // TODO Replace with whatever UI components are needed (if any) for Loupe integration.
+
 import {ClientService} from './app/services/client.service';
 import {EncounterService} from './app/services/encounter.service';
 import {ServerService} from './app/services/server.service';
@@ -26,6 +28,7 @@ import {ConditionService} from './app/services/condition.service';
 import {TimelineService} from './app/services/timeline.service';
 import {ObservationService} from './app/services/observation.service';
 import {MapService} from './app/services/map.service';
+import {LoupeService} from './app/services/loupe.service';
 
 import {MomentModule} from 'angular2-moment';
 
@@ -64,7 +67,8 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
         ActivitiesComponent,
         TimelineComponent,
         TimelinePopupComponent,
-        ActionListComponent
+        ActionListComponent,
+		LoupeExampleComponent
 
     ],   // components and directives
     providers: [
@@ -80,7 +84,8 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
         ConditionService,
         UserService,
         TimelineService,
-        MapService
+        MapService,
+		LoupeService
     ],                    // services
     bootstrap: [AppComponent]     // root component
 })

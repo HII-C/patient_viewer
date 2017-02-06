@@ -1,44 +1,38 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnChanges, Input} from '@angular/core';
 import {PatientComponent} from './patient.component';
-
+import {ObservationsComponent} from './observations.component';
+import {Condition} from '../models/condition.model';
 import {LoupeService} from '../services/loupe.service';
 
 @Component({
     selector: 'loupe-example',
     templateUrl: '/loupe-example.html'
 })
-export class LoupeExampleComponent implements OnInit {
-
+export class LoupeExampleComponent implements OnChanges {
+    @Input() observations: Array<any>;
+    @Input() condition: Condition;
     query = {
-        "filterByCategory": "Diagnosis",
+        "filterByCategory": {},
         "filterByCode": {
-            "code": "250.6",
-            "codeSystem": "ICD9CM"
+            "code": {},
+            "codeSystem": {}
         },
-        "codesToFilterCategory": "Diagnosis",
-        "codesToFilter": [
-            {
-                "codeSystem": "ICD9CM",
-                "code": "401.9"
-            },
-            {
-                "codeSystem": "ICD9CM",
-                "code": "724.03"
-            },
-            {
-                "codeSystem": "ICD9CM",
-                "code": "305.1"
-            }
-        ]
+        "codesToFilterCategory": {},
+        "codesToFilter": []
     };
     result: {};
 
     constructor(private loupeService: LoupeService) {
     }
 
-    ngOnInit() {
+    ngOnChanges() {
         console.log("LoupeExampleComponent has been initialized. This is only an example!");
-        this.search();
+        console.log(this.condition);
+        console.log(this.observations);
+        if ((this.condition) && (this.observations)){
+            this.update();
+        }
+        console.log(this.result);
     }
 
     search() {
@@ -49,6 +43,20 @@ export class LoupeExampleComponent implements OnInit {
         }, error => {
             console.log("Something weird happened. Bug?");
         });
+    }
+
+    update(){
+        this.query.filterByCategory = "Diagnosis";
+        this.query.filterByCode.code = String(this.condition.code['coding'][0]['code']);
+		this.query.filterByCode.codeSystem = String(this.condition.code['coding'][0]['system']);
+        this.query.codesToFilterCategory = ("Observation");
+        for (let o of this.observations){
+			this.query.codesToFilter.push({
+				"codeSystem": String(o.code['coding'][0]['system']),
+				"code": String(o.code['coding'][0]['code'])
+			});
+        };
+        console.log(this.query);
     }
 
     asString(o: Object): string {

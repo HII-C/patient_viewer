@@ -15,12 +15,9 @@ export class ObservationsComponent {
 	selected: Observation;
 	observations: Array<Observation> = [];
 	@Input() patient: Patient;
-
 	mappings: { [key: string]: Array<string> } = {};
 
-	constructor(private fhirService: FhirService,
-							private observationService: ObservationService,
-							private mapService: MapService) {
+	constructor(private fhirService: FhirService, private observationService: ObservationService, private mapService: MapService) {
 		console.log("ObservationsComponent created...");
 
 		this.mappings = MapService.STATIC_MAPPINGS;

@@ -48,8 +48,8 @@ style.
                 div(style='margin-left: 12.5%; margin-bottom: 2px')
                     select#patient_select.form-control((change)='select($event.target.value)', style='width: 85%;')
                         option("*ngFor"='let p of patients', "[value]"='p.id', [selected]='patient && (p.id == patient.id)')
-                            span("*ngIf"='p.name && p.name[0].given') {{p.name[0].given[0]}}
-                            span("*ngIf"='p.name && p.name[0].family') {{p.name[0].family[0]}}
+                            span("*ngIf"='p.name && p.name[0].family') {{p.name[0].family[0]}},&nbsp; <!-- added comma and space to order list by last name -->
+                            span("*ngIf"='p.name && p.name[0].given') {{p.name[0].given[0]}} 
                 div(style='margin-bottom: 0px')
                     .patientInfoBox("*ngIf"='selected', style='width: 110%; font-size: 90%')
                         .identifier("*ngFor"='let id of selected.identifier')

@@ -1,6 +1,7 @@
 import {Component, Input, Output, EventEmitter, Pipe} from '@angular/core';
 import {FhirService} from '../services/fhir.service';
 import {ConditionService} from '../services/condition.service';
+import {LoupeService} from '../services/loupe.service';
 import {Condition} from '../models/condition.model';
 import {Patient} from '../models/patient.model';
 
@@ -16,13 +17,14 @@ export class ConditionsComponent{
 
     @Output() conditionSelected:EventEmitter<Condition> = new EventEmitter();
 
-    constructor(private fhirService: FhirService, private conditionService: ConditionService) {
+    constructor(private fhirService: FhirService, private conditionService: ConditionService, private loupeService: LoupeService) {
         console.log("ConditionsComponent created...");
     }
 
     selectCondition(condition: Condition) {
       this.selected = condition;
       this.conditionSelected.emit(this.selected);
+      this.loupeService.activeCondition = condition;
 
       for(let c of this.conditions) {
         c['selected'] = (c.id == this.selected.id);

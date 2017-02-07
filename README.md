@@ -1,4 +1,4 @@
-# HealthCreek (Austin and Kaan's version
+# HealthCreek (Technical Team Version)
 
 Front-end project for context-driven clinical transactions.
 

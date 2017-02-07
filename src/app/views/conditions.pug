@@ -1,6 +1,5 @@
 section("*ngIf"='patient')
     h2  Conditions
-    loupe-example([condition]='selected')
     p.text-default("*ngIf"='conditions.length == 0')
         i (none)
     table.table.table-condensed.table-striped("*ngIf"='conditions.length > 0')

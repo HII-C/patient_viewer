@@ -8,9 +8,7 @@ import {LoupeService} from '../services/loupe.service';
     selector: 'loupe-example',
     templateUrl: '/loupe-example.html'
 })
-export class LoupeExampleComponent implements OnChanges {
-    @Input() observations: Array<any>;
-    @Input() condition: Condition;
+export class LoupeExampleComponent implements OnChanges{
     query = {
         "filterByCategory": {},
         "filterByCode": {
@@ -21,17 +19,18 @@ export class LoupeExampleComponent implements OnChanges {
         "codesToFilter": []
     };
     result: {};
-
+    condition: Condition;
+    observations: Array<any>;
     constructor(private loupeService: LoupeService) {
+        this.condition = this.loupeService.activeCondition;
+        this.observations = this.loupeService.observationsArray;
     }
 
     ngOnChanges() {
         console.log("LoupeExampleComponent has been initialized. This is only an example!");
         console.log(this.condition);
         console.log(this.observations);
-        if ((this.condition) && (this.observations)){
-            this.update();
-        }
+        console.log(this.query);
         console.log(this.result);
     }
 

@@ -12,6 +12,7 @@ section("*ngIf"='patient')
         thead
             tr
                 th
+                th
                     | Description
                 th
                     | Status
@@ -19,6 +20,8 @@ section("*ngIf"='patient')
                     | Onset
         tbody
             tr("*ngFor"='let c of conditions', [class.selected]='c.selected', (click)='selectCondition(c)')
+                td
+                    input(type='checkbox', name='conditionsCheckbox')
                 td
                     | {{c.code['text']}}
                     | [{{c.code['coding'][0]['code']}}]

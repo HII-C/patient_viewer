@@ -8,6 +8,7 @@ section("*ngIf"='patient')
     table.table.table-condensed.table-striped("*ngIf"='observations.length > 0')
         thead
             tr
+                th
                 th Date
                 th Category
                 th Code
@@ -15,6 +16,8 @@ section("*ngIf"='patient')
                 th Status
         tbody
             tr("*ngFor"='let o of observations', [class.selected]='o.highlighted')
+                td
+                  input(type='checkbox', name='observationsCheckbox')
                 td {{o.effectiveDateTime | amTimeAgo}}
                 td
                     span {{o.category['text']}}

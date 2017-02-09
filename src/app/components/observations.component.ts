@@ -51,8 +51,7 @@ export class ObservationsComponent {
 		for(let obs of this.observations) {
 			obs['highlighted'] = false;
 		}
-
-		let key = condition.code['coding'][0]['code'];
+		let key = condition.code.coding[0].code;
 		if(this.mappings[key] != null) {
 			for(let obs of this.observations) {
 				if(this.mappings[key].indexOf(obs.code['coding'][0]['code']) > -1) {

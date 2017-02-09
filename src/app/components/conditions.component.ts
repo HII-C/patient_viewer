@@ -19,13 +19,13 @@ export class ConditionsComponent{
 
     constructor(private fhirService: FhirService, private conditionService: ConditionService, private loupeService: LoupeService) {
         console.log("ConditionsComponent created...");
+        this.loupeService.activeCondition = this.selected;
     }
 
     selectCondition(condition: Condition) {
       this.selected = condition;
+      this.loupeService.activeCondition = this.selected;
       this.conditionSelected.emit(this.selected);
-      this.loupeService.activeCondition = condition;
-
       for(let c of this.conditions) {
         c['selected'] = (c.id == this.selected.id);
       }
@@ -33,7 +33,6 @@ export class ConditionsComponent{
 
     ngOnChanges() {
         this.selected = null;
-
         if (this.patient) {
             this.conditionService.index(this.patient).subscribe(data => {
 				if(data.entry) {

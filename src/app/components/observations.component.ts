@@ -1,6 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {FhirService} from '../services/fhir.service';
 import {ObservationService} from '../services/observation.service';
+import {OpenMRSService} from '../services/openmrs.service';
 import {LoupeService} from '../services/loupe.service';
 import {MapService} from '../services/map.service';
 import {Observation} from '../models/observation.model';
@@ -18,10 +19,16 @@ export class ObservationsComponent {
 	@Input() patient: Patient;
 	mappings: { [key: string]: Array<string> } = {};
 
-	constructor(private fhirService: FhirService, private observationService: ObservationService, private mapService: MapService, private loupeService: LoupeService) {
+	constructor(private fhirService: FhirService, private observationService: ObservationService,
+		private mapService: MapService, private loupeService: LoupeService, private openMRSService: OpenMRSService) {
 		console.log("ObservationsComponent created...");
 
 		this.mappings = MapService.STATIC_MAPPINGS;
+		console.log("OPENMRS: ");
+		var res = this.openMRSService.addPerson().subscribe(res => {
+			console.log(res);
+		});
+		console.log("OPENMRS DONE");
 
 		// this.mapService.load().subscribe(res => {
 		// 	console.log("Loaded mappings...");

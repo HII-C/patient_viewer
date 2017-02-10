@@ -22,5 +22,4 @@ export class ClientService {
 		var result = <Observable<Client>>this.http.get(url).map(res => res.json());
 		return result;
 	}
-
 }

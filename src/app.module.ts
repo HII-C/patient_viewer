@@ -29,6 +29,7 @@ import {TimelineService} from './app/services/timeline.service';
 import {ObservationService} from './app/services/observation.service';
 import {MapService} from './app/services/map.service';
 import {LoupeService} from './app/services/loupe.service';
+import {OpenMRSService} from './app/services/openmrs.service';
 
 import {MomentModule} from 'angular2-moment';
 
@@ -85,7 +86,8 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
         UserService,
         TimelineService,
         MapService,
-		LoupeService
+		LoupeService,
+    OpenMRSService
     ],                    // services
     bootstrap: [AppComponent]     // root component
 })

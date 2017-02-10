@@ -8,29 +8,33 @@ import {HealthCreekService} from './healthcreek.service';
 @Injectable()
 @Component({})
 export class OpenMRSService {
-  private url: string = 'http://windows.healthcreek.org/openmrs-standalone/ws/rest/v1/';
+  private static BASE_URL: string = 'http://windows.healthcreek.org/openmrs-standalone/ws/rest/v1/';
 
   private static LOCATION_UUID: string = '8d6c993e-c2cc-11de-8d13-0010c6dffd0f';
-  private OLD_ID_NUMBER: string = '8d79403a-c2cc-11de-8d13-0010c6dffd0f';
+  private static OLD_ID_NUMBER: string = '8d79403a-c2cc-11de-8d13-0010c6dffd0f';
   private static AUTH_TOKEN: string = 'Basic YWRtaW46dGVzdA==';
 
 	constructor(private http: Http) {}
 
-	/*public index(): Observable<Client> {
-		var url = this.healthCreekService.getUrl() + this.path;
-		var result = <Observable<Client>>this.http.get(url, {
-      headers: this.headers
-    }).map(res => res.json());
-		return result;
-	}*/
+  public createPatient(firstName: string, lastName: string, gender: string) {
+    this.addPerson(firstName, lastName).subscribe(person => {
+      console.log(person);
+      var personUUID = person['uuid'];
+      console.log('UUID: ' + personUUID);
 
-  public addPerson() {
+      this.addPatient(personUUID).subscribe(patient => {
+        console.log(patient);
+      });
+    });
+  }
+
+  private addPerson(firstName: string, lastName: string) {
     var body = {
       'gender': 'M',
       'names': [
         {
-          'givenName': 'Test First',
-          'familyName':'Test Last'
+          'givenName': firstName,
+          'familyName': lastName
         }
       ]
     };
@@ -38,15 +42,28 @@ export class OpenMRSService {
     var authHeader = new Headers();
     authHeader.append('Authorization', OpenMRSService.AUTH_TOKEN);
 
-    return this.http.post(this.url + 'person', body, {
+    return this.http.post(OpenMRSService.BASE_URL + 'person', body, {
       headers: authHeader
     }).map(res => res.json());
   }
 
-  private addPatient() {
-    //this.headers.append('Content-Type', 'application/json');
-    //Do POST here.
+  private addPatient(personUUID: String) {
+    var authHeaders = new Headers();
+    authHeaders.append('Content-Type', 'application/json');
+    authHeaders.append('Authorization', OpenMRSService.AUTH_TOKEN);
 
-    //this.headers.delete('Content-Type');
+    var body = {
+      "person": personUUID,
+      "identifiers": [{
+        "identifier": Math.random().toString(36).slice(2),
+        "identifierType": OpenMRSService.OLD_ID_NUMBER,
+        "location": OpenMRSService.LOCATION_UUID,
+        "preferred": true
+      }]
+    };
+
+    return this.http.post(OpenMRSService.BASE_URL + 'patient', body, {
+      headers: authHeaders
+    }).map(res => res.json());
   }
 }

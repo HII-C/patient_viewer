@@ -38,6 +38,16 @@ export class OpenMRSService {
     }).map(res => res.json());
   }
 
+  public getPatient(uuid: string) {
+    var authHeaders = new Headers();
+    authHeaders.append('Authorization', OpenMRSService.AUTH_TOKEN);
+    authHeaders.append('Content-Type', 'application/json');
+
+    return this.http.get(OpenMRSService.BASE_URL + 'patient/' + uuid, {
+      headers: authHeaders
+    }).map(res => res.json());
+  }
+
   private addPerson(firstName: string, lastName: string) {
     var body = {
       'gender': 'M',

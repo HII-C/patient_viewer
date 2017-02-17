@@ -28,6 +28,16 @@ export class OpenMRSService {
     });
   }
 
+  public queryPerson(name: string) {
+    var authHeaders = new Headers();
+    authHeaders.append('Authorization', OpenMRSService.AUTH_TOKEN);
+    authHeaders.append('Content-Type', 'application/json');
+
+    return this.http.get(OpenMRSService.BASE_URL + 'person?q=' + name, {
+      headers: authHeaders
+    }).map(res => res.json());
+  }
+
   private addPerson(firstName: string, lastName: string) {
     var body = {
       'gender': 'M',

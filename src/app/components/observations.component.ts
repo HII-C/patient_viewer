@@ -25,7 +25,10 @@ export class ObservationsComponent {
 
 		this.mappings = MapService.STATIC_MAPPINGS;
 		console.log("OPENMRS: ");
-		openMRSService.createPatient('Major', 'Brown', 'M');
+		//openMRSService.createPatient('Major', 'Brown', 'M');
+		/*openMRSService.queryPerson('Major').subscribe(results => {
+			console.log(results);
+		});*/
 		console.log("OPENMRS DONE");
 
 		// this.mapService.load().subscribe(res => {

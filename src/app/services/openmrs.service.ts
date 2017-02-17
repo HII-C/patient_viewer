@@ -28,7 +28,7 @@ export class OpenMRSService {
     });
   }
 
-  public queryPerson(name: string) {
+  public queryPersons(name: string) {
     var authHeaders = new Headers();
     authHeaders.append('Authorization', OpenMRSService.AUTH_TOKEN);
     authHeaders.append('Content-Type', 'application/json');

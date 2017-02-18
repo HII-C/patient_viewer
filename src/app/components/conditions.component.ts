@@ -31,6 +31,25 @@ export class ConditionsComponent{
       }
     }
 
+    sortCondition(x: string) {
+      if(x=="date-asc" || x=="date-desc") {
+        var a = 1;
+        if(x=="date-asc") {
+          a=-a;
+        }
+        this.conditions.sort((n1,n2)=> {
+            if(n1.code['coding'][0]['code']>n2.code['coding'][0]['code']) {
+              return a;
+            }
+            if(n1.code['coding'][0]['code']<n2.code['coding'][0]['code']) {
+              return -a;
+            }
+        })
+      }
+
+      console.log("sort");
+    }
+
     ngOnChanges() {
         this.selected = null;
         if (this.patient) {

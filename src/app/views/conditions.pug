@@ -7,11 +7,11 @@ section("*ngIf"='patient')
         span.caret
       ul.dropdown-menu
         li
-          a(href="#", (click)='sortCondition("date-asc")')
+          a(href="#!", (click)='sortCondition("date-asc")')
             span.glyphicon.glyphicon-sort-by-alphabet(aria-hidden="true")
 
         li
-          a(href="#", (click)='sortCondition("date-desc")')
+          a(href="#!", (click)='sortCondition("date-desc")')
             span.glyphicon.glyphicon-sort-by-alphabet-alt(aria-hidden="true")
     p.text-default("*ngIf"='conditions.length == 0')
         i (none)

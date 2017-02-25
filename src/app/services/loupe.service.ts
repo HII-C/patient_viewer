@@ -16,13 +16,14 @@ export class LoupeService {
     constructor(private http: Http) {
     }
 
-    query(query: Object): Observable<Response> {
+    query(body: Object): Observable<Response> {
         let headers = new Headers({
-            'Accept': 'application/json',
-            'x-api-key': LoupeService.API_KEY
+            'x-api-key': LoupeService.API_KEY,
+            'Accept': 'application/json'
         });
         let options = new RequestOptions({ headers: headers });
-        return this.http.post(LoupeService.URL, query, options).map(res => res.json());
+        var resp = this.http.post(LoupeService.URL, body, options).map(res => res.json());
+        return resp;
     }
 
 }

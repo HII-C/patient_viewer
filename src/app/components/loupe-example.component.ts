@@ -8,15 +8,16 @@ import {LoupeService} from '../services/loupe.service';
     selector: 'loupe-example',
     templateUrl: '/loupe-example.html'
 })
+
 export class LoupeExampleComponent {
-    query = {
-        filterByCategory: {},
+    query: {
+        filterByCategory: string,
         filterByCode: {
-            code: {},
-            codeSystem: {}
+            code: string,
+            codeSystem: string
         },
-        codesToFilterCategory: {},
-        codesToFilter: []
+        codesToFilterCategory: string,
+        codesToFilter: Array<any>
     };
     result: {};
     condition: Condition;
@@ -28,8 +29,6 @@ export class LoupeExampleComponent {
         console.log("LoupeExampleComponent has been initialized. This is only an example!");
         var condition = this.loupeService.activeCondition;
         var observations = this.loupeService.observationsArray;
-        console.log(condition);
-        console.log(observations);
         this.update();
         this.search();
         console.log(this.result);
@@ -39,6 +38,7 @@ export class LoupeExampleComponent {
         this.loupeService.query(this.query).subscribe(data => {
             console.log("Loupe returned a result. Yay.");
             this.result = data;
+            console.log(this.result)
         }, error => {
             console.log("Something weird happened. Bug?");
         });
@@ -48,8 +48,8 @@ export class LoupeExampleComponent {
         // TODO There is some hardcoding right now due to the way systems are coded in the data, need to fix before actual use
         var condition = this.loupeService.activeCondition;
         var observations = this.loupeService.observationsArray;
-        this.query.filterByCategory = "Diagnosis";
-        this.query.filterByCode.code = condition.code.coding[0];
+        this.query.filterByCategory = 'Diagnosis';
+        this.query.filterByCode.code = String(condition.code.coding[0]);
 		this.query.filterByCode.codeSystem = "SNOMEDCT_US"
         this.query.codesToFilterCategory = "Observation";
         for (let o of observations){

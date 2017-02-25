@@ -26,3 +26,5 @@ section("*ngIf"='patient')
                     | [{{c.code['coding'][0]['code']}}]
                 td {{c.clinicalStatus}}
                 td {{c.onsetDateTime | amTimeAgo}}
+div
+    button((click)='testingCsiro()')

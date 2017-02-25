@@ -2,6 +2,7 @@ import {Component, Input, Output, EventEmitter, Pipe} from '@angular/core';
 import {FhirService} from '../services/fhir.service';
 import {ConditionService} from '../services/condition.service';
 import {LoupeService} from '../services/loupe.service';
+import {CsiroService} from '../services/csiro.service'
 import {Condition} from '../models/condition.model';
 import {Patient} from '../models/patient.model';
 
@@ -17,7 +18,7 @@ export class ConditionsComponent{
 
     @Output() conditionSelected:EventEmitter<Condition> = new EventEmitter();
 
-    constructor(private fhirService: FhirService, private conditionService: ConditionService, private loupeService: LoupeService) {
+    constructor(private fhirService: FhirService, private conditionService: ConditionService, private loupeService: LoupeService, private csiroService: CsiroService) {
         console.log("ConditionsComponent created...");
         this.loupeService.activeCondition = this.selected;
     }
@@ -45,5 +46,8 @@ export class ConditionsComponent{
 				}
             });
         }
+    }
+    testingCsiro(){
+        console.log(this.csiroService.MapQuery);
     }
 }

@@ -18,8 +18,8 @@ export class LoupeService {
 
     query(body: Object): Observable<Response> {
         let headers = new Headers({
-            'x-api-key': LoupeService.API_KEY,
-            'Accept': 'application/json'
+            'Accept': 'application/json',
+            'x-api-key': LoupeService.API_KEY
         });
         let options = new RequestOptions({ headers: headers });
         let resp = this.http.post(LoupeService.URL, JSON.stringify(body), options).map(res => res.json());

@@ -77,7 +77,7 @@ style.
                         col(style='width:40%')
                         col(style='width:25%')
                     th(style='overflow-y: scroll')
-                        conditions((conditionselected)='obs.updateHighlighted($event)', [patient]='selected')
+                        conditions([patient]='selected', (conditionselected)='obs.updateHighlighted($event)')
                     th(style='overflow-y: scroll')
                         observations([patient]='selected', #obs='')
                     th(style='overflow-y: scroll')

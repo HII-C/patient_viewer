@@ -2,13 +2,13 @@ import {Component, Input, Output, EventEmitter, Pipe} from '@angular/core';
 import {FhirService} from '../services/fhir.service';
 import {ConditionService} from '../services/condition.service';
 import {LoupeService} from '../services/loupe.service';
-import {CsiroService} from '../services/csiro.service'
+import {CsiroService} from '../services/csiro.service';
 import {Condition} from '../models/condition.model';
 import {Patient} from '../models/patient.model';
 
 @Component({
     selector: 'conditions',
-    templateUrl: '/conditions.html',
+    templateUrl: '/conditions.html'
 })
 export class ConditionsComponent{
 

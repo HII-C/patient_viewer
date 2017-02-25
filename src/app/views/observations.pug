@@ -17,7 +17,8 @@ section("*ngIf"='patient')
             tr("*ngFor"='let o of observations', [class.selected]='o.highlighted')
                 td
                   input(type='checkbox', name='observationsCheckbox')
-                td {{o.effectiveDateTime | amTimeAgo}}
+                td
+                    span {{o.effectiveDateTime | amTimeAgo}}
                 td
                     span {{o.category['text']}}
                 td

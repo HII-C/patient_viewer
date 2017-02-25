@@ -36,17 +36,16 @@ export class LoupeExampleComponent {
 
     test() {
         console.log("LoupeExampleComponent has been initialized. This is only an example!");
-        this.update();
         this.search();
         console.log(this.result);
     }
 
     search() {
-        this.update();
-        this.loupeService.query(this.query).subscribe(data => {
+        let newQuery = this.update();
+        this.loupeService.query(newQuery).subscribe(data => {
             console.log("Loupe returned a result. Yay.");
             this.result = data;
-            console.log(this.result)
+            console.log(this.result);
         }, error => {
             console.log("Something weird happened. Bug?");
         });
@@ -58,7 +57,7 @@ export class LoupeExampleComponent {
         var observations = this.loupeService.observationsArray;
         this.query.filterByCategory = "Diagnosis";
         this.query.filterByCode.code = String(condition.code.coding[0]);
-		this.query.filterByCode.codeSystem = "SNOMEDCT_US"
+		this.query.filterByCode.codeSystem = "SNOMEDCT_US";
         this.query.codesToFilterCategory = "Observation";
         for (let o of observations){
 			this.query.codesToFilter.push({
@@ -66,6 +65,8 @@ export class LoupeExampleComponent {
 				code: String(o.code['coding'][0]['code'])
 			});
         };
+        console.log(this.query);
+        return this.asString(this.query);
     }
 
     asString(o: Object): string {

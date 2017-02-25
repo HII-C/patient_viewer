@@ -1,9 +1,6 @@
 section("*ngIf"='patient')
-<<<<<<< HEAD
     h2
         | Conditions
-=======
-    h2  Conditions
     <!-- Single button -->
     div.btn-group
       button.btn.btn-default.dropdown-toggle(type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
@@ -17,7 +14,6 @@ section("*ngIf"='patient')
         li
           a(href="#!", (click)='sortCondition("date-desc")')
             span.glyphicon.glyphicon-sort-by-alphabet-alt(aria-hidden="true")
->>>>>>> techTeam
     p.text-default("*ngIf"='conditions.length == 0')
         i (none)
     table.table.table-condensed.table-striped("*ngIf"='conditions.length > 0')

@@ -22,7 +22,7 @@ export class LoupeService {
             'Accept': 'application/json'
         });
         let options = new RequestOptions({ headers: headers });
-        var resp = this.http.post(LoupeService.URL, body, options).map(res => res.json());
+        let resp = this.http.post(LoupeService.URL, JSON.stringify(body), options).map(res => res.json());
         return resp;
     }
 

@@ -1,4 +1,5 @@
 import {Component, OnChanges, Input} from '@angular/core';
+import {Observable} from 'rxjs/Observable';
 import {PatientComponent} from './patient.component';
 import {ObservationsComponent} from './observations.component';
 import {Condition} from '../models/condition.model';
@@ -10,16 +11,24 @@ import {LoupeService} from '../services/loupe.service';
 })
 
 export class LoupeExampleComponent {
-    query: {
-        filterByCategory: string,
-        filterByCode: {
-            code: string,
-            codeSystem: string
-        },
-        codesToFilterCategory: string,
-        codesToFilter: Array<any>
-    };
     result: {};
+    query: {
+        "filterByCategory": string,
+        "filterByCode": {
+            "code": string,
+            "codeSystem": string
+        },
+        "codesToFilterCategory": string,
+        "codesToFilter": Array<any>
+    } = {
+        "filterByCategory": "",
+        "filterByCode": {
+            "code": "",
+            "codeSystem": ""
+        },
+        "codesToFilterCategory": "",
+        "codesToFilter": []
+    };
     condition: Condition;
     observations: Array<any>;
     constructor(private loupeService: LoupeService) {
@@ -27,14 +36,13 @@ export class LoupeExampleComponent {
 
     test() {
         console.log("LoupeExampleComponent has been initialized. This is only an example!");
-        var condition = this.loupeService.activeCondition;
-        var observations = this.loupeService.observationsArray;
         this.update();
         this.search();
         console.log(this.result);
     }
 
     search() {
+        this.update();
         this.loupeService.query(this.query).subscribe(data => {
             console.log("Loupe returned a result. Yay.");
             this.result = data;
@@ -48,7 +56,7 @@ export class LoupeExampleComponent {
         // TODO There is some hardcoding right now due to the way systems are coded in the data, need to fix before actual use
         var condition = this.loupeService.activeCondition;
         var observations = this.loupeService.observationsArray;
-        this.query.filterByCategory = 'Diagnosis';
+        this.query.filterByCategory = "Diagnosis";
         this.query.filterByCode.code = String(condition.code.coding[0]);
 		this.query.filterByCode.codeSystem = "SNOMEDCT_US"
         this.query.codesToFilterCategory = "Observation";

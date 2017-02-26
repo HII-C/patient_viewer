@@ -65,8 +65,9 @@ export class LoupeExampleComponent {
 				code: String(o.code['coding'][0]['code'])
 			});
         };
-        console.log(this.query);
-        return this.asString(this.query);
+        let response = this.query;
+        console.log(response);
+        return this.asString(response);
     }
 
     asString(o: Object): string {

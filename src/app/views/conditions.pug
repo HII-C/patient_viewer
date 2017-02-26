@@ -18,7 +18,8 @@ section("*ngIf"='patient')
         i (none)
     table.table.table-condensed.table-striped("*ngIf"='conditions.length > 0')
         colgroup
-            col(style='width:60%')
+            col(style='width:10%')
+            col(style='width:50%')
             col(style='width:15%')
             col(style='width:25%')
         thead
@@ -35,8 +36,7 @@ section("*ngIf"='patient')
                 td
                     input(type='checkbox', name='conditionsCheckbox')
                 td
-                    span {{c.code['text']}}
-                    span {{c.code['coding'][0]['code']}}
+                    span {{c.code['text']}} {{c.code['coding'][0]['code']}}
                 td {{c.clinicalStatus}}
                 td {{c.onsetDateTime | amTimeAgo}}
 div

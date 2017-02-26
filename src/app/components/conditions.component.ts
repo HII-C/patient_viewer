@@ -5,6 +5,7 @@ import {LoupeService} from '../services/loupe.service';
 import {CsiroService} from '../services/csiro.service';
 import {Condition} from '../models/condition.model';
 import {Patient} from '../models/patient.model';
+import {Csiro} from '../models/csiro.model';
 
 @Component({
     selector: 'conditions',
@@ -67,6 +68,11 @@ export class ConditionsComponent{
         }
     }
     testingCsiro(){
-        console.log(this.csiroService.MapQuery);
+        this.csiroService.MapQuery().subscribe(data =>{
+            console.log("Hey CSIRO works");
+            console.log(data);
+        }, error => {
+            console.log("oops");
+        });
     }
 }

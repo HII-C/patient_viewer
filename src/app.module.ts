@@ -15,7 +15,6 @@ import {ActivitiesComponent} from './app/components/activities.component';
 import {ActionListComponent} from './app/components/actionList.component';
 
 import {LoupeExampleComponent} from './app/components/loupe-example.component'; // TODO Replace with whatever UI components are needed (if any) for Loupe integration.
-
 import {ClientService} from './app/services/client.service';
 import {EncounterService} from './app/services/encounter.service';
 import {ServerService} from './app/services/server.service';

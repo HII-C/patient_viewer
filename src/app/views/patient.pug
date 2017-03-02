@@ -57,7 +57,40 @@ style.
                                 | Date of Birth: {{selected.birthDate | amDateFormat:'MM/DD/YYYY'}} ({{-1 * (selected.birthDate | amDifference:today:'years':false)}}yr)
                             div Gender: {{selected.gender}}
                             div MRN: {{id['value']}}
-        actionList
+        section
+            .left(style='background-color: white; border: 15px; padding: 7px; border-radius: 10px;')
+                div(style='text-align: center; margin-top: 0px;')
+                    label  Search
+                    input.doctorSearch(style='margin-bottom: 5px; border-radius: 2px; width: 80%;')
+                    select.form-control(style='margin-bottom: 15px;')
+                        option  Search Options
+                        option  Could be patients?
+                        option  Or something like past images on this patient?
+                div(style='margin-bottom: 15px; text-align: center;')
+                    label  Order Lab Test
+                    select.form-control(style='margin-bottom: 5px;')
+                        option  Different types of labs
+                        option  Different types of labs
+                        option  Different types of labs
+                    label  Order Medication
+                    select.form-control(style='margin-bottom: 5px;')
+                        option  Order Medication
+                    label  Schedule Follow-Up
+                    select.form-control(style='margin-bottom: 5px;')
+                        option  Schedule Follow-Up
+                    label  Refer to Specialist
+                    select.form-control(style='margin-bottom: 5px;')
+                        option  Refer to Specialist
+                    label  Order Procedure
+                    select.form-control(style='margin-bottom: 5px;')
+                        option  Order Procedure
+                div(style='text-align: center;')
+                    font(size='3')
+                        span.glyphicon.glyphicon-fire
+                        |  Provider
+                    select#server_select.form-control((change)='selectServerForUrl($event.target.value)')
+                        option("*ngFor"='let s of servers', "[value]"='s.url', [selected]='server && (s.url == server.url)') {{s.name}}
+
     .patientBody
         aside#sidebar.div("*ngIf"='patients')
             section

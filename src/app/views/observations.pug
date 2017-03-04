@@ -23,6 +23,8 @@ section("*ngIf"='patient')
                     span {{o.category['text']}}
                 td
                     span {{o.code['text']}}
+                    span("*ngIf"="!o.code['text']")
+                        | {{csiroLookup('test')}}
                     span [{{o.code['coding'][0]['code']}}]
                 td
                     span("*ngIf"='o.valueQuantity') {{o.valueQuantity['value']}} {{o.valueQuantity['unit']}}

@@ -15,6 +15,7 @@ import {Condition} from '../models/condition.model';
 export class ObservationsComponent {
 
 	selected: Observation;
+	test: Observation;
 	observations: Array<Observation> = [];
 	@Input() patient: Patient;
 	mappings: { [key: string]: Array<string> } = {};
@@ -45,7 +46,14 @@ export class ObservationsComponent {
 				if(data.entry) {
 					this.observations = <Array<Observation>>data.entry.map(r => r['resource']);
 					this.observations = this.observations.reverse();
+					console.log("Test data" + this.observations[0]);
+					this.test = new Observation();
+					this.test = JSON.parse('{"resourceType":"Observation","id":"argonaut-lab-24","meta":{"versionId":"206106","lastUpdated":"2016-03-09T15:35:58.410+00:00"},"text":{"status":"generated","div":"<div>See structured data</div>"},"status":"final","category":{"coding":[{"system":"http://hl7.org/fhir/observation-category","code":"laboratory","display":"Laboratory"}],"text":"Laboratory"},"code":{"coding":[{"system":"http://loinc.org","code":"32623-1","display":"Platelet mean volume"}],"text":"Platelet mean volume"},"subject":{"reference":"Patient/1032702"},"effectiveDateTime":"2005-07-04","valueQuantity":{"value":9.1,"unit":"fL","system":"http://unitsofmeasure.org"}}');
+					this.test.code['text'] = "";
+					//console.log(JSON.stringify(this.observations[0]));
+					this.observations.push(this.test);
 					console.log("Loaded " + this.observations.length + " observations.");
+					//append broken data here
 					this.loupeService.observationsArray = this.observations;
 				} else {
 					this.observations = new Array<Observation>();
@@ -53,6 +61,10 @@ export class ObservationsComponent {
 				}
 			});
 		}
+	}
+
+	csiroLookup(code: String) {
+		//setTimeout(()=>{console.log(code)}, 5000);
 	}
 
 	updateHighlighted(condition: Condition) {

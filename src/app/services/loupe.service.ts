@@ -2,6 +2,7 @@ import {Component, Injectable} from '@angular/core';
 import {Http, Headers, RequestOptions, Response} from '@angular/http';
 import {Condition} from '../models/condition.model';
 import {Observable} from 'rxjs/Observable';
+import {Observation} from '../models/observation.model';
 
 @Injectable()
 export class LoupeService {
@@ -12,6 +13,8 @@ export class LoupeService {
 
     observationsArray: Array<any>;
     activeCondition: Condition;
+    conditionArray: Array<any>;
+    activeObservation: Observation;
 
     constructor(private http: Http) {
     }

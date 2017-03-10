@@ -53,16 +53,17 @@ export class LoupeExampleComponent {
 
     update(){
         // TODO There is some hardcoding right now due to the way systems are coded in the data, need to fix before actual use
-        var condition = this.loupeService.activeCondition;
-        var observations = this.loupeService.observationsArray;
-        this.query.filterByCategory = "Diagnosis";
-        this.query.filterByCode.code = String(condition.code.coding[0]);
-		this.query.filterByCode.codeSystem = "SNOMEDCT_US";
-        this.query.codesToFilterCategory = "Observation";
-        for (let o of observations){
+        let condition = this.loupeService.activeCondition;
+        let conditions = this.loupeService.conditionArray;
+        console.log(condition);
+        this.query.filterByCategory = 'Diagnosis';
+        this.query.filterByCode.code = condition.code.coding[0].code;
+		this.query.filterByCode.codeSystem = condition.code.coding[0].system;
+        this.query.codesToFilterCategory = "Diagnosis";
+        for (let c of conditions){
 			this.query.codesToFilter.push({
-				codeSystem: "LOINC",
-				code: String(o.code['coding'][0]['code'])
+				codeSystem: String(c.code.coding[0].system),
+				code: String(c.code.coding[0].code)
 			});
         };
         let response = this.query;

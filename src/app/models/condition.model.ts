@@ -4,7 +4,7 @@ export class Condition {
     verificationStatus: string;
     clinicalStatus: string;
 	code: {
-        coding: [{code: string}, {display: string}, {system: string}],
+        coding: [{code: string, display: string, system: string}],
         text: string
     };
 };

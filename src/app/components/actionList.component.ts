@@ -10,7 +10,7 @@ import {Condition} from '../models/condition.model';
 
 @Component({
     selector: 'actionList',
-    templateUrl: '/actionList.html'
+    templateUrl: '/activities.html'
 })
 export class ActionListComponent {
 

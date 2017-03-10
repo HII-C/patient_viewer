@@ -63,8 +63,10 @@ export class ObservationsComponent {
 		}
 	}
 
-	csiroLookup(code: String) {
-		//setTimeout(()=>{console.log(code)}, 5000);
+	csiroLookup(code: Observation) {
+		setTimeout(()=>{console.log(code)}, 5000);
+		this.observations[(this.observations.indexOf(code))].code['text'] = "working?";
+
 	}
 
 	updateHighlighted(condition: Condition) {

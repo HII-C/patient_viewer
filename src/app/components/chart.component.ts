@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import {LoupeService} from '../services/loupe.service';
 
 @Component({
     selector: 'chart',
@@ -7,7 +8,7 @@ import {Component} from '@angular/core';
 
 export class ChartComponent {
     public data: Array<any> = [
-        {data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A'},
+        {data: [0], label: 'Series A'},
         {data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B'},
         {data: [18, 48, 77, 9, 100, 27, 40], label: 'Series C'}
         ];
@@ -43,12 +44,23 @@ export class ChartComponent {
     public legend: boolean = true;
     public type: string = 'line';
 
-    constructor(){
+    constructor(private loupeService: LoupeService){
         console.log("Chart Component is loaded...");
     }
 
     test(e: any){
         console.log("Events work, see~" + e);
+    }
+
+    reRenderData(){
+        for (let o of this.loupeService.observationsArray){
+            if (o.code['coding'][0]['code'] == '32623-1'){
+                console.log(o.valueQuantity.value);
+                this.data[0].data.push(Number(o.valueQuantity.value));
+                let dataSet = JSON.parse(JSON.stringify(this.data));
+                this.data = dataSet;
+            }
+        }
     }
 
 }

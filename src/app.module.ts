@@ -6,13 +6,13 @@ import {AppComponent} from './app/components/app.component';
 import {ClientComponent} from './app/components/client.component';
 import {HomeComponent} from './app/components/home.component';
 import {PatientComponent} from './app/components/patient.component';
-
 import {ConditionsComponent} from './app/components/conditions.component';
 import {TimelineComponent} from './app/components/timeline.component';
 import {TimelinePopupComponent} from './app/components/timeline_popup.component';
 import {ObservationsComponent} from './app/components/observations.component';
 import {ActivitiesComponent} from './app/components/activities.component';
 import {ActionListComponent} from './app/components/actionList.component';
+import {ChartComponent} from './app/components/chart.component';
 
 import {LoupeExampleComponent} from './app/components/loupe-example.component'; // TODO Replace with whatever UI components are needed (if any) for Loupe integration.
 import {ClientService} from './app/services/client.service';
@@ -40,6 +40,7 @@ import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { ChartsModule } from 'ng2-charts/ng2-charts';
 
 const appRoutes: Routes = [
     { path: '', component: HomeComponent },
@@ -55,7 +56,8 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
         routing,
         FormsModule,
         HttpModule,
-		MomentModule
+		MomentModule,
+        ChartsModule
     ],       // module dependencies
     declarations: [
         ApiComponent,
@@ -69,7 +71,8 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
         TimelineComponent,
         TimelinePopupComponent,
         ActionListComponent,
-		LoupeExampleComponent
+		LoupeExampleComponent,
+        ChartComponent
 
     ],   // components and directives
     providers: [

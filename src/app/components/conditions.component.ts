@@ -17,6 +17,7 @@ export class ConditionsComponent{
     selected: Condition;
     conditions: Array<Condition> = [];
     viewConditionList: Array<any> = [];
+    viewToggle: boolean = true;
     @Input() patient: Patient;
 
     @Output() conditionSelected:EventEmitter<Condition> = new EventEmitter();
@@ -61,7 +62,9 @@ export class ConditionsComponent{
                     this.conditions = this.conditions.reverse();
                 	console.log("Loaded " + this.conditions.length + " conditions.");
                     this.loupeService.conditionArray = this.conditions;
-                    this.viewConditionList = this.doctorService.assignVisible(this.conditions);
+                    if (this.viewToggle == true){
+                        this.viewConditionList = this.doctorService.assignVisible(this.conditions);
+                    }
 				} else {
 					this.conditions = new Array<Condition>();
 					console.log("No conditions for patient.");
@@ -76,5 +79,18 @@ export class ConditionsComponent{
         }, error => {
             console.log("oops");
         });
+    }
+
+    // Method for basic toggling, using JSON functions to toggle internal Angular2 module OnChanges for UI reactivity
+    toggleExpansion(){
+        // Basic logic for toggle, assuming this.conditions contains all info, and this.viewConditionList is the modified list being used to display data
+        if (this.viewToggle == true){
+            this.viewConditionList = JSON.parse(JSON.stringify(this.conditions));
+            this.viewToggle = false;
+        }
+        else{
+            this.viewConditionList = this.doctorService.assignVisible(this.conditions);
+            this.viewToggle = true;
+        }
     }
 }

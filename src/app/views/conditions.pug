@@ -18,7 +18,8 @@ section("*ngIf"='patient')
         li
           a(href="#!", (click)='sortCondition("date-desc")')
             span.glyphicon.glyphicon-sort-by-alphabet-alt(aria-hidden="true")
-    p.text-default("*ngIf"='viewConditionList.length == 0')
+      button.btn.btn-default((click)='toggleExpansion()') Toggle Expansion
+    p.telt("*ngIf"='viewConditionList.length == 0')
         i (none)
     table.table.table-condensed.table-striped("*ngIf"='viewConditionList.length > 0')
         colgroup

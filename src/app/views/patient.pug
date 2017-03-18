@@ -102,6 +102,13 @@ style.
                         div("*ngIf"='selected')
                             h4  Patient Vital Signs
                             #patient_vitals
+
+                    .vitalsSection(style='width: 55%')
+                        notesSection(style='color: rgb(51, 122, 183); width: 50%; margin-right: 100px')
+                        weightSection(style='color: rgb(51, 122, 183); width: 50%; margin-right: 100px')
+                        heightSection(style='color: rgb(51, 122, 183); width: 50%; margin-right: 100px')
+
+
                 .encounterBar
                 timelines([patient]='selected')
                 // Tab panes

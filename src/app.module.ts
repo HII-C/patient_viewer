@@ -13,6 +13,9 @@ import {ActivitiesComponent} from './app/components/activities.component';
 import {ActionListComponent} from './app/components/actionList.component';
 import {ChartComponent} from './app/components/chart.component';
 import {AccountComponent} from './app/components/account.component';
+import {NotesComponent} from './app/components/notes.component';
+import {WeightNoteComponent} from './app/components/weightNote.component';
+import {HeightNoteComponent} from './app/components/heightNote.component';
 
 import {LoupeExampleComponent} from './app/components/loupe-example.component'; // TODO Replace with whatever UI components are needed (if any) for Loupe integration.
 import {ClientService} from './app/services/client.service';
@@ -33,6 +36,8 @@ import {CsiroService} from './app/services/csiro.service';
 import {DoctorService} from './app/services/doctor.service';
 
 import {MomentModule} from 'angular2-moment';
+
+
 
 enableProdMode();
 
@@ -73,7 +78,10 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
         ActionListComponent,
 		LoupeExampleComponent,
         ChartComponent,
-        AccountComponent
+        AccountComponent,
+        NotesComponent,
+      WeightNoteComponent,
+      HeightNoteComponent
     ],   // components and directives
     providers: [
         appRoutingProviders,

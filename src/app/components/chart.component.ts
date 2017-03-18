@@ -57,10 +57,11 @@ export class ChartComponent {
             if (o.code['coding'][0]['code'] == '32623-1'){
                 console.log(o.valueQuantity.value);
                 this.data[0].data.push(Number(o.valueQuantity.value));
-                let dataSet = JSON.parse(JSON.stringify(this.data));
-                this.data = dataSet;
+
             }
         }
+        let dataSet = JSON.parse(JSON.stringify(this.data));
+        this.data = dataSet;
     }
 
 }

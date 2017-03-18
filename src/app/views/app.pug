@@ -20,7 +20,7 @@ style.
     }
 
 .flex-container
-    .headerHyperLinks(style='padding: 10px;')
+    .headerHyperLinks
         label.text-left
             font(color='#337ab7', size='5')  Schedule
     .headerHyperLinks(style='text-align: center; margin-bottom: -10px;')
@@ -29,20 +29,8 @@ style.
             font(size='7', color='#337ab7')
                 | Patient
                 span.text-info(style='color: #337ab7') Viewer
-            //
-                <small>
-                <b>&nbsp;&nbsp;&nbsp;/clinical_flows/</b>
-                </small>
-        //
-            <small>
-            <span class="tagline">&nbsp; Better Clinical Transactions
+    .headerHyperLinks(style='text-align: right; padding: 10px;')
         a#api_page_link.btn.btn-small.btn-default(style='margin-bottom: 19px; margin-left: 5px;', routerLink='/account', routerLinkActive='active')
             span.glyphicon.glyphicon-transfer
             |  Account
-    .headerHyperLinks(style='text-align: right; padding: 10px;')
-        label
-            font(color='#337ab7', size='5')  Your account
-    //
-        </span>
-        </small>
 router-outlet

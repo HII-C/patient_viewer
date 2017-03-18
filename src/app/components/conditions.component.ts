@@ -3,6 +3,7 @@ import {FhirService} from '../services/fhir.service';
 import {ConditionService} from '../services/condition.service';
 import {LoupeService} from '../services/loupe.service';
 import {CsiroService} from '../services/csiro.service';
+import {DoctorService} from '../services/doctor.service';
 import {Condition} from '../models/condition.model';
 import {Patient} from '../models/patient.model';
 import {Csiro} from '../models/csiro.model';
@@ -15,11 +16,12 @@ export class ConditionsComponent{
 
     selected: Condition;
     conditions: Array<Condition> = [];
+    viewConditionList: Array<any> = [];
     @Input() patient: Patient;
 
     @Output() conditionSelected:EventEmitter<Condition> = new EventEmitter();
 
-    constructor(private fhirService: FhirService, private conditionService: ConditionService, private loupeService: LoupeService, private csiroService: CsiroService) {
+    constructor(private fhirService: FhirService, private conditionService: ConditionService, private loupeService: LoupeService, private csiroService: CsiroService, private doctorService: DoctorService) {
         console.log("ConditionsComponent created...");
         this.loupeService.activeCondition = this.selected;
     }
@@ -27,7 +29,6 @@ export class ConditionsComponent{
     selectCondition(condition: Condition) {
       this.selected = condition;
       this.loupeService.activeCondition = this.selected;
-      this.loupeService.conditionArray = this.conditions;
       for(let c of this.conditions) {
         c['selected'] = (c.id == this.selected.id);
       }
@@ -48,7 +49,6 @@ export class ConditionsComponent{
             }
         })
       }
-
       console.log("sort");
     }
 
@@ -60,6 +60,8 @@ export class ConditionsComponent{
                     this.conditions = <Array<Condition>>data.entry.map(r => r['resource']);
                     this.conditions = this.conditions.reverse();
                 	console.log("Loaded " + this.conditions.length + " conditions.");
+                    this.loupeService.conditionArray = this.conditions;
+                    this.viewConditionList = this.doctorService.assignVisible(this.conditions);
 				} else {
 					this.conditions = new Array<Condition>();
 					console.log("No conditions for patient.");

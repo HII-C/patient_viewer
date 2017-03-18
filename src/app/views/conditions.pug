@@ -18,9 +18,9 @@ section("*ngIf"='patient')
         li
           a(href="#!", (click)='sortCondition("date-desc")')
             span.glyphicon.glyphicon-sort-by-alphabet-alt(aria-hidden="true")
-    p.text-default("*ngIf"='conditions.length == 0')
+    p.text-default("*ngIf"='viewConditionList.length == 0')
         i (none)
-    table.table.table-condensed.table-striped("*ngIf"='conditions.length > 0')
+    table.table.table-condensed.table-striped("*ngIf"='viewConditionList.length > 0')
         colgroup
             col(style='width:10%')
             col(style='width:50%')
@@ -36,7 +36,7 @@ section("*ngIf"='patient')
                 th
                     | Onset
         tbody
-            tr("*ngFor"='let c of conditions', [class.selected]='c.selected', (click)='selectCondition(c)')
+            tr("*ngFor"='let c of viewConditionList', [class.selected]='c.selected', (click)='selectCondition(c)')
                 td
                     input(type='checkbox', name='conditionsCheckbox')
                 td

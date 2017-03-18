@@ -1,7 +1,6 @@
 import {ModuleWithProviders, enableProdMode} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 
-import {ApiComponent} from './app/components/api.component';
 import {AppComponent} from './app/components/app.component';
 import {ClientComponent} from './app/components/client.component';
 import {HomeComponent} from './app/components/home.component';
@@ -13,6 +12,7 @@ import {ObservationsComponent} from './app/components/observations.component';
 import {ActivitiesComponent} from './app/components/activities.component';
 import {ActionListComponent} from './app/components/actionList.component';
 import {ChartComponent} from './app/components/chart.component';
+import {AccountComponent} from './app/components/account.component';
 
 import {LoupeExampleComponent} from './app/components/loupe-example.component'; // TODO Replace with whatever UI components are needed (if any) for Loupe integration.
 import {ClientService} from './app/services/client.service';
@@ -44,8 +44,8 @@ import { HttpModule } from '@angular/http';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 
 const appRoutes: Routes = [
-    { path: '', component: HomeComponent },
-    { path: 'api', component: ApiComponent }
+    { path: '', component: PatientComponent },
+    { path: 'account', component: AccountComponent }
 ]
 const appRoutingProviders: any[] = [];
 const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
@@ -61,7 +61,6 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
         ChartsModule
     ],       // module dependencies
     declarations: [
-        ApiComponent,
         AppComponent,
         ClientComponent,
         HomeComponent,
@@ -73,8 +72,8 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
         TimelinePopupComponent,
         ActionListComponent,
 		LoupeExampleComponent,
-        ChartComponent
-
+        ChartComponent,
+        AccountComponent
     ],   // components and directives
     providers: [
         appRoutingProviders,

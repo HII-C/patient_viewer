@@ -43,6 +43,7 @@ export class ChartComponent {
     ];
     public legend: boolean = true;
     public type: string = 'line';
+    viewToggle: boolean = true;
 
     constructor(private loupeService: LoupeService){
         console.log("Chart Component is loaded...");
@@ -63,5 +64,6 @@ export class ChartComponent {
         let dataSet = JSON.parse(JSON.stringify(this.data));
         this.data = dataSet;
     }
+
 
 }

@@ -1,4 +1,15 @@
-
-button((click)="reRenderData()")
+div.btn-group
+    button((click)="toggleExpansion()") Toggle
+    button(type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
+      | Charts
+      span.caret
+    ul.dropdown-menu
+      li
+        a(href="#!")
+          span Chart 1
+      li
+        a(href="#!")
+          span Chart 2
+    button((click)="reRenderData()") Render Data
 div(style='display:block;')
     canvas(height="400px", width="400px", baseChart="", [datasets]="data", [labels]="labels", [options]="options", [legend]="legend", [chartType]="type")

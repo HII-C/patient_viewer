@@ -1,12 +1,14 @@
-import {Component} from '@angular/core';
+import {Component, Output, EventEmitter} from '@angular/core';
 import {LoupeService} from '../services/loupe.service';
+
 
 @Component({
     selector: 'chart',
-    templateUrl: '/chart.html'
+    templateUrl: '/chart.html',
 })
 
 export class ChartComponent {
+
     public data: Array<any> = [
         {data: [0], label: 'Series A'},
         {data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B'},
@@ -43,7 +45,6 @@ export class ChartComponent {
     ];
     public legend: boolean = true;
     public type: string = 'line';
-    viewToggle: boolean = true;
 
     constructor(private loupeService: LoupeService){
         console.log("Chart Component is loaded...");
@@ -64,6 +65,7 @@ export class ChartComponent {
         let dataSet = JSON.parse(JSON.stringify(this.data));
         this.data = dataSet;
     }
+
 
 
 }

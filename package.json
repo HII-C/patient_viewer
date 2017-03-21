@@ -41,7 +41,7 @@
     "zone.js": "^0.7.6"
   },
   "devDependencies": {
-    "@types/core-js": "^0.9.34",
+    "@types/core-js": "^0.9.35",
     "angular2-router-loader": "^0.3.4",
     "concurrently": "^3.0.0",
     "grunt": "^1.0.1",

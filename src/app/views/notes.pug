@@ -1,4 +1,10 @@
-input(type='text', [(ngModel)]='enteredNotes')
-|     Weight: {{ enteredNotes }}
-input(type='text', [(ngModel)]='enteredNotes1')
-|     Height: {{ enteredNotes1 }}
+table(align='center', style='column-gap: 10px; height: 50px')
+    colgroup
+        col(style='width:40%')
+        col(style='width:40%')
+    th
+        | Weight:
+        input(type='text', [(ngModel)]='enteredNotes')
+    th
+        | Height:
+        input(type='text', [(ngModel)]='enteredNotes1')

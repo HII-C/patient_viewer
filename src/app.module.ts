@@ -13,9 +13,8 @@ import {ActivitiesComponent} from './app/components/activities.component';
 import {ActionListComponent} from './app/components/actionList.component';
 import {ChartComponent} from './app/components/chart.component';
 import {AccountComponent} from './app/components/account.component';
-import {NotesComponent} from './app/components/notes.component';
-import {WeightNoteComponent} from './app/components/weightNote.component';
-import {HeightNoteComponent} from './app/components/heightNote.component';
+import {DoctorNoteComponent} from './app/components/doctorNote.component';
+
 
 import {LoupeExampleComponent} from './app/components/loupe-example.component'; // TODO Replace with whatever UI components are needed (if any) for Loupe integration.
 import {ClientService} from './app/services/client.service';
@@ -79,9 +78,7 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
 		LoupeExampleComponent,
         ChartComponent,
         AccountComponent,
-        NotesComponent,
-      WeightNoteComponent,
-      HeightNoteComponent
+        DoctorNoteComponent
     ],   // components and directives
     providers: [
         appRoutingProviders,

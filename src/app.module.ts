@@ -1,5 +1,6 @@
 import {ModuleWithProviders, enableProdMode} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
+import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
 
 import {AppComponent} from './app/components/app.component';
 import {ClientComponent} from './app/components/client.component';
@@ -33,9 +34,17 @@ import {LoupeService} from './app/services/loupe.service';
 import {OpenMRSService} from './app/services/openmrs.service';
 import {CsiroService} from './app/services/csiro.service';
 import {DoctorService} from './app/services/doctor.service';
+import {FirebaseService} from './app/services/firebase.service';
 
 import {MomentModule} from 'angular2-moment';
 
+export const firebaseConfig = {
+      apiKey: "AIzaSyAYh3QW9KoP-US0FoKyFuNFsr3TvC7fnAg",
+      authDomain: "hii-c-92f21.firebaseapp.com",
+      databaseURL: "https://hii-c-92f21.firebaseio.com",
+      storageBucket: "hii-c-92f21.appspot.com",
+      messagingSenderId: "963671299882"
+};
 
 
 enableProdMode();
@@ -62,7 +71,8 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
         FormsModule,
         HttpModule,
 		MomentModule,
-        ChartsModule
+        ChartsModule,
+        AngularFireModule.initializeApp(firebaseConfig)
     ],       // module dependencies
     declarations: [
         AppComponent,
@@ -97,7 +107,8 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
 		LoupeService,
         OpenMRSService,
         CsiroService,
-        DoctorService
+        DoctorService,
+        FirebaseService
     ],                    // services
     bootstrap: [AppComponent]     // root component
 })

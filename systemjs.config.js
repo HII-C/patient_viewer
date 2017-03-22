@@ -25,7 +25,8 @@
             'rxjs': 'npm:rxjs',
             'angular-in-memory-web-api': 'npm:angular-in-memory-web-api',
 			'moment': 'npm:moment',
-			'angular2-moment': 'npm:angular2-moment'
+			'angular2-moment': 'npm:angular2-moment',
+            'angularfire2': 'npm:angularfire2'
 
         },
         // packages tells the System loader how to load when no filename and/or no extension

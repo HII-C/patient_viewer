@@ -7,11 +7,13 @@ import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'a
 @Injectable()
 @Component({})
 export class FirebaseService {
+
   items: FirebaseListObservable<any[]>;
   item: FirebaseObjectObservable<any>;
+  
   constructor(private http: Http, private angularFire: AngularFire) {
         this.items = angularFire.database.list('/associations');
-        
+
         console.log(this.items);
     }
 }

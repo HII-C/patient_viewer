@@ -15,6 +15,7 @@ import {ActionListComponent} from './app/components/actionList.component';
 import {ChartComponent} from './app/components/chart.component';
 import {AccountComponent} from './app/components/account.component';
 import {DoctorNoteComponent} from './app/components/doctorNote.component';
+import {FirebaseComponent} from './app/components/firebase.component';
 
 
 import {LoupeExampleComponent} from './app/components/loupe-example.component'; // TODO Replace with whatever UI components are needed (if any) for Loupe integration.
@@ -88,7 +89,8 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
 		LoupeExampleComponent,
         ChartComponent,
         AccountComponent,
-        DoctorNoteComponent
+        DoctorNoteComponent,
+        FirebaseComponent
     ],   // components and directives
     providers: [
         appRoutingProviders,

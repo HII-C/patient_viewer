@@ -19,6 +19,5 @@ export class FhirService {
         let headers = new Headers({ 'Accept': 'application/json' });
         return new RequestOptions({ headers: headers });
     }
-    
 
 }

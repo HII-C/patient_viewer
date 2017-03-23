@@ -1,6 +1,6 @@
 import {ModuleWithProviders, enableProdMode} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
-import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
+
 
 import {AppComponent} from './app/components/app.component';
 import {ClientComponent} from './app/components/client.component';
@@ -15,7 +15,7 @@ import {ActionListComponent} from './app/components/actionList.component';
 import {ChartComponent} from './app/components/chart.component';
 import {AccountComponent} from './app/components/account.component';
 import {DoctorNoteComponent} from './app/components/doctorNote.component';
-import {FirebaseComponent} from './app/components/firebase.component';
+
 
 
 import {LoupeExampleComponent} from './app/components/loupe-example.component'; // TODO Replace with whatever UI components are needed (if any) for Loupe integration.
@@ -35,17 +35,9 @@ import {LoupeService} from './app/services/loupe.service';
 import {OpenMRSService} from './app/services/openmrs.service';
 import {CsiroService} from './app/services/csiro.service';
 import {DoctorService} from './app/services/doctor.service';
-import {FirebaseService} from './app/services/firebase.service';
+
 
 import {MomentModule} from 'angular2-moment';
-
-export const firebaseConfig = {
-      apiKey: "AIzaSyAYh3QW9KoP-US0FoKyFuNFsr3TvC7fnAg",
-      authDomain: "hii-c-92f21.firebaseapp.com",
-      databaseURL: "https://hii-c-92f21.firebaseio.com",
-      storageBucket: "hii-c-92f21.appspot.com",
-      messagingSenderId: "963671299882"
-};
 
 
 enableProdMode();
@@ -72,8 +64,7 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
         FormsModule,
         HttpModule,
 		MomentModule,
-        ChartsModule,
-        AngularFireModule.initializeApp(firebaseConfig)
+        ChartsModule
     ],       // module dependencies
     declarations: [
         AppComponent,
@@ -89,8 +80,7 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
 		LoupeExampleComponent,
         ChartComponent,
         AccountComponent,
-        DoctorNoteComponent,
-        FirebaseComponent
+        DoctorNoteComponent
     ],   // components and directives
     providers: [
         appRoutingProviders,
@@ -109,8 +99,7 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
 		LoupeService,
         OpenMRSService,
         CsiroService,
-        DoctorService,
-        FirebaseService
+        DoctorService
     ],                    // services
     bootstrap: [AppComponent]     // root component
 })

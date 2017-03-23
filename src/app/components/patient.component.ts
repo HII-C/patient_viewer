@@ -5,7 +5,6 @@ import {PatientService} from '../services/patient.service';
 import {Patient} from '../models/patient.model';
 import {Server} from '../models/server.model';
 import {Condition} from '../models/condition.model';
-import {FirebaseService} from '../services/firebase.service';
 
 @Component({
     selector: 'patients',
@@ -18,7 +17,7 @@ export class PatientComponent {
     servers: Server[] = ServerService.servers;
     selectedCondition: Condition;
 
-    constructor(private fhirService: FhirService, private patientService: PatientService, private compiler: Compiler, private firebaseService: FirebaseService) {
+    constructor(private fhirService: FhirService, private patientService: PatientService, private compiler: Compiler) {
 		this.compiler.clearCache();
         this.selectServer(this.servers[0]);
         this.loadPatients();

@@ -29,6 +29,10 @@ export class DoctorService {
 				let thisModel = {condition: c, visibleStatus: true, extraData: []};
 				this.viewConditionList.push(thisModel);
 			}
+			if  (c.code['coding'][0]['code'] != "442311008"){
+				let thisModel = {condition: c, visibleStatus: true, extraData: []};
+				this.viewConditionList.push(thisModel);
+			}
 			else{
 				let thisModel = {condition: c, visibleStatus: false, extraData: []};
 				this.viewConditionList.push(thisModel);

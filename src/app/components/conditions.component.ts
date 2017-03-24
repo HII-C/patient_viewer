@@ -63,7 +63,7 @@ export class ConditionsComponent{
                 	console.log("Loaded " + this.conditions.length + " conditions.");
                     this.loupeService.conditionArray = this.conditions;
                     if (this.viewToggle == true){
-                        this.viewConditionList = this.doctorService.assignVisible(this.conditions);
+                        this.viewConditionList = JSON.parse(JSON.stringify(this.conditions));
                     }
 				} else {
 					this.conditions = new Array<Condition>();
@@ -85,11 +85,13 @@ export class ConditionsComponent{
     toggleExpansion(){
         // Basic logic for toggle, assuming this.conditions contains all info, and this.viewConditionList is the modified list being used to display data
         if (this.viewToggle == true){
-            this.viewConditionList = JSON.parse(JSON.stringify(this.conditions));
+            this.viewConditionList = this.doctorService.assignVisible(this.conditions);
             this.viewToggle = false;
         }
-        else{
-            this.viewConditionList = this.doctorService.assignVisible(this.conditions);
+    }
+    ellipsesToggle(){
+        if (this.viewToggle == false){
+            this.viewConditionList = JSON.parse(JSON.stringify(this.conditions));
             this.viewToggle = true;
         }
     }

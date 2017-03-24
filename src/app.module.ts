@@ -1,6 +1,7 @@
 import {ModuleWithProviders, enableProdMode} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 
+
 import {AppComponent} from './app/components/app.component';
 import {ClientComponent} from './app/components/client.component';
 import {HomeComponent} from './app/components/home.component';
@@ -14,6 +15,7 @@ import {ActionListComponent} from './app/components/actionList.component';
 import {ChartComponent} from './app/components/chart.component';
 import {AccountComponent} from './app/components/account.component';
 import {DoctorNoteComponent} from './app/components/doctorNote.component';
+
 
 
 import {LoupeExampleComponent} from './app/components/loupe-example.component'; // TODO Replace with whatever UI components are needed (if any) for Loupe integration.
@@ -34,8 +36,8 @@ import {OpenMRSService} from './app/services/openmrs.service';
 import {CsiroService} from './app/services/csiro.service';
 import {DoctorService} from './app/services/doctor.service';
 
-import {MomentModule} from 'angular2-moment';
 
+import {MomentModule} from 'angular2-moment';
 
 
 enableProdMode();

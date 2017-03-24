@@ -44,5 +44,14 @@ section("*ngIf"='patient')
                     span {{c.code['text']}} {{c.code['coding'][0]['code']}}
                 td {{c.clinicalStatus}}
                 td {{c.onsetDateTime | amTimeAgo}}
+            tr("*ngIf"="!viewToggle", style="width: 100%")
+                td
+                    | 
+                td
+                    button.btn.btn-default(style="width: 100%", (click)='ellipsesToggle()') ...
+                td
+                    | 
+                td
+                    | 
 div
     button.btn.btn-default((click)='testingCsiro()') CSIRO

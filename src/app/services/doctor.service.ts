@@ -21,15 +21,13 @@ export class DoctorService {
 		this.exportList = new Array<Condition>();
 		this.viewConditionList = new Array<Condition>();
 		// Use "let of" to generate enumerated list, allows for pass by value iteration
+		var count = 0;
 		for (let c of list){
 			// Right now the logic only excludes one code, for testing purposes
 			// thisModel is a undefined data model, depending on if we want to leave the service with the data we need to create a static model, but
 			// it should work for testing purposes
-			if (c.code['coding'][0]['code'] != "310249008"){
-				let thisModel = {condition: c, visibleStatus: true, extraData: []};
-				this.viewConditionList.push(thisModel);
-			}
-			if  (c.code['coding'][0]['code'] != "442311008"){
+
+			if (count<2){
 				let thisModel = {condition: c, visibleStatus: true, extraData: []};
 				this.viewConditionList.push(thisModel);
 			}
@@ -37,6 +35,7 @@ export class DoctorService {
 				let thisModel = {condition: c, visibleStatus: false, extraData: []};
 				this.viewConditionList.push(thisModel);
 			}
+			count++;
 		}
 		// More pass by value iteration
 		for (let v of this.viewConditionList){

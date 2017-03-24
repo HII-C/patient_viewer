@@ -7,6 +7,23 @@
           |  Doctor Stuff
         p
           | Think of this as the Account area
+        tr
+          td
+            input(type='checkbox', name='setting1')
+          td
+            | Setting 1
+        tr
+          td
+            input(type='checkbox', name='setting2')
+          td
+            | Setting 2
+        tr
+          td
+            input(type='checkbox', name='setting3')
+          td
+            | Setting 3
+        button.btn.btn-default((click)='saveSettings()') Save
+
     .col-sm-9
         a#api_page_link.btn.btn-small.btn-default(style='margin-bottom: 19px; margin-left: 5px;', routerLink='', routerLinkActive='active')
               span.glyphicon.glyphicon-transfer

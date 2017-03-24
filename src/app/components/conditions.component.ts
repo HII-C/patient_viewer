@@ -17,7 +17,7 @@ export class ConditionsComponent{
     selected: Condition;
     conditions: Array<Condition> = [];
     viewConditionList: Array<any> = [];
-    viewToggle: boolean = true;
+    viewToggle: boolean = false;
     @Input() patient: Patient;
 
     @Output() conditionSelected:EventEmitter<Condition> = new EventEmitter();
@@ -41,7 +41,7 @@ export class ConditionsComponent{
         if(x=="date-asc") {
           a=-a;
         }
-        this.viewConditionList.sort((n1,n2)=> {
+        this.conditions.sort((n1,n2)=> {
             if(n1.code['coding'][0]['code']>n2.code['coding'][0]['code']) {
               return a;
             }
@@ -49,6 +49,12 @@ export class ConditionsComponent{
               return -a;
             }
         })
+      }
+      if (this.viewToggle == false){
+          this.viewConditionList = this.doctorService.assignVisible(this.conditions);
+      }
+      else {
+          this.viewConditionList = JSON.parse(JSON.stringify(this.conditions));
       }
       console.log("sort");
     }
@@ -62,8 +68,10 @@ export class ConditionsComponent{
                     this.conditions = this.conditions.reverse();
                 	console.log("Loaded " + this.conditions.length + " conditions.");
                     this.loupeService.conditionArray = this.conditions;
-                    if (this.viewToggle == true){
-                        this.viewConditionList = JSON.parse(JSON.stringify(this.conditions));
+                    if (this.viewToggle == false){
+                        //this.viewConditionList = JSON.parse(JSON.stringify(this.conditions));
+                        this.viewConditionList = this.doctorService.assignVisible(this.conditions);
+
                     }
 				} else {
 					this.conditions = new Array<Condition>();
@@ -82,17 +90,18 @@ export class ConditionsComponent{
     }
 
     // Method for basic toggling, using JSON functions to toggle internal Angular2 module OnChanges for UI reactivity
-    toggleExpansion(){
-        // Basic logic for toggle, assuming this.conditions contains all info, and this.viewConditionList is the modified list being used to display data
-        if (this.viewToggle == true){
-            this.viewConditionList = this.doctorService.assignVisible(this.conditions);
-            this.viewToggle = false;
-        }
-    }
     ellipsesToggle(){
+        // Basic logic for toggle, assuming this.conditions contains all info, and this.viewConditionList is the modified list being used to display data
         if (this.viewToggle == false){
             this.viewConditionList = JSON.parse(JSON.stringify(this.conditions));
             this.viewToggle = true;
+        }
+    }
+    toggleExpansion(){
+
+        if (this.viewToggle == true){
+            this.viewConditionList = this.doctorService.assignVisible(this.conditions);
+            this.viewToggle = false;
         }
     }
 }

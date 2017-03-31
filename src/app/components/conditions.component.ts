@@ -123,7 +123,7 @@ export class ConditionsComponent{
         for(let i of this.viewConditionList) {
           if(i.code["coding"][0]["code"]==(<HTMLInputElement>document.getElementById(c)).value) {
             this.viewConditionList.splice(index,1);
-            console.log("found");
+            console.log("found:"+index);
           }
           index++;
           console.log("code:"+i.code["coding"][0]["code"]+"vs:"+(<HTMLInputElement>document.getElementById(c)).value);
@@ -159,6 +159,6 @@ export class ConditionsComponent{
       var parent3 = document.getElementById('newtd'+this.collapseQueue[0]);
       parent3.insertBefore(button,parent3.firstChild);
       //this.viewConditionList.push("test");
-
+      this.collapseQueue = [];
     }
 }

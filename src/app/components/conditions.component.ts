@@ -18,6 +18,7 @@ export class ConditionsComponent{
     conditions: Array<Condition> = [];
     viewConditionList: Array<any> = [];
     viewToggle: boolean = false;
+    collapseQueue: Array<any> = [];
     @Input() patient: Patient;
 
     @Output() conditionSelected:EventEmitter<Condition> = new EventEmitter();
@@ -103,5 +104,61 @@ export class ConditionsComponent{
             this.viewConditionList = this.doctorService.assignVisible(this.conditions);
             this.viewToggle = false;
         }
+    }
+    addCollapse(checked: boolean, value) {
+      if(checked) {
+        this.collapseQueue.push(value);
+      }
+      else {
+        var index = this.collapseQueue.indexOf(value);
+        if (index > -1) {
+           this.collapseQueue.splice(index, 1);
+        }
+      }
+
+    }
+    collapse() {
+      for(let c of this.collapseQueue) {
+        let index = 0;
+        for(let i of this.viewConditionList) {
+          if(i.code["coding"][0]["code"]==(<HTMLInputElement>document.getElementById(c)).value) {
+            this.viewConditionList.splice(index,1);
+            console.log("found:"+index);
+          }
+          index++;
+          console.log("code:"+i.code["coding"][0]["code"]+"vs:"+(<HTMLInputElement>document.getElementById(c)).value);
+        }
+        /*
+        if (c.visibleStatus == true){
+          this.exportList.push(v.condition);
+        }
+*/
+        console.log(document.getElementById(c));
+      }
+      //this.viewConditionList = this.doctorService.assignVisible(this.conditions);
+
+      var data = document.createElement('tr');
+      var button = document.createElement('button');
+      var tdata = document.createElement('td');
+      var empty = document.createElement('td');
+      button.setAttribute('class','btn btn-default');
+      button.setAttribute('style','width:100%');
+      button.innerHTML = '...';
+      data.setAttribute('id', 'newtr'+this.collapseQueue[0]);
+      tdata.setAttribute('id','newtd'+this.collapseQueue[0]);
+
+      var parent = document.getElementById('test');
+
+      parent.insertBefore(data, document.getElementById('t'+this.collapseQueue[0]));
+      var parent2 = document.getElementById('newtr'+this.collapseQueue[0]);
+      parent2.insertBefore(empty,parent2.firstChild);
+      parent2.insertBefore(tdata,parent2.firstChild);
+      parent2.insertBefore(empty,parent2.firstChild);
+      parent2.insertBefore(empty,parent2.firstChild);
+
+      var parent3 = document.getElementById('newtd'+this.collapseQueue[0]);
+      parent3.insertBefore(button,parent3.firstChild);
+      //this.viewConditionList.push("test");
+      this.collapseQueue = [];
     }
 }

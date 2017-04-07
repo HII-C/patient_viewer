@@ -19,6 +19,8 @@ section("*ngIf"='patient')
           a(href="#!", (click)='sortCondition("date-desc")')
             span.glyphicon.glyphicon-sort-by-alphabet-alt(aria-hidden="true")
       button.btn.btn-default((click)='toggleExpansion()') Toggle Expansion
+      button.btn.btn-default((click)='collapse()') Collapse
+
     p.telt("*ngIf"='viewConditionList.length == 0')
         i (none)
     table.table.table-condensed.table-striped("*ngIf"='viewConditionList.length > 0')
@@ -36,10 +38,11 @@ section("*ngIf"='patient')
                     | Status
                 th
                     | Onset
-        tbody
-            tr("*ngFor"='let c of viewConditionList', [class.selected]='c.selected', (click)='selectCondition(c)')
+        tbody(id='test')
+            tr("*ngFor"='let c of viewConditionList', [class.selected]='c.selected', (click)='selectCondition(c)',id='t{{viewConditionList.indexOf(c)}}')
                 td
-                    input(type='checkbox', name='conditionsCheckbox')
+                    input(type='checkbox',id='{{viewConditionList.indexOf(c)}}', value='{{c.code["coding"][0]["code"]}}', (change)='addCollapse($event.target.checked,$event.target.getAttribute("id"))')
+
                 td
                     span {{c.code['text']}} {{c.code['coding'][0]['code']}}
                 td {{c.clinicalStatus}}
@@ -53,5 +56,6 @@ section("*ngIf"='patient')
                     | 
                 td
                     | 
+            
 div
     button.btn.btn-default((click)='testingCsiro()') CSIRO

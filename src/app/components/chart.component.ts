@@ -1,5 +1,66 @@
-import {Component, Output, EventEmitter} from '@angular/core';
+import {Component, Output, EventEmitter, NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
 import {LoupeService} from '../services/loupe.service';
+import {NgxChartsModule} from '@swimlane/ngx-charts';
+
+export var single = [
+  {
+    "name": "Germany",
+    "value": 8940000
+  },
+  {
+    "name": "USA",
+    "value": 5000000
+  },
+  {
+    "name": "France",
+    "value": 7200000
+  }
+];
+
+export var multi = [
+  {
+    "name": "Germany",
+    "series": [
+      {
+        "name": "2010",
+        "value": 7300000
+      },
+      {
+        "name": "2011",
+        "value": 8940000
+      }
+    ]
+  },
+
+  {
+    "name": "USA",
+    "series": [
+      {
+        "name": "2010",
+        "value": 7870000
+      },
+      {
+        "name": "2011",
+        "value": 8270000
+      }
+    ]
+  },
+
+  {
+    "name": "France",
+    "series": [
+      {
+        "name": "2010",
+        "value": 5000002
+      },
+      {
+        "name": "2011",
+        "value": 5800000
+      }
+    ]
+  }
+];
 
 
 @Component({
@@ -7,7 +68,27 @@ import {LoupeService} from '../services/loupe.service';
     templateUrl: '/chart.html',
 })
 
+
 export class ChartComponent {
+
+    single: any[];
+    multi: any[];
+    // options
+    showXAxis = true;
+    showYAxis = true;
+    gradient = false;
+    showLegend = false;
+    showXAxisLabel = true;
+    xAxisLabel = 'Country';
+    showYAxisLabel = true;
+    yAxisLabel = 'Population';
+
+    colorScheme = {
+      domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
+    };
+    autoScale = true;
+
+    view: any[] = [800, 400];
 
     public data: Array<any> = [
         {data: [0], label: 'Series A'},
@@ -48,7 +129,9 @@ export class ChartComponent {
 
     constructor(private loupeService: LoupeService){
         console.log("Chart Component is loaded...");
+        Object.assign(this, {single, multi});
     }
+
 
     test(e: any){
         console.log("Events work, see~" + e);

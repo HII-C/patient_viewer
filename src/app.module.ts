@@ -49,6 +49,9 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { LineChartComponent } from '@swimlane/ngx-charts'
+
 const appRoutes: Routes = [
     { path: '', component: PatientComponent },
     { path: 'account', component: AccountComponent }
@@ -64,7 +67,8 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
         FormsModule,
         HttpModule,
 		MomentModule,
-        ChartsModule
+        ChartsModule,
+        NgxChartsModule
     ],       // module dependencies
     declarations: [
         AppComponent,

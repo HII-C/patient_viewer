@@ -15,7 +15,10 @@ div.btn-group
             a(href="#!")
               span Chart 2
     button.btn.btn-default((click)="reRenderData()") Render Data
-#toggle.collapse
+//#toggle.collapse
     div(style='display:block')
         canvas(baseChart="", [datasets]="data", [labels]="labels", [options]="options", [legend]="legend", [chartType]="type")
-    
+
+div
+    #toggle.collapse.in
+        ngx-charts-line-chart([view]='view', [scheme]='colorScheme', [results]='multi', [gradient]='gradient', [xAxis]='showXAxis', [yAxis]='showYAxis', [legend]='showLegend', [showXAxisLabel]='showXAxisLabel', [showYAxisLabel]='showYAxisLabel', [xAxisLabel]='xAxisLabel', [yAxisLabel]='yAxisLabel', [autoScale]='autoScale')

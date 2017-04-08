@@ -52,10 +52,12 @@ export class ConditionsComponent{
         })
       }
       if (this.viewToggle == false){
-          this.viewConditionList = this.doctorService.assignVisible(this.conditions);
+          this.conditions = this.doctorService.assignVisible(this.conditions);
       }
       else {
-          this.viewConditionList = JSON.parse(JSON.stringify(this.conditions));
+        for(let c of this.conditions) {
+          c.isVisible = true;
+        }
       }
       console.log("sort");
     }
@@ -69,17 +71,22 @@ export class ConditionsComponent{
                     this.conditions = this.conditions.reverse();
                 	console.log("Loaded " + this.conditions.length + " conditions.");
                     this.loupeService.conditionArray = this.conditions;
+                    for(let c of this.conditions) {
+                        c.isVisible = true;
+                    }
                     if (this.viewToggle == false){
                         //this.viewConditionList = JSON.parse(JSON.stringify(this.conditions));
-                        this.viewConditionList = this.doctorService.assignVisible(this.conditions);
-
+                        this.conditions = this.doctorService.assignVisible(this.conditions);
                     }
+
 				} else {
 					this.conditions = new Array<Condition>();
 					console.log("No conditions for patient.");
 				}
             });
         }
+
+
     }
     testingCsiro(){
         this.csiroService.MapQuery().subscribe(data =>{
@@ -94,71 +101,59 @@ export class ConditionsComponent{
     ellipsesToggle(){
         // Basic logic for toggle, assuming this.conditions contains all info, and this.viewConditionList is the modified list being used to display data
         if (this.viewToggle == false){
-            this.viewConditionList = JSON.parse(JSON.stringify(this.conditions));
+          for(let c of this.conditions) {
+              c.isVisible = true;
+          }
             this.viewToggle = true;
         }
     }
     toggleExpansion(){
 
         if (this.viewToggle == true){
-            this.viewConditionList = this.doctorService.assignVisible(this.conditions);
+            this.conditions = this.doctorService.assignVisible(this.conditions);
             this.viewToggle = false;
         }
     }
+
     addCollapse(checked: boolean, value) {
       if(checked) {
-        this.collapseQueue.push(value);
+        this.conditions[value].isSelected = true;
       }
       else {
-        var index = this.collapseQueue.indexOf(value);
-        if (index > -1) {
-           this.collapseQueue.splice(index, 1);
-        }
+        this.conditions[value].isSelected = false;
+
       }
 
+    }
+
+    expand(parent: string) {
+      for(let c of this.conditions) {
+        if(c.parent == parent) {
+          c.isVisible = true;
+          c.parent = "";
+          c.isParent = false;
+        }
+      }
     }
     collapse() {
-      for(let c of this.collapseQueue) {
-        let index = 0;
-        for(let i of this.viewConditionList) {
-          if(i.code["coding"][0]["code"]==(<HTMLInputElement>document.getElementById(c)).value) {
-            this.viewConditionList.splice(index,1);
-            console.log("found:"+index);
-          }
-          index++;
-          console.log("code:"+i.code["coding"][0]["code"]+"vs:"+(<HTMLInputElement>document.getElementById(c)).value);
+      let index = 0;
+      let parent = "";
+      for(let c of this.conditions) {
+          if(c.isSelected==true) {
+            if(index==0) {
+              c.isParent = true;
+              parent = c.id;
+            }
+            else {
+              c.isVisible = false;
+
+            }
+            c.parent = parent;
+            index++;
         }
-        /*
-        if (c.visibleStatus == true){
-          this.exportList.push(v.condition);
-        }
-*/
-        console.log(document.getElementById(c));
+        c.isSelected = false;
       }
-      //this.viewConditionList = this.doctorService.assignVisible(this.conditions);
 
-      var data = document.createElement('tr');
-      var button = document.createElement('button');
-      var tdata = document.createElement('td');
-      var empty = document.createElement('td');
-      button.setAttribute('class','btn btn-default');
-      button.setAttribute('style','width:100%');
-      button.innerHTML = '...';
-      data.setAttribute('id', 'newtr'+this.collapseQueue[0]);
-      tdata.setAttribute('id','newtd'+this.collapseQueue[0]);
-
-      var parent = document.getElementById('test');
-
-      parent.insertBefore(data, document.getElementById('t'+this.collapseQueue[0]));
-      var parent2 = document.getElementById('newtr'+this.collapseQueue[0]);
-      parent2.insertBefore(empty,parent2.firstChild);
-      parent2.insertBefore(tdata,parent2.firstChild);
-      parent2.insertBefore(empty,parent2.firstChild);
-      parent2.insertBefore(empty,parent2.firstChild);
-
-      var parent3 = document.getElementById('newtd'+this.collapseQueue[0]);
-      parent3.insertBefore(button,parent3.firstChild);
-      //this.viewConditionList.push("test");
-      this.collapseQueue = [];
     }
+
 }

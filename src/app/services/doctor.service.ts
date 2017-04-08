@@ -28,22 +28,15 @@ export class DoctorService {
 			// it should work for testing purposes
 
 			if (count<2){
-				let thisModel = {condition: c, visibleStatus: true, extraData: []};
-				this.viewConditionList.push(thisModel);
+				c.isVisible = true;
 			}
 			else{
-				let thisModel = {condition: c, visibleStatus: false, extraData: []};
-				this.viewConditionList.push(thisModel);
+				c.isVisible = false;
 			}
 			count++;
 		}
-		// More pass by value iteration
-		for (let v of this.viewConditionList){
-			if (v.visibleStatus == true){
-				this.exportList.push(v.condition);
-			}
-		}
+
 		// returning the updated list for the spec parameters
-		return this.exportList;
+		return list;
 	}
 }

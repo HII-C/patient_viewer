@@ -50,15 +50,6 @@ export class ConditionsComponent{
               return -a;
             }
         })
-<<<<<<< HEAD
-      }
-      if (this.viewToggle == false){
-          this.viewConditionList = this.doctorService.assignVisible(this.conditions);
-      }
-      else {
-          this.viewConditionList = JSON.parse(JSON.stringify(this.conditions));
-      }
-=======
       }
       if (this.viewToggle == false){
           this.conditions = this.doctorService.assignVisible(this.conditions);
@@ -68,7 +59,6 @@ export class ConditionsComponent{
           c.isVisible = true;
         }
       }
->>>>>>> origin/master
       console.log("sort");
     }
 

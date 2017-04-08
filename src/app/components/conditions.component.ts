@@ -31,6 +31,7 @@ export class ConditionsComponent{
     selectCondition(condition: Condition) {
       this.selected = condition;
       this.loupeService.activeCondition = this.selected;
+      this.conditionSelected.emit(this.selected);
       for(let c of this.conditions) {
         c['selected'] = (c.id == this.selected.id);
       }

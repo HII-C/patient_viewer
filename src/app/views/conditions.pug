@@ -39,7 +39,7 @@ section("*ngIf"='patient')
                 th
                     | Onset
         tbody(id='test')
-            tr("*ngFor"='let c of conditions', [class.selected]='c.selected', (click)='selectCondition(c)',id='t{{viewConditionList.indexOf(c)}}')
+            tr("*ngFor"='let c of conditions', [class.selected]='c.selected', (click)='selectCondition(c)',id='t{{conditions.indexOf(c)}}')
                 ng-container("*ngIf"="c.isVisible")
                     td
                         input("*ngIf"="!c.isParent",type='checkbox',id='{{conditions.indexOf(c)}}', value='{{c.code["coding"][0]["code"]}}', (change)='addCollapse($event.target.checked,$event.target.getAttribute("id"))')

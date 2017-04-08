@@ -16,7 +16,6 @@ export class ConditionsComponent{
 
     selected: Condition;
     conditions: Array<Condition> = [];
-    viewConditionList: Array<any> = [];
     viewToggle: boolean = false;
     collapseQueue: Array<any> = [];
     @Input() patient: Patient;

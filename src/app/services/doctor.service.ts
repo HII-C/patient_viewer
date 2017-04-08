@@ -7,8 +7,6 @@ import {Condition} from '../models/condition.model';
 })
 export class DoctorService {
 	// Creates the class-scope variables so we can call this.exportList, and doctorService.exportList from other components
-	viewConditionList: Array<any> = [];
-	exportList: Array<Condition> = [];
 
 	constructor() {
 		console.log("Doctor Prefrence Service running...");
@@ -18,8 +16,7 @@ export class DoctorService {
 	assignVisible(list: Array<Condition>){
 		// Wipes the lists, as assignVisible() gets called on subscribe){data == true} for conditions.component.ts
 		// Needs to have a clean list, or it will push doubles/triples, or more
-		this.exportList = new Array<Condition>();
-		this.viewConditionList = new Array<Condition>();
+
 		// Use "let of" to generate enumerated list, allows for pass by value iteration
 		var count = 0;
 		for (let c of list){

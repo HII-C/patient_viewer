@@ -7,8 +7,6 @@ import {Condition} from '../models/condition.model';
 })
 export class DoctorService {
 	// Creates the class-scope variables so we can call this.exportList, and doctorService.exportList from other components
-	viewConditionList: Array<any> = [];
-	exportList: Array<Condition> = [];
 
 	constructor() {
 		console.log("Doctor Prefrence Service running...");
@@ -18,8 +16,7 @@ export class DoctorService {
 	assignVisible(list: Array<Condition>){
 		// Wipes the lists, as assignVisible() gets called on subscribe){data == true} for conditions.component.ts
 		// Needs to have a clean list, or it will push doubles/triples, or more
-		this.exportList = new Array<Condition>();
-		this.viewConditionList = new Array<Condition>();
+
 		// Use "let of" to generate enumerated list, allows for pass by value iteration
 		var count = 0;
 		for (let c of list){
@@ -28,22 +25,15 @@ export class DoctorService {
 			// it should work for testing purposes
 
 			if (count<2){
-				let thisModel = {condition: c, visibleStatus: true, extraData: []};
-				this.viewConditionList.push(thisModel);
+				c.isVisible = true;
 			}
 			else{
-				let thisModel = {condition: c, visibleStatus: false, extraData: []};
-				this.viewConditionList.push(thisModel);
+				c.isVisible = false;
 			}
 			count++;
 		}
-		// More pass by value iteration
-		for (let v of this.viewConditionList){
-			if (v.visibleStatus == true){
-				this.exportList.push(v.condition);
-			}
-		}
+
 		// returning the updated list for the spec parameters
-		return this.exportList;
+		return list;
 	}
 }

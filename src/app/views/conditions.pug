@@ -21,9 +21,9 @@ section("*ngIf"='patient')
       button.btn.btn-default((click)='toggleExpansion()') Toggle Expansion
       button.btn.btn-default((click)='collapse()') Collapse
 
-    p.telt("*ngIf"='viewConditionList.length == 0')
+    p.telt("*ngIf"='conditions.length == 0')
         i (none)
-    table.table.table-condensed.table-striped("*ngIf"='viewConditionList.length > 0')
+    table.table.table-condensed.table-striped("*ngIf"='conditions.length > 0')
         colgroup
             col(style='width:10%')
             col(style='width:50%')
@@ -39,14 +39,16 @@ section("*ngIf"='patient')
                 th
                     | Onset
         tbody(id='test')
-            tr("*ngFor"='let c of viewConditionList', [class.selected]='c.selected', (click)='selectCondition(c)',id='t{{viewConditionList.indexOf(c)}}')
-                td
-                    input(type='checkbox',id='{{viewConditionList.indexOf(c)}}', value='{{c.code["coding"][0]["code"]}}', (change)='addCollapse($event.target.checked,$event.target.getAttribute("id"))')
+            tr("*ngFor"='let c of conditions', [class.selected]='c.selected', (click)='selectCondition(c)',id='t{{conditions.indexOf(c)}}')
+                ng-container("*ngIf"="c.isVisible")
+                    td
+                        input("*ngIf"="!c.isParent",type='checkbox',id='{{conditions.indexOf(c)}}', value='{{c.code["coding"][0]["code"]}}', (change)='addCollapse($event.target.checked,$event.target.getAttribute("id"))')
 
-                td
-                    span {{c.code['text']}} {{c.code['coding'][0]['code']}}
-                td {{c.clinicalStatus}}
-                td {{c.onsetDateTime | amTimeAgo}}
+                    td
+                        button.btn.btn-default("*ngIf"="c.isParent",style="width: 100%", (click)='expand(c.parent)') ...
+                        span("*ngIf"="!c.isParent") {{c.code['text']}} {{c.code['coding'][0]['code']}}
+                    td("*ngIf"="!c.isParent") {{c.clinicalStatus}}
+                    td("*ngIf"="!c.isParent") {{c.onsetDateTime | amTimeAgo}}
             tr("*ngIf"="!viewToggle", style="width: 100%")
                 td
                     | 

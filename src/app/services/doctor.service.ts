@@ -7,6 +7,7 @@ import {Condition} from '../models/condition.model';
 })
 export class DoctorService {
 	// Creates the class-scope variables so we can call this.exportList, and doctorService.exportList from other components
+	filter: Array<String> = [];
 
 	constructor() {
 		console.log("Doctor Prefrence Service running...");
@@ -25,12 +26,21 @@ export class DoctorService {
 			// it should work for testing purposes
 
 			if (count<2){
-				c.isVisible = true;
+				for(let i of this.filter) {
+					if(c.code['coding'][0]['code']==i) {
+						c.isVisible = true;
+						count++;
+						break;
+					}
+					else {
+						c.isVisible = false;
+					}
+				}
+
 			}
 			else{
 				c.isVisible = false;
 			}
-			count++;
 		}
 
 		// returning the updated list for the spec parameters

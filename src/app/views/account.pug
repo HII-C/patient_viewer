@@ -9,19 +9,19 @@
           | Think of this as the Account area
         tr
           td
-            input(type='checkbox', name='setting1')
+            input(type='checkbox', name='setting1', (change)='addSetting($event.target.checked,"185903001")')
           td
-            | Setting 1
+            | Setting 1 [185903001]
         tr
           td
-            input(type='checkbox', name='setting2')
+            input(type='checkbox', name='setting2', (change)='addSetting($event.target.checked,"235595009")')
           td
-            | Setting 2
+            | Setting 2 [235595009]
         tr
           td
-            input(type='checkbox', name='setting3')
+            input(type='checkbox', name='setting3', (change)='addSetting($event.target.checked,"310249008")')
           td
-            | Setting 3
+            | Setting 3 [310249008]
         button.btn.btn-default((click)='saveSettings()') Save
 
     .col-sm-9

@@ -2,6 +2,7 @@ import {ModuleWithProviders, enableProdMode} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 
 
+
 import {AppComponent} from './app/components/app.component';
 import {ClientComponent} from './app/components/client.component';
 import {HomeComponent} from './app/components/home.component';
@@ -13,8 +14,9 @@ import {ObservationsComponent} from './app/components/observations.component';
 import {ActivitiesComponent} from './app/components/activities.component';
 import {ActionListComponent} from './app/components/actionList.component';
 import {ChartComponent} from './app/components/chart.component';
-import {AccountComponent} from './app/components/account.component';
+import {CalendarComponent} from './app/components/calendar.component';
 import {DoctorNoteComponent} from './app/components/doctorNote.component';
+import {AccountComponent} from './app/components/account.component';
 
 
 
@@ -48,9 +50,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
-
+import { CalendarModule } from 'angular-calendar';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
-import { LineChartComponent } from '@swimlane/ngx-charts'
+import { LineChartComponent } from '@swimlane/ngx-charts';
 
 const appRoutes: Routes = [
     { path: '', component: PatientComponent },
@@ -68,7 +70,8 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
         HttpModule,
 		MomentModule,
         ChartsModule,
-        NgxChartsModule
+        NgxChartsModule,
+        CalendarModule.forRoot()
     ],       // module dependencies
     declarations: [
         AppComponent,
@@ -84,7 +87,8 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
 		LoupeExampleComponent,
         ChartComponent,
         AccountComponent,
-        DoctorNoteComponent
+        DoctorNoteComponent,
+        CalendarComponent
     ],   // components and directives
     providers: [
         appRoutingProviders,

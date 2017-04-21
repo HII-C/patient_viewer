@@ -53,6 +53,7 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { CalendarModule } from 'angular-calendar';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { LineChartComponent } from '@swimlane/ngx-charts';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const appRoutes: Routes = [
     { path: '', component: PatientComponent },
@@ -71,6 +72,7 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
 		MomentModule,
         ChartsModule,
         NgxChartsModule,
+        BrowserAnimationsModule,
         CalendarModule.forRoot()
     ],       // module dependencies
     declarations: [

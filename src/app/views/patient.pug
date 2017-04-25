@@ -3,7 +3,7 @@ style.
     display: -webkit-flex;
     display: flex;
     width: 100%;
-    height: 80px;
+    height: 200px;
     background-color: white;
     border-bottom: grey;
     }
@@ -38,7 +38,11 @@ style.
     border-radius: 5px;
     align-self: center;
     }
-
+    .btn.btn-custom-lg {
+    border-radius: 0;
+    display:block;
+    float:left;
+    }
 .whole-container
     aside.actionBar
         section
@@ -96,18 +100,33 @@ style.
         aside#sidebar.div("*ngIf"='patients')
             section
                 .flex-container
-                    .flex-item(style='width: 50%; float: left;')
-                        textarea(rows='3', style='border: 3px solid #2a7999; border-radius: 5px; width: 100%;')  Reason for Visit
-                    .patientInfoBox(style='width=50%; float: right;')
-                        div("*ngIf"='selected')
-                            h4  Patient Vital Signs
-                            #patient_vitals
-
-                    .vitalsSection(style='width: 55%')
-                        doctorNote(style='color: rgb(51, 122, 183); width: 50%; margin-right: 100px')
-                        
-
-
+                      div(style="flex:1;margin-top:20px")
+                        img(src='/images/textures/me.jpg', style='width:100px;height:90px')
+                      div(style='margin-bottom: 0px;flex:1;margin-top:20px')
+                          .patientInfoBox("*ngIf"='selected', style='width: 110%; font-size: 90%')
+                              .identifier("*ngFor"='let id of selected.identifier')
+                                  div {{selected.name[0].given[0]}} {{selected.name[0].family[0]}}
+                                  div(style="text-transform: capitalize") {{selected.gender}}, {{-1 * (selected.birthDate | amDifference:today:'years':false)}} yrs ({{selected.birthDate | amDateFormat:'MM/DD/YYYY'}})
+                      div(style="max-width:220px;flex:1;margin-top:10px;")
+                        button(type="button" class="btn btn-default btn-lg btn-custom-lg")
+                          span(class="glyphicon glyphicon-earphone" aria-hidden="true" style="height:30px;width:30px")
+                        button(type="button" class="btn btn-default btn-lg btn-custom-lg")
+                          span(class="glyphicon glyphicon-home" aria-hidden="true" style="height:30px;width:30px")
+                        button(type="button" class="btn btn-default btn-lg btn-custom-lg")
+                          span(class="glyphicon glyphicon-search" aria-hidden="true" style="height:30px;width:30px")
+                        button(type="button" class="btn btn-default btn-lg btn-custom-lg")
+                          span(class="glyphicon glyphicon-star" aria-hidden="true" style="height:30px;width:30px")
+                        button(type="button" class="btn btn-default btn-lg btn-custom-lg")
+                          span(class="glyphicon glyphicon-cog" aria-hidden="true" style="height:30px;width:30px")
+                        button(type="button" class="btn btn-default btn-lg btn-custom-lg")
+                          span(class="glyphicon glyphicon-signal" aria-hidden="true" style="height:30px;width:30px")
+                        button(type="button" class="btn btn-default btn-lg btn-custom-lg")
+                          span(class="glyphicon glyphicon-link" aria-hidden="true" style="height:30px;width:30px")
+                        button(type="button" class="btn btn-default btn-lg btn-custom-lg")
+                          span(class="glyphicon glyphicon-stats" aria-hidden="true" style="height:30px;width:30px")
+                        button(type="button" class="btn btn-default btn-lg btn-custom-lg")
+                          span(class="glyphicon glyphicon-info-sign" aria-hidden="true" style="height:30px;width:30px")
+                                        
                 .encounterBar
                 timelines([patient]='selected')
                   // Tab panes

@@ -20,12 +20,12 @@ section("*ngIf"='patient')
                 td
                     span {{o.effectiveDateTime | amTimeAgo}}
                 td
-                    span {{o.category['text']}}
+                    span {{o['code']['coding'][0]['display']}}
                 td
                     span {{o.code['text']}}
-                    span("*ngIf"="!o.code['text']")
+                    //span("*ngIf"="!o.code.coding['display']")
                         | {{csiroLookup(o)}}
-                    span [{{o.code['coding'][0]['code']}}]
+                    span {{o['code']['coding'][0]['code']}}
                 td
                     span("*ngIf"='o.valueQuantity') {{o.valueQuantity['value']}} {{o.valueQuantity['unit']}}
                     span("*ngIf"='o.valueCodeableConcept') {{o.valueCodeableConcept['text']}}

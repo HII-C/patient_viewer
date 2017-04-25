@@ -11,13 +11,13 @@ import {Patient} from '../models/patient.model';
 export class ObservationService {
 
     private path = '/Observation';
-    
+
     constructor(private fhirService: FhirService, private http: Http) {
         console.log("ObservationService created...");
     }
 
     index(patient: Patient): Observable<any> {
-        var url = this.fhirService.getUrl() + this.path + "?patient=" + patient.id;
+        var url = this.fhirService.getUrl() + this.path + "?patient=" + patient.id + "&_format=json";
 		// console.log("ESNUTH");
         return this.http.get(url, this.fhirService.options()).map(res => res.json());
     }

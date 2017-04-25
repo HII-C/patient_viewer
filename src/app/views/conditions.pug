@@ -42,11 +42,11 @@ section("*ngIf"='patient')
             tr("*ngFor"='let c of conditions', [class.selected]='c.selected', (click)='selectCondition(c)',id='t{{conditions.indexOf(c)}}')
                 ng-container("*ngIf"="c.isVisible")
                     td
-                        input("*ngIf"="!c.isParent",type='checkbox',id='{{conditions.indexOf(c)}}', value='{{c.code["coding"][0]["code"]}}', (change)='addCollapse($event.target.checked,$event.target.getAttribute("id"))')
+                        input("*ngIf"="!c.isParent",type='checkbox',id='{{conditions.indexOf(c)}}', value='{{c["code"]["text"]}}', (change)='addCollapse($event.target.checked,$event.target.getAttribute("id"))')
 
                     td
                         button.btn.btn-default("*ngIf"="c.isParent",style="width: 100%", (click)='expand(c.parent)') ...
-                        span("*ngIf"="!c.isParent") {{c.code['text']}} {{c.code['coding'][0]['code']}}
+                        span("*ngIf"="!c.isParent") {{c['code']['text']}} {{c['category']['coding'][0]['code']}}
                     td("*ngIf"="!c.isParent") {{c.clinicalStatus}}
                     td("*ngIf"="!c.isParent") {{c.onsetDateTime | amTimeAgo}}
             tr("*ngIf"="!viewToggle", style="width: 100%")

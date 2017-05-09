@@ -43,6 +43,13 @@ style.
     display:block;
     float:left;
     }
+    .glyphicon {
+      height:30px;
+      width:30px;
+    }
+    .btn2 {
+      background-color:#F0F0F0;
+    }
 .whole-container
     aside.actionBar
         section
@@ -107,26 +114,46 @@ style.
                               .identifier("*ngFor"='let id of selected.identifier')
                                   div {{selected.name[0].given[0]}} {{selected.name[0].family[0]}}
                                   div(style="text-transform: capitalize") {{selected.gender}}, {{-1 * (selected.birthDate | amDifference:today:'years':false)}} yrs ({{selected.birthDate | amDateFormat:'MM/DD/YYYY'}})
-                      div(style="max-width:220px;flex:1;margin-top:10px;")
-                        button(type="button" class="btn btn-default btn-lg btn-custom-lg")
-                          span(class="glyphicon glyphicon-earphone" aria-hidden="true" style="height:30px;width:30px")
-                        button(type="button" class="btn btn-default btn-lg btn-custom-lg")
-                          span(class="glyphicon glyphicon-home" aria-hidden="true" style="height:30px;width:30px")
-                        button(type="button" class="btn btn-default btn-lg btn-custom-lg")
-                          span(class="glyphicon glyphicon-search" aria-hidden="true" style="height:30px;width:30px")
-                        button(type="button" class="btn btn-default btn-lg btn-custom-lg")
-                          span(class="glyphicon glyphicon-star" aria-hidden="true" style="height:30px;width:30px")
-                        button(type="button" class="btn btn-default btn-lg btn-custom-lg")
-                          span(class="glyphicon glyphicon-cog" aria-hidden="true" style="height:30px;width:30px")
-                        button(type="button" class="btn btn-default btn-lg btn-custom-lg")
-                          span(class="glyphicon glyphicon-signal" aria-hidden="true" style="height:30px;width:30px")
-                        button(type="button" class="btn btn-default btn-lg btn-custom-lg")
-                          span(class="glyphicon glyphicon-link" aria-hidden="true" style="height:30px;width:30px")
-                        button(type="button" class="btn btn-default btn-lg btn-custom-lg")
-                          span(class="glyphicon glyphicon-stats" aria-hidden="true" style="height:30px;width:30px")
-                        button(type="button" class="btn btn-default btn-lg btn-custom-lg")
-                          span(class="glyphicon glyphicon-info-sign" aria-hidden="true" style="height:30px;width:30px")
-                                        
+                      div("*ngIf"="!nav2", style="max-width:220px;flex:1;margin-top:10px;position:relative;", [@fadeIn]="'in'")
+                        button.btn.btn-default.btn-lg.btn-custom-lg
+                          span(class="glyphicon glyphicon-earphone")
+                        button.btn.btn-default.btn-lg.btn-custom-lg((click)='switchNav()')
+                          span(class="glyphicon glyphicon-home")
+                        button.btn.btn-default.btn-lg.btn-custom-lg
+                          span(class="glyphicon glyphicon-search")
+                        button.btn.btn-default.btn-lg.btn-custom-lg
+                          span(class="glyphicon glyphicon-star")
+                        button.btn.btn-default.btn-lg.btn-custom-lg(routerLink='/account', routerLinkActive='active')
+                          span(class="glyphicon glyphicon-cog")
+                        button.btn.btn-default.btn-lg.btn-custom-lg
+                          span(class="glyphicon glyphicon-signal")
+                        button.btn.btn-default.btn-lg.btn-custom-lg
+                          span(class="glyphicon glyphicon-link")
+                        button.btn.btn-default.btn-lg.btn-custom-lg
+                          span(class="glyphicon glyphicon-stats")
+                        button.btn.btn-default.btn-lg.btn-custom-lg  
+                          span(class="glyphicon glyphicon-info-sign")
+                      
+                      div("*ngIf"="nav2", style="max-width:220px;flex:1;margin-top:10px;;", [@fadeIn]="'in'")
+                        button.btn.btn-default.btn-lg.btn-custom-lg.btn2
+                          span(class="glyphicon glyphicon-arrow-left")
+                        button.btn.btn-default.btn-lg.btn-custom-lg((click)='switchNav()')
+                          span(class="glyphicon glyphicon-home")
+                        button.btn.btn-default.btn-lg.btn-custom-lg.btn2
+                          span(class="glyphicon glyphicon-arrow-right")
+                        button.btn.btn-default.btn-lg.btn-custom-lg.btn2
+                          span(class="glyphicon glyphicon-repeat") 
+                        button.btn.btn-default.btn-lg.btn-custom-lg.btn2
+                          span(class="glyphicon glyphicon-bookmark")
+                        button.btn.btn-default.btn-lg.btn-custom-lg.btn2
+                          span(class="glyphicon glyphicon-hourglass") 
+                        button.btn.btn-default.btn-lg.btn-custom-lg.btn2
+                          span(class="glyphicon glyphicon-flash")
+                        button.btn.btn-default.btn-lg.btn-custom-lg.btn2
+                          span(class="glyphicon glyphicon-list-alt") 
+                        button.btn.btn-default.btn-lg.btn-custom-lg.btn2
+                          span(class="glyphicon glyphicon-stats")
+
                 .encounterBar
                 timelines([patient]='selected')
                   // Tab panes

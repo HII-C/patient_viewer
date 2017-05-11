@@ -36,46 +36,78 @@ style.
             option(value="18") 18 month
           h3
             | Problem List
-          table
+          table.paddedtable
             tr
-              td
+              td.paddedtd
                 input(type='checkbox', name='setting1')
-              td
+              td.paddedtd
                 | Active Problems
-              td
+              td.paddedtd
                 input(type='checkbox', name='setting2')
-              td
+              td.paddedtd
                 | Allergies
             tr
-              td
+              td.paddedtd
                 input(type='checkbox', name='setting3')
-              td
+              td.paddedtd
                 | Inactive Problems
-              td
-                input(type='checkbox', name='setting3')
-              td
+              td.paddedtd
+                input(type='checkbox', name='setting4')
+              td.paddedtd
                 | Activities Due
           h3
             | Findings List
+          table.paddedtable
+            tr
+              td.paddedtd
+                input(type='checkbox', name='setting1')
+              td.paddedtd
+                | Abnormal Values
+              td.paddedtd
+                input(type='checkbox', name='setting2')
+              td.paddedtd
+                | All Values
+            tr
+              td.paddedtd
+                input(type='checkbox', name='setting3')
+              td.paddedtd
+                | No Values
+              td.paddedtd
+                input(type='checkbox', name='setting4')
+              td.paddedtd
+                | Selected Values
           table
-            tr
+            tr("*ngFor"="let lab of electrolytes")
               td
-                input(type='checkbox', name='setting1', (change)='addSetting($event.target.checked,"185903001")')
+                input(type='checkbox', name='{{lab}}')
               td
-                | Setting 1 [185903001]
+                | {{lab}}
+          br
+          table
+            tr("*ngFor"="let lab of cholesteralBattery")
               td
-                input(type='checkbox', name='setting2', (change)='addSetting($event.target.checked,"235595009")')
+                input(type='checkbox', name='{{lab}}')
               td
-                | Setting 2 [235595009]
-            tr
+                | {{lab}}
+          br      
+          table
+            tr("*ngFor"="let lab of liverFunction")
               td
-                input(type='checkbox', name='setting3', (change)='addSetting($event.target.checked,"310249008")')
+                input(type='checkbox', name='{{lab}}')
               td
-                | Setting 3 [310249008]
+                | {{lab}}
+          br      
+          table
+            tr("*ngFor"="let lab of kidneyFunction")
               td
-                input(type='checkbox', name='setting3', (change)='addSetting($event.target.checked,"310249008")')
+                input(type='checkbox', name='{{lab}}')
               td
-                | Setting 4 [310249008]
+                | {{lab}}
+                
+                
+                //input(type='checkbox', name='setting1', (change)='addSetting($event.target.checked,"185903001")')
+
+          
               
           button.btn.btn-default((click)='saveSettings()') Save
 

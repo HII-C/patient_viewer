@@ -1,36 +1,3 @@
-style.
-    body { font: 12px Arial;}
-            
-    path { 
-        stroke: steelblue;
-        stroke-width: 2;
-        fill: none;
-    }     
-    .axis path
-    .axis line {
-        fill: none;
-        stroke: grey;
-        stroke-width: 1;
-        shape-rendering: crispEdges;
-    }
-
-    .brush .extent {
-        stroke: #fff;
-        fill-opacity: .125;
-        shape-rendering: crispEdges;
-    }       
-    .loader {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background: rgba(255,255,255,0.8);
-        text-align: center;
-        z-index: 99;
-        display: none;
-    } .loader p { margin-top: 180px; }
-    
 div(style="padding: 15px;")
     h2
         | Charts
@@ -48,10 +15,7 @@ div.btn-group
             a(href="#!")
               span Chart 2
     button.btn.btn-default((click)="reRenderData()") Render Data
-//#toggle.collapse
-    div(style='display:block')
-        canvas(baseChart="", [datasets]="data", [labels]="labels", [options]="options", [legend]="legend", [chartType]="type")
 
 div
-    #toggle.collapse.in
+    #toggle.collapse
         ngx-charts-line-chart([view]='view', [scheme]='colorScheme', [results]='multi', [gradient]='gradient', [xAxis]='showXAxis', [yAxis]='showYAxis', [legend]='showLegend', [showXAxisLabel]='showXAxisLabel', [showYAxisLabel]='showYAxisLabel', [xAxisLabel]='xAxisLabel', [yAxisLabel]='yAxisLabel', [autoScale]='autoScale')

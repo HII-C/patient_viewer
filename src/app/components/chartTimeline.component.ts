@@ -92,8 +92,8 @@ export class ChartTimelineComponent {
     xAxisLabel = 'Country';
     showYAxisLabel = true;
     yAxisLabel = 'Population';
-    view: any[] = [800, 60];
-    view2: any[] = [800,100]
+    view: any[] = [800, 45];
+    view2: any[] = [800,131]
 
     colorScheme = {
       domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']

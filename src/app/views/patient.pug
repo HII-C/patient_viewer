@@ -157,7 +157,14 @@ style.
                 .encounterBar
                 timelines([patient]='selected')
                   
-                div
+                //div
+                    chartTimelines
+                div(style="padding: 15px;")
+                    h2(style = "display : inline;")
+                        | Historical Trend  
+                    span.btn-group
+                        button.btn.btn-default(data-toggle='collapse', data-target='#toggle') Toggle
+                #toggle.collapse.in                   
                     chartTimelines
                 table(align='center', style='column-gap: 10px; overflow: scroll; height: 1000px')
                     colgroup

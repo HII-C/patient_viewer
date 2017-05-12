@@ -5,10 +5,21 @@ import {PatientService} from '../services/patient.service';
 import {Patient} from '../models/patient.model';
 import {Server} from '../models/server.model';
 import {Condition} from '../models/condition.model';
+import {trigger, state, style, animate, transition} from '@angular/animations';
 
 @Component({
     selector: 'patients',
-    templateUrl: '/patient.html'
+    templateUrl: '/patient.html',
+
+    animations: [
+      trigger('fadeIn', [
+        state('in', style({opacity: '1'})),
+        transition('void => *', [
+          style({opacity: '0'}),
+          animate('800ms ease-in')
+        ])
+      ])
+    ]
 })
 export class PatientComponent {
     selected: Patient;
@@ -16,6 +27,7 @@ export class PatientComponent {
     server: Server;
     servers: Server[] = ServerService.servers;
     selectedCondition: Condition;
+    nav2: boolean = false;
 
     constructor(private fhirService: FhirService, private patientService: PatientService, private compiler: Compiler) {
 		this.compiler.clearCache();
@@ -87,5 +99,9 @@ export class PatientComponent {
     selectCondition(condition) {
       this.selectedCondition = condition;
       console.log(this.selectedCondition);
+    }
+
+    switchNav() {
+      this.nav2 = !this.nav2;
     }
 }

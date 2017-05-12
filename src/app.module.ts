@@ -17,6 +17,10 @@ import {ChartComponent} from './app/components/chart.component';
 import {CalendarComponent} from './app/components/calendar.component';
 import {DoctorNoteComponent} from './app/components/doctorNote.component';
 import {AccountComponent} from './app/components/account.component';
+//import {ChartTimeline} from './app/components/chart_timeline.component';
+import {ChartTimelineComponent} from './app/components/chartTimeline.component';
+//import {HostChartComponent} from './app/components/hostChart.component';
+
 
 
 
@@ -90,7 +94,10 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
         ChartComponent,
         AccountComponent,
         DoctorNoteComponent,
-        CalendarComponent
+        CalendarComponent,
+        //ChartTimeline,
+        ChartTimelineComponent,
+        //HostChartComponent
     ],   // components and directives
     providers: [
         appRoutingProviders,

@@ -156,12 +156,16 @@ style.
 
                 .encounterBar
                 timelines([patient]='selected')
-                  // Tab panes
-                  //div(style="display:block; width: 400px; height:400px")
-                
-                //div(style='display:block', height='400px', width='400px')
-                div
-                    chart
+                  
+                //div
+                    chartTimelines
+                div(style="padding: 15px;")
+                    h2(style = "display : inline;")
+                        | Historical Trend  
+                    span.btn-group
+                        button.btn.btn-default(data-toggle='collapse', data-target='#toggle') Toggle
+                #toggle.collapse.in                   
+                    chartTimelines
                 table(align='center', style='column-gap: 10px; overflow: scroll; height: 1000px')
                     colgroup
                         col(style='width:25%')
@@ -173,3 +177,6 @@ style.
                         observations([patient]='selected', #obs='')
                     th(style='overflow-y: scroll')
                         activities([patient]='selected')
+
+//div
+    chartTimelines

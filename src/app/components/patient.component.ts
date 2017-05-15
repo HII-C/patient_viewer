@@ -71,6 +71,7 @@ export class PatientComponent {
         console.log("Selected patient: " + id);
         this.patientService.get(id).subscribe(d => {
             console.log("Fetching: " + d);
+            console.log(JSON.stringify(d));
             this.selected = <Patient>d; //.entry['resource'];
         });
     }

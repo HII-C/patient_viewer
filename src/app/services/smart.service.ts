@@ -1,8 +1,10 @@
 import {Component, Injectable} from '@angular/core';
 import {Http, Headers, RequestOptions} from '@angular/http';
+import {CookieService} from 'angular2-cookie/core';
 import {FhirService} from '../services/fhir.service';
 import {ServerService} from '../services/server.service';
 import {PatientService} from '../services/patient.service';
+import {Md5} from 'ts-md5/dist/md5';
 
 @Component({
     selector: 'smart',
@@ -21,7 +23,7 @@ export class SmartService {
     token: string;
     patient: string;
 
-    constructor(private fhirService: FhirService, private patientService: PatientService, private http: Http) {
+    constructor(private fhirService: FhirService, private patientService: PatientService, private http: Http, private cookieService: CookieService) {
         console.log("AppComponent has been initialized.");
     }
 
@@ -36,11 +38,18 @@ export class SmartService {
         this.patientService.index2().subscribe(data => {
             this.authorizeUrl = data.rest[0].security.extension[0].extension[0].valueUri;
             this.tokenUrl = data.rest[0].security.extension[0].extension[1].valueUri;
+            this.cookieService.put('tokenUrl', this.tokenUrl);
             this.requestAuth();
         });
       }
       else {
-        this.getToken();
+        if (this.cookieService.get('state') == this.findGetParameter('state')){
+            console.log("Verification working");
+            this.getToken();
+          }
+        else{
+          console.log('Stop cross-site scripting please, thanks');
+        }
       }
 
 
@@ -49,7 +58,7 @@ export class SmartService {
     getToken() {
       console.log("getting token");
       var code = this.findGetParameter("code");
-      var body = 'code='+code+'&redirect_uri='+encodeURI(this.redirectUri);
+      var body = 'code='+code+'&redirect_uri='+encodeURI(this.redirectUri)+'&token_url='+this.cookieService.get('tokenUrl');
 
       var headers = new Headers();
       headers.append('Content-Type', 'application/x-www-form-urlencoded');
@@ -69,6 +78,13 @@ export class SmartService {
           });
     }
     requestAuth() {
+<<<<<<< HEAD
+=======
+      //encodeURI
+      //TODO Fix hashing method - not sure best way to do it
+      this.state = (Md5.hashStr("testing Hasing")).toString();
+      this.cookieService.put('state', this.state);
+>>>>>>> 2197799e6d8e6ba2bd03958888005abff7db01ee
       var request = this.authorizeUrl+"?response_type=code"
       + "&client_id="+this.clientId
       + "&redirect_uri="+this.redirectUri

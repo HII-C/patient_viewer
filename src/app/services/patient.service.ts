@@ -5,17 +5,14 @@ import {Observable} from 'rxjs/Observable';
 import {FhirService} from './fhir.service';
 
 @Injectable()
-@Component({
-})
 export class PatientService {
-
-    private path = '/Patient';
-    private patients;
     // private options: Headers = new Headers;["Accept: application/json";
 
     constructor(private fhirService: FhirService, private http: Http) {
         console.log("PatientService created...");
     }
+    private path = '/Patient';
+    private patients;
 
     index(): Observable<any> {
         var url = this.fhirService.getUrl() + this.path;

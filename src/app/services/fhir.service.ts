@@ -5,7 +5,9 @@ import {SmartService} from '../services/smart.service';
 
 @Injectable()
 export class FhirService {
-
+    constructor(private smartService: SmartService) {
+        console.log("FhirService created...");
+    }
     private base: string;
     private token: string;
 
@@ -30,7 +32,7 @@ export class FhirService {
     options(): RequestOptions {
         let headers = new Headers();
         headers.append('Accept', 'application/json');
-        headers.append('Authentication', 'Bearer '+ this.token);
+        headers.append('Authentication', 'Bearer '+ this.smartService.token);
 
         return new RequestOptions({ headers: headers });
     }

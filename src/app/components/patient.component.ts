@@ -33,11 +33,17 @@ export class PatientComponent {
 
     constructor(private fhirService: FhirService, private patientService: PatientService, private compiler: Compiler, private http: Http, private smartService: SmartService) {
 		this.compiler.clearCache();
-        this.smartService.authenticate();
+        this.smartService.authenticate().subscribe(data => {
+            console.log("data:"+JSON.stringify(data));
+            console.log(data.access_token);
+            smartService.token = data.access_token;
+            smartService.patient = data.patient;
+            this.fhirService.setToken(smartService.token);
+            this.select(smartService.patient);
+          });;
 
         this.selectServer(this.servers[0]);
-        //this.loadPatients();
-        //this.select(smartService.patient);
+        //this.loadPatients()
     }
 
     loadPatients() {

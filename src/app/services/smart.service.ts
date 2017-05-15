@@ -6,26 +6,24 @@ import {ServerService} from '../services/server.service';
 import {PatientService} from '../services/patient.service';
 import {Md5} from 'ts-md5/dist/md5';
 
-@Component({
-    selector: 'smart',
-    templateUrl: ''
-})
+@Injectable()
 export class SmartService {
+
+    constructor(private fhirService: FhirService, private patientService: PatientService, private http: Http, private cookieService: CookieService) {
+        console.log("SmartService has been initialized.");
+    }
+    
     fhirBaseUrl: string;
     authorizeUrl: string;
     tokenUrl: string;
-    clientId: string = "160324a1-e8fa-440c-8068-0f482701f1e8";
+    clientId: string = "e647d169-5139-4a4e-8b72-3c8dedb72a73";
     launch: string;
     scope: string = "launch patient/*.* openid profile";
     redirectUri: string = "http://localhost:9000";
-    state: string = "test";
+    state: string;
     aud: string;
     token: string;
     patient: string;
-
-    constructor(private fhirService: FhirService, private patientService: PatientService, private http: Http, private cookieService: CookieService) {
-        console.log("AppComponent has been initialized.");
-    }
 
     authenticate() {
       this.fhirBaseUrl = this.findGetParameter("iss");
@@ -44,8 +42,7 @@ export class SmartService {
       }
       else {
         if (this.cookieService.get('state') == this.findGetParameter('state')){
-            console.log("Verification working");
-            this.getToken();
+            return this.getToken();
           }
         else{
           console.log('Stop cross-site scripting please, thanks');
@@ -63,19 +60,7 @@ export class SmartService {
       var headers = new Headers();
       headers.append('Content-Type', 'application/x-www-form-urlencoded');
 
-      this.http
-        .post("http://mongo-proxy.healthcreek.org/token",
-          body, {
-            headers: headers
-          })
-          .map(response => response.json())
-          .subscribe(data => {
-                console.log("data:"+JSON.stringify(data));
-                console.log(data.access_token);
-                this.token = data.access_token;
-                this.patient = data.patient;
-                this.fhirService.setToken(this.token);
-          });
+      return this.http.post("http://mongo-proxy.healthcreek.org/token",body, {headers: headers}).map(response => response.json());
     }
     requestAuth() {
       //encodeURI

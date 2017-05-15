@@ -18,6 +18,8 @@ export class SmartService {
     redirectUri: string = "http://localhost:9000";
     state: string = "test";
     aud: string;
+    token: string;
+    patient: string;
 
     constructor(private fhirService: FhirService, private patientService: PatientService, private http: Http) {
         console.log("AppComponent has been initialized.");
@@ -31,7 +33,7 @@ export class SmartService {
 
         this.fhirService.setUrl(this.fhirBaseUrl);
         this.patientService.setPath("/metadata");
-        this.patientService.index().subscribe(data => {
+        this.patientService.index2().subscribe(data => {
             this.authorizeUrl = data.rest[0].security.extension[0].extension[0].valueUri;
             this.tokenUrl = data.rest[0].security.extension[0].extension[1].valueUri;
             this.requestAuth();
@@ -61,11 +63,12 @@ export class SmartService {
           .subscribe(data => {
                 console.log("data:"+JSON.stringify(data));
                 console.log(data.access_token);
+                this.token = data.access_token;
+                this.patient = data.patient;
+                this.fhirService.setToken(this.token);
           });
     }
     requestAuth() {
-      //encodeURI
-
       var request = this.authorizeUrl+"?response_type=code"
       + "&client_id="+this.clientId
       + "&redirect_uri="+this.redirectUri

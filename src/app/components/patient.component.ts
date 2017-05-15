@@ -36,8 +36,8 @@ export class PatientComponent {
         this.smartService.authenticate();
 
         this.selectServer(this.servers[0]);
-        this.loadPatients();
-
+        //this.loadPatients();
+        //this.select(smartService.patient);
     }
 
     loadPatients() {

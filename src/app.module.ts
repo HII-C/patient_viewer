@@ -42,6 +42,7 @@ import {OpenMRSService} from './app/services/openmrs.service';
 import {CsiroService} from './app/services/csiro.service';
 import {DoctorService} from './app/services/doctor.service';
 import {SmartService} from './app/services/smart.service';
+import {CookieService} from 'angular2-cookie/core';
 
 
 import {MomentModule} from 'angular2-moment';
@@ -55,6 +56,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
+import { Md5 } from 'ts-md5/dist/md5';
 import { CalendarModule } from 'angular-calendar';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { LineChartComponent } from '@swimlane/ngx-charts';
@@ -78,6 +80,7 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
         ChartsModule,
         NgxChartsModule,
         BrowserAnimationsModule,
+        // Md5,
         CalendarModule.forRoot()
     ],       // module dependencies
     declarations: [
@@ -118,7 +121,8 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
         OpenMRSService,
         CsiroService,
         DoctorService,
-        SmartService
+        SmartService,
+        CookieService
     ],                    // services
     bootstrap: [AppComponent]     // root component
 })

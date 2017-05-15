@@ -13,3 +13,6 @@ import '@angular/http';
 import '@angular/platform-browser-dynamic';
 import '@angular/platform-browser';
 import '@angular/router';
+
+// Cookies
+import 'angular2-cookie/core'

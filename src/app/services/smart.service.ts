@@ -78,13 +78,10 @@ export class SmartService {
           });
     }
     requestAuth() {
-<<<<<<< HEAD
-=======
       //encodeURI
       //TODO Fix hashing method - not sure best way to do it
       this.state = (Md5.hashStr("testing Hasing")).toString();
       this.cookieService.put('state', this.state);
->>>>>>> 2197799e6d8e6ba2bd03958888005abff7db01ee
       var request = this.authorizeUrl+"?response_type=code"
       + "&client_id="+this.clientId
       + "&redirect_uri="+this.redirectUri

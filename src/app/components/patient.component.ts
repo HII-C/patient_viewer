@@ -38,7 +38,7 @@ export class PatientComponent {
             console.log(data.access_token);
             smartService.token = data.access_token;
             smartService.patient = data.patient;
-            this.fhirService.setToken(smartService.token);
+            this.fhirService.setToken(data.access_token);
             this.select(smartService.patient);
           });;
 

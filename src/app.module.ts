@@ -41,6 +41,7 @@ import {LoupeService} from './app/services/loupe.service';
 import {OpenMRSService} from './app/services/openmrs.service';
 import {CsiroService} from './app/services/csiro.service';
 import {DoctorService} from './app/services/doctor.service';
+import {SmartService} from './app/services/smart.service';
 
 
 import {MomentModule} from 'angular2-moment';
@@ -116,7 +117,8 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
 		LoupeService,
         OpenMRSService,
         CsiroService,
-        DoctorService
+        DoctorService,
+        SmartService
     ],                    // services
     bootstrap: [AppComponent]     // root component
 })

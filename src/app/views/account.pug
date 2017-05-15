@@ -76,28 +76,28 @@ style.
                 input(type='checkbox', name='setting4')
               td.paddedtd
                 | Selected Values
-          table
+          table(style="width:100%")
             tr("*ngFor"="let lab of electrolytes")
               td
                 input(type='checkbox', name='{{lab}}')
               td
                 | {{lab}}
           br
-          table
+          table(style="width:50%")
             tr("*ngFor"="let lab of cholesteralBattery")
               td
                 input(type='checkbox', name='{{lab}}')
               td
                 | {{lab}}
           br      
-          table
+          table(style="width:75%")
             tr("*ngFor"="let lab of liverFunction")
               td
                 input(type='checkbox', name='{{lab}}')
               td
                 | {{lab}}
           br      
-          table
+          table(style="width:25%")
             tr("*ngFor"="let lab of kidneyFunction")
               td
                 input(type='checkbox', name='{{lab}}')

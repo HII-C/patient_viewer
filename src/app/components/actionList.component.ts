@@ -26,9 +26,12 @@ export class ActionListComponent {
     	this.compiler.clearCache();
         this.selectServer(this.servers[0]);
         this.loadPatients();
+
     }
 
+
     loadPatients() {
+      console.log("ARE YOU THERE?");
         this.patientService.index().subscribe(data => {
             this.patients = <Array<Patient>>data.entry.map(r => r['resource']);
             console.log("Loaded " + this.total() + " patients.");

@@ -16,7 +16,7 @@ export class FhirService {
     }
 
     options(): RequestOptions {
-        let headers = new Headers([{'Accept': 'application/json'}, {'Authorization': 'Basic c3VtbWVyVGVzdGluZzo0dXN0MW5UM3N0'}]);
+        let headers = new Headers({ 'Accept': 'application/json' });
         return new RequestOptions({ headers: headers });
     }
 

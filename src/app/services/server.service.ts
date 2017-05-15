@@ -4,9 +4,9 @@ import {Server} from '../models/server.model';
 @Injectable()
 export class ServerService {
     public static servers: Array<Server> = [
-        new Server('Testing Ours', 'http://mongo-proxy.healthcreek.org'),
+        new Server('Smart Sandbox', 'https://sb-fhir-dstu2.smarthealthit.org/api/smartdstu2/data'),
         new Server('DTSU3', 'http://demo.oridashi.com.au:8291'),
-		new Server("SMARTHealthIT DSTU2", 'https://fhir-open-api-dstu2.smarthealthit.org'),
+		    new Server("SMARTHealthIT DSTU2", 'https://fhir-open-api-dstu2.smarthealthit.org'),
         new Server("AEGIS WildFHIR - STU 3 Ballot (v1.6.0-9810)", "http://wildfhir.aegis.net/fhir1-6-0"),
         // new Server("Google", "https://Google.com"),
         // new Server("Epic's Sandbox", "http://open.epic.com/Interface/FHIR"),

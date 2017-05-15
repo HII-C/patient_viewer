@@ -29,4 +29,7 @@ export class PatientService {
         return this.http.get(url, this.fhirService.options()).map(res => res.json());
     }
 
+    setPath(newPath) {
+      this.path = newPath;
+    }
 }

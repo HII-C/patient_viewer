@@ -2,7 +2,6 @@ import {Component, Injectable} from '@angular/core';
 import {Http, Headers, RequestOptions} from '@angular/http';
 import {CookieService} from 'angular2-cookie/core';
 import {FhirService} from '../services/fhir.service';
-import {ServerService} from '../services/server.service';
 import {PatientService} from '../services/patient.service';
 import {Md5} from 'ts-md5/dist/md5';
 
@@ -22,6 +21,7 @@ export class SmartService {
     redirectUri: string = "http://localhost:9000";
     state: string;
     aud: string;
+
 
     authenticate() {
       this.fhirBaseUrl = this.findGetParameter("iss");

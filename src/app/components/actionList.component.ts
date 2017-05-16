@@ -1,7 +1,6 @@
 import {Component, Compiler} from '@angular/core';
 
 import {FhirService} from '../services/fhir.service';
-import {ServerService} from '../services/server.service';
 import {PatientService} from '../services/patient.service';
 import {Patient} from '../models/patient.model';
 import {Server} from '../models/server.model';
@@ -19,5 +18,5 @@ export class ActionListComponent {
     }
 
 
-    
+
 }

@@ -1,6 +1,5 @@
 import {Component, Compiler} from '@angular/core';
 import {FhirService} from '../services/fhir.service';
-import {ServerService} from '../services/server.service';
 import {SmartService} from '../services/smart.service';
 import {PatientService} from '../services/patient.service';
 import {Patient} from '../models/patient.model';
@@ -27,7 +26,6 @@ import {CookieService} from 'angular2-cookie/core';
 export class PatientComponent {
     selected: Patient;
     server: Server;
-    servers: Server[] = ServerService.servers;
     selectedCondition: Condition;
     nav2: boolean = false;
 

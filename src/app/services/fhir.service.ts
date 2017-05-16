@@ -21,18 +21,14 @@ export class FhirService {
       this.token = newToken;
     }
 
-    options2(): RequestOptions {
+    options(auth): RequestOptions {
         let headers = new Headers();
         headers.append('Accept', 'application/json');
+        if(auth) {
+          headers.append('Authorization', 'Bearer '+ this.token);
+        }
+        return new RequestOptions({ headers: headers });
+    }
 
-        return new RequestOptions({ headers: headers });
-    }
-    options(): RequestOptions {
-        let headers = new Headers();
-        headers.append('Accept', 'application/json');
-        headers.append('Authorization', 'Bearer '+ this.token);
-        console.log('auth is:'+this.token);
-        return new RequestOptions({ headers: headers });
-    }
 
 }

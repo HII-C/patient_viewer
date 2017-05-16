@@ -14,21 +14,17 @@ export class PatientService {
     private path = '/Patient';
     private patients;
 
-    index(): Observable<any> {
+    index(withAuth): Observable<any> {
         var url = this.fhirService.getUrl() + this.path;
         // this.http.get
 
-        return this.http.get(url, this.fhirService.options()).map(res => res.json());
-    }
-    index2(): Observable<any> {
-        var url = this.fhirService.getUrl() + this.path;
-        // this.http.get
+          return this.http.get(url, this.fhirService.options(withAuth)).map(res => res.json());
 
-        return this.http.get(url, this.fhirService.options2()).map(res => res.json());
     }
+
     get(id): Observable<any> {
         var url = this.fhirService.getUrl() + this.path + '/' + id;
-        return this.http.get(url, this.fhirService.options()).map(res => res.json());
+        return this.http.get(url, this.fhirService.options(true)).map(res => res.json());
     }
 
     setPath(newPath) {

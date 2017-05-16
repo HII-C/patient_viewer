@@ -38,7 +38,6 @@ import {TimelineService} from './app/services/timeline.service';
 import {ObservationService} from './app/services/observation.service';
 import {MapService} from './app/services/map.service';
 import {LoupeService} from './app/services/loupe.service';
-import {OpenMRSService} from './app/services/openmrs.service';
 import {CsiroService} from './app/services/csiro.service';
 import {DoctorService} from './app/services/doctor.service';
 import {SmartService} from './app/services/smart.service';
@@ -118,7 +117,6 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
         TimelineService,
         MapService,
 		LoupeService,
-        OpenMRSService,
         CsiroService,
         DoctorService,
         SmartService,

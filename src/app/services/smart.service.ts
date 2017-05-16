@@ -12,7 +12,7 @@ export class SmartService {
     constructor(private fhirService: FhirService, private patientService: PatientService, private http: Http, private cookieService: CookieService) {
         console.log("SmartService has been initialized.");
     }
-    
+
     fhirBaseUrl: string;
     authorizeUrl: string;
     tokenUrl: string;
@@ -22,8 +22,6 @@ export class SmartService {
     redirectUri: string = "http://localhost:9000";
     state: string;
     aud: string;
-    token: string;
-    patient: string;
 
     authenticate() {
       this.fhirBaseUrl = this.findGetParameter("iss");
@@ -33,10 +31,11 @@ export class SmartService {
 
         this.fhirService.setUrl(this.fhirBaseUrl);
         this.patientService.setPath("/metadata");
-        this.patientService.index2().subscribe(data => {
+        this.patientService.index(false).subscribe(data => {
             this.authorizeUrl = data.rest[0].security.extension[0].extension[0].valueUri;
             this.tokenUrl = data.rest[0].security.extension[0].extension[1].valueUri;
             this.cookieService.put('tokenUrl', this.tokenUrl);
+            this.cookieService.put('fhirBaseUrl', this.fhirBaseUrl);
             this.requestAuth();
         });
       }
@@ -53,7 +52,6 @@ export class SmartService {
     }
 
     getToken() {
-      console.log("getting token");
       var code = this.findGetParameter("code");
       var body = 'code='+code+'&redirect_uri='+encodeURI(this.redirectUri)+'&token_url='+this.cookieService.get('tokenUrl');
 

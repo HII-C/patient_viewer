@@ -23,6 +23,7 @@ export class SmartService {
     aud: string;
 
     authenticate() {
+      
       this.fhirBaseUrl = this.findGetParameter("iss");
       if(this.fhirBaseUrl) {
         this.aud = this.fhirBaseUrl;

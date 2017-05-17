@@ -32,12 +32,15 @@ export class PatientComponent {
     constructor(private fhirService: FhirService, private patientService: PatientService, private compiler: Compiler, private http: Http, private smartService: SmartService, private cookieService: CookieService) {
 		this.compiler.clearCache();
     this.fhirService.setUrl(this.cookieService.get('fhirBaseUrl'));
-
+    if(this.fhirService.token) {
+      this.select(this.patientService.patient);
+    }
+    else {
         this.smartService.authenticate().subscribe(data => {
             this.fhirService.setToken(data.access_token);
             this.select(data.patient);
           });;
-
+    }
     }
 
 

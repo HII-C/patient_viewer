@@ -7,7 +7,7 @@ import {SmartService} from '../services/smart.service';
 export class FhirService {
 
     private base: string;
-    private token: string;
+    public token: string;
 
     getUrl(): string {
         return this.base;

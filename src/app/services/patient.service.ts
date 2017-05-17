@@ -12,7 +12,7 @@ export class PatientService {
         console.log("PatientService created...");
     }
     private path = '/Patient';
-    private patients;
+    public patient;
 
     index(withAuth): Observable<any> {
         var url = this.fhirService.getUrl() + this.path;
@@ -24,6 +24,7 @@ export class PatientService {
 
     get(id): Observable<any> {
         var url = this.fhirService.getUrl() + this.path + '/' + id;
+        this.patient = id;
         return this.http.get(url, this.fhirService.options(true)).map(res => res.json());
     }
 

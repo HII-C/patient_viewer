@@ -57,11 +57,6 @@ style.
                 header(style='text-align: center; margin-bottom: 5px')  Action Area
                 div(style='text-align: center; margin-bottom: 3px;')
                     img(src='/images/textures/me.jpg', style='width:100px;height:90px;float: middle;')
-                div(style='margin-left: 12.5%; margin-bottom: 2px')
-                    select#patient_select.form-control((change)='select($event.target.value)', style='width: 85%;')
-                        option("*ngFor"='let p of patients', "[value]"='p.id', [selected]='patient && (p.id == patient.id)')
-                            span("*ngIf"='p.name && p.name[0].family') {{p.name[0].family[0]}},&nbsp; <!-- added comma and space to order list by last name -->
-                            span("*ngIf"='p.name && p.name[0].given') {{p.name[0].given[0]}}
                 div(style='margin-bottom: 0px')
                     .patientInfoBox("*ngIf"='selected', style='width: 110%; font-size: 90%')
                         .identifier("*ngFor"='let id of selected.identifier')
@@ -96,15 +91,9 @@ style.
                     label  Order Procedure
                     select.form-control(style='margin-bottom: 5px;')
                         option  Order Procedure
-                div(style='text-align: center;')
-                    font(size='3')
-                        span.glyphicon.glyphicon-fire
-                        |  Provider
-                    select#server_select.form-control((change)='selectServerForUrl($event.target.value)')
-                        option("*ngFor"='let s of servers', "[value]"='s.url', [selected]='server && (s.url == server.url)') {{s.name}}
-
+                
     .patientBody
-        aside#sidebar.div("*ngIf"='patients')
+        aside#sidebar.div("*ngIf"='selected')
             section
                 .flex-container
                       div(style="flex:1;margin-top:20px")

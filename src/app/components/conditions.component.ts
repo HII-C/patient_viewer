@@ -67,7 +67,9 @@ export class ConditionsComponent{
         if (this.patient) {
             this.conditionService.index(this.patient).subscribe(data => {
 				if(data.entry) {
+
                     this.conditions = <Array<Condition>>data.entry.map(r => r['resource']);
+                    console.log(this.conditions[0]);
                     this.conditions = this.conditions.reverse();
                 	console.log("Loaded " + this.conditions.length + " conditions.");
                     this.loupeService.conditionArray = this.conditions;

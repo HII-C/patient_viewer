@@ -27,7 +27,6 @@ import {ChartTimelineComponent} from './app/components/chartTimeline.component';
 import {LoupeExampleComponent} from './app/components/loupe-example.component'; // TODO Replace with whatever UI components are needed (if any) for Loupe integration.
 import {ClientService} from './app/services/client.service';
 import {EncounterService} from './app/services/encounter.service';
-import {ServerService} from './app/services/server.service';
 import {FhirService} from './app/services/fhir.service';
 import {HealthCreekService} from './app/services/healthcreek.service';
 import {PatientService} from './app/services/patient.service';
@@ -38,9 +37,10 @@ import {TimelineService} from './app/services/timeline.service';
 import {ObservationService} from './app/services/observation.service';
 import {MapService} from './app/services/map.service';
 import {LoupeService} from './app/services/loupe.service';
-import {OpenMRSService} from './app/services/openmrs.service';
 import {CsiroService} from './app/services/csiro.service';
 import {DoctorService} from './app/services/doctor.service';
+import {SmartService} from './app/services/smart.service';
+import {CookieService} from 'angular2-cookie/core';
 
 
 import {MomentModule} from 'angular2-moment';
@@ -54,6 +54,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
+import { Md5 } from 'ts-md5/dist/md5';
 import { CalendarModule } from 'angular-calendar';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { LineChartComponent } from '@swimlane/ngx-charts';
@@ -77,6 +78,7 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
         ChartsModule,
         NgxChartsModule,
         BrowserAnimationsModule,
+        // Md5,
         CalendarModule.forRoot()
     ],       // module dependencies
     declarations: [
@@ -101,7 +103,6 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
     ],   // components and directives
     providers: [
         appRoutingProviders,
-		ServerService,
         ClientService,
         EncounterService,
 		FhirService,
@@ -114,9 +115,10 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
         TimelineService,
         MapService,
 		LoupeService,
-        OpenMRSService,
         CsiroService,
-        DoctorService
+        DoctorService,
+        SmartService,
+        CookieService
     ],                    // services
     bootstrap: [AppComponent]     // root component
 })

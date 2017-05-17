@@ -20,7 +20,7 @@ export class ConditionService {
     index(patient: Patient): Observable<any> {
         var url = this.fhirService.getUrl() + this.path + "?patient=" + patient.id;
 		// console.log("ESNUTH");
-        return this.http.get(url, this.fhirService.options()).map(res => res.json());
+        return this.http.get(url, this.fhirService.options(true)).map(res => res.json());
     }
 
     // get(id): Observable<any> {

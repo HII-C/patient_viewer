@@ -1,11 +1,13 @@
 import {Component, Compiler} from '@angular/core';
 import {FhirService} from '../services/fhir.service';
-import {ServerService} from '../services/server.service';
+import {SmartService} from '../services/smart.service';
 import {PatientService} from '../services/patient.service';
 import {Patient} from '../models/patient.model';
 import {Server} from '../models/server.model';
 import {Condition} from '../models/condition.model';
 import {trigger, state, style, animate, transition} from '@angular/animations';
+import {Http, Headers} from '@angular/http';
+import {CookieService} from 'angular2-cookie/core';
 
 @Component({
     selector: 'patients',
@@ -23,35 +25,21 @@ import {trigger, state, style, animate, transition} from '@angular/animations';
 })
 export class PatientComponent {
     selected: Patient;
-    patients: Array<Patient>;
     server: Server;
-    servers: Server[] = ServerService.servers;
     selectedCondition: Condition;
     nav2: boolean = false;
 
-    constructor(private fhirService: FhirService, private patientService: PatientService, private compiler: Compiler) {
+    constructor(private fhirService: FhirService, private patientService: PatientService, private compiler: Compiler, private http: Http, private smartService: SmartService, private cookieService: CookieService) {
 		this.compiler.clearCache();
-        this.selectServer(this.servers[0]);
-        this.loadPatients();
+    this.fhirService.setUrl(this.cookieService.get('fhirBaseUrl'));
+
+        this.smartService.authenticate().subscribe(data => {
+            this.fhirService.setToken(data.access_token);
+            this.select(data.patient);
+          });;
+
     }
 
-    loadPatients() {
-        this.patientService.index().subscribe(data => {
-            this.patients = <Array<Patient>>data.entry.map(r => r['resource']);
-            console.log("Loaded " + this.total() + " patients.");
-            if (this.patients.length > 0) {
-                this.select(this.patients[0].id);
-            }
-        });
-    }
-
-    total(): number {
-        var t = 0;
-        if (this.patients) {
-            t = this.patients.length;
-        }
-        return t;
-    }
 
     select(id) {
         console.log("Selected patient: " + id);
@@ -61,28 +49,7 @@ export class PatientComponent {
         });
     }
 
-	selectServer(server: Server) {
-		console.log("Setting server to: " + server.url);
-		this.server = server;
-		this.fhirService.setUrl(server.url);
-		this.loadPatients();
-	}
 
-
-    selectServerForUrl(url: string) {
-		this.selectServer(this.serverFor(url));
-    }
-
-    serverFor(url: string) {
-        var obj: Server = null;
-        for(var server of this.servers) {
-            if (server.url == url) {
-                obj = server;
-                break;
-            }
-        }
-        return obj;
-    }
     genderString(patient: Patient) {
         var s = 'Unknown';
         switch (patient.gender) {

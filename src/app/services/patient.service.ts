@@ -11,7 +11,7 @@ import {FhirService} from './fhir.service';
 export class PatientService {
 
     private path = '/Patient';
-    private patients;
+    // private patients;
     // private options: Headers = new Headers;["Accept: application/json";
 
     constructor(private fhirService: FhirService, private http: Http) {

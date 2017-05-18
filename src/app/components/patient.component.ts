@@ -10,7 +10,7 @@ import {NgGrid, NgGridItem, NgGridConfig, NgGridItemConfig, NgGridItemEvent} fro
 
 
 @Component({
-    selector: 'patients',
+    selector: 'patient',
     templateUrl: '/patient.html'
 })
 export class PatientComponent {

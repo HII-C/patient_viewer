@@ -1,4 +1,7 @@
 import {Component, Input} from '@angular/core';
+
+import {DraggableWidget} from './draggable_widget.component';
+
 import {FhirService} from '../services/fhir.service';
 import {ObservationService} from '../services/observation.service';
 import {LoupeService} from '../services/loupe.service';
@@ -12,13 +15,14 @@ import {Observable} from 'rxjs/Observable';
 	selector: 'observations',
 	templateUrl: '/observations.html'
 })
-export class ObservationsComponent {
+export class ObservationsComponent implements DraggableWidget {
 
 	selected: Observation;
 	test: Observation;
 	observations: Array<Observation> = [];
 	@Input() patient: Patient;
 	mappings: { [key: string]: Array<string> } = {};
+	gridItemConfiguration = {}; // For options: https://github.com/BTMorton/angular2-grid
 
 	constructor(private fhirService: FhirService, private observationService: ObservationService,
 		private mapService: MapService, private loupeService: LoupeService) {

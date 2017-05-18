@@ -1,248 +1,97 @@
 body
-  padding: 10px
+  padding: 50px 0px 10px
   background-color: none
-  background: url('/images/textures/wild_oliva.png') repeat
+  // background: url("/images/textures/wild_oliva.png") repeat
+  background: url("/images/textures/crossword.png") repeat
+
   h3
+
   margin: 0
-  .cal-month-view
-  .cal-header
-    text-align: center
-    font-weight: bolder
-  .cal-cell-row:hover
-    background-color: #fafafa
-  .cal-header .cal-cell
-    padding: 5px 0
-    overflow: hidden
-    text-overflow: ellipsis
-    display: block
-    white-space: nowrap
-  .cal-cell-row .cal-cell:hover, .cal-cell.cal-has-events.cal-open
-    background-color: #ededed
-  .cal-days
-    border: 1px solid #e1e1e1
-    border-bottom: 0
-  .cal-cell-top
-    min-height: 62px
-  .cal-cell-row
-    display: -webkit-box
-    display: -ms-flexbox
-    -js-display: flex
-    display: flex
-  .cal-cell
-    /* This line will edit background color of calendar background-color: #4286f4 */
-    float: left
-    -webkit-box-flex: 1
-    -ms-flex: 1
-    flex: 1
-    display: -webkit-box
-    display: -ms-flexbox
-    -js-display: flex
-    display: flex
-    -webkit-box-orient: vertical
-    -webkit-box-direction: normal
-    -ms-flex-direction: column
-    flex-direction: column
-    -webkit-box-align: stretch
-    -ms-flex-align: stretch
-    align-items: stretch
-  .cal-day-cell
-    min-height: 100px
-    &:not(:last-child)
-      border-right: 1px solid #e1e1e1
-  .cal-days .cal-cell-row
-    border-bottom: 1px solid #e1e1e1
-  .cal-day-badge
-    margin-top: 18px
-    margin-left: 10px
-    background-color: #b94a48
-    display: inline-block
-    min-width: 10px
-    padding: 3px 7px
-    font-size: 12px
-    font-weight: 700
-    line-height: 1
-    color: white
-    text-align: center
-    white-space: nowrap
-    vertical-align: middle
-    border-radius: 10px
-  .cal-day-number
-    font-size: 1.2em
-    font-weight: 400
-    opacity: 0.5
-    margin-top: 15px
-    margin-right: 15px
-    float: right
-    margin-bottom: 10px
-  .cal-events
-    -webkit-box-flex: 1
-    -ms-flex: 1
-    flex: 1
-    -webkit-box-align: end
-    -ms-flex-align: end
-    align-items: flex-end
-    margin: 3px
-    line-height: 10px
-    display: -webkit-box
-    display: -ms-flexbox
-    -js-display: flex
-    display: flex
-    -ms-flex-wrap: wrap
-    flex-wrap: wrap
-  .cal-event
-    width: 10px
-    height: 10px
-    border-radius: 50%
-    display: inline-block
-    margin: 2px
-  .cal-day-cell
-    &.cal-in-month.cal-has-events
-      cursor: pointer
-    &.cal-out-month .cal-day-number
-      opacity: 0.1
-      cursor: default
-    &.cal-weekend .cal-day-number
-      color: darkred
-    &.cal-today
-      background-color: #e8fde7
-      .cal-day-number
-        font-size: 1.9em
-    &.cal-drag-over
-      background-color: #e0e0e0 !important
-  .cal-open-day-events
-    padding: 15px
-    color: white
-    background-color: #555
-    box-shadow: inset 0 0 15px 0 rgba(0, 0, 0, 0.5)
-    .cal-event
-      position: relative
-      top: 2px
-  .cal-event-title
-    color: white
-  .cal-out-month
-    .cal-day-badge, .cal-event
-      opacity: 0.3
-
-.cal-week-view
-  .cal-day-headers
-    display: -webkit-box
-    display: -ms-flexbox
-    -js-display: flex
-    display: flex
-    margin-bottom: 3px
-    border: 1px solid #e1e1e1
-    margin-left: 2px
-    margin-right: 2px
-    .cal-header
-      -webkit-box-flex: 1
-      -ms-flex: 1
-      flex: 1
-      text-align: center
-      padding: 5px
-      &:not(:last-child)
-        border-right: 1px solid #e1e1e1
-      &:hover
-        background-color: #ededed
-    .cal-drag-over
-      background-color: #ededed
-    span
-      font-weight: 400
-      opacity: 0.5
-  .cal-event-container
-    display: inline-block
-  .cal-event
-    padding: 0 10px
-    font-size: 12px
-    margin-left: 2px
-    margin-right: 2px
-    height: 30px
-    line-height: 30px
-  .cal-draggable
-    cursor: move
-  .cal-event
-    &.cal-starts-within-week
-      border-top-left-radius: 5px
-      border-bottom-left-radius: 5px
-    &.cal-ends-within-week
-      border-top-right-radius: 5px
-      border-bottom-right-radius: 5px
-  .cal-header
-    &.cal-today
-      background-color: #e8fde7
-    &.cal-weekend span
-      color: #8b0000
-  .cal-event, .cal-header
-    overflow: hidden
-    text-overflow: ellipsis
-    white-space: nowrap
-
-.cal-day-view
-  .cal-hour-rows
-    width: 100%
-    border: solid 1px #e1e1e1
-    overflow-x: scroll
-    position: relative
-  .cal-hour:nth-child(odd)
-    background-color: #fafafa
-  .cal-hour-segment
-    height: 30px
-    &::after
-      content: '\A0'
-  .cal-hour
-    &:not(:last-child) .cal-hour-segment, &:last-child :not(:last-child) .cal-hour-segment
-      border-bottom: thin dashed #e1e1e1
-  .cal-time
-    font-weight: bold
-    padding-top: 5px
-    width: 70px
-    text-align: center
-  .cal-hour-segment
-    &.cal-after-hour-start .cal-time
-      display: none
-    &:hover
-      background-color: #ededed
-  .cal-drag-over .cal-hour-segment
-    background-color: #ededed
-  .cal-event-container
-    position: absolute
-  .cal-event
-    border: solid 1px
-    padding: 5px
-    font-size: 12px
-    overflow: hidden
-    text-overflow: ellipsis
-    white-space: nowrap
-    height: 100%
-  .cal-draggable
-    cursor: move
-  .cal-event
-    &.cal-starts-within-day
-      border-top-left-radius: 5px
-      border-top-right-radius: 5px
-    &.cal-ends-within-day
-      border-bottom-left-radius: 5px
-      border-bottom-right-radius: 5px
-  .cal-all-day-event
-    padding: 8px
-    border: solid 1px
 
 pre
   background-color: #f5f5f5
   padding: 15px
+
+#patient_card
+  // position: absolute
+
+  // Has to be above Bootstrap's fixed header nav bar at 1040
+  // z-index: 1100
+  // top: 0
+  // left: 10px
+  // width: 400px
+
+  // .content
+  //   position: relative
+  //
+  //   img
+  //     position: absolute
+  //     top: 0
+  //     left: 0
+  //     width: 150px
+  //     object-fit: cover
+  //     display: inline-block
+  //     clear: none
+  //
+  //   .details
+  //     position: absolute
+  //     top: 0
+  //     right: 0
+  //     z-index: 1110
+  //     clear: none
+  //     text-align: right
+  //     padding: 10px
+  //
+  //   form
+  //     padding: inherit 10px
+  //
+  //   #advanced_search
+  //     padding-top: 160px
+
+.widget
+  border-radius: 2px
+  background: rgba(0, 0, 0, 0.8)
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.8)
+  border: 1px solid #222
+  // position: absolute
+  // width: 500px
+  // height: 500px
+  padding: 20px
+  // top: 100px
+  // left: 100px
+
+.handle
+  width: 100%
+  height: 50px
+  background: #eee
+  color: black
+  font-weight: 500
+  padding: 15px
+  box-sizing: border-box
+
+.box-header-btns
+  top: 15px
+  right: 10px
+  cursor: pointer
+  position: absolute
+
 
 .event-editor-table
   margin-top: 10px
   width: 100%
   max-width: 100%
   border: 1px solid #eceeef
+
   thead th
     vertical-align: bottom
     border-bottom: 2px solid #eceeef
+
   th
-    padding: .75rem
+    padding: 0.75rem
     vertical-align: top
+
   td
-    padding: .75rem
+    padding: 0.75rem
     vertical-align: top
     border: 1px solid #eceeef
 
@@ -255,9 +104,11 @@ input:invalid, textarea:invalid
 
 header
   text-shadow: 0 4px 4px rgba(0, 0, 0, 0.2)
+
   a
     transition: all 0.2s ease-out
     text-decoration: none
+
     &:default
       text-decoration: none
       text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.4)
@@ -277,7 +128,7 @@ aside#sidebar > section, activities > section, observations > section
   border-radius: 8px
   box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3)
   background-color: none
-  background: url('/images/textures/crossword.png') repeat
+  background: url("/images/textures/crossword.png") repeat
 
 .highlight
   background: rgba(230, 230, 0, 0.5)
@@ -290,85 +141,14 @@ table.table tbody tr
   &.selected
     background-color: #a7c6d8
     transition: all 0.2s ease-out
+
   transition: all 0.2s ease-out
+
   &:hover:not(.selected)
     background-color: #c7e6f8
     transition: all 0.2s ease-out
 
 h4
   border-bottom: 1px solid #ccc
+
   /*text-decoration: underline;
-
-.horizTimeLine
-  white-space: nowrap
-  overflow-x: scroll
-  padding: 30px 0 10px 0
-  position: relative
-  width: 100%
-  direction: rtl
-
-.encounterBox
-  display: inline-block
-  direction: rtl
-  vertical-align: top
-  white-space: normal
-  background: #9DA8b0
-  color: black
-  font-size: 12px
-  text-align: center
-  position: relative
-  border-top: 4px solid #3D4850
-  border-radius: 15px
-  min-width: 200px
-  max-width: 200px
-  img
-    display: block
-    max-width: 100%
-    height: auto
-    margin-bottom: 10px
-  &:after
-    content: ''
-    display: block
-    background: #eee
-    width: 15px
-    height: 15px
-    border-radius: 20px
-    border: 3px solid #06182E
-    position: absolute
-    left: 50%
-    top: -30px
-    margin-left: -9px
-  &:before
-    content: ''
-    display: block
-    background: #06182E
-    width: 5px
-    height: 20px
-    position: absolute
-    left: 50%
-    top: -20px
-    margin-left: -4px
-  h1
-    color: black
-    font-size: 18px
-    padding: 0px
-    font-weight: bold
-  h2
-    font-weight: bolder
-    font-size: 12px
-    margin: 2px
-  &:hover
-    background: #8D979E
-    cursor: pointer
-
-.encounterBar
-  height: 4px
-  background: #9DA8b0
-  width: 100%
-  position: relative
-  top: 13px
-  left: 0
-
-.chart
-    display: block
-    width: 100%

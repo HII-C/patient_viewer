@@ -1,4 +1,7 @@
 import {Component, Input, Output, EventEmitter, Pipe} from '@angular/core';
+
+import {DraggableWidget} from './draggable_widget.component';
+
 import {FhirService} from '../services/fhir.service';
 import {ConditionService} from '../services/condition.service';
 import {LoupeService} from '../services/loupe.service';
@@ -12,7 +15,7 @@ import {Csiro} from '../models/csiro.model';
     selector: 'conditions',
     templateUrl: '/conditions.html'
 })
-export class ConditionsComponent{
+export class ConditionsComponent implements DraggableWidget {
 
     selected: Condition;
     conditions: Array<Condition> = [];
@@ -21,6 +24,7 @@ export class ConditionsComponent{
     @Input() patient: Patient;
 
     @Output() conditionSelected:EventEmitter<Condition> = new EventEmitter();
+	gridItemConfiguration = {}; // For options: https://github.com/BTMorton/angular2-grid
 
     constructor(private fhirService: FhirService, private conditionService: ConditionService, private loupeService: LoupeService, private csiroService: CsiroService, private doctorService: DoctorService) {
         console.log("ConditionsComponent created...");

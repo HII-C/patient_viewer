@@ -1,4 +1,7 @@
 import {Component, Output, EventEmitter, NgModule} from '@angular/core';
+
+import {DraggableWidget} from './draggable_widget.component';
+
 import {BrowserModule} from '@angular/platform-browser';
 import {LoupeService} from '../services/loupe.service';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
@@ -8,9 +11,9 @@ import {NgxChartsModule} from '@swimlane/ngx-charts';
     selector: 'chart',
     templateUrl: '/chart.html',
 })
+export class ChartComponent implements DraggableWidget {
 
-
-export class ChartComponent {
+	gridItemConfiguration = {}; // For options: https://github.com/BTMorton/angular2-grid
 
     //Chart Options
 

@@ -17,14 +17,7 @@ import {ChartComponent} from './app/components/chart.component';
 import {CalendarComponent} from './app/components/calendar.component';
 import {DoctorNoteComponent} from './app/components/doctorNote.component';
 import {AccountComponent} from './app/components/account.component';
-<<<<<<< HEAD
-//import {ChartTimeline} from './app/components/chart_timeline.component';
-import {ChartTimelineComponent} from './app/components/chartTimeline.component';
-//import {HostChartComponent} from './app/components/hostChart.component';
-
-=======
 import {ToolbarComponent} from './app/components/toolbar.component';
->>>>>>> origin/layout-refactoring
 
 
 

@@ -5,15 +5,12 @@ import {PatientService} from '../services/patient.service';
 import {Patient} from '../models/patient.model';
 import {Server} from '../models/server.model';
 import {Condition} from '../models/condition.model';
-<<<<<<< HEAD
-import {trigger, state, style, animate, transition} from '@angular/animations';
+
 import {Http, Headers} from '@angular/http';
 import {CookieService} from 'angular2-cookie/core';
-=======
 // import {DraggableWidget} from './draggable_widget.component';
 import {NgGrid, NgGridItem, NgGridConfig, NgGridItemConfig, NgGridItemEvent} from 'angular2-grid';
 
->>>>>>> origin/layout-refactoring
 
 @Component({
     selector: 'patients',
@@ -77,8 +74,7 @@ export class PatientComponent {
     }
 
 
-<<<<<<< HEAD
-=======
+
     selectServerForUrl(url: string) {
 		this.selectServer(this.serverFor(url));
     }
@@ -93,7 +89,6 @@ export class PatientComponent {
         }
         return obj;
     }
->>>>>>> origin/layout-refactoring
     genderString(patient: Patient) {
         var s = 'Unknown';
         switch (patient.gender) {

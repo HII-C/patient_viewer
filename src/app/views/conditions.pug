@@ -49,23 +49,6 @@ table.table.table-condensed.table-striped("*ngIf"='conditions.length > 0')
 			td
 				| 
 
-<<<<<<< HEAD
-                    td
-                        button.btn.btn-default("*ngIf"="c.isParent",style="width: 100%", (click)='expand(c.parent)') ...
-                        span("*ngIf"="!c.isParent") {{c['code']['text']}} {{c['code']['coding'][0]['code']}}
-                    td("*ngIf"="!c.isParent") {{c.clinicalStatus}}
-                    td("*ngIf"="!c.isParent") {{c.onsetDateTime | amTimeAgo}}
-            tr("*ngIf"="!viewToggle", style="width: 100%")
-                td
-                    | 
-                td
-                    button.btn.btn-default(style="width: 100%", (click)='ellipsesToggle()') ...
-                td
-                    | 
-                td
-                    | 
-            
-=======
->>>>>>> origin/layout-refactoring
+
 div
 	button.btn.btn-default((click)='testingCsiro()') CSIRO

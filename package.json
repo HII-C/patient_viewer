@@ -24,14 +24,10 @@
     "@swimlane/ngx-charts": "^4.3.0",
     "angular-calendar": "^0.14.0",
     "angular-in-memory-web-api": "^0.1.17",
-<<<<<<< HEAD
     "angular2-cookie": "^1.2.6",
-    "angular2-moment": "^1.1.0",
-=======
     "angular2-grid": "^2.0.2",
     "angular2-moment": "^1.3.3",
     "angular2-router-loader": "^0.3.5",
->>>>>>> origin/layout-refactoring
     "angular2-toaster": "^1.1.0",
     "bootstrap": "^3.3.7",
     "chart.js": "^2.5.0",
@@ -54,17 +50,11 @@
     "source-map-loader": "^0.1.6",
     "systemjs": "^0.19.47",
     "ts-loader": "^1.3.3",
-<<<<<<< HEAD
     "ts-md5": "^1.2.0",
-    "typescript": "^2.1.5",
-    "webpack": "^1.14.0",
-    "zone.js": "^0.7.6"
-=======
     "typescript": "^2.3.2",
     "webpack": "^1.15.0",
     "webpack-dev-server": "^1.16.5",
     "zone.js": "^0.7.8"
->>>>>>> origin/layout-refactoring
   },
   "devDependencies": {
     "@types/core-js": "0.9.41",

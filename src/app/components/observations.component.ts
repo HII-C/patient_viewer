@@ -1,5 +1,7 @@
 import {Component, Input} from '@angular/core';
 
+import {NgGrid, NgGridItem, NgGridConfig, NgGridItemConfig, NgGridItemEvent} from 'angular2-grid';
+
 import {DraggableWidget} from './draggable_widget.component';
 
 import {FhirService} from '../services/fhir.service';
@@ -23,7 +25,8 @@ export class ObservationsComponent implements DraggableWidget {
 	observations: Array<Observation> = [];
 	@Input() patient: Patient;
 	mappings: { [key: string]: Array<string> } = {};
-	gridItemConfiguration = {}; // For options: https://github.com/BTMorton/angular2-grid
+	
+	gridItemConfiguration: NgGridItemConfig = {};
 
 	constructor(private fhirService: FhirService, private observationService: ObservationService,
 		private mapService: MapService, private loupeService: LoupeService, private openMRSService: OpenMRSService) {

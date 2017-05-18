@@ -1,5 +1,7 @@
 import {Component, Output, EventEmitter, NgModule} from '@angular/core';
 
+import {NgGrid, NgGridItem, NgGridConfig, NgGridItemConfig, NgGridItemEvent} from 'angular2-grid';
+
 import {DraggableWidget} from './draggable_widget.component';
 
 import {BrowserModule} from '@angular/platform-browser';
@@ -13,7 +15,7 @@ import {NgxChartsModule} from '@swimlane/ngx-charts';
 })
 export class ChartComponent implements DraggableWidget {
 
-	gridItemConfiguration = {}; // For options: https://github.com/BTMorton/angular2-grid
+	gridItemConfiguration: NgGridItemConfig = {}; // For options: https://github.com/BTMorton/angular2-grid
 
     //Chart Options
 

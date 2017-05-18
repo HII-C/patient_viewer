@@ -1,5 +1,7 @@
 import {Component, Input, Output, EventEmitter, Pipe} from '@angular/core';
 
+import {NgGrid, NgGridItem, NgGridConfig, NgGridItemConfig, NgGridItemEvent} from 'angular2-grid';
+
 import {DraggableWidget} from './draggable_widget.component';
 
 import {FhirService} from '../services/fhir.service';
@@ -24,7 +26,8 @@ export class ConditionsComponent implements DraggableWidget {
     @Input() patient: Patient;
 
     @Output() conditionSelected:EventEmitter<Condition> = new EventEmitter();
-	gridItemConfiguration = {}; // For options: https://github.com/BTMorton/angular2-grid
+
+	gridItemConfiguration: NgGridItemConfig = {};
 
     constructor(private fhirService: FhirService, private conditionService: ConditionService, private loupeService: LoupeService, private csiroService: CsiroService, private doctorService: DoctorService) {
         console.log("ConditionsComponent created...");

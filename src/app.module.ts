@@ -58,7 +58,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgGridModule } from 'angular2-grid';
 
 const appRoutes: Routes = [
-    { path: '', component: PatientComponent },
+    { path: '', component: HomeComponent },
     { path: 'account', component: AccountComponent }
 ]
 const appRoutingProviders: any[] = [];

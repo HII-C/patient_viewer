@@ -1,5 +1,7 @@
 import {Component, Input} from '@angular/core';
 
+import {NgGrid, NgGridItem, NgGridConfig, NgGridItemConfig, NgGridItemEvent} from 'angular2-grid';
+
 import {DraggableWidget} from './draggable_widget.component';
 
 import {FhirService} from '../services/fhir.service';
@@ -16,7 +18,8 @@ export class ActivitiesComponent implements DraggableWidget {
     selected: Activity;
     activities: Array<Activity>;
     @Input() patient: Patient;
-	gridItemConfiguration = {}; // For options: https://github.com/BTMorton/angular2-grid
+
+	gridItemConfiguration: NgGridItemConfig = {};
 
     constructor(private fhirService: FhirService) {
         console.log("ActivityService created...");

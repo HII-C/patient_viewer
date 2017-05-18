@@ -72,17 +72,12 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
         routing,
         FormsModule,
         HttpModule,
-		MomentModule,
+		    MomentModule,
         ChartsModule,
         NgxChartsModule,
         BrowserAnimationsModule,
-<<<<<<< HEAD
-        // Md5,
-        CalendarModule.forRoot()
-=======
         CalendarModule.forRoot(),
-		NgGridModule
->>>>>>> origin/layout-refactoring
+		    NgGridModule
     ],       // module dependencies
     declarations: [
         AppComponent,
@@ -95,18 +90,12 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
         TimelineComponent,
         TimelinePopupComponent,
         ActionListComponent,
-		LoupeExampleComponent,
+		    LoupeExampleComponent,
         ChartComponent,
         AccountComponent,
         DoctorNoteComponent,
         CalendarComponent,
-<<<<<<< HEAD
-        //ChartTimeline,
-        ChartTimelineComponent,
-        //HostChartComponent
-=======
         ToolbarComponent
->>>>>>> origin/layout-refactoring
     ],   // components and directives
     providers: [
         appRoutingProviders,

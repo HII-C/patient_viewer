@@ -74,21 +74,6 @@ export class PatientComponent {
     }
 
 
-
-    selectServerForUrl(url: string) {
-		this.selectServer(this.serverFor(url));
-    }
-
-    serverFor(url: string) {
-        var obj: Server = null;
-        for (var server of this.servers) {
-            if (server.url == url) {
-                obj = server;
-                break;
-            }
-        }
-        return obj;
-    }
     genderString(patient: Patient) {
         var s = 'Unknown';
         switch (patient.gender) {

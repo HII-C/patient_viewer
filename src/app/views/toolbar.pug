@@ -1,0 +1,41 @@
+.widget
+	//- div("*ngIf"="!nav2", [@fadeIn]="'in'")
+	div("*ngIf"="!nav2")
+		button.btn.btn-default.btn-lg.btn-custom-lg
+			span(class="glyphicon glyphicon-earphone")
+		button.btn.btn-default.btn-lg.btn-custom-lg((click)='switchNav()')
+			span(class="glyphicon glyphicon-home")
+		button.btn.btn-default.btn-lg.btn-custom-lg
+			span(class="glyphicon glyphicon-search")
+		button.btn.btn-default.btn-lg.btn-custom-lg
+			span(class="glyphicon glyphicon-star")
+		button.btn.btn-default.btn-lg.btn-custom-lg(routerLink='/account', routerLinkActive='active')
+			span(class="glyphicon glyphicon-cog")
+		button.btn.btn-default.btn-lg.btn-custom-lg
+			span(class="glyphicon glyphicon-signal")
+		button.btn.btn-default.btn-lg.btn-custom-lg
+			span(class="glyphicon glyphicon-link")
+		button.btn.btn-default.btn-lg.btn-custom-lg
+			span(class="glyphicon glyphicon-stats")
+		button.btn.btn-default.btn-lg.btn-custom-lg  
+			span(class="glyphicon glyphicon-info-sign")
+
+	div("*ngIf"="nav2")
+		button.btn.btn-default.btn-lg.btn-custom-lg.btn2
+			span(class="glyphicon glyphicon-arrow-left")
+		button.btn.btn-default.btn-lg.btn-custom-lg((click)='switchNav()')
+			span(class="glyphicon glyphicon-home")
+		button.btn.btn-default.btn-lg.btn-custom-lg.btn2
+			span(class="glyphicon glyphicon-arrow-right")
+		button.btn.btn-default.btn-lg.btn-custom-lg.btn2
+			span(class="glyphicon glyphicon-repeat") 
+		button.btn.btn-default.btn-lg.btn-custom-lg.btn2
+			span(class="glyphicon glyphicon-bookmark")
+		button.btn.btn-default.btn-lg.btn-custom-lg.btn2
+			span(class="glyphicon glyphicon-hourglass") 
+		button.btn.btn-default.btn-lg.btn-custom-lg.btn2
+			span(class="glyphicon glyphicon-flash")
+		button.btn.btn-default.btn-lg.btn-custom-lg.btn2
+			span(class="glyphicon glyphicon-list-alt") 
+		button.btn.btn-default.btn-lg.btn-custom-lg.btn2
+			span(class="glyphicon glyphicon-stats")

@@ -17,6 +17,7 @@ import {ChartComponent} from './app/components/chart.component';
 import {CalendarComponent} from './app/components/calendar.component';
 import {DoctorNoteComponent} from './app/components/doctorNote.component';
 import {AccountComponent} from './app/components/account.component';
+import {ToolbarComponent} from './app/components/toolbar.component';
 
 
 
@@ -54,6 +55,7 @@ import { CalendarModule } from 'angular-calendar';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { LineChartComponent } from '@swimlane/ngx-charts';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgGridModule } from 'angular2-grid';
 
 const appRoutes: Routes = [
     { path: '', component: PatientComponent },
@@ -69,11 +71,12 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
         routing,
         FormsModule,
         HttpModule,
-		    MomentModule,
+		MomentModule,
         ChartsModule,
         NgxChartsModule,
         BrowserAnimationsModule,
-        CalendarModule.forRoot()
+        CalendarModule.forRoot(),
+		NgGridModule
     ],       // module dependencies
     declarations: [
         AppComponent,
@@ -90,7 +93,8 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
         ChartComponent,
         AccountComponent,
         DoctorNoteComponent,
-        CalendarComponent
+        CalendarComponent,
+        ToolbarComponent
     ],   // components and directives
     providers: [
         appRoutingProviders,

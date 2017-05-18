@@ -5,29 +5,49 @@ import {PatientService} from '../services/patient.service';
 import {Patient} from '../models/patient.model';
 import {Server} from '../models/server.model';
 import {Condition} from '../models/condition.model';
-import {trigger, state, style, animate, transition} from '@angular/animations';
+// import {DraggableWidget} from './draggable_widget.component';
+import {NgGrid, NgGridItem, NgGridConfig, NgGridItemConfig, NgGridItemEvent} from 'angular2-grid';
+
 
 @Component({
     selector: 'patients',
-    templateUrl: '/patient.html',
-
-    animations: [
-      trigger('fadeIn', [
-        state('in', style({opacity: '1'})),
-        transition('void => *', [
-          style({opacity: '0'}),
-          animate('800ms ease-in')
-        ])
-      ])
-    ]
+    templateUrl: '/patient.html'
 })
 export class PatientComponent {
+
     selected: Patient;
     patients: Array<Patient>;
     server: Server;
     servers: Server[] = ServerService.servers;
     selectedCondition: Condition;
-    nav2: boolean = false;
+    advancedSearch = false;
+
+	// For options: https://github.com/BTMorton/angular2-grid
+
+	gridConfiguration: NgGridConfig = <NgGridConfig>{
+		'margins': [5],
+		'draggable': true,
+		'resizable': true,
+		'max_cols': 0,
+		'max_rows': 0,
+		'visible_cols': 0,
+		'visible_rows': 0,
+		'min_cols': 1,
+		'min_rows': 1,
+		'col_width': 2,
+		'row_height': 2,
+		'cascade': 'up',
+		'min_width': 50,
+		'min_height': 50,
+		'fix_to_grid': false,
+		'auto_style': true,
+		'auto_resize': false,
+		'maintain_ratio': false,
+		'prefer_new': false,
+		'zoom_on_drag': false,
+		'limit_to_screen': true
+	};
+	gridItemConfiguration = { 'dragHandle': '.handle', 'col': 1, 'row': 1, 'sizex': 1, 'sizey': 1 }; // For options: https://github.com/BTMorton/angular2-grid
 
     constructor(private fhirService: FhirService, private patientService: PatientService, private compiler: Compiler) {
 		this.compiler.clearCache();
@@ -75,7 +95,7 @@ export class PatientComponent {
 
     serverFor(url: string) {
         var obj: Server = null;
-        for(var server of this.servers) {
+        for (var server of this.servers) {
             if (server.url == url) {
                 obj = server;
                 break;
@@ -97,11 +117,8 @@ export class PatientComponent {
     }
 
     selectCondition(condition) {
-      this.selectedCondition = condition;
-      console.log(this.selectedCondition);
+		this.selectedCondition = condition;
+		console.log(this.selectedCondition);
     }
 
-    switchNav() {
-      this.nav2 = !this.nav2;
-    }
 }

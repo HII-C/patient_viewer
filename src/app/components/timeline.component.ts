@@ -1,4 +1,7 @@
 import {Component, Input} from '@angular/core';
+
+import {DraggableWidget} from './draggable_widget.component';
+
 import {FhirService} from '../services/fhir.service';
 import {TimelineService} from '../services/timeline.service';
 import {Timeline} from '../models/timeline.model';
@@ -8,11 +11,12 @@ import {Patient} from '../models/patient.model';
     selector: 'timelines',
     templateUrl: '/timeline.html'
 })
-export class TimelineComponent{
+export class TimelineComponent implements DraggableWidget{
 
     selected: Timeline;
     timeline: Array<Timeline> = [];
     @Input() patient: Patient;
+	gridItemConfiguration = {};
 
     constructor(private fhirService: FhirService, private timelineService: TimelineService) {
         console.log("TimelineService created...");

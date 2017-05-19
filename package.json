@@ -33,7 +33,7 @@
     "concurrently": "^3.4.0",
     "core-js": "^2.4.1",
     "d3": "4.7.4",
-    "date-fns": "^1.28.3",
+    "date-fns": "^1.28.5",
     "firebase": "^3.7.3",
     "grunt-contrib-clean": "^1.1.0",
     "grunt-contrib-compress": "^1.4.1",

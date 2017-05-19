@@ -18,12 +18,12 @@ export class SmartService {
     clientId: string = "82b330f7-1186-4059-8c31-62dce4b18d77";
     launch: string;
     scope: string = "launch patient/*.* openid profile";
-    redirectUri: string = "http://localhost:9000";
+    redirectUri: string = "http://patient-viewer.healthcreek.org";
     state: string;
     aud: string;
 
     authenticate() {
-      
+
       this.fhirBaseUrl = this.findGetParameter("iss");
       if(this.fhirBaseUrl) {
         this.aud = this.fhirBaseUrl;

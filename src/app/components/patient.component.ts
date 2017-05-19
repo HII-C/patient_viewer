@@ -5,14 +5,10 @@ import {PatientService} from '../services/patient.service';
 import {Patient} from '../models/patient.model';
 import {Server} from '../models/server.model';
 import {Condition} from '../models/condition.model';
-<<<<<<< HEAD
-
 import {Http, Headers} from '@angular/http';
 import {CookieService} from 'angular2-cookie/core';
 // import {DraggableWidget} from './draggable_widget.component';
-=======
 import {DraggableWidget} from './draggable_widget.component';
->>>>>>> origin/layout-refactoring
 import {NgGrid, NgGridItem, NgGridConfig, NgGridItemConfig, NgGridItemEvent} from 'angular2-grid';
 
 

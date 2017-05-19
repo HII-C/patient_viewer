@@ -28,10 +28,10 @@ export class ToolbarComponent {
 
 	// angular2-grid: https://github.com/BTMorton/angular2-grid
 	gridItemConfiguration: NgGridItemConfig = {
-		'col': 50,               //  The start column for the item
+		'col': 35,               //  The start column for the item
 		'row': 1,               //  The start row for the item
 		'sizex': 40,             //  The start width in terms of columns for the item
-		'sizey': 4,             //  The start height in terms of rows for the item
+		'sizey': 5,             //  The start height in terms of rows for the item
 		'dragHandle': null,     //  The selector to be used for the drag handle. If null, uses the whole item
 		'resizeHandle': null,   //  The selector to be used for the resize handle. If null, uses 'borderSize' pixels from the right for horizontal resize,
 		//    'borderSize' pixels from the bottom for vertical, and the square in the corner bottom-right for both

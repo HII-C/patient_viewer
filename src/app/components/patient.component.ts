@@ -1,4 +1,4 @@
-import {Component, Compiler} from '@angular/core';
+import {Component, Compiler, EventEmitter, Output} from '@angular/core';
 import {FhirService} from '../services/fhir.service';
 import {ServerService} from '../services/server.service';
 import {PatientService} from '../services/patient.service';
@@ -21,21 +21,14 @@ export class PatientComponent {
     servers: Server[] = ServerService.servers;
     selectedCondition: Condition;
     advancedSearch = false;
+	@Output() patientSelected: EventEmitter<Patient> = new EventEmitter();
 
 	// For options: https://github.com/BTMorton/angular2-grid
 	gridItemConfiguration: NgGridItemConfig = {
-			// 'dragHandle': '.header',
-			// 'col': 1,
-			// 'row': 1,
-			// 'sizex': 150,
-			// 'sizey': 200
-		// };
-
-	// {
 		'col': 1,               //  The start column for the item
 		'row': 1,               //  The start row for the item
-		'sizex': 40,             //  The start width in terms of columns for the item
-		'sizey': 50,             //  The start height in terms of rows for the item
+		'sizex': 30,             //  The start width in terms of columns for the item
+		'sizey': 30,             //  The start height in terms of rows for the item
 		'dragHandle': null,     //  The selector to be used for the drag handle. If null, uses the whole item
 		'resizeHandle': null,   //  The selector to be used for the resize handle. If null, uses 'borderSize' pixels from the right for horizontal resize,
 		//    'borderSize' pixels from the bottom for vertical, and the square in the corner bottom-right for both
@@ -51,15 +44,7 @@ export class PatientComponent {
 		'minWidth': 0,          //  The minimum width of a particular item. This value will override the value from the grid, as well as the minimum columns if the resulting size is larger
 		'minHeight': 0,         //  The minimum height of a particular item. This value will override the value from the grid, as well as the minimum rows if the resulting size is larger
 	}
-	// gridItemConfiguration(): NgGridItemConfig {
-	// 	return {
-	// 			'dragHandle': '.header',
-	// 			'col': 1,
-	// 			'row': 1,
-	// 			'sizex': 150,
-	// 			'sizey': 200
-	// 		};
-	// }
+
     constructor(private fhirService: FhirService, private patientService: PatientService, private compiler: Compiler) {
 		this.compiler.clearCache();
         this.selectServer(this.servers[0]);
@@ -89,6 +74,7 @@ export class PatientComponent {
         this.patientService.get(id).subscribe(d => {
             console.log("Fetching: " + d);
             this.selected = <Patient>d; //.entry['resource'];
+			this.patientSelected.emit(this.selected);
         });
     }
 

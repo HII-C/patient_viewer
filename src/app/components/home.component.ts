@@ -3,12 +3,15 @@ import {Component} from '@angular/core';
 import {NgGrid, NgGridItem, NgGridConfig, NgGridItemConfig, NgGridItemEvent} from 'angular2-grid';
 
 import {PatientComponent} from './patient.component';
+import {Patient} from '../models/patient.model';
 
 @Component({
     selector: 'home',
     templateUrl: '/home.html'
 })
 export class HomeComponent {
+
+	selected: Patient = null;
 
 	// For options: https://github.com/BTMorton/angular2-grid
 	gridConfiguration: NgGridConfig = <NgGridConfig>{
@@ -37,6 +40,11 @@ export class HomeComponent {
 
 	constructor() {
 		console.log("HomeComponent has been initialized.");
+	}
+
+	selectPatient(patient: Patient) {
+		this.selected = patient;
+		console.log("HomeComponent setting selection to patient: " + this.selected);
 	}
 
 }

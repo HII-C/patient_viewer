@@ -1,19 +1,23 @@
-import {Component, Compiler} from '@angular/core';
+import {Component, Compiler, EventEmitter, Output} from '@angular/core';
 import {FhirService} from '../services/fhir.service';
 import {SmartService} from '../services/smart.service';
 import {PatientService} from '../services/patient.service';
 import {Patient} from '../models/patient.model';
 import {Server} from '../models/server.model';
 import {Condition} from '../models/condition.model';
+<<<<<<< HEAD
 
 import {Http, Headers} from '@angular/http';
 import {CookieService} from 'angular2-cookie/core';
 // import {DraggableWidget} from './draggable_widget.component';
+=======
+import {DraggableWidget} from './draggable_widget.component';
+>>>>>>> origin/layout-refactoring
 import {NgGrid, NgGridItem, NgGridConfig, NgGridItemConfig, NgGridItemEvent} from 'angular2-grid';
 
 
 @Component({
-    selector: 'patients',
+    selector: 'patient',
     templateUrl: '/patient.html'
 })
 export class PatientComponent {
@@ -22,33 +26,29 @@ export class PatientComponent {
     server: Server;
     selectedCondition: Condition;
     advancedSearch = false;
+	@Output() patientSelected: EventEmitter<Patient> = new EventEmitter();
 
 	// For options: https://github.com/BTMorton/angular2-grid
-
-	gridConfiguration: NgGridConfig = <NgGridConfig>{
-		'margins': [5],
-		'draggable': true,
-		'resizable': true,
-		'max_cols': 0,
-		'max_rows': 0,
-		'visible_cols': 0,
-		'visible_rows': 0,
-		'min_cols': 1,
-		'min_rows': 1,
-		'col_width': 2,
-		'row_height': 2,
-		'cascade': 'up',
-		'min_width': 50,
-		'min_height': 50,
-		'fix_to_grid': false,
-		'auto_style': true,
-		'auto_resize': false,
-		'maintain_ratio': false,
-		'prefer_new': false,
-		'zoom_on_drag': false,
-		'limit_to_screen': true
-	};
-	gridItemConfiguration = { 'dragHandle': '.handle', 'col': 1, 'row': 1, 'sizex': 1, 'sizey': 1 }; // For options: https://github.com/BTMorton/angular2-grid
+	gridItemConfiguration: NgGridItemConfig = {
+		'col': 1,               //  The start column for the item
+		'row': 1,               //  The start row for the item
+		'sizex': 30,             //  The start width in terms of columns for the item
+		'sizey': 30,             //  The start height in terms of rows for the item
+		'dragHandle': null,     //  The selector to be used for the drag handle. If null, uses the whole item
+		'resizeHandle': null,   //  The selector to be used for the resize handle. If null, uses 'borderSize' pixels from the right for horizontal resize,
+		//    'borderSize' pixels from the bottom for vertical, and the square in the corner bottom-right for both
+		'borderSize': 15,
+		'fixed': false,         //  If the grid item should be cascaded or not. If yes, manual movement is required
+		'draggable': true,      //  If the grid item can be dragged. If this or the global setting is set to false, the item cannot be dragged.
+		'resizable': true,      //  If the grid item can be resized. If this or the global setting is set to false, the item cannot be resized.
+		'payload': null,        //  An optional custom payload (string/number/object) to be used to identify the item for serialization
+		'maxCols': 0,           //  The maximum number of columns for a particular item. This value will only override the value from the grid (if set) if it is smaller
+		'minCols': 0,           //  The minimum number of columns for a particular item. This value will only override the value from the grid if larger
+		'maxRows': 0,           //  The maximum number of rows for a particular item. This value will only override the value from the grid (if set) if it is smaller
+		'minRows': 0,           //  The minimum number of rows for a particular item. This value will only override the value from the grid if larger
+		'minWidth': 0,          //  The minimum width of a particular item. This value will override the value from the grid, as well as the minimum columns if the resulting size is larger
+		'minHeight': 0,         //  The minimum height of a particular item. This value will override the value from the grid, as well as the minimum rows if the resulting size is larger
+	}
 
     constructor(private fhirService: FhirService, private patientService: PatientService, private compiler: Compiler, private http: Http, private smartService: SmartService, private cookieService: CookieService) {
 		this.compiler.clearCache();
@@ -70,6 +70,7 @@ export class PatientComponent {
         this.patientService.get(id).subscribe(d => {
             console.log("Fetching: " + d);
             this.selected = <Patient>d; //.entry['resource'];
+			this.patientSelected.emit(this.selected);
         });
     }
 

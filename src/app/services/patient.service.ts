@@ -6,6 +6,12 @@ import {FhirService} from './fhir.service';
 
 @Injectable()
 export class PatientService {
+<<<<<<< HEAD
+=======
+
+    private path = '/Patient';
+    // private patients;
+>>>>>>> origin/layout-refactoring
     // private options: Headers = new Headers;["Accept: application/json";
 
     constructor(private fhirService: FhirService, private http: Http) {

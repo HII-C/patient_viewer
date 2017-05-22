@@ -1,5 +1,5 @@
 section
-    table
+    table.table.table-condensed.table-bordered
         colgroup
             col(style = 'width: 15%')
             col(style = 'width: 85%')
@@ -19,7 +19,12 @@ section
                 td
                     | 
                 td
-                    ngx-charts-line-chart([view] = 'view', [scheme] = 'colorScheme', [results] = 'data1', [gradient] = 'gradient', [legend] = 'showLegend', [showXAxisLabel] = 'showXAxisLabel', [xAxisLabel] = 'xAxisLabel', [yAxisLabel] = 'yAxisLabel', [autoScale] = 'autoScale')
+                    ngx-charts-line-chart([view] = 'this.view', [scheme] = 'colorScheme', [results] = 'data1', [gradient] = 'gradient', [legend] = 'showLegend', [showXAxisLabel] = 'showXAxisLabel', [xAxisLabel] = 'xAxisLabel', [yAxisLabel] = 'yAxisLabel', [autoScale] = 'autoScale')
+            tr#labToggle.collapse.in
+                td
+                    | 
+                td([style.padding-left.px] = "xPad")
+                    ngx-charts-line-chart([view] = 'this.view3', [scheme] = 'colorScheme', [results] = 'data3', [gradient] = 'gradient', [legend] = 'showLegend', [showXAxisLabel] = 'showXAxisLabel', [xAxisLabel] = 'xAxisLabel', [yAxisLabel] = 'yAxisLabel', [autoScale] = 'autoScale')
             tr
                 td
                     button(data-toggle='collapse', data-target='#problemToggle') Toggle 
@@ -30,7 +35,7 @@ section
                 td
                     | 
                 td
-                    ngx-charts-line-chart([view] = 'view', [scheme] = 'colorScheme', [results] = 'data1', [gradient] = 'gradient', [legend] = 'showLegend', [showXAxisLabel] = 'showXAxisLabel', [xAxisLabel] = 'xAxisLabel', [yAxisLabel] = 'yAxisLabel', [autoScale] = 'autoScale')
+                    ngx-charts-line-chart([view] = 'this.view', [scheme] = 'colorScheme', [results] = 'data1', [gradient] = 'gradient', [legend] = 'showLegend', [showXAxisLabel] = 'showXAxisLabel', [xAxisLabel] = 'xAxisLabel', [yAxisLabel] = 'yAxisLabel', [autoScale] = 'autoScale')
             tr
                 td
                     button(data-toggle='collapse', data-target='#medToggle') Toggle 
@@ -41,7 +46,7 @@ section
                 td
                     | 
                 td
-                    ngx-charts-line-chart([view] = 'view', [scheme] = 'colorScheme', [results] = 'data1', [gradient] = 'gradient', [legend] = 'showLegend', [showXAxisLabel] = 'showXAxisLabel', [xAxisLabel] = 'xAxisLabel', [yAxisLabel] = 'yAxisLabel', [autoScale] = 'autoScale')        
+                    ngx-charts-line-chart([view] = 'this.view', [scheme] = 'colorScheme', [results] = 'data1', [gradient] = 'gradient', [legend] = 'showLegend', [showXAxisLabel] = 'showXAxisLabel', [xAxisLabel] = 'xAxisLabel', [yAxisLabel] = 'yAxisLabel', [autoScale] = 'autoScale')        
             tr
                 td
                     button(data-toggle='collapse', data-target='#allergyToggle') Toggle 
@@ -52,7 +57,7 @@ section
                 td
                     | 
                 td
-                    ngx-charts-line-chart([view] = 'view', [scheme] = 'colorScheme', [results] = 'data1', [gradient] = 'gradient', [legend] = 'showLegend', [showXAxisLabel] = 'showXAxisLabel', [xAxisLabel] = 'xAxisLabel', [yAxisLabel] = 'yAxisLabel', [autoScale] = 'autoScale')
+                    ngx-charts-line-chart([view] = 'this.view', [scheme] = 'colorScheme', [results] = 'data1', [gradient] = 'gradient', [legend] = 'showLegend', [showXAxisLabel] = 'showXAxisLabel', [xAxisLabel] = 'xAxisLabel', [yAxisLabel] = 'yAxisLabel', [autoScale] = 'autoScale')
             tr
                 td
                     button(data-toggle='collapse', data-target='#diagToggle') Toggle 
@@ -63,37 +68,11 @@ section
                 td
                     | 
                 td
-                    ngx-charts-line-chart([view] = 'view', [scheme] = 'colorScheme', [results] = 'data1', [gradient] = 'gradient', [legend] = 'showLegend', [showXAxisLabel] = 'showXAxisLabel', [xAxisLabel] = 'xAxisLabel', [yAxisLabel] = 'yAxisLabel', [autoScale] = 'autoScale')
+                    ngx-charts-line-chart([view] = 'this.view', [scheme] = 'colorScheme', [results] = 'data1', [gradient] = 'gradient', [legend] = 'showLegend', [showXAxisLabel] = 'showXAxisLabel', [xAxisLabel] = 'xAxisLabel', [yAxisLabel] = 'yAxisLabel', [autoScale] = 'autoScale')
             tr
                 td
                     |  
                 td
-                    ngx-charts-line-chart([view] = 'view2', [scheme] = 'colorScheme', [results] = 'data2', [gradient] = 'gradient', [xAxis] = 'showXAxis', [legend] = 'showLegend', [xAxisLabel] = 'xAxisLabel', [yAxisLabel] = 'yAxisLabel', [autoScale] = 'autoScale', [timeline] = 'true')
+                    ngx-charts-line-chart([view] = 'this.view2', [scheme] = 'colorScheme', [results] = 'data2', [gradient] = 'gradient', [xAxis] = 'showXAxis', [legend] = 'showLegend', [xAxisLabel] = 'xAxisLabel', [yAxisLabel] = 'yAxisLabel', [autoScale] = 'autoScale', [timeline] = 'true')
                                             
             
-
-//div
-    #toggle.collapse.in
-        ngx-charts-line-chart([view] = 'view', [scheme] = 'colorScheme', [results] = 'data1', [gradient] = 'gradient', [legend] = 'showLegend', [showXAxisLabel] = 'showXAxisLabel', [xAxisLabel] = 'xAxisLabel', [yAxisLabel] = 'yAxisLabel', [autoScale] = 'autoScale')
-        ngx-charts-line-chart([view] = 'view', [scheme] = 'colorScheme', [results] = 'data1', [gradient] = 'gradient', [legend] = 'showLegend', [showXAxisLabel] = 'showXAxisLabel', [xAxisLabel] = 'xAxisLabel', [yAxisLabel] = 'yAxisLabel', [autoScale] = 'autoScale')
-        ngx-charts-line-chart([view] = 'view', [scheme] = 'colorScheme', [results] = 'data1', [gradient] = 'gradient', [legend] = 'showLegend', [showXAxisLabel] = 'showXAxisLabel', [xAxisLabel] = 'xAxisLabel', [yAxisLabel] = 'yAxisLabel', [autoScale] = 'autoScale')                
-        ngx-charts-line-chart([view] = 'view', [scheme] = 'colorScheme', [results] = 'data2', [gradient] = 'gradient', [xAxis] = 'showXAxis', [legend] = 'showLegend', [showXAxisLabel] = 'showXAxisLabel', [xAxisLabel] = 'xAxisLabel', [yAxisLabel] = 'yAxisLabel', [autoScale] = 'autoScale')
-        
-
-//div(style="padding: 15px;")
-    h2
-        | Historical Trend
-//div.btn-group
-    button.btn.btn-default(data-toggle='collapse', data-target='#toggle') Toggle
-    div.btn-group
-        button.btn.btn-default.dropdown-toggle(type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
-          | Charts
-          span.caret
-        ul.dropdown-menu(role='menu')
-          li
-            a(href="#!")
-              span Chart 1
-          li
-            a(href="#!")
-              span Chart 2
-    //button.btn.btn-default((click)="reRenderData()") Render Data

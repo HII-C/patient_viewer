@@ -1,59 +1,114 @@
 import { Component } from '@angular/core';
 
 interface Single{
-  name:String
-  series: Array<{value: number, name: any}> // <-- note here it's explicitly any
+    name:String
+    series: Array<any>
 }
 
-var single: Single[] = [
+let single: Single[] = [
 {
     "name": "David",
     "series": [
-      {
-        "value": 3309,
-        "name": "2016-09-19T10:24:08.741Z"
-      },
-      {
-        "value": 2927,
-        "name": "2016-09-15T21:10:06.716Z"
-      },
-      {
-        "value": 6264,
-        "name": "2016-09-19T15:57:56.065Z"
-      },
-      {
-        "value": 3890,
-        "name": "2016-09-19T01:52:22.028Z"
-      },
-      {
-        "value": 5290,
-        "name": "2016-09-15T11:33:32.350Z"
-    },
-    {
-      "value": 2309,
-      "name": "2016-08-23T10:24:08.741Z"
-    },{
-      "value": 7909,
-      "name": "2016-10-10T10:24:08.741Z"
-    },
-    {
-      "value": 4309,
-      "name": "2016-09-22T10:24:08.741Z"
-    },
-    {
-      "value": 927,
-      "name": "2016-09-14T21:10:06.716Z"
-    },
-    {
-      "value": 6264,
-      "name": "2016-09-25T15:57:56.065Z"
-    },
+        {
+            "value": 3309,
+            "name": "2016-09-19T10:24:08.741Z"
+        },
+        {
+            "value": 2927,
+            "name": "2016-09-15T21:10:06.716Z"
+        },
+        {
+            "value": 6264,
+            "name": "2016-09-19T15:57:56.065Z"
+        },
+        {
+            "value": 3890,
+            "name": "2016-09-19T01:52:22.028Z"
+        },
+        {
+            "value": 5290,
+            "name": "2016-09-15T11:33:32.350Z"
+        },
+        {
+            "value": 2309,
+            "name": "2016-08-13T10:24:08.741Z"
+        },
+        {
+            "value": 7909,
+            "name": "2016-10-10T10:24:08.741Z"
+        },
+        {
+            "value": 4309,
+            "name": "2016-09-22T10:24:08.741Z"
+        },
+        {
+            "value": 927,
+            "name": "2016-09-14T21:10:06.716Z"
+        },
+        {
+            "value": 6264,
+            "name": "2016-09-25T15:57:56.065Z"
+        },
+        {
+            "value": 2533,
+            "name": "2016-08-10T01:52:22.028Z"
+        },
+        {
+          "value": 3752
+          ,
+          "name": "2016-10-28T10:24:08.741Z"
+        },
 
     ]
   }
 ];
 
-var bottom: Single[] = [
+let multi: Single[] = [
+{
+    "name": "David",
+    "series": [
+        {
+            "value": 3309,
+            "name": "2016-09-19T10:24:08.741Z"
+        },
+        {
+            "value": 2927,
+            "name": "2016-09-15T21:10:06.716Z"
+        },
+        {
+            "value": 6264,
+            "name": "2016-09-19T15:57:56.065Z"
+        },
+        {
+            "value": 3890,
+            "name": "2016-09-19T01:52:22.028Z"
+        },
+        {
+            "value": 5290,
+            "name": "2016-09-15T11:33:32.350Z"
+        },
+        {
+            "value": 7909,
+            "name": "2016-10-10T10:24:08.741Z"
+        },
+        {
+            "value": 4309,
+            "name": "2016-09-22T10:24:08.741Z"
+        },
+        {
+            "value": 927,
+            "name": "2016-09-14T21:10:06.716Z"
+        },
+        {
+            "value": 6264,
+            "name": "2016-09-25T15:57:56.065Z"
+        },
+
+    ]
+  }
+];
+
+let bottom: Single[] = [
 {
     "name": "David",
     "series": [
@@ -66,7 +121,7 @@ var bottom: Single[] = [
         "name": "2016-08-10T01:52:22.028Z"
       },
     ]
-  }
+    }
 ];
 
 @Component({
@@ -77,13 +132,38 @@ var bottom: Single[] = [
 
 export class ChartTimelineComponent {
 
-    //Chart Options
 
+    start: Date;
+    end: Date;
+    startSub: any;
+    endSub: any;
+
+    startDate: any;
+    endDate: any;
+    dateDifference: any;
+    startDate2: any;
+    endDate2: any;
+    dateDifference2: any;
+    percentage: any;
+    leftRatio: any;
+    rightRatio: any;
+    xPad: any;
+
+//Chart data variables
     single: any[];
     multi: any[];
     data1: any[];
     data2: any[];
+    data3: any[];
+    view: any[];
+    view2: any[];
+    view3: any[];
 
+    view2XMax: number;
+    viewXMax: number;
+
+
+//Chart Options
     showXAxis = true;
     showYAxis = true;
     gradient = false;
@@ -92,17 +172,61 @@ export class ChartTimelineComponent {
     xAxisLabel = 'Country';
     showYAxisLabel = true;
     yAxisLabel = 'Population';
-    view: any[] = [800, 45];
-    view2: any[] = [800,131]
 
     colorScheme = {
       domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
     };
     autoScale = true;
 
+    findStuff()
+    {
+        for (let i of multi[0].series)
+        {
+            console.log("i.name: ", i.name);
+            console.log("start: ", this.startSub, "end", this.endSub);
+            if (this.startSub > i.name)
+            {
+                this.startSub = i.name;
+            }
+            else if (this.endSub < i.name)
+            {
+                this.endSub = i.name;
+            }
+        }
+    }
 
     constructor(){
         console.log("Chart Component is loaded...");
+
+        //this.start = multi[0].series[0].name;
+        //this.end = multi[0].series[0].name;
+        this.startSub = multi[0].series[0].name;
+        this.endSub = multi[0].series[0].name;
+        this.findStuff();
+        console.log("Start Sub",this.startSub)
+        console.log("End Sub",this.endSub)
+        console.log();
+
+        this.maxXAxis()
+        this.otherXAxis()
+        this.findPercentage()
+        this.setXAxis()
+        this.setPosition()
+        this.setChartSizes()
+
+        console.log(this.startDate);
+        console.log(this.endDate);
+        console.log(this.dateDifference);
+        console.log(this.startDate2);
+        console.log(this.endDate2);
+        console.log(this.dateDifference2);
+        console.log(this.percentage);
+        console.log(this.view2XMax);
+        console.log(this.xPad);
+        console.log(bottom[0].series[1].name);
+
+
+
         this.data1 = single.map(group => {
             group.series = group.series.map(dataItem => {
                 dataItem.name = new Date(dataItem.name);
@@ -121,75 +245,56 @@ export class ChartTimelineComponent {
       return group;
     })
 
-        this.multi = [
-        {
-          "name": "Germany",
-          "series": [
-            {
-              "name": "2010",
-              "value": 7300000
-            },
-            {
-              "name": "2011",
-              "value": 8940000
-            }
-          ]
-        },
+        this.data3 = multi.map(group => {
+            group.series = group.series.map(dataItem => {
+                dataItem.name = new Date(dataItem.name);
+        return dataItem;
+      })
 
-        {
-          "name": "USA",
-          "series": [
-            {
-              "name": "2010",
-              "value": 7870000
-            },
-            {
-              "name": "2011",
-              "value": 8270000
-            }
-          ]
-        },
+      return group;
+    })
 
-        {
-          "name": "France",
-          "series": [
-            {
-              "name": "2010",
-              "value": 5000002
-            },
-            {
-              "name": "2011",
-              "value": 5800000
-            }
-          ]
-        }
-      ];
-        /*this.data = [
-        {
-          "name": "Germany",
-          "value": 46268
-        },
-        {
-          "name": "USA",
-          "value": 53041
-        },
-        {
-          "name": "France",
-          "value": 42503
-        },
-        {
-          "name": "United Kingdom",
-          "value": 41787
-        },
-        {
-          "name": "Spain",
-          "value": 29863
-        },
-        {
-          "name": "Italy",
-          "value": 35925
-        }
-    ];*/
     }
+
+maxXAxis(){
+    //Overall date difference for setting max X-Axis
+        this.startDate = new Date("2016-08-10T01:52:22.028Z");
+        this.endDate = new Date("2016-10-28T10:24:08.741Z");
+        this.dateDifference = this.endDate.valueOf() - this.startDate.valueOf();
+        console.log("maxXAxis ", this.startDate, this.endDate, this.dateDifference)
+    }
+
+otherXAxis(){
+    //Date difference of other data sets to compare to get percentage
+        this.startDate2 = new Date(this.startSub); //"2016-09-14T21:10:06.716Z"
+        this.endDate2 = new Date(this.endSub); //"2016-10-10T10:24:08.741Z"
+        this.dateDifference2 = this.endDate2.valueOf() - this.startDate2.valueOf();
+    }
+
+findPercentage(){
+    //Find percentage to get size of x-axis
+        this.percentage = this.dateDifference2/this.dateDifference;
+    }
+
+setXAxis(){
+    //X-Axis sizes
+        this.viewXMax = 800;
+        this.view2XMax = this.viewXMax * this.percentage;
+    }
+
+setPosition(){
+    //Set position of graph with padding using startDate, endDate, and startDate2
+        this.leftRatio = this.startDate2.valueOf() - this.startDate.valueOf();
+        this.rightRatio = this.endDate.valueOf() - this.startDate2.valueOf();
+        this.xPad = (this.leftRatio/(this.leftRatio + this.rightRatio)) * this.viewXMax; //left padding in pixels
+    }
+
+setChartSizes(){
+//Chart sizes
+    this.view = [this.viewXMax, 45];
+    this.view2 = [this.viewXMax, 131];
+    this.view3 = [this.view2XMax, 45];
+}
+
 
 }

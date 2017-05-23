@@ -18,6 +18,7 @@ import {CalendarComponent} from './app/components/calendar.component';
 import {DoctorNoteComponent} from './app/components/doctorNote.component';
 import {AccountComponent} from './app/components/account.component';
 import {ToolbarComponent} from './app/components/toolbar.component';
+import {ChartTimelineComponent} from './app/components/chartTimeline.component';
 
 
 
@@ -95,7 +96,8 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
         AccountComponent,
         DoctorNoteComponent,
         CalendarComponent,
-        ToolbarComponent
+        ToolbarComponent,
+        ChartTimelineComponent
     ],   // components and directives
     providers: [
         appRoutingProviders,

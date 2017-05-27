@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, Output, EventEmitter} from '@angular/core';
 
 import {NgGrid, NgGridItem, NgGridConfig, NgGridItemConfig, NgGridItemEvent} from 'angular2-grid';
 
@@ -23,6 +23,7 @@ export class ObservationsComponent implements DraggableWidget {
 	test: Observation;
 	observations: Array<Observation> = [];
 	@Input() patient: Patient;
+	@Output() observationReturned: EventEmitter<Array<any>> = new EventEmitter();
 	mappings: { [key: string]: Array<string> } = {};
 
 	// For options: https://github.com/BTMorton/angular2-grid
@@ -64,10 +65,10 @@ export class ObservationsComponent implements DraggableWidget {
 
 					this.observations = <Array<Observation>>data.entry.map(r => r['resource']);
 					this.observations = this.observations.reverse();
-
 					console.log("Loaded " + this.observations.length + " observations.");
 					//append broken data here
 					this.loupeService.observationsArray = this.observations;
+					this.observationReturned.emit(this.observations);
 				} else {
 					this.observations = new Array<Observation>();
 					console.log("No observations for patient.");

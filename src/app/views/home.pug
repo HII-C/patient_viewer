@@ -2,8 +2,8 @@ div([ngGrid]="gridConfiguration")
 	patient((patientSelected)="selectPatient($event)")
 	toolbar
 	timelines([patient]='selected')
-	chartTimelines
 	//chart
+	chartTimelines([observations]='observationReturned', #chart="")
 	conditions([patient]='selected', (conditionSelected)='obs.updateHighlighted($event)', "*ngIf"='selected')
-	observations([patient]='selected', #obs="", "*ngIf"='selected')
+	observations([patient]='selected', #obs="", "*ngIf"='selected', (observationReturned)='chart.ngOnChanges()')
 	//- activities([patient]='selected', "*ngIf"='selected')

@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 import {NgGrid, NgGridItem, NgGridConfig, NgGridItemConfig, NgGridItemEvent} from 'angular2-grid';
-
 import {DraggableWidget} from './draggable_widget.component';
+import {Patient} from '../models/patient.model';
+import {LoupeService} from '../services/loupe.service';
 
 
 interface Single{
@@ -158,7 +159,7 @@ export class ChartTimelineComponent implements DraggableWidget {
         'minWidth': 0,          //  The minimum width of a particular item. This value will override the value from the grid, as well as the minimum columns if the resulting size is larger
         'minHeight': 0,         //  The minimum height of a particular item. This value will override the value from the grid, as well as the minimum rows if the resulting size is larger
     }
-
+    @Input() observations: Array<any>;
     start: Date;
     end: Date;
     startSub: any;
@@ -204,24 +205,7 @@ export class ChartTimelineComponent implements DraggableWidget {
     };
     autoScale = true;
 
-    findStuff()
-    {
-        for (let i of multi[0].series)
-        {
-            console.log("i.name: ", i.name);
-            console.log("start: ", this.startSub, "end", this.endSub);
-            if (this.startSub > i.name)
-            {
-                this.startSub = i.name;
-            }
-            else if (this.endSub < i.name)
-            {
-                this.endSub = i.name;
-            }
-        }
-    }
-
-    constructor(){
+    constructor(private loupeService: LoupeService){
         console.log("Chart Component is loaded...");
 
         //this.start = multi[0].series[0].name;
@@ -229,16 +213,16 @@ export class ChartTimelineComponent implements DraggableWidget {
         this.startSub = multi[0].series[0].name;
         this.endSub = multi[0].series[0].name;
         this.findStuff();
-        console.log("Start Sub",this.startSub)
-        console.log("End Sub",this.endSub)
+        console.log("Start Sub",this.startSub);
+        console.log("End Sub",this.endSub);
         console.log();
 
-        this.maxXAxis()
-        this.otherXAxis()
-        this.findPercentage()
-        this.setXAxis()
-        this.setPosition()
-        this.setChartSizes()
+        this.maxXAxis();
+        this.otherXAxis();
+        this.findPercentage();
+        this.setXAxis();
+        this.setPosition();
+        this.setChartSizes();
 
         console.log(this.startDate);
         console.log(this.endDate);
@@ -257,16 +241,16 @@ export class ChartTimelineComponent implements DraggableWidget {
             group.series = group.series.map(dataItem => {
                 dataItem.name = new Date(dataItem.name);
         return dataItem;
-      })
+      });
 
       return group;
-    })
+    });
 
         this.data2 = bottom.map(group => {
             group.series = group.series.map(dataItem => {
                 dataItem.name = new Date(dataItem.name);
         return dataItem;
-      })
+      });
 
       return group;
     })
@@ -275,10 +259,31 @@ export class ChartTimelineComponent implements DraggableWidget {
             group.series = group.series.map(dataItem => {
                 dataItem.name = new Date(dataItem.name);
         return dataItem;
-      })
+      });
 
       return group;
-    })
+    });
+
+    }
+    // This Method will hold all of the live observation data, not 100% where to put it into graph, but just lmk and I can do it 
+    ngOnChanges(){
+        if (this.loupeService.observationsArray){
+            console.log(this.loupeService.observationsArray);
+            single[0].name = 'Austin';
+            single[0].series = [];
+            for (let o of this.loupeService.observationsArray){
+                if (o.valueQuantity){
+                    single[0].series.push({"value": o.valueQuantity.value, "name": o.effectiveDateTime});
+                }
+                else if (o.component){
+                    single[0].series.push({"value": o.component[0].valueQuantity.value, "name": o.effectiveDateTime});
+                }
+            }
+            console.log(single);
+        }
+        else{
+            console.log('Invalid observations array');
+        }
 
     }
 
@@ -322,5 +327,21 @@ setChartSizes(){
     this.view3 = [this.view2XMax, 45];
 }
 
+findStuff()
+    {
+        for (let i of multi[0].series)
+        {
+            console.log("i.name: ", i.name);
+            console.log("start: ", this.startSub, "end", this.endSub);
+            if (this.startSub > i.name)
+            {
+                this.startSub = i.name;
+            }
+            else if (this.endSub < i.name)
+            {
+                this.endSub = i.name;
+            }
+        }
+    }
 
 }

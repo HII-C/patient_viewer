@@ -11,7 +11,6 @@ import {Patient} from '../models/patient.model';
 export class ObservationService {
 
     private path = '/Observation';
-
     constructor(private fhirService: FhirService, private http: Http) {
         console.log("ObservationService created...");
     }

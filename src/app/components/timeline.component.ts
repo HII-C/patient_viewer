@@ -6,6 +6,7 @@ import {DraggableWidget} from './draggable_widget.component';
 
 import {FhirService} from '../services/fhir.service';
 import {TimelineService} from '../services/timeline.service';
+import {DoctorService} from '../services/doctor.service';
 import {Timeline} from '../models/timeline.model';
 import {Patient} from '../models/patient.model';
 
@@ -41,8 +42,9 @@ export class TimelineComponent implements DraggableWidget {
 		'minHeight': 0,         //  The minimum height of a particular item. This value will override the value from the grid, as well as the minimum rows if the resulting size is larger
 	}
 
-    constructor(private fhirService: FhirService, private timelineService: TimelineService) {
+    constructor(private fhirService: FhirService, private timelineService: TimelineService, private doctorService: DoctorService) {
         console.log("TimelineService created...");
+		this.gridItemConfiguration.draggable = this.doctorService.configMode;
     }
 
     ngOnChanges() {

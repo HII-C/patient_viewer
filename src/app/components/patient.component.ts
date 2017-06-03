@@ -2,6 +2,7 @@ import {Component, Compiler, EventEmitter, Output} from '@angular/core';
 import {FhirService} from '../services/fhir.service';
 import {SmartService} from '../services/smart.service';
 import {PatientService} from '../services/patient.service';
+import {DoctorService} from '../services/doctor.service';
 import {Patient} from '../models/patient.model';
 import {Server} from '../models/server.model';
 import {Condition} from '../models/condition.model';
@@ -35,7 +36,7 @@ export class PatientComponent {
 		//    'borderSize' pixels from the bottom for vertical, and the square in the corner bottom-right for both
 		'borderSize': 15,
 		'fixed': false,         //  If the grid item should be cascaded or not. If yes, manual movement is required
-		'draggable': true,      //  If the grid item can be dragged. If this or the global setting is set to false, the item cannot be dragged.
+		'draggable': false,      //  If the grid item can be dragged. If this or the global setting is set to false, the item cannot be dragged.
 		'resizable': true,      //  If the grid item can be resized. If this or the global setting is set to false, the item cannot be resized.
 		'payload': null,        //  An optional custom payload (string/number/object) to be used to identify the item for serialization
 		'maxCols': 0,           //  The maximum number of columns for a particular item. This value will only override the value from the grid (if set) if it is smaller
@@ -46,7 +47,8 @@ export class PatientComponent {
 		'minHeight': 0,         //  The minimum height of a particular item. This value will override the value from the grid, as well as the minimum rows if the resulting size is larger
 	}
 
-    constructor(private fhirService: FhirService, private patientService: PatientService, private compiler: Compiler, private http: Http, private smartService: SmartService, private cookieService: CookieService) {
+    constructor(private fhirService: FhirService, private patientService: PatientService, private compiler: Compiler, private http: Http, private smartService: SmartService, private cookieService: CookieService, private doctorService: DoctorService) {
+    this.gridItemConfiguration.draggable = this.doctorService.configMode;
 		this.compiler.clearCache();
     this.fhirService.setUrl(this.cookieService.get('fhirBaseUrl'));
     if(this.fhirService.token) {

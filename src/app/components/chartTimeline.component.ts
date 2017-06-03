@@ -4,6 +4,7 @@ import {NgGrid, NgGridItem, NgGridConfig, NgGridItemConfig, NgGridItemEvent} fro
 import {DraggableWidget} from './draggable_widget.component';
 import {Patient} from '../models/patient.model';
 import {LoupeService} from '../services/loupe.service';
+import {DoctorService} from '../services/doctor.service';
 
 
 interface Single{
@@ -205,7 +206,8 @@ export class ChartTimelineComponent implements DraggableWidget {
     };
     autoScale = true;
 
-    constructor(private loupeService: LoupeService){
+    constructor(private loupeService: LoupeService, private doctorService: DoctorService){
+        this.gridItemConfiguration.draggable = this.doctorService.configMode;
         console.log("Chart Component is loaded...");
 
         //this.start = multi[0].series[0].name;

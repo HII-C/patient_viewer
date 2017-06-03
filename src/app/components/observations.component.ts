@@ -8,6 +8,7 @@ import {FhirService} from '../services/fhir.service';
 import {ObservationService} from '../services/observation.service';
 import {LoupeService} from '../services/loupe.service';
 import {MapService} from '../services/map.service';
+import {DoctorService} from '../services/doctor.service';
 import {Observation} from '../models/observation.model';
 import {Patient} from '../models/patient.model';
 import {Condition} from '../models/condition.model';
@@ -49,10 +50,11 @@ export class ObservationsComponent implements DraggableWidget {
 	}
 
 	constructor(private fhirService: FhirService, private observationService: ObservationService,
-		private mapService: MapService, private loupeService: LoupeService) {
+		private mapService: MapService, private loupeService: LoupeService, private doctorService: DoctorService) {
 		console.log("ObservationsComponent created...");
 
 		this.mappings = MapService.STATIC_MAPPINGS;
+		this.gridItemConfiguration.draggable = this.doctorService.configMode;
 
 	}
 

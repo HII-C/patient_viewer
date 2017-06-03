@@ -4,8 +4,8 @@ import {trigger, state, style, animate, transition} from '@angular/animations';
 import {NgGrid, NgGridItem, NgGridConfig, NgGridItemConfig, NgGridItemEvent} from 'angular2-grid';
 
 import {DraggableWidget} from './draggable_widget.component';
-
 import {Patient} from '../models/patient.model';
+import {DoctorService} from '../services/doctor.service';
 
 @Component({
 	selector: 'toolbar',
@@ -48,9 +48,9 @@ export class ToolbarComponent {
 		// 'minHeight': 0,         //  The minimum height of a particular item. This value will override the value from the grid, as well as the minimum rows if the resulting size is larger
 	}
 
-	constructor() {
+	constructor(private doctorService: DoctorService) {
 		console.log("ToolbarComponent created...");
-
+		this.gridItemConfiguration.draggable = this.doctorService.configMode;
 	}
 
     switchNav() {

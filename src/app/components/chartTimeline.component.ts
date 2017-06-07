@@ -160,7 +160,7 @@ export class ChartTimelineComponent implements DraggableWidget {
         'minWidth': 0,          //  The minimum width of a particular item. This value will override the value from the grid, as well as the minimum columns if the resulting size is larger
         'minHeight': 0,         //  The minimum height of a particular item. This value will override the value from the grid, as well as the minimum rows if the resulting size is larger
     }
-    @Input() observations: Array<any>;
+    // @Input() observations: Array<any>;
     start: Date;
     end: Date;
     startSub: any;
@@ -268,7 +268,7 @@ export class ChartTimelineComponent implements DraggableWidget {
 
     }
     // This Method will hold all of the live observation data, not 100% where to put it into graph, but just lmk and I can do it 
-    ngOnChanges(){
+    observationsReturned(){
         if (this.loupeService.observationsArray){
             console.log(this.loupeService.observationsArray);
             single[0].name = 'Austin';

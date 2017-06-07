@@ -3,7 +3,7 @@ div([ngGrid]="gridConfiguration")
 	toolbar
 	timelines([patient]='selected')
 	//chart
-	chartTimelines([observations]='observationReturned', #chart="")
-	conditions([patient]='selected', (conditionSelected)='obs.updateHighlighted($event)', "*ngIf"='selected')
-	observations([patient]='selected', #obs="", "*ngIf"='selected', (observationReturned)='chart.ngOnChanges()')
+	triplelist([patient]='selected', *ngIf='selected')
+	chartTimelines(#chart="")
+
 	//- activities([patient]='selected', "*ngIf"='selected')

@@ -14,7 +14,7 @@ export class TripleListComponent implements DraggableWidget{
     gridItemConfiguration: NgGridItemConfig = {
 		'col': 1,               //  The start column for the item
 		'row': 1,               //  The start row for the item
-		'sizex': 119,             //  The start width in terms of columns for the item
+		'sizex': 80,             //  The start width in terms of columns for the item
 		'sizey': 50,             //  The start height in terms of rows for the item
 		'dragHandle': null,     //  The selector to be used for the drag handle. If null, uses the whole item
 		'resizeHandle': null,   //  The selector to be used for the resize handle. If null, uses 'borderSize' pixels from the right for horizontal resize,

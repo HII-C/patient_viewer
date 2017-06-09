@@ -6,9 +6,9 @@ import {Condition} from '../models/condition.model';
 @Component({
 })
 export class DoctorService {
-	// Creates the class-scope variables so we can call this.exportList, and doctorService.exportList from other components
 	filter: Array<String> = [];
 	configMode: boolean = true;
+	graphPopup: boolean = false;
 
 	constructor() {
 		console.log("Doctor Prefrence Service running...");

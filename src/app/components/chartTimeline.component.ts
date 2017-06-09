@@ -130,7 +130,7 @@ let bottom: Single[] = [
     ]
     }
 ];
-
+declare var $:any; //Necessary in order to use jQuery to open popup.
 @Component({
   selector: 'chartTimelines',
   templateUrl: '/chartTimeline.html',
@@ -344,6 +344,9 @@ findStuff()
                 this.endSub = i.name;
             }
         }
+    }
+    show() {
+        $('#chartTimeline_popup').modal({});
     }
 
 }

@@ -92,7 +92,7 @@ export class ConditionsComponent {
   ngOnChanges() {
     this.selected = null;
     if (this.patient) {
-      this.conditionService.index(this.patient).subscribe(data => {
+      this.conditionService.index(this.patient, true).subscribe(data => {
         if (data.entry) {
 
           this.conditions = <Array<Condition>>data.entry.map(r => r['resource']);

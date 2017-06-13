@@ -7,18 +7,18 @@ import {DoctorService} from '../services/doctor.service';
 	templateUrl: '/account.html',
 })
 export class AccountComponent {
-	settings: Array<String> = [];
-	electrolytes: Array<String> = ["Sodium","Potassium","Chloride","CO2","Calcium","Magnesium","HBA1C","GLU","ANA"];
-	cholesteralBattery: Array<String> = ["Total","LDL","HDL","Triglycerides"];
-	liverFunction: Array<String> = ["ALT","AST","Albumin","Bilirubin"];
-	kidneyFunction: Array<String> = ["Creatinine","GFR","BUN"];
+	settings: Array<string> = [];
+	electrolytes: Array<string> = ["Sodium","Potassium","Chloride","CO2","Calcium","Magnesium","HBA1C","GLU","ANA"];
+	cholesteralBattery: Array<string> = ["Total","LDL","HDL","Triglycerides"];
+	liverFunction: Array<string> = ["ALT","AST","Albumin","Bilirubin"];
+	kidneyFunction: Array<string> = ["Creatinine","GFR","BUN"];
 
 
 	constructor(private doctorService: DoctorService) {
 		console.log("AccountComponent created...");
 	}
 
-	addSetting(checked: boolean, setting: String) {
+	addSetting(checked: boolean, setting: string) {
 	  if(checked) {
 		this.settings.push(setting);
 	  }
@@ -29,6 +29,7 @@ export class AccountComponent {
 
 	saveSettings() {
 	  this.doctorService.filter = this.settings;
+		this.doctorService.addGraphConfig(this.settings);
 	  console.log("saved");
 	}
 

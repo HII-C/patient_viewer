@@ -8,7 +8,6 @@ import {Server} from '../models/server.model';
 import {Condition} from '../models/condition.model';
 import {Http, Headers} from '@angular/http';
 import {CookieService} from 'angular2-cookie/core';
-// import {DraggableWidget} from './draggable_widget.component';
 import {DraggableWidget} from './draggable_widget.component';
 import {NgGrid, NgGridItem, NgGridConfig, NgGridItemConfig, NgGridItemEvent} from 'angular2-grid';
 
@@ -23,6 +22,7 @@ export class PatientComponent {
     server: Server;
     selectedCondition: Condition;
     advancedSearch = false;
+    graphConfig: any;
 	@Output() patientSelected: EventEmitter<Patient> = new EventEmitter();
 
 	// For options: https://github.com/BTMorton/angular2-grid
@@ -36,8 +36,8 @@ export class PatientComponent {
 		//    'borderSize' pixels from the bottom for vertical, and the square in the corner bottom-right for both
 		'borderSize': 15,
 		'fixed': false,         //  If the grid item should be cascaded or not. If yes, manual movement is required
-		'draggable': false,      //  If the grid item can be dragged. If this or the global setting is set to false, the item cannot be dragged.
-		'resizable': true,      //  If the grid item can be resized. If this or the global setting is set to false, the item cannot be resized.
+		'draggable': this.doctorService.configMode,      //  If the grid item can be dragged. If this or the global setting is set to false, the item cannot be dragged.
+		'resizable': this.doctorService.configMode,      //  If the grid item can be resized. If this or the global setting is set to false, the item cannot be resized.
 		'payload': null,        //  An optional custom payload (string/number/object) to be used to identify the item for serialization
 		'maxCols': 0,           //  The maximum number of columns for a particular item. This value will only override the value from the grid (if set) if it is smaller
 		'minCols': 0,           //  The minimum number of columns for a particular item. This value will only override the value from the grid if larger
@@ -48,18 +48,20 @@ export class PatientComponent {
 	}
 
     constructor(private fhirService: FhirService, private patientService: PatientService, private compiler: Compiler, private http: Http, private smartService: SmartService, private cookieService: CookieService, private doctorService: DoctorService) {
-    this.gridItemConfiguration.draggable = this.doctorService.configMode;
+    
 		this.compiler.clearCache();
-    this.fhirService.setUrl(this.cookieService.get('fhirBaseUrl'));
-    if(this.fhirService.token) {
-      this.select(this.patientService.patient);
-    }
-    else {
-        this.smartService.authenticate().subscribe(data => {
-            this.fhirService.setToken(data.access_token);
-            this.select(data.patient);
-          });;
-    }
+        this.fhirService.setUrl(this.cookieService.get('fhirBaseUrl'));
+        if(this.fhirService.token) {
+            this.select(this.patientService.patient);
+        }
+        else {
+            this.smartService.authenticate().subscribe(data => {
+                this.fhirService.setToken(data.access_token);
+                this.select(data.patient);
+            });;
+        }
+        this.graphConfig = this.cookieService.getObject("graphConfig");
+        // this.cookieService.remove("graphConfig");
     }
 
 

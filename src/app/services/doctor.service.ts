@@ -1,6 +1,7 @@
 import {Component, Injectable} from '@angular/core';
 import {LoupeService} from './loupe.service';
 import {Condition} from '../models/condition.model';
+import {CookieService} from 'angular2-cookie/core';
 
 @Injectable()
 @Component({
@@ -8,9 +9,9 @@ import {Condition} from '../models/condition.model';
 export class DoctorService {
 	filter: Array<String> = [];
 	configMode: boolean = true;
-	graphPopup: boolean = false;
+	graphConfig: Array<Array<string>> = [];
 
-	constructor() {
+	constructor(private cookieService: CookieService) {
 		console.log("Doctor Prefrence Service running...");
 	}
 
@@ -47,4 +48,18 @@ export class DoctorService {
 		// returning the updated list for the spec parameters
 		return list;
 	}
+
+	addGraphConfig(list: Array<string>){
+		for (let j of this.graphConfig){
+			if (list != j){
+				continue;
+			}
+			else{
+				break;
+			}
+		}
+		this.graphConfig.push(list);
+		this.cookieService.putObject("graphConfig", this.graphConfig);
+	}
+
 }

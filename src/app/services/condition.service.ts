@@ -17,10 +17,10 @@ export class ConditionService {
         console.log("ConditionService created...");
     }
 
-    index(patient: Patient): Observable<any> {
+    index(patient: Patient, authParam: boolean): Observable<any> {
         var url = this.fhirService.getUrl() + this.path + "?patient=" + patient.id;
 		// console.log("ESNUTH");
-        return this.http.get(url, this.fhirService.options(true)).map(res => res.json());
+        return this.http.get(url, this.fhirService.options(authParam)).map(res => res.json());
     }
 
     // get(id): Observable<any> {

@@ -29,8 +29,8 @@ export class TimelineComponent implements DraggableWidget {
 		'dragHandle': null,     //  The selector to be used for the drag handle. If null, uses the whole item
 		'resizeHandle': null,   //  The selector to be used for the resize handle. If null, uses 'borderSize' pixels from the right for horizontal resize,
 		//    'borderSize' pixels from the bottom for vertical, and the square in the corner bottom-right for both
-		'borderSize': 15,
-		'fixed': false,         //  If the grid item should be cascaded or not. If yes, manual movement is required
+		'borderSize': 0,
+		'fixed': true,         //  If the grid item should be cascaded or not. If yes, manual movement is required
 		'draggable': true,      //  If the grid item can be dragged. If this or the global setting is set to false, the item cannot be dragged.
 		'resizable': true,      //  If the grid item can be resized. If this or the global setting is set to false, the item cannot be resized.
 		'payload': null,        //  An optional custom payload (string/number/object) to be used to identify the item for serialization

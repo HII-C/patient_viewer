@@ -1,6 +1,6 @@
 div([(ngGridItem)]='gridItemConfiguration')
   .row.col-lg-12
     div.col-md-4.col-lg-4
-      conditions([patient]='patient', (conditionSelected)='obs.updateHighlighted($event)', *ngIf='passThrough')
+      conditions([patient]='patient', *ngIf='passThrough')
     div.col-md-4.col-lg-4
-      observations([patient]='patient', #obs='', *ngIf='passThrough', (observationReturned)='chart.observationsReturned()')
+      observations([patient]='patient', #obs='', *ngIf='passThrough')

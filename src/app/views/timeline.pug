@@ -1,4 +1,3 @@
-timeline-popup(#popup='')
 div("[(ngGridItem)]"="gridItemConfiguration")
 	.horizTimeLine("*ngIf"='patient')
 		.encounterBox("*ngIf"='timeline.length == 0')
@@ -7,3 +6,4 @@ div("[(ngGridItem)]"="gridItemConfiguration")
 			h2 {{t.code['text']}}
 			h2 {{t.clinicalStatus}}
 			h2 {{t.onsetDateTime | amTimeAgo}}
+timeline-popup(#popup='')

@@ -32,10 +32,13 @@ table.table.table-condensed.table-striped("*ngIf"='conditions.length > 0')
 				td
 					input("*ngIf"="!c.isParent",type='checkbox',id='{{conditions.indexOf(c)}}', value='{{c["code"]["text"]}}', (change)='addCollapse($event.target.checked,$event.target.getAttribute("id"))')
 				td
-					button.btn.btn-default("*ngIf"="c.isParent", (click)='expand(c.parent)') ...
+					button.btn.btn-default("*ngIf"="c.isParent", (click)='expand(c.parent)') ... 
 					span("*ngIf"="!c.isParent") {{c['code']['text']}} {{c['code']['coding'][0]['code']}}
 				td("*ngIf"="!c.isParent") {{c.clinicalStatus}}
-				td("*ngIf"="!c.isParent") {{c.onsetDateTime | amTimeAgo}}
+				td("*ngIf"="!c.isParent") {{c.onsetDateTime}}
+					
+					
+
 		tr("*ngIf"="!viewToggle", style="width: 100%")
 			td
 				| 

@@ -2,7 +2,6 @@ div([ngGrid]="gridConfiguration")
 	patient((patientSelected)="selectPatient($event)")
 	toolbar
 	timelines([patient]='selected')
-	//chart
 	triplelist([patient]='selected', *ngIf='selected')
 	
 	//- activities([patient]='selected', "*ngIf"='selected')

@@ -1,4 +1,4 @@
-div("[(ngGridItem)]"="gridItemConfiguration")
+div#patient("[(ngGridItem)]"="gridItemConfiguration")
 	.handle Patient Focus
 		.box-header-btns.pull-right
 			a(title="Remove widget")
@@ -63,7 +63,7 @@ div("[(ngGridItem)]"="gridItemConfiguration")
 						|  Provider
 					select#server_select.form-control((change)='selectServerForUrl($event.target.value)')
 						option("*ngFor"='let s of servers', "[value]"='s.url', [selected]='server && (s.url == server.url)') {{s.name}}
-nav(style="z-index: 1200;")
-	button.btn.btn-default("*ngFor"='let s of graphConfig; let i = index')  Configuration {{i}} {{s}}
+	nav(style="z-index: 1200;")
+		button.btn.btn-default("*ngFor"='let s of graphConfig; let i = index')  Configuration {{i}} {{s}}
 	//- | Testing
 

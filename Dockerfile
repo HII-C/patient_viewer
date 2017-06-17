@@ -1,3 +1,3 @@
 FROM nginx
-MAINTAINER Preston Lee
+MAINTAINER Austin Michne
 COPY build /usr/share/nginx/html

@@ -31,8 +31,26 @@ export class SmartService {
         this.fhirService.setUrl(this.fhirBaseUrl);
         this.patientService.setPath("/metadata");
         this.patientService.index(false).subscribe(data => {
-            this.authorizeUrl = data.rest[0].security.extension[0].extension[0].valueUri;
-            this.tokenUrl = data.rest[0].security.extension[0].extension[1].valueUri;
+          
+            var smartExtension = data.rest[0].security.extension.filter(function (e) {
+             return (e.url === "http://fhir-registry.smarthealthit.org/StructureDefinition/oauth-uris");
+            });
+            console.log("here:"+JSON.stringify(smartExtension));
+            var auth;
+            var tok;
+            smartExtension[0].extension.forEach(function(arg, index, array){
+            console.log("url:"+arg.url);
+            console.log("value:"+arg.valueUri);
+
+            if (arg.url === "authorize") {
+              auth = arg.valueUri;
+            } else if (arg.url === "token") {
+              tok = arg.valueUri;
+            }
+            });
+            this.tokenUrl = tok;
+            this.authorizeUrl = auth;
+
             this.cookieService.put('tokenUrl', this.tokenUrl);
             this.cookieService.put('fhirBaseUrl', this.fhirBaseUrl);
             this.requestAuth();

@@ -16,37 +16,41 @@ div.btn-group
 	button.btn.btn-default((click)='collapse()') Collapse
 p.telt("*ngIf"='conditions.length == 0')
 	i (none)
-table.table.table-condensed.table-striped("*ngIf"='conditions.length > 0')
-	thead
-		tr
-			th
-			th
-				| Description
-			th
-				| Status
-			th
-				| Onset
-	tbody(id='test')
-		tr("*ngFor"='let c of conditions', [class.selected]='c.selected', (click)='selectCondition(c)',id='t{{conditions.indexOf(c)}}')
-			ng-container("*ngIf"="c.isVisible")
-				td
-					input("*ngIf"="!c.isParent",type='checkbox',id='{{conditions.indexOf(c)}}', value='{{c["code"]["text"]}}', (change)='addCollapse($event.target.checked,$event.target.getAttribute("id"))')
-				td
-					button.btn.btn-default("*ngIf"="c.isParent", (click)='expand(c.parent)') ... 
-					span("*ngIf"="!c.isParent") {{c['code']['text']}} {{c['code']['coding'][0]['code']}}
-				td("*ngIf"="!c.isParent") {{c.clinicalStatus}}
-				td("*ngIf"="!c.isParent") {{c.onsetDateTime}}
-					
-					
 
-		tr("*ngIf"="!viewToggle", style="width: 100%")
-			td
-				| 
-			td
-				button.btn.btn-default((click)='ellipsesToggle()') ...
-			td
-				| 
-			td
-				| 
+div("*ngIf"='conditions.length > 0')
+	div("*ngFor"='let c of conditionGrouping')
+		button.btn.btn-default(data-toggle="collapse", [attr.data-target]="'#inactive'+conditionGrouping.indexOf(c)", aria-expanded="false", [attr.aria-controls]="'inactive'+conditionGrouping.indexOf(c)")
+			| Testing
+		div.collapse(id='inactive{{conditionGrouping.indexOf(c)}}')
+				table.table.table-condensed.table-striped
+					thead
+						tr
+							th
+							th
+								| Description
+							th
+								| Status
+							th
+								| Onset
+					tbody
+						tr("*ngFor"='let cSub of c', [class.selected]='cSub.selected', (click)='selectCondition(cSub)',id='t{{conditions.indexOf(cSub)}}')
+							ng-container("*ngIf"="cSub.isVisible")
+								td
+									input("*ngIf"="!cSub.isParent",type='checkbox',id='c{{conditions.indexOf(cSub)}}', value='{{cSub["code"]["text"]}}', (change)='addCollapse($event.target.checked,$event.target.getAttribute("id"))')
+								td
+									button.btn.btn-default("*ngIf"="cSub.isParent", (click)='expand(cSub.parent)') ... 
+									span("*ngIf"="!cSub.isParent") {{cSub['code']['text']}} {{cSub['code']['coding'][0]['code']}}
+								td("*ngIf"="!cSub.isParent") {{cSub.clinicalStatus}}
+								td("*ngIf"="!cSub.isParent") {{cSub.onsetDateTime}}
+
+//- tr("*ngIf"="!viewToggle", style="width: 100%")
+//- 	td
+//- 		| 
+//- 	td
+//- 		button.btn.btn-default((click)='ellipsesToggle()') ...
+//- 	td
+//- 		| 
+//- 	td
+//- 		| 
 div
 	button.btn.btn-default((click)='testingCsiro()') CSIRO

@@ -23,6 +23,7 @@ export class ConditionsComponent {
   conditions: Array<Condition> = [];
   viewToggle: boolean = false;
   collapseQueue: Array<any> = [];
+  conditionGrouping: Array<any> = [];
   @Input() patient: Patient;
 
   @Output() conditionSelected: EventEmitter<Condition> = new EventEmitter();
@@ -107,6 +108,7 @@ export class ConditionsComponent {
             //this.viewConditionList = JSON.parse(JSON.stringify(this.conditions));
             this.conditions = this.doctorService.assignVisible(this.conditions);
           }
+          this.groupConditions();
 
         } else {
           this.conditions = new Array<Condition>();
@@ -183,6 +185,34 @@ export class ConditionsComponent {
       c.isSelected = false;
     }
 
+  }
+  groupConditions(){
+    for (let c of this.conditions){
+      if (c.clinicalStatus == "active"){
+        if (!this.conditionGrouping[0]){
+          this.conditionGrouping[0] = [c];
+        }
+        else{
+          console.log("question???");
+          this.conditionGrouping[0].push(c);
+          console.log('This condition is active');
+        }
+      }
+      else{
+        if (!this.conditionGrouping[1]){
+          this.conditionGrouping[1] = [c];
+          console.log(this.conditionGrouping);
+          console.log("there");
+        }
+        else{
+          console.log("here");
+          console.log(c);
+          this.conditionGrouping[1].push(c);
+        }
+      }
+    }
+    // this.conditionGrouping[1] = this.conditionGrouping[0];
+    console.log(this.conditionGrouping);
   }
 
 }

@@ -18,8 +18,8 @@ html
         link(rel='stylesheet' href='/css/timeline.css')
         link(rel='stylesheet' href='/css/ribbons.css')
 
-        script(src="vendor.bundle.js")
-        script(src="main.bundle.js")
+        script(src="vendor.bundle.js" defer)
+        script(src="main.bundle.js" defer)
         
 
     body(class="#{yield(:body_class)}")

@@ -9,17 +9,18 @@ import {Patient} from '../models/patient.model';
 @Injectable()
 @Component({
 })
-export class ConditionService {
+export class CarePlanService {
 
-    private path = '/Condition';
+    private path = '/CarePlan';
 
     constructor(private fhirService: FhirService, private http: Http) {
-        console.log("ConditionService created...");
+        console.log("CarePlanService created...");
     }
 
     index(patient: Patient, authParam: boolean): Observable<any> {
         var url = this.fhirService.getUrl() + this.path + "?patient=" + patient.id;
         return this.http.get(url, this.fhirService.options(authParam)).map(res => res.json());
     }
+
 
 }

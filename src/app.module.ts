@@ -11,8 +11,8 @@ import {ConditionsComponent} from './app/components/conditions.component';
 import {TimelineComponent} from './app/components/timeline.component';
 import {TimelinePopupComponent} from './app/components/timeline_popup.component';
 import {ObservationsComponent} from './app/components/observations.component';
-import {ActivitiesComponent} from './app/components/activities.component';
-import {ActionListComponent} from './app/components/actionList.component';
+import {CarePlanComponent} from './app/components/carePlan.component';
+// import {ActionListComponent} from './app/components/actionList.component';
 import {ChartComponent} from './app/components/chart.component';
 import {CalendarComponent} from './app/components/calendar.component';
 import {DoctorNoteComponent} from './app/components/doctorNote.component';
@@ -32,6 +32,7 @@ import {PatientService} from './app/services/patient.service';
 import {SearchService} from './app/services/search.service';
 import {UserService} from './app/services/user.service';
 import {ConditionService} from './app/services/condition.service';
+import {CarePlanService} from './app/services/carePlan.service';
 import {TimelineService} from './app/services/timeline.service';
 import {ObservationService} from './app/services/observation.service';
 import {MapService} from './app/services/map.service';
@@ -88,10 +89,10 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
         PatientComponent,
         ObservationsComponent,
         ConditionsComponent,
-        ActivitiesComponent,
+        CarePlanComponent,
         TimelineComponent,
         TimelinePopupComponent,
-        ActionListComponent,
+        // ActionListComponent,
 		    LoupeExampleComponent,
         ChartComponent,
         AccountComponent,
@@ -118,7 +119,8 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
         CsiroService,
         DoctorService,
         SmartService,
-        CookieService
+        CookieService,
+        CarePlanService
     ],                    // services
     bootstrap: [AppComponent]     // root component
 })

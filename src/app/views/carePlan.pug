@@ -1,5 +1,15 @@
-div
-	h2.pull-down
-		// <span class="glyphicon glyphicon-ok-circle"></span>
-		| Activities
-	p.text-info Not implemented.
+h2
+	| Care Plans
+table.table.table-condensed.table-striped
+	thead
+		th
+		th
+			| Description
+	tbody
+		tr("*ngFor"='let cP of carePlans', id='t{{carePlans.indexOf(cP)}}')
+			td
+				input(type='checkbox',id='cP{{carePlans.indexOf(cP)}}', value='{{cP["activity"][0]["detail"]["code"]["coding"][0]["display"]}}')
+			td
+				span {{cP["activity"][0]['detail']['code']['coding'][0]['display']}}
+			//- td {{cP.clinicalStatus}}
+			//- td {{cP.onsetDateTime}}

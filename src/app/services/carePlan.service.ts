@@ -21,6 +21,4 @@ export class CarePlanService {
         var url = this.fhirService.getUrl() + this.path + "?patient=" + patient.id;
         return this.http.get(url, this.fhirService.options(authParam)).map(res => res.json());
     }
-
-
 }

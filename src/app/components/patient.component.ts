@@ -70,8 +70,14 @@ export class PatientComponent {
         this.patientService.get(id).subscribe(d => {
             console.log("Fetching: " + d);
             this.selected = <Patient>d; //.entry['resource'];
+            for(let id of d.identifier) {
+              if(id.type && id.type.coding[0].code=="MR"){
+                this.selected.mrn = id.value;
+              }
+            }
 			this.patientSelected.emit(this.selected);
         });
+
     }
 
 

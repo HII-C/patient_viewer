@@ -6,13 +6,7 @@ div#patient("[(ngGridItem)]"="gridItemConfiguration")
 				i.glyphicon.glyphicon-trash
 	.content
 		.details.pull-right("*ngIf"='selected')
-			form#patient_selector
-				.form-group
-					select#patient_select.form-control((change)='select($event.target.value)')
-						option("*ngFor"='let p of patients', "[value]"='p.id', [selected]='patient && (p.id == patient.id)')
-							span("*ngIf"='p.name && p.name[0].family') {{p.name[0].family[0]}},&nbsp; <!-- added comma and space to order list by last name -->
-							span("*ngIf"='p.name && p.name[0].given') {{p.name[0].given[0]}}
-			.identifier("*ngFor"='let id of selected.identifier')
+			.identifier
 				b
 					span("*ngIf"='selected.name && selected.name[0].given') {{selected.name[0].given[0]}}
 					| &nbsp;
@@ -20,7 +14,7 @@ div#patient("[(ngGridItem)]"="gridItemConfiguration")
 				div
 					| Born: {{selected.birthDate | amDateFormat:'MM/DD/YYYY'}} ({{-1 * (selected.birthDate | amDifference:today:'years':false)}}yr)
 				div Gender: {{selected.gender}}
-				div MRN: {{id['value']}}
+				div("*ngIf" = 'selected.mrn') MRN: {{selected.mrn}}
 		img(src='/images/textures/me.jpg')
 
 		#advanced_search
@@ -66,4 +60,3 @@ div#patient("[(ngGridItem)]"="gridItemConfiguration")
 	nav(style="z-index: 1200;")
 		button.btn.btn-default("*ngFor"='let s of graphConfig; let i = index')  Configuration {{i}} {{s}}
 	//- | Testing
-

@@ -8,5 +8,5 @@ export class Patient {
     identifier: Array<Object>;
     name: Array<Object>;
     telecom: Array<Object>;
-
+    mrn: string;
 }

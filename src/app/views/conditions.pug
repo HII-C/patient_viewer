@@ -41,7 +41,7 @@ div("*ngIf"='conditions.length > 0')
 									button.btn.btn-default("*ngIf"="cSub.isParent", (click)='expand(cSub.parent)') ... 
 									span("*ngIf"="!cSub.isParent") {{cSub['code']['text']}} {{cSub['code']['coding'][0]['code']}}
 								td("*ngIf"="!cSub.isParent") {{cSub.clinicalStatus}}
-								td("*ngIf"="!cSub.isParent") {{cSub.onsetDateTime}}
+								td("*ngIf"="!cSub.isParent") {{cSub.relativeDateTime}}
 
 //- tr("*ngIf"="!viewToggle", style="width: 100%")
 //- 	td

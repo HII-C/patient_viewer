@@ -13,6 +13,7 @@ import {Observation} from '../models/observation.model';
 import {Patient} from '../models/patient.model';
 import {Condition} from '../models/condition.model';
 import {Observable} from 'rxjs/Observable';
+import * as moment from 'moment';
 
 @Component({
 	selector: 'observations',
@@ -69,6 +70,24 @@ export class ObservationsComponent {
 					this.observations = this.observations.reverse();
 					console.log("Loaded " + this.observations.length + " observations.");
 					//append broken data here
+					this.observations.sort((n1, n2) => {
+		        if (n1.effectiveDateTime < n2.effectiveDateTime) {
+		          return 1;
+		        }
+		        if (n1.effectiveDateTime > n2.effectiveDateTime) {
+		          return -1;
+		        }
+		      })
+					var diff = new Date().getTime() - new Date(this.observations[0].effectiveDateTime).getTime();
+					for(let ob of this.observations) {
+						var newDate = new Date(ob.effectiveDateTime).getTime() + diff;
+						ob.relativeDateTime = new Date(newDate).toDateString();
+						ob.relativeDateTime = moment(newDate).toISOString();
+					}
+
+
+
+
 					this.loupeService.observationsArray = this.observations;
 					this.observationReturned.emit(this.observations);
 				} else {

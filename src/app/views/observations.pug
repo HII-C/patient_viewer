@@ -17,7 +17,7 @@ table.table.table-condensed.table-striped("*ngIf"='observations.length > 0')
             td
               input(type='checkbox', name='observationsCheckbox')
             td
-                span {{o.effectiveDateTime | amTimeAgo}}
+                span {{o.relativeDateTime | amTimeAgo}}
             td
                 span {{o['code']['coding'][0]['display']}}
             td

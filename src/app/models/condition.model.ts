@@ -1,6 +1,7 @@
 export class Condition {
     id: string;
     onsetDateTime: string;
+    relativeDateTime: string;
     verificationStatus: string;
     clinicalStatus: string;
     isVisible: boolean;

@@ -7,6 +7,7 @@ import { DoctorService } from '../services/doctor.service';
 import { Condition } from '../models/condition.model';
 import { Patient } from '../models/patient.model';
 import { Csiro } from '../models/csiro.model';
+import * as moment from 'moment';
 
 @Component({
   selector: 'conditions',
@@ -71,12 +72,30 @@ export class ConditionsComponent {
         if (data.entry) {
 
           this.conditions = <Array<Condition>>data.entry.map(r => r['resource']);
-          console.log(this.conditions[0]);
           this.conditions = this.conditions.reverse();
           console.log("Loaded " + this.conditions.length + " conditions.");
           this.loupeService.conditionArray = this.conditions;
+
+
+          this.conditions.sort((n1, n2) => {
+            if (n1.onsetDateTime < n2.onsetDateTime) {
+              return 1;
+            }
+            if (n1.onsetDateTime > n2.onsetDateTime) {
+              return -1;
+            }
+          })
+          var diff = new Date().getTime() - new Date(this.conditions[0].onsetDateTime).getTime();
+
+
+
+
+
           for (let c of this.conditions) {
             c.isVisible = true;
+            var newDate = new Date(c.onsetDateTime).getTime() + diff;
+            c.relativeDateTime = new Date(newDate).toDateString();
+            c.relativeDateTime = moment(newDate).toISOString();
           }
           if (this.viewToggle == false) {
             //this.viewConditionList = JSON.parse(JSON.stringify(this.conditions));
@@ -99,7 +118,7 @@ export class ConditionsComponent {
       console.log("oops");
     });
   }
-  
+
   // Method for basic toggling, using JSON functions to toggle internal Angular2 module OnChanges for UI reactivity
   ellipsesToggle() {
     // Basic logic for toggle, assuming this.conditions contains all info, and this.viewConditionList is the modified list being used to display data

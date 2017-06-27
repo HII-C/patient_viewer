@@ -6,83 +6,10 @@
             .modal-lg.modal-header
                 button.close(type='button', data-dismiss='modal', aria-label='Close')
                     span(aria-hidden='true') ×
-            .modal-lg.modal-body
+            .modal-lg.modal-body(style="background-color:white")
                 section
-                    table.table.table-condensed.table-bordered
-                        colgroup
-                            col(style = 'width: 15%')
-                            col(style = 'width: 85%')
-                        thead
-                            th
-                                | Name
-                            th
-                                | Graph
-                        tbody
-                            tr
-                                td
-                                    //button(data-toggle='collapse', data-target='#labToggle') Toggle 
-                                    |   Lab Tests
-                                td
-                                    | 
-                            tr#labToggle.collapse.in
-                                td
-                                    | 
-                                td
-                                    ngx-charts-line-chart([view] = 'this.view', [scheme] = 'colorScheme', [results] = 'data1',  [gradient] = 'gradient', [legend] = 'showLegend', [showXAxisLabel] = 'showXAxisLabel',   [xAxisLabel] = 'xAxisLabel', [yAxisLabel] = 'yAxisLabel', [autoScale] = 'autoScale')
-                            tr#labToggle.collapse.in
-                                td
-                                    | 
-                                td([style.padding-left.px] = "xPad")
-                                    ngx-charts-line-chart([view] = 'this.view3', [scheme] = 'colorScheme', [results] = 'data3',     [gradient] = 'gradient', [legend] = 'showLegend', [showXAxisLabel] = 'showXAxisLabel',  [xAxisLabel] = 'xAxisLabel', [yAxisLabel] = 'yAxisLabel', [autoScale] = 'autoScale')
-                            tr
-                                td
-                                    button(data-toggle='collapse', data-target='#problemToggle') Toggle 
-                                    |   Problems
-                                td
-                                    | 
-                            tr#problemToggle.collapse.in
-                                td
-                                    | 
-                                td
-                                    ngx-charts-line-chart([view] = 'this.view', [scheme] = 'colorScheme', [results] = 'data1',  [gradient] = 'gradient', [legend] = 'showLegend', [showXAxisLabel] = 'showXAxisLabel',   [xAxisLabel] = 'xAxisLabel', [yAxisLabel] = 'yAxisLabel', [autoScale] = 'autoScale')
-                            tr
-                                td
-                                    button(data-toggle='collapse', data-target='#medToggle') Toggle 
-                                    |   Medications
-                                td
-                                    | 
-                            tr#medToggle.collapse.in
-                                td
-                                    | 
-                                td
-                                    ngx-charts-line-chart([view] = 'this.view', [scheme] = 'colorScheme', [results] = 'data1',  [gradient] = 'gradient', [legend] = 'showLegend', [showXAxisLabel] = 'showXAxisLabel',   [xAxisLabel] = 'xAxisLabel', [yAxisLabel] = 'yAxisLabel', [autoScale] = 'autoScale')        
-                            tr
-                                td
-                                    button(data-toggle='collapse', data-target='#allergyToggle') Toggle 
-                                    |   Allergies
-                                td
-                                    | 
-                            tr#allergyToggle.collapse.in
-                                td
-                                    | 
-                                td
-                                    ngx-charts-line-chart([view] = 'this.view', [scheme] = 'colorScheme', [results] = 'data1',  [gradient] = 'gradient', [legend] = 'showLegend', [showXAxisLabel] = 'showXAxisLabel',   [xAxisLabel] = 'xAxisLabel', [yAxisLabel] = 'yAxisLabel', [autoScale] = 'autoScale')
-                            tr
-                                td
-                                    button(data-toggle='collapse', data-target='#diagToggle') Toggle 
-                                    |   Diagnoses
-                                td
-                                    | 
-                            tr#diagToggle.collapse.in
-                                td
-                                    | 
-                                td
-                                    ngx-charts-line-chart([view] = 'this.view', [scheme] = 'colorScheme', [results] = 'data1',  [gradient] = 'gradient', [legend] = 'showLegend', [showXAxisLabel] = 'showXAxisLabel',   [xAxisLabel] = 'xAxisLabel', [yAxisLabel] = 'yAxisLabel', [autoScale] = 'autoScale')
-                            tr
-                                td
-                                    |  
-                                td
-                                    ngx-charts-line-chart([view] = 'this.view2', [scheme] = 'colorScheme', [results] = 'data2',     [gradient] = 'gradient', [xAxis] = 'showXAxis', [legend] = 'showLegend', [xAxisLabel] =     'xAxisLabel', [yAxisLabel] = 'yAxisLabel', [autoScale] = 'autoScale', [timeline] = 'true')
+                  canvas(id="canvas" width="800" height="500")
+
             .modal-footer.modal-lg
                 button.btn.btn-default(type='button', data-dismiss='modal') Close
                             

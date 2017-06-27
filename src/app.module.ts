@@ -40,6 +40,7 @@ import {LoupeService} from './app/services/loupe.service';
 import {CsiroService} from './app/services/csiro.service';
 import {DoctorService} from './app/services/doctor.service';
 import {SmartService} from './app/services/smart.service';
+import {ChartTimelineService} from './app/services/chartTimeline.service';
 import {CookieService} from 'angular2-cookie/core';
 
 
@@ -120,7 +121,8 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
         DoctorService,
         SmartService,
         CookieService,
-        CarePlanService
+        CarePlanService,
+        ChartTimelineService
     ],                    // services
     bootstrap: [AppComponent]     // root component
 })

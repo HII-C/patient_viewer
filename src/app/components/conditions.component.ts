@@ -20,6 +20,7 @@ export class ConditionsComponent {
   viewToggle: boolean = false;
   collapseQueue: Array<any> = [];
   conditionGrouping: Array<any> = [];
+  conditionGroupingName: Array<any> = ["Active", "Inactive"];
   @Input() patient: Patient;
 
   @Output() conditionSelected: EventEmitter<Condition> = new EventEmitter();
@@ -182,6 +183,7 @@ export class ConditionsComponent {
       if (c.clinicalStatus == "active"){
         if (!this.conditionGrouping[0]){
           this.conditionGrouping[0] = [c];
+          this.conditionGrouping[1] = [c];
         }
         else{
           this.conditionGrouping[0].push(c);
@@ -197,6 +199,20 @@ export class ConditionsComponent {
       }
     }
     // this.conditionGrouping[1] = this.conditionGrouping[0];
+  }
+
+  tableNavigation(clickedSet: number){
+    for (let c of this.conditionGrouping){
+      let cNum = this.conditionGrouping.indexOf(c);
+      if (cNum != clickedSet){
+        let tempTableVar = document.getElementById("cG" + cNum.toString());
+        tempTableVar.hidden = true;
+      }
+      else{
+        let tempTableVar = document.getElementById("cG" + cNum.toString());
+        tempTableVar.hidden = false;
+      }
+    }
   }
 
 }

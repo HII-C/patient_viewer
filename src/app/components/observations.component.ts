@@ -9,6 +9,8 @@ import {ObservationService} from '../services/observation.service';
 import {LoupeService} from '../services/loupe.service';
 import {MapService} from '../services/map.service';
 import {DoctorService} from '../services/doctor.service';
+import {ChartTimelineService} from '../services/chartTimeline.service';
+
 import {Observation} from '../models/observation.model';
 import {Patient} from '../models/patient.model';
 import {Condition} from '../models/condition.model';
@@ -51,7 +53,8 @@ export class ObservationsComponent {
 	// }
 
 	constructor(private fhirService: FhirService, private observationService: ObservationService,
-		private mapService: MapService, private loupeService: LoupeService, private doctorService: DoctorService) {
+		private mapService: MapService, private loupeService: LoupeService, private doctorService: DoctorService,
+		private chartService: ChartTimelineService) {
 		console.log("ObservationsComponent created...");
 
 		this.mappings = MapService.STATIC_MAPPINGS;
@@ -69,6 +72,15 @@ export class ObservationsComponent {
 					this.observations = <Array<Observation>>data.entry.map(r => r['resource']);
 					this.observations = this.observations.reverse();
 					console.log("Loaded " + this.observations.length + " observations.");
+					this.observations.sort((n1, n2) => {
+		        if (n1['code']['coding'][0]['code'] < n2['code']['coding'][0]['code']) {
+		          return 1;
+		        }
+		        if (n1['code']['coding'][0]['code'] > n2['code']['coding'][0]['code']) {
+		          return -1;
+		        }
+		      })
+					this.chartService.setData(this.observations);
 					//append broken data here
 					this.observations.sort((n1, n2) => {
 		        if (n1.effectiveDateTime < n2.effectiveDateTime) {

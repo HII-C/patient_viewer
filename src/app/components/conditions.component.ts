@@ -217,4 +217,39 @@ export class ConditionsComponent {
     }
   }
 
+  newTable(tableName: string, dataLocation: Array<any>, quality: string, groupingCount: number){
+    if(this.conditionGroupingName.indexOf(tableName) == -1){
+      this.conditionGroupingName.push(tableName);
+      for (let c of this.conditions){
+        // Right now this will only allow for a table with one quality!
+        var fullPath = c;
+        dataLocation.forEach(element => {
+          try{
+            fullPath = c[element];
+          }
+          catch(error){
+            console.log('That field does not exist on this Condition' + c);
+          }
+        });
+        // Testing condition and adding if it's true
+        if (quality){
+          console.log(fullPath);
+          if (!this.conditionGrouping[groupingCount]){
+            this.conditionGrouping[groupingCount] = [c];
+          }
+          else{
+            this.conditionGrouping[groupingCount].push(c);
+            
+          }
+        }
+      }
+    }
+    else{
+      console.log("This table already exists");
+    }
+    console.log(groupingCount);
+    console.log(this.conditionGrouping);
+    console.log(this.conditionGroupingName);
+  }
+
 }

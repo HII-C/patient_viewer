@@ -183,7 +183,6 @@ export class ConditionsComponent {
       if (c.clinicalStatus == "active"){
         if (!this.conditionGrouping[0]){
           this.conditionGrouping[0] = [c];
-          this.conditionGrouping[1] = [c];
         }
         else{
           this.conditionGrouping[0].push(c);

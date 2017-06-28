@@ -62,14 +62,21 @@ export class ObservationsComponent {
 
 	}
 
-	ngOnChanges() {
-		console.log("Observations ngOnChanges");
+	loadData(url) {
+		let isLast = false;
+		this.observationService.indexNext(url).subscribe(data => {
+			if(data.entry) {
+			 	let nextObs= <Array<Observation>>data.entry.map(r => r['resource']);
 
-		if (this.patient) {
-			this.observationService.index(this.patient).subscribe(data => {
-				if(data.entry) {
-
-					this.observations = <Array<Observation>>data.entry.map(r => r['resource']);
+				this.observations = this.observations.concat(nextObs);
+				isLast = true;
+				for(let i of data.link) {
+					if(i.relation=="next") {
+						isLast = false;
+						this.loadData(i.url);
+					}
+				}
+				if(isLast) {
 					this.observations = this.observations.reverse();
 					console.log("Loaded " + this.observations.length + " observations.");
 					this.observations.sort((n1, n2) => {
@@ -102,6 +109,29 @@ export class ObservationsComponent {
 
 					this.loupeService.observationsArray = this.observations;
 					this.observationReturned.emit(this.observations);
+				}
+			}
+		});
+
+	}
+
+	ngOnChanges() {
+		console.log("Observations ngOnChanges");
+
+		if (this.patient) {
+
+			this.observationService.index(this.patient).subscribe(data => {
+				if(data.entry) {
+					let nextLink = null;
+					this.observations = <Array<Observation>>data.entry.map(r => r['resource']);
+					for(let i of data.link) {
+						if(i.relation=="next") {
+							nextLink = i.url;
+						}
+					}
+					this.loadData(nextLink);
+
+
 				} else {
 					this.observations = new Array<Observation>();
 					console.log("No observations for patient.");

@@ -21,6 +21,10 @@ export class ObservationService {
         return this.http.get(url, this.fhirService.options(true)).map(res => res.json());
     }
 
+    indexNext(url: string): Observable<any> {
+      return this.http.get(url, this.fhirService.options(true)).map(res => res.json());
+
+    }
     // get(id): Observable<any> {
     //     var url = this.fhirService.getUrl() + this.path + '/' + id;
     //     return this.http.get(url, this.fhirService.options()).map(res => res.json());

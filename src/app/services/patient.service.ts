@@ -26,7 +26,13 @@ export class PatientService {
     get(id): Observable<any> {
         var url = this.fhirService.getUrl() + this.path + '/' + id;
         this.patient = id;
-        return this.http.get(url, this.fhirService.options(true)).map(res => res.json());
+        let options = this.fhirService.options(true);
+        options.headers.append('Pragma', 'no-cache');
+        options.headers.append('Cache-Control', 'no-store');
+        options.headers.append('Cache-Control', 'no-cache');
+        options.headers.append('Cache-Control', 'must-revalidate');
+
+        return this.http.get(url, options).map(res => res.json());
     }
 
     setPath(newPath) {

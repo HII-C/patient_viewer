@@ -68,44 +68,74 @@ export class ConditionsComponent {
     }
     console.log("sort");
   }
+  loadFinished() {
+    this.conditions = this.conditions.reverse();
+    console.log("Loaded " + this.conditions.length + " conditions.");
+    this.loupeService.conditionArray = this.conditions;
 
+
+    this.conditions.sort((n1, n2) => {
+      if (n1.onsetDateTime < n2.onsetDateTime) {
+        return 1;
+      }
+      if (n1.onsetDateTime > n2.onsetDateTime) {
+        return -1;
+      }
+    })
+    var diff = new Date().getTime() - new Date(this.conditions[0].onsetDateTime).getTime();
+
+
+
+
+
+    for (let c of this.conditions) {
+      c.isVisible = true;
+      var newDate = new Date(c.onsetDateTime).getTime() + diff;
+      c.relativeDateTime = new Date(newDate).toDateString();
+      c.relativeDateTime = moment(newDate).toISOString();
+    }
+    if (this.viewToggle == false) {
+      //this.viewConditionList = JSON.parse(JSON.stringify(this.conditions));
+      this.conditions = this.doctorService.assignVisible(this.conditions);
+    }
+    this.groupConditions();
+  }
+  loadData(url) {
+    let isLast = false;
+    this.conditionService.indexNext(url).subscribe(data => {
+      if(data.entry) {
+        let nextCon= <Array<Condition>>data.entry.map(r => r['resource']);
+    
+        this.conditions = this.conditions.concat(nextCon);
+        isLast = true;
+        for(let i of data.link) {
+          if(i.relation=="next") {
+            isLast = false;
+            this.loadData(i.url);
+          }
+        }
+        if(isLast) {
+          this.loadFinished();
+        }
+      }
+    });
+  }
   ngOnChanges() {
     this.selected = null;
     if (this.patient) {
       this.conditionService.index(this.patient, true).subscribe(data => {
         if (data.entry) {
 
+
+          let nextLink = null;
           this.conditions = <Array<Condition>>data.entry.map(r => r['resource']);
-          this.conditions = this.conditions.reverse();
-          console.log("Loaded " + this.conditions.length + " conditions.");
-          this.loupeService.conditionArray = this.conditions;
-
-
-          this.conditions.sort((n1, n2) => {
-            if (n1.onsetDateTime < n2.onsetDateTime) {
-              return 1;
-            }
-            if (n1.onsetDateTime > n2.onsetDateTime) {
-              return -1;
-            }
-          })
-          var diff = new Date().getTime() - new Date(this.conditions[0].onsetDateTime).getTime();
-
-
-
-
-
-          for (let c of this.conditions) {
-            c.isVisible = true;
-            var newDate = new Date(c.onsetDateTime).getTime() + diff;
-            c.relativeDateTime = new Date(newDate).toDateString();
-            c.relativeDateTime = moment(newDate).toISOString();
-          }
-          if (this.viewToggle == false) {
-            //this.viewConditionList = JSON.parse(JSON.stringify(this.conditions));
-            this.conditions = this.doctorService.assignVisible(this.conditions);
-          }
-          this.groupConditions();
+					for(let i of data.link) {
+						if(i.relation=="next") {
+							nextLink = i.url;
+						}
+					}
+					if(nextLink) {this.loadData(nextLink);}
+					else {this.loadFinished();}
 
         } else {
           this.conditions = new Array<Condition>();
@@ -239,7 +269,7 @@ export class ConditionsComponent {
           }
           else{
             this.conditionGrouping[groupingCount].push(c);
-            
+
           }
         }
       }

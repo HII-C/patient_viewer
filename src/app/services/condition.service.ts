@@ -21,5 +21,9 @@ export class ConditionService {
         var url = this.fhirService.getUrl() + this.path + "?patient=" + patient.id;
         return this.http.get(url, this.fhirService.options(authParam)).map(res => res.json());
     }
+    
+    indexNext(url: string): Observable<any> {
+      return this.http.get(url, this.fhirService.options(true)).map(res => res.json());
 
+    }
 }

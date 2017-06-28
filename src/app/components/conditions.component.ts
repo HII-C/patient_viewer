@@ -46,7 +46,9 @@ export class ConditionsComponent {
       if (x == "date-asc") {
         a = -a;
       }
-      this.conditions.sort((n1, n2) => {
+
+      for (let c of this.conditionGrouping){
+      c.sort((n1, n2) => {
         if (n1.code['coding'][0]['code'] > n2.code['coding'][0]['code']) {
           return a;
         }
@@ -54,6 +56,7 @@ export class ConditionsComponent {
           return -a;
         }
       })
+    }
     }
     if (this.viewToggle == false) {
       this.conditions = this.doctorService.assignVisible(this.conditions);

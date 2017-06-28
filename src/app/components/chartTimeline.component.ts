@@ -32,44 +32,49 @@ export class ChartTimelineComponent {
 
     show() {
         $('#chartTimeline_popup').modal({});
+
         this.render('canvas', this.chartService.dataDef);
 
     }
     render(canvasId, dataObj) {
+      this.maxYValue = 0;
+      this.count = 0;
+      this.ratio = 0;
       var margin = { top: 0, left: 0, right: 0, bottom: 0 };
       var overallMax, overallMin;
       var renderType = { bars: 'bars', points: 'points', lines: 'lines' };
       this.data = this.chartService.dataDef;
-      console.log(this.data);
       for (var i = 0; i < this.data.dataPoints.length; i++)
       {
           this.newData[i] = JSON.parse(JSON.stringify(this.data.dataPoints[i].data.map(this.makeDate)));
-          console.log("NEWDATA:"+this.newData[i][0].x);
           this.newData[i].sort(function(a, b){return a.x - b.x});
       }
       this.getMaxDataYValue();
       var canvas = <HTMLCanvasElement> document.getElementById(canvasId);
       this.chartHeight = 100; //canvas.getAttribute('height'); //100
       this.chartWidth = Number(canvas.getAttribute('width'));
-      console.log("CHARTWIDTH:"+this.chartWidth);
       this.xMax = this.chartWidth - (margin.left + margin.right);
       this.yMax = this.chartHeight - (margin.top + margin.bottom);
       this.ratio = this.yMax / this.maxYValue;
       this.ctx = canvas.getContext("2d");
+      
+      //reset context
+      this.ctx.save();
+      this.ctx.setTransform(1, 0, 0, 1, 0, 0);
+      this.ctx.restore();
+      this.ctx.clearRect(0, 0, canvas.width, canvas.height);
+
       this.renderChart();
     }
 
     makeDate(data) {
         data.x = new Date(data.x).getTime();
-        console.log("DATE:"+data.x);
         return data;
     }
     getMaxDataYValue() {
         for (let i = 0; i < this.newData.length; i++) {
-          console.log("y value:" + this.newData[i][0].y);
             if (this.newData[i][0].y > this.maxYValue) this.maxYValue = this.newData[i][0].y;
         }
-        console.log("MAX:"+this.maxYValue);
     };
 
     renderChart() {
@@ -82,9 +87,7 @@ export class ChartTimelineComponent {
           this.renderLines();
           this.renderName(i);
           this.ctx.save();
-          console.log("STUFF"+overallMaxAndMin.min,overallMaxAndMin.max, this.newData[i][0].x, this.newData[i][this.newData[i].length-1].x);
           offsetAndWidth = this.getOffsetAndWidth(overallMaxAndMin.min, overallMaxAndMin.max, this.newData[i][0].x, this.newData[i][this.newData[i].length-1].x);
-          console.log("OFFSET:"+JSON.stringify(offsetAndWidth));
           this.translateNewChart(offsetAndWidth.offset);
           //render data
           if (this.data.dataPoints[i].code == '1')
@@ -166,7 +169,6 @@ export class ChartTimelineComponent {
     renderData(newData, index, offset, width, max, min) {
         console.log("newData", newData);
         var maxAndMins = this.getMaxAndMins(newData);
-        console.log("MAXANDMINS:"+maxAndMins.smallestX);
         var xLength = maxAndMins.largestX - maxAndMins.smallestX;
         var yLength = maxAndMins.largestY - maxAndMins.smallestY;
         var a, b, c, d, y;
@@ -258,10 +260,6 @@ export class ChartTimelineComponent {
             {
                 a = newData[i].x - maxAndMins.smallestX;
                 xPos = (a/xLength)*(width /*- 30*/);
-                console.log("FLAG:" + xPos);
-                console.log("a:"+a);
-                console.log("xlength:"+xLength);
-                console.log("width:"+width);
 
                 b = newData[i].y - maxAndMins.smallestY;
                 yPos = (this.chartHeight-30) - (b/yLength)*(this.chartHeight-30);

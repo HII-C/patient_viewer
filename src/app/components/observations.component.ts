@@ -61,7 +61,40 @@ export class ObservationsComponent {
 		// this.gridItemConfiguration.draggable = this.doctorService.configMode;
 
 	}
+	loadFinished() {
+		this.observations = this.observations.reverse();
+		console.log("Loaded " + this.observations.length + " observations.");
+		this.observations.sort((n1, n2) => {
+			if (n1['code']['coding'][0]['code'] < n2['code']['coding'][0]['code']) {
+				return 1;
+			}
+			if (n1['code']['coding'][0]['code'] > n2['code']['coding'][0]['code']) {
+				return -1;
+			}
+		})
+		this.chartService.setData(this.observations);
+		//append broken data here
+		this.observations.sort((n1, n2) => {
+			if (n1.effectiveDateTime < n2.effectiveDateTime) {
+				return 1;
+			}
+			if (n1.effectiveDateTime > n2.effectiveDateTime) {
+				return -1;
+			}
+		})
+		var diff = new Date().getTime() - new Date(this.observations[0].effectiveDateTime).getTime();
+		for(let ob of this.observations) {
+			var newDate = new Date(ob.effectiveDateTime).getTime() + diff;
+			ob.relativeDateTime = new Date(newDate).toDateString();
+			ob.relativeDateTime = moment(newDate).toISOString();
+		}
 
+
+
+
+		this.loupeService.observationsArray = this.observations;
+		this.observationReturned.emit(this.observations);
+	}
 	loadData(url) {
 		let isLast = false;
 		this.observationService.indexNext(url).subscribe(data => {
@@ -77,38 +110,7 @@ export class ObservationsComponent {
 					}
 				}
 				if(isLast) {
-					this.observations = this.observations.reverse();
-					console.log("Loaded " + this.observations.length + " observations.");
-					this.observations.sort((n1, n2) => {
-		        if (n1['code']['coding'][0]['code'] < n2['code']['coding'][0]['code']) {
-		          return 1;
-		        }
-		        if (n1['code']['coding'][0]['code'] > n2['code']['coding'][0]['code']) {
-		          return -1;
-		        }
-		      })
-					this.chartService.setData(this.observations);
-					//append broken data here
-					this.observations.sort((n1, n2) => {
-		        if (n1.effectiveDateTime < n2.effectiveDateTime) {
-		          return 1;
-		        }
-		        if (n1.effectiveDateTime > n2.effectiveDateTime) {
-		          return -1;
-		        }
-		      })
-					var diff = new Date().getTime() - new Date(this.observations[0].effectiveDateTime).getTime();
-					for(let ob of this.observations) {
-						var newDate = new Date(ob.effectiveDateTime).getTime() + diff;
-						ob.relativeDateTime = new Date(newDate).toDateString();
-						ob.relativeDateTime = moment(newDate).toISOString();
-					}
-
-
-
-
-					this.loupeService.observationsArray = this.observations;
-					this.observationReturned.emit(this.observations);
+					this.loadFinished();
 				}
 			}
 		});
@@ -129,8 +131,8 @@ export class ObservationsComponent {
 							nextLink = i.url;
 						}
 					}
-					this.loadData(nextLink);
-
+					if(nextLink) {this.loadData(nextLink);}
+					else {this.loadFinished();}
 
 				} else {
 					this.observations = new Array<Observation>();

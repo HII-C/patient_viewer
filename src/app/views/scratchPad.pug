@@ -1,0 +1,19 @@
+div([(ngGridItem)]='gridItemConfiguration')
+	table.table.table-condensed.table-striped(id='condSP')
+		thead
+			tr
+				th
+				th
+					| Description
+				th
+					| Status
+				th
+					| Onset
+		tbody
+			tr("*ngFor"='let c of currentCondSpArray',id='condSP{{currentCondSpArray.indexOf(c)}}')
+				td
+					| ?
+				td
+					span {{c['code']['text']}} {{c['code']['coding'][0]['code']}}
+				td {{c.clinicalStatus}}
+				td {{c.relativeDateTime}}

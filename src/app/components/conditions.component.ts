@@ -4,6 +4,7 @@ import { ConditionService } from '../services/condition.service';
 import { LoupeService } from '../services/loupe.service';
 import { CsiroService } from '../services/csiro.service';
 import { DoctorService } from '../services/doctor.service';
+import { ScratchPadService } from '../services/scratchPad.service';
 import { Condition } from '../models/condition.model';
 import { Patient } from '../models/patient.model';
 import { Csiro } from '../models/csiro.model';
@@ -25,7 +26,7 @@ export class ConditionsComponent {
 
   @Output() conditionSelected: EventEmitter<Condition> = new EventEmitter();
 
-  constructor(private fhirService: FhirService, private conditionService: ConditionService, private loupeService: LoupeService, private csiroService: CsiroService, private doctorService: DoctorService) {
+  constructor(private fhirService: FhirService, private conditionService: ConditionService, private loupeService: LoupeService, private csiroService: CsiroService, private doctorService: DoctorService, private scratchPadService: ScratchPadService) {
     console.log("ConditionsComponent created...");
     // this.gridItemConfiguration.draggable = this.doctorService.configMode;
     this.loupeService.activeCondition = this.selected;
@@ -68,44 +69,74 @@ export class ConditionsComponent {
     }
     console.log("sort");
   }
+  loadFinished() {
+    this.conditions = this.conditions.reverse();
+    console.log("Loaded " + this.conditions.length + " conditions.");
+    this.loupeService.conditionArray = this.conditions;
 
+
+    this.conditions.sort((n1, n2) => {
+      if (n1.onsetDateTime < n2.onsetDateTime) {
+        return 1;
+      }
+      if (n1.onsetDateTime > n2.onsetDateTime) {
+        return -1;
+      }
+    })
+    var diff = new Date().getTime() - new Date(this.conditions[0].onsetDateTime).getTime();
+
+
+
+
+
+    for (let c of this.conditions) {
+      c.isVisible = true;
+      var newDate = new Date(c.onsetDateTime).getTime() + diff;
+      c.relativeDateTime = new Date(newDate).toDateString();
+      c.relativeDateTime = moment(newDate).toISOString();
+    }
+    if (this.viewToggle == false) {
+      //this.viewConditionList = JSON.parse(JSON.stringify(this.conditions));
+      this.conditions = this.doctorService.assignVisible(this.conditions);
+    }
+    this.groupConditions();
+  }
+  loadData(url) {
+    let isLast = false;
+    this.conditionService.indexNext(url).subscribe(data => {
+      if(data.entry) {
+        let nextCon= <Array<Condition>>data.entry.map(r => r['resource']);
+    
+        this.conditions = this.conditions.concat(nextCon);
+        isLast = true;
+        for(let i of data.link) {
+          if(i.relation=="next") {
+            isLast = false;
+            this.loadData(i.url);
+          }
+        }
+        if(isLast) {
+          this.loadFinished();
+        }
+      }
+    });
+  }
   ngOnChanges() {
     this.selected = null;
     if (this.patient) {
       this.conditionService.index(this.patient, true).subscribe(data => {
         if (data.entry) {
 
+
+          let nextLink = null;
           this.conditions = <Array<Condition>>data.entry.map(r => r['resource']);
-          this.conditions = this.conditions.reverse();
-          console.log("Loaded " + this.conditions.length + " conditions.");
-          this.loupeService.conditionArray = this.conditions;
-
-
-          this.conditions.sort((n1, n2) => {
-            if (n1.onsetDateTime < n2.onsetDateTime) {
-              return 1;
-            }
-            if (n1.onsetDateTime > n2.onsetDateTime) {
-              return -1;
-            }
-          })
-          var diff = new Date().getTime() - new Date(this.conditions[0].onsetDateTime).getTime();
-
-
-
-
-
-          for (let c of this.conditions) {
-            c.isVisible = true;
-            var newDate = new Date(c.onsetDateTime).getTime() + diff;
-            c.relativeDateTime = new Date(newDate).toDateString();
-            c.relativeDateTime = moment(newDate).toISOString();
-          }
-          if (this.viewToggle == false) {
-            //this.viewConditionList = JSON.parse(JSON.stringify(this.conditions));
-            this.conditions = this.doctorService.assignVisible(this.conditions);
-          }
-          this.groupConditions();
+					for(let i of data.link) {
+						if(i.relation=="next") {
+							nextLink = i.url;
+						}
+					}
+					if(nextLink) {this.loadData(nextLink);}
+					else {this.loadFinished();}
 
         } else {
           this.conditions = new Array<Condition>();
@@ -141,15 +172,24 @@ export class ConditionsComponent {
     }
   }
 
-  addCollapse(checked: boolean, value) {
+  scratchPadCheckBoxes(checked: boolean, value) {
+
     if (checked) {
-      this.conditions[value].isSelected = true;
+      // this.conditions[value].isSelected = true;
+      this.scratchPadService.toAddToCondSpArray.push(this.conditions[value]);
     }
     else {
-      this.conditions[value].isSelected = false;
-
+      // this.conditions[value].isSelected = false;
+      let temp = this.scratchPadService.toAddToCondSpArray.indexOf(this.conditions[value]);
+      if (temp > -1){
+        // This will actually delete instead of simply setting to null, which will throw errors in the long run
+        this.scratchPadService.toAddToCondSpArray.splice(temp, 1);
+      }
     }
+  }
 
+  updateScratchPad(){
+    this.scratchPadService.buttonClicked(true);
   }
 
   expand(parent: string) {
@@ -186,7 +226,6 @@ export class ConditionsComponent {
       if (c.clinicalStatus == "active"){
         if (!this.conditionGrouping[0]){
           this.conditionGrouping[0] = [c];
-          this.conditionGrouping[1] = [c];
         }
         else{
           this.conditionGrouping[0].push(c);
@@ -216,6 +255,41 @@ export class ConditionsComponent {
         tempTableVar.hidden = false;
       }
     }
+  }
+
+  newTable(tableName: string, dataLocation: Array<any>, quality: string, groupingCount: number){
+    if(this.conditionGroupingName.indexOf(tableName) == -1){
+      this.conditionGroupingName.push(tableName);
+      for (let c of this.conditions){
+        // Right now this will only allow for a table with one quality!
+        var fullPath = c;
+        dataLocation.forEach(element => {
+          try{
+            fullPath = c[element];
+          }
+          catch(error){
+            console.log('That field does not exist on this Condition' + c);
+          }
+        });
+        // Testing condition and adding if it's true
+        if (quality){
+          console.log(fullPath);
+          if (!this.conditionGrouping[groupingCount]){
+            this.conditionGrouping[groupingCount] = [c];
+          }
+          else{
+            this.conditionGrouping[groupingCount].push(c);
+
+          }
+        }
+      }
+    }
+    else{
+      console.log("This table already exists");
+    }
+    console.log(groupingCount);
+    console.log(this.conditionGrouping);
+    console.log(this.conditionGroupingName);
   }
 
 }

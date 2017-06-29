@@ -4,6 +4,7 @@ import { ConditionService } from '../services/condition.service';
 import { LoupeService } from '../services/loupe.service';
 import { CsiroService } from '../services/csiro.service';
 import { DoctorService } from '../services/doctor.service';
+import { ScratchPadService } from '../services/scratchPad.service';
 import { Condition } from '../models/condition.model';
 import { Patient } from '../models/patient.model';
 import { Csiro } from '../models/csiro.model';
@@ -25,7 +26,7 @@ export class ConditionsComponent {
 
   @Output() conditionSelected: EventEmitter<Condition> = new EventEmitter();
 
-  constructor(private fhirService: FhirService, private conditionService: ConditionService, private loupeService: LoupeService, private csiroService: CsiroService, private doctorService: DoctorService) {
+  constructor(private fhirService: FhirService, private conditionService: ConditionService, private loupeService: LoupeService, private csiroService: CsiroService, private doctorService: DoctorService, private scratchPadService: ScratchPadService) {
     console.log("ConditionsComponent created...");
     // this.gridItemConfiguration.draggable = this.doctorService.configMode;
     this.loupeService.activeCondition = this.selected;
@@ -171,15 +172,24 @@ export class ConditionsComponent {
     }
   }
 
-  addCollapse(checked: boolean, value) {
+  scratchPadCheckBoxes(checked: boolean, value) {
+
     if (checked) {
-      this.conditions[value].isSelected = true;
+      // this.conditions[value].isSelected = true;
+      this.scratchPadService.toAddToCondSpArray.push(this.conditions[value]);
     }
     else {
-      this.conditions[value].isSelected = false;
-
+      // this.conditions[value].isSelected = false;
+      let temp = this.scratchPadService.toAddToCondSpArray.indexOf(this.conditions[value]);
+      if (temp > -1){
+        // This will actually delete instead of simply setting to null, which will throw errors in the long run
+        this.scratchPadService.toAddToCondSpArray.splice(temp, 1);
+      }
     }
+  }
 
+  updateScratchPad(){
+    this.scratchPadService.buttonClicked(true);
   }
 
   expand(parent: string) {

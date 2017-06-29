@@ -9,7 +9,7 @@ import {DoctorService} from '../services/doctor.service';
 
 @Component({
 	selector: 'toolbar',
-	templateUrl: '/toolbar.html'
+	templateUrl: 'toolbar.html'
 	// animations: [
 	// 	trigger('fadeIn', [
 	// 		state('in', style({ opacity: '1' })),
@@ -50,7 +50,6 @@ export class ToolbarComponent {
 
 	constructor(private doctorService: DoctorService) {
 		console.log("ToolbarComponent created...");
-		this.gridItemConfiguration.draggable = this.doctorService.configMode;
 	}
 
     switchNav() {

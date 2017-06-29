@@ -47,7 +47,7 @@ export class ChartTimelineComponent {
       for (var i = 0; i < this.data.dataPoints.length; i++)
       {
           this.newData[i] = JSON.parse(JSON.stringify(this.data.dataPoints[i].data.map(this.makeDate)));
-          this.newData[i].sort(function(a, b){return a.x - b.x});
+          this.newData[i].sort((a, b) => {return a.x - b.x});
       }
       this.getMaxDataYValue();
       var canvas = <HTMLCanvasElement> document.getElementById(canvasId);
@@ -57,7 +57,7 @@ export class ChartTimelineComponent {
       this.yMax = this.chartHeight - (margin.top + margin.bottom);
       this.ratio = this.yMax / this.maxYValue;
       this.ctx = canvas.getContext("2d");
-      
+
       //reset context
       this.ctx.save();
       this.ctx.setTransform(1, 0, 0, 1, 0, 0);
@@ -119,28 +119,30 @@ export class ChartTimelineComponent {
 
     translateLines()
     {
-        this.ctx.translate(0, this.count*this.chartHeight);
+        this.ctx.translate(0, this.count*(this.chartHeight+1));
         this.count++;
     }
 
     renderLines() {
 
-        //Vertical line
-        this.drawLine(1, 0, 1, this.chartHeight, 'black');
+        //Vertical lines
+        this.drawLine(1, 0, 1, this.chartHeight, 'black', 2);
+        this.drawLine(this.chartWidth-1, 0, this.chartWidth-1, this.chartHeight, 'black', 2);
 
         //Horizontal Line
-        this.drawLine(0, this.chartHeight, this.chartWidth, this.chartHeight, 'black');
+        this.drawLine(0, this.chartHeight, this.chartWidth, this.chartHeight, 'black', 2);
     }
 
-    drawLine(startX, startY, endX, endY, strokeStyle) {
+    drawLine(startX, startY, endX, endY, strokeStyle, lineWidth) {
         if (strokeStyle != null) this.ctx.strokeStyle = strokeStyle;
-        //if (lineWidth != null) this.ctx.lineWidth = lineWidth;
+        if (lineWidth != null) this.ctx.lineWidth = lineWidth;
         this.ctx.beginPath();
         this.ctx.moveTo(startX, startY);
         this.ctx.lineTo(endX, endY);
         this.ctx.stroke();
         this.ctx.closePath();
     }
+
     renderName(i)
     {
         this.ctx.save();
@@ -169,7 +171,7 @@ export class ChartTimelineComponent {
     renderData(newData, index, offset, width, max, min) {
         console.log("newData", newData);
         var maxAndMins = this.getMaxAndMins(newData);
-        var xLength = maxAndMins.largestX - maxAndMins.smallestX;
+        var xLength = newData[newData.length-1].x - newData[0].x; //maxAndMins.largestX - maxAndMins.smallestX;
         var yLength = maxAndMins.largestY - maxAndMins.smallestY;
         var a, b, c, d, y;
         var xPos, yPos;
@@ -258,7 +260,7 @@ export class ChartTimelineComponent {
         {
             if (whole == false)
             {
-                a = newData[i].x - maxAndMins.smallestX;
+                a = newData[i].x - newData[0].x;
                 xPos = (a/xLength)*(width /*- 30*/);
 
                 b = newData[i].y - maxAndMins.smallestY;
@@ -266,7 +268,7 @@ export class ChartTimelineComponent {
             }
             else
             {
-                a = newData[i].x - maxAndMins.smallestX;
+                a = newData[i].x - newData[0].x;
                 xPos = (a/xLength)*(width /*- 30*/);
                 b = newData[i].y - maxAndMins.smallestY;
                 yPos = (this.chartHeight-30) - (b/yLength)*(this.chartHeight-30);
@@ -311,7 +313,7 @@ export class ChartTimelineComponent {
 
             if (i != newData.length - 1)
             {
-                c = newData[i+1].x - maxAndMins.smallestX;
+                c = newData[i+1].x - newData[0].x;
                 nextX = (c/xLength)*(width-30);
                 d = newData[i+1].y - maxAndMins.smallestY;
                 nextY = (this.chartHeight-30) - (d/yLength)*(this.chartHeight-30);
@@ -324,7 +326,7 @@ export class ChartTimelineComponent {
                 if (nextX - xPos < 20 && yPos - nextY <= 20 && yPos - nextY >= 0)
                 {
                     prevPos = "bottom";
-                    txt = newData[i].y;
+                    txt = newData[i].y.toFixed(2);
                     this.ctx.textAlign = 'center';
                     this.ctx.fillText(txt, xPos, yPos + 15);
                     console.log("1.1");
@@ -332,7 +334,7 @@ export class ChartTimelineComponent {
                 else
                 {
                     prevPos = "top";
-                    txt = newData[i].y;
+                    txt = newData[i].y.toFixed(2);
                     this.ctx.textAlign = 'center';
                     this.ctx.fillText(txt, xPos, yPos - 5);
                     console.log("1.2");
@@ -345,7 +347,7 @@ export class ChartTimelineComponent {
                 if (xPos - prevX < 20 && prevY - yPos <= 20 && yPos - nextY >= 0)
                 {
                     prevPos = "bottom";
-                    txt = newData[i].y;
+                    txt = newData[i].y.toFixed(2);
                     this.ctx.textAlign = 'center';
                     this.ctx.fillText(txt, xPos, yPos + 15);
                     console.log("2.1");
@@ -353,7 +355,7 @@ export class ChartTimelineComponent {
                 else
                 {
                     prevPos = "top";
-                    txt = newData[i].y;
+                    txt = newData[i].y.toFixed(2);
                     this.ctx.textAlign = 'center';
                     this.ctx.fillText(txt, xPos, yPos - 5);
                     console.log("2.2");
@@ -365,7 +367,7 @@ export class ChartTimelineComponent {
                 if (xPos - prevX < 20 && prevPos == "top" && yPos - prevY <= 20 && yPos - nextY >= 0)
                 {
                     prevPos = "bottom";
-                    txt = newData[i].y;
+                    txt = newData[i].y.toFixed(2);
                     this.ctx.textAlign = 'center';
                     this.ctx.fillText(txt, xPos, yPos + 15);
                     console.log("3.1");
@@ -373,14 +375,14 @@ export class ChartTimelineComponent {
                 else if (nextX - xPos < 20 && prevPos == "top" && yPos - nextY <= 20 && yPos - nextY >= 0)
                 {
                     prevPos = "bottom";
-                    txt = newData[i].y;
+                    txt = newData[i].y.toFixed(2);
                     this.ctx.textAlign = 'center';
                     this.ctx.fillText(txt, xPos, yPos + 15);
                     console.log("3.2");
                 }
                 else
                 {
-                    txt = newData[i].y;
+                    txt = newData[i].y.toFixed(2);
                     this.ctx.textAlign = 'center';
                     this.ctx.fillText(txt, xPos, yPos - 5);
                     console.log("3.3");
@@ -400,18 +402,6 @@ export class ChartTimelineComponent {
     getMaxAndMins(newData) {
         if (newData.length % 2 == 0)
         {
-            //set initial largest and smallest x values
-            if(newData[0].x >= newData[1].x)
-            {
-                var largestX = newData[0].x;
-                var smallestX = newData[1].x;
-            }
-            else
-            {
-                var largestX = newData[1].x;
-                var smallestX = newData[0].x;
-            }
-
             //set initial largest and smallest y values
             if(newData[0].y >= newData[1].y)
             {
@@ -428,8 +418,6 @@ export class ChartTimelineComponent {
         }
         else
         {
-            var largestX = newData[0].x;
-            var smallestX = newData[0].x;
             var largestY = newData[0].y;
             var smallestY = newData[0].y;
             var i = 1;
@@ -439,30 +427,6 @@ export class ChartTimelineComponent {
         //find smallest and largest x and y values in the data set
         while (j <= newData.length)
         {
-            //x
-            if (newData[i].x >= newData[j].x)
-            {
-                if (newData[i].x > largestX)
-                {
-                    largestX = newData[i].x;
-                }
-                if (newData[j].x < smallestX)
-                {
-                    smallestX = newData[j].x;
-                }
-            }
-            else
-            {
-                if (newData[i].x < smallestX)
-                {
-                    smallestX = newData[i].x;
-                }
-                if (newData[j].x > largestX)
-                {
-                    largestX = newData[j].x;
-                }
-            }
-
             //y
             if (newData[i].y >= newData[j].y)
             {
@@ -491,8 +455,8 @@ export class ChartTimelineComponent {
         }
 
 
-        console.log(smallestX, smallestY, largestX, largestY);
-        return {smallestX: smallestX, smallestY: smallestY, largestX: largestX, largestY: largestY};
+        console.log(smallestY, largestY);
+        return {smallestY: smallestY, largestY: largestY};
     }
     drawDashedLine(startX, startY, endX, endY)
     {

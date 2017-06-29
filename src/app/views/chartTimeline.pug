@@ -8,7 +8,8 @@
                     span(aria-hidden='true') ×
             .modal-lg.modal-body(style="background-color:white")
                 section
-                  canvas(id="canvas" width="800" height="500")
+                    div(style="height: 500px; width: 825px; overflow-y:auto")
+                        canvas(id="canvas" width="800" height="500")
 
             .modal-footer.modal-lg
                 button.btn.btn-default(type='button', data-dismiss='modal') Close

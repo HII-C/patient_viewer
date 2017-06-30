@@ -8,14 +8,15 @@ import {Condition} from '../models/condition.model';
 export class ScratchPadService {
     currentCondSpArray: Array<Condition> = [];
     toAddToCondSpArray: Array<Condition> = [];
+    toRemovceFromCondSpArray: Array<Condition> = [];
     private updatedCondSP = new Subject<boolean>();
     buttonInCondCompClicked$ = this.updatedCondSP.asObservable();
 
     constructor() {
         console.log("ScratchPadService Created...");
-     }
+    }
 
-     buttonClicked(clicked: boolean){
+    buttonClicked(clicked: boolean){
          this.updatedCondSP.next(clicked);
-     }
+    }
 }

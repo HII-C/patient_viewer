@@ -27,7 +27,7 @@ export class ChartTimelineService {
           continue;
         }
         if(o.code['text'] != currentTitle) {
-            if(numCharts>5) {break;} //temporary fix to prevent graph data overload
+            //if(numCharts>5) {break;} //temporary fix to prevent graph data overload
             numCharts++;
             count = 0;
             currentTitle = o.code['text'];

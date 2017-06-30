@@ -29,7 +29,7 @@ export class ScratchPadComponent implements DraggableWidget, OnDestroy{
 		'fixed': false,         //  If the grid item should be cascaded or not. If yes, manual movement is required
 		'draggable': this.doctorService.configMode,      //  If the grid item can be dragged. If this or the global setting is set to false, the item cannot be dragged.
 		'resizable': this.doctorService.configMode,      //  If the grid item can be resized. If this or the global setting is set to false, the item cannot be resized.
-		'payload': null,        //  An optional custom payload (string/number/object) to be used to identify the item for serialization
+		'payload': 'test',        //  An optional custom payload (string/number/object) to be used to identify the item for serialization
 		'maxCols': 0,           //  The maximum number of columns for a particular item. This value will only override the value from the grid (if set) if it is smaller
 		'minCols': 0,           //  The minimum number of columns for a particular item. This value will only override the value from the grid if larger
 		'maxRows': 0,           //  The maximum number of rows for a particular item. This value will only override the value from the grid (if set) if it is smaller
@@ -37,7 +37,7 @@ export class ScratchPadComponent implements DraggableWidget, OnDestroy{
 		'minWidth': 0,          //  The minimum width of a particular item. This value will override the value from the grid, as well as the minimum columns if the resulting size is larger
 		'minHeight': 0,         //  The minimum height of a particular item. This value will override the value from the grid, as well as the minimum rows if the resulting size is larger
 	}
-    constructor(private doctorService: DoctorService, private scratchPadService: ScratchPadService, private loupeService: LoupeService) { 
+    constructor(private doctorService: DoctorService, private scratchPadService: ScratchPadService, private loupeService: LoupeService) {
         console.log("ScratchPadComponent Created...");
         this.subscription = this.scratchPadService.buttonInCondCompClicked$.subscribe(clicked => {
             this.addToScratchPad();

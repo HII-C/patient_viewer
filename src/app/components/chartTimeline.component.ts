@@ -29,6 +29,7 @@ export class ChartTimelineComponent {
     chartWidth: number;
     yMax: number;
     xMax: number;
+    canvasHeight: number;
 
     show() {
         $('#chartTimeline_popup').modal({});
@@ -57,6 +58,7 @@ export class ChartTimelineComponent {
       this.yMax = this.chartHeight - (margin.top + margin.bottom);
       this.ratio = this.yMax / this.maxYValue;
       this.ctx = canvas.getContext("2d");
+      this.canvasHeight = 101*this.data.dataPoints.length
 
       //reset context
       this.ctx.save();
@@ -65,6 +67,7 @@ export class ChartTimelineComponent {
       this.ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       this.renderChart();
+
     }
 
     makeDate(data) {
@@ -97,6 +100,7 @@ export class ChartTimelineComponent {
           this.ctx.restore();
           this.ctx.restore();
       }
+
     }
 
     getOverallMaxAndMin()

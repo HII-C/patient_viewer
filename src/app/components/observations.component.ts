@@ -21,6 +21,7 @@ export class ObservationsComponent {
 	selected: Observation;
 	test: Observation;
 	observations: Array<Observation> = [];
+	categorizedObservations: any;
 	@Input() patient: Patient;
 	@Output() observationReturned: EventEmitter<Array<any>> = new EventEmitter();
 	mappings: { [key: string]: Array<string> } = {};
@@ -63,10 +64,15 @@ export class ObservationsComponent {
 		}
 
 
-
-
+		this.categorizedObservations = this.observationService.categorizedObservations;
+		//console.log(JSON.stringify(this.categorizedObservations));
 		this.loupeService.observationsArray = this.observations;
 		this.observationReturned.emit(this.observations);
+		console.log("done!");
+		console.log(this.categorizedObservations.categories[0].data.length);
+		console.log(this.categorizedObservations.categories[1].data.length);
+		console.log(this.categorizedObservations.categories[2].data.length);
+
 	}
 	loadData(url) {
 		let isLast = false;
@@ -75,6 +81,7 @@ export class ObservationsComponent {
 			 	let nextObs= <Array<Observation>>data.entry.map(r => r['resource']);
 
 				this.observations = this.observations.concat(nextObs);
+				this.observationService.filterCategory(nextObs);
 				isLast = true;
 				for(let i of data.link) {
 					if(i.relation=="next") {
@@ -99,6 +106,8 @@ export class ObservationsComponent {
 				if(data.entry) {
 					let nextLink = null;
 					this.observations = <Array<Observation>>data.entry.map(r => r['resource']);
+					this.observationService.filterCategory(this.observations);
+
 					for(let i of data.link) {
 						if(i.relation=="next") {
 							nextLink = i.url;

@@ -12,7 +12,8 @@ div.btn-group
 		li
 			a((click)='sortCondition("date-desc")')
 				span.glyphicon.glyphicon-sort-by-alphabet-alt(aria-hidden="true")
-	button.button.btn-default((click)='updateScratchPad()') | Update ScratchPad
+	button.button.btn-default((click)='updateScratchPad()') 
+		| Update ScratchPad
 p.telt("*ngIf"='conditions.length == 0')
 	i (none)
 

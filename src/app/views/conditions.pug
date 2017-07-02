@@ -31,6 +31,7 @@ div("*ngIf"='conditions.length > 0', id="tableParentEle")
 					| Status
 				th
 					| Onset
+				th 
 		tbody
 			tr("*ngFor"='let cSub of c', [class.selected]='cSub.selected', (click)='selectCondition(cSub)',id='t{{conditions.indexOf(cSub)}}')
 				ng-container("*ngIf"="cSub.isVisible")
@@ -41,6 +42,8 @@ div("*ngIf"='conditions.length > 0', id="tableParentEle")
 						span("*ngIf"="!cSub.isParent") {{cSub['code']['text']}} {{cSub['code']['coding'][0]['code']}}
 					td("*ngIf"="!cSub.isParent") {{cSub.clinicalStatus}}
 					td("*ngIf"="!cSub.isParent") {{cSub.relativeDateTime}}
+					td
+						button.btn.btn-default((click)="updateEntry(conditionService.conditions.indexOf(cSub), \"TESTING\", \"['code']['coding'][0]['code']\")") ET
 		
 //- div("*ngFor"='let c of conditionGrouping')
 		//- button.btn.btn-default(data-toggle="collapse", [attr.data-target]="'#cG'+conditionGrouping.indexOf(c)", aria-expanded="false", [attr.aria-controls]="'cG'+conditionGrouping.indexOf(c)")

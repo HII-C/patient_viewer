@@ -21,6 +21,7 @@ import {ToolbarComponent} from './app/components/toolbar.component';
 import {ChartTimelineComponent} from './app/components/chartTimeline.component';
 import {TripleListComponent} from './app/components/tripleList.component';
 import {ScratchPadComponent} from './app/components/scratchPad.component';
+import {ObservationRecursive} from './app/components/observationRecursion.component';
 
 
 
@@ -104,7 +105,8 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
         ToolbarComponent,
         ChartTimelineComponent,
         TripleListComponent,
-        ScratchPadComponent
+        ScratchPadComponent,
+        ObservationRecursive
     ],   // components and directives
     providers: [
         appRoutingProviders,

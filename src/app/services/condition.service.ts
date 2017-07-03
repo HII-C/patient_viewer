@@ -5,6 +5,7 @@ import {Observable} from 'rxjs/Observable';
 
 import {FhirService} from './fhir.service';
 import {Patient} from '../models/patient.model';
+import {Condition} from '../models/condition.model';
 
 @Injectable()
 @Component({
@@ -12,6 +13,7 @@ import {Patient} from '../models/patient.model';
 export class ConditionService {
 
     private path = '/Condition';
+    conditions: Array<Condition> = [];
 
     constructor(private fhirService: FhirService, private http: Http) {
         console.log("ConditionService created...");

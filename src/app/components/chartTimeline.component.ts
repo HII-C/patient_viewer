@@ -24,11 +24,8 @@ export class ChartTimelineComponent {
     data: Chart;
     ctx: CanvasRenderingContext2D;
     count: number = 0;
-    ratio: number = 0;
     chartHeight: number;
     chartWidth: number;
-    yMax: number;
-    xMax: number;
     canvasHeight: number;
 
     show() {
@@ -38,36 +35,31 @@ export class ChartTimelineComponent {
 
     }
     render(canvasId, dataObj) {
-      this.maxYValue = 0;
-      this.count = 0;
-      this.ratio = 0;
-      var margin = { top: 0, left: 0, right: 0, bottom: 0 };
-      var overallMax, overallMin;
-      var renderType = { bars: 'bars', points: 'points', lines: 'lines' };
-      this.data = this.chartService.dataDef;
-      for (var i = 0; i < this.data.dataPoints.length; i++)
-      {
-          this.newData[i] = JSON.parse(JSON.stringify(this.data.dataPoints[i].data.map(this.makeDate)));
-          this.newData[i].sort((a, b) => {return a.x - b.x});
-      }
-      this.getMaxDataYValue();
-      var canvas = <HTMLCanvasElement> document.getElementById(canvasId);
-      this.chartHeight = 100; //canvas.getAttribute('height'); //100
-      this.chartWidth = Number(canvas.getAttribute('width'));
-      this.xMax = this.chartWidth - (margin.left + margin.right);
-      this.yMax = this.chartHeight - (margin.top + margin.bottom);
-      this.ratio = this.yMax / this.maxYValue;
-      this.ctx = canvas.getContext("2d");
-      this.canvasHeight = 101*this.data.dataPoints.length
+        this.maxYValue = 0;
+        this.count = 0;
+        var margin = { top: 0, left: 0, right: 0, bottom: 0 };
+        var overallMax, overallMin;
+        var renderType = { bars: 'bars', points: 'points', lines: 'lines' };
+        this.data = this.chartService.dataDef;
+        for (var i = 0; i < this.data.dataPoints.length; i++)
+        {
+            this.newData[i] = JSON.parse(JSON.stringify(this.data.dataPoints[i].data.map(this.makeDate)));
+            this.newData[i].sort((a, b) => {return a.x - b.x});
+        }
+        this.getMaxDataYValue();
+        var canvas = <HTMLCanvasElement> document.getElementById(canvasId);
+        this.chartHeight = 100; //canvas.getAttribute('height'); //100
+        this.chartWidth = Number(canvas.getAttribute('width'));
+        this.ctx = canvas.getContext("2d");
+        this.canvasHeight = 101*this.data.dataPoints.length
 
-      //reset context
-      this.ctx.save();
-      this.ctx.setTransform(1, 0, 0, 1, 0, 0);
-      this.ctx.restore();
-      this.ctx.clearRect(0, 0, canvas.width, canvas.height);
+        //reset context
+        this.ctx.save();
+        this.ctx.setTransform(1, 0, 0, 1, 0, 0);
+        this.ctx.restore();
+        this.ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      this.renderChart();
-
+        this.renderChart();
     }
 
     makeDate(data) {
@@ -81,25 +73,25 @@ export class ChartTimelineComponent {
     };
 
     renderChart() {
-      var overallMaxAndMin = this.getOverallMaxAndMin();
-      var offsetAndWidth;
-      for (let i = 0; i < this.data.dataPoints.length; i++)
-      {
-          this.ctx.save();
-          this.translateLines();
-          this.renderLines();
-          this.renderName(i);
-          this.ctx.save();
-          offsetAndWidth = this.getOffsetAndWidth(overallMaxAndMin.min, overallMaxAndMin.max, this.newData[i][0].x, this.newData[i][this.newData[i].length-1].x);
-          this.translateNewChart(offsetAndWidth.offset);
-          //render data
-          if (this.data.dataPoints[i].code == '1')
-          {
-              this.renderData(this.newData[i], i, offsetAndWidth.offset, offsetAndWidth.width, overallMaxAndMin.max, overallMaxAndMin.min);
-          }
-          this.ctx.restore();
-          this.ctx.restore();
-      }
+        var overallMaxAndMin = this.getOverallMaxAndMin();
+        var offsetAndWidth;
+        for (let i = 0; i < this.data.dataPoints.length; i++)
+        {
+            this.ctx.save();
+            this.translateLines();
+            this.renderLines();
+            this.renderName(i);
+            this.ctx.save();
+            offsetAndWidth = this.getOffsetAndWidth(overallMaxAndMin.min, overallMaxAndMin.max, this.newData[i][0].x, this.newData[i][this.newData[i].length-1].x);
+            this.translateNewChart(offsetAndWidth.offset);
+            //render data
+            if (this.data.dataPoints[i].code == '1')
+            {
+                this.renderData(this.newData[i], i, offsetAndWidth.offset, offsetAndWidth.width, overallMaxAndMin.max, overallMaxAndMin.min);
+            }
+            this.ctx.restore();
+            this.ctx.restore();
+        }
 
     }
 
@@ -183,8 +175,11 @@ export class ChartTimelineComponent {
         console.log("top", top, "bottom", bottom);
 
         var xLength = newData[newData.length-1].x - newData[0].x;
+        var perc = xLength*.04;
+        xLength = xLength + perc;
         var yLength = top - bottom; //maxAndMins.largestY - maxAndMins.smallestY;
         var a, b, c, d, y;
+        var sameVal = true;
         var xPos, yPos;
         var txt;
         var fontSize = '8pt Calibri';
@@ -249,16 +244,16 @@ export class ChartTimelineComponent {
         }
 
         this.ctx.save();
-        //ctx.translate(15, 15);
+        this.ctx.translate(0, 15);
 
-        if (whole == true) //TODO figure out why they don't line up exactly!!!
+        /*if (whole == true) //TODO figure out why they don't line up exactly!!!
         {
             this.ctx.translate(15, 15);
         }
         else
         {
             this.ctx.translate(10, 15);
-        }
+        }*/
 
         //Get font for value rendering
         if (this.data.dataPointFont)
@@ -267,14 +262,44 @@ export class ChartTimelineComponent {
         }
         this.ctx.font = fontSize;
 
+        //Check if all values are the same
+        for (let i = 1; i < newData.length; i++)
+        {
+            if (newData[i].y != newData[i-1].y)
+            {
+                sameVal = false;
+                break;
+            }
+        }
+
         for (let i = 0; i < newData.length; i++)
         {
-            if (whole == false)
+            if (newData.length = 1)
+            {
+                xPos = 0;
+                console.log("xPos", xPos);
+                yPos = (this.chartHeight-30) - (newData[i].y/yLength)*(this.chartHeight-30);
+                console.log("yPos", yPos);
+                console.log("1 value");
+            }
+            else if (sameVal == true)
+            {
+                a = newData[i].x - newData[0].x;
+                xPos = (a/xLength)*(width /*- 30*/);
+                yPos = (this.chartHeight-30) - (newData[i].y/yLength)*(this.chartHeight-30);
+                console.log("xPos", xPos);
+                console.log("yPos", yPos);
+                console.log("same values");
+            }
+            else if (whole == false)
             {
                 a = newData[i].x - newData[0].x;
                 xPos = (a/xLength)*(width /*- 30*/);
                 b = newData[i].y - bottom; //maxAndMins.smallestY;
                 yPos = (this.chartHeight-30) - (b/yLength)*(this.chartHeight-30);
+                console.log("xPos", xPos);
+                console.log("yPos", yPos);
+                console.log("whole");
             }
             else
             {
@@ -282,6 +307,9 @@ export class ChartTimelineComponent {
                 xPos = (a/xLength)*(width /*- 30*/);
                 b = newData[i].y - bottom; //maxAndMins.smallestY;
                 yPos = (this.chartHeight-30) - (b/yLength)*(this.chartHeight-30);
+                console.log("xPos", xPos);
+                console.log("yPos", yPos);
+                console.log("regular");
             }
 
             console.log(newData[i].y, xPos, yPos);

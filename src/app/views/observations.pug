@@ -1,47 +1,17 @@
-h2
-    // <span class="glyphicon glyphicon-eye-open"></span>
-    | Observations
-p.text-default("*ngIf"='observations.length == 0')
-    i (none)
-
-div.container(id="tableParentEle")
-  div.panel-group
-    div.panel.panel-default("*ngIf"='categorizedObservations')
-      div("*ngFor"='let cat of categorizedObservations.categories')
-        div.panel-heading("*ngIf"='cat.data.length>0')
-          h4.panel-title
-            a(data-toggle='collapse', href='#collapse{{cat.id}}')
-              span.glyphicon.glyphicon-triangle-bottom
-              | {{cat.display}}
-              
-              
-        div.panel-collapse.collapse(id="collapse{{cat.id}}")
-          table.table.table-condensed.table-striped
-              thead
-                  tr
-                      th
-                      th Date
-                      th Category
-                      th Code
-                      th Value
-                      th Status
-              tbody
-                  tr("*ngFor"='let o of cat.data', [class.selected]='o.highlighted')
-                      td
-                        input(type='checkbox', name='observationsCheckbox')
-                      td
-                          span {{o.relativeDateTime | amTimeAgo}}
-                      td
-                          span {{o['code']['coding'][0]['display']}}
-                      td
-                          span {{o.code['text']}}
-                          //span("*ngIf"="!o.code.coding['display']")
-                              | {{csiroLookup(o)}}
-                          span {{o['code']['coding'][0]['code']}}
-                      td
-                          span("*ngIf"='o.valueQuantity') {{o.valueQuantity['value']}} {{o.valueQuantity['unit']}}
-                          span("*ngIf"='o.valueCodeableConcept') {{o.valueCodeableConcept['text']}}
-                      td
-                          | {{o.status}}
-            
-      
+div("*ngFor"='let cat of getData()')
+  div.panel-heading
+    h4.panel-title([style.marginLeft.px] = "getLevel()*20")
+      a(data-toggle='collapse', href='#collapse{{cat.id}}')
+        span.glyphicon.glyphicon-triangle-bottom
+        | {{cat.display}} ({{cat.count}})
+  div.panel-collapse.collapse(id="collapse{{cat.id}}")
+    table.table.table-condensed.table-striped("*ngIf"='cat.data', style="width:auto", [style.marginLeft.px] = "(getLevel()+1)*20")
+        tbody
+            tr("*ngFor"='let o of cat.data', [class.selected]='o.highlighted')
+                td
+                  input(type='checkbox', name='observationsCheckbox')
+                td
+                    span {{o.name}}
+                td
+                    span {{o.date | amTimeAgo}}
+    observationRecursion("*ngIf"='cat.child', [obs]='cat.child', [level]='getLevel()+1')

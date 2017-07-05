@@ -23,6 +23,7 @@ export class ConditionsComponent {
   collapseQueue: Array<any> = [];
   conditionGrouping: Array<any> = [];
   conditionGroupingName: Array<any> = ["Active", "Inactive"];
+  textInputForEdit: String;
   @Input() patient: Patient;
 
   @Output() conditionSelected: EventEmitter<Condition> = new EventEmitter();
@@ -291,10 +292,10 @@ export class ConditionsComponent {
     }
   }
 
-  updateEntry(index: number, toChange: any, dataLocation: string){
+  updateEntry(index: number, dataLocation: string){
     let conditionToUpdate = this.conditionService.conditions[index];
-    console.log(toChange);
-    this.updatingService.updateEntry(conditionToUpdate, toChange, dataLocation, index);
+    console.log(this.textInputForEdit);
+    this.updatingService.updateEntry(conditionToUpdate, this.textInputForEdit, dataLocation, index);
     this.conditions[index] = this.conditionService.conditions[index];
     console.log(this.conditions[index]);
   }

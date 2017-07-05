@@ -1,0 +1,10 @@
+h2
+    // <span class="glyphicon glyphicon-eye-open"></span>
+    | Observations
+p.text-default("*ngIf"='observations.length == 0')
+    i (none)
+
+div.container(style="width:auto")
+  div.panel-group
+    div.panel.panel-default("*ngIf"='this.observationService.categorizedObservations')
+      observationRecursion([obs]="this.observationService.categorizedObservations.categories",[level]=0)

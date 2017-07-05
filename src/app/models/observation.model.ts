@@ -7,4 +7,5 @@ export class Observation {
 	code: Object;
 	valueQuantity: Object;
 	valueCodeableConcept: Object;
+	grouping: string;
 }

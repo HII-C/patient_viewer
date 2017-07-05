@@ -10,18 +10,18 @@ import {Observation} from '../models/observation.model';
 import {Patient} from '../models/patient.model';
 import {Condition} from '../models/condition.model';
 import {Observable} from 'rxjs/Observable';
+import {ObservationRecursive} from './observationRecursion.component';
 import * as moment from 'moment';
 
 @Component({
 	selector: 'observations',
-	templateUrl: '/observations.html'
+	templateUrl: '/observationmain.html'
 })
 export class ObservationsComponent {
 
 	selected: Observation;
 	test: Observation;
 	observations: Array<Observation> = [];
-	categorizedObservations: any;
 	@Input() patient: Patient;
 	@Output() observationReturned: EventEmitter<Array<any>> = new EventEmitter();
 	mappings: { [key: string]: Array<string> } = {};
@@ -63,15 +63,16 @@ export class ObservationsComponent {
 			ob.relativeDateTime = moment(newDate).toISOString();
 		}
 
+		console.log("running service");
 
-		this.categorizedObservations = this.observationService.categorizedObservations;
-		//console.log(JSON.stringify(this.categorizedObservations));
+		this.observationService.populate(this.observationService.temp.categories);
+		this.observationService.categorizedObservations = this.observationService.temp;
+
 		this.loupeService.observationsArray = this.observations;
 		this.observationReturned.emit(this.observations);
+
 		console.log("done!");
-		console.log(this.categorizedObservations.categories[0].data.length);
-		console.log(this.categorizedObservations.categories[1].data.length);
-		console.log(this.categorizedObservations.categories[2].data.length);
+
 
 	}
 	loadData(url) {
@@ -147,4 +148,6 @@ export class ObservationsComponent {
 			}
 		}
 	}
+
+
 }

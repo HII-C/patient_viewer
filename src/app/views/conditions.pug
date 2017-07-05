@@ -12,7 +12,7 @@ div.btn-group
 		li
 			a((click)='sortCondition("date-desc")')
 				span.glyphicon.glyphicon-sort-by-alphabet-alt(aria-hidden="true")
-	button.button.btn-default((click)='updateScratchPad()') 
+	button.btn.btn-default((click)='updateScratchPad()') 
 		| Update ScratchPad
 p.telt("*ngIf"='conditions.length == 0')
 	i (none)
@@ -31,6 +31,7 @@ div("*ngIf"='conditions.length > 0', id="tableParentEle")
 					| Status
 				th
 					| Onset
+				th 
 		tbody
 			tr("*ngFor"='let cSub of c', [class.selected]='cSub.selected', (click)='selectCondition(cSub)',id='t{{conditions.indexOf(cSub)}}')
 				ng-container("*ngIf"="cSub.isVisible")
@@ -41,7 +42,31 @@ div("*ngIf"='conditions.length > 0', id="tableParentEle")
 						span("*ngIf"="!cSub.isParent") {{cSub['code']['text']}} {{cSub['code']['coding'][0]['code']}}
 					td("*ngIf"="!cSub.isParent") {{cSub.clinicalStatus}}
 					td("*ngIf"="!cSub.isParent") {{cSub.relativeDateTime}}
-		
+					td
+						button.btn.btn-default(data-toggle="modal", [attr.data-target]="'#editFieldc' + conditions.indexOf(cSub)")
+						
+						.modal.fade(tabindex='-1', id="editFieldc{{conditions.indexOf(cSub)}}")
+							.modal-dialog(role='document')
+								.modal-content
+									.modal-header
+										button.close(type='button', data-dismiss='modal', aria-label='Close')
+											span(aria-hidden='true') ×
+										h4.modal-title(style='border-bottom: none') Encounter from {{cSub.onsetDateTime | amTimeAgo}}
+									.modal-body
+										p {{cSub.code.coding[0].display}}
+										p
+											b Code System:
+											a(href='{{cSub.code.coding[0].system}}') {{cSub.code.coding[0].system}}
+										p
+											b Code:
+											|  {{cSub.code.coding[0].code}}
+									.modal-footer
+										button.btn.btn-default(type='button', data-dismiss='modal') Close
+                            
+
+//- click)="updateEntry(conditionService.conditions.indexOf(cSub), \"TESTING\", \"['code']['coding'][0]['code']\")") ET
+
+
 //- div("*ngFor"='let c of conditionGrouping')
 		//- button.btn.btn-default(data-toggle="collapse", [attr.data-target]="'#cG'+conditionGrouping.indexOf(c)", aria-expanded="false", [attr.aria-controls]="'cG'+conditionGrouping.indexOf(c)")
 		//- 	| {{conditionGroupingName[conditionGrouping.indexOf(c)]}}

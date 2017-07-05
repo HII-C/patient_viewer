@@ -1,4 +1,5 @@
 div([(ngGridItem)]='gridItemConfiguration')
+	button.btn.btn-default((click)="removeFromScratchPad()") Remove Selected Conditions
 	table.table.table-condensed.table-striped(id='condSP')
 		thead
 			tr
@@ -12,7 +13,7 @@ div([(ngGridItem)]='gridItemConfiguration')
 		tbody
 			tr("*ngFor"='let c of currentCondSpArray',id='condSP{{currentCondSpArray.indexOf(c)}}')
 				td
-					| ?
+					input(type='checkbox',id='condSP{{currentCondSpArray.indexOf(c)}}', value='{{currentCondSpArray.indexOf(c)}}', (change)='scratchPadCheckBoxes($event.target.checked, $event.target.getAttribute("value"))')
 				td
 					span {{c['code']['text']}} {{c['code']['coding'][0]['code']}}
 				td {{c.clinicalStatus}}

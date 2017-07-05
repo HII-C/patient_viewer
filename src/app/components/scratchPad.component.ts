@@ -64,4 +64,31 @@ export class ScratchPadComponent implements DraggableWidget, OnDestroy{
         this.subscription.unsubscribe();
     }
 
+    removeFromScratchPad(){
+        for (let c of this.scratchPadService.toRemovceFromCondSpArray){
+            if (this.scratchPadService.currentCondSpArray.indexOf(c) > -1){
+                this.scratchPadService.currentCondSpArray.splice(this.scratchPadService.currentCondSpArray.indexOf(c), 1);
+                console.log("Successfully removed" + c);
+            }
+            else{
+                console.log("bug");
+            }
+        }
+    }
+
+    scratchPadCheckBoxes(checked: boolean, value) {
+    if (checked) {
+      // this.conditions[value].isSelected = true;
+      this.scratchPadService.toRemovceFromCondSpArray.push(this.scratchPadService.currentCondSpArray[value]);
+    }
+    else {
+      // this.conditions[value].isSelected = false;
+      let temp = this.scratchPadService.toRemovceFromCondSpArray.indexOf(this.scratchPadService.currentCondSpArray[value]);
+      if (temp > -1){
+        // This will actually delete instead of simply setting to null, which will throw errors in the long run
+        this.scratchPadService.toRemovceFromCondSpArray.splice(temp, 1);
+      }
+    }
+  }
+
 }

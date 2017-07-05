@@ -21,6 +21,7 @@ import {ToolbarComponent} from './app/components/toolbar.component';
 import {ChartTimelineComponent} from './app/components/chartTimeline.component';
 import {TripleListComponent} from './app/components/tripleList.component';
 import {ScratchPadComponent} from './app/components/scratchPad.component';
+import {ObservationRecursive} from './app/components/observationRecursion.component';
 
 
 
@@ -44,6 +45,7 @@ import {SmartService} from './app/services/smart.service';
 import {ChartTimelineService} from './app/services/chartTimeline.service';
 import {CookieService} from 'angular2-cookie/core';
 import {ScratchPadService} from './app/services/scratchPad.service';
+import {UpdatingService} from './app/services/updating.service';
 
 
 import {MomentModule} from 'angular2-moment';
@@ -104,7 +106,8 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
         ToolbarComponent,
         ChartTimelineComponent,
         TripleListComponent,
-        ScratchPadComponent
+        ScratchPadComponent,
+        ObservationRecursive
     ],   // components and directives
     providers: [
         appRoutingProviders,
@@ -126,7 +129,8 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
         CookieService,
         CarePlanService,
         ChartTimelineService,
-        ScratchPadService
+        ScratchPadService,
+        UpdatingService
     ],                    // services
     bootstrap: [AppComponent]     // root component
 })

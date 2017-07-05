@@ -36,9 +36,9 @@ export class ObservationsComponent {
 
 	}
 	loadFinished() {
-		this.observations = this.observations.reverse();
-		console.log("Loaded " + this.observations.length + " observations.");
-		this.observations.sort((n1, n2) => {
+		this.observationService.observations = this.observationService.observations.reverse();
+		console.log("Loaded " + this.observationService.observations.length + " observations.");
+		this.observationService.observations.sort((n1, n2) => {
 			if (n1['code']['coding'][0]['code'] < n2['code']['coding'][0]['code']) {
 				return 1;
 			}
@@ -46,9 +46,9 @@ export class ObservationsComponent {
 				return -1;
 			}
 		})
-		//this.chartService.setData(this.observations);
+		//this.chartService.setData(this.observationService.observations);
 		//append broken data here
-		this.observations.sort((n1, n2) => {
+		this.observationService.observations.sort((n1, n2) => {
 			if (n1.effectiveDateTime < n2.effectiveDateTime) {
 				return 1;
 			}
@@ -57,21 +57,22 @@ export class ObservationsComponent {
 			}
 		})
 
-		var diff = new Date().getTime() - new Date(this.observations[0].effectiveDateTime).getTime();
-		for(let ob of this.observations) {
+		var diff = new Date().getTime() - new Date(this.observationService.observations[0].effectiveDateTime).getTime();
+		for(let ob of this.observationService.observations) {
 			var newDate = new Date(ob.effectiveDateTime).getTime() + diff;
 			ob.relativeDateTime = new Date(newDate).toDateString();
 			ob.relativeDateTime = moment(newDate).toISOString();
+			console.log(ob.relativeDateTime,ob.effectiveDateTime);
 		}
 
 		console.log("running service");
 
-		this.observationService.observations = this.observations;
+		//this.observationService.observations = this.observationService.observations;
 		this.observationService.populate(this.observationService.temp.categories);
 		this.observationService.categorizedObservations = this.observationService.temp;
 
-		this.loupeService.observationsArray = this.observations;
-		this.observationReturned.emit(this.observations);
+		this.loupeService.observationsArray = this.observationService.observations;
+		this.observationReturned.emit(this.observationService.observations);
 
 		console.log("done!");
 
@@ -83,7 +84,7 @@ export class ObservationsComponent {
 			if(data.entry) {
 			 	let nextObs= <Array<Observation>>data.entry.map(r => r['resource']);
 
-				this.observations = this.observations.concat(nextObs);
+				this.observationService.observations = this.observationService.observations.concat(nextObs);
 				this.observationService.filterCategory(nextObs);
 				isLast = true;
 				for(let i of data.link) {
@@ -108,8 +109,8 @@ export class ObservationsComponent {
 			this.observationService.index(this.patient).subscribe(data => {
 				if(data.entry) {
 					let nextLink = null;
-					this.observations = <Array<Observation>>data.entry.map(r => r['resource']);
-					this.observationService.filterCategory(this.observations);
+					this.observationService.observations = <Array<Observation>>data.entry.map(r => r['resource']);
+					this.observationService.filterCategory(this.observationService.observations);
 
 					for(let i of data.link) {
 						if(i.relation=="next") {
@@ -120,7 +121,7 @@ export class ObservationsComponent {
 					else {this.loadFinished();}
 
 				} else {
-					this.observations = new Array<Observation>();
+					this.observationService.observations = new Array<Observation>();
 					console.log("No observations for patient.");
 				}
 			});
@@ -131,19 +132,19 @@ export class ObservationsComponent {
 
 	csiroLookup(code: Observation) {
 		setTimeout(()=>{console.log(code)}, 5000);
-		this.observations[(this.observations.indexOf(code))].code['text'] = "working?";
+		this.observationService.observations[(this.observationService.observations.indexOf(code))].code['text'] = "working?";
 
 	}
 
 	updateHighlighted(condition: Condition) {
 
 		let response = this.mapService.load("XYZ");
-		for(let obs of this.observations) {
+		for(let obs of this.observationService.observations) {
 			obs['highlighted'] = false;
 		}
 		let key = condition.code.coding[0].code;
 		if(this.mappings[key] != null) {
-			for(let obs of this.observations) {
+			for(let obs of this.observationService.observations) {
 				if(this.mappings[key].indexOf(obs.code['coding'][0]['code']) > -1) {
 					obs['highlighted'] = true;
 				}

@@ -1,7 +1,7 @@
 h2
     // <span class="glyphicon glyphicon-eye-open"></span>
     | Observations
-p.text-default("*ngIf"='observations.length == 0')
+p.text-default("*ngIf"='this.observationService.observations.length == 0')
     i (none)
 
 div.container(style="width:auto")

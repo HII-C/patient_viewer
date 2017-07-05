@@ -11,7 +11,7 @@ export class Chart {
     };
     data: {
       y: number;
-      x: string;
+      x: number;
     }[];
 
   }[];

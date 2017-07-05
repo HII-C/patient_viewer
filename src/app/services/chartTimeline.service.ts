@@ -40,13 +40,14 @@ export class ChartTimelineService {
               });
             newData.dataPoints[numCharts].title = o.code['text'];
             newData.dataPoints[numCharts].code = '1';
-            newData.dataPoints[numCharts].dashedLines = false;
-            newData.dataPoints[numCharts].normalValues = {low: 115, high: 127};
+            newData.dataPoints[numCharts].dashedLines = true;
+            newData.dataPoints[numCharts].normalValues = {low: 100, high: 200};
         }
 
-          newData.dataPoints[numCharts].data.push({y: 0, x:''});
+          newData.dataPoints[numCharts].data.push({y: 0, x:0});
           newData.dataPoints[numCharts].data[count].y = o.valueQuantity['value'];
-          newData.dataPoints[numCharts].data[count].x = o.effectiveDateTime;
+          let newDate = new Date(o.relativeDateTime).getTime();
+          newData.dataPoints[numCharts].data[count].x = newDate;
           count++;
 
 

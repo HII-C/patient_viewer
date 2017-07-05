@@ -44,6 +44,7 @@ export class ChartTimelineComponent {
         var overallMax, overallMin;
         var renderType = { bars: 'bars', points: 'points', lines: 'lines' };
         this.data = this.chartService.dataDef;
+        console.log(JSON.stringify(this.data));
         for (var i = 0; i < this.data.dataPoints.length; i++)
         {
             this.newData[i] = JSON.parse(JSON.stringify(this.data.dataPoints[i].data.map(this.makeDate)));
@@ -172,8 +173,8 @@ export class ChartTimelineComponent {
         var maxAndMins = this.getMaxAndMins(newData);
 
         //this section is currently for using the "potential max and min" values as bounds for the height of the graphs.  Will need to be changed at some point
-        var top = maxAndMins.largestY+1;
-        var bottom = maxAndMins.smallestY-1;
+        var top = maxAndMins.largestY+50;
+        var bottom = maxAndMins.smallestY-50;
         if (bottom < 0) bottom = 0;
         console.log("top", top, "bottom", bottom);
 
@@ -277,7 +278,7 @@ export class ChartTimelineComponent {
 
         for (let i = 0; i < newData.length; i++)
         {
-            if (newData.length = 1)
+            if (newData.length == 1)
             {
                 xPos = 0;
                 console.log("xPos", xPos);
@@ -289,6 +290,7 @@ export class ChartTimelineComponent {
             {
                 a = newData[i].x - newData[0].x;
                 xPos = (a/xLength)*(width /*- 30*/);
+                console.log(this.chartHeight,newData[i].y,yLength,this.chartHeight);
                 yPos = (this.chartHeight-30) - (newData[i].y/yLength)*(this.chartHeight-30);
                 console.log("xPos", xPos);
                 console.log("yPos", yPos);

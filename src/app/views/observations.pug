@@ -9,10 +9,10 @@ div("*ngFor"='let cat of getData()')
         tbody
             tr("*ngFor"='let o of cat.data', [class.selected]='o.highlighted')
                 td
-                  input(type='checkbox',id='c{{o.code}}', value='{{o.code}}', (change)='checked($event.target.checked, $event.target.getAttribute("value"))')
+                  input(type='checkbox',id='c{{o.code}}', value='{{o.code}}', [checked] = 'o.isSelected', (change)='checked(o)')
 
-                td
+                td((click)='checked(o)')
                     span {{o.name}}
-                td
+                td((click)='checked(o)')
                     span {{o.date | amTimeAgo}}
     observationRecursion("*ngIf"='cat.child', [obs]='cat.child', [level]='getLevel()+1')

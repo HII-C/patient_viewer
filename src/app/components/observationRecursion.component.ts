@@ -20,22 +20,25 @@ export class ObservationRecursive {
   getLevel() {
     return this.level;
   }
-	checked(checked: boolean, value) {
-		if(checked) {
+	checked(obs:any) {
+		obs.isSelected = !obs.isSelected
+		console.log("value:"+JSON.stringify(obs));
+
+		if(obs.isSelected) {
 			for(let o of this.observationService.observations) {
-				if (o['code']['coding'][0]['code'] == value) {
+				if (o['code']['coding'][0]['code'] == obs.code) {
 					this.observationService.selected.push(o);
 				}
 			}
 		}
 		else {
 			for(let o of this.observationService.observations) {
-				if (o.id == value) {
+				if (o.id == obs.code) {
 					let index = this.observationService.selected.indexOf(o);
 					this.observationService.selected.splice(index,1);
 				}
 			}
 		}
-		console.log("checked",checked,value);
+		console.log("checked",obs.isSelected,obs.code);
 	}
 }

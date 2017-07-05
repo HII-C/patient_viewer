@@ -6,6 +6,8 @@ import {Patient} from '../models/patient.model';
 import {LoupeService} from '../services/loupe.service';
 import {DoctorService} from '../services/doctor.service';
 import {ChartTimelineService} from '../services/chartTimeline.service';
+import {ObservationService} from '../services/observation.service';
+
 import { Chart } from '../models/chart.model';
 
 declare var $:any; //Necessary in order to use jQuery to open popup.
@@ -15,7 +17,7 @@ declare var $:any; //Necessary in order to use jQuery to open popup.
 })
 
 export class ChartTimelineComponent {
-  constructor(private loupeService: LoupeService, private doctorService: DoctorService, private chartService: ChartTimelineService){
+  constructor(private loupeService: LoupeService, private doctorService: DoctorService, private chartService: ChartTimelineService, private observationService: ObservationService){
       console.log("Chart Component is loaded...");
     }
 
@@ -32,6 +34,7 @@ export class ChartTimelineComponent {
     canvasHeight: number;
 
     show() {
+      this.chartService.setData(this.observationService.selected);
         $('#chartTimeline_popup').modal({});
 
         this.render('canvas', this.chartService.dataDef);
@@ -177,8 +180,8 @@ export class ChartTimelineComponent {
         var maxAndMins = this.getMaxAndMins(newData);
 
         //this section is currently for using the "potential max and min" values as bounds for the height of the graphs.  Will need to be changed at some point
-        var top = maxAndMins.largestY+50;
-        var bottom = maxAndMins.smallestY-50;
+        var top = maxAndMins.largestY+1;
+        var bottom = maxAndMins.smallestY-1;
         if (bottom < 0) bottom = 0;
         console.log("top", top, "bottom", bottom);
 

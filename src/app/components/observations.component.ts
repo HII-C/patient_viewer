@@ -46,7 +46,7 @@ export class ObservationsComponent {
 				return -1;
 			}
 		})
-		this.chartService.setData(this.observations);
+		//this.chartService.setData(this.observations);
 		//append broken data here
 		this.observations.sort((n1, n2) => {
 			if (n1.effectiveDateTime < n2.effectiveDateTime) {
@@ -56,6 +56,7 @@ export class ObservationsComponent {
 				return -1;
 			}
 		})
+
 		var diff = new Date().getTime() - new Date(this.observations[0].effectiveDateTime).getTime();
 		for(let ob of this.observations) {
 			var newDate = new Date(ob.effectiveDateTime).getTime() + diff;
@@ -65,6 +66,7 @@ export class ObservationsComponent {
 
 		console.log("running service");
 
+		this.observationService.observations = this.observations;
 		this.observationService.populate(this.observationService.temp.categories);
 		this.observationService.categorizedObservations = this.observationService.temp;
 

@@ -9,7 +9,8 @@ div("*ngFor"='let cat of getData()')
         tbody
             tr("*ngFor"='let o of cat.data', [class.selected]='o.highlighted')
                 td
-                  input(type='checkbox', name='observationsCheckbox')
+                  input(type='checkbox',id='c{{o.code}}', value='{{o.code}}', (change)='checked($event.target.checked, $event.target.getAttribute("value"))')
+
                 td
                     span {{o.name}}
                 td

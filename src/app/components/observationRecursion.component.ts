@@ -20,4 +20,22 @@ export class ObservationRecursive {
   getLevel() {
     return this.level;
   }
+	checked(checked: boolean, value) {
+		if(checked) {
+			for(let o of this.observationService.observations) {
+				if (o['code']['coding'][0]['code'] == value) {
+					this.observationService.selected.push(o);
+				}
+			}
+		}
+		else {
+			for(let o of this.observationService.observations) {
+				if (o.id == value) {
+					let index = this.observationService.selected.indexOf(o);
+					this.observationService.selected.splice(index,1);
+				}
+			}
+		}
+		console.log("checked",checked,value);
+	}
 }

@@ -15,6 +15,9 @@ export class ObservationService {
     categorizedObservations: any;
     groupList: any;
     count: number = 0;
+    observations: Array<Observation> = [];
+    selected: Array<Observation> = [];
+
     private path = '/Observation';
     constructor(private fhirService: FhirService, private http: Http) {
       this.groupList = {

@@ -248,7 +248,7 @@ export class ChartTimelineComponent {
         }
 
         this.ctx.save();
-        this.ctx.translate(0, 15);
+        this.ctx.translate(17, 15);
 
         /*if (whole == true) //TODO figure out why they don't line up exactly!!!
         {

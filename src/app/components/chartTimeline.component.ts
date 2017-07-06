@@ -91,7 +91,11 @@ export class ChartTimelineComponent {
             //render data
             if (this.data.dataPoints[i].code == '1')
             {
-                this.renderData(this.newData[i], i, offsetAndWidth.offset, offsetAndWidth.width, overallMaxAndMin.max, overallMaxAndMin.min);
+                this.renderDataType1(this.newData[i], i, offsetAndWidth.offset, offsetAndWidth.width, overallMaxAndMin.max, overallMaxAndMin.min);
+            }
+            else if (this.data.dataPoints[i].code == '2')
+            {
+                this.renderDataType2(this.newData[i], i, offsetAndWidth.offset, offsetAndWidth.width, overallMaxAndMin.max, overallMaxAndMin.min);
             }
             this.ctx.restore();
             this.ctx.restore();
@@ -168,7 +172,7 @@ export class ChartTimelineComponent {
         this.ctx.translate(xTranslate, 0);
     }
 
-    renderData(newData, index, offset, width, max, min) {
+    renderDataType1(newData, index, offset, width, max, min) {
         console.log("newData", newData);
         var maxAndMins = this.getMaxAndMins(newData);
 
@@ -249,15 +253,6 @@ export class ChartTimelineComponent {
 
         this.ctx.save();
         this.ctx.translate(17, 15);
-
-        /*if (whole == true) //TODO figure out why they don't line up exactly!!!
-        {
-            this.ctx.translate(15, 15);
-        }
-        else
-        {
-            this.ctx.translate(10, 15);
-        }*/
 
         //Get font for value rendering
         if (this.data.dataPointFont)
@@ -442,6 +437,83 @@ export class ChartTimelineComponent {
 
     }
 
+    renderDataType2(newData, index, offset, width, max, min)
+    {
+        var xLength = newData[newData.length-1].x - newData[0].x;
+        var perc = xLength*.04;
+        xLength = xLength + perc;
+        var a;
+        var sameVal = true;
+        var xPos;
+        var fontSize = '8pt Calibri';
+        var first = true;
+        var whole = false;
+        //var prevPos = "";
+
+        if (newData[0].x == min && newData[newData.length-1].x == max)
+        {
+            whole = true;
+            console.log(whole);
+        }
+
+        this.ctx.save();
+        this.ctx.translate(17, 15);
+
+        //Get font for value rendering
+        if (this.data.dataPointFont)
+        {
+            fontSize = this.data.dataPointFont;
+        }
+        this.ctx.font = fontSize;
+
+        //Check if all values are the same
+        for (let i = 1; i < newData.length; i++)
+        {
+            if (newData[i].y != newData[i-1].y)
+            {
+                sameVal = false;
+                break;
+            }
+        }
+
+        for (let i = 0; i < newData.length; i++)
+        {
+            if (newData.length == 1)
+            {
+                xPos = 0;
+                console.log("xPos", xPos);
+                console.log("1 value");
+            }
+            else if (sameVal == true)
+            {
+                a = newData[i].x - newData[0].x;
+                xPos = (a/xLength)*(width /*- 30*/);
+                console.log(this.chartHeight,newData[i].y,this.chartHeight);
+                console.log("xPos", xPos);
+                console.log("same values");
+            }
+            else if (whole == false)
+            {
+                a = newData[i].x - newData[0].x;
+                xPos = (a/xLength)*(width /*- 30*/);
+                console.log("xPos", xPos);
+                console.log("whole");
+            }
+            else
+            {
+                a = newData[i].x - newData[0].x;
+                xPos = (a/xLength)*(width /*- 30*/);
+                console.log("xPos", xPos);
+                console.log("regular");
+            }
+
+            this.drawLineWithX(xPos);
+        }
+
+        this.ctx.restore();
+
+    }
+
     getMaxAndMins(newData) {
         if (newData.length % 2 == 0)
         {
@@ -508,5 +580,17 @@ export class ChartTimelineComponent {
         this.ctx.moveTo(startX, startY);
         this.ctx.lineTo(endX, endY);
         this.ctx.stroke();
+    }
+
+    drawLineWithX(startX)
+    {
+        var endY = this.chartHeight-(2/3)*this.chartHeight;
+
+        //Line
+        this.drawLine(startX, this.chartHeight-15, startX, endY, 'black', 2);
+
+        //draw X
+        this.drawLine(startX-4, endY-4, startX+4, endY+4, 'black', 1);
+        this.drawLine(startX-4, endY+4, startX+4, endY-4, 'black', 1);
     }
 }

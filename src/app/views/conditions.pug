@@ -46,7 +46,7 @@ section(style='z-index: 1201;')
 						td
 							button.btn.btn-default(data-toggle="modal", [attr.data-target]="'#editFieldc' + conditions.indexOf(cSub)")
 							
-							.modal.fade(id="editFieldc{{conditions.indexOf(cSub)}}")
+							.modal.fade(id="editFieldc{{conditions.indexOf(cSub)}}",role='dialog')
 								.modal-dialog(role='document')
 									.modal-content
 										.modal-header
@@ -54,7 +54,7 @@ section(style='z-index: 1201;')
 												span(aria-hidden='true') ×
 										.modal-body
 											p
-												input(type='text', name="textInputForEdit", [(ngModel)]='textInputForEdit', style='z-index: 1202;')
+												input(type='text', name="textInputForEdit", [(ngModel)]='textInputForEdit')
 											button.btn.btn-default((click)="updateEntry(conditionService.conditions.indexOf(cSub), \"['code']['coding'][0]['code']\")")
 
 											p

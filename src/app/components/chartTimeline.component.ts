@@ -132,8 +132,8 @@ export class ChartTimelineComponent {
     renderLines() {
 
         //Vertical lines
-        this.drawLine(1, 0, 1, this.chartHeight, 'black', 2);
-        this.drawLine(this.chartWidth-1, 0, this.chartWidth-1, this.chartHeight, 'black', 2);
+        this.drawLine(1, 4, 1, this.chartHeight, 'black', 2);
+        //this.drawLine(this.chartWidth-1, 0, this.chartWidth-1, this.chartHeight, 'black', 2);
 
         //Horizontal Line
         this.drawLine(0, this.chartHeight, this.chartWidth, this.chartHeight, 'black', 2);
@@ -447,10 +447,8 @@ export class ChartTimelineComponent {
         var a;
         var sameVal = true;
         var xPos;
-        var fontSize = '8pt Calibri';
         var first = true;
         var whole = false;
-        //var prevPos = "";
 
         if (newData[0].x == min && newData[newData.length-1].x == max)
         {
@@ -460,13 +458,6 @@ export class ChartTimelineComponent {
 
         this.ctx.save();
         this.ctx.translate(17, 15);
-
-        //Get font for value rendering
-        if (this.data.dataPointFont)
-        {
-            fontSize = this.data.dataPointFont;
-        }
-        this.ctx.font = fontSize;
 
         //Check if all values are the same
         for (let i = 1; i < newData.length; i++)
@@ -515,6 +506,21 @@ export class ChartTimelineComponent {
         this.ctx.restore();
 
     }
+
+    renderDataType3(newData, index, offset, width, max, min) {
+
+        var xLength = newData[newData.length-1].x - newData[0].x;
+        var perc = xLength*.04;
+        xLength = xLength + perc;
+        //var yLength = top - bottom; //maxAndMins.largestY - maxAndMins.smallestY;
+        var a, b, c, d, y;
+        var sameVal = true;
+        var xPos, yPos;
+        var first = true;
+        var whole = false;
+
+
+}
 
     getMaxAndMins(newData) {
         if (newData.length % 2 == 0)

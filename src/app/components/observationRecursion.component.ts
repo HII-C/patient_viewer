@@ -23,7 +23,6 @@ export class ObservationRecursive {
   }
 	checked(obs:any) {
 		obs.isSelected = !obs.isSelected
-		console.log("value:"+JSON.stringify(obs));
 
 		if(obs.isSelected) {
 			for(let o of this.observationService.observations) {
@@ -34,7 +33,7 @@ export class ObservationRecursive {
 		}
 		else {
 			for(let o of this.observationService.observations) {
-				if (o.id == obs.code) {
+				if (o['code']['coding'][0]['code'] == obs.code) {
 					let index = this.observationService.selected.indexOf(o);
 					this.observationService.selected.splice(index,1);
 				}

@@ -46,7 +46,7 @@ export class ChartTimelineService {
                   data: []
               });
             newData.dataPoints[numCharts].title = o.code['text'];
-            newData.dataPoints[numCharts].code = '2';
+            newData.dataPoints[numCharts].code = '3';
             newData.dataPoints[numCharts].dashedLines = true;
             newData.dataPoints[numCharts].normalValues = {low: 100, high: 200};
         }

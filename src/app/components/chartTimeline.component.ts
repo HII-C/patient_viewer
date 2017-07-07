@@ -95,7 +95,11 @@ export class ChartTimelineComponent {
             }
             else if (this.data.dataPoints[i].code == '2')
             {
-                this.renderDataType2(this.newData[i], i, offsetAndWidth.offset, offsetAndWidth.width, overallMaxAndMin.max, overallMaxAndMin.min);
+                this.renderDataType2(this.newData[i], offsetAndWidth.width);
+            }
+            else if (this.data.dataPoints[i].code == '3')
+            {
+                this.renderDataType3(this.newData[i], i, offsetAndWidth.offset, offsetAndWidth.width, overallMaxAndMin.max, overallMaxAndMin.min);
             }
             this.ctx.restore();
             this.ctx.restore();
@@ -196,7 +200,6 @@ export class ChartTimelineComponent {
         var nextY = 0;
         var nextX = 0;
         var first = true;
-        var whole = false;
         var prevPos = "";
         var shadedY;
         var shadedHeight = (this.data.dataPoints[index].normalValues.high - this.data.dataPoints[index].normalValues.low) / (maxAndMins.largestY) * (this.chartHeight - 25);
@@ -245,12 +248,6 @@ export class ChartTimelineComponent {
 
         console.log("Height and Y", shadedHeight, shadedY);
 
-        if (newData[0].x == min && newData[newData.length-1].x == max)
-        {
-            whole = true;
-            console.log(whole);
-        }
-
         this.ctx.save();
         this.ctx.translate(17, 15);
 
@@ -290,16 +287,6 @@ export class ChartTimelineComponent {
                 console.log("xPos", xPos);
                 console.log("yPos", yPos);
                 console.log("same values");
-            }
-            else if (whole == false)
-            {
-                a = newData[i].x - newData[0].x;
-                xPos = (a/xLength)*(width /*- 30*/);
-                b = newData[i].y - bottom; //maxAndMins.smallestY;
-                yPos = (this.chartHeight-30) - (b/yLength)*(this.chartHeight-30);
-                console.log("xPos", xPos);
-                console.log("yPos", yPos);
-                console.log("whole");
             }
             else
             {
@@ -437,7 +424,7 @@ export class ChartTimelineComponent {
 
     }
 
-    renderDataType2(newData, index, offset, width, max, min)
+    renderDataType2(newData, width)
     {
         var xLength = newData[newData.length-1].x - newData[0].x;
         var perc = xLength*.04;
@@ -446,7 +433,70 @@ export class ChartTimelineComponent {
         var sameVal = true;
         var xPos;
         var first = true;
+
+        this.ctx.save();
+        this.ctx.translate(17, 15);
+
+        //Check if all values are the same
+        for (let i = 1; i < newData.length; i++)
+        {
+            if (newData[i].y != newData[i-1].y)
+            {
+                sameVal = false;
+                break;
+            }
+        }
+
+        for (let i = 0; i < newData.length; i++)
+        {
+            if (newData.length == 1)
+            {
+                xPos = 0;
+                console.log("xPos", xPos);
+                console.log("1 value");
+            }
+            else if (sameVal == true)
+            {
+                a = newData[i].x - newData[0].x;
+                xPos = (a/xLength)*(width /*- 30*/);
+                console.log(this.chartHeight,newData[i].y,this.chartHeight);
+                console.log("xPos", xPos);
+                console.log("same values");
+            }
+            else
+            {
+                a = newData[i].x - newData[0].x;
+                xPos = (a/xLength)*(width /*- 30*/);
+                console.log("xPos", xPos);
+                console.log("regular");
+            }
+
+            this.drawLineWithX(xPos);
+        }
+
+        this.ctx.restore();
+
+    }
+
+    renderDataType3(newData, index, offset, width, max, min) {
+        var maxAndMins = this.getMaxAndMins(newData);
+
+        //this section is currently for using the "potential max and min" values as bounds for the height of the graphs.  Will need to be changed at some point
+        var top = maxAndMins.largestY+50;
+        var bottom = maxAndMins.smallestY-50;
+        if (bottom < 0) bottom = 0;
+        console.log("top", top, "bottom", bottom);
+
+        var xLength = newData[newData.length-1].x - newData[0].x;
+        var perc = xLength*.04;
+        xLength = xLength + perc;
+        var yLength = top - bottom; //maxAndMins.largestY - maxAndMins.smallestY;
+        var a, b, c, d, y;
+        var sameVal = true;
+        var xPos, yPos;
+        var first = true;
         var whole = false;
+        var duration = new Date(8640000000).getTime();
 
         if (newData[0].x == min && newData[newData.length-1].x == max)
         {
@@ -498,27 +548,13 @@ export class ChartTimelineComponent {
                 console.log("regular");
             }
 
-            this.drawLineWithX(xPos);
+            this.ctx.fillStyle = 'grey';
+            this.ctx.rect(xPos, this.chartHeight-16, (duration/xLength)*width, (-2/3)*this.chartHeight);
+            this.ctx.fill();
         }
 
         this.ctx.restore();
-
     }
-
-    renderDataType3(newData, index, offset, width, max, min) {
-
-        var xLength = newData[newData.length-1].x - newData[0].x;
-        var perc = xLength*.04;
-        xLength = xLength + perc;
-        //var yLength = top - bottom; //maxAndMins.largestY - maxAndMins.smallestY;
-        var a, b, c, d, y;
-        var sameVal = true;
-        var xPos, yPos;
-        var first = true;
-        var whole = false;
-
-
-}
 
     getMaxAndMins(newData) {
         if (newData.length % 2 == 0)

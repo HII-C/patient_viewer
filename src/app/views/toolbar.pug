@@ -1,4 +1,3 @@
-chartTimelines(#chart="")
 #toolbar([(ngGridItem)]="gridItemConfiguration")
 	//- div("*ngIf"="!nav2", [@fadeIn]="'in'")
 	.btn-group("*ngIf"="!nav2")
@@ -16,7 +15,7 @@ chartTimelines(#chart="")
 			span(class="glyphicon glyphicon-signal")
 		button.btn.btn-default.btn-lg.btn-custom-lg
 			span(class="glyphicon glyphicon-link")
-		button.btn.btn-default.btn-lg.btn-custom-lg((click)='chart.show()')
+		button.btn.btn-default.btn-lg.btn-custom-lg(data-toggle="modal", [attr.data-target]="'#chartTimeline_popup'", (click)='openGraph()')
 			span(class="glyphicon glyphicon-stats")
 		button.btn.btn-default.btn-lg.btn-custom-lg  
 			span(class="glyphicon glyphicon-info-sign")

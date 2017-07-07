@@ -2,6 +2,7 @@ import {Component, Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import { Chart } from '../models/chart.model';
 import { Observation } from '../models/observation.model';
+import { Subject } from 'rxjs/Subject';
 
 
 @Injectable()
@@ -10,10 +11,16 @@ import { Observation } from '../models/observation.model';
 export class ChartTimelineService {
     dataDef: Chart;
     test: Chart;
+    canvasHeight: number;
+
+    private activateGraphSource = new Subject<boolean>();
+    activateGraph$ = this.activateGraphSource.asObservable();
     constructor() {
         console.log("ChartTimelineService created...");
     }
-
+    buttonClicked(clicked: boolean){
+         this.activateGraphSource.next(clicked);
+    }
     setData(data) {
       let newData = new Chart();
       newData.labelFont = "10pt Calibri";
@@ -53,5 +60,7 @@ export class ChartTimelineService {
 
     }
       this.dataDef = newData;
+      this.canvasHeight = 101*this.dataDef.dataPoints.length;
     }
+
 }

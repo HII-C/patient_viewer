@@ -1,5 +1,6 @@
 import {Component, Input, Output, EventEmitter} from '@angular/core';
 import {ObservationService} from '../services/observation.service';
+import {ChartTimelineService} from '../services/chartTimeline.service';
 
 
 @Component({
@@ -11,7 +12,7 @@ export class ObservationRecursive {
 
 	@Input() obs: any;
   @Input() level: number;
-	constructor(private observationService: ObservationService) {
+	constructor(private observationService: ObservationService, private chartService: ChartTimelineService) {
 		console.log("Recursive created...");
 	}
   getData() {
@@ -40,5 +41,6 @@ export class ObservationRecursive {
 			}
 		}
 		console.log("checked",obs.isSelected,obs.code);
+		this.chartService.setData(this.observationService.selected);
 	}
 }

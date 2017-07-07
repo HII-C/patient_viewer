@@ -27,9 +27,7 @@ export class ObservationsComponent {
 	@Input() patient: Patient;
 	@Output() observationReturned: EventEmitter<Array<any>> = new EventEmitter();
 	mappings: { [key: string]: Array<string> } = {};
-	model = {name:'', code: "1"};
-  arrayOfKeyValues: any[] = [{name:'height', code:'8302-2'},{name:'weight', code:'3141-9'},{name:'oxygen_saturation', code:'2710-2'},{name:'temperature', code:'8310-5'},{name:'bmi', code:'39156-5'}];
-
+	
 	constructor(private fhirService: FhirService, private observationService: ObservationService,
 		private mapService: MapService, private loupeService: LoupeService, private doctorService: DoctorService,
 		private chartService: ChartTimelineService, private http:Http) {

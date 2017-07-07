@@ -7,6 +7,7 @@ import {LoupeService} from '../services/loupe.service';
 import {DoctorService} from '../services/doctor.service';
 import {ChartTimelineService} from '../services/chartTimeline.service';
 import {ObservationService} from '../services/observation.service';
+import {Subscription} from 'rxjs/Subscription';
 
 import { Chart } from '../models/chart.model';
 
@@ -19,7 +20,11 @@ declare var $:any; //Necessary in order to use jQuery to open popup.
 export class ChartTimelineComponent {
   constructor(private loupeService: LoupeService, private doctorService: DoctorService, private chartService: ChartTimelineService, private observationService: ObservationService){
       console.log("Chart Component is loaded...");
+      this.subscription = this.chartService.activateGraph$.subscribe(clicked => {
+          this.update();
+      });
     }
+    subscription: Subscription;
 
     maxYValue: number = 0;
     newData: Array<any> = [];
@@ -30,12 +35,8 @@ export class ChartTimelineComponent {
     chartWidth: number;
     canvasHeight: number;
 
-    show() {
-      this.chartService.setData(this.observationService.selected);
-        $('#chartTimeline_popup').modal({});
-
+    update() {
         this.render('canvas', this.chartService.dataDef);
-
     }
     render(canvasId, dataObj) {
         this.maxYValue = 0;
@@ -64,6 +65,7 @@ export class ChartTimelineComponent {
         this.ctx.clearRect(0, 0, canvas.width, canvas.height);
 
         this.renderChart();
+
     }
 
     makeDate(data) {

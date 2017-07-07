@@ -6,6 +6,8 @@ import {NgGrid, NgGridItem, NgGridConfig, NgGridItemConfig, NgGridItemEvent} fro
 import {DraggableWidget} from './draggable_widget.component';
 import {Patient} from '../models/patient.model';
 import {DoctorService} from '../services/doctor.service';
+import {ChartTimelineService} from '../services/chartTimeline.service';
+
 
 @Component({
 	selector: 'toolbar',
@@ -48,12 +50,17 @@ export class ToolbarComponent {
 		// 'minHeight': 0,         //  The minimum height of a particular item. This value will override the value from the grid, as well as the minimum rows if the resulting size is larger
 	}
 
-	constructor(private doctorService: DoctorService) {
+	constructor(private doctorService: DoctorService, private chartService: ChartTimelineService) {
 		console.log("ToolbarComponent created...");
 	}
 
     switchNav() {
 		this.nav2 = !this.nav2;
     }
+
+		openGraph() {
+			this.chartService.buttonClicked(true);
+
+		}
 
 }

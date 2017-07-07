@@ -56,7 +56,8 @@
     "typescript": "^2.3.2",
     "webpack": "^1.15.0",
     "webpack-dev-server": "^1.16.5",
-    "zone.js": "^0.7.8"
+    "zone.js": "^0.7.8",
+    "@ngui/auto-complete":"0.13.3"
   },
   "devDependencies": {
     "@types/core-js": "0.9.41",

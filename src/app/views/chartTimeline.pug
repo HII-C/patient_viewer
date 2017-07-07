@@ -9,7 +9,7 @@
             .modal-lg.modal-body(style="background-color:white")
                 section
                     div(style="height: 500px; width: 825px; overflow-y:auto")
-                        canvas(id="canvas", width="800", [height] = "canvasHeight" )
+                        canvas(id="canvas", width="800", [height] = "this.chartService.canvasHeight" )
 
             .modal-footer.modal-lg
                 button.btn.btn-default(type='button', data-dismiss='modal') Close

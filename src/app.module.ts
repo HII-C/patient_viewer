@@ -65,6 +65,8 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { LineChartComponent } from '@swimlane/ngx-charts';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgGridModule } from 'angular2-grid';
+import { NguiAutoCompleteModule } from '@ngui/auto-complete';
+
 
 const appRoutes: Routes = [
     { path: '', component: HomeComponent },
@@ -85,7 +87,8 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
         NgxChartsModule,
         BrowserAnimationsModule,
         CalendarModule.forRoot(),
-		    NgGridModule
+		    NgGridModule,
+        NguiAutoCompleteModule
     ],       // module dependencies
     declarations: [
         AppComponent,

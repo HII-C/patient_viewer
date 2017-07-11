@@ -1,5 +1,4 @@
 div([ngGrid]="gridConfiguration")
-	scratchPad([patient]='selected', *ngIf='selected')
 	patient((patientSelected)="selectPatient($event)")
 	toolbar
 	timelines([patient]='selected', *ngIf='selected')

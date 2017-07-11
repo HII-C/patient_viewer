@@ -3,6 +3,22 @@ div([(ngGridItem)]='gridItemConfiguration')
     div.col-md-4.col-lg-4
       conditions([patient]='patient', *ngIf='passThrough')
     div.col-md-4.col-lg-4
-      observations([patient]='patient', #obs='', *ngIf='passThrough')
+      div.panel-group(id="accordion")
+        div.panel.panel-default
+          div.panel-heading
+            h4.panel-title
+              a(data-toggle="collapse" data-parent="#accordion" href="#o1")
+                | Scratch Pad
+          div.panel-collapse.collapse.in(id="o1")
+            div.panel-body
+              scratchPad([dataSource]='this.observationService.selected')
+        div.panel.panel-default
+          div.panel-heading
+            h4.panel-title
+              a(data-toggle="collapse" data-parent="#accordion" href="#o2")
+                | Findings List
+          div.panel-collapse.collapse.in(id="o2")
+            div.panel-body
+              observations([patient]='patient', #obs='', *ngIf='passThrough')
     div.col-md-4.col-lg-4
       carePlan([patient]='patient', *ngIf='passThrough')

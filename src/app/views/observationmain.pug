@@ -3,11 +3,12 @@ h2
     | Observations
     button.btn.btn-default.btn-sm(data-toggle="modal", [attr.data-target]="'#newEntry'")
       span.glyphicon.glyphicon-plus
-    
+a((click)='updateScratchPad()') 
+  | Add to Scratchpad
 p.text-default("*ngIf"='this.observationService.observations.length == 0')
     i (none)
 
 div.container(style="width:auto")
-  div.panel-group
+  div.panel-group(id="obs")
     div.panel.panel-default("*ngIf"='this.observationService.categorizedObservations')
       observationRecursion([obs]="this.observationService.categorizedObservations.categories",[level]=0)

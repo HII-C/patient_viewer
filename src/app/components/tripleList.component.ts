@@ -3,6 +3,8 @@ import {NgGrid, NgGridItem, NgGridConfig, NgGridItemConfig, NgGridItemEvent} fro
 import {DraggableWidget} from './draggable_widget.component';
 import {DoctorService} from '../services/doctor.service';
 import {Patient} from '../models/patient.model';
+import {ObservationService} from '../services/observation.service';
+
 
 @Component({
     selector: 'triplelist',
@@ -32,9 +34,9 @@ export class TripleListComponent implements DraggableWidget{
 		'minWidth': 0,          //  The minimum width of a particular item. This value will override the value from the grid, as well as the minimum columns if the resulting size is larger
 		'minHeight': 0,         //  The minimum height of a particular item. This value will override the value from the grid, as well as the minimum rows if the resulting size is larger
 	};
-	
 
-    constructor(private doctorService: DoctorService) {
+
+    constructor(private doctorService: DoctorService, private observationService: ObservationService) {
         console.log("TripleList Component created");
 
 		this.passThrough.emit(this.patient);

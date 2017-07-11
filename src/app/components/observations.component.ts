@@ -5,6 +5,7 @@ import {LoupeService} from '../services/loupe.service';
 import {MapService} from '../services/map.service';
 import {DoctorService} from '../services/doctor.service';
 import {ChartTimelineService} from '../services/chartTimeline.service';
+import { ScratchPadService } from '../services/scratchPad.service';
 
 import {Observation} from '../models/observation.model';
 import {Patient} from '../models/patient.model';
@@ -27,10 +28,10 @@ export class ObservationsComponent {
 	@Input() patient: Patient;
 	@Output() observationReturned: EventEmitter<Array<any>> = new EventEmitter();
 	mappings: { [key: string]: Array<string> } = {};
-	
+
 	constructor(private fhirService: FhirService, private observationService: ObservationService,
 		private mapService: MapService, private loupeService: LoupeService, private doctorService: DoctorService,
-		private chartService: ChartTimelineService, private http:Http) {
+		private chartService: ChartTimelineService, private http:Http, private scratchPadService: ScratchPadService) {
 		console.log("ObservationsComponent created...");
 
 		this.mappings = MapService.STATIC_MAPPINGS;
@@ -153,6 +154,9 @@ export class ObservationsComponent {
 			}
 		}
 	}
+updateScratchPad (){
+	this.scratchPadService.addData("observation");
 
+}
 
 }

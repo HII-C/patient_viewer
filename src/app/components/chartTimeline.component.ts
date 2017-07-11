@@ -500,12 +500,6 @@ export class ChartTimelineComponent {
         var whole = false;
         var duration = new Date(8640000000).getTime();
 
-        if (newData[0].x == min && newData[newData.length-1].x == max)
-        {
-            whole = true;
-            console.log(whole);
-        }
-
         this.ctx.save();
         this.ctx.translate(17, 15);
 
@@ -524,34 +518,31 @@ export class ChartTimelineComponent {
             if (newData.length == 1)
             {
                 xPos = 0;
+                yPos = (this.chartHeight) - (newData[i].y/yLength)*(this.chartHeight);
                 console.log("xPos", xPos);
                 console.log("1 value");
             }
             else if (sameVal == true)
             {
                 a = newData[i].x - newData[0].x;
-                xPos = (a/xLength)*(width /*- 30*/);
+                xPos = (a/xLength)*(width);
+                yPos = (this.chartHeight) - (newData[i].y/yLength)*(this.chartHeight);
                 console.log(this.chartHeight,newData[i].y,this.chartHeight);
                 console.log("xPos", xPos);
                 console.log("same values");
             }
-            else if (whole == false)
-            {
-                a = newData[i].x - newData[0].x;
-                xPos = (a/xLength)*(width /*- 30*/);
-                console.log("xPos", xPos);
-                console.log("whole");
-            }
             else
             {
                 a = newData[i].x - newData[0].x;
-                xPos = (a/xLength)*(width /*- 30*/);
+                xPos = (a/xLength)*(width);
+                b = newData[i].y - bottom;
+                yPos = (this.chartHeight) - (b/yLength)*(this.chartHeight);
                 console.log("xPos", xPos);
                 console.log("regular");
             }
 
             this.ctx.fillStyle = 'grey';
-            this.ctx.rect(xPos, this.chartHeight-16, (duration/xLength)*width, (-2/3)*this.chartHeight);
+            this.ctx.rect(xPos, this.chartHeight-16, (duration/xLength)*width, -yPos);
             this.ctx.fill();
         }
 

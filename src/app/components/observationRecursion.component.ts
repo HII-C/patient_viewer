@@ -13,6 +13,7 @@ export class ObservationRecursive {
 	@Input() obs: any;
   @Input() level: number;
 	graphData: Array<any> = [];
+	lastIndex: number;
 	constructor(private observationService: ObservationService, private chartService: ChartTimelineService) {
 		console.log("Recursive created...");
 	}
@@ -22,8 +23,26 @@ export class ObservationRecursive {
   getLevel() {
     return this.level;
   }
-	checked(obs:any) {
+	checked(obs:any, event,position,data) {
 		obs.isSelected = !obs.isSelected
+		if(event.shiftKey) {
+			let upper,lower;
+			if(position<this.lastIndex) {
+				upper = this.lastIndex;
+				lower = position;
+			}
+			else {
+				upper = position;
+				lower = this.lastIndex;
+			}
+			for(let i = lower; i<=upper; i++) {
+				if(data[i].isSelected!=true) {
+					this.observationService.selected.push(data[i]);
+				}
+				data[i].isSelected = true;
+			}
+		}
+		this.lastIndex = position;
 
 		if(obs.isSelected) {
 			for(let o of this.observationService.observations) {

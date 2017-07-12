@@ -17,7 +17,7 @@ export class ScratchPadComponent implements OnDestroy{
     @Input() dataSource: Array<any>;
     currentDataArray: Array<any> = [];
     subscription: Subscription;
-
+    lastIndex: number;
     constructor(private doctorService: DoctorService, private scratchPadService: ScratchPadService, private loupeService: LoupeService) {
         console.log("ScratchPadComponent Created...");
         this.subscription = this.scratchPadService.addNewData$.subscribe(clicked => {
@@ -27,9 +27,23 @@ export class ScratchPadComponent implements OnDestroy{
     }
 
 
-    checked(selected:any) {
+    checked(selected:any, event, position, data) {
       selected.isSelected = !selected.isSelected;
-
+      if(event.shiftKey) {
+  			let upper,lower;
+  			if(position<this.lastIndex) {
+  				upper = this.lastIndex;
+  				lower = position;
+  			}
+  			else {
+  				upper = position;
+  				lower = this.lastIndex;
+  			}
+  			for(let i = lower; i<=upper; i++) {
+  				data[i].isSelected = true;
+  			}
+  		}
+  		this.lastIndex = position;
       }
 
     addToScratchPad(){

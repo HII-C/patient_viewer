@@ -9,27 +9,27 @@
             .modal-lg.modal-body(style="background-color:white")
                 section
                     div.btn-group(style="height: 50px")
-                        button.btn.btn-default(style="width: 75px")
+                        button.btn.btn-default((click)='setWhole()' style="width: 75px")
                             | All
-                        button.btn.btn-default(style="width: 75px")
+                        button.btn.btn-default((click)='setTwentyFiveYears()' style="width: 75px")
                             | 25 Years
-                        button.btn.btn-default(style="width: 75px")
+                        button.btn.btn-default((click)='setTenYears()' style="width: 75px")
                             | 10 Years
-                        button.btn.btn-default(style="width: 75px")
+                        button.btn.btn-default((click)='setFiveYears()' style="width: 75px")
                             | 5 Years
-                        button.btn.btn-default(style="width: 75px")
+                        button.btn.btn-default((click)='setTwoYears()' style="width: 75px")
                             | 2 Years
-                        button.btn.btn-default(style="width: 75px")
+                        button.btn.btn-default((click)='setOneYear()' style="width: 75px")
                             | 1 Year
-                        button.btn.btn-default(style="width: 75px")
+                        button.btn.btn-default((click)='setSixMonths()' style="width: 75px")
                             | 6 Months
-                        button.btn.btn-default(style="width: 75px")
+                        button.btn.btn-default((click)='setThreeMonths()' style="width: 75px")
                             | 3 Months
-                        button.btn.btn-default(style="width: 75px")
+                        button.btn.btn-default((click)='setOneMonth()' style="width: 75px")
                             | 1 Month
-                        button.btn.btn-default(style="width: 75px")
+                        button.btn.btn-default((click)='setTwoWeeks()' style="width: 75px")
                             | 2 Weeks
-                        button.btn.btn-default(style="width: 75px")
+                        button.btn.btn-default((click)='setSpecifyDates()' style="width: 75px")
                             | Specify
                     div(style="height: 500px; width: 825px; overflow-y:auto")
                         canvas(id="canvas", width="800", [height] = "this.chartService.canvasHeight" )

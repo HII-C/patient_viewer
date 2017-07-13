@@ -39,6 +39,29 @@ export class ChartTimelineComponent {
     chartWidth: number;
     canvasHeight: number;
 
+    whole: boolean = true;
+    twentyFiveYears: boolean = false;
+    tenYears: boolean = false;
+    fiveYears: boolean = false;
+    twoYears: boolean = false;
+    oneYear: boolean = false;
+    sixMonths: boolean = false;
+    threeMonths: boolean = false;
+    oneMonth: boolean = false;
+    twoWeeks: boolean = false;
+    specifyDates: boolean = false;
+
+    static readonly twentyFiveYearsMS: number = 788923150000;
+    static readonly tenYearsMS: number = 315569260000;
+    static readonly fiveYearsMS: number = 157784630000;
+    static readonly twoYearsMS: number = 63113852000;
+    static readonly oneYearsMS: number = 31556926000;
+    static readonly sixMonthsMS: number = 15778463000;
+    static readonly threeMonthsMS: number = 7889231500;
+    static readonly oneMonthMS: number = 2629743833.3;
+    static readonly twoWeeksMS: number = 1209600000;
+
+
     update() {
         this.render('canvas', this.chartService.dataDef);
     }
@@ -47,7 +70,6 @@ export class ChartTimelineComponent {
         this.count = 0;
         var margin = { top: 0, left: 0, right: 0, bottom: 0 };
         var overallMax, overallMin;
-        var renderType = { bars: 'bars', points: 'points', lines: 'lines' };
         this.data = this.chartService.dataDef;
         console.log(JSON.stringify(this.data));
         for (var i = 0; i < this.data.dataPoints.length; i++)
@@ -65,7 +87,7 @@ export class ChartTimelineComponent {
         this.ctx.save();
         this.ctx.setTransform(1, 0, 0, 1, 0, 0);
         this.ctx.restore();
-        this.ctx.clearRect(0, 0, canvas.width, canvas.height);
+        this.ctx.clearRect(0, 0, this.chartWidth, this.chartService.canvasHeight);
 
         this.renderChart();
 
@@ -81,10 +103,274 @@ export class ChartTimelineComponent {
         }
     };
 
+    setWhole()
+    {
+        this.whole = true;
+        this.twentyFiveYears = false;
+        this.tenYears = false;
+        this.fiveYears = false;
+        this.twoYears = false;
+        this.oneYear = false;
+        this.sixMonths = false;
+        this.threeMonths = false;
+        this.oneMonth = false;
+        this.twoWeeks = false;
+        this.specifyDates = false;
+        this.ctx.save();
+        this.ctx.setTransform(1, 0, 0, 1, 0, 0);
+        this.ctx.restore();
+        this.ctx.clearRect(0, 0, this.chartWidth, this.chartService.canvasHeight);
+        this.update();
+        console.log(this.whole);
+    }
+    setTwentyFiveYears()
+    {
+        this.whole = false;
+        this.twentyFiveYears = true;
+        this.tenYears = false;
+        this.fiveYears = false;
+        this.twoYears = false;
+        this.oneYear = false;
+        this.sixMonths = false;
+        this.threeMonths = false;
+        this.oneMonth = false;
+        this.twoWeeks = false;
+        this.specifyDates = false;
+        this.ctx.save();
+        this.ctx.setTransform(1, 0, 0, 1, 0, 0);
+        this.ctx.restore();
+        this.ctx.clearRect(0, 0, this.chartWidth, this.chartService.canvasHeight);
+        this.update();
+        console.log(this.twentyFiveYears);
+    }
+    setTenYears()
+    {
+        this.whole = false;
+        this.twentyFiveYears = false;
+        this.tenYears = true;
+        this.fiveYears = false;
+        this.twoYears = false;
+        this.oneYear = false;
+        this.sixMonths = false;
+        this.threeMonths = false;
+        this.oneMonth = false;
+        this.twoWeeks = false;
+        this.specifyDates = false;
+        this.ctx.save();
+        this.ctx.setTransform(1, 0, 0, 1, 0, 0);
+        this.ctx.restore();
+        this.ctx.clearRect(0, 0, this.chartWidth, this.chartService.canvasHeight);
+        this.update();
+        console.log(this.tenYears);
+    }
+    setFiveYears()
+    {
+        this.whole = false;
+        this.twentyFiveYears = false;
+        this.tenYears = false;
+        this.fiveYears = true;
+        this.twoYears = false;
+        this.oneYear = false;
+        this.sixMonths = false;
+        this.threeMonths = false;
+        this.oneMonth = false;
+        this.twoWeeks = false;
+        this.specifyDates = false;
+        this.ctx.save();
+        this.ctx.setTransform(1, 0, 0, 1, 0, 0);
+        this.ctx.restore();
+        this.ctx.clearRect(0, 0, this.chartWidth, this.chartService.canvasHeight);
+        this.renderChart();
+        console.log(this.fiveYears);
+    }
+    setTwoYears()
+    {
+        this.whole = false;
+        this.twentyFiveYears = false;
+        this.tenYears = false;
+        this.fiveYears = false;
+        this.twoYears = true;
+        this.oneYear = false;
+        this.sixMonths = false;
+        this.threeMonths = false;
+        this.oneMonth = false;
+        this.twoWeeks = false;
+        this.specifyDates = false;
+        this.ctx.save();
+        this.ctx.setTransform(1, 0, 0, 1, 0, 0);
+        this.ctx.restore();
+        this.ctx.clearRect(0, 0, this.chartWidth, this.chartHeight);
+        this.renderChart();
+        console.log(this.twoYears);
+    }
+    setOneYear()
+    {
+        this.whole = false;
+        this.twentyFiveYears = false;
+        this.tenYears = false;
+        this.fiveYears = false;
+        this.twoYears = false;
+        this.oneYear = true;
+        this.sixMonths = false;
+        this.threeMonths = false;
+        this.oneMonth = false;
+        this.twoWeeks = false;
+        this.specifyDates = false;
+        this.ctx.save();
+        this.ctx.setTransform(1, 0, 0, 1, 0, 0);
+        this.ctx.restore();
+        this.ctx.clearRect(0, 0, this.chartWidth, this.chartHeight);
+        this.renderChart();
+        console.log(this.oneYear);
+    }
+    setSixMonths()
+    {
+        this.whole = false;
+        this.twentyFiveYears = false;
+        this.tenYears = false;
+        this.fiveYears = false;
+        this.twoYears = false;
+        this.oneYear = false;
+        this.sixMonths = true;
+        this.threeMonths = false;
+        this.oneMonth = false;
+        this.twoWeeks = false;
+        this.specifyDates = false;
+        this.ctx.save();
+        this.ctx.setTransform(1, 0, 0, 1, 0, 0);
+        this.ctx.restore();
+        this.ctx.clearRect(0, 0, this.chartWidth, this.chartHeight);
+        this.renderChart();
+        console.log(this.sixMonths);
+    }
+    setThreeMonths()
+    {
+        this.whole = false;
+        this.twentyFiveYears = false;
+        this.tenYears = false;
+        this.fiveYears = false;
+        this.twoYears = false;
+        this.oneYear = false;
+        this.sixMonths = false;
+        this.threeMonths = true;
+        this.oneMonth = false;
+        this.twoWeeks = false;
+        this.specifyDates = false;
+        this.ctx.save();
+        this.ctx.setTransform(1, 0, 0, 1, 0, 0);
+        this.ctx.restore();
+        this.ctx.clearRect(0, 0, this.chartWidth, this.chartHeight);
+        this.renderChart();
+        console.log(this.threeMonths);
+    }
+    setOneMonth()
+    {
+        this.whole = false;
+        this.twentyFiveYears = false;
+        this.tenYears = false;
+        this.fiveYears = false;
+        this.twoYears = false;
+        this.oneYear = false;
+        this.sixMonths = false;
+        this.threeMonths = false;
+        this.oneMonth = true;
+        this.twoWeeks = false;
+        this.specifyDates = false;
+        this.ctx.save();
+        this.ctx.setTransform(1, 0, 0, 1, 0, 0);
+        this.ctx.restore();
+        this.ctx.clearRect(0, 0, this.chartWidth, this.chartHeight);
+        this.renderChart();
+        console.log(this.oneMonth);
+    }
+    setTwoWeeks()
+    {
+        this.whole = false;
+        this.twentyFiveYears = false;
+        this.tenYears = false;
+        this.fiveYears = false;
+        this.twoYears = false;
+        this.oneYear = false;
+        this.sixMonths = false;
+        this.threeMonths = false;
+        this.oneMonth = false;
+        this.twoWeeks = true;
+        this.specifyDates = false;
+        this.ctx.save();
+        this.ctx.setTransform(1, 0, 0, 1, 0, 0);
+        this.ctx.restore();
+        this.ctx.clearRect(0, 0, this.chartWidth, this.chartHeight);
+        this.renderChart();
+        console.log(this.twoWeeks);
+    }
+    setSpecifyDates()
+    {
+        this.whole = false;
+        this.twentyFiveYears = false;
+        this.tenYears = false;
+        this.fiveYears = false;
+        this.twoYears = false;
+        this.oneYear = false;
+        this.sixMonths = false;
+        this.threeMonths = false;
+        this.oneMonth = false;
+        this.twoWeeks = false;
+        this.specifyDates = true;
+        this.ctx.save();
+        this.ctx.setTransform(1, 0, 0, 1, 0, 0);
+        this.ctx.restore();
+        this.ctx.clearRect(0, 0, this.chartWidth, this.chartHeight);
+        this.renderChart();
+        console.log(this.specifyDates);
+    }
+
     renderChart() {
         var overallMaxAndMin = this.getOverallMaxAndMin();
         var offsetAndWidth;
-        this.renderAxisLabels(overallMaxAndMin);
+        var dateRange;
+        var indexStart;
+        if (this.whole = true)
+        {
+            dateRange = null;
+        }
+        else if (this.twentyFiveYears = true)
+        {
+            dateRange = new Date().getTime() - new Date(ChartTimelineComponent.twentyFiveYearsMS).getTime();
+        }
+        else if (this.tenYears = true)
+        {
+            dateRange = new Date().getTime() - new Date(ChartTimelineComponent.tenYearsMS).getTime();
+        }
+        else if (this.fiveYears = true)
+        {
+            dateRange = new Date().getTime() - new Date(ChartTimelineComponent.fiveYearsMS).getTime();
+        }
+        else if (this.twoYears = true)
+        {
+            dateRange = new Date().getTime() - new Date(ChartTimelineComponent.twoYearsMS).getTime();
+        }
+        else if (this.oneYear = true)
+        {
+            dateRange = new Date().getTime() - new Date(ChartTimelineComponent.oneYearsMS).getTime();
+        }
+        else if (this.sixMonths = true)
+        {
+            dateRange = new Date().getTime() - new Date(ChartTimelineComponent.sixMonthsMS).getTime();
+        }
+        else if (this.threeMonths = true)
+        {
+            dateRange = new Date().getTime() - new Date(ChartTimelineComponent.threeMonthsMS).getTime();
+        }
+        else if (this.oneMonth = true)
+        {
+            dateRange = new Date().getTime() - new Date(ChartTimelineComponent.oneMonthMS).getTime();
+        }
+        else if (this.twoWeeks = true)
+        {
+            dateRange = new Date().getTime() - new Date(ChartTimelineComponent.twoWeeksMS).getTime();
+        }
+
+        this.renderAxisLabels(overallMaxAndMin, dateRange);
         this.ctx.save();
         this.ctx.translate(0, 60);
         for (let i = 0; i < this.data.dataPoints.length; i++)
@@ -134,10 +420,18 @@ export class ChartTimelineComponent {
         return {min: min, max: max};
     }
 
-    renderAxisLabels(overallMaxAndMin)
+    renderAxisLabels(overallMaxAndMin, dateRange)
     {
         var interval, intervalDate;
-        var totInterval = overallMaxAndMin.max - overallMaxAndMin.min;
+        var totInterval;
+        if (dateRange == null)
+        {
+            totInterval = overallMaxAndMin.max - overallMaxAndMin.min;
+        }
+        else
+        {
+            totInterval = dateRange;
+        }
         /*var diff = new Date().getTime() - (overallMaxAndMin.min);
         var diffInterval, diffIntervalDate;*/
 

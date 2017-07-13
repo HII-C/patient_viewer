@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy } from '@angular/core';
+import { Component, Input, OnDestroy, Output,EventEmitter  } from '@angular/core';
 import {DraggableWidget} from './draggable_widget.component';
 import {NgGrid, NgGridItem, NgGridConfig, NgGridItemConfig, NgGridItemEvent} from 'angular2-grid';
 import {Subscription} from 'rxjs/Subscription';
@@ -15,6 +15,7 @@ import {Condition} from '../models/condition.model';
 
 export class ScratchPadComponent implements OnDestroy{
     @Input() dataSource: Array<any>;
+    @Output() totalUpdate = new EventEmitter();
     currentDataArray: Array<any> = [];
     subscription: Subscription;
     lastIndex: number;
@@ -57,6 +58,7 @@ export class ScratchPadComponent implements OnDestroy{
                 console.log("This Condition already exists on the scratchPad, duplicates are not allowed");
             }
         };
+        this.totalUpdate.emit(this.currentDataArray.length);
 
         // Recursively subscribes, do NOT change the onDestroy method or there will be memory leaks
 /*
@@ -85,6 +87,8 @@ export class ScratchPadComponent implements OnDestroy{
             this.currentDataArray.splice(c,1);
           }
         }
+        this.totalUpdate.emit(this.currentDataArray.length);
+
     }
 
 

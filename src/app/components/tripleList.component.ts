@@ -14,6 +14,7 @@ import {ObservationService} from '../services/observation.service';
 export class TripleListComponent implements DraggableWidget{
 	@Input() patient: Patient;
 	@Output() passThrough: EventEmitter<Patient> = new EventEmitter();
+    obsCount: number = 0;
     gridItemConfiguration: NgGridItemConfig = {
 		'col': 5,               //  The start column for the item
 		'row': 3,               //  The start row for the item
@@ -41,6 +42,9 @@ export class TripleListComponent implements DraggableWidget{
 
 		this.passThrough.emit(this.patient);
      }
-
+     updateTotal(event) {
+       console.log("total:"+event);
+       this.obsCount = event;
+     }
 
 }

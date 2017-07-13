@@ -8,10 +8,10 @@ div([(ngGridItem)]='gridItemConfiguration')
           div.panel-heading
             h4.panel-title
               a(data-toggle="collapse" data-parent="#accordion" href="#o1")
-                | Scratch Pad
-          div.panel-collapse.collapse.in(id="o1")
+                | Scratch Pad ({{obsCount}})
+          div.panel-collapse.collapse(id="o1")
             div.panel-body
-              scratchPad([dataSource]='this.observationService.selected')
+              scratchPad([dataSource]='this.observationService.selected', (totalUpdate) = "updateTotal($event)")
         div.panel.panel-default
           div.panel-heading
             h4.panel-title

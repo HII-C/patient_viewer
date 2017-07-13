@@ -109,7 +109,7 @@ export class ConditionsComponent {
     this.conditionService.indexNext(url).subscribe(data => {
       if(data.entry) {
         let nextCon= <Array<Condition>>data.entry.map(r => r['resource']);
-    
+
         this.conditions = this.conditions.concat(nextCon);
         isLast = true;
         for(let i of data.link) {
@@ -192,7 +192,7 @@ export class ConditionsComponent {
   }
 
   updateScratchPad(){
-    this.scratchPadService.buttonClicked(true);
+    //this.scratchPadService.buttonClicked(true);
   }
 
   expand(parent: string) {

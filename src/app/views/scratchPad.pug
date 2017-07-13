@@ -1,20 +1,10 @@
-div([(ngGridItem)]='gridItemConfiguration')
-	button.btn.btn-default((click)="removeFromScratchPad()") Remove Selected Conditions
-	table.table.table-condensed.table-striped(id='condSP')
-		thead
-			tr
-				th
-				th
-					| Description
-				th
-					| Status
-				th
-					| Onset
-		tbody
-			tr("*ngFor"='let c of currentCondSpArray',id='condSP{{currentCondSpArray.indexOf(c)}}')
-				td
-					input(type='checkbox',id='condSP{{currentCondSpArray.indexOf(c)}}', value='{{currentCondSpArray.indexOf(c)}}', (change)='scratchPadCheckBoxes($event.target.checked, $event.target.getAttribute("value"))')
-				td
-					span {{c['code']['text']}} {{c['code']['coding'][0]['code']}}
-				td {{c.clinicalStatus}}
-				td {{c.relativeDateTime}}
+button.btn.btn-default((click)="removeFromScratchPad()") Remove Selected Conditions
+table.table.table-condensed.table-striped(id='condSP')
+	tbody
+		tr("*ngFor"='let c of currentDataArray',id='SP{{currentDataArray.indexOf(c)}}')
+			td
+				input(type='checkbox',id='condSP{{currentDataArray.indexOf(c)}}', value='{{currentDataArray.indexOf(c)}}', [checked] = 'c.isSelected', (change)='checked(c,$event,currentDataArray.indexOf(c),currentDataArray)')
+			td((click)='checked(c,$event,currentDataArray.indexOf(c),currentDataArray)')
+				span {{c.name}}
+			td((click)='checked(c,$event,currentDataArray.indexOf(c),currentDataArray)')
+				span {{c.date | amTimeAgo}}

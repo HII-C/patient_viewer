@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy } from '@angular/core';
+import { Component, Input, OnDestroy, Output,EventEmitter  } from '@angular/core';
 import {DraggableWidget} from './draggable_widget.component';
 import {NgGrid, NgGridItem, NgGridConfig, NgGridItemConfig, NgGridItemEvent} from 'angular2-grid';
 import {Subscription} from 'rxjs/Subscription';
@@ -13,82 +13,83 @@ import {Condition} from '../models/condition.model';
     templateUrl: 'scratchPad.html'
 })
 
-export class ScratchPadComponent implements DraggableWidget, OnDestroy{
-    @Input() patient: Patient;
-    currentCondSpArray: Array<Condition> = this.scratchPadService.currentCondSpArray;
+export class ScratchPadComponent implements OnDestroy{
+    @Input() dataSource: Array<any>;
+    @Output() totalUpdate = new EventEmitter();
+    currentDataArray: Array<any> = [];
     subscription: Subscription;
-    gridItemConfiguration: NgGridItemConfig = {
-		'col': 1,               //  The start column for the item
-		'row': 1,               //  The start row for the item
-		'sizex': 30,             //  The start width in terms of columns for the item
-		'sizey': 30,             //  The start height in terms of rows for the item
-		'dragHandle': null,     //  The selector to be used for the drag handle. If null, uses the whole item
-		'resizeHandle': null,   //  The selector to be used for the resize handle. If null, uses 'borderSize' pixels from the right for horizontal resize,
-		//    'borderSize' pixels from the bottom for vertical, and the square in the corner bottom-right for both
-		'borderSize': 15,
-		'fixed': false,         //  If the grid item should be cascaded or not. If yes, manual movement is required
-		'draggable': this.doctorService.configMode,      //  If the grid item can be dragged. If this or the global setting is set to false, the item cannot be dragged.
-		'resizable': this.doctorService.configMode,      //  If the grid item can be resized. If this or the global setting is set to false, the item cannot be resized.
-		'payload': 'test',        //  An optional custom payload (string/number/object) to be used to identify the item for serialization
-		'maxCols': 0,           //  The maximum number of columns for a particular item. This value will only override the value from the grid (if set) if it is smaller
-		'minCols': 0,           //  The minimum number of columns for a particular item. This value will only override the value from the grid if larger
-		'maxRows': 0,           //  The maximum number of rows for a particular item. This value will only override the value from the grid (if set) if it is smaller
-		'minRows': 0,           //  The minimum number of rows for a particular item. This value will only override the value from the grid if larger
-		'minWidth': 0,          //  The minimum width of a particular item. This value will override the value from the grid, as well as the minimum columns if the resulting size is larger
-		'minHeight': 0,         //  The minimum height of a particular item. This value will override the value from the grid, as well as the minimum rows if the resulting size is larger
-	}
+    lastIndex: number;
     constructor(private doctorService: DoctorService, private scratchPadService: ScratchPadService, private loupeService: LoupeService) {
         console.log("ScratchPadComponent Created...");
-        this.subscription = this.scratchPadService.buttonInCondCompClicked$.subscribe(clicked => {
+        this.subscription = this.scratchPadService.addNewData$.subscribe(clicked => {
+          console.log("value:"+clicked);
             this.addToScratchPad();
         });
     }
 
+
+    checked(selected:any, event, position, data) {
+      selected.isSelected = !selected.isSelected;
+      if(event.shiftKey) {
+  			let upper,lower;
+  			if(position<this.lastIndex) {
+  				upper = this.lastIndex;
+  				lower = position;
+  			}
+  			else {
+  				upper = position;
+  				lower = this.lastIndex;
+  			}
+  			for(let i = lower; i<=upper; i++) {
+  				data[i].isSelected = true;
+  			}
+  		}
+  		this.lastIndex = position;
+      }
+
     addToScratchPad(){
-        for (let c of this.scratchPadService.toAddToCondSpArray){
-            if (this.scratchPadService.currentCondSpArray.indexOf(c) == -1){
-                this.scratchPadService.currentCondSpArray.push(c);
+      console.log("adding");
+
+        for (let c of this.dataSource){
+            if (!this.doesExist(c)){
+                this.currentDataArray.push({"name":c.name,"date":c.date,"code":c.code});
             }
             else{
                 console.log("This Condition already exists on the scratchPad, duplicates are not allowed");
             }
         };
-        this.currentCondSpArray = this.scratchPadService.currentCondSpArray;
-        console.log(this.currentCondSpArray);
+        this.totalUpdate.emit(this.currentDataArray.length);
+
         // Recursively subscribes, do NOT change the onDestroy method or there will be memory leaks
-        this.subscription = this.scratchPadService.buttonInCondCompClicked$.subscribe(clicked => {
+/*
+        this.subscription = this.scratchPadService.addNewData$.subscribe(clicked => {
             this.addToScratchPad();
         });
+*/
     }
+    doesExist(value) {
+        for(let o of this.currentDataArray) {
+          if(value.code==o.code) {
+            return true;
+        }
+      }
+      return false;
+    }
+
     ngOnDestroy(){
         this.subscription.unsubscribe();
     }
 
     removeFromScratchPad(){
-        for (let c of this.scratchPadService.toRemovceFromCondSpArray){
-            if (this.scratchPadService.currentCondSpArray.indexOf(c) > -1){
-                this.scratchPadService.currentCondSpArray.splice(this.scratchPadService.currentCondSpArray.indexOf(c), 1);
-                console.log("Successfully removed" + c);
-            }
-            else{
-                console.log("bug");
-            }
+      for(let c = this.currentDataArray.length - 1; c >= 0; c--) {
+
+          if(this.currentDataArray[c].isSelected) {
+            this.currentDataArray.splice(c,1);
+          }
         }
+        this.totalUpdate.emit(this.currentDataArray.length);
+
     }
 
-    scratchPadCheckBoxes(checked: boolean, value) {
-    if (checked) {
-      // this.conditions[value].isSelected = true;
-      this.scratchPadService.toRemovceFromCondSpArray.push(this.scratchPadService.currentCondSpArray[value]);
-    }
-    else {
-      // this.conditions[value].isSelected = false;
-      let temp = this.scratchPadService.toRemovceFromCondSpArray.indexOf(this.scratchPadService.currentCondSpArray[value]);
-      if (temp > -1){
-        // This will actually delete instead of simply setting to null, which will throw errors in the long run
-        this.scratchPadService.toRemovceFromCondSpArray.splice(temp, 1);
-      }
-    }
-  }
 
 }

@@ -180,7 +180,7 @@ export class ChartTimelineComponent {
         this.ctx.setTransform(1, 0, 0, 1, 0, 0);
         this.ctx.restore();
         this.ctx.clearRect(0, 0, this.chartWidth, this.chartService.canvasHeight);
-        this.renderChart();
+        this.update();
         console.log(this.fiveYears);
     }
     setTwoYears()
@@ -200,7 +200,7 @@ export class ChartTimelineComponent {
         this.ctx.setTransform(1, 0, 0, 1, 0, 0);
         this.ctx.restore();
         this.ctx.clearRect(0, 0, this.chartWidth, this.chartHeight);
-        this.renderChart();
+        this.update();
         console.log(this.twoYears);
     }
     setOneYear()
@@ -220,7 +220,7 @@ export class ChartTimelineComponent {
         this.ctx.setTransform(1, 0, 0, 1, 0, 0);
         this.ctx.restore();
         this.ctx.clearRect(0, 0, this.chartWidth, this.chartHeight);
-        this.renderChart();
+        this.update();
         console.log(this.oneYear);
     }
     setSixMonths()
@@ -240,7 +240,7 @@ export class ChartTimelineComponent {
         this.ctx.setTransform(1, 0, 0, 1, 0, 0);
         this.ctx.restore();
         this.ctx.clearRect(0, 0, this.chartWidth, this.chartHeight);
-        this.renderChart();
+        this.update();
         console.log(this.sixMonths);
     }
     setThreeMonths()
@@ -260,7 +260,7 @@ export class ChartTimelineComponent {
         this.ctx.setTransform(1, 0, 0, 1, 0, 0);
         this.ctx.restore();
         this.ctx.clearRect(0, 0, this.chartWidth, this.chartHeight);
-        this.renderChart();
+        this.update();
         console.log(this.threeMonths);
     }
     setOneMonth()
@@ -280,7 +280,7 @@ export class ChartTimelineComponent {
         this.ctx.setTransform(1, 0, 0, 1, 0, 0);
         this.ctx.restore();
         this.ctx.clearRect(0, 0, this.chartWidth, this.chartHeight);
-        this.renderChart();
+        this.update();
         console.log(this.oneMonth);
     }
     setTwoWeeks()
@@ -300,7 +300,7 @@ export class ChartTimelineComponent {
         this.ctx.setTransform(1, 0, 0, 1, 0, 0);
         this.ctx.restore();
         this.ctx.clearRect(0, 0, this.chartWidth, this.chartHeight);
-        this.renderChart();
+        this.update();
         console.log(this.twoWeeks);
     }
     setSpecifyDates()
@@ -320,7 +320,7 @@ export class ChartTimelineComponent {
         this.ctx.setTransform(1, 0, 0, 1, 0, 0);
         this.ctx.restore();
         this.ctx.clearRect(0, 0, this.chartWidth, this.chartHeight);
-        this.renderChart();
+        this.update();
         console.log(this.specifyDates);
     }
 

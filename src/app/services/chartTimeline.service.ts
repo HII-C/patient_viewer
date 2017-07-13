@@ -60,7 +60,7 @@ export class ChartTimelineService {
 
     }
       this.dataDef = newData;
-      this.canvasHeight = 101*this.dataDef.dataPoints.length;
+      this.canvasHeight = 101*this.dataDef.dataPoints.length+60;
     }
 
 }

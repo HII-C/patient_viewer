@@ -11,6 +11,10 @@ import {Subscription} from 'rxjs/Subscription';
 
 import { Chart } from '../models/chart.model';
 
+//import * as moment from 'moment';
+//import { TimeAgoPipe } from 'angular2-moment/time-ago.pipe';
+
+
 declare var $:any; //Necessary in order to use jQuery to open popup.
 @Component({
   selector: 'chartTimelines',
@@ -56,7 +60,6 @@ export class ChartTimelineComponent {
         this.chartHeight = 100; //canvas.getAttribute('height'); //100
         this.chartWidth = Number(canvas.getAttribute('width'));
         this.ctx = canvas.getContext("2d");
-        this.canvasHeight = 101*this.data.dataPoints.length
 
         //reset context
         this.ctx.save();
@@ -81,6 +84,9 @@ export class ChartTimelineComponent {
     renderChart() {
         var overallMaxAndMin = this.getOverallMaxAndMin();
         var offsetAndWidth;
+        this.renderAxisLabels(overallMaxAndMin);
+        this.ctx.save();
+        this.ctx.translate(0, 60);
         for (let i = 0; i < this.data.dataPoints.length; i++)
         {
             this.ctx.save();
@@ -106,6 +112,7 @@ export class ChartTimelineComponent {
             this.ctx.restore();
             this.ctx.restore();
         }
+        this.ctx.restore();
 
     }
 
@@ -125,6 +132,35 @@ export class ChartTimelineComponent {
             }
         }
         return {min: min, max: max};
+    }
+
+    renderAxisLabels(overallMaxAndMin)
+    {
+        var interval, intervalDate;
+        var totInterval = overallMaxAndMin.max - overallMaxAndMin.min;
+        /*var diff = new Date().getTime() - (overallMaxAndMin.min);
+        var diffInterval, diffIntervalDate;*/
+
+        this.drawLine(0, 60, this.chartWidth, 60, 'black', 2);
+        for (let i = 0; i < 10; i++)
+        {
+            this.drawLine(i*(this.chartWidth/10), 60, (i*(this.chartWidth/10))+20, 1, 'black', 1);
+            interval = (totInterval/10)*(i+1);
+            //diffInterval = (diff/10)*(i+1);
+            intervalDate = new Date(interval).toLocaleDateString();
+            /*diffIntervalDate = new Date(intervalDate).toDateString();
+            diffIntervalDate = moment(intervalDate).toISOString();*/
+            //console.log(diffIntervalDate);
+            //diffIntervalDate = this.timeAgoPipe;
+            //console.log(diffIntervalDate);
+            this.ctx.save();
+            this.ctx.translate(i*(this.chartWidth/10)+22,30);
+            this.ctx.rotate(-1.22496);
+            this.ctx.font = this.data.labelFont;
+            this.ctx.textAlign = 'center';
+            this.ctx.fillText(intervalDate, 0, 0);
+            this.ctx.restore();
+        }
     }
 
     translateLines()
@@ -428,6 +464,8 @@ export class ChartTimelineComponent {
 
     renderDataType2(newData, width)
     {
+        console.log("newData", newData);
+
         var xLength = newData[newData.length-1].x - newData[0].x;
         var perc = xLength*.04;
         xLength = xLength + perc;
@@ -481,6 +519,8 @@ export class ChartTimelineComponent {
     }
 
     renderDataType3(newData, index, offset, width, max, min) {
+        console.log("newData", newData);
+
         var maxAndMins = this.getMaxAndMins(newData);
 
         //this section is currently for using the "potential max and min" values as bounds for the height of the graphs.  Will need to be changed at some point
@@ -518,7 +558,7 @@ export class ChartTimelineComponent {
             if (newData.length == 1)
             {
                 xPos = 0;
-                yPos = (this.chartHeight) - (newData[i].y/yLength)*(this.chartHeight);
+                yPos = -((this.chartHeight) - (newData[i].y/yLength)*(this.chartHeight));
                 console.log("xPos", xPos);
                 console.log("1 value");
             }
@@ -526,7 +566,7 @@ export class ChartTimelineComponent {
             {
                 a = newData[i].x - newData[0].x;
                 xPos = (a/xLength)*(width);
-                yPos = (this.chartHeight) - (newData[i].y/yLength)*(this.chartHeight);
+                yPos = -((this.chartHeight) - (newData[i].y/yLength)*(this.chartHeight));
                 console.log(this.chartHeight,newData[i].y,this.chartHeight);
                 console.log("xPos", xPos);
                 console.log("same values");

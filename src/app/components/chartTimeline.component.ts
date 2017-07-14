@@ -11,7 +11,7 @@ import {Subscription} from 'rxjs/Subscription';
 
 import { Chart } from '../models/chart.model';
 
-//import * as moment from 'moment';
+import * as moment from 'moment';
 //import { TimeAgoPipe } from 'angular2-moment/time-ago.pipe';
 
 
@@ -441,12 +441,8 @@ export class ChartTimelineComponent {
             this.drawLine(i*(this.chartWidth/10), 60, (i*(this.chartWidth/10))+20, 1, 'black', 1);
             interval = (totInterval/10)*(i+1);
             //diffInterval = (diff/10)*(i+1);
-            intervalDate = new Date(interval).toLocaleDateString();
-            /*diffIntervalDate = new Date(intervalDate).toDateString();
-            diffIntervalDate = moment(intervalDate).toISOString();*/
-            //console.log(diffIntervalDate);
-            //diffIntervalDate = this.timeAgoPipe;
-            //console.log(diffIntervalDate);
+            //intervalDate = new Date(interval).toLocaleDateString();
+            intervalDate = moment(interval).fromNow();
             this.ctx.save();
             this.ctx.translate(i*(this.chartWidth/10)+22,30);
             this.ctx.rotate(-1.22496);

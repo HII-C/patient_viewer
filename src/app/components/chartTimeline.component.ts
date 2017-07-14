@@ -39,7 +39,7 @@ export class ChartTimelineComponent {
     chartWidth: number;
     canvasHeight: number;
 
-    whole: boolean = true;
+    whole: boolean = false;
     twentyFiveYears: boolean = false;
     tenYears: boolean = false;
     fiveYears: boolean = false;
@@ -329,45 +329,55 @@ export class ChartTimelineComponent {
         var offsetAndWidth;
         var dateRange;
         var indexStart;
-        if (this.whole = true)
+        if (this.whole == true)
         {
             dateRange = null;
+            console.log("dateRange", dateRange);
         }
-        else if (this.twentyFiveYears = true)
+        else if (this.twentyFiveYears == true)
         {
-            dateRange = new Date().getTime() - new Date(ChartTimelineComponent.twentyFiveYearsMS).getTime();
+            dateRange = new Date().getTime() - ChartTimelineComponent.twentyFiveYearsMS;
+            console.log("dateRange", dateRange);
         }
-        else if (this.tenYears = true)
+        else if (this.tenYears == true)
         {
-            dateRange = new Date().getTime() - new Date(ChartTimelineComponent.tenYearsMS).getTime();
+            dateRange = new Date().getTime() - ChartTimelineComponent.tenYearsMS;
+            console.log("dateRange", dateRange);
         }
-        else if (this.fiveYears = true)
+        else if (this.fiveYears == true)
         {
-            dateRange = new Date().getTime() - new Date(ChartTimelineComponent.fiveYearsMS).getTime();
+            dateRange = new Date().getTime() - ChartTimelineComponent.fiveYearsMS;
+            console.log("dateRange", dateRange);
         }
-        else if (this.twoYears = true)
+        else if (this.twoYears == true)
         {
-            dateRange = new Date().getTime() - new Date(ChartTimelineComponent.twoYearsMS).getTime();
+            dateRange = new Date().getTime() - ChartTimelineComponent.twoYearsMS;
+            console.log("dateRange", dateRange);
         }
-        else if (this.oneYear = true)
+        else if (this.oneYear == true)
         {
-            dateRange = new Date().getTime() - new Date(ChartTimelineComponent.oneYearsMS).getTime();
+            dateRange = new Date().getTime() - ChartTimelineComponent.oneYearsMS;
+            console.log("dateRange", dateRange);
         }
-        else if (this.sixMonths = true)
+        else if (this.sixMonths == true)
         {
-            dateRange = new Date().getTime() - new Date(ChartTimelineComponent.sixMonthsMS).getTime();
+            dateRange = new Date().getTime() - ChartTimelineComponent.sixMonthsMS;
+            console.log("dateRange", dateRange);
         }
-        else if (this.threeMonths = true)
+        else if (this.threeMonths == true)
         {
-            dateRange = new Date().getTime() - new Date(ChartTimelineComponent.threeMonthsMS).getTime();
+            dateRange = new Date().getTime() - ChartTimelineComponent.threeMonthsMS;
+            console.log("dateRange", dateRange);
         }
-        else if (this.oneMonth = true)
+        else if (this.oneMonth == true)
         {
-            dateRange = new Date().getTime() - new Date(ChartTimelineComponent.oneMonthMS).getTime();
+            dateRange = new Date().getTime() - ChartTimelineComponent.oneMonthMS;
+            console.log("dateRange", dateRange);
         }
-        else if (this.twoWeeks = true)
+        else if (this.twoWeeks == true)
         {
-            dateRange = new Date().getTime() - new Date(ChartTimelineComponent.twoWeeksMS).getTime();
+            dateRange = new Date().getTime() - ChartTimelineComponent.twoWeeksMS;
+            console.log("dateRange", dateRange);
         }
 
         this.renderAxisLabels(overallMaxAndMin, dateRange);

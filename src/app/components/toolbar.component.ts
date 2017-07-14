@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, ElementRef} from '@angular/core';
 import {trigger, state, style, animate, transition} from '@angular/animations';
 
 import {NgGrid, NgGridItem, NgGridConfig, NgGridItemConfig, NgGridItemEvent} from 'angular2-grid';
@@ -7,6 +7,7 @@ import {DraggableWidget} from './draggable_widget.component';
 import {Patient} from '../models/patient.model';
 import {DoctorService} from '../services/doctor.service';
 import {ChartTimelineService} from '../services/chartTimeline.service';
+import {ToolBarService} from '../services/toolbar.service';
 
 
 @Component({
@@ -32,7 +33,7 @@ export class ToolbarComponent {
 	gridItemConfiguration: NgGridItemConfig = {
 		'col': 35,               //  The start column for the item
 		'row': 1,               //  The start row for the item
-		'sizex': 40,             //  The start width in terms of columns for the item
+		'sizex': 41,             //  The start width in terms of columns for the item
 		'sizey': 5,             //  The start height in terms of rows for the item
 		'dragHandle': null,     //  The selector to be used for the drag handle. If null, uses the whole item
 		'resizeHandle': null,   //  The selector to be used for the resize handle. If null, uses 'borderSize' pixels from the right for horizontal resize,
@@ -50,7 +51,7 @@ export class ToolbarComponent {
 		// 'minHeight': 0,         //  The minimum height of a particular item. This value will override the value from the grid, as well as the minimum rows if the resulting size is larger
 	}
 
-	constructor(private doctorService: DoctorService, private chartService: ChartTimelineService) {
+	constructor(private doctorService: DoctorService, private chartService: ChartTimelineService, private elRef:ElementRef, private toolbarService:ToolBarService) {
 		console.log("ToolbarComponent created...");
 	}
 
@@ -62,5 +63,17 @@ export class ToolbarComponent {
 			this.chartService.buttonClicked(true);
 
 		}
+		updatePosition(ref: ElementRef) {
+			console.log(this.elRef.nativeElement.querySelector('div').style.left);
+			console.log(this.elRef.nativeElement.querySelector('div').style.top);
+
+			let left = this.elRef.nativeElement.querySelector('div').style.left;
+			let top = this.elRef.nativeElement.querySelector('div').style.top;
+
+			this.toolbarService.leftPosition =  (parseInt(left.replace(/px/,""))+150)+"px";
+			this.toolbarService.topPosition = (parseInt(top.replace(/px/,""))+100)+"px";
+
+		}
+
 
 }

@@ -17,6 +17,8 @@ div([(ngGridItem)]='gridItemConfiguration')
             h4.panel-title
               a(data-toggle="collapse" data-parent="#accordion" href="#o2")
                 | Findings List
+              button.btn.btn-default.btn-sm(data-toggle="modal", [attr.data-target]="'#newEntry'")
+                span.glyphicon.glyphicon-plus
           div.panel-collapse.collapse.in(id="o2")
             div.panel-body
               observations([patient]='patient', #obs='', *ngIf='passThrough')

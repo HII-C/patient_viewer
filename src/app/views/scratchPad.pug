@@ -1,4 +1,5 @@
-button.btn.btn-default((click)="removeFromScratchPad()") Remove Selected Conditions
+a((click)='removeFromScratchPad()') 
+	| Remove Selected Conditions
 table.table.table-condensed.table-striped(id='condSP')
 	tbody
 		tr("*ngFor"='let c of currentDataArray',id='SP{{currentDataArray.indexOf(c)}}')

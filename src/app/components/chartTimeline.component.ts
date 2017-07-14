@@ -12,7 +12,6 @@ import {Subscription} from 'rxjs/Subscription';
 import { Chart } from '../models/chart.model';
 
 import * as moment from 'moment';
-//import { TimeAgoPipe } from 'angular2-moment/time-ago.pipe';
 
 
 declare var $:any; //Necessary in order to use jQuery to open popup.
@@ -39,7 +38,7 @@ export class ChartTimelineComponent {
     chartWidth: number;
     canvasHeight: number;
 
-    whole: boolean = false;
+    whole: boolean = true;
     twentyFiveYears: boolean = false;
     tenYears: boolean = false;
     fiveYears: boolean = false;
@@ -329,58 +328,69 @@ export class ChartTimelineComponent {
         var offsetAndWidth;
         var dateRange;
         var indexStart;
+        var dateMin;
         if (this.whole == true)
         {
             dateRange = null;
+            dateMin = overallMaxAndMin.min;
             console.log("dateRange", dateRange);
         }
         else if (this.twentyFiveYears == true)
         {
             dateRange = new Date().getTime() - ChartTimelineComponent.twentyFiveYearsMS;
+            dateMin = ChartTimelineComponent.twentyFiveYearsMS;
             console.log("dateRange", dateRange);
         }
         else if (this.tenYears == true)
         {
             dateRange = new Date().getTime() - ChartTimelineComponent.tenYearsMS;
+            dateMin = ChartTimelineComponent.tenYearsMS;
             console.log("dateRange", dateRange);
         }
         else if (this.fiveYears == true)
         {
             dateRange = new Date().getTime() - ChartTimelineComponent.fiveYearsMS;
+            dateMin = ChartTimelineComponent.fiveYearsMS;
             console.log("dateRange", dateRange);
         }
         else if (this.twoYears == true)
         {
             dateRange = new Date().getTime() - ChartTimelineComponent.twoYearsMS;
+            dateMin = ChartTimelineComponent.twoYearsMS;
             console.log("dateRange", dateRange);
         }
         else if (this.oneYear == true)
         {
             dateRange = new Date().getTime() - ChartTimelineComponent.oneYearsMS;
+            dateMin = ChartTimelineComponent.oneYearsMS;
             console.log("dateRange", dateRange);
         }
         else if (this.sixMonths == true)
         {
             dateRange = new Date().getTime() - ChartTimelineComponent.sixMonthsMS;
+            dateMin = ChartTimelineComponent.sixMonthsMS;
             console.log("dateRange", dateRange);
         }
         else if (this.threeMonths == true)
         {
             dateRange = new Date().getTime() - ChartTimelineComponent.threeMonthsMS;
+            dateMin = ChartTimelineComponent.threeMonthsMS;
             console.log("dateRange", dateRange);
         }
         else if (this.oneMonth == true)
         {
             dateRange = new Date().getTime() - ChartTimelineComponent.oneMonthMS;
+            dateMin = ChartTimelineComponent.oneMonthMS;
             console.log("dateRange", dateRange);
         }
         else if (this.twoWeeks == true)
         {
             dateRange = new Date().getTime() - ChartTimelineComponent.twoWeeksMS;
+            dateMin = ChartTimelineComponent.twoWeeksMS;
             console.log("dateRange", dateRange);
         }
 
-        this.renderAxisLabels(overallMaxAndMin, dateRange);
+        this.renderAxisLabels(overallMaxAndMin, dateRange, dateMin);
         this.ctx.save();
         this.ctx.translate(0, 60);
         for (let i = 0; i < this.data.dataPoints.length; i++)
@@ -430,28 +440,27 @@ export class ChartTimelineComponent {
         return {min: min, max: max};
     }
 
-    renderAxisLabels(overallMaxAndMin, dateRange)
+    renderAxisLabels(overallMaxAndMin, dateRange, dateMin)
     {
         var interval, intervalDate;
-        var totInterval;
-        if (dateRange == null)
+        var totInterval = dateMin;
+        console.log(dateMin);
+        /* (dateRange == null)
         {
             totInterval = overallMaxAndMin.max - overallMaxAndMin.min;
         }
         else
         {
             totInterval = dateRange;
-        }
-        /*var diff = new Date().getTime() - (overallMaxAndMin.min);
-        var diffInterval, diffIntervalDate;*/
+        }*/
 
         this.drawLine(0, 60, this.chartWidth, 60, 'black', 2);
+        this.ctx.save();
+        this.ctx.translate(17,0);
         for (let i = 0; i < 10; i++)
         {
             this.drawLine(i*(this.chartWidth/10), 60, (i*(this.chartWidth/10))+20, 1, 'black', 1);
-            interval = (totInterval/10)*(i+1);
-            //diffInterval = (diff/10)*(i+1);
-            //intervalDate = new Date(interval).toLocaleDateString();
+            interval = dateRange+((totInterval/10)*(i+1));
             intervalDate = moment(interval).fromNow();
             this.ctx.save();
             this.ctx.translate(i*(this.chartWidth/10)+22,30);
@@ -461,6 +470,7 @@ export class ChartTimelineComponent {
             this.ctx.fillText(intervalDate, 0, 0);
             this.ctx.restore();
         }
+        this.ctx.restore();
     }
 
     translateLines()

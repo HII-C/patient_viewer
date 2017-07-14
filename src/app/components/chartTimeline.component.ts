@@ -26,7 +26,26 @@ export class ChartTimelineComponent {
       this.subscription = this.chartService.activateGraph$.subscribe(clicked => {
           this.update();
       });
+      moment.updateLocale('en', {
+        relativeTime : {
+            future: "in %s",
+            past:"%s ago",
+            s:  "seconds",
+            ss : '%d seconds',
+            m:  "1m",
+            mm: "%dm",
+            h:  "1h",
+            hh: "%h",
+            d:  "1d",
+            dd: "%dd",
+            M:  "1m",
+            MM: "%dm",
+            y:  "1y",
+            yy: "%dy"
+        }
+      });
     }
+
     subscription: Subscription;
 
     maxYValue: number = 0;
@@ -62,6 +81,7 @@ export class ChartTimelineComponent {
 
 
     update() {
+
         this.render('canvas', this.chartService.dataDef);
     }
     render(canvasId, dataObj) {

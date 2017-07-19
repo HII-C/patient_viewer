@@ -30,10 +30,10 @@ export class ChartTimelineComponent {
         relativeTime : {
             future: "in %s",
             past:"%s ago",
-            s:  "seconds",
-            ss : '%d seconds',
-            m:  "1m",
-            mm: "%dm",
+            s:  "1s",
+            ss : '%ds',
+            m:  "1min",
+            mm: "%dmin",
             h:  "1h",
             hh: "%h",
             d:  "1d",
@@ -346,71 +346,72 @@ export class ChartTimelineComponent {
     renderChart() {
         var overallMaxAndMin = this.getOverallMaxAndMin();
         var offsetAndWidth;
-        var dateRange;
-        var indexStart;
         var dateMin;
+        var indexStart;
+        var dateRange;
+        var dateNow = new Date().getTime();
         if (this.whole == true)
         {
             dateRange = null;
             dateMin = overallMaxAndMin.min;
-            console.log("dateRange", dateRange);
+            console.log("dateMin", dateMin);
         }
         else if (this.twentyFiveYears == true)
         {
-            dateRange = new Date().getTime() - ChartTimelineComponent.twentyFiveYearsMS;
-            dateMin = ChartTimelineComponent.twentyFiveYearsMS;
-            console.log("dateRange", dateRange);
+            dateMin = dateNow - ChartTimelineComponent.twentyFiveYearsMS;
+            dateRange = ChartTimelineComponent.twentyFiveYearsMS;
+            console.log("dateMin", dateMin);
         }
         else if (this.tenYears == true)
         {
-            dateRange = new Date().getTime() - ChartTimelineComponent.tenYearsMS;
-            dateMin = ChartTimelineComponent.tenYearsMS;
-            console.log("dateRange", dateRange);
+            dateMin = dateNow - ChartTimelineComponent.tenYearsMS;
+            dateRange = ChartTimelineComponent.tenYearsMS;
+            console.log("dateMin", dateMin);
         }
         else if (this.fiveYears == true)
         {
-            dateRange = new Date().getTime() - ChartTimelineComponent.fiveYearsMS;
-            dateMin = ChartTimelineComponent.fiveYearsMS;
-            console.log("dateRange", dateRange);
+            dateMin = dateNow - ChartTimelineComponent.fiveYearsMS;
+            dateRange = ChartTimelineComponent.fiveYearsMS;
+            console.log("dateMin", dateMin);
         }
         else if (this.twoYears == true)
         {
-            dateRange = new Date().getTime() - ChartTimelineComponent.twoYearsMS;
-            dateMin = ChartTimelineComponent.twoYearsMS;
-            console.log("dateRange", dateRange);
+            dateMin = dateNow - ChartTimelineComponent.twoYearsMS;
+            dateRange = ChartTimelineComponent.twoYearsMS;
+            console.log("dateMin", dateMin);
         }
         else if (this.oneYear == true)
         {
-            dateRange = new Date().getTime() - ChartTimelineComponent.oneYearsMS;
-            dateMin = ChartTimelineComponent.oneYearsMS;
-            console.log("dateRange", dateRange);
+            dateMin = dateNow - ChartTimelineComponent.oneYearsMS;
+            dateRange = ChartTimelineComponent.oneYearsMS;
+            console.log("dateMin", dateMin);
         }
         else if (this.sixMonths == true)
         {
-            dateRange = new Date().getTime() - ChartTimelineComponent.sixMonthsMS;
-            dateMin = ChartTimelineComponent.sixMonthsMS;
-            console.log("dateRange", dateRange);
+            dateMin = dateNow - ChartTimelineComponent.sixMonthsMS;
+            dateRange = ChartTimelineComponent.sixMonthsMS;
+            console.log("dateMin", dateMin);
         }
         else if (this.threeMonths == true)
         {
-            dateRange = new Date().getTime() - ChartTimelineComponent.threeMonthsMS;
-            dateMin = ChartTimelineComponent.threeMonthsMS;
-            console.log("dateRange", dateRange);
+            dateMin = dateNow - ChartTimelineComponent.threeMonthsMS;
+            dateRange = ChartTimelineComponent.threeMonthsMS;
+            console.log("dateMin", dateMin);
         }
         else if (this.oneMonth == true)
         {
-            dateRange = new Date().getTime() - ChartTimelineComponent.oneMonthMS;
-            dateMin = ChartTimelineComponent.oneMonthMS;
-            console.log("dateRange", dateRange);
+            dateMin = dateNow - ChartTimelineComponent.oneMonthMS;
+            dateRange = ChartTimelineComponent.oneMonthMS;
+            console.log("dateMin", dateMin);
         }
         else if (this.twoWeeks == true)
         {
-            dateRange = new Date().getTime() - ChartTimelineComponent.twoWeeksMS;
-            dateMin = ChartTimelineComponent.twoWeeksMS;
-            console.log("dateRange", dateRange);
+            dateMin = dateNow - ChartTimelineComponent.twoWeeksMS;
+            dateRange = ChartTimelineComponent.twoWeeksMS;
+            console.log("dateMin", dateMin);
         }
 
-        this.renderAxisLabels(overallMaxAndMin, dateRange, dateMin);
+        this.renderAxisLabels(overallMaxAndMin, dateMin, dateRange, dateNow);
         this.ctx.save();
         this.ctx.translate(0, 60);
         for (let i = 0; i < this.data.dataPoints.length; i++)
@@ -433,7 +434,7 @@ export class ChartTimelineComponent {
             }
             else if (this.data.dataPoints[i].code == '3')
             {
-                this.renderDataType3(this.newData[i], i, offsetAndWidth.offset, offsetAndWidth.width, overallMaxAndMin.max, overallMaxAndMin.min);
+                this.renderDataType3(this.newData[i], i, offsetAndWidth.offset, offsetAndWidth.width, overallMaxAndMin.max, overallMaxAndMin.min, dateMin, dateRange);
             }
             this.ctx.restore();
             this.ctx.restore();
@@ -460,19 +461,20 @@ export class ChartTimelineComponent {
         return {min: min, max: max};
     }
 
-    renderAxisLabels(overallMaxAndMin, dateRange, dateMin)
+    renderAxisLabels(overallMaxAndMin, dateMin, dateRange, dateNow)
     {
         var interval, intervalDate;
-        var totInterval = dateMin;
-        console.log(dateMin);
-        /* (dateRange == null)
+        var totInterval;
+        if (dateRange != null)
         {
-            totInterval = overallMaxAndMin.max - overallMaxAndMin.min;
+            totInterval = overallMaxAndMin.max - dateMin;
         }
         else
         {
-            totInterval = dateRange;
-        }*/
+            totInterval = overallMaxAndMin.max - overallMaxAndMin.min;
+        }
+
+        console.log(dateRange);
 
         this.drawLine(0, 60, this.chartWidth, 60, 'black', 2);
         this.ctx.save();
@@ -480,7 +482,7 @@ export class ChartTimelineComponent {
         for (let i = 0; i < 10; i++)
         {
             this.drawLine(i*(this.chartWidth/10), 60, (i*(this.chartWidth/10))+20, 1, 'black', 1);
-            interval = dateRange+((totInterval/10)*(i+1));
+            interval = dateMin+((totInterval/10)*(i+1));
             intervalDate = moment(interval).fromNow();
             this.ctx.save();
             this.ctx.translate(i*(this.chartWidth/10)+22,30);
@@ -848,9 +850,22 @@ export class ChartTimelineComponent {
 
     }
 
-    renderDataType3(newData, index, offset, width, max, min) {
+    renderDataType3(newData, index, offset, width, max, min, dateMin, dateRange) {
         console.log("newData", newData);
 
+        var j = 0;
+        if (dateRange != null)
+        {
+            for (let i = 0; i < newData.length; i++)
+            {
+                if (newData[i].x >= dateMin)
+                {
+                    j = i;
+                    console.log("j set", j, "dateMin", dateMin, "newData.x", newData[i].x);
+                    break;
+                }
+            }
+        }
         var maxAndMins = this.getMaxAndMins(newData);
 
         //this section is currently for using the "potential max and min" values as bounds for the height of the graphs.  Will need to be changed at some point
@@ -874,7 +889,7 @@ export class ChartTimelineComponent {
         this.ctx.translate(17, 15);
 
         //Check if all values are the same
-        for (let i = 1; i < newData.length; i++)
+        for (let i = j + 1; i < newData.length; i++)
         {
             if (newData[i].y != newData[i-1].y)
             {
@@ -883,7 +898,42 @@ export class ChartTimelineComponent {
             }
         }
 
-        for (let i = 0; i < newData.length; i++)
+        while (j < newData.length)
+        {
+            if (newData.length == 1)
+            {
+                xPos = 0;
+                yPos = -((this.chartHeight) - (newData[j].y/yLength)*(this.chartHeight));
+                console.log("xPos", xPos);
+                console.log("1 value");
+            }
+            else if (sameVal == true)
+            {
+                a = newData[j].x - newData[0].x;
+                xPos = (a/xLength)*(width);
+                yPos = -((this.chartHeight) - (newData[j].y/yLength)*(this.chartHeight));
+                console.log(this.chartHeight,newData[j].y,this.chartHeight);
+                console.log("xPos", xPos);
+                console.log("same values");
+            }
+            else
+            {
+                a = newData[j].x - newData[0].x;
+                xPos = (a/xLength)*(width);
+                b = newData[j].y - bottom;
+                yPos = (this.chartHeight) - (b/yLength)*(this.chartHeight);
+                console.log("xPos", xPos);
+                console.log("regular");
+            }
+
+            this.ctx.fillStyle = 'grey';
+            this.ctx.rect(xPos, this.chartHeight-16, (duration/xLength)*width, -yPos);
+            this.ctx.fill();
+
+            j++;
+        }
+
+        /*for (let i = 0; i < newData.length; i++)
         {
             if (newData.length == 1)
             {
@@ -914,7 +964,7 @@ export class ChartTimelineComponent {
             this.ctx.fillStyle = 'grey';
             this.ctx.rect(xPos, this.chartHeight-16, (duration/xLength)*width, -yPos);
             this.ctx.fill();
-        }
+        }*/
 
         this.ctx.restore();
     }

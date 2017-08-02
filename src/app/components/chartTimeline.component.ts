@@ -623,7 +623,8 @@ export class ChartTimelineComponent {
     }
 
     renderDataType1(newData, index, offset, width, max, min) {
-        var maxAndMins = this.getMaxAndMins(newData);
+        console.log("newData", newData);
+        var maxAndMins = this.getMaxAndMins(newData, 1); //TODO add button control here as well
 
         //this section is currently for using the "potential max and min" values as bounds for the height of the graphs.  Will need to be changed at some point
         var top = maxAndMins.largestY+50;
@@ -938,7 +939,7 @@ export class ChartTimelineComponent {
                 }
             }
         }
-        var maxAndMins = this.getMaxAndMins(newData);
+        var maxAndMins = this.getMaxAndMins(newData, 0);
 
         //this section is currently for using the "potential max and min" values as bounds for the height of the graphs.  Will need to be changed at some point
         var top = maxAndMins.largestY+50;
@@ -948,7 +949,7 @@ export class ChartTimelineComponent {
         var xLength = newData[newData.length-1].x - newData[0].x;
         var perc = xLength*.04;
         xLength = xLength + perc;
-        var yLength = top - bottom; //maxAndMins.largestY - maxAndMins.smallestY;
+        var yLength = top - bottom;
         var a, b, c, d, y;
         var sameVal = true;
         var xPos, yPos;
@@ -971,7 +972,7 @@ export class ChartTimelineComponent {
 
         while (j < newData.length)
         {
-            if (newData.length == 1)
+            if (newData.length-j == 1)
             {
                 xPos = 0;
                 yPos = -((this.chartHeight) - (newData[j].y/yLength)*(this.chartHeight));
@@ -1040,29 +1041,29 @@ export class ChartTimelineComponent {
         this.ctx.restore();
     }
 
-    getMaxAndMins(newData) {
-        if (newData.length % 2 == 0)
+    getMaxAndMins(newData, a) {
+        if ((newData.length - a) % 2 == 0)
         {
             //set initial largest and smallest y values
-            if(newData[0].y >= newData[1].y)
+            if(newData[a].y >= newData[a+1].y)
             {
-                var largestY = newData[0].y;
-                var smallestY = newData[1].y;
+                var largestY = newData[a].y;
+                var smallestY = newData[a+1].y;
             }
             else
             {
-                var largestY = newData[1].y;
-                var smallestY = newData[0].y;
+                var largestY = newData[a+1].y;
+                var smallestY = newData[a].y;
             }
-            var i = 2;
-            var j = 3;
+            var i = a+2;
+            var j = a+3;
         }
         else
         {
-            var largestY = newData[0].y;
-            var smallestY = newData[0].y;
-            var i = 1;
-            var j = 2;
+            var largestY = newData[a].y;
+            var smallestY = newData[a].y;
+            var i = a+1;
+            var j = a+2;
         }
 
         //find smallest and largest y values in the data set

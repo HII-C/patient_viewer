@@ -8,6 +8,8 @@
                     span(aria-hidden='true') ×
             .modal-lg.modal-body(style="background-color:white")
                 section
+                    //TODO dashboard here!
+                section
                     div.btn-group(style="height: 50px")
                         button.btn.btn-default((click)='setWhole()' style="width: 75px")
                             | All
@@ -29,7 +31,7 @@
                             | 1 Month
                         button.btn.btn-default((click)='setTwoWeeks()' style="width: 75px")
                             | 2 Weeks
-                        button.btn.btn-default((click)='setSpecifyDates()' style="width: 75px")
+                        button.btn.btn-default(data-toggle="modal", [attr.data-target]="'#specify_popup'", style="width: 75px") 
                             | Specify
                     div(style="height: 500px; width: 825px; overflow-y:auto")
                         canvas(id="canvas", width="800", [height] = "this.chartService.canvasHeight" )
@@ -37,3 +39,16 @@
             .modal-footer.modal-lg
                 button.btn.btn-default(type='button', data-dismiss='modal') Close
                         
+#specify_popup.modal.fade(tabindex='-1', role='dialog')
+    .modal-lg.modal-dialog(role='document')
+        .modal-lg.modal-content(style="width: 450px; height: 125px;")
+            .modal-lg.modal-header(style='width: 450px')
+                | Specify start and end dates
+                button.close(type='button', data-dismiss='modal', aria-label='Close')
+                    span(aria-hidden='true') ×
+            .modal-lg.modal-body(style="width: 445px; background-color:white")
+                forms
+                    input(#startDate='', type='date', name='startDate')
+                    input(#endDate='', type='date', name='endDate')
+                    button((click)='setSpecifyDates(starDate.value, endDate.value)') Submit
+                

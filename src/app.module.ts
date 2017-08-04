@@ -24,6 +24,7 @@ import {ScratchPadComponent} from './app/components/scratchPad.component';
 import {ObservationRecursive} from './app/components/observationRecursion.component';
 import {AddObservation} from './app/components/addObservation.component';
 import {Favorites} from './app/components/favorites.component';
+import {ObservationRecursiveChart} from './app/components/observationRecursionChart.component';
 
 
 
@@ -115,7 +116,8 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
         ScratchPadComponent,
         ObservationRecursive,
         AddObservation,
-        Favorites
+        Favorites,
+        ObservationRecursiveChart
     ],   // components and directives
     providers: [
         appRoutingProviders,

@@ -11,7 +11,7 @@ export class ObservationRecursiveChart {
 
 
 	@Input() obs: any;
-  @Input() level: number;
+	@Input() level: number;
 	graphData: Array<any> = [];
 	lastIndex: number;
 	constructor(private observationService: ObservationService, private chartService: ChartTimelineService) {

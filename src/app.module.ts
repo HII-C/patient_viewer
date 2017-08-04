@@ -25,6 +25,8 @@ import {ObservationRecursive} from './app/components/observationRecursion.compon
 import {AddObservation} from './app/components/addObservation.component';
 import {Favorites} from './app/components/favorites.component';
 import {ObservationRecursiveChart} from './app/components/observationRecursionChart.component';
+import {CarePlanChartComponent} from './app/components/carePlanChart.component';
+import {ConditionsChartComponent} from './app/components/conditionsChart.component';
 
 
 
@@ -117,7 +119,9 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
         ObservationRecursive,
         AddObservation,
         Favorites,
-        ObservationRecursiveChart
+        ObservationRecursiveChart,
+        CarePlanChartComponent,
+        ConditionsChartComponent
     ],   // components and directives
     providers: [
         appRoutingProviders,

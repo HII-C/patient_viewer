@@ -12,13 +12,34 @@
                         h4 
                             | Dashboard
                             button((click)='update()') Update
-                        div(style="overflow-y:auto")
-                            h2 Observations
-                            div.container(style="width:auto")
-                                div.panel-group(id="obs")
-                                    div.panel.panel-default("*ngIf"='this.observationService.categorizedObservations')
-                                        observationRecursionChart([obs]="this.observationService.categorizedObservations.categories",[level]=0)
-                            
+                        div(style="overflow-y:auto; height:650px")
+                            div.panel.panel-default
+                                div.panel-heading
+                                    h4.panel-title
+                                        a(data-toggle="collapse" href="#c")
+                                            | Conditions
+                                div.container(id="c", style="width:auto")
+                                    div.panel-group
+                                        div.panel.panel-default
+                                            conditionsChart([patient]='patient', *ngIf='passThrough')
+                            div.panel.panel-default
+                                div.panel-heading
+                                    h4.panel-title
+                                        a(data-toggle="collapse" href="#o")
+                                            | Findings List
+                                div.container(id="o", style="width:auto")
+                                    div.panel-group(id="obs")
+                                        div.panel.panel-default("*ngIf"='this.observationService.categorizedObservations')
+                                            observationRecursionChart([obs]="this.observationService.categorizedObservations.categories",[level]=0)
+                            div.panel.panel-default
+                                div.panel-heading
+                                    h4.panel-title
+                                        a(data-toggle="collapse" href="#cp")
+                                            | Care Plans
+                                div.container(id="cp", style="width:auto")
+                                    div.panel-group
+                                        div.panel.panel-default
+                                            carePlanChart([patient]='patient', *ngIf='passThrough')
                 div(style="float:right; width: 825px")
                     div.btn-group(style="height: 50px")
                         button.btn.btn-default((click)='setWhole()' style="width: 75px")
@@ -48,7 +69,7 @@
             div(style="clear: both")
             .modal-footer.modal-lg(style="width: 1250px")
                 button.btn.btn-default(type='button', data-dismiss='modal') Close
-                        
+
 #specify_popup.modal.fade(tabindex='-1', role='dialog')
     .modal-lg.modal-dialog(role='document')
         .modal-lg.modal-content(style="width: 450px; height: 125px;")
@@ -57,7 +78,6 @@
                 button.close(type='button', data-dismiss='modal', aria-label='Close')
                     span(aria-hidden='true') ×
             .modal-lg.modal-body(style="width: 445px; background-color:white")
-                input(#startDate='', type='date', name='startDate')
-                input(#endDate='', type='date', name='endDate')
+                input(id="startDate", type='date', name='startDate')
+                input(id="endDate", type='date', name='endDate')
                 button((click)='setSpecifyDates(starDate.value, endDate.value)') Submit
-                

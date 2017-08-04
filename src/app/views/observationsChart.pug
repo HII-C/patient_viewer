@@ -1,18 +1,18 @@
-div("*ngFor"='let cats of getData()')
+div("*ngFor"='let cat of getData()')
   div.panel-heading
     h4.panel-title([style.marginLeft.px] = "getLevel()*20")
-      a(data-toggle='collapse', href='#collapse{{cats.id}}')
+      a(data-toggle='collapse', href='#collapseC{{cat.id}}')
         span.glyphicon.glyphicon-triangle-bottom
-        | {{cats.display}} ({{cats.count}})
-  div.panel-collapse.collapse(id="collapse{{cats.id}}")
-    table.table.table-condensed.table-striped("*ngIf"='cats.data', style="width:auto", [style.marginLeft.px] = "(getLevel()+1)*20")
+        | {{cat.display}} ({{cat.count}})
+  div.panel-collapse.collapse(id="collapseC{{cat.id}}")
+    table.table.table-condensed.table-striped("*ngIf"='cat.data', style="width:auto", [style.marginLeft.px] = "(getLevel()+1)*20")
         tbody
-            tr("*ngFor"='let o of cats.data', [class.selected]='o.highlighted')
+            tr("*ngFor"='let o of cat.data', [class.selected]='o.highlighted')
                 td
-                  input(type='checkbox',id='c{{o.code}}', value='{{o.code}}', [checked] = 'o.isSelected', (change)='checked(o,$event,cats.data.indexOf(o),cats.data)')
+                  input(type='checkbox',id='c{{o.code}}', value='{{o.code}}', [checked] = 'o.isSelected', (change)='checked(o,$event,cat.data.indexOf(o),cat.data)')
 
-                td((click)='checked(o,$event,cats.data.indexOf(o),cats.data)')
+                td((click)='checked(o,$event,cat.data.indexOf(o),cat.data)')
                     span {{o.name}}
-                td((click)='checked(o,$event,cats.data.indexOf(o),cats.data)')
+                td((click)='checked(o,$event,cat.data.indexOf(o),cat.data)')
                     span {{o.date | amTimeAgo}}
-    observationRecursionChart("*ngIf"='cats.child', [obs]='cats.child', [level]='getLevel()+1')
+    observationRecursionChart("*ngIf"='cat.child', [obs]='cat.child', [level]='getLevel()+1')

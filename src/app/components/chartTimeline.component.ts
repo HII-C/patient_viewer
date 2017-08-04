@@ -1,4 +1,4 @@
-import {Component, Input, Output, EventEmitter} from '@angular/core';
+import {Component, Input, Output, EventEmitter, Pipe} from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 
 import {NgGrid, NgGridItem, NgGridConfig, NgGridItemConfig, NgGridItemEvent} from 'angular2-grid';
@@ -8,12 +8,24 @@ import {LoupeService} from '../services/loupe.service';
 import {DoctorService} from '../services/doctor.service';
 import {ChartTimelineService} from '../services/chartTimeline.service';
 import {ObservationService} from '../services/observation.service';
-import { ConditionService } from '../services/condition.service';
-import { Condition } from '../models/condition.model';
+import {ConditionService} from '../services/condition.service';
+import {Condition} from '../models/condition.model';
 import {ObservationRecursiveChart} from './observationRecursionChart.component';
 import {Observation} from '../models/observation.model';
 import {Http, Headers, RequestOptions, Response} from '@angular/http';
 import {MapService} from '../services/map.service';
+import { UpdatingService } from '../services/updating.service';
+import { FhirService } from '../services/fhir.service';
+import {ConditionsComponent} from '../components/conditions.component';
+import {CarePlanService} from '../services/carePlan.service';
+import {CarePlan} from '../models/carePlan.model';
+import {ConditionsChartComponent} from './conditionsChart.component';
+import {CarePlanChartComponent} from './carePlanChart.component';
+
+import { CsiroService } from '../services/csiro.service';
+import { ScratchPadService } from '../services/scratchPad.service';
+
+import { Csiro } from '../models/csiro.model';
 
 import {Subscription} from 'rxjs/Subscription';
 
@@ -32,7 +44,9 @@ export class ChartTimelineComponent {
     constructor(private loupeService: LoupeService, private doctorService: DoctorService,
         private chartService: ChartTimelineService, private observationService: ObservationService,
         private conditionService: ConditionService, private mapService: MapService,
-        private http:Http){
+        private http:Http, private updatingService: UpdatingService, private fhirService: FhirService,
+        private csiroService: CsiroService, private scratchPadService: ScratchPadService,
+        private carePlanService: CarePlanService){
         console.log("Chart Component is loaded...");
         this.subscription = this.chartService.activateGraph$.subscribe(clicked => {
             this.update();
@@ -57,18 +71,42 @@ export class ChartTimelineComponent {
         }
         });
         this.mappings = MapService.STATIC_MAPPINGS;
+        this.loupeService.activeCondition = this.selectedC;
+        this.passThrough.emit(this.patient);
 
     }
 
     subscription: Subscription;
 
-    selected: Observation;
+//Observation
+    selectedO: Observation;
 	test: Observation;
 	observations: Array<Observation> = [];
 	@Input() patient: Patient;
 	@Output() observationReturned: EventEmitter<Array<any>> = new EventEmitter();
 	mappings: { [key: string]: Array<string> } = {};
 
+//Conditions
+    selectedC: Condition;
+    conditions: Array<Condition> = [];
+    viewToggle: boolean = false;
+    collapseQueue: Array<any> = [];
+    conditionGrouping: Array<any> = [];
+    conditionGroupingName: Array<any> = ["Active", "Inactive"];
+    textInputForEdit: String;
+
+    @Output() conditionSelected: EventEmitter<Condition> = new EventEmitter();
+
+//Actions
+	@Output() passThrough: EventEmitter<Patient> = new EventEmitter();
+    obsCount: number = 0;
+    updateTotal(event) {
+        console.log("total:"+event);
+        this.obsCount = event;
+    }
+
+
+//Chart
     maxYValue: number = 0;
     newData: Array<any> = [];
     data: Chart;
@@ -1140,8 +1178,42 @@ export class ChartTimelineComponent {
         this.drawLine(startX-4, endY+4, startX+4, endY-4, 'black', 1);
     }
 
+
+    ngOnChanges() {
+        console.log("Chart ngOnChanges");
+
+        if (this.patient) {
+
+            this.observationService.index(this.patient).subscribe(data => {
+                if(data.entry) {
+                    let nextLink = null;
+                    this.observationService.observations = <Array<Observation>>data.entry.map(r => r['resource']);
+                    this.observationService.filterCategory(this.observationService.observations);
+
+                    for(let i of data.link) {
+                        if(i.relation=="next") {
+                            nextLink = i.url;
+                        }
+                    }
+                    if(nextLink) {this.loadDataO(nextLink);}
+                    else {this.loadFinishedO();}
+
+                } else {
+                    this.observationService.observations = new Array<Observation>();
+                    console.log("No observations for patient.");
+                }
+            });
+
+            // if (this.selectedC)
+        }
+
+    }
+
+
+
     //Observation stuff
-    loadFinished() {
+//*****************************************************************************************
+    loadFinishedO() {
     this.observationService.observations = this.observationService.observations.reverse();
     console.log("Loaded " + this.observationService.observations.length + " observations.");
     this.observationService.observations.sort((n1, n2) => {
@@ -1184,7 +1256,7 @@ export class ChartTimelineComponent {
 
 
     }
-    loadData(url) {
+    loadDataO(url) {
         let isLast = false;
         this.observationService.indexNext(url).subscribe(data => {
             if(data.entry) {
@@ -1196,45 +1268,17 @@ export class ChartTimelineComponent {
                 for(let i of data.link) {
                     if(i.relation=="next") {
                         isLast = false;
-                        this.loadData(i.url);
+                        this.loadDataO(i.url);
                     }
                 }
                 if(isLast) {
-                    this.loadFinished();
+                    this.loadFinishedO();
                 }
             }
         });
 
     }
 
-    ngOnChanges() {
-        console.log("Observations ngOnChanges");
-
-        if (this.patient) {
-
-            this.observationService.index(this.patient).subscribe(data => {
-                if(data.entry) {
-                    let nextLink = null;
-                    this.observationService.observations = <Array<Observation>>data.entry.map(r => r['resource']);
-                    this.observationService.filterCategory(this.observationService.observations);
-
-                    for(let i of data.link) {
-                        if(i.relation=="next") {
-                            nextLink = i.url;
-                        }
-                    }
-                    if(nextLink) {this.loadData(nextLink);}
-                    else {this.loadFinished();}
-
-                } else {
-                    this.observationService.observations = new Array<Observation>();
-                    console.log("No observations for patient.");
-                }
-            });
-
-            // if (this.selected)
-        }
-    }
 
     updateHighlighted(condition: Condition) {
 

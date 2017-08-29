@@ -9,7 +9,10 @@
         "removeComments": false,
         "noImplicitAny": false,
         "outDir": "build",
-        "rootDir": "src"
+        "rootDir": "src",
+        "typeRoots": [
+            "./node_modules/@types"
+        ]
     },
     "compileOnSave": false,
     "exclude": [

@@ -1,5 +1,5 @@
 import {Component, Injectable} from '@angular/core';
-import {Http, Headers} from '@angular/http';
+import {Http, Headers, RequestOptions} from '@angular/http';
 import {Csiro} from '../models/csiro.model';
 import 'rxjs/add/operator/map';
 import {Observable} from 'rxjs/Observable';
@@ -32,8 +32,8 @@ export class CsiroService {
 		let authHeaders = new Headers();
 	    authHeaders.append('Accept', 'application+json');
 		let pingUrl = this.csiroTranslateURL();
-
-		var result = this.http.get(pingUrl, authHeaders).map(res => res.json());
+		let requestOptions = new RequestOptions({headers: authHeaders});
+		var result = this.http.get(pingUrl, requestOptions).map(res => res.json());
 		return result;
 	}
 

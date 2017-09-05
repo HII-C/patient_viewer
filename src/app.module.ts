@@ -13,7 +13,7 @@ import {TimelinePopupComponent} from './app/components/timeline_popup.component'
 import {ObservationsComponent} from './app/components/observations.component';
 import {CarePlanComponent} from './app/components/carePlan.component';
 // import {ActionListComponent} from './app/components/actionList.component';
-import {ChartComponent} from './app/components/chart.component';
+// import {ChartComponent} from './app/components/chart.component';
 import {CalendarComponent} from './app/components/calendar.component';
 import {DoctorNoteComponent} from './app/components/doctorNote.component';
 import {AccountComponent} from './app/components/account.component';
@@ -67,8 +67,8 @@ import { HttpModule } from '@angular/http';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { Md5 } from 'ts-md5/dist/md5';
 import { CalendarModule } from 'angular-calendar';
-import { NgxChartsModule } from '@swimlane/ngx-charts';
-import { LineChartComponent } from '@swimlane/ngx-charts';
+// import { NgxChartsModule } from '@swimlane/ngx-charts';
+// import { LineChartComponent } from '@swimlane/ngx-charts';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgGridModule } from 'angular2-grid';
 import { NguiAutoCompleteModule } from '@ngui/auto-complete';
@@ -90,7 +90,7 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
         HttpModule,
 		    MomentModule,
         ChartsModule,
-        NgxChartsModule,
+        // NgxChartsModule,
         BrowserAnimationsModule,
         CalendarModule.forRoot(),
 		    NgGridModule,
@@ -108,7 +108,7 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
         TimelinePopupComponent,
         // ActionListComponent,
 		    LoupeExampleComponent,
-        ChartComponent,
+        // ChartComponent,
         AccountComponent,
         DoctorNoteComponent,
         CalendarComponent,

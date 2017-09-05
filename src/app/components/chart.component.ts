@@ -6,7 +6,7 @@ import {DraggableWidget} from './draggable_widget.component';
 
 import {BrowserModule} from '@angular/platform-browser';
 import {LoupeService} from '../services/loupe.service';
-import {NgxChartsModule} from '@swimlane/ngx-charts';
+// import {NgxChartsModule} from '@swimlane/ngx-charts';
 
 
 @Component({

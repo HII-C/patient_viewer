@@ -33,7 +33,7 @@ export class CsiroService {
 	    authHeaders.append('Accept', 'application+json');
 		let pingUrl = this.csiroTranslateURL();
 
-		var result = this.http.get(pingUrl, authHeaders).map(res => res.json());
+		var result = this.http.get(pingUrl).map(res => res.json());
 		return result;
 	}
 

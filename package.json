@@ -21,7 +21,6 @@
     "@angular/router": "4.0.2",
     "@angular/upgrade": "4.0.2",
     "@ng-bootstrap/ng-bootstrap": "^1.0.0-alpha.23",
-    "@swimlane/ngx-charts": "^4.3.0",
     "@types/lodash": "^4.14.68",
     "angular-calendar": "^0.14.0",
     "angular-in-memory-web-api": "^0.1.17",
@@ -31,10 +30,8 @@
     "angular2-router-loader": "^0.3.5",
     "angular2-toaster": "^1.1.0",
     "bootstrap": "^3.3.7",
-    "chart.js": "^2.5.0",
     "concurrently": "^3.4.0",
     "core-js": "^2.4.1",
-    "d3": "4.7.4",
     "date-fns": "^1.28.5",
     "firebase": "^3.7.3",
     "grunt-contrib-clean": "^1.1.0",
@@ -57,7 +54,7 @@
     "webpack": "^1.15.0",
     "webpack-dev-server": "^1.16.5",
     "zone.js": "^0.7.8",
-    "@ngui/auto-complete":"0.13.3"
+    "@ngui/auto-complete": "0.13.3"
   },
   "devDependencies": {
     "@types/core-js": "0.9.41",

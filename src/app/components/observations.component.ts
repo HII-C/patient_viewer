@@ -65,7 +65,7 @@ export class ObservationsComponent {
 			var newDate = new Date(ob.effectiveDateTime).getTime() + diff;
 			ob.relativeDateTime = new Date(newDate).toDateString();
 			ob.relativeDateTime = moment(newDate).toISOString();
-			console.log(ob.relativeDateTime,ob.effectiveDateTime);
+			// console.log(ob.relativeDateTime,ob.effectiveDateTime);
 		}
 
 		console.log("running service");

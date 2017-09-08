@@ -1,11 +1,11 @@
 import {Component, Input, Output, EventEmitter} from '@angular/core';
 import {ObservationService} from '../services/observation.service';
 import {ChartTimelineService} from '../services/chartTimeline.service';
-
+import {Observation} from '../models/observation.model';
 
 @Component({
 	selector: 'observationRecursion',
-	templateUrl: '/observations.html'
+	templateUrl: '/observationRecursion.html'
 })
 export class ObservationRecursive {
 
@@ -24,7 +24,7 @@ export class ObservationRecursive {
     return this.level;
   }
 	checked(obs:any, event,position,data) {
-		obs.isSelected = !obs.isSelected
+		obs.isSelected = !obs.isSelected;
 		if(event.shiftKey) {
 			let upper,lower;
 			if(position<this.lastIndex) {

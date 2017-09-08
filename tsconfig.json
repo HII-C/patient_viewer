@@ -19,7 +19,8 @@
         "node_modules",
         "bower_components",
         "typings/globals",
-        "typings/index.d.ts"
+        "typings/index.d.ts",
+        "typings/core-js"
     ],
     "filesGlob": [
         "src/**/*.ts"

@@ -32,8 +32,8 @@ export class CsiroService {
 		let authHeaders = new Headers();
 	    authHeaders.append('Accept', 'application+json');
 		let pingUrl = this.csiroTranslateURL();
-		let requestOptions = new RequestOptions({headers: authHeaders});
-		var result = this.http.get(pingUrl, requestOptions).map(res => res.json());
+
+		var result = this.http.get(pingUrl).map(res => res.json());
 		return result;
 	}
 

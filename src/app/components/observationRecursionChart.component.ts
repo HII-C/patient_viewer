@@ -1,6 +1,7 @@
 import {Component, Input, Output, EventEmitter} from '@angular/core';
 import {ObservationService} from '../services/observation.service';
 import {ChartTimelineService} from '../services/chartTimeline.service';
+import {Observation} from '../models/observation.model';
 
 
 @Component({
@@ -10,7 +11,7 @@ import {ChartTimelineService} from '../services/chartTimeline.service';
 export class ObservationRecursiveChart {
 
 
-	@Input() obs: any;
+	@Input() obs: Array<Observation>;
 	@Input() level: number;
 	graphData: Array<any> = [];
 	lastIndex: number;

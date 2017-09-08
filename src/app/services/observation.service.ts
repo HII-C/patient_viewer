@@ -115,83 +115,92 @@ export class ObservationService {
           "data":[]
         }
       ]};
+        this.categorizedObservations = this.temp;
         console.log("ObservationService created...");
 
     }
 
-    index(patient: Patient): Observable<any> {
-        var url = this.fhirService.getUrl() + this.path + "?patient=" + patient.id;
-		// console.log("ESNUTH");
-        return this.http.get(url, this.fhirService.options(true)).map(res => res.json());
-    }
-
-    indexNext(url: string): Observable<any> {
-      return this.http.get(url, this.fhirService.options(true)).map(res => res.json());
-
-    }
-    getKey(value) {
-      for(let x in this.groupList) {
-        for(let y of this.groupList[x]) {
-          if(value==y) {
-            return x;
-          }
-        }
-      }
-
-      return "3";
-    }
-    filterCategory(observations: Array<Observation>) {
-      for(let obs of observations) {
-        if(!this.containsObject(obs)) {
-          console.log(obs['code']['coding'][0]['code']);
-          obs.grouping = this.getKey(obs['code']['coding'][0]['code']);
-          this.condensedObservations.push(obs);
-        }
-      }
-
-    }
-
-    containsObject(obj) {
-    for (let obs of this.condensedObservations) {
-        if (obs['code']['coding'][0]['code'] == obj['code']['coding'][0]['code']) {
-            return true;
-        }
-    }
-
-    return false;
+index(patient: Patient): Observable<any> {
+    var url = this.fhirService.getUrl() + this.path + "?patient=" + patient.id;
+// console.log("ESNUTH");
+    return this.http.get(url, this.fhirService.options(true)).map(res => res.json());
 }
 
-populate(obj) {
+indexNext(url: string): Observable<any> {
+  return this.http.get(url, this.fhirService.options(true)).map(res => res.json());
+
+}
+getKey(value) {
+  for(let x in this.groupList) {
+    for(let y of this.groupList[x]) {
+      if(value==y) {
+        return x;
+      }
+    }
+  }
+
+  return "3";
+}
+filterCategory(observations: Array<Observation>) {
+  for(let obs of observations) {
+    if(!this.containsObject(obs)) {
+      console.log(obs['code']['coding'][0]['code']);
+      obs.grouping = this.getKey(obs['code']['coding'][0]['code']);
+      this.condensedObservations.push(obs);
+    }
+  }
+
+}
+
+containsObject(obj) {
+for (let obs of this.condensedObservations) {
+    if (obs['code']['coding'][0]['code'] == obj['code']['coding'][0]['code']) {
+        return true;
+    }
+}
+
+return false;
+}
+
+populateCategories(obsToFilter) {
   let totalcount = 0;
   let count = 0;
-  for(let prop = obj.length - 1; prop >= 0; prop--) {
-    if (obj[prop].data){
+  for(let i = 0; i < obsToFilter.length; i++) {
+    if (obsToFilter[i].data){
       for(let obs of this.condensedObservations) {
-        if(obs.grouping == obj[prop].id) {
+        if(obs.grouping == obsToFilter[i].id) {
           count++;
-          obj[prop].data.push({"name":obs['code']['coding'][0]['display'],"date":obs.effectiveDateTime,"code":obs['code']['coding'][0]['code']});
+          // This is a crappy solution, want sometime more robust in the future - Austin Michne
+          if (obs.valueQuantity){
+            obsToFilter[i].data.push({"name":obs['code']['coding'][0]['display'],"date":obs.effectiveDateTime,"code":obs['code']['coding'][0]['code'], "value":obs.valueQuantity['value']});
+          }
+          else{
+            obsToFilter[i].data.push({"name":obs['code']['coding'][0]['display'],"date":obs.effectiveDateTime,"code":obs['code']['coding'][0]['code']});
+          }
+
+          // obsToFilter[i].data.push(obs);
         }
       }
     }
-    if(obj[prop].data == "") {
-      obj.splice(prop,1);
+    if(obsToFilter[i].data == "") {
+      obsToFilter.splice(i,1);
     }
-    else if (obj[prop].data){
-        obj[prop].count += count;
+    else if (obsToFilter[i].data){
+      obsToFilter[i].count += count;
         totalcount += count;
         count = 0;
       continue;
     }
 
-    else if (typeof obj[prop] === 'object') {
+    else if (typeof obsToFilter[i] === 'object') {
       totalcount += count;
 
-      let newcount = this.populate(obj[prop].child);
-      console.log(newcount,JSON.stringify(obj[prop]));
-      obj[prop].count += newcount;
+      let newcount = this.populateCategories(obsToFilter[i].child);
+      console.log(newcount,JSON.stringify(obsToFilter[i]));
+      obsToFilter[i].count += newcount;
 
-      if(obj[prop].child =="") {
-        obj.splice(prop,1);
+      if(obsToFilter[i].child =="") {
+        obsToFilter.splice(i ,1);
       }
 
     }

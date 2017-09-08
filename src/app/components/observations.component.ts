@@ -18,7 +18,7 @@ import * as moment from 'moment';
 
 @Component({
 	selector: 'observations',
-	templateUrl: '/observationmain.html'
+	templateUrl: '/observations.html'
 })
 export class ObservationsComponent {
 
@@ -65,19 +65,20 @@ export class ObservationsComponent {
 			var newDate = new Date(ob.effectiveDateTime).getTime() + diff;
 			ob.relativeDateTime = new Date(newDate).toDateString();
 			ob.relativeDateTime = moment(newDate).toISOString();
-			console.log(ob.relativeDateTime,ob.effectiveDateTime);
+			// console.log(ob.relativeDateTime,ob.effectiveDateTime);
 		}
 
 		console.log("running service");
 
 		//this.observationService.observations = this.observationService.observations;
-		this.observationService.populate(this.observationService.temp.categories);
+		this.observationService.populateCategories(this.observationService.temp.categories);
 		this.observationService.categorizedObservations = this.observationService.temp;
 
 		this.loupeService.observationsArray = this.observationService.observations;
 		this.observationReturned.emit(this.observationService.observations);
 
 		console.log("done!");
+		console.log(this.observationService.observations);
 
 
 	}
@@ -90,10 +91,11 @@ export class ObservationsComponent {
 				this.observationService.observations = this.observationService.observations.concat(nextObs);
 				this.observationService.filterCategory(nextObs);
 				isLast = true;
-				for(let i of data.link) {
-					if(i.relation=="next") {
+				console.log(data);
+				for(let item of data.link) {
+					if(item.relation=="next") {
 						isLast = false;
-						this.loadData(i.url);
+						this.loadData(item.url);
 					}
 				}
 				if(isLast) {

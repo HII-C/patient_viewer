@@ -1246,7 +1246,7 @@ export class ChartTimelineComponent {
     console.log("running service");
 
     //this.observationService.observations = this.observationService.observations;
-    this.observationService.populate(this.observationService.temp.categories);
+    this.observationService.populateCategories(this.observationService.temp.categories);
     this.observationService.categorizedObservations = this.observationService.temp;
 
     this.loupeService.observationsArray = this.observationService.observations;

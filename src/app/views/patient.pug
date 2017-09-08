@@ -1,10 +1,11 @@
-div#patient
+span#patient
 	.handle Patient Focus
 		.box-header-btns.pull-right
 			a(title="Remove widget")
 				//- , (click)="removeWidget(i);")
 				i.glyphicon.glyphicon-trash
-	.content
+	.content(style="width: 175px")
+		img(src='/images/textures/me.jpg')
 		.details.pull-right("*ngIf"='selected')
 			.identifier
 				b
@@ -15,7 +16,6 @@ div#patient
 					| Born: {{selected.birthDate | amDateFormat:'MM/DD/YYYY'}} ({{-1 * (selected.birthDate | amDifference:today:'years':false)}}yr)
 				div Gender: {{selected.gender}}
 				div("*ngIf" = 'selected.mrn') MRN: {{selected.mrn}}
-		img(src='/images/textures/me.jpg')
 
 		#advanced_search
 			a("(click)"="advancedSearch = !advancedSearch" href="#")

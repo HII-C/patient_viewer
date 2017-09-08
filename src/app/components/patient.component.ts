@@ -48,7 +48,7 @@ export class PatientComponent {
 	}
 
     constructor(private fhirService: FhirService, private patientService: PatientService, private compiler: Compiler, private http: Http, private smartService: SmartService, private cookieService: CookieService, private doctorService: DoctorService) {
-    
+
 		this.compiler.clearCache();
         this.fhirService.setUrl(this.cookieService.get('fhirBaseUrl'));
         if(this.fhirService.token) {

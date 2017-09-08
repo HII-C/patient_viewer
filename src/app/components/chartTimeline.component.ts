@@ -1,8 +1,6 @@
 import {Component, Input, Output, EventEmitter, Pipe} from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 
-import {NgGrid, NgGridItem, NgGridConfig, NgGridItemConfig, NgGridItemEvent} from 'angular2-grid';
-import {DraggableWidget} from './draggable_widget.component';
 import {Patient} from '../models/patient.model';
 import {LoupeService} from '../services/loupe.service';
 import {DoctorService} from '../services/doctor.service';

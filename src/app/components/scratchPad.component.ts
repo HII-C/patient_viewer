@@ -1,6 +1,4 @@
 import { Component, Input, OnDestroy, Output,EventEmitter  } from '@angular/core';
-import {DraggableWidget} from './draggable_widget.component';
-import {NgGrid, NgGridItem, NgGridConfig, NgGridItemConfig, NgGridItemEvent} from 'angular2-grid';
 import {Subscription} from 'rxjs/Subscription';
 import {DoctorService} from '../services/doctor.service';
 import {ScratchPadService} from '../services/scratchPad.service';

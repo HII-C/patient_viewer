@@ -14,7 +14,11 @@ To run in development mode, just:
 
 	grunt --force # to serve the project and automatically recompile on file changes
 
-Visit [http://localhost:9000](http://localhost:9000) and do your thang. :)
+Then, do the following:
+- Visit [FHIR Starter](http://fhir-starter.healthcreek.org/#/ui/select-patient), and login with the credentials `admin` and `password`.
+- Select the patient `Karen L. Lewis`.
+- In the bottom-right box, enter `"Patient Viewer Local"` in the first text box, and `"http://localhost:9000"` in the second text box.
+- Click the blue button underneath to launch the patient viewer.
 
 ## Building for Production
 

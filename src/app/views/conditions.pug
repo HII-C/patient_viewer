@@ -1,4 +1,5 @@
 section(style='z-index: 1201;')
+
 	h2
 		| Conditions
 		loupe-example
@@ -15,10 +16,14 @@ section(style='z-index: 1201;')
 					span.glyphicon.glyphicon-sort-by-alphabet-alt(aria-hidden="true")
 		button.btn.btn-default((click)='updateScratchPad()') 
 			| Update ScratchPad
+
+		button.btn.btn-default((click)='autoCheck(0, 2)')
+			| Select
+
 	p.telt("*ngIf"='conditions.length == 0')
 		i (none)
 
-	div("*ngIf"='conditions.length >= 0', id="tableParentEle")
+	div("*ngIf"='conditions.length > 0', id="tableParentEle") {{hideInactive()}}
 		button.btn.btn-default((click)='tableNavigation(conditionGrouping.indexOf(c))', "*ngFor"='let c of conditionGrouping') {{conditionGroupingName[conditionGrouping.indexOf(c)]}}
 		//- {cSub['code']['coding'][0]['code']
 		button.btn.btn-default((click)='newTable("testing", ["code", "coding", 0, "code"], "55822004", conditionGrouping.length)')
@@ -28,7 +33,7 @@ section(style='z-index: 1201;')
 					th
 					th
 						| Description
-					th
+					
 						| Status
 					th
 						| Onset
@@ -36,7 +41,8 @@ section(style='z-index: 1201;')
 			tbody
 				tr("*ngFor"='let cSub of c', [class.selected]='cSub.selected', (click)='selectCondition(cSub)',id='t{{conditions.indexOf(cSub)}}')
 					ng-container("*ngIf"="cSub.isVisible")
-						td
+						td 
+							//- 											
 							input("*ngIf"="!cSub.isParent",type='checkbox',id='c{{conditions.indexOf(cSub)}}', value='{{conditions.indexOf(cSub)}}', (change)='scratchPadCheckBoxes($event.target.checked, $event.target.getAttribute("value"))')
 						td
 							button.btn.btn-default("*ngIf"="cSub.isParent", (click)='expand(cSub.parent)') ... 
@@ -45,7 +51,6 @@ section(style='z-index: 1201;')
 						td("*ngIf"="!cSub.isParent") {{cSub.relativeDateTime}}
 						td
 							button.btn.btn-default(data-toggle="modal", [attr.data-target]="'#editFieldc' + conditions.indexOf(cSub)")
-								| Edit
 							
 							.modal.fade(id="editFieldc{{conditions.indexOf(cSub)}}",role='dialog')
 								.modal-dialog(role='document')
@@ -57,7 +62,6 @@ section(style='z-index: 1201;')
 											p
 												input(type='text', name="textInputForEdit", [(ngModel)]='textInputForEdit')
 											button.btn.btn-default((click)="updateEntry(conditionService.conditions.indexOf(cSub), \"['code']['coding'][0]['code']\")")
-												| Replace Code with Entered Value
 
 											p
 												b Code System:
@@ -66,8 +70,7 @@ section(style='z-index: 1201;')
 												b Code:
 												|  {{cSub.code.coding[0].code}}
 										.modal-footer
-											button.btn.btn-default(type='button', data-dismiss='modal') Close
-								
+											button.btn.btn-default(type='button', data-dismiss='modal') Close	
 
 	//- click)="updateEntry(conditionService.conditions.indexOf(cSub), \"TESTING\", \"['code']['coding'][0]['code']\")") ET
 

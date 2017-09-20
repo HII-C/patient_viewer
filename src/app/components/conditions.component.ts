@@ -11,6 +11,7 @@ import { Patient } from '../models/patient.model';
 import { Csiro } from '../models/csiro.model';
 import * as moment from 'moment';
 
+
 @Component({
   selector: 'conditions',
   templateUrl: '/conditions.html'
@@ -24,6 +25,7 @@ export class ConditionsComponent {
   conditionGrouping: Array<any> = [];
   conditionGroupingName: Array<any> = ["Active", "Inactive"];
   textInputForEdit: String;
+  justCreated: boolean;
   @Input() patient: Patient;
 
   @Output() conditionSelected: EventEmitter<Condition> = new EventEmitter();
@@ -32,6 +34,7 @@ export class ConditionsComponent {
     console.log("ConditionsComponent created...");
     // this.gridItemConfiguration.draggable = this.doctorService.configMode;
     this.loupeService.activeCondition = this.selected;
+    this.justCreated = true;
   }
 
   selectCondition(condition: Condition) {
@@ -71,6 +74,7 @@ export class ConditionsComponent {
     }
     console.log("sort");
   }
+
   loadFinished() {
     this.conditions = this.conditions.reverse();
     console.log("Loaded " + this.conditions.length + " conditions.");
@@ -87,10 +91,6 @@ export class ConditionsComponent {
     })
     var diff = new Date().getTime() - new Date(this.conditions[0].onsetDateTime).getTime();
 
-
-
-
-
     for (let c of this.conditions) {
       c.isVisible = true;
       var newDate = new Date(c.onsetDateTime).getTime() + diff;
@@ -104,6 +104,7 @@ export class ConditionsComponent {
     this.conditionService.conditions = this.conditions;
     this.groupConditions();
   }
+
   loadData(url) {
     let isLast = false;
     this.conditionService.indexNext(url).subscribe(data => {
@@ -124,6 +125,7 @@ export class ConditionsComponent {
       }
     });
   }
+
   ngOnChanges() {
     this.selected = null;
     if (this.patient) {
@@ -148,6 +150,7 @@ export class ConditionsComponent {
       });
     }
   }
+
   testingCsiro() {
     this.csiroService.MapQuery().subscribe(data => {
       console.log("Hey CSIRO works");
@@ -191,6 +194,13 @@ export class ConditionsComponent {
     }
   }
 
+  autoCheck(rangeLow: number, rangeHigh: number) {
+    for(var i = rangeLow; i < rangeHigh; i++){
+      (<HTMLInputElement>document.getElementById('c' + i)).checked = true;
+    }
+    console.log('autochecked');
+  }
+
   updateScratchPad(){
     //this.scratchPadService.buttonClicked(true);
   }
@@ -224,6 +234,8 @@ export class ConditionsComponent {
     }
 
   }
+
+  // Active v. Inactive
   groupConditions(){
     for (let c of this.conditions){
       if (c.clinicalStatus == "active"){
@@ -258,6 +270,15 @@ export class ConditionsComponent {
         tempTableVar.hidden = false;
       }
     }
+  }
+
+  //Hides inactive conditions on construction
+  hideInactive(){
+    if (this.justCreated) {
+       document.getElementById("cG1").hidden = true;
+       console.log("inactive conditions hidden")
+     }
+    this.justCreated = false;
   }
 
   newTable(tableName: string, dataLocation: Array<any>, quality: string, groupingCount: number){

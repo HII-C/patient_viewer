@@ -35,7 +35,4 @@ export class CarePlanComponent{
 			});
 		}
 	}
-
-
-
 }

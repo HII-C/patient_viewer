@@ -107,7 +107,11 @@ export class ConditionsComponent {
 
   loadData(url) {
     let isLast = false;
+    console.log("LOAD DATA");
+
     this.conditionService.indexNext(url).subscribe(data => {
+      console.log(data);
+
       if(data.entry) {
         let nextCon= <Array<Condition>>data.entry.map(r => r['resource']);
 
@@ -128,25 +132,11 @@ export class ConditionsComponent {
 
   ngOnChanges() {
     this.selected = null;
+
     if (this.patient) {
-      this.conditionService.index(this.patient, true).subscribe(data => {
-        if (data.entry) {
-
-
-          let nextLink = null;
-          this.conditions = <Array<Condition>>data.entry.map(r => r['resource']);
-					for(let i of data.link) {
-						if(i.relation=="next") {
-							nextLink = i.url;
-						}
-					}
-					if(nextLink) {this.loadData(nextLink);}
-					else {this.loadFinished();}
-
-        } else {
-          this.conditions = new Array<Condition>();
-          console.log("No conditions for patient.");
-        }
+      this.conditionService.loadConditions(this.patient, true).subscribe(conditions => {
+        this.conditions = conditions;
+        this.loadFinished();
       });
     }
   }

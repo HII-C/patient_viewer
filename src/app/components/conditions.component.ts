@@ -77,9 +77,10 @@ export class ConditionsComponent {
 
   loadFinished() {
     this.conditions = this.conditions.reverse();
-    console.log("Loaded " + this.conditions.length + " conditions.");
-    this.loupeService.conditionArray = this.conditions;
 
+    console.log("Loaded " + this.conditions.length + " conditions.");
+
+    this.loupeService.conditionArray = this.conditions;
 
     this.conditions.sort((n1, n2) => {
       if (n1.onsetDateTime < n2.onsetDateTime) {
@@ -88,7 +89,8 @@ export class ConditionsComponent {
       if (n1.onsetDateTime > n2.onsetDateTime) {
         return -1;
       }
-    })
+    });
+
     var diff = new Date().getTime() - new Date(this.conditions[0].onsetDateTime).getTime();
 
     for (let c of this.conditions) {

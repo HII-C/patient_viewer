@@ -105,31 +105,6 @@ export class ConditionsComponent {
     this.groupConditions();
   }
 
-  loadData(url) {
-    let isLast = false;
-    console.log("LOAD DATA");
-
-    this.conditionService.indexNext(url).subscribe(data => {
-      console.log(data);
-
-      if(data.entry) {
-        let nextCon= <Array<Condition>>data.entry.map(r => r['resource']);
-
-        this.conditions = this.conditions.concat(nextCon);
-        isLast = true;
-        for(let i of data.link) {
-          if(i.relation=="next") {
-            isLast = false;
-            this.loadData(i.url);
-          }
-        }
-        if(isLast) {
-          this.loadFinished();
-        }
-      }
-    });
-  }
-
   ngOnChanges() {
     this.selected = null;
 

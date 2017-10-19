@@ -34,7 +34,13 @@ export class ConditionService {
       return this.http.get(url, this.fhirService.options(authParam)).map(data => {
         data = data.json();
 
-        return <Array<Condition>>data['entry'].map(item => item['resource']);
+        var loadedConditions = [];
+
+        if (data['entry']) {
+          loadedConditions = <Array<Condition>>data['entry'].map(item => item['resource']);
+        }
+
+        return loadedConditions;
       });
 
       // TODO: Implement the paginated loading functionality shown below:

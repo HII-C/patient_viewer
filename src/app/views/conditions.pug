@@ -1,5 +1,12 @@
 section(style='z-index: 1201;')
-
+	.text-center
+		.btn-group("*ngIf"="!nav2")
+			button.btn.btn-default.btn-sm.btn-custom-sm(title="Home")
+				span(class="glyphicon glyphicon-home")
+			button.btn.btn-default.btn-sm.btn-custom-sm(title="Scratch Pad")
+				span(class="glyphicon glyphicon-eye-open")
+			button.btn.btn-default.btn-sm.btn-custom-sm(title="Note Pad")
+				span(class="glyphicon glyphicon-pencil")
 	h2
 		| Conditions
 		loupe-example

@@ -1,8 +1,8 @@
 .text-center
-  .btn-group("*ngIf"="!nav2")
-    button.btn.btn-default.btn-sm.btn-custom-sm(title="Home")
+  .btn-group
+    button.btn.btn-default.btn-sm.btn-custom-sm(title="Home", (click)='switchToDefault()')
       span(class="glyphicon glyphicon-home")
-    button.btn.btn-default.btn-sm.btn-custom-sm(title="Scratch Pad")
+    button.btn.btn-default.btn-sm.btn-custom-sm(title="Scratch Pad", (click)='switchToScratchPad()')
       span(class="glyphicon glyphicon-eye-open")
-    button.btn.btn-default.btn-sm.btn-custom-sm(title="Note Pad")
+    button.btn.btn-default.btn-sm.btn-custom-sm(title="Note Pad", (click)='switchToNotePad()')
       span(class="glyphicon glyphicon-pencil")

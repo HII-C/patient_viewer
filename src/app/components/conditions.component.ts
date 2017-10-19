@@ -37,6 +37,18 @@ export class ConditionsComponent {
     this.justCreated = true;
   }
 
+  showDefault() {
+    console.log("showDefault");
+  }
+
+  showScratchPad() {
+    console.log("showScratchPad");
+  }
+
+  showNotePad() {
+    console.log("showNotePad");
+  }
+
   selectCondition(condition: Condition) {
     this.selected = condition;
     this.loupeService.activeCondition = this.selected;

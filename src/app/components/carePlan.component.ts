@@ -3,21 +3,33 @@ import {FhirService} from '../services/fhir.service';
 import {CarePlanService} from '../services/carePlan.service';
 import {CarePlan} from '../models/carePlan.model';
 import {Patient} from '../models/patient.model';
+import {Column} from '../interfaces/column.interface';
 
 @Component({
     selector: 'carePlan',
     templateUrl: '/carePlan.html'
 })
-export class CarePlanComponent{
+export class CarePlanComponent implements Column {
+  selected: CarePlan;
+  carePlans: Array<CarePlan>;
+  @Input() patient: Patient;
 
-    selected: CarePlan;
-    carePlans: Array<CarePlan>;
-    @Input() patient: Patient;
+  constructor(private fhirService: FhirService, private carePlanService: CarePlanService) {
+    console.log("CarePlanComponent created...");
+  }
 
-    constructor(private fhirService: FhirService, private carePlanService: CarePlanService) {
-        console.log("CarePlanComponent created...");
-    }
+  showDefault() {
+    console.log("showDefault");
+  }
 
+  showScratchPad() {
+    console.log("showScratchPad");
+  }
+
+  showNotePad() {
+    console.log("showNotePad");
+  }
+  
 	ngOnChanges() {
 		this.selected = null;
 		if (this.patient) {

@@ -1,4 +1,5 @@
 import { Component, Input, Output, EventEmitter, Pipe } from '@angular/core';
+import { Column } from '../interfaces/column.interface';
 
 /**
  * Allows for switching between the three states of each column.
@@ -9,23 +10,27 @@ import { Component, Input, Output, EventEmitter, Pipe } from '@angular/core';
   templateUrl: '/columnStateSwitcher.html'
 })
 export class ColumnStateSwitcherComponent {
-  @Output() default: EventEmitter<any> = new EventEmitter();
-  @Output() scratchPad: EventEmitter<any> = new EventEmitter();
-  @Output() notePad: EventEmitter<any> = new EventEmitter();
+  @Input() column: Column;
 
   constructor() {
     console.log("ColumnStateSwitcherComponent created...");
   }
 
   switchToDefault() {
-    this.default.emit();
+    if (this.column != null) {
+      this.column.showDefault();
+    }
   }
 
   switchToScratchPad() {
-    this.scratchPad.emit();
+    if (this.column != null) {
+      this.column.showScratchPad();
+    }
   }
 
   switchToNotePad() {
-    this.notePad.emit();
+    if (this.column != null) {
+      this.column.showNotePad();
+    }
   }
 }

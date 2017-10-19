@@ -9,6 +9,7 @@ import { UpdatingService } from '../services/updating.service';
 import { Condition } from '../models/condition.model';
 import { Patient } from '../models/patient.model';
 import { Csiro } from '../models/csiro.model';
+import { Column } from '../interfaces/column.interface';
 import * as moment from 'moment';
 
 
@@ -16,7 +17,7 @@ import * as moment from 'moment';
   selector: 'conditions',
   templateUrl: '/conditions.html'
 })
-export class ConditionsComponent {
+export class ConditionsComponent implements Column {
 
   selected: Condition;
   conditions: Array<Condition> = [];

@@ -2,9 +2,9 @@ toolbar
 timelines([patient]='selected', *ngIf='selected')
 
 div.row
-  div.col-md-3
+  div.col-md-2
     patient((patientSelected)="selectPatient($event)")
-  div.col-md-9
+  div.col-md-10
     triplelist([patient]='selected', *ngIf='selected')
 
 favorites

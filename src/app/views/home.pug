@@ -1,7 +1,12 @@
-patient((patientSelected)="selectPatient($event)")
 toolbar
 timelines([patient]='selected', *ngIf='selected')
-triplelist([patient]='selected', *ngIf='selected')
+
+div.row
+  div.col-md-3
+    patient((patientSelected)="selectPatient($event)")
+  div.col-md-9
+    triplelist([patient]='selected', *ngIf='selected')
+
 favorites
 chartTimelines
 addObservation

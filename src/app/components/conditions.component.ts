@@ -18,7 +18,6 @@ import * as moment from 'moment';
   templateUrl: '/conditions.html'
 })
 export class ConditionsComponent implements Column {
-
   selected: Condition;
   conditions: Array<Condition> = [];
   viewToggle: boolean = false;

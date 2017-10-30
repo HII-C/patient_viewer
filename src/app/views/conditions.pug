@@ -1,9 +1,8 @@
-section(style='z-index: 1201;')
+div
 	columnStateSwitcher([column]='this')
 	
-	h2
+	h2.text-center
 		| Conditions
-		loupe-example
 	div.btn-group
 		button.btn.btn-default.dropdown-toggle(type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
 			| Tools
@@ -80,6 +79,3 @@ section(style='z-index: 1201;')
 			//- button.btn.btn-default(data-toggle="collapse", [attr.data-target]="'#cG'+conditionGrouping.indexOf(c)", aria-expanded="false", [attr.aria-controls]="'cG'+conditionGrouping.indexOf(c)")
 			//- 	| {{conditionGroupingName[conditionGrouping.indexOf(c)]}}
 			//- div.collapse(id='cG{{conditionGrouping.indexOf(c)}}')
-
-	div
-		button.btn.btn-default((click)='testingCsiro()') CSIRO

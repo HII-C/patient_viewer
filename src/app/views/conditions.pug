@@ -16,18 +16,19 @@ div
 					span.glyphicon.glyphicon-sort-by-alphabet-alt(aria-hidden="true")
 		button.btn.btn-default((click)='addToScratchPad()') 
 			| Add to ScratchPad
-
-		button.btn.btn-default((click)='autoCheck(0, 2)')
-			| Select
-
+			
 	p.telt("*ngIf"='conditions.length == 0')
 		i (none)
 
 	div("*ngIf"='shownConditions.length > 0', id="tableParentEle")
-		button.btn.btn-default((click)='showActiveConditions()')
-			| Active
-		button.btn.btn-default((click)='showInactiveConditions()')
-			| Inactive
+		div.btn-group
+			button.btn.btn-default((click)='showActiveConditions()')
+				| Active
+			button.btn.btn-default((click)='showInactiveConditions()')
+				| Inactive
+		
+		a("*ngIf"='columnState == "scratchpad"')
+			| Delete from ScratchPad
 				
 		table.table.table-condensed.table-striped
 			thead
@@ -46,7 +47,7 @@ div
 					ng-container("*ngIf"="c.isVisible")
 						td 
 							//- 											
-							input("*ngIf"="!c.isParent",type='checkbox',id='c{{conditions.indexOf(c)}}', value='{{conditions.indexOf(c)}}', (change)='scratchPadCheckBoxes($event.target.checked, $event.target.getAttribute("value"))')
+							input("*ngIf"="!c.isParent",type='checkbox',id='c{{conditions.indexOf(c)}}', value='{{conditions.indexOf(c)}}', (change)='conditionChecked($event.target.checked, c)')
 						td
 							button.btn.btn-default("*ngIf"="c.isParent", (click)='expand(c.parent)') ... 
 							span("*ngIf"="!c.isParent") {{c['code']['text']}} {{c['code']['coding'][0]['code']}}

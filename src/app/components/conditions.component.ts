@@ -18,9 +18,11 @@ import * as moment from 'moment';
   templateUrl: '/conditions.html'
 })
 export class ConditionsComponent implements Column {
-  selected: Condition;
+  columnState: string = "defualt";
 
+  selected: Condition;
   conditions: Array<Condition> = [];
+  scratchPadConditions: Array<Condition> = [];
   shownConditions: Array<Condition> = [];
 
   viewToggle: boolean = false;
@@ -41,15 +43,17 @@ export class ConditionsComponent implements Column {
   }
 
   showDefault() {
-    console.log("showDefault");
+    this.columnState = "default";
+    this.shownConditions = this.conditions;
   }
 
   showScratchPad() {
-    console.log("showScratchPad");
+    this.columnState = "scratchpad";
+    this.shownConditions = this.scratchPadConditions;
   }
 
   showNotePad() {
-    console.log("showNotePad");
+    this.columnState = "notepad";
   }
 
   selectCondition(condition: Condition) {
@@ -153,6 +157,7 @@ export class ConditionsComponent implements Column {
       this.viewToggle = true;
     }
   }
+
   toggleExpansion() {
 
     if (this.viewToggle == true) {
@@ -161,20 +166,9 @@ export class ConditionsComponent implements Column {
     }
   }
 
-  scratchPadCheckBoxes(checked: boolean, value) {
-
-    if (checked) {
-      // this.conditions[value].isSelected = true;
-      this.scratchPadService.toAddToCondSpArray.push(this.conditions[value]);
-    }
-    else {
-      // this.conditions[value].isSelected = false;
-      let temp = this.scratchPadService.toAddToCondSpArray.indexOf(this.conditions[value]);
-      if (temp > -1){
-        // This will actually delete instead of simply setting to null, which will throw errors in the long run
-        this.scratchPadService.toAddToCondSpArray.splice(temp, 1);
-      }
-    }
+  conditionChecked(checked: boolean, checkedCondition: Condition) {
+    checkedCondition['checked'] = checked;
+    console.log(checkedCondition['checked']);
   }
 
   autoCheck(rangeLow: number, rangeHigh: number) {
@@ -185,7 +179,15 @@ export class ConditionsComponent implements Column {
   }
 
   addToScratchPad() {
+    for (let c of this.conditions) {
+      if (c['checked']) {
+        if (this.scratchPadConditions.indexOf(c) == -1) {
+          this.scratchPadConditions.push(c);
+        }
+      }
+    }
 
+    console.log(this.scratchPadConditions);
   }
 
   expand(parent: string) {

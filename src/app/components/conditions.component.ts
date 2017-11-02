@@ -43,17 +43,15 @@ export class ConditionsComponent implements Column {
   }
 
   showDefault() {
-    this.columnState = "default";
     this.shownConditions = this.conditions;
   }
 
   showScratchPad() {
-    this.columnState = "scratchpad";
     this.shownConditions = this.scratchPadConditions;
   }
 
   showNotePad() {
-    this.columnState = "notepad";
+    
   }
 
   selectCondition(condition: Condition) {

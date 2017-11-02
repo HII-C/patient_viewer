@@ -12,24 +12,23 @@ import { Column } from '../interfaces/column.interface';
 export class ColumnStateSwitcherComponent {
   @Input() column: Column;
 
-  constructor() {
-    console.log("ColumnStateSwitcherComponent created...");
-  }
-
   switchToDefault() {
     if (this.column != null) {
+      this.column.columnState = "default";
       this.column.showDefault();
     }
   }
 
   switchToScratchPad() {
     if (this.column != null) {
+      this.column.columnState = "scratchpad";
       this.column.showScratchPad();
     }
   }
 
   switchToNotePad() {
     if (this.column != null) {
+      this.column.columnState = "notepad";
       this.column.showNotePad();
     }
   }

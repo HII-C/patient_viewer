@@ -14,8 +14,8 @@ div
 			li
 				a((click)='sortCondition("date-desc")')
 					span.glyphicon.glyphicon-sort-by-alphabet-alt(aria-hidden="true")
-		button.btn.btn-default((click)='updateScratchPad()') 
-			| Update ScratchPad
+		button.btn.btn-default((click)='addToScratchPad()') 
+			| Add to ScratchPad
 
 		button.btn.btn-default((click)='autoCheck(0, 2)')
 			| Select
@@ -23,36 +23,36 @@ div
 	p.telt("*ngIf"='conditions.length == 0')
 		i (none)
 
-	div("*ngIf"='conditions.length > 0', id="tableParentEle") {{hideInactive()}}
+	div("*ngIf"='conditions.length > 0', id="tableParentEle")
 		button.btn.btn-default((click)='tableNavigation(conditionGrouping.indexOf(c))', "*ngFor"='let c of conditionGrouping') {{conditionGroupingName[conditionGrouping.indexOf(c)]}}
-		//- {cSub['code']['coding'][0]['code']
-		button.btn.btn-default((click)='newTable("testing", ["code", "coding", 0, "code"], "55822004", conditionGrouping.length)')
-		table.table.table-condensed.table-striped(id='cG{{conditionGrouping.indexOf(c)}}', "*ngFor"='let c of conditionGrouping')
+		
+		table.table.table-condensed.table-striped
 			thead
 				tr
 					th
+						| 
 					th
 						| Description
-					
+					th
 						| Status
 					th
 						| Onset
 					th 
 			tbody
-				tr("*ngFor"='let cSub of c', [class.selected]='cSub.selected', (click)='selectCondition(cSub)',id='t{{conditions.indexOf(cSub)}}')
-					ng-container("*ngIf"="cSub.isVisible")
+				tr("*ngFor"='let c of conditions', [class.selected]='c.selected', (click)='selectCondition(c)',id='t{{conditions.indexOf(c)}}')
+					ng-container("*ngIf"="c.isVisible")
 						td 
 							//- 											
-							input("*ngIf"="!cSub.isParent",type='checkbox',id='c{{conditions.indexOf(cSub)}}', value='{{conditions.indexOf(cSub)}}', (change)='scratchPadCheckBoxes($event.target.checked, $event.target.getAttribute("value"))')
+							input("*ngIf"="!c.isParent",type='checkbox',id='c{{conditions.indexOf(c)}}', value='{{conditions.indexOf(c)}}', (change)='scratchPadCheckBoxes($event.target.checked, $event.target.getAttribute("value"))')
 						td
-							button.btn.btn-default("*ngIf"="cSub.isParent", (click)='expand(cSub.parent)') ... 
-							span("*ngIf"="!cSub.isParent") {{cSub['code']['text']}} {{cSub['code']['coding'][0]['code']}}
-						td("*ngIf"="!cSub.isParent") {{cSub.clinicalStatus}}
-						td("*ngIf"="!cSub.isParent") {{cSub.relativeDateTime}}
+							button.btn.btn-default("*ngIf"="c.isParent", (click)='expand(c.parent)') ... 
+							span("*ngIf"="!c.isParent") {{c['code']['text']}} {{c['code']['coding'][0]['code']}}
+						td("*ngIf"="!c.isParent") {{c.clinicalStatus}}
+						td("*ngIf"="!c.isParent") {{c.relativeDateTime}}
 						td
-							button.btn.btn-default(data-toggle="modal", [attr.data-target]="'#editFieldc' + conditions.indexOf(cSub)")
+							button.btn.btn-default(data-toggle="modal", [attr.data-target]="'#editFieldc' + conditions.indexOf(c)")
 							
-							.modal.fade(id="editFieldc{{conditions.indexOf(cSub)}}",role='dialog')
+							.modal.fade(id="editFieldc{{conditions.indexOf(c)}}",role='dialog')
 								.modal-dialog(role='document')
 									.modal-content
 										.modal-header
@@ -61,21 +61,13 @@ div
 										.modal-body
 											p
 												input(type='text', name="textInputForEdit", [(ngModel)]='textInputForEdit')
-											button.btn.btn-default((click)="updateEntry(conditionService.conditions.indexOf(cSub), \"['code']['coding'][0]['code']\")")
+											button.btn.btn-default((click)="updateEntry(conditionService.conditions.indexOf(c), \"['code']['coding'][0]['code']\")")
 
 											p
 												b Code System:
-												a(href='{{cSub.code.coding[0].system}}') {{cSub.code.coding[0].system}}
+												a(href='{{c.code.coding[0].system}}') {{c.code.coding[0].system}}
 											p
 												b Code:
-												|  {{cSub.code.coding[0].code}}
+												|  {{c.code.coding[0].code}}
 										.modal-footer
 											button.btn.btn-default(type='button', data-dismiss='modal') Close	
-
-	//- click)="updateEntry(conditionService.conditions.indexOf(cSub), \"TESTING\", \"['code']['coding'][0]['code']\")") ET
-
-
-	//- div("*ngFor"='let c of conditionGrouping')
-			//- button.btn.btn-default(data-toggle="collapse", [attr.data-target]="'#cG'+conditionGrouping.indexOf(c)", aria-expanded="false", [attr.aria-controls]="'cG'+conditionGrouping.indexOf(c)")
-			//- 	| {{conditionGroupingName[conditionGrouping.indexOf(c)]}}
-			//- div.collapse(id='cG{{conditionGrouping.indexOf(c)}}')

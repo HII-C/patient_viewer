@@ -19,7 +19,10 @@ import * as moment from 'moment';
 })
 export class ConditionsComponent implements Column {
   selected: Condition;
+
   conditions: Array<Condition> = [];
+  scratchPadConditions: Array<Condition> = [];
+
   viewToggle: boolean = false;
   collapseQueue: Array<any> = [];
   conditionGrouping: Array<any> = [];
@@ -180,8 +183,11 @@ export class ConditionsComponent implements Column {
     console.log('autochecked');
   }
 
-  updateScratchPad(){
-    //this.scratchPadService.buttonClicked(true);
+  addToScratchPad() {
+    console.log('addToScratchPad()');
+    console.log(this.selected);
+
+    this.scratchPadConditions.push(this.selected);
   }
 
   expand(parent: string) {
@@ -221,15 +227,15 @@ export class ConditionsComponent implements Column {
         if (!this.conditionGrouping[0]){
           this.conditionGrouping[0] = [c];
         }
-        else{
+        else {
           this.conditionGrouping[0].push(c);
         }
       }
-      else{
+      else {
         if (!this.conditionGrouping[1]){
           this.conditionGrouping[1] = [c];
         }
-        else{
+        else {
           this.conditionGrouping[1].push(c);
         }
       }

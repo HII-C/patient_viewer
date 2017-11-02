@@ -46,33 +46,31 @@ div
 			tbody
 				tr("*ngFor"='let c of shownConditions', [class.selected]='c.selected', (click)='selectCondition(c)',id='t{{conditions.indexOf(c)}}')
 					ng-container("*ngIf"="c.isVisible")
-						td 
-							//- 											
+						td 									
 							input("*ngIf"="!c.isParent",type='checkbox',id='c{{conditions.indexOf(c)}}', value='{{conditions.indexOf(c)}}', (change)='checkCondition($event.target.checked, c)')
 						td
 							button.btn.btn-default("*ngIf"="c.isParent", (click)='expand(c.parent)') ... 
 							span("*ngIf"="!c.isParent") {{c['code']['text']}} {{c['code']['coding'][0]['code']}}
 						td("*ngIf"="!c.isParent") {{c.clinicalStatus}}
-						td("*ngIf"="!c.isParent") {{c.relativeDateTime}}
-						td
-							button.btn.btn-default(data-toggle="modal", [attr.data-target]="'#editFieldc' + conditions.indexOf(c)")
-							
-							.modal.fade(id="editFieldc{{conditions.indexOf(c)}}",role='dialog')
-								.modal-dialog(role='document')
-									.modal-content
-										.modal-header
-											button.close(type='button', data-dismiss='modal', aria-label='Close')
-												span(aria-hidden='true') ×
-										.modal-body
-											p
-												input(type='text', name="textInputForEdit", [(ngModel)]='textInputForEdit')
+						td("*ngIf"="!c.isParent") {{c.relativeDateTime | amDateFormat: 'YYYY-MM-DD'}}
+						
+						//- td button.btn.btn-default(data-toggle="modal", [attr.data-target]="'#editFieldc' + conditions.indexOf(c)")		
+						.modal.fade(id="editFieldc{{conditions.indexOf(c)}}",role='dialog')
+							.modal-dialog(role='document')
+								.modal-content
+									.modal-header
+										button.close(type='button', data-dismiss='modal', aria-label='Close')
+											span(aria-hidden='true') ×
+									.modal-body
+										p
+											input(type='text', name="textInputForEdit", [(ngModel)]='textInputForEdit')
 											button.btn.btn-default((click)="updateEntry(conditionService.conditions.indexOf(c), \"['code']['coding'][0]['code']\")")
 
-											p
-												b Code System:
-												a(href='{{c.code.coding[0].system}}') {{c.code.coding[0].system}}
-											p
-												b Code:
-												|  {{c.code.coding[0].code}}
-										.modal-footer
-											button.btn.btn-default(type='button', data-dismiss='modal') Close	
+										p
+											b Code System:
+											a(href='{{c.code.coding[0].system}}') {{c.code.coding[0].system}}
+										p
+											b Code:
+											|  {{c.code.coding[0].code}}
+									.modal-footer
+										button.btn.btn-default(type='button', data-dismiss='modal') Close	

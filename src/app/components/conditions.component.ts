@@ -21,7 +21,7 @@ export class ConditionsComponent implements Column {
   selected: Condition;
 
   conditions: Array<Condition> = [];
-  scratchPadConditions: Array<Condition> = [];
+  shownConditions: Array<Condition> = [];
 
   viewToggle: boolean = false;
   collapseQueue: Array<any> = [];
@@ -128,6 +128,7 @@ export class ConditionsComponent implements Column {
     if (this.patient) {
       this.conditionService.loadConditions(this.patient, true).subscribe(conditions => {
         this.conditions = conditions;
+        this.showActiveConditions();
         this.loadFinished();
       });
     }
@@ -184,10 +185,7 @@ export class ConditionsComponent implements Column {
   }
 
   addToScratchPad() {
-    console.log('addToScratchPad()');
-    console.log(this.selected);
 
-    this.scratchPadConditions.push(this.selected);
   }
 
   expand(parent: string) {
@@ -199,6 +197,7 @@ export class ConditionsComponent implements Column {
       }
     }
   }
+
   collapse() {
     let index = 0;
     let parent = "";
@@ -243,18 +242,18 @@ export class ConditionsComponent implements Column {
     // this.conditionGrouping[1] = this.conditionGrouping[0];
   }
 
-  tableNavigation(clickedSet: number){
-    for (let c of this.conditionGrouping){
-      let cNum = this.conditionGrouping.indexOf(c);
-      if (cNum != clickedSet){
-        let tempTableVar = document.getElementById("cG" + cNum.toString());
-        tempTableVar.hidden = true;
-      }
-      else{
-        let tempTableVar = document.getElementById("cG" + cNum.toString());
-        tempTableVar.hidden = false;
-      }
-    }
+  showActiveConditions() {
+    console.log("showActiveConditions");
+    this.shownConditions = this.conditions.filter(
+      c => c.clinicalStatus == "active"
+    );
+  }
+
+  showInactiveConditions() {
+    console.log("showInactiveConditions");
+    this.shownConditions = this.conditions.filter(
+      c => c.clinicalStatus != "active"
+    );
   }
 
   //Hides inactive conditions on construction

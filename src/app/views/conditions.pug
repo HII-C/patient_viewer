@@ -23,9 +23,12 @@ div
 	p.telt("*ngIf"='conditions.length == 0')
 		i (none)
 
-	div("*ngIf"='conditions.length > 0', id="tableParentEle")
-		button.btn.btn-default((click)='tableNavigation(conditionGrouping.indexOf(c))', "*ngFor"='let c of conditionGrouping') {{conditionGroupingName[conditionGrouping.indexOf(c)]}}
-		
+	div("*ngIf"='shownConditions.length > 0', id="tableParentEle")
+		button.btn.btn-default((click)='showActiveConditions()')
+			| Active
+		button.btn.btn-default((click)='showInactiveConditions()')
+			| Inactive
+				
 		table.table.table-condensed.table-striped
 			thead
 				tr
@@ -39,7 +42,7 @@ div
 						| Onset
 					th 
 			tbody
-				tr("*ngFor"='let c of conditions', [class.selected]='c.selected', (click)='selectCondition(c)',id='t{{conditions.indexOf(c)}}')
+				tr("*ngFor"='let c of shownConditions', [class.selected]='c.selected', (click)='selectCondition(c)',id='t{{conditions.indexOf(c)}}')
 					ng-container("*ngIf"="c.isVisible")
 						td 
 							//- 											

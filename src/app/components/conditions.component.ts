@@ -18,7 +18,7 @@ import * as moment from 'moment';
   templateUrl: '/conditions.html'
 })
 export class ConditionsComponent implements Column {
-  columnState: string = "defualt";
+  columnState: string = "default";
 
   selected: Condition;
   conditions: Array<Condition> = [];
@@ -123,7 +123,6 @@ export class ConditionsComponent implements Column {
       this.conditions = this.doctorService.assignVisible(this.conditions);
     }
     this.conditionService.conditions = this.conditions;
-    this.groupConditions();
   }
 
   ngOnChanges() {
@@ -138,15 +137,6 @@ export class ConditionsComponent implements Column {
     }
   }
 
-  testingCsiro() {
-    this.csiroService.MapQuery().subscribe(data => {
-      console.log("Hey CSIRO works");
-      console.log(data);
-    }, error => {
-      console.log("oops");
-    });
-  }
-
   // Method for basic toggling, using JSON functions to toggle internal Angular2 module OnChanges for UI reactivity
   ellipsesToggle() {
     // Basic logic for toggle, assuming this.conditions contains all info, and this.viewConditionList is the modified list being used to display data
@@ -159,26 +149,18 @@ export class ConditionsComponent implements Column {
   }
 
   toggleExpansion() {
-
     if (this.viewToggle == true) {
       this.conditions = this.doctorService.assignVisible(this.conditions);
       this.viewToggle = false;
     }
   }
 
-  conditionChecked(checked: boolean, checkedCondition: Condition) {
+  checkCondition(checked: boolean, checkedCondition: Condition) {
     checkedCondition['checked'] = checked;
     console.log(checkedCondition['checked']);
   }
 
-  autoCheck(rangeLow: number, rangeHigh: number) {
-    for(var i = rangeLow; i < rangeHigh; i++){
-      (<HTMLInputElement>document.getElementById('c' + i)).checked = true;
-    }
-    console.log('autochecked');
-  }
-
-  addToScratchPad() {
+  addConditionsToScratchPad() {
     for (let c of this.conditions) {
       if (c['checked']) {
         if (this.scratchPadConditions.indexOf(c) == -1) {
@@ -186,8 +168,15 @@ export class ConditionsComponent implements Column {
         }
       }
     }
+  }
 
-    console.log(this.scratchPadConditions);
+  removeConditionsFromScratchPad() {
+    for (let c of this.conditions) {
+      if (c['checked']) {
+        var index = this.scratchPadConditions.indexOf(c);
+        this.scratchPadConditions.splice(index, 1);
+      }
+    }
   }
 
   expand(parent: string) {
@@ -221,29 +210,6 @@ export class ConditionsComponent implements Column {
 
   }
 
-  // Active v. Inactive
-  groupConditions(){
-    for (let c of this.conditions){
-      if (c.clinicalStatus == "active"){
-        if (!this.conditionGrouping[0]){
-          this.conditionGrouping[0] = [c];
-        }
-        else {
-          this.conditionGrouping[0].push(c);
-        }
-      }
-      else {
-        if (!this.conditionGrouping[1]){
-          this.conditionGrouping[1] = [c];
-        }
-        else {
-          this.conditionGrouping[1].push(c);
-        }
-      }
-    }
-    // this.conditionGrouping[1] = this.conditionGrouping[0];
-  }
-
   showActiveConditions() {
     console.log("showActiveConditions");
     this.shownConditions = this.conditions.filter(
@@ -256,15 +222,6 @@ export class ConditionsComponent implements Column {
     this.shownConditions = this.conditions.filter(
       c => c.clinicalStatus != "active"
     );
-  }
-
-  //Hides inactive conditions on construction
-  hideInactive(){
-    if (this.justCreated) {
-       document.getElementById("cG1").hidden = true;
-       console.log("inactive conditions hidden")
-     }
-    this.justCreated = false;
   }
 
   newTable(tableName: string, dataLocation: Array<any>, quality: string, groupingCount: number){
@@ -306,5 +263,4 @@ export class ConditionsComponent implements Column {
     this.conditions[index] = this.conditionService.conditions[index];
     console.log(this.conditions[index]);
   }
-
 }

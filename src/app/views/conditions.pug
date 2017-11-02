@@ -3,33 +3,33 @@ div
 	
 	h2.text-center
 		| Conditions
-	div.btn-group
-		button.btn.btn-default.dropdown-toggle(type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
-			| Tools
-			span.caret
-		ul.dropdown-menu
-			li
-				a((click)='sortCondition("date-asc")')
-					span.glyphicon.glyphicon-sort-by-alphabet(aria-hidden="true")
-			li
-				a((click)='sortCondition("date-desc")')
-					span.glyphicon.glyphicon-sort-by-alphabet-alt(aria-hidden="true")
-		button.btn.btn-default((click)='addToScratchPad()') 
-			| Add to ScratchPad
-			
-	p.telt("*ngIf"='conditions.length == 0')
-		i (none)
-
-	div("*ngIf"='shownConditions.length > 0', id="tableParentEle")
-		div.btn-group
+	
+	.text-center
+		.btn-group
+			button.btn.btn-default(type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
+				| Sort
+				span.caret
 			button.btn.btn-default((click)='showActiveConditions()')
 				| Active
 			button.btn.btn-default((click)='showInactiveConditions()')
 				| Inactive
+			button.btn.btn-default("*ngIf"='columnState == "scratchpad"', (click)='removeConditionsFromScratchPad()')
+				| Remove
+			button.btn.btn-default("*ngIf"='columnState == "default"', (click)='addConditionsToScratchPad()')
+				| Add
 		
-		a("*ngIf"='columnState == "scratchpad"')
-			| Delete from ScratchPad
-				
+	ul.dropdown-menu
+		li
+			a((click)='sortCondition("date-asc")')
+				span.glyphicon.glyphicon-sort-by-alphabet(aria-hidden="true")
+		li
+			a((click)='sortCondition("date-desc")')
+				span.glyphicon.glyphicon-sort-by-alphabet-alt(aria-hidden="true")
+	
+	p.telt("*ngIf"='conditions.length == 0')
+		i (none)
+
+	div("*ngIf"='shownConditions.length > 0', id="tableParentEle")
 		table.table.table-condensed.table-striped
 			thead
 				tr
@@ -47,7 +47,7 @@ div
 					ng-container("*ngIf"="c.isVisible")
 						td 
 							//- 											
-							input("*ngIf"="!c.isParent",type='checkbox',id='c{{conditions.indexOf(c)}}', value='{{conditions.indexOf(c)}}', (change)='conditionChecked($event.target.checked, c)')
+							input("*ngIf"="!c.isParent",type='checkbox',id='c{{conditions.indexOf(c)}}', value='{{conditions.indexOf(c)}}', (change)='checkCondition($event.target.checked, c)')
 						td
 							button.btn.btn-default("*ngIf"="c.isParent", (click)='expand(c.parent)') ... 
 							span("*ngIf"="!c.isParent") {{c['code']['text']}} {{c['code']['coding'][0]['code']}}

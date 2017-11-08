@@ -5,6 +5,8 @@
     
     button.btn.btn-default.btn-xs(title="Scratch Pad", [class.active]='column.columnState == "scratchpad"', (click)='switchToScratchPad()')
       span(class="glyphicon glyphicon-eye-open")
+      span(class="badge column-state-badge") 0
     
     button.btn.btn-default.btn-xs(title="Note Pad", [class.active]='column.columnState == "notepad"', (click)='switchToNotePad()')
       span(class="glyphicon glyphicon-pencil")
+      span(class="badge column-state-badge") 0

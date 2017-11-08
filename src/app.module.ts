@@ -27,6 +27,7 @@ import {ObservationRecursiveChart} from './app/components/observationRecursionCh
 import {CarePlanChartComponent} from './app/components/carePlanChart.component';
 import {ConditionsChartComponent} from './app/components/conditionsChart.component';
 import {ColumnStateSwitcherComponent} from './app/components/columnStateSwitcher.component';
+import {NewCondition} from './app/components/newCondition.component';
 
 
 
@@ -119,7 +120,8 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
         ObservationRecursiveChart,
         CarePlanChartComponent,
         ConditionsChartComponent,
-        ColumnStateSwitcherComponent
+        ColumnStateSwitcherComponent,
+        NewCondition
     ],   // components and directives
     providers: [
         appRoutingProviders,

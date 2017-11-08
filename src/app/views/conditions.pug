@@ -18,6 +18,8 @@ div
 				| Remove
 			button.btn.btn-default("*ngIf"='columnState == "default"', (click)='addConditionsToScratchPad()')
 				| Add
+			button.btn.btn-default(data-toggle="modal", [attr.data-target]="'#newCondition'")
+				| New
 		
 	ul.dropdown-menu
 		li

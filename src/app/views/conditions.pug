@@ -52,7 +52,7 @@ div
 							button.btn.btn-default("*ngIf"="c.isParent", (click)='expand(c.parent)') ... 
 							span("*ngIf"="!c.isParent") {{c['code']['text']}}
 						td("*ngIf"="!c.isParent") {{c.clinicalStatus}}
-						td("*ngIf"="!c.isParent") {{c.relativeDateTime | amDateFormat: 'YYYY-MM-DD'}}
+						td("*ngIf"="!c.isParent") {{c.relativeDateTime | amTimeAgo:true}}
 						
 						//- td button.btn.btn-default(data-toggle="modal", [attr.data-target]="'#editFieldc' + conditions.indexOf(c)")		
 						.modal.fade(id="editFieldc{{conditions.indexOf(c)}}",role='dialog')

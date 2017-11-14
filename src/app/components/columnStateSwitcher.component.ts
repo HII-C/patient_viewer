@@ -32,4 +32,12 @@ export class ColumnStateSwitcherComponent {
       this.column.showNotePad();
     }
   }
+
+  getScratchPadCount() {
+    if (this.column != null) {
+      return this.column.getScratchPadCount();
+    } else {
+      return 0;
+    }
+  }
 }

@@ -51,7 +51,11 @@ export class ConditionsComponent implements Column {
   }
 
   showNotePad() {
-    
+
+  }
+
+  getScratchPadCount() {
+    return this.scratchPadConditions.length;
   }
 
   selectCondition(condition: Condition) {

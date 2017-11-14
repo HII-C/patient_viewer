@@ -10,6 +10,8 @@ import {Column} from '../interfaces/column.interface';
     templateUrl: '/carePlan.html'
 })
 export class CarePlanComponent implements Column {
+  columnState: string = "default";
+
   selected: CarePlan;
   carePlans: Array<CarePlan>;
   @Input() patient: Patient;
@@ -29,7 +31,11 @@ export class CarePlanComponent implements Column {
   showNotePad() {
     console.log("showNotePad");
   }
-  
+
+  getScratchPadCount() {
+    return 0;
+  }
+
 	ngOnChanges() {
 		this.selected = null;
 		if (this.patient) {

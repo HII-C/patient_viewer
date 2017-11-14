@@ -1,10 +1,11 @@
-timelines([patient]='selected', *ngIf='selected')
+.row
+  .col-md-2
+    patient((patientSelected)="selectPatient($event)")
+  .col-md-10
+    timelines([patient]='selected', *ngIf='selected')
 
 div.row
-  div.col-md-2
-    patient((patientSelected)="selectPatient($event)")
-  div.col-md-10
-    triplelist([patient]='selected', *ngIf='selected')
+  triplelist([patient]='selected', *ngIf='selected')
 
 favorites
 chartTimelines

@@ -42,19 +42,15 @@ div
 						| Description
 					th
 						| Status
-					th
-						| Onset
-					th 
 			tbody
-				tr("*ngFor"='let c of shownConditions', [class.selected]='c.selected', (click)='selectCondition(c)',id='t{{conditions.indexOf(c)}}')
+				tr("*ngFor"='let c of shownConditions', [class.selected]='c.selected', (click)='selectCondition(c)', id='t{{conditions.indexOf(c)}}', title='Onset: {{c.relativeDateTime | amTimeAgo:false}}')
 					ng-container("*ngIf"="c.isVisible")
-						td 									
+						td
 							input("*ngIf"="!c.isParent",type='checkbox',id='c{{conditions.indexOf(c)}}', value='{{conditions.indexOf(c)}}', (change)='checkCondition($event.target.checked, c)')
 						td
 							button.btn.btn-default("*ngIf"="c.isParent", (click)='expand(c.parent)') ... 
 							span("*ngIf"="!c.isParent") {{c['code']['text']}}
 						td("*ngIf"="!c.isParent") {{c.clinicalStatus}}
-						td("*ngIf"="!c.isParent") {{c.relativeDateTime | amTimeAgo:true}}
 						
 						//- td button.btn.btn-default(data-toggle="modal", [attr.data-target]="'#editFieldc' + conditions.indexOf(c)")		
 						.modal.fade(id="editFieldc{{conditions.indexOf(c)}}",role='dialog')

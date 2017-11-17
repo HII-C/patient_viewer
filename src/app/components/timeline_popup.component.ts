@@ -22,4 +22,14 @@ export class TimelinePopupComponent{
       this.condition = timelineItem;
       $('#timeline_popup').modal({});
     }
+
+    open(timeLineItem) {
+        document.getElementById('content').innerHTML = '<h2>' + timeLineItem.code['text'] + '</h2>\n<p>' + timeLineItem.clinicalStatus + '</p>\n<p>' + timeLineItem.onsetDateTime + '</p>';
+        document.getElementById('content').hidden = false;
+    }
+
+    close() {
+        document.getElementById('content').innerHTML = '';
+        document.getElementById('content').hidden = true;
+    }
 }

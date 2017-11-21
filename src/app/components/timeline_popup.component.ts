@@ -24,7 +24,7 @@ export class TimelinePopupComponent{
     }
 
     open(timeLineItem) {
-        document.getElementById('content').innerHTML = '<h2>' + timeLineItem.code['text'] + '</h2>\n<p>' + timeLineItem.clinicalStatus + '</p>\n<p>' + timeLineItem.onsetDateTime + '</p>';
+        document.getElementById('content').innerHTML = '<h2>' + timeLineItem.code['text'] + '</h2>\n<p>' + timeLineItem.clinicalStatus + '</p>\n<p>' + new Date(timeLineItem.onsetDateTime).toDateString() + '</p>';
         document.getElementById('content').hidden = false;
     }
 

@@ -225,6 +225,18 @@ export class ConditionsComponent implements Column {
     );
   }
 
+  getActiveConditions() {
+    return this.conditions.filter(
+      c => c.clinicalStatus == "active"
+    );
+  }
+
+  getInactiveConditions() {
+    return this.conditions.filter(
+      c => c.clinicalStatus != "active"
+    );
+  }
+
   newTable(tableName: string, dataLocation: Array<any>, quality: string, groupingCount: number){
     if(this.conditionGroupingName.indexOf(tableName) == -1){
       this.conditionGroupingName.push(tableName);

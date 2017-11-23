@@ -7,71 +7,76 @@ div
 			
 	.text-center
 		.btn-group
-			button.btn.btn-default.btn-sm(type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
-				| Sort
-				span.caret
-			button.btn.btn-default.btn-sm((click)='showActiveConditions()')
-				| Active
-			button.btn.btn-default.btn-sm((click)='showInactiveConditions()')
-				| Inactive
-			button.btn.btn-default.btn-sm("*ngIf"='columnState == "scratchpad"', (click)='removeConditionsFromScratchPad()')
+			button.btn.btn-default.btn-sm([class.disabled]='columnState != "scratchpad"', (click)='removeConditionsFromScratchPad()')
 				| Remove
-			button.btn.btn-default.btn-sm("*ngIf"='columnState == "default"', (click)='addConditionsToScratchPad()')
+			button.btn.btn-default.btn-sm([class.disabled]='columnState != "default"', (click)='addConditionsToScratchPad()')
 				| Add
-			button.btn.btn-default.btn-sm(data-toggle="modal", [attr.data-target]="'#newCondition'")
-				| New
-		
-	ul.dropdown-menu
-		li
-			a((click)='sortCondition("date-asc")')
-				span.glyphicon.glyphicon-sort-by-alphabet(aria-hidden="true")
-		li
-			a((click)='sortCondition("date-desc")')
-				span.glyphicon.glyphicon-sort-by-alphabet-alt(aria-hidden="true")
 	
-	p.telt("*ngIf"='conditions.length == 0')
-		i (none)
+	h5
+		| {{columnState == "default" ? "Active" : "Scratch Pad"}}
+	
+	table.table.table-condensed.table-striped
+		thead
+			tr
+				th
+					| 
+				th
+					| Description
+				th
+					| Status
+				th
+					| Onset
+		tbody
+			tr("*ngFor"='let c of (columnState == "default" ? getActiveConditions() : scratchPadConditions)', [class.selected]='c.selected', (click)='selectCondition(c)', id='t{{conditions.indexOf(c)}}', title="Onset Date: {{c.relativeDateTime | amDateFormat: 'YYYY-MM-DD'}}")
+				td
+					input("*ngIf"="!c.isParent",type='checkbox',id='c{{conditions.indexOf(c)}}', value='{{conditions.indexOf(c)}}', (change)='checkCondition($event.target.checked, c)')
+				td
+					button.btn.btn-default("*ngIf"="c.isParent", (click)='expand(c.parent)') ... 
+					span("*ngIf"="!c.isParent") {{c['code']['text']}}
+				td("*ngIf"="!c.isParent") {{c.clinicalStatus}}
+				td("*ngIf"="!c.isParent") {{c.relativeDateTime | amTimeAgo:true}}
 
-	div("*ngIf"='shownConditions.length > 0', id="tableParentEle")
-		table.table.table-condensed.table-striped
-			thead
-				tr
-					th
-						| 
-					th
-						| Description
-					th
-						| Status
-					th
-						| Onset
-			tbody
-				tr("*ngFor"='let c of shownConditions', [class.selected]='c.selected', (click)='selectCondition(c)', id='t{{conditions.indexOf(c)}}', title="Onset Date: {{c.relativeDateTime | amDateFormat: 'YYYY-MM-DD'}}")
-					ng-container("*ngIf"="c.isVisible")
-						td
-							input("*ngIf"="!c.isParent",type='checkbox',id='c{{conditions.indexOf(c)}}', value='{{conditions.indexOf(c)}}', (change)='checkCondition($event.target.checked, c)')
-						td
-							button.btn.btn-default("*ngIf"="c.isParent", (click)='expand(c.parent)') ... 
-							span("*ngIf"="!c.isParent") {{c['code']['text']}}
-						td("*ngIf"="!c.isParent") {{c.clinicalStatus}}
-						td("*ngIf"="!c.isParent") {{c.relativeDateTime | amTimeAgo:true}}
-						
-						//- td button.btn.btn-default(data-toggle="modal", [attr.data-target]="'#editFieldc' + conditions.indexOf(c)")		
-						.modal.fade(id="editFieldc{{conditions.indexOf(c)}}",role='dialog')
-							.modal-dialog(role='document')
-								.modal-content
-									.modal-header
-										button.close(type='button', data-dismiss='modal', aria-label='Close')
-											span(aria-hidden='true') ×
-									.modal-body
-										p
-											input(type='text', name="textInputForEdit", [(ngModel)]='textInputForEdit')
-											button.btn.btn-default((click)="updateEntry(conditionService.conditions.indexOf(c), \"['code']['coding'][0]['code']\")")
+	h5("*ngIf"='columnState == "default"')
+		| Inactive
+	
+	table.table.table-condensed.table-striped("*ngIf"='columnState == "default"')
+		thead
+			tr
+				th
+					| 
+				th
+					| Description
+				th
+					| Status
+				th
+					| Onset
+		tbody
+			tr("*ngFor"='let c of getInactiveConditions()', [class.selected]='c.selected', (click)='selectCondition(c)', id='t{{conditions.indexOf(c)}}', title="Onset Date: {{c.relativeDateTime | amDateFormat: 'YYYY-MM-DD'}}")
+				td
+					input("*ngIf"="!c.isParent",type='checkbox',id='c{{conditions.indexOf(c)}}', value='{{conditions.indexOf(c)}}', (change)='checkCondition($event.target.checked, c)')
+				td
+					button.btn.btn-default("*ngIf"="c.isParent", (click)='expand(c.parent)') ... 
+					span("*ngIf"="!c.isParent") {{c['code']['text']}}
+				td("*ngIf"="!c.isParent") {{c.clinicalStatus}}
+				td("*ngIf"="!c.isParent") {{c.relativeDateTime | amTimeAgo:true}}
+					
+				//- td button.btn.btn-default(data-toggle="modal", [attr.data-target]="'#editFieldc' + conditions.indexOf(c)")		
+				.modal.fade(id="editFieldc{{conditions.indexOf(c)}}",role='dialog')
+					.modal-dialog(role='document')
+						.modal-content
+							.modal-header
+								button.close(type='button', data-dismiss='modal', aria-label='Close')
+									span(aria-hidden='true') ×
+							.modal-body
+								p
+									input(type='text', name="textInputForEdit", [(ngModel)]='textInputForEdit')
+									button.btn.btn-default((click)="updateEntry(conditionService.conditions.indexOf(c), \"['code']['coding'][0]['code']\")")
 
-										p
-											b Code System:
-											a(href='{{c.code.coding[0].system}}') {{c.code.coding[0].system}}
-										p
-											b Code:
-											|  {{c.code.coding[0].code}}
-									.modal-footer
-										button.btn.btn-default(type='button', data-dismiss='modal') Close	
+								p
+									b Code System:
+									a(href='{{c.code.coding[0].system}}') {{c.code.coding[0].system}}
+								p
+									b Code:
+									|  {{c.code.coding[0].code}}
+							.modal-footer
+								button.btn.btn-default(type='button', data-dismiss='modal') Close	

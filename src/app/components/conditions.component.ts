@@ -124,6 +124,7 @@ export class ConditionsComponent implements Column {
       //this.viewConditionList = JSON.parse(JSON.stringify(this.conditions));
       this.conditions = this.doctorService.assignVisible(this.conditions);
     }
+
     this.conditionService.conditions = this.conditions;
   }
 
@@ -133,7 +134,7 @@ export class ConditionsComponent implements Column {
     if (this.patient) {
       this.conditionService.loadConditions(this.patient, true).subscribe(conditions => {
         this.conditions = conditions;
-        this.showActiveConditions();
+        this.shownConditions = conditions;
         this.loadFinished();
       });
     }
@@ -213,14 +214,12 @@ export class ConditionsComponent implements Column {
   }
 
   showActiveConditions() {
-    console.log("showActiveConditions");
     this.shownConditions = this.conditions.filter(
       c => c.clinicalStatus == "active"
     );
   }
 
   showInactiveConditions() {
-    console.log("showInactiveConditions");
     this.shownConditions = this.conditions.filter(
       c => c.clinicalStatus != "active"
     );

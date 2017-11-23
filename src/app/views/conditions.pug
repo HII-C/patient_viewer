@@ -7,18 +7,18 @@ div
 			
 	.text-center
 		.btn-group
-			button.btn.btn-default(type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
+			button.btn.btn-default.btn-sm(type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
 				| Sort
 				span.caret
-			button.btn.btn-default((click)='showActiveConditions()')
+			button.btn.btn-default.btn-sm((click)='showActiveConditions()')
 				| Active
-			button.btn.btn-default((click)='showInactiveConditions()')
+			button.btn.btn-default.btn-sm((click)='showInactiveConditions()')
 				| Inactive
-			button.btn.btn-default("*ngIf"='columnState == "scratchpad"', (click)='removeConditionsFromScratchPad()')
+			button.btn.btn-default.btn-sm("*ngIf"='columnState == "scratchpad"', (click)='removeConditionsFromScratchPad()')
 				| Remove
-			button.btn.btn-default("*ngIf"='columnState == "default"', (click)='addConditionsToScratchPad()')
+			button.btn.btn-default.btn-sm("*ngIf"='columnState == "default"', (click)='addConditionsToScratchPad()')
 				| Add
-			button.btn.btn-default(data-toggle="modal", [attr.data-target]="'#newCondition'")
+			button.btn.btn-default.btn-sm(data-toggle="modal", [attr.data-target]="'#newCondition'")
 				| New
 		
 	ul.dropdown-menu

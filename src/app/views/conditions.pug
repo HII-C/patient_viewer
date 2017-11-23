@@ -1,10 +1,10 @@
 div
-	.pull-right
-		columnStateSwitcher([column]='this')
-	br
-	h2.text-center
-		| Conditions
-	
+	.header.text-center
+		h2(style="display: inline-block")
+			| Conditions
+		div(style="display: inline-block")
+			columnStateSwitcher([column]='this')
+			
 	.text-center
 		.btn-group
 			button.btn.btn-default(type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")

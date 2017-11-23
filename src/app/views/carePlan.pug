@@ -1,6 +1,9 @@
-columnStateSwitcher([column]='this')
-h2.text-center
-	| Care Plans
+.header.text-center
+	h2(style="display: inline-block")
+		| Care Plans
+	div(style="display: inline-block")
+		columnStateSwitcher([column]='this')
+
 table.table.table-condensed.table-striped
 	thead
 		tr

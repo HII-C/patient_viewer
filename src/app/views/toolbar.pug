@@ -1,42 +1,42 @@
 #toolbar((onDrag)="updatePosition($event)",(onDragStop)="updatePosition($event)")
 	//- div("*ngIf"="!nav2", [@fadeIn]="'in'")
 	.btn-group("*ngIf"="!nav2")
-		button.btn.btn-default.btn-lg.btn-custom-lg(title="Contacts")
+		button.btn.btn-default(title="Contacts")
 			span(class="glyphicon glyphicon-earphone")
-		button.btn.btn-default.btn-lg.btn-custom-lg((click)='switchNav()',title="Home")
+		button.btn.btn-default((click)='switchNav()',title="Home")
 			span(class="glyphicon glyphicon-home")
-		button.btn.btn-default.btn-lg.btn-custom-lg(title="Search")
+		button.btn.btn-default(title="Search")
 			span(class="glyphicon glyphicon-search")
-		button.btn.btn-default.btn-lg.btn-custom-lg(title="Favorites", data-toggle="collapse", data-target="#favorites",(click)="updatePosition()")
+		button.btn.btn-default(title="Favorites", data-toggle="collapse", data-target="#favorites",(click)="updatePosition()")
 			span(class="glyphicon glyphicon-star")
-		button.btn.btn-default.btn-lg.btn-custom-lg(routerLink='/account', routerLinkActive='active',title="Settings")
+		button.btn.btn-default(routerLink='/account', routerLinkActive='active',title="Settings")
 			span(class="glyphicon glyphicon-cog")
-		button.btn.btn-default.btn-lg.btn-custom-lg(title="Graphing Tool")
+		button.btn.btn-default(title="Graphing Tool")
 			span(class="glyphicon glyphicon-signal")
-		button.btn.btn-default.btn-lg.btn-custom-lg(title="Association Tool")
+		button.btn.btn-default(title="Association Tool")
 			span(class="glyphicon glyphicon-link")
-		button.btn.btn-default.btn-lg.btn-custom-lg(data-toggle="modal", [attr.data-target]="'#chartTimeline_popup'", (click)='openGraph()',title="Historical Trends")
+		button.btn.btn-default(data-toggle="modal", [attr.data-target]="'#chartTimeline_popup'", (click)='openGraph()',title="Historical Trends")
 			span(class="glyphicon glyphicon-stats")
-		button.btn.btn-default.btn-lg.btn-custom-lg(title="Info Button")  
+		button.btn.btn-default(title="Info Button")  
 			span(class="glyphicon glyphicon-info-sign")
 
 	.btn-group("*ngIf"="nav2")
-		button.btn.btn-default.btn-lg.btn-custom-lg.btn2
+		button.btn.btn-default.btn2
 			span(class="glyphicon glyphicon-arrow-left")
-		button.btn.btn-default.btn-lg.btn-custom-lg((click)='switchNav()')
+		button.btn.btn-default((click)='switchNav()')
 			span(class="glyphicon glyphicon-home")
-		button.btn.btn-default.btn-lg.btn-custom-lg.btn2
+		button.btn.btn-default.btn2
 			span(class="glyphicon glyphicon-arrow-right")
-		button.btn.btn-default.btn-lg.btn-custom-lg.btn2
+		button.btn.btn-default.btn2
 			span(class="glyphicon glyphicon-repeat") 
-		button.btn.btn-default.btn-lg.btn-custom-lg.btn2
+		button.btn.btn-default.btn2
 			span(class="glyphicon glyphicon-bookmark")
-		button.btn.btn-default.btn-lg.btn-custom-lg.btn2
+		button.btn.btn-default.btn2
 			span(class="glyphicon glyphicon-hourglass") 
-		button.btn.btn-default.btn-lg.btn-custom-lg.btn2
+		button.btn.btn-default.btn2
 			span(class="glyphicon glyphicon-flash")
-		button.btn.btn-default.btn-lg.btn-custom-lg.btn2
+		button.btn.btn-default.btn2
 			span(class="glyphicon glyphicon-list-alt") 
-		button.btn.btn-default.btn-lg.btn-custom-lg.btn2
+		button.btn.btn-default.btn2
 			span(class="glyphicon glyphicon-stats")
 				

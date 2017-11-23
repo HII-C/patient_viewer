@@ -73,7 +73,6 @@ import { CalendarModule } from 'angular-calendar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NguiAutoCompleteModule } from '@ngui/auto-complete';
 
-
 const appRoutes: Routes = [
     { path: '', component: HomeComponent },
     { path: 'account', component: AccountComponent }

@@ -1,12 +1,13 @@
-.row
-  .col-md-2
+.row(style="padding-top: 10px")
+  .col-md-3
     patient((patientSelected)="selectPatient($event)")
-  .col-md-10
+  .col-md-2
+    toolbar
+  .col-md-7
     timelines([patient]='selected', *ngIf='selected')
 
-div.row
-  .col-md-10.col-md-offset-1
-    triplelist([patient]='selected', *ngIf='selected')
+div.triple-list-container
+  triplelist([patient]='selected', *ngIf='selected')
 
 favorites
 chartTimelines

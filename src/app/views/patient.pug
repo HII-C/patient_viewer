@@ -1,56 +1,57 @@
-div.text-center
-	span#patient
-		.patient-handle Patient Details
-		.patient-content
-			img.img-rounded(src='/images/textures/me.jpg')
-			.details("*ngIf"='selected')
-				.identifier
-					b
-						span("*ngIf"='selected.name && selected.name[0].given') {{selected.name[0].given[0]}}
-						| &nbsp;
-						span("*ngIf"='selected.name && selected.name[0].family') {{selected.name[0].family[0]}}
-					div
-						| Born: {{selected.birthDate | amDateFormat:'MM/DD/YYYY'}} ({{-1 * (selected.birthDate | amDifference:today:'years':false)}}yr)
-					div Gender: {{selected.gender}}
-					div("*ngIf" = 'selected.mrn') MRN: {{selected.mrn}}
+.row.patient-content
+	.col-md-6
+		img.img-rounded(src='/images/textures/profile.png', width="100px", height="100px")
+	.dol-md-6
+		div.text-center
+			span#patient
+				.details("*ngIf"='selected')
+					.identifier
+						b
+							span("*ngIf"='selected.name && selected.name[0].given') {{selected.name[0].given[0]}}
+							| &nbsp;
+							span("*ngIf"='selected.name && selected.name[0].family') {{selected.name[0].family[0]}}
+						div
+							| Born: {{selected.birthDate | amDateFormat:'MM/DD/YYYY'}} ({{-1 * (selected.birthDate | amDifference:today:'years':false)}}yr)
+						div Gender: {{selected.gender}}
+						div("*ngIf" = 'selected.mrn') MRN: {{selected.mrn}}
 
-			#advanced_search
-				a("(click)"="advancedSearch = !advancedSearch" href="#")
-					span("*ngIf"="advancedSearch") basic
-					span("*ngIf"="!advancedSearch") advanced
-				form.form("*ngIf"="advancedSearch")
-					.form-group
-						label  Search
-						input.form-control(type="search")
-						select.form-control
-							option  Search Options
-							option  Could be patients?
-							option  Or something like past images on this patient?
-					.form-group
-						label  Order Lab Test
-						select.form-control
-							option  Different types of labs
-							option  Different types of labs
-							option  Different types of labs
-					.form-group
-						label  Order Medication
-						select.form-control
-							option  Order Medication
-					.form-group
-						label  Schedule Follow-Up
-						select.form-control
-							option  Schedule Follow-Up
-					.form-group
-						label  Refer to Specialist
-						select.form-control
-							option  Refer to Specialist
-					.form-group
-						label  Order Procedure
-						select.form-control
-							option  Order Procedure
-					.form-group
-						label
-							span.glyphicon.glyphicon-fire
-							|  Provider
-						select#server_select.form-control((change)='selectServerForUrl($event.target.value)')
-							option("*ngFor"='let s of servers', "[value]"='s.url', [selected]='server && (s.url == server.url)') {{s.name}}
+				#advanced_search
+					a("(click)"="advancedSearch = !advancedSearch" href="#")
+						span("*ngIf"="advancedSearch") basic
+						span("*ngIf"="!advancedSearch") advanced
+					form.form("*ngIf"="advancedSearch")
+						.form-group
+							label  Search
+							input.form-control(type="search")
+							select.form-control
+								option  Search Options
+								option  Could be patients?
+								option  Or something like past images on this patient?
+						.form-group
+							label  Order Lab Test
+							select.form-control
+								option  Different types of labs
+								option  Different types of labs
+								option  Different types of labs
+						.form-group
+							label  Order Medication
+							select.form-control
+								option  Order Medication
+						.form-group
+							label  Schedule Follow-Up
+							select.form-control
+								option  Schedule Follow-Up
+						.form-group
+							label  Refer to Specialist
+							select.form-control
+								option  Refer to Specialist
+						.form-group
+							label  Order Procedure
+							select.form-control
+								option  Order Procedure
+						.form-group
+							label
+								span.glyphicon.glyphicon-fire
+								|  Provider
+							select#server_select.form-control((change)='selectServerForUrl($event.target.value)')
+								option("*ngFor"='let s of servers', "[value]"='s.url', [selected]='server && (s.url == server.url)') {{s.name}}

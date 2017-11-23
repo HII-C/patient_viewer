@@ -12,6 +12,8 @@ import { Csiro } from '../models/csiro.model';
 import { Column } from '../interfaces/column.interface';
 import * as moment from 'moment';
 
+declare var $:any; //Necessary in order to use jQuery to open popup.
+
 
 @Component({
   selector: 'conditions',
@@ -179,6 +181,24 @@ export class ConditionsComponent implements Column {
         this.scratchPadConditions.splice(index, 1);
       }
     }
+  }
+
+  showPopover(condition: Condition) {
+    var popover = document.getElementById("condition-popover");
+    popover.style.display = "block";
+    popover.innerHTML = condition['code']['text'];
+  }
+
+  movePopover(event: MouseEvent) {
+    var columnOffset = document.getElementById("conditions").getBoundingClientRect();
+    var popover = document.getElementById("condition-popover");
+
+    popover.style.left = (event.x - columnOffset.left + 5) + "px";
+    popover.style.top = (event.y - columnOffset.top + 5) + "px";
+  }
+
+  hidePopover() {
+    document.getElementById("condition-popover").style.display = "none";
   }
 
   expand(parent: string) {

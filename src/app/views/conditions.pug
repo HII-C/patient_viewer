@@ -1,4 +1,4 @@
-div
+div#conditions
 	.header.text-center
 		h2(style="display: inline-block")
 			| Conditions
@@ -27,14 +27,14 @@ div
 				th
 					| Onset
 		tbody
-			tr("*ngFor"='let c of (columnState == "default" ? getActiveConditions() : scratchPadConditions)', [class.selected]='c.selected', (click)='selectCondition(c)', id='t{{conditions.indexOf(c)}}', title="Onset Date: {{c.relativeDateTime | amDateFormat: 'YYYY-MM-DD'}}")
+			tr("*ngFor"='let c of (columnState == "default" ? getActiveConditions() : scratchPadConditions)', [class.selected]='c.selected', (click)='selectCondition(c)', id='t{{conditions.indexOf(c)}}')
 				td
 					input("*ngIf"="!c.isParent",type='checkbox',id='c{{conditions.indexOf(c)}}', value='{{conditions.indexOf(c)}}', (change)='checkCondition($event.target.checked, c)')
 				td
 					button.btn.btn-default("*ngIf"="c.isParent", (click)='expand(c.parent)') ... 
 					span("*ngIf"="!c.isParent") {{c['code']['text']}}
 				td("*ngIf"="!c.isParent") {{c.clinicalStatus}}
-				td("*ngIf"="!c.isParent") {{c.relativeDateTime | amTimeAgo:true}}
+				td("*ngIf"="!c.isParent", (mouseenter)='showPopover(c)', (mousemove)='movePopover($event, c)', (mouseleave)='hidePopover()') {{c.relativeDateTime | amTimeAgo:true}}
 
 	h5("*ngIf"='columnState == "default"')
 		| Inactive
@@ -51,14 +51,14 @@ div
 				th
 					| Onset
 		tbody
-			tr("*ngFor"='let c of getInactiveConditions()', [class.selected]='c.selected', (click)='selectCondition(c)', id='t{{conditions.indexOf(c)}}', title="Onset Date: {{c.relativeDateTime | amDateFormat: 'YYYY-MM-DD'}}")
+			tr("*ngFor"='let c of getInactiveConditions()', [class.selected]='c.selected', (click)='selectCondition(c)', id='t{{conditions.indexOf(c)}}')
 				td
 					input("*ngIf"="!c.isParent",type='checkbox',id='c{{conditions.indexOf(c)}}', value='{{conditions.indexOf(c)}}', (change)='checkCondition($event.target.checked, c)')
 				td
 					button.btn.btn-default("*ngIf"="c.isParent", (click)='expand(c.parent)') ... 
 					span("*ngIf"="!c.isParent") {{c['code']['text']}}
 				td("*ngIf"="!c.isParent") {{c.clinicalStatus}}
-				td("*ngIf"="!c.isParent") {{c.relativeDateTime | amTimeAgo:true}}
+				td("*ngIf"="!c.isParent", (mouseenter)='showPopover(c)', (mousemove)='movePopover($event, c)', (mouseleave)='hidePopover()') {{c.relativeDateTime | amTimeAgo:true}}
 					
 				//- td button.btn.btn-default(data-toggle="modal", [attr.data-target]="'#editFieldc' + conditions.indexOf(c)")		
 				.modal.fade(id="editFieldc{{conditions.indexOf(c)}}",role='dialog')
@@ -79,4 +79,7 @@ div
 									b Code:
 									|  {{c.code.coding[0].code}}
 							.modal-footer
-								button.btn.btn-default(type='button', data-dismiss='modal') Close	
+								button.btn.btn-default(type='button', data-dismiss='modal') Close
+
+	#condition-popover(style="display: none")
+		| Testing condition popover

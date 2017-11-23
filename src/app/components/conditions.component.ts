@@ -160,7 +160,6 @@ export class ConditionsComponent implements Column {
 
   checkCondition(checked: boolean, checkedCondition: Condition) {
     checkedCondition['checked'] = checked;
-    console.log(checkedCondition['checked']);
   }
 
   addConditionsToScratchPad() {
@@ -174,7 +173,7 @@ export class ConditionsComponent implements Column {
   }
 
   removeConditionsFromScratchPad() {
-    for (let c of this.conditions) {
+    for (let c of this.scratchPadConditions) {
       if (c['checked']) {
         var index = this.scratchPadConditions.indexOf(c);
         this.scratchPadConditions.splice(index, 1);

@@ -1,0 +1,6 @@
+.form-group
+	label.form_label  {{inputData.data.name}} 
+	br
+	select.form-control([(ngModel)]='listData')
+		option
+		option(*ngFor='let entry of inputData.data.listdata', [ngValue]='entry.description')  {{entry.description}} 

@@ -1,0 +1,13 @@
+ul#main_list
+	li(*ngFor='let entry of forms; let i = index')
+		// CREATE FORM TEMPLATES HERE
+		div(*ngIf="entry.type == 'checkbox_inline'")
+			checkbox-inline([inputData]='formInput[i]', #form='')  
+		div(*ngIf="entry.type == 'box1'")
+			normal-box-1([inputData]='formInput[i]', #form='')  
+		div(*ngIf="entry.type == 'box2'")
+			normal-box-2([inputData]='formInput[i]', #form='')  
+		div(*ngIf="entry.type == 'list'")
+			select-list-single([inputData]='formInput[i]', #form='')  
+	button(type='button', (click)='getForms()')  Refresh 
+	button(type='button', (click)='submitClick()')  Submit 

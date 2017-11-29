@@ -1,7 +1,7 @@
 import {ModuleWithProviders, enableProdMode} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 
-
+import { FormCreatorModule } from './app/modules/form.module';
 
 import {AppComponent} from './app/components/app.component';
 import {ClientComponent} from './app/components/client.component';
@@ -28,7 +28,7 @@ import {CarePlanChartComponent} from './app/components/carePlanChart.component';
 import {ConditionsChartComponent} from './app/components/conditionsChart.component';
 import {ColumnStateSwitcherComponent} from './app/components/columnStateSwitcher.component';
 import {NewCondition} from './app/components/newCondition.component';
-
+import { FormBuilder } from './app/components/form-builder.component'
 
 
 import {LoupeExampleComponent} from './app/components/loupe-example.component'; // TODO Replace with whatever UI components are needed (if any) for Loupe integration.
@@ -83,6 +83,7 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
 
 @NgModule({
     imports: [
+		FormCreatorModule,
         BrowserModule,
         routing,
         FormsModule,
@@ -104,6 +105,7 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
         CarePlanComponent,
         TimelineComponent,
         TimelinePopupComponent,
+		FormBuilder,
         // ActionListComponent,
 		    LoupeExampleComponent,
         AccountComponent,

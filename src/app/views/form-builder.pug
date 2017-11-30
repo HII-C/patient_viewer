@@ -8,6 +8,8 @@ ul#main_list
 		div(*ngIf="entry.type == 'box2'")
 			normal-box-2([inputData]='formInput[i]', #form='')  
 		div(*ngIf="entry.type == 'list'")
-			select-list-single([inputData]='formInput[i]', #form='')  
+			select-list-single([inputData]='formInput[i]', #form='')
+		div(*ngIf="entry.type == 's-update'")
+			scratchpad-update([inputData]='formInput[i]', #form='')
 	button(type='button', (click)='getForms()')  Refresh 
 	button(type='button', (click)='submitClick()')  Submit 

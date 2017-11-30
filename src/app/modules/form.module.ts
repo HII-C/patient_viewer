@@ -7,6 +7,7 @@ import { CheckboxInline } from '../components/form_components/checkbox-inline.co
 import { NormalBox1 } from '../components/form_components/normal-box-1.component';
 import { NormalBox2 } from '../components/form_components/normal-box-2.component';
 import { SelectListSingle } from '../components/form_components/select-list-single.component';
+import { ScratchPadUpdate } from '../components/form_components/scrachpad-update.component';
 
 @NgModule({
 	imports: [
@@ -17,12 +18,14 @@ import { SelectListSingle } from '../components/form_components/select-list-sing
 		CheckboxInline,
 		NormalBox1,
 		NormalBox2,
-		SelectListSingle
+		SelectListSingle,
+		ScratchPadUpdate
 	], exports: [
 		CheckboxInline,
 		NormalBox1,
 		NormalBox2,
-		SelectListSingle
+		SelectListSingle,
+		ScratchPadUpdate
 	]
 })
 

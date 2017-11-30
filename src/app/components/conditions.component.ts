@@ -178,6 +178,7 @@ export class ConditionsComponent implements Column {
         }
       }
     }
+
   }
 
   removeConditionsFromScratchPad() {
@@ -299,12 +300,13 @@ export class ConditionsComponent implements Column {
   updateSelectedConditions(){
 	  
 	this.patientId = this.conditions[0].subject.reference;
+	
 	  
 	// parse the selected conditions into the correct format for form
 	var formObj = [];
-	  
+	 
 	for (var i = 0 ; i < this.scratchPadConditions.length; i++){
-		var newObj = {type: 'box1', id: this.scratchPadConditions[i].id, data: {name: this.scratchPadConditions[i].code.text}}; 
+		var newObj = {type: 's-update', id: this.scratchPadConditions[i].id, data: {name: this.scratchPadConditions[i].code.text, status: this.scratchPadConditions[i].clinicalStatus}}; 
 		formObj.push(newObj);
 	}
 	
@@ -326,7 +328,15 @@ export class ConditionsComponent implements Column {
 	  for (var i = 0 ; i < this.conditions.length; i++){
 		  for (var j = 0 ; j < inData.data.length; j++){
 			  if (this.conditions[i].id == inData.data[j].id){
-				  this.conditions[i].code.text = inData.data[j].data;
+				  var updDescription = inData.data[j].data.description;
+				  var updStatus = inData.data[j].data.status
+				  
+				  if (updDescription != null)
+					this.conditions[i].code.text = updDescription;
+				
+				  if (updStatus != null)
+					this.conditions[i].clinicalStatus = updStatus;
+				
 				  break;
 			  }
 		  }
@@ -335,13 +345,19 @@ export class ConditionsComponent implements Column {
 	  for (var i = 0 ; i < this.scratchPadConditions.length; i++){
 		  for (var j = 0 ; j < inData.data.length; j++){
 			  if (this.scratchPadConditions[i].id == inData.data[j].id){
-				  this.scratchPadConditions[i].code.text = inData.data[j].data;
+				  				  var updDescription = inData.data[j].data.description;
+				  var updStatus = inData.data[j].data.status
+				  
+				  if (updDescription != null)
+					this.scratchPadConditions[i].code.text = updDescription;
+				
+				  if (updStatus != null)
+					this.scratchPadConditions[i].clinicalStatus = updStatus;
+				
 				  break;
 			  }
 		  }
-	  }
-	  
-	  console.log("RECEIVED: " + JSON.stringify(inData));
+	  }	  
   }
 
   updateEntry(index: number, dataLocation: string){

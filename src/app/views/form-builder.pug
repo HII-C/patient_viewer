@@ -11,5 +11,4 @@ ul#main_list
 			select-list-single([inputData]='formInput[i]', #form='')
 		div(*ngIf="entry.type == 's-update'")
 			scratchpad-update([inputData]='formInput[i]', #form='')
-	button(type='button', (click)='getForms()')  Refresh 
-	button(type='button', (click)='submitClick()')  Submit 
+	button(class = 'btn btn-default', type='button', (click)='submitClick()')  Submit 

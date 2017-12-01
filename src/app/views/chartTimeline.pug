@@ -78,6 +78,7 @@
                 button.close(type='button', data-dismiss='modal', aria-label='Close')
                     span(aria-hidden='true') ×
             .modal-lg.modal-body(style="width: 445px; background-color:white")
-                input(id="startDate", type='date', name='startDate')
-                input(id="endDate", type='date', name='endDate')
-                button((click)='setSpecifyDates(starDate.value, endDate.value)') Submit
+                form(#form="ngForm", (ngSubmit)="setSpecifyDates(form.value)")
+                    input(id="startDate", type='date', name='startDate', ngModel='')
+                    input(id="endDate", type='date', name='endDate', ngModel='')
+                    button(type='submit') Submit

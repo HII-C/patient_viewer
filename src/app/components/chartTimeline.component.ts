@@ -125,8 +125,8 @@ export class ChartTimelineComponent {
     oneMonth: boolean = false;
     twoWeeks: boolean = false;
     specifyDates: boolean = false;
-    startDate: Date;
-    endDate: Date;
+    startDate: number;
+    endDate: number;
 
     static readonly twentyFiveYearsMS: number = 788923150000;
     static readonly tenYearsMS: number = 315569260000;
@@ -381,11 +381,12 @@ export class ChartTimelineComponent {
         this.update();
         console.log(this.twoWeeks);
     }
-    setSpecifyDates(startDate, endDate)
+    setSpecifyDates(value: any)
     {
-        this.startDate = startDate;
-        this.endDate = endDate;
+        this.startDate = new Date(value.startDate).getTime();
+        this.endDate = new Date(value.endDate).getTime();
         console.log("startDate, endDate", this.startDate, this.endDate);
+        console.log("value", value);
         this.whole = false;
         this.twentyFiveYears = false;
         this.tenYears = false;

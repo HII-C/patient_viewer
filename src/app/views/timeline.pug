@@ -1,7 +1,14 @@
 div.timeline
 	.horizTimeLine("*ngIf"='patient')
 		.div(style="width:100%; height:12px; background-color:#EEEAEA;")
-			.div("*ngFor"='let t of timeline', (mouseenter)='popup.open(t)', (mouseleave)='popup.close()', style="float:right; width:22px; height:22px; border: 1px solid black; background-color:white; border-radius:5px; top:20px; margin-right:7%")
-	.displayBox(id='content', hidden=true)
+			.node((mouseenter)='popup.open(timeline[9], timeline[6], null)', (mouseleave)='popup.close()', style="margin-left:7%")
+			.node((mouseenter)='popup.open(timeline[4], null, null)', (mouseleave)='popup.close()', style="margin-left:7%")
+			.node((mouseenter)='popup.open(timeline[5], null, null)', (mouseleave)='popup.close()', style="margin-left:7%")
+			.node((mouseenter)='popup.open(timeline[1], timeline[1], null)', (mouseleave)='popup.close()', style="margin-left:7%")
+			.node((mouseenter)='popup.open(timeline[3], timeline[7], null)', (mouseleave)='popup.close()', style="margin-left:7%")
+			.node((mouseenter)='popup.open(timeline[8], null, null)', (mouseleave)='popup.close()', style="margin-left:7%")
+	.displayBox(id='c1', hidden=true)
+	.displayBox(id='c2', hidden=true)
+	.displayBox(id='c3', hidden=true)
 
 timeline-popup(#popup='')

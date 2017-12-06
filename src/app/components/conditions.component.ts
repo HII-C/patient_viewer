@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, Pipe } from '@angular/core';
+import { Component, Input, Output, EventEmitter, Pipe} from '@angular/core';
 import { FhirService } from '../services/fhir.service';
 import { ConditionService } from '../services/condition.service';
 import { LoupeService } from '../services/loupe.service';
@@ -26,7 +26,12 @@ export class ConditionsComponent implements Column {
   conditions: Array<Condition> = [];
   scratchPadConditions: Array<Condition> = [];
   shownConditions: Array<Condition> = [];
-
+ 
+  // for the dynamic form
+  formData: Array<any> = [];
+  modalToggle: boolean = false;
+  patientId: string = "";
+  
   viewToggle: boolean = false;
   collapseQueue: Array<any> = [];
   conditionGrouping: Array<any> = [];
@@ -136,6 +141,7 @@ export class ConditionsComponent implements Column {
     if (this.patient) {
       this.conditionService.loadConditions(this.patient, true).subscribe(conditions => {
         this.conditions = conditions;
+				
         this.shownConditions = conditions;
         this.loadFinished();
       });
@@ -172,6 +178,7 @@ export class ConditionsComponent implements Column {
         }
       }
     }
+
   }
 
   removeConditionsFromScratchPad() {
@@ -286,6 +293,71 @@ export class ConditionsComponent implements Column {
     else{
       console.log("This table already exists");
     }
+  }
+  
+  
+  // event handler for update button (pops up with update module)
+  updateSelectedConditions(){
+	  
+	this.patientId = this.conditions[0].subject.reference;
+	
+	  
+	// parse the selected conditions into the correct format for form
+	var formObj = [];
+	 
+	for (var i = 0 ; i < this.scratchPadConditions.length; i++){
+		var newObj = {type: 's-update', id: this.scratchPadConditions[i].id, data: {name: this.scratchPadConditions[i].code.text, status: this.scratchPadConditions[i].clinicalStatus}}; 
+		formObj.push(newObj);
+	}
+	
+	this.formData = formObj;
+	
+	// then set the form on page visible
+	this.modalToggle = !this.modalToggle;
+  }
+  
+  closeModal(): void {
+ 	this.modalToggle = false;
+  }
+  
+  // callback for when the submit button in the form is clicked
+  formSubmit(inData: any){
+	  this.modalToggle = !this.modalToggle;
+
+	  // update the conditions with the new updated data (naive bad implementation)
+	  for (var i = 0 ; i < this.conditions.length; i++){
+		  for (var j = 0 ; j < inData.data.length; j++){
+			  if (this.conditions[i].id == inData.data[j].id){
+				  var updDescription = inData.data[j].data.description;
+				  var updStatus = inData.data[j].data.status
+				  
+				  if (updDescription != null)
+					this.conditions[i].code.text = updDescription;
+				
+				  if (updStatus != null)
+					this.conditions[i].clinicalStatus = updStatus;
+				
+				  break;
+			  }
+		  }
+	  }
+	  
+	  for (var i = 0 ; i < this.scratchPadConditions.length; i++){
+		  for (var j = 0 ; j < inData.data.length; j++){
+			  if (this.scratchPadConditions[i].id == inData.data[j].id){
+				  				  var updDescription = inData.data[j].data.description;
+				  var updStatus = inData.data[j].data.status
+				  
+				  if (updDescription != null)
+					this.scratchPadConditions[i].code.text = updDescription;
+				
+				  if (updStatus != null)
+					this.scratchPadConditions[i].clinicalStatus = updStatus;
+				
+				  break;
+			  }
+		  }
+	  }	  
   }
 
   updateEntry(index: number, dataLocation: string){

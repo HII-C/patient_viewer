@@ -1,0 +1,13 @@
+.form-group
+	label(class = 'col-form-label') {{inputData.data.name}} : {{inputData.data.status}}
+	div(class = 'row')
+		div.col-sm-8
+			input.form-control([(ngModel)] = 'description')
+		div(class = 'col-sm-4')
+			form
+				label.radio-inline
+					input(type='radio', name='formRadio', [checked] = "inputData.data.status === 'active'", [value] = 'Active', (change) = "onRadioChanged('active')")
+					| Active
+				label.radio-inline
+					input(type='radio', name='formRadio', [checked] = "inputData.data.status === 'inactive'", [value] = 'Inactive', (change) = "onRadioChanged('inactive')")
+					| Inactive

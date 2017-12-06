@@ -1,4 +1,14 @@
 div#conditions
+	#modal.card(role='dialog', *ngIf='modalToggle', style='z-index: 100; position: absolute')
+		.modal-dialog
+			.modal-content
+				.modal-header
+					button.close(type='button', (click)='closeModal()')  × 
+					h4.modal-title  Update Items
+				.modal-body
+					form-builder([formInput] = 'formData', [userId] = 'patientId', (onSubmitClick) = 'formSubmit($event)')
+					
+
 	.header.text-center
 		h2(style="display: inline-block")
 			| Conditions
@@ -9,6 +19,7 @@ div#conditions
 		.btn-group
 			button.btn.btn-default.btn-sm([class.disabled]='columnState != "scratchpad"', (click)='removeConditionsFromScratchPad()')
 				| Remove
+			button.btn.btn-default.btn-sm([class.disabled]='columnState != "scratchpad"', (click) = 'updateSelectedConditions()') Update
 			button.btn.btn-default.btn-sm([class.disabled]='columnState != "default"', (click)='addConditionsToScratchPad()')
 				| Add
 	

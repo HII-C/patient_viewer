@@ -26,16 +26,24 @@ export class PatientComponent {
 
     constructor(private fhirService: FhirService, private patientService: PatientService, private compiler: Compiler, private http: Http, private smartService: SmartService, private cookieService: CookieService, private doctorService: DoctorService) {
 
-		this.compiler.clearCache();
+		    this.compiler.clearCache();
         this.fhirService.setUrl(this.cookieService.get('fhirBaseUrl'));
         if(this.fhirService.token) {
+            console.log("Token already available.");
             this.select(this.patientService.patient);
         }
         else {
+            console.log("Token not already available.");
+            // Goes here.
             this.smartService.authenticate().subscribe(data => {
+                console.log("Received data: ");
+                console.log(data);
                 this.fhirService.setToken(data.access_token);
                 this.select(data.patient);
-            });;
+            }, (err) => {
+                console.log("getToken caused an error: ");
+                console.log(err);
+            });
         }
         this.graphConfig = this.cookieService.getObject("graphConfig");
         // this.cookieService.remove("graphConfig");

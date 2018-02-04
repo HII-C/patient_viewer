@@ -17,10 +17,9 @@ export class PatientService {
 
     index(withAuth): Observable<any> {
         var url = this.fhirService.getUrl() + this.path;
-        // this.http.get
+        console.log("PatientService.index URL: " + url);
 
-          return this.http.get(url, this.fhirService.options(withAuth)).map(res => res.json());
-
+        return this.http.get(url, this.fhirService.options(withAuth)).map(res => res.json());
     }
 
     get(id): Observable<any> {

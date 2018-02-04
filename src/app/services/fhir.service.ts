@@ -25,7 +25,7 @@ export class FhirService {
         let headers = new Headers();
         headers.append('Accept', 'application/json');
         if(auth) {
-          headers.append('Authorization', 'Bearer '+ this.token);
+          headers.append('Authorization', 'Bearer ' + this.token);
         }
         return new RequestOptions({ headers: headers });
     }

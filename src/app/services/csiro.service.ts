@@ -5,8 +5,7 @@ import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()
-@Component({
-})
+@Component({})
 export class CsiroService {
   url = 'https://ontoserver.csiro.au/stu3';
 

@@ -7,10 +7,8 @@ import { FhirService } from './fhir.service';
 import { Patient } from '../models/patient.model';
 
 @Injectable()
-@Component({
-})
+@Component({})
 export class TimelineService {
-
   private path = '/Condition';
 
   constructor(private fhirService: FhirService, private http: Http) { }

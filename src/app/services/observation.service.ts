@@ -7,8 +7,7 @@ import { Patient } from '../models/patient.model';
 import { Observation } from '../models/observation.model';
 
 @Injectable()
-@Component({
-})
+@Component({})
 export class ObservationService {
   condensedObservations: Array<Observation> = [];
   temp: any;

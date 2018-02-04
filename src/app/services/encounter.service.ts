@@ -5,8 +5,7 @@ import 'rxjs/add/operator/map';
 import { FhirService } from './fhir.service';
 
 @Injectable()
-@Component({
-})
+@Component({})
 export class EncounterService {
   private path = '/Encounter';
 

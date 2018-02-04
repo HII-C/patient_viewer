@@ -4,8 +4,7 @@ import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()
-@Component({
-})
+@Component({})
 export class MapService {
     private path = 'localhost:5000/loupe_query/';
 

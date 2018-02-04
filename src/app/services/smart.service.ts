@@ -7,10 +7,7 @@ import { Md5 } from 'ts-md5/dist/md5';
 
 @Injectable()
 export class SmartService {
-
-  constructor(private fhirService: FhirService, private patientService: PatientService, private http: Http, private cookieService: CookieService) {
-    console.log("SmartService has been initialized.");
-  }
+  constructor(private fhirService: FhirService, private patientService: PatientService, private http: Http, private cookieService: CookieService) { }
 
   fhirBaseUrl: string;
   authorizeUrl: string;

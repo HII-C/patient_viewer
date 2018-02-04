@@ -6,8 +6,7 @@ import { ConditionService } from '../services/condition.service';
 
 
 @Injectable()
-@Component({
-})
+@Component({})
 export class ScratchPadService {
   currentCondSpArray: Array<Condition> = [];
   toAddToCondSpArray: Array<Condition> = [];

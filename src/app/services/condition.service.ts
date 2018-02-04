@@ -8,8 +8,7 @@ import { Patient } from '../models/patient.model';
 import { Condition } from '../models/condition.model';
 
 @Injectable()
-@Component({
-})
+@Component({})
 export class ConditionService {
   private path = '/Condition';
   conditions: Array<Condition> = [];

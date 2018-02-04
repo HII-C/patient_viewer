@@ -5,8 +5,7 @@ import 'rxjs/add/operator/map';
 import { HealthCreekService } from './healthcreek.service';
 
 @Injectable()
-@Component({
-})
+@Component({})
 export class UserService {
   private path = '/User';
   private users;

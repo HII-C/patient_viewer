@@ -7,8 +7,7 @@ import { Observable } from 'rxjs/Observable';
 import { HealthCreekService } from './healthcreek.service';
 
 @Injectable()
-@Component({
-})
+@Component({})
 export class ClientService {
   path = '/clients';
 

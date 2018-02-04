@@ -5,8 +5,7 @@ import { Observation } from '../models/observation.model';
 import { Subject } from 'rxjs/Subject';
 
 @Injectable()
-@Component({
-})
+@Component({})
 export class ChartTimelineService {
   dataDef: Chart;
   test: Chart;

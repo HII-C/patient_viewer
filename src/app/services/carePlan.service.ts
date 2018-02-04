@@ -7,8 +7,7 @@ import { FhirService } from './fhir.service';
 import { Patient } from '../models/patient.model';
 
 @Injectable()
-@Component({
-})
+@Component({})
 export class CarePlanService {
   private path = '/CarePlan';
 

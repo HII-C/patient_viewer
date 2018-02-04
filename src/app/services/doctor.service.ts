@@ -4,8 +4,7 @@ import { Condition } from '../models/condition.model';
 import { CookieService } from 'angular2-cookie/core';
 
 @Injectable()
-@Component({
-})
+@Component({})
 export class DoctorService {
   filter: Array<String> = [];
   configMode: boolean = true;

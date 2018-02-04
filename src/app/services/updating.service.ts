@@ -4,10 +4,8 @@ import { ConditionService } from './condition.service';
 import * as _ from "lodash";
 
 @Injectable()
-@Component({
-})
+@Component({})
 export class UpdatingService {
-
   constructor(private conditionService: ConditionService) { }
 
   updateEntry(entry: any, toChange: any, dataLocation: string, index: number) {

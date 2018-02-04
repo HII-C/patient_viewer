@@ -5,8 +5,7 @@ import 'rxjs/add/operator/map';
 import { HealthCreekService } from './healthcreek.service';
 
 @Injectable()
-@Component({
-})
+@Component({})
 export class SearchService {
   constructor(private healthCreekService: HealthCreekService, private http: Http) { }
 

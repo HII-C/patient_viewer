@@ -1,13 +1,12 @@
-import {Component, Injectable} from '@angular/core';
-import {Http, Headers} from '@angular/http';
+import { Component, Injectable } from '@angular/core';
+import { Http, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
-import {Observable} from 'rxjs/Observable';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 @Component({
 })
 export class MapService {
-
     private path = 'localhost:5000/loupe_query/';
 
     public static STATIC_MAPPINGS = {
@@ -26,15 +25,13 @@ export class MapService {
         "266998003": ["785-6", "26450-7", "26511-6", "26515-7"],
         "38341003": ["718-7", "26478-8", "786-4", "2345-7"],
         "29857009": ["26464-8", "30428-7", "13969-1", "3094-0"],
-        "442311008": ["32623-1","777-3"]
+        "442311008": ["32623-1", "777-3"]
     }
 
-    constructor(private http: Http) {
-        console.log("MapService created...");
-    }
+    constructor(private http: Http) { }
 
     load(hash: String): Observable<any> {
         console.log(this.path + hash);
-         return this.http.get(this.path + hash).map(res => res.json());
+        return this.http.get(this.path + hash).map(res => res.json());
     }
 }

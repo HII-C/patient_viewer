@@ -1,27 +1,25 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import {DoctorService} from '../services/doctor.service';
-import {Patient} from '../models/patient.model';
-import {ObservationService} from '../services/observation.service';
+import { DoctorService } from '../services/doctor.service';
+import { Patient } from '../models/patient.model';
+import { ObservationService } from '../services/observation.service';
 
 
 @Component({
-    selector: 'triplelist',
-    templateUrl: '/tripleList.html'
+  selector: 'triplelist',
+  templateUrl: '/tripleList.html'
 })
 
 export class TripleListComponent {
-	@Input() patient: Patient;
-	@Output() passThrough: EventEmitter<Patient> = new EventEmitter();
-    obsCount: number = 0;
+  @Input() patient: Patient;
+  @Output() passThrough: EventEmitter<Patient> = new EventEmitter();
+  obsCount: number = 0;
 
-    constructor(private doctorService: DoctorService, private observationService: ObservationService) {
-        console.log("TripleList Component created");
+  constructor(private doctorService: DoctorService, private observationService: ObservationService) {
+    this.passThrough.emit(this.patient);
+  }
 
-		this.passThrough.emit(this.patient);
-     }
-     updateTotal(event) {
-       console.log("total:"+event);
-       this.obsCount = event;
-     }
-
+  updateTotal(event) {
+    console.log("total:" + event);
+    this.obsCount = event;
+  }
 }

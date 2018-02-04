@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, Pipe} from '@angular/core';
+import { Component, Input, Output, EventEmitter, Pipe } from '@angular/core';
 import { FhirService } from '../services/fhir.service';
 import { ConditionService } from '../services/condition.service';
 import { LoupeService } from '../services/loupe.service';
@@ -12,8 +12,7 @@ import { Csiro } from '../models/csiro.model';
 import { Column } from '../interfaces/column.interface';
 import * as moment from 'moment';
 
-declare var $:any; //Necessary in order to use jQuery to open popup.
-
+declare var $: any; //Necessary in order to use jQuery to open popup.
 
 @Component({
   selector: 'conditions',
@@ -26,12 +25,12 @@ export class ConditionsComponent implements Column {
   conditions: Array<Condition> = [];
   scratchPadConditions: Array<Condition> = [];
   shownConditions: Array<Condition> = [];
- 
+
   // for the dynamic form
   formData: Array<any> = [];
   modalToggle: boolean = false;
   patientId: string = "";
-  
+
   viewToggle: boolean = false;
   collapseQueue: Array<any> = [];
   conditionGrouping: Array<any> = [];
@@ -81,16 +80,16 @@ export class ConditionsComponent implements Column {
         a = -a;
       }
 
-      for (let c of this.conditionGrouping){
-      c.sort((n1, n2) => {
-        if (n1.code['coding'][0]['code'] > n2.code['coding'][0]['code']) {
-          return a;
-        }
-        if (n1.code['coding'][0]['code'] < n2.code['coding'][0]['code']) {
-          return -a;
-        }
-      })
-    }
+      for (let c of this.conditionGrouping) {
+        c.sort((n1, n2) => {
+          if (n1.code['coding'][0]['code'] > n2.code['coding'][0]['code']) {
+            return a;
+          }
+          if (n1.code['coding'][0]['code'] < n2.code['coding'][0]['code']) {
+            return -a;
+          }
+        })
+      }
     }
     if (this.viewToggle == false) {
       this.conditions = this.doctorService.assignVisible(this.conditions);
@@ -141,7 +140,7 @@ export class ConditionsComponent implements Column {
     if (this.patient) {
       this.conditionService.loadConditions(this.patient, true).subscribe(conditions => {
         this.conditions = conditions;
-				
+
         this.shownConditions = conditions;
         this.loadFinished();
       });
@@ -263,104 +262,104 @@ export class ConditionsComponent implements Column {
     );
   }
 
-  newTable(tableName: string, dataLocation: Array<any>, quality: string, groupingCount: number){
-    if(this.conditionGroupingName.indexOf(tableName) == -1){
+  newTable(tableName: string, dataLocation: Array<any>, quality: string, groupingCount: number) {
+    if (this.conditionGroupingName.indexOf(tableName) == -1) {
       this.conditionGroupingName.push(tableName);
-      for (let c of this.conditions){
+      for (let c of this.conditions) {
         // Right now this will only allow for a table with one quality!
         var fullPath = c;
         dataLocation.forEach(element => {
-          try{
+          try {
             fullPath = c[element];
           }
-          catch(error){
+          catch (error) {
             console.log('That field does not exist on this Condition' + c);
           }
         });
         // Testing condition and adding if it's true
-        if (quality){
+        if (quality) {
           console.log(fullPath);
-          if (!this.conditionGrouping[groupingCount]){
+          if (!this.conditionGrouping[groupingCount]) {
             this.conditionGrouping[groupingCount] = [c];
           }
-          else{
+          else {
             this.conditionGrouping[groupingCount].push(c);
 
           }
         }
       }
     }
-    else{
+    else {
       console.log("This table already exists");
     }
   }
-  
-  
+
+
   // event handler for update button (pops up with update module)
-  updateSelectedConditions(){
-	  
-	this.patientId = this.conditions[0].subject.reference;
-	
-	  
-	// parse the selected conditions into the correct format for form
-	var formObj = [];
-	 
-	for (var i = 0 ; i < this.scratchPadConditions.length; i++){
-		var newObj = {type: 's-update', id: this.scratchPadConditions[i].id, data: {name: this.scratchPadConditions[i].code.text, status: this.scratchPadConditions[i].clinicalStatus}}; 
-		formObj.push(newObj);
-	}
-	
-	this.formData = formObj;
-	
-	// then set the form on page visible
-	this.modalToggle = !this.modalToggle;
+  updateSelectedConditions() {
+
+    this.patientId = this.conditions[0].subject.reference;
+
+
+    // parse the selected conditions into the correct format for form
+    var formObj = [];
+
+    for (var i = 0; i < this.scratchPadConditions.length; i++) {
+      var newObj = { type: 's-update', id: this.scratchPadConditions[i].id, data: { name: this.scratchPadConditions[i].code.text, status: this.scratchPadConditions[i].clinicalStatus } };
+      formObj.push(newObj);
+    }
+
+    this.formData = formObj;
+
+    // then set the form on page visible
+    this.modalToggle = !this.modalToggle;
   }
-  
+
   closeModal(): void {
- 	this.modalToggle = false;
+    this.modalToggle = false;
   }
-  
+
   // callback for when the submit button in the form is clicked
-  formSubmit(inData: any){
-	  this.modalToggle = !this.modalToggle;
+  formSubmit(inData: any) {
+    this.modalToggle = !this.modalToggle;
 
-	  // update the conditions with the new updated data (naive bad implementation)
-	  for (var i = 0 ; i < this.conditions.length; i++){
-		  for (var j = 0 ; j < inData.data.length; j++){
-			  if (this.conditions[i].id == inData.data[j].id){
-				  var updDescription = inData.data[j].data.description;
-				  var updStatus = inData.data[j].data.status
-				  
-				  if (updDescription != null)
-					this.conditions[i].code.text = updDescription;
-				
-				  if (updStatus != null)
-					this.conditions[i].clinicalStatus = updStatus;
-				
-				  break;
-			  }
-		  }
-	  }
-	  
-	  for (var i = 0 ; i < this.scratchPadConditions.length; i++){
-		  for (var j = 0 ; j < inData.data.length; j++){
-			  if (this.scratchPadConditions[i].id == inData.data[j].id){
-				  				  var updDescription = inData.data[j].data.description;
-				  var updStatus = inData.data[j].data.status
-				  
-				  if (updDescription != null)
-					this.scratchPadConditions[i].code.text = updDescription;
-				
-				  if (updStatus != null)
-					this.scratchPadConditions[i].clinicalStatus = updStatus;
-				
-				  break;
-			  }
-		  }
-	  }	  
+    // update the conditions with the new updated data (naive bad implementation)
+    for (var i = 0; i < this.conditions.length; i++) {
+      for (var j = 0; j < inData.data.length; j++) {
+        if (this.conditions[i].id == inData.data[j].id) {
+          var updDescription = inData.data[j].data.description;
+          var updStatus = inData.data[j].data.status
+
+          if (updDescription != null)
+            this.conditions[i].code.text = updDescription;
+
+          if (updStatus != null)
+            this.conditions[i].clinicalStatus = updStatus;
+
+          break;
+        }
+      }
+    }
+
+    for (var i = 0; i < this.scratchPadConditions.length; i++) {
+      for (var j = 0; j < inData.data.length; j++) {
+        if (this.scratchPadConditions[i].id == inData.data[j].id) {
+          var updDescription = inData.data[j].data.description;
+          var updStatus = inData.data[j].data.status
+
+          if (updDescription != null)
+            this.scratchPadConditions[i].code.text = updDescription;
+
+          if (updStatus != null)
+            this.scratchPadConditions[i].clinicalStatus = updStatus;
+
+          break;
+        }
+      }
+    }
   }
 
-  updateEntry(index: number, dataLocation: string){
+  updateEntry(index: number, dataLocation: string) {
     let conditionToUpdate = this.conditionService.conditions[index];
     console.log(this.textInputForEdit);
     this.updatingService.updateEntry(conditionToUpdate, this.textInputForEdit, dataLocation, index);

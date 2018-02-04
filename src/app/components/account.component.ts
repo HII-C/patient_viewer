@@ -1,45 +1,40 @@
-import {Component, Input} from '@angular/core';
-import {DoctorService} from '../services/doctor.service';
-
+import { Component, Input } from '@angular/core';
+import { DoctorService } from '../services/doctor.service';
 
 @Component({
-	selector: 'account',
-	templateUrl: '/account.html',
+  selector: 'account',
+  templateUrl: '/account.html',
 })
 export class AccountComponent {
-	settings: Array<string> = [];
-	electrolytes: Array<string> = ["Sodium","Potassium","Chloride","CO2","Calcium","Magnesium","HBA1C","GLU","ANA"];
-	cholesteralBattery: Array<string> = ["Total","LDL","HDL","Triglycerides"];
-	liverFunction: Array<string> = ["ALT","AST","Albumin","Bilirubin"];
-	kidneyFunction: Array<string> = ["Creatinine","GFR","BUN"];
+  settings: Array<string> = [];
+  electrolytes: Array<string> = ["Sodium", "Potassium", "Chloride", "CO2", "Calcium", "Magnesium", "HBA1C", "GLU", "ANA"];
+  cholesteralBattery: Array<string> = ["Total", "LDL", "HDL", "Triglycerides"];
+  liverFunction: Array<string> = ["ALT", "AST", "Albumin", "Bilirubin"];
+  kidneyFunction: Array<string> = ["Creatinine", "GFR", "BUN"];
 
+  constructor(private doctorService: DoctorService) { }
 
-	constructor(private doctorService: DoctorService) {
-		console.log("AccountComponent created...");
-	}
+  addSetting(checked: boolean, setting: string) {
+    if (checked) {
+      this.settings.push(setting);
+    }
+    else {
+      this.settings.splice(this.settings.indexOf(setting), 1);
+    }
+  }
 
-	addSetting(checked: boolean, setting: string) {
-	  if(checked) {
-		this.settings.push(setting);
-	  }
-	  else{
-		this.settings.splice(this.settings.indexOf(setting),1);
-	  }
-	}
+  saveSettings() {
+    this.doctorService.filter = this.settings;
+    this.doctorService.addGraphConfig(this.settings);
+    console.log("saved");
+  }
 
-	saveSettings() {
-	  this.doctorService.filter = this.settings;
-		this.doctorService.addGraphConfig(this.settings);
-	  console.log("saved");
-	}
-
-	toggleConfigMode() {
-		if (this.doctorService.configMode == true){
-			this.doctorService.configMode = false;
-		}
-		else {
-			this.doctorService.configMode = true;
-		}
-	}
-
+  toggleConfigMode() {
+    if (this.doctorService.configMode == true) {
+      this.doctorService.configMode = false;
+    }
+    else {
+      this.doctorService.configMode = true;
+    }
+  }
 }

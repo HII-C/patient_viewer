@@ -14,7 +14,6 @@ import { CookieService } from 'angular2-cookie/core';
   templateUrl: '/patient.html'
 })
 export class PatientComponent {
-
   selected: Patient;
   server: Server;
   selectedCondition: Condition;

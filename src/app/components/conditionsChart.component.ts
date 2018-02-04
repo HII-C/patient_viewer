@@ -16,7 +16,6 @@ import * as moment from 'moment';
   templateUrl: '/conditionsChart.html'
 })
 export class ConditionsChartComponent {
-
   selected: Condition;
   conditions: Array<Condition> = [];
   viewToggle: boolean = false;
@@ -29,7 +28,6 @@ export class ConditionsChartComponent {
   @Output() conditionSelected: EventEmitter<Condition> = new EventEmitter();
 
   constructor(private fhirService: FhirService, private conditionService: ConditionService, private loupeService: LoupeService, private csiroService: CsiroService, private doctorService: DoctorService, private scratchPadService: ScratchPadService, private updatingService: UpdatingService) {
-    console.log("ConditionsComponent created...");
     // this.gridItemConfiguration.draggable = this.doctorService.configMode;
     this.loupeService.activeCondition = this.selected;
   }
@@ -50,16 +48,16 @@ export class ConditionsChartComponent {
         a = -a;
       }
 
-      for (let c of this.conditionGrouping){
-      c.sort((n1, n2) => {
-        if (n1.code['coding'][0]['code'] > n2.code['coding'][0]['code']) {
-          return a;
-        }
-        if (n1.code['coding'][0]['code'] < n2.code['coding'][0]['code']) {
-          return -a;
-        }
-      })
-    }
+      for (let c of this.conditionGrouping) {
+        c.sort((n1, n2) => {
+          if (n1.code['coding'][0]['code'] > n2.code['coding'][0]['code']) {
+            return a;
+          }
+          if (n1.code['coding'][0]['code'] < n2.code['coding'][0]['code']) {
+            return -a;
+          }
+        })
+      }
     }
     if (this.viewToggle == false) {
       this.conditions = this.doctorService.assignVisible(this.conditions);
@@ -104,26 +102,28 @@ export class ConditionsChartComponent {
     this.conditionService.conditions = this.conditions;
     this.groupConditions();
   }
+
   loadData(url) {
     let isLast = false;
     this.conditionService.indexNext(url).subscribe(data => {
-      if(data.entry) {
-        let nextCon= <Array<Condition>>data.entry.map(r => r['resource']);
+      if (data.entry) {
+        let nextCon = <Array<Condition>>data.entry.map(r => r['resource']);
 
         this.conditions = this.conditions.concat(nextCon);
         isLast = true;
-        for(let i of data.link) {
-          if(i.relation=="next") {
+        for (let i of data.link) {
+          if (i.relation == "next") {
             isLast = false;
             this.loadData(i.url);
           }
         }
-        if(isLast) {
+        if (isLast) {
           this.loadFinished();
         }
       }
     });
   }
+
   ngOnChanges() {
     this.selected = null;
     if (this.patient) {
@@ -133,13 +133,13 @@ export class ConditionsChartComponent {
 
           let nextLink = null;
           this.conditions = <Array<Condition>>data.entry.map(r => r['resource']);
-					for(let i of data.link) {
-						if(i.relation=="next") {
-							nextLink = i.url;
-						}
-					}
-					if(nextLink) {this.loadData(nextLink);}
-					else {this.loadFinished();}
+          for (let i of data.link) {
+            if (i.relation == "next") {
+              nextLink = i.url;
+            }
+          }
+          if (nextLink) { this.loadData(nextLink); }
+          else { this.loadFinished(); }
 
         } else {
           this.conditions = new Array<Condition>();
@@ -148,6 +148,7 @@ export class ConditionsChartComponent {
       });
     }
   }
+
   testingCsiro() {
     this.csiroService.MapQuery().subscribe(data => {
       console.log("Hey CSIRO works");
@@ -167,6 +168,7 @@ export class ConditionsChartComponent {
       this.viewToggle = true;
     }
   }
+
   toggleExpansion() {
 
     if (this.viewToggle == true) {
@@ -184,14 +186,14 @@ export class ConditionsChartComponent {
     else {
       // this.conditions[value].isSelected = false;
       let temp = this.scratchPadService.toAddToCondSpArray.indexOf(this.conditions[value]);
-      if (temp > -1){
+      if (temp > -1) {
         // This will actually delete instead of simply setting to null, which will throw errors in the long run
         this.scratchPadService.toAddToCondSpArray.splice(temp, 1);
       }
     }
   }
 
-  updateScratchPad(){
+  updateScratchPad() {
     //this.scratchPadService.buttonClicked(true);
   }
 
@@ -204,6 +206,7 @@ export class ConditionsChartComponent {
       }
     }
   }
+
   collapse() {
     let index = 0;
     let parent = "";
@@ -224,21 +227,22 @@ export class ConditionsChartComponent {
     }
 
   }
-  groupConditions(){
-    for (let c of this.conditions){
-      if (c.clinicalStatus == "active"){
-        if (!this.conditionGrouping[0]){
+
+  groupConditions() {
+    for (let c of this.conditions) {
+      if (c.clinicalStatus == "active") {
+        if (!this.conditionGrouping[0]) {
           this.conditionGrouping[0] = [c];
         }
-        else{
+        else {
           this.conditionGrouping[0].push(c);
         }
       }
-      else{
-        if (!this.conditionGrouping[1]){
+      else {
+        if (!this.conditionGrouping[1]) {
           this.conditionGrouping[1] = [c];
         }
-        else{
+        else {
           this.conditionGrouping[1].push(c);
         }
       }
@@ -246,58 +250,57 @@ export class ConditionsChartComponent {
     // this.conditionGrouping[1] = this.conditionGrouping[0];
   }
 
-  tableNavigation(clickedSet: number){
-    for (let c of this.conditionGrouping){
+  tableNavigation(clickedSet: number) {
+    for (let c of this.conditionGrouping) {
       let cNum = this.conditionGrouping.indexOf(c);
-      if (cNum != clickedSet){
+      if (cNum != clickedSet) {
         let tempTableVar = document.getElementById("cG" + cNum.toString());
         tempTableVar.hidden = true;
       }
-      else{
+      else {
         let tempTableVar = document.getElementById("cG" + cNum.toString());
         tempTableVar.hidden = false;
       }
     }
   }
 
-  newTable(tableName: string, dataLocation: Array<any>, quality: string, groupingCount: number){
-    if(this.conditionGroupingName.indexOf(tableName) == -1){
+  newTable(tableName: string, dataLocation: Array<any>, quality: string, groupingCount: number) {
+    if (this.conditionGroupingName.indexOf(tableName) == -1) {
       this.conditionGroupingName.push(tableName);
-      for (let c of this.conditions){
+      for (let c of this.conditions) {
         // Right now this will only allow for a table with one quality!
         var fullPath = c;
         dataLocation.forEach(element => {
-          try{
+          try {
             fullPath = c[element];
           }
-          catch(error){
+          catch (error) {
             console.log('That field does not exist on this Condition' + c);
           }
         });
         // Testing condition and adding if it's true
-        if (quality){
+        if (quality) {
           console.log(fullPath);
-          if (!this.conditionGrouping[groupingCount]){
+          if (!this.conditionGrouping[groupingCount]) {
             this.conditionGrouping[groupingCount] = [c];
           }
-          else{
+          else {
             this.conditionGrouping[groupingCount].push(c);
 
           }
         }
       }
     }
-    else{
+    else {
       console.log("This table already exists");
     }
   }
 
-  updateEntry(index: number, dataLocation: string){
+  updateEntry(index: number, dataLocation: string) {
     let conditionToUpdate = this.conditionService.conditions[index];
     console.log(this.textInputForEdit);
     this.updatingService.updateEntry(conditionToUpdate, this.textInputForEdit, dataLocation, index);
     this.conditions[index] = this.conditionService.conditions[index];
     console.log(this.conditions[index]);
   }
-
 }

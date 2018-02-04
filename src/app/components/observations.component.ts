@@ -1,7 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FhirService } from '../services/fhir.service';
 import { ObservationService } from '../services/observation.service';
-import { LoupeService } from '../services/loupe.service';
 import { MapService } from '../services/map.service';
 import { DoctorService } from '../services/doctor.service';
 import { ChartTimelineService } from '../services/chartTimeline.service';
@@ -29,7 +28,7 @@ export class ObservationsComponent {
   mappings: { [key: string]: Array<string> } = {};
 
   constructor(private fhirService: FhirService, private observationService: ObservationService,
-    private mapService: MapService, private loupeService: LoupeService, private doctorService: DoctorService,
+    private mapService: MapService, private doctorService: DoctorService,
     private chartService: ChartTimelineService, private http: Http, private scratchPadService: ScratchPadService) {
 
     this.mappings = MapService.STATIC_MAPPINGS;
@@ -71,7 +70,6 @@ export class ObservationsComponent {
     this.observationService.populateCategories(this.observationService.temp.categories);
     this.observationService.categorizedObservations = this.observationService.temp;
 
-    this.loupeService.observationsArray = this.observationService.observations;
     this.observationReturned.emit(this.observationService.observations);
   }
 
@@ -121,12 +119,6 @@ export class ObservationsComponent {
 
       // if (this.selected)
     }
-  }
-
-  csiroLookup(code: Observation) {
-    // setTimeout(() => { console.log(code) }, 5000);
-    this.observationService.observations[(this.observationService.observations.indexOf(code))].code['text'] = "working?";
-
   }
 
   updateHighlighted(condition: Condition) {

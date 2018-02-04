@@ -1,14 +1,11 @@
 import { Component, Input, Output, EventEmitter, Pipe } from '@angular/core';
 import { FhirService } from '../services/fhir.service';
 import { ConditionService } from '../services/condition.service';
-import { LoupeService } from '../services/loupe.service';
-import { CsiroService } from '../services/csiro.service';
 import { DoctorService } from '../services/doctor.service';
 import { ScratchPadService } from '../services/scratchPad.service';
 import { UpdatingService } from '../services/updating.service';
 import { Condition } from '../models/condition.model';
 import { Patient } from '../models/patient.model';
-import { Csiro } from '../models/csiro.model';
 import { Column } from '../interfaces/column.interface';
 import * as moment from 'moment';
 
@@ -41,9 +38,8 @@ export class ConditionsComponent implements Column {
 
   @Output() conditionSelected: EventEmitter<Condition> = new EventEmitter();
 
-  constructor(private fhirService: FhirService, private conditionService: ConditionService, private loupeService: LoupeService, private csiroService: CsiroService, private doctorService: DoctorService, private scratchPadService: ScratchPadService, private updatingService: UpdatingService) {
+  constructor(private fhirService: FhirService, private conditionService: ConditionService, private doctorService: DoctorService, private scratchPadService: ScratchPadService, private updatingService: UpdatingService) {
     // this.gridItemConfiguration.draggable = this.doctorService.configMode;
-    this.loupeService.activeCondition = this.selected;
     this.justCreated = true;
   }
 
@@ -65,7 +61,6 @@ export class ConditionsComponent implements Column {
 
   selectCondition(condition: Condition) {
     this.selected = condition;
-    this.loupeService.activeCondition = this.selected;
     this.conditionSelected.emit(this.selected);
     for (let c of this.conditions) {
       c['selected'] = (c.id == this.selected.id);
@@ -98,15 +93,12 @@ export class ConditionsComponent implements Column {
         c.isVisible = true;
       }
     }
-    console.log("sort");
   }
 
   loadFinished() {
     this.conditions = this.conditions.reverse();
 
     console.log("Loaded " + this.conditions.length + " conditions.");
-
-    this.loupeService.conditionArray = this.conditions;
 
     this.conditions.sort((n1, n2) => {
       if (n1.onsetDateTime < n2.onsetDateTime) {
@@ -171,12 +163,13 @@ export class ConditionsComponent implements Column {
   addConditionsToScratchPad() {
     for (let c of this.conditions) {
       if (c['checked']) {
-        if (this.scratchPadConditions.indexOf(c) == -1) {
+        this.scratchPadService.addCondition(c);
+        /*if (this.scratchPadConditions.indexOf(c) == -1) {
           this.scratchPadConditions.push(c);
-        }
+          this.scratchPadService.addCondition(c);
+        }*/
       }
     }
-
   }
 
   removeConditionsFromScratchPad() {

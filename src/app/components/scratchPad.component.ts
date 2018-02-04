@@ -2,7 +2,6 @@ import { Component, Input, OnDestroy, Output, EventEmitter } from '@angular/core
 import { Subscription } from 'rxjs/Subscription';
 import { DoctorService } from '../services/doctor.service';
 import { ScratchPadService } from '../services/scratchPad.service';
-import { LoupeService } from '../services/loupe.service';
 import { Patient } from '../models/patient.model';
 import { Condition } from '../models/condition.model';
 
@@ -18,7 +17,7 @@ export class ScratchPadComponent implements OnDestroy {
   subscription: Subscription;
   lastIndex: number;
 
-  constructor(private doctorService: DoctorService, private scratchPadService: ScratchPadService, private loupeService: LoupeService) {
+  constructor(private doctorService: DoctorService, private scratchPadService: ScratchPadService) {
     this.subscription = this.scratchPadService.addNewData$.subscribe(clicked => {
       this.addToScratchPad();
     });

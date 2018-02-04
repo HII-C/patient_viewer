@@ -8,18 +8,23 @@ import { ConditionService } from '../services/condition.service';
 @Injectable()
 @Component({})
 export class ScratchPadService {
-  currentCondSpArray: Array<Condition> = [];
+  // Old fields that will likely be removed:
   toAddToCondSpArray: Array<Condition> = [];
-  toRemoveFromCondSpArray: Array<Condition> = [];
-
   dataToAdd: Array<any> = [];
-
   private addNewDataSource = new Subject<string>();
-
   addNewData$ = this.addNewDataSource.asObservable();
+
+  conditions: Array<Condition> = [];
 
   constructor(private observationService: ObservationService, private conditionService: ConditionService) { }
 
+
+  addCondition(condition: Condition) {
+    this.conditions.push(condition);
+    console.log("ScratchPadService has " + this.conditions.length + " conditions.");
+  }
+
+  // Old method likely to be removed.
   addData(location: string) {
     switch (location) {
       case "observation":

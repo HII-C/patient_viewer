@@ -2,7 +2,6 @@ import {Component, Input, Output, EventEmitter, Pipe} from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 
 import {Patient} from '../models/patient.model';
-import {LoupeService} from '../services/loupe.service';
 import {DoctorService} from '../services/doctor.service';
 import {ChartTimelineService} from '../services/chartTimeline.service';
 import {ObservationService} from '../services/observation.service';
@@ -20,13 +19,8 @@ import {CarePlan} from '../models/carePlan.model';
 import {ConditionsChartComponent} from './conditionsChart.component';
 import {CarePlanChartComponent} from './carePlanChart.component';
 
-import { CsiroService } from '../services/csiro.service';
 import { ScratchPadService } from '../services/scratchPad.service';
-
-import { Csiro } from '../models/csiro.model';
-
 import {Subscription} from 'rxjs/Subscription';
-
 import { Chart } from '../models/chart.model';
 
 import * as moment from 'moment';
@@ -39,16 +33,16 @@ declare var $:any; //Necessary in order to use jQuery to open popup.
 })
 
 export class ChartTimelineComponent {
-    constructor(private loupeService: LoupeService, private doctorService: DoctorService,
+    constructor(private doctorService: DoctorService,
         private chartService: ChartTimelineService, private observationService: ObservationService,
         private conditionService: ConditionService, private mapService: MapService,
         private http:Http, private updatingService: UpdatingService, private fhirService: FhirService,
-        private csiroService: CsiroService, private scratchPadService: ScratchPadService,
+        private scratchPadService: ScratchPadService,
         private carePlanService: CarePlanService) {
         this.subscription = this.chartService.activateGraph$.subscribe(clicked => {
             this.update();
         });
-        
+
         moment.updateLocale('en', {
         relativeTime : {
             future: "in %s",
@@ -68,9 +62,7 @@ export class ChartTimelineComponent {
         }
         });
         this.mappings = MapService.STATIC_MAPPINGS;
-        this.loupeService.activeCondition = this.selectedC;
         this.passThrough.emit(this.patient);
-
     }
 
     subscription: Subscription;
@@ -1247,13 +1239,9 @@ export class ChartTimelineComponent {
     this.observationService.populateCategories(this.observationService.temp.categories);
     this.observationService.categorizedObservations = this.observationService.temp;
 
-    this.loupeService.observationsArray = this.observationService.observations;
     this.observationReturned.emit(this.observationService.observations);
-
-    console.log("done!");
-
-
     }
+
     loadDataO(url) {
         let isLast = false;
         this.observationService.indexNext(url).subscribe(data => {

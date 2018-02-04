@@ -1,5 +1,4 @@
 import { Component, Injectable } from '@angular/core';
-import { LoupeService } from './loupe.service';
 import { Condition } from '../models/condition.model';
 import { CookieService } from 'angular2-cookie/core';
 

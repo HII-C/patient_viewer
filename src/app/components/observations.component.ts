@@ -67,8 +67,6 @@ export class ObservationsComponent {
       // console.log(ob.relativeDateTime,ob.effectiveDateTime);
     }
 
-    console.log("running service");
-
     //this.observationService.observations = this.observationService.observations;
     this.observationService.populateCategories(this.observationService.temp.categories);
     this.observationService.categorizedObservations = this.observationService.temp;
@@ -86,7 +84,6 @@ export class ObservationsComponent {
         this.observationService.observations = this.observationService.observations.concat(nextObs);
         this.observationService.filterCategory(nextObs);
         isLast = true;
-        console.log(data);
         for (let item of data.link) {
           if (item.relation == "next") {
             isLast = false;
@@ -101,10 +98,7 @@ export class ObservationsComponent {
   }
 
   ngOnChanges() {
-    console.log("Observations ngOnChanges");
-
     if (this.patient) {
-
       this.observationService.index(this.patient).subscribe(data => {
         if (data.entry) {
           let nextLink = null;
@@ -130,7 +124,7 @@ export class ObservationsComponent {
   }
 
   csiroLookup(code: Observation) {
-    setTimeout(() => { console.log(code) }, 5000);
+    // setTimeout(() => { console.log(code) }, 5000);
     this.observationService.observations[(this.observationService.observations.indexOf(code))].code['text'] = "working?";
 
   }

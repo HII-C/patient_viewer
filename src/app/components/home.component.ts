@@ -14,6 +14,5 @@ export class HomeComponent {
 
   selectPatient(patient: Patient) {
     this.selected = patient;
-    console.log("HomeComponent setting selection to patient: " + this.selected);
   }
 }

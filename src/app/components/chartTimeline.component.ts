@@ -44,12 +44,11 @@ export class ChartTimelineComponent {
         private conditionService: ConditionService, private mapService: MapService,
         private http:Http, private updatingService: UpdatingService, private fhirService: FhirService,
         private csiroService: CsiroService, private scratchPadService: ScratchPadService,
-        private carePlanService: CarePlanService){
-        console.log("Chart Component is loaded...");
+        private carePlanService: CarePlanService) {
         this.subscription = this.chartService.activateGraph$.subscribe(clicked => {
             this.update();
-
         });
+        
         moment.updateLocale('en', {
         relativeTime : {
             future: "in %s",

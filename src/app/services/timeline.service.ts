@@ -15,8 +15,7 @@ export class TimelineService {
 
   index(patient: Patient): Observable<any> {
     var url = this.fhirService.getUrl() + this.path + "?patient=" + patient.id;
-    console.log("Timeline URL is: " + url);
-    // console.log("ESNUTH");
+    // console.log("Timeline URL is: " + url);
     return this.http.get(url, this.fhirService.options(true)).map(res => res.json());
   }
 

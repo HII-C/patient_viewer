@@ -42,7 +42,6 @@ export class ConditionsComponent implements Column {
   @Output() conditionSelected: EventEmitter<Condition> = new EventEmitter();
 
   constructor(private fhirService: FhirService, private conditionService: ConditionService, private loupeService: LoupeService, private csiroService: CsiroService, private doctorService: DoctorService, private scratchPadService: ScratchPadService, private updatingService: UpdatingService) {
-    console.log("ConditionsComponent created...");
     // this.gridItemConfiguration.draggable = this.doctorService.configMode;
     this.loupeService.activeCondition = this.selected;
     this.justCreated = true;

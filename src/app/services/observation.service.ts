@@ -145,7 +145,6 @@ export class ObservationService {
   filterCategory(observations: Array<Observation>) {
     for (let obs of observations) {
       if (!this.containsObject(obs)) {
-        console.log(obs['code']['coding'][0]['code']);
         obs.grouping = this.getKey(obs['code']['coding'][0]['code']);
         this.condensedObservations.push(obs);
       }
@@ -196,7 +195,6 @@ export class ObservationService {
         totalcount += count;
 
         let newcount = this.populateCategories(obsToFilter[i].child);
-        console.log(newcount, JSON.stringify(obsToFilter[i]));
         obsToFilter[i].count += newcount;
 
         if (obsToFilter[i].child == "") {

@@ -23,7 +23,7 @@ export class ObservationRecursiveChart {
   getLevel() {
     return this.level;
   }
-	
+
   checked(obs: any, event, position, data) {
     obs.isSelected = !obs.isSelected
     if (event.shiftKey) {
@@ -64,7 +64,6 @@ export class ObservationRecursiveChart {
       let index = this.observationService.selected.indexOf(obs);
 
       this.observationService.selected.splice(index, 1);
-
     }
 
     console.log("checked", obs.isSelected, obs.code);

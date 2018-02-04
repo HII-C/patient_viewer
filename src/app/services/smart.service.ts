@@ -25,7 +25,6 @@ export class SmartService {
 
     authenticate() {
       this.fhirBaseUrl = this.findGetParameter("iss");
-      console.log("fhirBaseUrl: " + this.fhirBaseUrl);
 
       if(this.fhirBaseUrl) {
         // Occurs when arriving to the site for the first time.
@@ -112,7 +111,7 @@ export class SmartService {
           tmp = item.split("=");
           if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
       });
-      
+
       return result;
     }
 }

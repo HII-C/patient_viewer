@@ -154,7 +154,6 @@ export class ConditionsComponent implements Column {
 
   checkCondition(checked: boolean, checkedCondition: Condition) {
     this.checkedMap.set(checkedCondition, checked);
-    console.log("Set " + checkedCondition.id + " to " + this.checkedMap.get(checkedCondition));
   }
 
   addConditionsToScratchPad() {

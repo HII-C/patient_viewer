@@ -18,10 +18,25 @@ export class ScratchPadService {
 
   constructor(private observationService: ObservationService, private conditionService: ConditionService) { }
 
-
   addCondition(condition: Condition) {
-    this.conditions.push(condition);
-    console.log("ScratchPadService has " + this.conditions.length + " conditions.");
+    // Do not allow duplicate conditions in the scratch pad.
+    if (this.conditions.indexOf(condition) == -1) {
+      this.conditions.push(condition);
+    }
+  }
+
+  removeCondition(condition: Condition) {
+    // Remove a given condition from the scratch pad.
+    var index = this.conditions.indexOf(condition);
+
+    if (index != -1) {
+      this.conditions.splice(index, 1);
+    }
+  }
+
+  getConditions() {
+    // Return the conditions currently in the scratch pad.
+    return this.conditions;
   }
 
   // Old method likely to be removed.

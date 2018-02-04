@@ -8,7 +8,6 @@ div#conditions
 				.modal-body
 					form-builder([formInput] = 'formData', [userId] = 'patientId', (onSubmitClick) = 'formSubmit($event)')
 					
-
 	.header.text-center
 		h2(style="display: inline-block")
 			| Conditions
@@ -38,7 +37,7 @@ div#conditions
 				th
 					| Onset
 		tbody
-			tr("*ngFor"='let c of (columnState == "default" ? getActiveConditions() : scratchPadConditions)', [class.selected]='c.selected', (click)='selectCondition(c)', id='t{{conditions.indexOf(c)}}')
+			tr("*ngFor"='let c of (columnState == "default" ? getActiveConditions() : getScratchPadConditions())', [class.selected]='c.selected', (click)='selectCondition(c)', id='t{{conditions.indexOf(c)}}')
 				td
 					input("*ngIf"="!c.isParent",type='checkbox',id='c{{conditions.indexOf(c)}}', value='{{conditions.indexOf(c)}}', (change)='checkCondition($event.target.checked, c)')
 				td

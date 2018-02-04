@@ -16,12 +16,17 @@ declare var $: any; //Necessary in order to use jQuery to open popup.
   templateUrl: '/conditions.html'
 })
 export class ConditionsComponent implements Column {
+  // The state of the conditions list (ie, default or scratch pad)
   columnState: string = "default";
 
+  // The currently selected condition in the list.
   selected: Condition;
+
+  // The list of conditions being displayed.
   conditions: Array<Condition> = [];
-  scratchPadConditions: Array<Condition> = [];
-  shownConditions: Array<Condition> = [];
+
+  // Keep track of conditions that are currently checked in the list.
+  checkedMap: Map<Condition, boolean> = new Map();
 
   // for the dynamic form
   formData: Array<any> = [];
@@ -43,20 +48,13 @@ export class ConditionsComponent implements Column {
     this.justCreated = true;
   }
 
-  showDefault() {
-    this.shownConditions = this.conditions;
-  }
+  // Default implementations of Column interface methods.
+  showDefault() { }
+  showScratchPad() { }
+  showNotePad() { }
 
-  showScratchPad() {
-    this.shownConditions = this.scratchPadConditions;
-  }
-
-  showNotePad() {
-
-  }
-
-  getScratchPadCount() {
-    return this.scratchPadConditions.length;
+  getScratchPadConditions() {
+    return this.scratchPadService.getConditions();
   }
 
   selectCondition(condition: Condition) {
@@ -131,8 +129,6 @@ export class ConditionsComponent implements Column {
     if (this.patient) {
       this.conditionService.loadConditions(this.patient, true).subscribe(conditions => {
         this.conditions = conditions;
-
-        this.shownConditions = conditions;
         this.loadFinished();
       });
     }
@@ -157,26 +153,23 @@ export class ConditionsComponent implements Column {
   }
 
   checkCondition(checked: boolean, checkedCondition: Condition) {
-    checkedCondition['checked'] = checked;
+    this.checkedMap.set(checkedCondition, checked);
+    console.log("Set " + checkedCondition.id + " to " + this.checkedMap.get(checkedCondition));
   }
 
   addConditionsToScratchPad() {
     for (let c of this.conditions) {
-      if (c['checked']) {
+      if (this.checkedMap.get(c)) {
         this.scratchPadService.addCondition(c);
-        /*if (this.scratchPadConditions.indexOf(c) == -1) {
-          this.scratchPadConditions.push(c);
-          this.scratchPadService.addCondition(c);
-        }*/
       }
     }
   }
 
   removeConditionsFromScratchPad() {
-    for (let c of this.scratchPadConditions) {
-      if (c['checked']) {
-        var index = this.scratchPadConditions.indexOf(c);
-        this.scratchPadConditions.splice(index, 1);
+    for (let c of this.conditions) {
+      if (this.checkedMap.get(c)) {
+        this.scratchPadService.removeCondition(c);
+        this.checkedMap.set(c, false);
       }
     }
   }
@@ -228,18 +221,6 @@ export class ConditionsComponent implements Column {
       c.isSelected = false;
     }
 
-  }
-
-  showActiveConditions() {
-    this.shownConditions = this.conditions.filter(
-      c => c.clinicalStatus == "active"
-    );
-  }
-
-  showInactiveConditions() {
-    this.shownConditions = this.conditions.filter(
-      c => c.clinicalStatus != "active"
-    );
   }
 
   getActiveConditions() {

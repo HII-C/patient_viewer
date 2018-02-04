@@ -1,4 +1,5 @@
 import { Component, Input, Output, EventEmitter, Pipe } from '@angular/core';
+import { ScratchPadService } from '../services/scratchPad.service';
 import { Column } from '../interfaces/column.interface';
 
 /**
@@ -11,6 +12,8 @@ import { Column } from '../interfaces/column.interface';
 })
 export class ColumnStateSwitcherComponent {
   @Input() column: Column;
+
+  constructor (private scratchPadService: ScratchPadService) { }
 
   switchToDefault() {
     if (this.column != null) {
@@ -34,10 +37,6 @@ export class ColumnStateSwitcherComponent {
   }
 
   getScratchPadCount() {
-    if (this.column != null) {
-      return this.column.getScratchPadCount();
-    } else {
-      return 0;
-    }
+    return this.scratchPadService.getConditions().length;
   }
 }

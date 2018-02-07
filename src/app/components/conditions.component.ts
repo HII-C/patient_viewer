@@ -24,6 +24,7 @@ export class ConditionsComponent implements Column {
 
   // The list of conditions being displayed.
   conditions: Array<Condition> = [];
+  scratchPadConditions: any = [];
 
   // Keep track of conditions that are currently checked in the list.
   checkedMap: Map<Condition, boolean> = new Map();
@@ -31,7 +32,7 @@ export class ConditionsComponent implements Column {
   // for the dynamic form
   formData: Array<any> = [];
   modalToggle: boolean = false;
-  patientId: string = "";
+  patientId: string = "PATIENT_ID";
 
   viewToggle: boolean = false;
   collapseQueue: Array<any> = [];
@@ -46,6 +47,7 @@ export class ConditionsComponent implements Column {
   constructor(private fhirService: FhirService, private conditionService: ConditionService, private doctorService: DoctorService, private scratchPadService: ScratchPadService, private updatingService: UpdatingService) {
     // this.gridItemConfiguration.draggable = this.doctorService.configMode;
     this.justCreated = true;
+	this.scratchPadConditions = this.getScratchPadConditions();
   }
 
   // Default implementations of Column interface methods.
@@ -270,12 +272,11 @@ export class ConditionsComponent implements Column {
   // event handler for update button (pops up with update module)
   updateSelectedConditions() {
 
-    this.patientId = this.conditions[0].subject.reference;
-
+	//this.patientId = this.conditions[0].subject.reference;
 
     // parse the selected conditions into the correct format for form
     var formObj = [];
-
+	
     for (var i = 0; i < this.scratchPadConditions.length; i++) {
       var newObj = { type: 's-update', id: this.scratchPadConditions[i].id, data: { name: this.scratchPadConditions[i].code.text, status: this.scratchPadConditions[i].clinicalStatus } };
       formObj.push(newObj);

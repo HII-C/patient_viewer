@@ -10,15 +10,15 @@ This is an [AngularJS 2](https://angular.io) project using `grunt` as the build 
 	npm install # to install project development dependencies
 	typings install # to install TypeScript declarations
 
-To run in development mode, just:
+To launch in development mode, run the following terminal command from the `patient_viewer` folder:
 
 	grunt --force # to serve the project and automatically recompile on file changes
 
 Then, do the following:
-- Visit [FHIR Starter](http://fhir-starter.healthcreek.org/#/ui/select-patient), and login with the credentials `admin` and `password`.
-- Select the patient `Karen L. Lewis`.
-- In the bottom-right box, enter `Patient Viewer Local` in the top text box, and `http://localhost:9000` in the bottom text box.
-- Click the `Custom App` button underneath to launch the patient viewer.
+- In Chrome, enable the CORS extension (the extension should appear green in the top right of the browser).
+- Visit [HSPC Sandbox](https://sandbox.hspconsortium.org/), select the "HII-C" sandbox, choose the "Apps" option from the left menu, click on the "HII-C Confidential" app, and then click "Launch" on the right.
+- Select the patient `Adams, Daniel X` in the popup. This should open the Patient Viewer application.
+- Once you are done running Patient Viewer, make sure to terminate the `grunt --force` command in the terminal. Additionally, disable the CORS extension (it should appear red in the top right of the browser).
 
 ## Building for Production
 

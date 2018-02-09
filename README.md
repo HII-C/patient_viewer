@@ -10,6 +10,8 @@ This is an [AngularJS 2](https://angular.io) project using `grunt` as the build 
 	npm install # to install project development dependencies
 	typings install # to install TypeScript declarations
 
+If you do not have `npm` installed and `brew install node` does not work as expected, you may need to [follow the instructions here](https://brew.sh/) to install the `brew` package manager.
+
 To launch in development mode, run the following terminal command from the `patient_viewer` folder:
 
 	grunt --force # to serve the project and automatically recompile on file changes

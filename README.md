@@ -1,8 +1,8 @@
-# HealthCreek (Technical Team Version)
+# Patient Viewer
 
 Front-end project for context-driven clinical transactions.
 
-## Developer Quick Start
+## Preparing the Application
 
 This is an [AngularJS 2](https://angular.io) project using `grunt` as the build system, [pug](https://pugjs.org/api/getting-started.html) for HTML templates, [SASS](http://sass-lang.com) for CSS and [Bootstrap](http://getbootstrap.com/) for layout. `npm` is the package manager. Assuming you already have node installed via `brew install node` or similar:
 
@@ -12,6 +12,7 @@ This is an [AngularJS 2](https://angular.io) project using `grunt` as the build 
 
 If you do not have `npm` installed and `brew install node` does not work as expected, you may need to [follow the instructions here](https://brew.sh/) to install the `brew` package manager.
 
+## Running the Application
 To launch in development mode, run the following terminal command from the `patient_viewer` folder:
 
 	grunt --force # to serve the project and automatically recompile on file changes

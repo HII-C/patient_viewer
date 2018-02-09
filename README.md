@@ -4,7 +4,9 @@ Front-end project for context-driven clinical transactions.
 
 ## Preparing the Application
 
-This is an [AngularJS 2](https://angular.io) project using `grunt` as the build system, [pug](https://pugjs.org/api/getting-started.html) for HTML templates, [SASS](http://sass-lang.com) for CSS and [Bootstrap](http://getbootstrap.com/) for layout. `npm` is the package manager. Assuming you already have node installed via `brew install node` or similar:
+This is an [AngularJS 2](https://angular.io) project using `grunt` as the build system, [pug](https://pugjs.org/api/getting-started.html) for HTML templates, [SASS](http://sass-lang.com) for CSS and [Bootstrap](http://getbootstrap.com/) for layout. `npm` is the package manager. 
+
+Assuming you already have node installed via `brew install node` or similar, begin by running the following commands in the terminal:
 
 	npm install -g grunt typings
 	npm install # to install project development dependencies

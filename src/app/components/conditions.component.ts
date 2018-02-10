@@ -40,14 +40,28 @@ export class ConditionsComponent implements Column {
   conditionGroupingName: Array<any> = ["Active", "Inactive"];
   textInputForEdit: String;
   justCreated: boolean;
-  @Input() patient: Patient;
 
+  @Input() patient: Patient;
   @Output() conditionSelected: EventEmitter<Condition> = new EventEmitter();
 
   constructor(private fhirService: FhirService, private conditionService: ConditionService, private doctorService: DoctorService, private scratchPadService: ScratchPadService, private updatingService: UpdatingService) {
     // this.gridItemConfiguration.draggable = this.doctorService.configMode;
     this.justCreated = true;
-	this.scratchPadConditions = this.getScratchPadConditions();
+    this.scratchPadConditions = this.getScratchPadConditions();
+  }
+
+  ngOnChanges() {
+    // Triggered if a new patient is selected (not even implemented yet).
+    this.selected = null;
+    // Clear the old conditions.
+    this.conditions = [];
+
+    if (this.patient) {
+      this.conditionService.loadConditions(this.patient).subscribe(conditions => {
+        this.conditions = this.conditions.concat(conditions);
+        this.loadFinished();
+      });
+    }
   }
 
   // Default implementations of Column interface methods.
@@ -95,6 +109,7 @@ export class ConditionsComponent implements Column {
     }
   }
 
+  // Called when all conditions have been loaded.
   loadFinished() {
     this.conditions = this.conditions.reverse();
 
@@ -117,23 +132,12 @@ export class ConditionsComponent implements Column {
       c.relativeDateTime = new Date(newDate).toDateString();
       c.relativeDateTime = moment(newDate).toISOString();
     }
+
     if (this.viewToggle == false) {
-      //this.viewConditionList = JSON.parse(JSON.stringify(this.conditions));
       this.conditions = this.doctorService.assignVisible(this.conditions);
     }
 
     this.conditionService.conditions = this.conditions;
-  }
-
-  ngOnChanges() {
-    this.selected = null;
-
-    if (this.patient) {
-      this.conditionService.loadConditions(this.patient, true).subscribe(conditions => {
-        this.conditions = conditions;
-        this.loadFinished();
-      });
-    }
   }
 
   // Method for basic toggling, using JSON functions to toggle internal Angular2 module OnChanges for UI reactivity
@@ -268,15 +272,14 @@ export class ConditionsComponent implements Column {
     }
   }
 
-
   // event handler for update button (pops up with update module)
   updateSelectedConditions() {
 
-	//this.patientId = this.conditions[0].subject.reference;
+    //this.patientId = this.conditions[0].subject.reference;
 
     // parse the selected conditions into the correct format for form
     var formObj = [];
-	
+
     for (var i = 0; i < this.scratchPadConditions.length; i++) {
       var newObj = { type: 's-update', id: this.scratchPadConditions[i].id, data: { name: this.scratchPadConditions[i].code.text, status: this.scratchPadConditions[i].clinicalStatus } };
       formObj.push(newObj);

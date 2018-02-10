@@ -1,7 +1,11 @@
 import { Component, Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
-import 'rxjs/add/operator/map';
+
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/concatMap'
+import 'rxjs/add/observable/of';
+import 'rxjs/add/operator/concat';
 
 import { FhirService } from './fhir.service';
 import { Patient } from '../models/patient.model';
@@ -15,53 +19,52 @@ export class ConditionService {
 
   constructor(private fhirService: FhirService, private http: Http) { }
 
+  // Deprecated: This method will likely be deleted.
   index(patient: Patient, authParam: boolean): Observable<any> {
     var url = this.fhirService.getUrl() + this.path + "?patient=" + patient.id;
     return this.http.get(url, this.fhirService.options(authParam)).map(res => res.json());
   }
 
+  // Deprecated: This method will likely be deleted.
   indexNext(url: string): Observable<any> {
     return this.http.get(url, this.fhirService.options(true)).map(res => res.json());
   }
 
-  loadConditions(patient: Patient, authParam: boolean) {
-    var url = this.fhirService.getUrl() + this.path + "?patient=" + patient.id;
+  // https://stackoverflow.com/questions/45594609/which-operator-to-chain-observables-conditionally
+  // Because the conditions are paginated in the API, we must continually
+  // load the next page until no pages remain. This is achieved through
+  // concatMap and Observable.concat, as discussed above.
+  loadConditionsPage(url: string) {
+    return this.http.get(url, this.fhirService.options(true))
+      .map(res => res.json())
+      .concatMap(data => {
+        let conditions = [];
 
-    return this.http.get(url, this.fhirService.options(authParam)).map(data => {
-      data = data.json();
+        if (data['entry']) {
+          conditions = <Array<Condition>>data.entry.map(r => r['resource']);
+        }
 
-      var loadedConditions = [];
+        let nextUrl = null;
 
-      if (data['entry']) {
-        loadedConditions = <Array<Condition>>data['entry'].map(item => item['resource']);
-      }
-
-      return loadedConditions;
-    });
-
-    // TODO: Implement the paginated loading functionality shown below:
-    /*if (this.patient) {
-      this.conditionService.index(this.patient, true).subscribe(data => {
-        console.log("LOAD DATA: ");
-        console.log(data);
-
-        if (data.entry) {
-          let nextLink = null;
-          this.conditions = <Array<Condition>>data.entry.map(r => r['resource']);
-          console.log(this.conditions);
-          for(let i of data.link) {
-            if(i.relation=="next") {
-              nextLink = i.url;
-            }
+        for(let l of data.link) {
+          // Check if there is another page to load.
+          if(l.relation == "next") {
+            nextUrl = l.url;
           }
-          if(nextLink) {this.loadData(nextLink);}
-          else {this.loadFinished();}
+        }
 
+        if (nextUrl) {
+          // If there is another page, we need to trigger another request.
+          return Observable.of(conditions).concat(this.loadConditionsPage(nextUrl));
         } else {
-          this.conditions = new Array<Condition>();
-          console.log("No conditions for patient.");
+          // If no page is left, we are done.
+          return Observable.of(conditions);
         }
       });
-    }*/
+  }
+
+  loadConditions(patient: Patient) {
+    var url = this.fhirService.getUrl() + this.path + "?patient=" + patient.id;
+    return this.loadConditionsPage(url);
   }
 }

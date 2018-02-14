@@ -1,9 +1,13 @@
 import { Injectable, Component } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
+ 
+// MODELS
 import { Condition } from '../models/condition.model';
-import { ObservationService } from '../services/observation.service';
-import { ConditionService } from '../services/condition.service';
+import { CarePlan } from '../models/careplan.model';
+import { Observation } from '../models/observation.model';
 
+// SERVICES
+import { ObservationService } from '../services/observation.service';
 
 @Injectable()
 @Component({})
@@ -16,8 +20,8 @@ export class ScratchPadService {
 
   conditions: Array<Condition> = [];
 
-  constructor(private observationService: ObservationService, private conditionService: ConditionService) { }
-
+  constructor(private observationService: ObservationService) { }
+  
   // Add a condition to the scratch pad, and disallow duplicates.
   addCondition(condition: Condition) {
     if (this.conditions.indexOf(condition) == -1) {
@@ -39,6 +43,10 @@ export class ScratchPadService {
     return this.conditions;
   }
 
+  // ======================== METHODS FOR STORING CARE PLANS ========================
+  
+  // ======================== METHODS FOR STORING OBSERVATIONS ======================
+  
   // Old method likely to be removed.
   addData(location: string) {
     switch (location) {
@@ -52,4 +60,5 @@ export class ScratchPadService {
     }
     //this.updatedCondSP.next(clicked);
   }
+  
 }

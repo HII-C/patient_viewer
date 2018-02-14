@@ -137,6 +137,6 @@ export class ObservationsComponent {
     }
   }
   updateScratchPad() {
-    this.scratchPadService.addData("observation");
+	// TODO add stuff to scratch pad
   }
 }

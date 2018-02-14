@@ -19,7 +19,6 @@ import { AccountComponent } from './app/components/account.component';
 import { ToolbarComponent } from './app/components/toolbar.component';
 import { ChartTimelineComponent } from './app/components/chartTimeline.component';
 import { TripleListComponent } from './app/components/tripleList.component';
-import { ScratchPadComponent } from './app/components/scratchPad.component';
 import { ObservationRecursive } from './app/components/observationRecursion.component';
 import { AddObservation } from './app/components/addObservation.component';
 import { Favorites } from './app/components/favorites.component';
@@ -109,7 +108,6 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
     ToolbarComponent,
     ChartTimelineComponent,
     TripleListComponent,
-    ScratchPadComponent,
     ObservationRecursive,
     AddObservation,
     Favorites,

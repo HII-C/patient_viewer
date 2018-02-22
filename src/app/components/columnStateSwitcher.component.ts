@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter, Pipe } from '@angular/core';
 import { ScratchPadService } from '../services/scratchPad.service';
-import { Column } from '../interfaces/column.interface';
+import { BaseColumn } from './baseColumn';
 
 /**
  * Allows for switching between the three states of each column.
@@ -11,7 +11,7 @@ import { Column } from '../interfaces/column.interface';
   templateUrl: '/columnStateSwitcher.html'
 })
 export class ColumnStateSwitcherComponent {
-  @Input() column: Column;
+  @Input() column: BaseColumn;
 
   constructor (private scratchPadService: ScratchPadService) { }
 

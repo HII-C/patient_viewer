@@ -6,19 +6,16 @@ import { ScratchPadService } from '../services/scratchPad.service';
 import { UpdatingService } from '../services/updating.service';
 import { Condition } from '../models/condition.model';
 import { Patient } from '../models/patient.model';
-import { Column } from '../interfaces/column.interface';
-import * as moment from 'moment';
+import { BaseColumn } from './baseColumn';
 
+import * as moment from 'moment';
 declare var $: any; //Necessary in order to use jQuery to open popup.
 
 @Component({
   selector: 'conditions',
   templateUrl: '/conditions.html'
 })
-export class ConditionsComponent implements Column {
-  // The state of the conditions list (ie, default or scratch pad)
-  columnState: string = "default";
-
+export class ConditionsComponent extends BaseColumn {
   // The currently selected condition in the list.
   selected: Condition;
 
@@ -45,6 +42,7 @@ export class ConditionsComponent implements Column {
   @Output() conditionSelected: EventEmitter<Condition> = new EventEmitter();
 
   constructor(private fhirService: FhirService, private conditionService: ConditionService, private doctorService: DoctorService, private scratchPadService: ScratchPadService, private updatingService: UpdatingService) {
+    super();
     // this.gridItemConfiguration.draggable = this.doctorService.configMode;
     this.justCreated = true;
     this.scratchPadConditions = this.getScratchPadConditions();
@@ -63,11 +61,6 @@ export class ConditionsComponent implements Column {
       });
     }
   }
-
-  // Default implementations of Column interface methods.
-  showDefault() { }
-  showScratchPad() { }
-  showNotePad() { }
 
   getScratchPadConditions() {
     return this.scratchPadService.getConditions();

@@ -1,13 +1,19 @@
+// Prevent the whole page from being scrolled
+html, body
+  height: 100%
+  overflow: hidden
+
 body
   padding: 50px 0px 10px
   background-color: none
 
-  // background: url("/images/textures/wild_oliva.png") repeat
   background: url("/images/textures/crossword.png") repeat
 
   h3
 
   margin: 0
+  padding-left: 10px
+  padding-right: 10px
 
 pre
   background-color: #f5f5f5
@@ -114,9 +120,20 @@ nav
   position: absolute
 
 .triple-list-container
-  padding-top: 40px
-  padding-left: 20px
-  padding-right: 20px
+  padding-top: 5px
+  padding-left: 10px
+  padding-right: 10px
+
+.column-header
+  height: 100px
+  width: 100%
+
+.column-content
+  position: absolute
+  top: 100px
+  bottom: 0
+  left: 0
+  overflow-y: scroll
 
 .column-state-switcher
   margin-left: 10px

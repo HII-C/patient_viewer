@@ -3,31 +3,19 @@ import { FhirService } from '../services/fhir.service';
 import { CarePlanService } from '../services/carePlan.service';
 import { CarePlan } from '../models/carePlan.model';
 import { Patient } from '../models/patient.model';
-import { Column } from '../interfaces/column.interface';
+import { BaseColumn } from './baseColumn';
 
 @Component({
   selector: 'carePlan',
   templateUrl: '/carePlan.html'
 })
-export class CarePlanComponent implements Column {
-  columnState: string = "default";
-
+export class CarePlanComponent extends BaseColumn {
   selected: CarePlan;
   carePlans: Array<CarePlan>;
   @Input() patient: Patient;
 
-  constructor(private fhirService: FhirService, private carePlanService: CarePlanService) { }
-
-  showDefault() {
-    // Triggered when switching to default view.
-  }
-
-  showScratchPad() {
-    // Triggered when switching to scratch pad.
-  }
-
-  showNotePad() {
-    // Triggered when switching to note pad.
+  constructor(private fhirService: FhirService, private carePlanService: CarePlanService) {
+    super();
   }
 
   getScratchPadCount() {

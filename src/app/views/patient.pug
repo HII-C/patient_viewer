@@ -1,8 +1,8 @@
 .row.patient-content
-	.col-md-6("*ngIf"='selected')
-		img.img-rounded("*ngIf"='selected.gender === "female"', src='/images/textures/female.png', width="100px", height="100px")
-		img.img-rounded("*ngIf"='selected.gender === "male"', src='/images/textures/male.png', width="100px", height="100px")
-	.col-md-6
+	.col-md-4("*ngIf"='selected')
+		img.img-rounded("*ngIf"='selected.gender === "female"', src='/images/textures/female.png', width="60px", height="60px")
+		img.img-rounded("*ngIf"='selected.gender === "male"', src='/images/textures/male.png', width="60px", height="60px")
+	.col-md-8
 		div.text-center
 			span#patient
 				.details("*ngIf"='selected')
@@ -13,10 +13,12 @@
 							span("*ngIf"='selected.name && selected.name[0].family') {{selected.name[0].family[0]}}
 						div
 							| Born: {{selected.birthDate | amDateFormat:'MM/DD/YYYY'}} ({{-1 * (selected.birthDate | amDifference:today:'years':false)}}yr)
-						div Gender: {{selected.gender}}
-						div("*ngIf" = 'selected.mrn') MRN: {{selected.mrn}}
-
-				#advanced_search
+						div 
+							| Gender: {{selected.gender}}, 	
+							span("*ngIf"='selected.mrn') MRN: {{selected.mrn}}
+					
+				// May be re-added eventually, but does not do anything currently.
+				//#advanced_search
 					a("(click)"="advancedSearch = !advancedSearch" href="#")
 						span("*ngIf"="advancedSearch") basic
 						span("*ngIf"="!advancedSearch") advanced

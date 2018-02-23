@@ -34,7 +34,7 @@ export class BaseColumn {
   columnHeight: number;
 
   // 220px is an approximate value that seems to work for now.
-  HEIGHT_OFFSET: number = 220;
+  HEIGHT_OFFSET: number = 200;
 
   // The current state (ie, scratch pad) of the column.
   columnState: string = "default";

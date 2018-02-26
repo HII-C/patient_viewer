@@ -27,14 +27,13 @@ export class BaseColumn {
 
   // Can be overriden in the child class to handle switching between states.
   showDefault() { }
-  showNotePad() { }
   showScratchPad() { }
 
   // The current height (in pixels) of the column.
   columnHeight: number;
 
   // 220px is an approximate value that seems to work for now.
-  HEIGHT_OFFSET: number = 200;
+  HEIGHT_OFFSET: number = 180;
 
   // The current state (ie, scratch pad) of the column.
   columnState: string = "default";

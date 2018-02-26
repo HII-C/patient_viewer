@@ -29,13 +29,6 @@ export class ColumnStateSwitcherComponent {
     }
   }
 
-  switchToNotePad() {
-    if (this.column != null) {
-      this.column.columnState = "notepad";
-      this.column.showNotePad();
-    }
-  }
-
   getScratchPadCount() {
     return this.scratchPadService.getConditions().length;
   }

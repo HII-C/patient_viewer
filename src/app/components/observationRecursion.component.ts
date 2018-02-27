@@ -1,6 +1,9 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+
 import { ObservationService } from '../services/observation.service';
 import { ChartTimelineService } from '../services/chartTimeline.service';
+import { ScratchPadService } from '../services/scratchPad.service';
+
 import { Observation } from '../models/observation.model';
 
 @Component({
@@ -13,19 +16,15 @@ export class ObservationRecursive {
   graphData: Array<any> = [];
   lastIndex: number;
 
-  constructor(private observationService: ObservationService, private chartService: ChartTimelineService) { }
+  constructor(private observationService: ObservationService, private chartService: ChartTimelineService, private scratchpadService: ScratchPadService) { }
 
-  getData() {
-    return this.obs;
-  }
+  // ========================================= EVENT HANDLERS ==============================
 
-  getLevel() {
-    return this.level;
-  }
-
+  // handles whenever a checkbox is clicked
   checked(obs: any, event, position, data) {
     obs.isSelected = !obs.isSelected;
 
+    // shift click functionality [not tested]
     if (event.shiftKey) {
       let upper, lower;
       if (position < this.lastIndex) {
@@ -46,28 +45,24 @@ export class ObservationRecursive {
 
     this.lastIndex = position;
 
+    // unselected to selected
     if (obs.isSelected) {
-      for (let o of this.observationService.observations) {
-        if (o['code']['coding'][0]['code'] == obs.code) {
-          this.graphData.push(o);
-        }
-      }
-
-      this.observationService.selected.push(obs);
+      this.scratchpadService.addObservation(obs);
     }
-    else {
-      for (let o of this.observationService.observations) {
-        if (o['code']['coding'][0]['code'] == obs.code) {
-          let index = this.graphData.indexOf(o);
-          this.graphData.splice(index, 1);
-        }
-      }
-      let index = this.observationService.selected.indexOf(obs);
-
-      this.observationService.selected.splice(index, 1);
+    else { // selected to unselected
+      this.scratchpadService.removeObservation(obs);
     }
 
     console.log("checked", obs.isSelected, obs.code);
-    this.chartService.setData(this.graphData);
   }
+
+    // ======================================== GETTER METHODS =========================
+
+    getData() {
+      return this.obs;
+    }
+  
+    getLevel() {
+      return this.level;
+    }
 }

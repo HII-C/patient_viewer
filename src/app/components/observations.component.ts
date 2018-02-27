@@ -139,8 +139,8 @@ export class ObservationsComponent extends BaseColumn{
 
   // ====================== SCRATCH PAD FUNCTIONALITY =============================
 
-  updateScratchPad() {
-	// TODO add stuff to scratch pad
+  getScratchPadObservations() {
+
   }
 
   // OVERRIDDEN FROM BASECOLUMN:
@@ -151,6 +151,4 @@ export class ObservationsComponent extends BaseColumn{
   showScratchPad(){
 
   }
-
-
 }

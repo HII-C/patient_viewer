@@ -19,9 +19,12 @@ export class ScratchPadService {
   addNewData$ = this.addNewDataSource.asObservable();
 
   conditions: Array<Condition> = [];
+  observations: Array<Observation> = [];
 
   constructor(private observationService: ObservationService) { }
   
+  // ========================== METHODS FOR CONDITIONS ====================
+
   // Add a condition to the scratch pad, and disallow duplicates.
   addCondition(condition: Condition) {
     if (this.conditions.indexOf(condition) == -1) {
@@ -47,6 +50,29 @@ export class ScratchPadService {
   
   // ======================== METHODS FOR STORING OBSERVATIONS ======================
   
+  // Add a observation to the scratch pad, and disallow duplicates.
+  addObservation(observation: Observation) {
+    if (this.observations.indexOf(observation) == -1) {
+      this.observations.push(observation);
+    }
+  }
+
+  // Remove a given obseration from the scratch pad.
+  removeObservation(observation: Observation) {
+    var index = this.observations.indexOf(observation);
+
+    if (index != -1) {
+      this.observations.splice(index, 1);
+    }
+  }
+
+  // Return the observations currently in the scratch pad.
+  getObservations() {
+    return this.observations;
+  }
+
+  // ============================== OTHER METHODS ===============================
+
   // Old method likely to be removed.
   addData(location: string) {
     switch (location) {

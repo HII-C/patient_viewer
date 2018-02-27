@@ -1,4 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+
+import { BaseColumn } from './baseColumn';
+
 import { FhirService } from '../services/fhir.service';
 import { ObservationService } from '../services/observation.service';
 import { MapService } from '../services/map.service';
@@ -19,7 +22,7 @@ import * as moment from 'moment';
   selector: 'observations',
   templateUrl: '/observations.html'
 })
-export class ObservationsComponent {
+export class ObservationsComponent extends BaseColumn{
   selected: Observation;
   test: Observation;
   observations: Array<Observation> = [];
@@ -30,11 +33,11 @@ export class ObservationsComponent {
   constructor(private fhirService: FhirService, private observationService: ObservationService,
     private mapService: MapService, private doctorService: DoctorService,
     private chartService: ChartTimelineService, private http: Http, private scratchPadService: ScratchPadService) {
-
-    this.mappings = MapService.STATIC_MAPPINGS;
-    // this.gridItemConfiguration.draggable = this.doctorService.configMode;
-
+      super();
+      this.mappings = MapService.STATIC_MAPPINGS;
   }
+
+  // ===================== FOR DATA RETRIEVAL FROM OBSERVATIONS SERVICE ============
 
   loadFinished() {
     this.observationService.observations = this.observationService.observations.reverse();
@@ -47,8 +50,7 @@ export class ObservationsComponent {
         return -1;
       }
     })
-    //this.chartService.setData(this.observationService.observations);
-    //append broken data here
+
     this.observationService.observations.sort((n1, n2) => {
       if (n1.effectiveDateTime < n2.effectiveDateTime) {
         return 1;
@@ -66,7 +68,6 @@ export class ObservationsComponent {
       // console.log(ob.relativeDateTime,ob.effectiveDateTime);
     }
 
-    //this.observationService.observations = this.observationService.observations;
     this.observationService.populateCategories(this.observationService.temp.categories);
     this.observationService.categorizedObservations = this.observationService.temp;
 
@@ -117,7 +118,6 @@ export class ObservationsComponent {
         }
       });
 
-      // if (this.selected)
     }
   }
 
@@ -136,7 +136,21 @@ export class ObservationsComponent {
       }
     }
   }
+
+  // ====================== SCRATCH PAD FUNCTIONALITY =============================
+
   updateScratchPad() {
 	// TODO add stuff to scratch pad
   }
+
+  // OVERRIDDEN FROM BASECOLUMN:
+  showDefault() {
+
+  }
+
+  showScratchPad(){
+
+  }
+
+
 }

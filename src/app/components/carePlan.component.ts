@@ -22,6 +22,11 @@ export class CarePlanComponent extends BaseColumn {
     return 0;
   }
 
+  onClick(event) {
+    event.preventDefault();
+    console.log("Clicked!");
+  }
+
   ngOnChanges() {
     this.selected = null;
     if (this.patient) {

@@ -7,6 +7,12 @@ import 'rxjs/add/observable/fromEvent';
   templateUrl: '/contextMenu.html'
 })
 export class ContextMenuComponent {
+  // The list of options displayed in the menu.
+  options: Array<any> = [];
+
+  // The data passed into the menu from wherever it was triggered.
+  data: any = null;
+
   visible: boolean = false;
   top: string = '0px';
   left: string = '0px';
@@ -16,6 +22,21 @@ export class ContextMenuComponent {
 
   constructor(private ref: ElementRef) { }
 
+  /*
+  Example Usage:
+
+  this.menu.addOption({
+    'icon': 'glyphicon-stats', // icon to display
+    'text': 'Add to Trend Tool', // text to display
+    'exec': function(data) { // what to execute upon click
+      console.log(data);
+    }
+  });
+  */
+  public addOption(option) {
+    this.options = this.options.concat(option);
+  }
+
   private handleDocClick(event) {
     // Hide the menu if the user clicks outside of it.
     if (!this.ref.nativeElement.contains(event.target)) {
@@ -24,7 +45,9 @@ export class ContextMenuComponent {
   }
 
   // Show the menu.
-  public show(event) {
+  public show(data, event) {
+    this.data = data;
+
     // Set the location of the menu to where the user clicked.
     this.top = event.pageY + 'px';
     this.left = event.pageX + 'px';
@@ -41,8 +64,19 @@ export class ContextMenuComponent {
     this.visible = true;
   }
 
+  // Handle executing actions tied to a clicked menu option.
+  private handleOptionClick(option, event) {
+    if (option.exec) {
+      // Execute the function tied to the clicked menu option.
+      option.exec(this.data);
+    }
+
+    // Hide the context menu.
+    this.hide(event);
+  }
+
   // Hide the menu.
-  public hide(event) {
+  private hide(event) {
     if (event) {
       event.preventDefault();
     }
@@ -51,6 +85,8 @@ export class ContextMenuComponent {
     this.clickSubscription.unsubscribe();
     this.clickSubscription = null;
 
+    // Hide the menu and reset the associated data.
     this.visible = false;
+    this.data = null;
   }
 }

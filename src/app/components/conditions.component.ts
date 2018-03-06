@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, Pipe } from '@angular/core';
+import { Component, Input, Output, EventEmitter, Pipe, ViewChild } from '@angular/core';
 import { FhirService } from '../services/fhir.service';
 import { ConditionService } from '../services/condition.service';
 import { DoctorService } from '../services/doctor.service';
@@ -7,6 +7,7 @@ import { UpdatingService } from '../services/updating.service';
 import { Condition } from '../models/condition.model';
 import { Patient } from '../models/patient.model';
 import { BaseColumn } from './baseColumn';
+import { ContextMenuComponent } from './contextMenu.component';
 
 import * as moment from 'moment';
 declare var $: any; //Necessary in order to use jQuery to open popup.
@@ -41,11 +42,41 @@ export class ConditionsComponent extends BaseColumn {
   @Input() patient: Patient;
   @Output() conditionSelected: EventEmitter<Condition> = new EventEmitter();
 
+  @ViewChild('menu') menu: ContextMenuComponent;
+
   constructor(private fhirService: FhirService, private conditionService: ConditionService, private doctorService: DoctorService, private scratchPadService: ScratchPadService, private updatingService: UpdatingService) {
     super();
     // this.gridItemConfiguration.draggable = this.doctorService.configMode;
     this.justCreated = true;
     this.scratchPadConditions = this.getScratchPadConditions();
+  }
+
+  // Can only access view child after the view has been initialized.
+  ngAfterViewInit() {
+    // Add options to the context menu shown when right clicking conditions.
+    this.menu.addOption({
+      'icon': 'glyphicon-pencil',
+      'text': 'Add to Scratch Pad',
+      'exec': function(data) {
+        console.log(data);
+      }
+    });
+
+    this.menu.addOption({
+      'icon': 'glyphicon-stats',
+      'text': 'Add to Trend Tool',
+      'exec': function(data) {
+        console.log(data);
+      }
+    });
+
+    this.menu.addOption({
+      'icon': 'glyphicon-random',
+      'text': 'Open Association Tool',
+      'exec': function(data) {
+        console.log(data);
+      }
+    });
   }
 
   ngOnChanges() {

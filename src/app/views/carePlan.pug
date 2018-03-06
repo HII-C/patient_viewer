@@ -4,11 +4,6 @@ div#carePlans(style="height: 500px; overflow-y: auto")
 			| Care Plans
 		div(style="display: inline-block")
 			columnStateSwitcher([column]='this')
-	
-	button.btn-primary(type="button", (contextmenu)='menu.show($event)')
-		| Right Click Me
-	
-	contextMenu(#menu='')
 			
 	table.table.table-condensed.table-striped
 		thead

@@ -39,9 +39,12 @@ export class ObservationsComponent extends BaseColumn{
 
   // ===================== FOR DATA RETRIEVAL FROM OBSERVATIONS SERVICE ============
 
+  // runs whenever all the observations are finished loading
   loadFinished() {
     this.observationService.observations = this.observationService.observations.reverse();
     console.log("Loaded " + this.observationService.observations.length + " observations.");
+    
+    // sorts the data received from the observationService
     this.observationService.observations.sort((n1, n2) => {
       if (n1['code']['coding'][0]['code'] < n2['code']['coding'][0]['code']) {
         return 1;
@@ -60,12 +63,12 @@ export class ObservationsComponent extends BaseColumn{
       }
     })
 
+    // gets relative date?
     var diff = new Date().getTime() - new Date(this.observationService.observations[0].effectiveDateTime).getTime();
     for (let ob of this.observationService.observations) {
       var newDate = new Date(ob.effectiveDateTime).getTime() + diff;
       ob.relativeDateTime = new Date(newDate).toDateString();
       ob.relativeDateTime = moment(newDate).toISOString();
-      // console.log(ob.relativeDateTime,ob.effectiveDateTime);
     }
 
     this.observationService.populateCategories(this.observationService.temp.categories);
@@ -74,6 +77,7 @@ export class ObservationsComponent extends BaseColumn{
     this.observationReturned.emit(this.observationService.observations);
   }
 
+  // loads all the observations recursively until the all loaded
   loadData(url) {
     let isLast = false;
     this.observationService.indexNext(url).subscribe(data => {
@@ -140,7 +144,7 @@ export class ObservationsComponent extends BaseColumn{
   // ====================== SCRATCH PAD FUNCTIONALITY =============================
 
   getScratchPadObservations() {
-
+    return this.scratchPadService.getObservations();
   }
 
   // OVERRIDDEN FROM BASECOLUMN:
@@ -149,6 +153,6 @@ export class ObservationsComponent extends BaseColumn{
   }
 
   showScratchPad(){
-
+    console.log(this.getScratchPadObservations());
   }
 }

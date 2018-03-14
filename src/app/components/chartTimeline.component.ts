@@ -43,6 +43,7 @@ export class ChartTimelineComponent {
             this.update();
         });
 
+//this section defines how dates are shown
         moment.updateLocale('en', {
         relativeTime : {
             future: "in %s",
@@ -119,6 +120,7 @@ export class ChartTimelineComponent {
     startDate: number;
     endDate: number;
 
+// ranges in ms
     static readonly twentyFiveYearsMS: number = 788923150000;
     static readonly tenYearsMS: number = 315569260000;
     static readonly fiveYearsMS: number = 157784630000;
@@ -172,6 +174,7 @@ export class ChartTimelineComponent {
         }
     };
 
+// this set of functions is for the date adjust buttons
     setWhole()
     {
         this.whole = true;
@@ -405,6 +408,8 @@ export class ChartTimelineComponent {
         var indexStart;
         var dateRange;
         var dateNow = new Date().getTime();
+
+// change date ranges shown based on button click (if button is clicked)
         if (this.whole == true)
         {
             dateRange = null;
@@ -528,8 +533,8 @@ export class ChartTimelineComponent {
 
     getOverallDateMinAndMax(dateMin, dateMax)
     {
-        var oDateMin = this.newData[0][0].x; //TODO closer to present or past????
-        var oDateMax = this.newData[0][this.newData.length-1].x; //TODO same as above     currently both values to the inside
+        var oDateMin = this.newData[0][0].x; //closer to present
+        var oDateMax = this.newData[0][this.newData.length-1].x; //closer to past
         for (let i = 0; i < this.newData.length; i++)
         {
             if (i == 0)
@@ -580,6 +585,7 @@ export class ChartTimelineComponent {
         return {oDateMin: oDateMin, oDateMax: oDateMax};
     }
 
+//does all the rendering
     renderAxisLabels(overallMaxAndMin, dateMin, dateRange, dateNow, overallDateMinAndMax, dateMax)
     {
         console.log("overallDateMin", overallDateMinAndMax, "dateMin", dateMax);
@@ -670,11 +676,12 @@ export class ChartTimelineComponent {
         this.ctx.translate(xTranslate, 0);
     }
 
+//scatter chart type thing
     renderDataType1(newData, index, offset, width, max, min) {
         console.log("newData", newData);
         var maxAndMins = this.getMaxAndMins(newData, 1); //TODO add button control here as well
 
-        //this section is currently for using the "potential max and min" values as bounds for the height of the graphs.  Will need to be changed at some point
+        //TODO this section is currently for using the "potential max and min" values as bounds for the height of the graphs.  Will need to be changed at some point
         var top = maxAndMins.largestY+50;
         var bottom = maxAndMins.smallestY-50;
         if (bottom < 0) bottom = 0;
@@ -917,6 +924,7 @@ export class ChartTimelineComponent {
 
     }
 
+//shaded rectangles i think
     renderDataType2(newData, width)
     {
         var xLength = newData[newData.length-1].x - newData[0].x;
@@ -971,6 +979,7 @@ export class ChartTimelineComponent {
 
     }
 
+//event markers i think
     renderDataType3(newData, index, offset, width, max, min, dateMin, dateRange) {
         console.log("newData", newData);
 

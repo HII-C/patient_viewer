@@ -28,7 +28,8 @@ import { ConditionsChartComponent } from './app/components/conditionsChart.compo
 import { ColumnStateSwitcherComponent } from './app/components/columnStateSwitcher.component';
 import { NewCondition } from './app/components/newCondition.component';
 import { FormBuilder } from './app/components/form-builder.component'
-import { ObservationScratchPad } from './app/components/observationsScratchPad.component';
+import { ContextMenuComponent } from './app/components/contextMenu.component';
+import { ObservationScratchPad } from './app/components/observationsScratchPad.component'
 
 import { ClientService } from './app/services/client.service';
 import { EncounterService } from './app/services/encounter.service';
@@ -124,7 +125,8 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
     ObservationRecursiveChart,
     ConditionsChartComponent,
     ColumnStateSwitcherComponent,
-    NewCondition
+    NewCondition,
+    ContextMenuComponent
   ],   // components and directives
   providers: [
     appRoutingProviders,

@@ -39,7 +39,7 @@ div#conditions([style.height.px]="columnHeight")
 					th
 						| Onset
 			tbody
-				tr("*ngFor"='let c of (columnState == "default" ? getActiveConditions() : getScratchPadConditions())', [class.selected]='c.selected', (click)='selectCondition(c)', id='t{{conditions.indexOf(c)}}')
+				tr("*ngFor"='let c of (columnState == "default" ? getActiveConditions() : getScratchPadConditions())', [class.selected]='c.selected', (click)='selectCondition(c)', (contextmenu)='menu.show(c, $event)', id='t{{conditions.indexOf(c)}}')
 					td
 						input("*ngIf"="!c.isParent",type='checkbox',id='c{{conditions.indexOf(c)}}', value='{{conditions.indexOf(c)}}', (change)='checkCondition($event.target.checked, c)')
 					td
@@ -95,3 +95,5 @@ div#conditions([style.height.px]="columnHeight")
 
 	#condition-popover(style="display: none")
 		| Testing condition popover
+		
+	contextMenu(#menu='')

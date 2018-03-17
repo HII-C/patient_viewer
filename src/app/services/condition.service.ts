@@ -67,4 +67,12 @@ export class ConditionService {
     var url = this.fhirService.getUrl() + this.path + "?patient=" + patient.id;
     return this.loadConditionsPage(url);
   }
+
+  //Task: Display Allergies in Patient Demographics
+  //get request
+  //make a models
+  loadAllergies(patient: Patient, authParam: boolean): Observable<any> {
+    var url = this.fhirService.getUrl() + "/AllergyIntolerance" + "?patient=" + patient.id;
+    return this.http.get(url, this.fhirService.options(authParam)).map(res => res.json());
+  }
 }

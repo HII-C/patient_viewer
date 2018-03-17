@@ -49,6 +49,8 @@ export class ConditionsComponent extends BaseColumn {
     // this.gridItemConfiguration.draggable = this.doctorService.configMode;
     this.justCreated = true;
     this.scratchPadConditions = this.getScratchPadConditions();
+
+    //testing allergies
   }
 
   // Can only access view child after the view has been initialized.
@@ -91,6 +93,16 @@ export class ConditionsComponent extends BaseColumn {
         this.loadFinished();
       });
     }
+
+    //Task: Display text in header
+    if (this.patient) {
+      this.conditionService.loadAllergies(this.patient, true).subscribe(allergies => {
+        for (let e of allergies.entry) {
+          console.log(e.resource.code.text);
+        }
+      });
+    }
+
   }
 
   getScratchPadConditions() {

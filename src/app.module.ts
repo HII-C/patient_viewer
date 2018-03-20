@@ -33,6 +33,7 @@ import { ContextMenuComponent } from './app/components/contextMenu.component';
 import { ObservationScratchPad } from './app/components/observationsScratchPad.component'
 import { AccordionRecursion } from './app/components/accordionRecursion.component';
 import { ConditionsDisplay } from './app/components/conditionsDisplay.component';
+import { CarePlanDisplay } from './app/components/carePlanDisplay.component';
 
 // SERVICE IMPORTS
 import { ClientService } from './app/services/client.service';
@@ -114,6 +115,7 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
 
     // CAREPLAN COLUMN
     CarePlanComponent,
+    CarePlanDisplay,
     CarePlanChartComponent,
 
     TimelineComponent,

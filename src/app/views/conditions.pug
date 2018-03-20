@@ -20,6 +20,8 @@ div#conditions([style.height.px]="columnHeight")
 		
 		div("*ngIf" = 'columnState == "default" && loaded')
 			accordionRecursion([levelData] = 'conditions', [columnNum] = 0, [levelNum] = 0)
+		div("*ngIf" = "!loaded")
+			p Not loaded!
 
 		div("*ngIf" = 'columnState == "scratchpad"')
 			conditionsDisplay([conditions] = "getScratchPadConditions()")

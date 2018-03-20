@@ -46,7 +46,10 @@ export class AccordionRecursion {
     // When the component is first initialized
     ngOnInit(){
         // reconstruct the data for now
-        this.reconstructData(this.levelData);
+        if (this.columnNum == 0)
+            this.reconstructData(this.levelData);
+        else if (this.columnNum == 2)
+            this.reconstructDataFindings(this.levelData);
         // this.parsedData = this.levelData;
         this.loadFinished = true;
     }
@@ -85,6 +88,42 @@ export class AccordionRecursion {
         },
         {
             category: "Preventions/Exposures",
+            subheadings: false,
+            subs: null,
+            data: arrData
+        },
+    ];
+
+    this.parsedData = reconstructedObject;
+    }
+
+    reconstructDataFindings(arrData: any) {
+        var reconstructedObject = [{
+            category: "Medication",
+            subheadings: false,
+            subs: null,
+            data: arrData
+        }, 
+        {
+            category: "Procedures",
+            subheadings: false,
+            subs: null,
+            data: arrData
+        },
+        {
+            category: "In-Progress Tests",
+            subheadings: false,
+            subs: null,
+            data: arrData
+        },
+        {
+            category: "Dietary Plan",
+            subheadings: false,
+            subs: null,
+            data: arrData
+        },
+        {
+            category: "Exercise Plan",
             subheadings: false,
             subs: null,
             data: arrData

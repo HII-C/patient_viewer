@@ -18,12 +18,47 @@ export class ScratchPadService {
   private addNewDataSource = new Subject<string>();
   addNewData$ = this.addNewDataSource.asObservable();
 
+  totalConditions: Array<Condition>;
+
   conditions: Array<Condition> = [];
   observations: Array<Observation> = [];
 
   constructor(private observationService: ObservationService) { }
   
   // ========================== METHODS FOR CONDITIONS ====================
+
+  // MAP TO KEEP TRACK OF WHICH CONDITIONS ARE SELECTED (BUT NOT IN SCRATCH PAD)
+
+  // initialize the totalConditions
+  initConditions(inConditions: Array<Condition>){
+    this.totalConditions = inConditions;
+  }
+
+  // Keep track of conditions that are currently checked in the list (conditions)
+  checkedMapConditions: Map<Condition, boolean> = new Map();
+
+  checkCondition(checked: boolean, checkedCondition: Condition) {
+    this.checkedMapConditions.set(checkedCondition, checked);
+  }
+
+  // removes the marked scratch pad elements to the actual scratch pad
+  removeConditionsFromScratchPad() {
+    for (let c of this.totalConditions) {
+      if (this.checkedMapConditions.get(c)) {
+        this.removeCondition(c);
+        this.checkedMapConditions.set(c, false);
+      }
+    }
+  }
+
+  // adds the marked scratch pad elements to the actual scratch pad
+  addConditionsToScratchPad() {
+    for (let c of this.totalConditions) {
+      if (this.checkedMapConditions.get(c)) {
+        this.addCondition(c);
+      }
+    }
+  }
 
   // Add a condition to the scratch pad, and disallow duplicates.
   addCondition(condition: Condition) {

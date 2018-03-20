@@ -1,12 +1,22 @@
+/*
+  DESCRIPTION: TOP LEVEL OF THE CONDITIONS COLUMN: DOES NOT HANDLE (ANY) RENDERING; SIMPLY FOR RETRIEVING 
+  DATA FROM THE SERVER, WHICH IS PASSED DOWN
+
+  Author: Steven Tran and Kaan Aksoy
+  Version: 1.2 (3/19/18)
+*/
+
 import { Component, Input, Output, EventEmitter, Pipe, ViewChild } from '@angular/core';
+
 import { FhirService } from '../services/fhir.service';
 import { ConditionService } from '../services/condition.service';
 import { DoctorService } from '../services/doctor.service';
 import { ScratchPadService } from '../services/scratchPad.service';
-import { UpdatingService } from '../services/updating.service';
+
 import { Condition } from '../models/condition.model';
 import { Patient } from '../models/patient.model';
 import { BaseColumn } from './baseColumn';
+
 import { ContextMenuComponent } from './contextMenu.component';
 
 import * as moment from 'moment';
@@ -24,59 +34,24 @@ export class ConditionsComponent extends BaseColumn {
   conditions: Array<Condition> = [];
   scratchPadConditions: any = [];
 
-  // Keep track of conditions that are currently checked in the list.
-  checkedMap: Map<Condition, boolean> = new Map();
-
-  // for the dynamic form
-  formData: Array<any> = [];
-  modalToggle: boolean = false;
-  patientId: string = "PATIENT_ID";
+  // for checking whenever the page is loaded
+  loaded: boolean = false;
 
   viewToggle: boolean = false;
-  collapseQueue: Array<any> = [];
   conditionGrouping: Array<any> = [];
-  conditionGroupingName: Array<any> = ["Active", "Inactive"];
-  textInputForEdit: String;
   justCreated: boolean;
 
   @Input() patient: Patient;
   @Output() conditionSelected: EventEmitter<Condition> = new EventEmitter();
 
-  @ViewChild('menu') menu: ContextMenuComponent;
+  // ===============================================================================================================================================
+  // ================================================================== EVENT METHODS ==============================================================
+  // ==================================================================---------------==============================================================
 
-  constructor(private fhirService: FhirService, private conditionService: ConditionService, private doctorService: DoctorService, private scratchPadService: ScratchPadService, private updatingService: UpdatingService) {
+  constructor(private fhirService: FhirService, private conditionService: ConditionService, private doctorService: DoctorService, private scratchPadService: ScratchPadService) {
     super();
-    // this.gridItemConfiguration.draggable = this.doctorService.configMode;
     this.justCreated = true;
     this.scratchPadConditions = this.getScratchPadConditions();
-  }
-
-  // Can only access view child after the view has been initialized.
-  ngAfterViewInit() {
-    // Add options to the context menu shown when right clicking conditions.
-    this.menu.addOption({
-      'icon': 'glyphicon-pencil',
-      'text': 'Add to Scratch Pad',
-      'exec': function(data) {
-        console.log(data);
-      }
-    });
-
-    this.menu.addOption({
-      'icon': 'glyphicon-stats',
-      'text': 'Add to Trend Tool',
-      'exec': function(data) {
-        console.log(data);
-      }
-    });
-
-    this.menu.addOption({
-      'icon': 'glyphicon-random',
-      'text': 'Open Association Tool',
-      'exec': function(data) {
-        console.log(data);
-      }
-    });
   }
 
   ngOnChanges() {
@@ -90,46 +65,6 @@ export class ConditionsComponent extends BaseColumn {
         this.conditions = this.conditions.concat(conditions);
         this.loadFinished();
       });
-    }
-  }
-
-  getScratchPadConditions() {
-    return this.scratchPadService.getConditions();
-  }
-
-  selectCondition(condition: Condition) {
-    this.selected = condition;
-    this.conditionSelected.emit(this.selected);
-    for (let c of this.conditions) {
-      c['selected'] = (c.id == this.selected.id);
-    }
-  }
-
-  sortCondition(x: string) {
-    if (x == "date-asc" || x == "date-desc") {
-      var a = 1;
-      if (x == "date-asc") {
-        a = -a;
-      }
-
-      for (let c of this.conditionGrouping) {
-        c.sort((n1, n2) => {
-          if (n1.code['coding'][0]['code'] > n2.code['coding'][0]['code']) {
-            return a;
-          }
-          if (n1.code['coding'][0]['code'] < n2.code['coding'][0]['code']) {
-            return -a;
-          }
-        })
-      }
-    }
-    if (this.viewToggle == false) {
-      this.conditions = this.doctorService.assignVisible(this.conditions);
-    }
-    else {
-      for (let c of this.conditions) {
-        c.isVisible = true;
-      }
     }
   }
 
@@ -162,208 +97,21 @@ export class ConditionsComponent extends BaseColumn {
     }
 
     this.conditionService.conditions = this.conditions;
-  }
 
-  // Method for basic toggling, using JSON functions to toggle internal Angular2 module OnChanges for UI reactivity
-  ellipsesToggle() {
-    // Basic logic for toggle, assuming this.conditions contains all info, and this.viewConditionList is the modified list being used to display data
-    if (this.viewToggle == false) {
-      for (let c of this.conditions) {
-        c.isVisible = true;
-      }
-      this.viewToggle = true;
-    }
-  }
+    // for rendering elements only after page is loaded (there probably is a better way)
+    this.loaded = true;
 
-  toggleExpansion() {
-    if (this.viewToggle == true) {
-      this.conditions = this.doctorService.assignVisible(this.conditions);
-      this.viewToggle = false;
-    }
-  }
-
-  checkCondition(checked: boolean, checkedCondition: Condition) {
-    this.checkedMap.set(checkedCondition, checked);
-  }
-
-  addConditionsToScratchPad() {
-    for (let c of this.conditions) {
-      if (this.checkedMap.get(c)) {
-        this.scratchPadService.addCondition(c);
-      }
-    }
-  }
-
-  removeConditionsFromScratchPad() {
-    for (let c of this.conditions) {
-      if (this.checkedMap.get(c)) {
-        this.scratchPadService.removeCondition(c);
-        this.checkedMap.set(c, false);
-      }
-    }
-  }
-
-  showPopover(condition: Condition) {
-    var popover = document.getElementById("condition-popover");
-    popover.style.display = "block";
-    popover.innerHTML = condition['code']['text'];
-  }
-
-  movePopover(event: MouseEvent) {
-    var columnOffset = document.getElementById("conditions").getBoundingClientRect();
-    var popover = document.getElementById("condition-popover");
-
-    popover.style.left = (event.x - columnOffset.left + 5) + "px";
-    popover.style.top = (event.y - columnOffset.top + 5) + "px";
-  }
-
-  hidePopover() {
-    document.getElementById("condition-popover").style.display = "none";
-  }
-
-  expand(parent: string) {
-    for (let c of this.conditions) {
-      if (c.parent == parent) {
-        c.isVisible = true;
-        c.parent = "";
-        c.isParent = false;
-      }
-    }
-  }
-
-  collapse() {
-    let index = 0;
-    let parent = "";
-    for (let c of this.conditions) {
-      if (c.isSelected == true) {
-        if (index == 0) {
-          c.isParent = true;
-          parent = c.id;
-        }
-        else {
-          c.isVisible = false;
-
-        }
-        c.parent = parent;
-        index++;
-      }
-      c.isSelected = false;
-    }
+    // initialize the scratchPadService totalConditions with all the shit
+    this.scratchPadService.initConditions(this.conditions);
 
   }
 
-  getActiveConditions() {
-    return this.conditions.filter(
-      c => c.clinicalStatus == "active"
-    );
-  }
+  // ===============================================================================================================================================
+  // ======================================================== GETTERS AND SETTERS===================================================================
+  // ===============================================================================================================================================
 
-  getInactiveConditions() {
-    return this.conditions.filter(
-      c => c.clinicalStatus != "active"
-    );
-  }
-
-  newTable(tableName: string, dataLocation: Array<any>, quality: string, groupingCount: number) {
-    if (this.conditionGroupingName.indexOf(tableName) == -1) {
-      this.conditionGroupingName.push(tableName);
-      for (let c of this.conditions) {
-        // Right now this will only allow for a table with one quality!
-        var fullPath = c;
-        dataLocation.forEach(element => {
-          try {
-            fullPath = c[element];
-          }
-          catch (error) {
-            console.log('That field does not exist on this Condition' + c);
-          }
-        });
-        // Testing condition and adding if it's true
-        if (quality) {
-          console.log(fullPath);
-          if (!this.conditionGrouping[groupingCount]) {
-            this.conditionGrouping[groupingCount] = [c];
-          }
-          else {
-            this.conditionGrouping[groupingCount].push(c);
-
-          }
-        }
-      }
-    }
-    else {
-      console.log("This table already exists");
-    }
-  }
-
-  // event handler for update button (pops up with update module)
-  updateSelectedConditions() {
-
-    //this.patientId = this.conditions[0].subject.reference;
-
-    // parse the selected conditions into the correct format for form
-    var formObj = [];
-
-    for (var i = 0; i < this.scratchPadConditions.length; i++) {
-      var newObj = { type: 's-update', id: this.scratchPadConditions[i].id, data: { name: this.scratchPadConditions[i].code.text, status: this.scratchPadConditions[i].clinicalStatus } };
-      formObj.push(newObj);
-    }
-
-    this.formData = formObj;
-
-    // then set the form on page visible
-    this.modalToggle = !this.modalToggle;
-  }
-
-  closeModal(): void {
-    this.modalToggle = false;
-  }
-
-  // callback for when the submit button in the form is clicked
-  formSubmit(inData: any) {
-    this.modalToggle = !this.modalToggle;
-
-    // update the conditions with the new updated data (naive bad implementation)
-    for (var i = 0; i < this.conditions.length; i++) {
-      for (var j = 0; j < inData.data.length; j++) {
-        if (this.conditions[i].id == inData.data[j].id) {
-          var updDescription = inData.data[j].data.description;
-          var updStatus = inData.data[j].data.status
-
-          if (updDescription != null)
-            this.conditions[i].code.text = updDescription;
-
-          if (updStatus != null)
-            this.conditions[i].clinicalStatus = updStatus;
-
-          break;
-        }
-      }
-    }
-
-    for (var i = 0; i < this.scratchPadConditions.length; i++) {
-      for (var j = 0; j < inData.data.length; j++) {
-        if (this.scratchPadConditions[i].id == inData.data[j].id) {
-          var updDescription = inData.data[j].data.description;
-          var updStatus = inData.data[j].data.status
-
-          if (updDescription != null)
-            this.scratchPadConditions[i].code.text = updDescription;
-
-          if (updStatus != null)
-            this.scratchPadConditions[i].clinicalStatus = updStatus;
-
-          break;
-        }
-      }
-    }
-  }
-
-  updateEntry(index: number, dataLocation: string) {
-    let conditionToUpdate = this.conditionService.conditions[index];
-    console.log(this.textInputForEdit);
-    this.updatingService.updateEntry(conditionToUpdate, this.textInputForEdit, dataLocation, index);
-    this.conditions[index] = this.conditionService.conditions[index];
-    console.log(this.conditions[index]);
+  // retrieves the selected conditions from the scratch pad
+  getScratchPadConditions() {
+    return this.scratchPadService.getConditions();
   }
 }

@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { FormCreatorModule } from './app/modules/form.module';
 
+// COMPONENT IMPORTS
 import { AppComponent } from './app/components/app.component';
 import { ClientComponent } from './app/components/client.component';
 import { HomeComponent } from './app/components/home.component';
@@ -30,7 +31,10 @@ import { NewCondition } from './app/components/newCondition.component';
 import { FormBuilder } from './app/components/form-builder.component'
 import { ContextMenuComponent } from './app/components/contextMenu.component';
 import { ObservationScratchPad } from './app/components/observationsScratchPad.component'
+import { AccordionRecursion } from './app/components/accordionRecursion.component';
+import { ConditionsDisplay } from './app/components/conditionsDisplay.component';
 
+// SERVICE IMPORTS
 import { ClientService } from './app/services/client.service';
 import { EncounterService } from './app/services/encounter.service';
 import { FhirService } from './app/services/fhir.service';
@@ -98,12 +102,15 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
     HomeComponent,
     PatientComponent,
 
+    AccordionRecursion,
+
     // OBSERVATIONS COLUMN
     ObservationsComponent,
     ObservationScratchPad, 
 
     // CONDITIONS COLUMN
     ConditionsComponent,
+    ConditionsDisplay,
 
     // CAREPLAN COLUMN
     CarePlanComponent,

@@ -15,7 +15,7 @@ import { ContextMenuComponent } from './contextMenu.component';
 
 @Component({
     selector: 'careplanDisplay',
-    templateUrl: '/careplanDisplay.html'
+    templateUrl: '/carePlanDisplay.html'
 })
 export class CarePlanDisplay {
     // The currently selected careplan in the list.
@@ -27,7 +27,7 @@ export class CarePlanDisplay {
 
     @ViewChild('menu') menu: ContextMenuComponent;
 
-    
+
     // ===============================================================================================================================================
     // ================================================================== EVENT METHODS ==============================================================
     // ==================================================================---------------==============================================================
@@ -67,7 +67,7 @@ export class CarePlanDisplay {
     }
 
     // FOR MAINTAINING CHECK STATE AFTER LOSING FOCUS
-    
+
     // Refactor the code for care plans
     /*
     //whenver a line is selected

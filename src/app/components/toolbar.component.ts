@@ -31,7 +31,6 @@ export class ToolbarComponent {
 
   openGraph() {
     this.chartService.buttonClicked(true);
-
   }
 
   updatePosition(ref: ElementRef) {

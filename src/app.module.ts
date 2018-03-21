@@ -34,7 +34,6 @@ import { ObservationScratchPad } from './app/components/observationsScratchPad.c
 import { AccordionRecursion } from './app/components/accordionRecursion.component';
 import { ConditionsDisplay } from './app/components/conditionsDisplay.component';
 import { CarePlanDisplay } from './app/components/carePlanDisplay.component';
-
 // SERVICE IMPORTS
 import { ClientService } from './app/services/client.service';
 import { EncounterService } from './app/services/encounter.service';
@@ -76,12 +75,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NguiAutoCompleteModule } from '@ngui/auto-complete';
 
 const appRoutes: Routes = [
+  { path: 'account', component: AccountComponent },
+  { path: 'trends', component: ChartTimelineComponent },
   { path: '', component: HomeComponent },
-  { path: 'account', component: AccountComponent }
+  { path: '**', component: HomeComponent }
 ]
 const appRoutingProviders: any[] = [];
 const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
-
 
 @NgModule({
   imports: [
@@ -96,7 +96,7 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
     BrowserAnimationsModule,
     CalendarModule.forRoot(),
     NguiAutoCompleteModule
-  ],       
+  ],
   declarations: [
     AppComponent,
     ClientComponent,
@@ -107,7 +107,7 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
 
     // OBSERVATIONS COLUMN
     ObservationsComponent,
-    ObservationScratchPad, 
+    ObservationScratchPad,
 
     // CONDITIONS COLUMN
     ConditionsComponent,

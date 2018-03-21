@@ -30,10 +30,11 @@ import { ColumnStateSwitcherComponent } from './app/components/columnStateSwitch
 import { NewCondition } from './app/components/newCondition.component';
 import { FormBuilder } from './app/components/form-builder.component'
 import { ContextMenuComponent } from './app/components/contextMenu.component';
+import { CarePlanDisplay } from './app/components/carePlanDisplay.component';
+import { NoteNavigationComponent } from './app/components/noteNavigation.component';
 import { ObservationScratchPad } from './app/components/observationsScratchPad.component'
 import { AccordionRecursion } from './app/components/accordionRecursion.component';
 import { ConditionsDisplay } from './app/components/conditionsDisplay.component';
-import { CarePlanDisplay } from './app/components/carePlanDisplay.component';
 // SERVICE IMPORTS
 import { ClientService } from './app/services/client.service';
 import { EncounterService } from './app/services/encounter.service';
@@ -135,7 +136,8 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
     ConditionsChartComponent,
     ColumnStateSwitcherComponent,
     NewCondition,
-    ContextMenuComponent
+    ContextMenuComponent,
+    NoteNavigationComponent,
   ],   // components and directives
   providers: [
     appRoutingProviders,

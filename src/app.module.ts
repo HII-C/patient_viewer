@@ -29,7 +29,9 @@ import { ColumnStateSwitcherComponent } from './app/components/columnStateSwitch
 import { NewCondition } from './app/components/newCondition.component';
 import { FormBuilder } from './app/components/form-builder.component'
 import { ContextMenuComponent } from './app/components/contextMenu.component';
-import { ObservationScratchPad } from './app/components/observationsScratchPad.component'
+import { ObservationScratchPad } from './app/components/observationsScratchPad.component';
+import { NoteNavigationComponent } from './app/components/noteNavigation.component';
+import { SideNoteComponent } from './app/components/sideNote.component';
 
 import { ClientService } from './app/services/client.service';
 import { EncounterService } from './app/services/encounter.service';
@@ -91,7 +93,7 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
     BrowserAnimationsModule,
     CalendarModule.forRoot(),
     NguiAutoCompleteModule
-  ],       
+  ],
   declarations: [
     AppComponent,
     ClientComponent,
@@ -100,7 +102,7 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
 
     // OBSERVATIONS COLUMN
     ObservationsComponent,
-    ObservationScratchPad, 
+    ObservationScratchPad,
 
     // CONDITIONS COLUMN
     ConditionsComponent,
@@ -126,7 +128,9 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
     ConditionsChartComponent,
     ColumnStateSwitcherComponent,
     NewCondition,
-    ContextMenuComponent
+    ContextMenuComponent,
+    NoteNavigationComponent,
+    SideNoteComponent,
   ],   // components and directives
   providers: [
     appRoutingProviders,

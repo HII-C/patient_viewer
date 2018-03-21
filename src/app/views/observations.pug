@@ -11,5 +11,5 @@ div.container("*ngIf"='columnState == "default"' style="width:auto")
 
 div.container("*ngIf"='columnState == "scratchpad"' style="width:auto")
   div.panel-group(id="obs")
-    div.panel.panel-default("*ngIf"='this.observationService.categorizedObservations')
+    div.panel.panel-default("*ngIf"='this.observationService.categorizedObservations' style = "padding: 10px")
       observationScratchPad

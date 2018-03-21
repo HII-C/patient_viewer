@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { FormCreatorModule } from './app/modules/form.module';
 
+// COMPONENT IMPORTS
 import { AppComponent } from './app/components/app.component';
 import { ClientComponent } from './app/components/client.component';
 import { HomeComponent } from './app/components/home.component';
@@ -29,10 +30,14 @@ import { ColumnStateSwitcherComponent } from './app/components/columnStateSwitch
 import { NewCondition } from './app/components/newCondition.component';
 import { FormBuilder } from './app/components/form-builder.component'
 import { ContextMenuComponent } from './app/components/contextMenu.component';
-import { ObservationScratchPad } from './app/components/observationsScratchPad.component';
+import { CarePlanDisplay } from './app/components/carePlanDisplay.component';
 import { NoteNavigationComponent } from './app/components/noteNavigation.component';
-import { SideNoteComponent } from './app/components/sideNote.component';
-
+import { ObservationScratchPad } from './app/components/observationsScratchPad.component'
+import { AccordionRecursion } from './app/components/accordionRecursion.component';
+import { ConditionsDisplay } from './app/components/conditionsDisplay.component';
+import { CarePlanDisplay } from './app/components/carePlanDisplay.component';
+import { NoteNavigationComponent } from '/.app/components/noteNavigation.component';
+// SERVICE IMPORTS
 import { ClientService } from './app/services/client.service';
 import { EncounterService } from './app/services/encounter.service';
 import { FhirService } from './app/services/fhir.service';
@@ -73,12 +78,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NguiAutoCompleteModule } from '@ngui/auto-complete';
 
 const appRoutes: Routes = [
+  { path: 'account', component: AccountComponent },
+  { path: 'trends', component: ChartTimelineComponent },
   { path: '', component: HomeComponent },
-  { path: 'account', component: AccountComponent }
+  { path: '**', component: HomeComponent }
 ]
 const appRoutingProviders: any[] = [];
 const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
-
 
 @NgModule({
   imports: [
@@ -100,15 +106,19 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
     HomeComponent,
     PatientComponent,
 
+    AccordionRecursion,
+
     // OBSERVATIONS COLUMN
     ObservationsComponent,
     ObservationScratchPad,
 
     // CONDITIONS COLUMN
     ConditionsComponent,
+    ConditionsDisplay,
 
     // CAREPLAN COLUMN
     CarePlanComponent,
+    CarePlanDisplay,
     CarePlanChartComponent,
 
     TimelineComponent,

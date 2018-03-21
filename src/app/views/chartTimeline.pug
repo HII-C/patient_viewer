@@ -1,74 +1,64 @@
-// TODO Write js to automatically to the styling, shouldn't be super hard
-
-#chartTimeline_popup.modal.fade(tabindex='-1', role='dialog')
-    .modal-lg.modal-dialog(role='document')
-        .modal-lg.modal-content(style="width: 1275px;")
-            .modal-lg.modal-header(style="width: 1250px")
-                button.close(type='button', data-dismiss='modal', aria-label='Close')
-                    span(aria-hidden='true') ×
-            .modal-lg.modal-body(style="width: 1250px; background-color:white")
-                div(style="float: left; width: 350px")
-                    div
-                        h4 
-                            | Dashboard
-                            button((click)='update()') Update
-                        div(style="overflow-y:auto; height:650px")
-                            div.panel.panel-default
-                                div.panel-heading
-                                    h4.panel-title
-                                        a(data-toggle="collapse" href="#c")
-                                            | Conditions
-                                div.container(id="c", style="width:auto")
-                                    div.panel-group
-                                        div.panel.panel-default
-                                            conditionsChart([patient]='patient', *ngIf='passThrough')
-                            div.panel.panel-default
-                                div.panel-heading
-                                    h4.panel-title
-                                        a(data-toggle="collapse" href="#o")
-                                            | Findings List
-                                div.container(id="o", style="width:auto")
-                                    div.panel-group(id="obs")
-                                        div.panel.panel-default("*ngIf"='this.observationService.categorizedObservations')
-                                            observationRecursionChart([obs]="this.observationService.categorizedObservations.categories",[level]=0)
-                            div.panel.panel-default
-                                div.panel-heading
-                                    h4.panel-title
-                                        a(data-toggle="collapse" href="#cp")
-                                            | Care Plans
-                                div.container(id="cp", style="width:auto")
-                                    div.panel-group
-                                        div.panel.panel-default
-                                            carePlanChart([patient]='patient', *ngIf='passThrough')
-                div(style="float:right; width: 825px")
-                    div.btn-group(style="height: 50px")
-                        button.btn.btn-default((click)='setWhole()' style="width: 75px")
-                            | All
-                        button.btn.btn-default((click)='setTwentyFiveYears()' style="width: 75px")
-                            | 25 Years
-                        button.btn.btn-default((click)='setTenYears()' style="width: 75px")
-                            | 10 Years
-                        button.btn.btn-default((click)='setFiveYears()' style="width: 75px")
-                            | 5 Years
-                        button.btn.btn-default((click)='setTwoYears()' style="width: 75px")
-                            | 2 Years
-                        button.btn.btn-default((click)='setOneYear()' style="width: 75px")
-                            | 1 Year
-                        button.btn.btn-default((click)='setSixMonths()' style="width: 75px")
-                            | 6 Months
-                        button.btn.btn-default((click)='setThreeMonths()' style="width: 75px")
-                            | 3 Months
-                        button.btn.btn-default((click)='setOneMonth()' style="width: 75px")
-                            | 1 Month
-                        button.btn.btn-default((click)='setTwoWeeks()' style="width: 75px")
-                            | 2 Weeks
-                        button.btn.btn-default(data-toggle="modal", [attr.data-target]="'#specify_popup'", style="width: 75px") 
-                            | Specify
-                    div(style="height: 500px; width: 825px; overflow-y:auto")
-                        canvas(id="canvas", width="800", [height] = "this.chartService.canvasHeight" )
-            div(style="clear: both")
-            .modal-footer.modal-lg(style="width: 1250px")
-                button.btn.btn-default(type='button', data-dismiss='modal') Close
+div(style="float: left; width: 350px")
+    div
+        h4 
+            | Dashboard
+            button.btn.btn-default((click)='update()') Update
+            button.btn.btn-default(routerLink='/') Back
+        div(style="overflow-y:auto; height:650px")
+            div.panel.panel-default
+                div.panel-heading
+                    h4.panel-title
+                        a(data-toggle="collapse" href="#c")
+                            | Conditions
+                div.container(id="c", style="width:auto")
+                    div.panel-group
+                        div.panel.panel-default
+                            conditionsChart([patient]='patient', *ngIf='passThrough')
+            div.panel.panel-default
+                div.panel-heading
+                    h4.panel-title
+                        a(data-toggle="collapse" href="#o")
+                            | Findings List
+                div.container(id="o", style="width:auto")
+                    div.panel-group(id="obs")
+                        div.panel.panel-default("*ngIf"='this.observationService.categorizedObservations')
+                            observationRecursionChart([obs]="this.observationService.categorizedObservations.categories",[level]=0)
+            div.panel.panel-default
+                div.panel-heading
+                    h4.panel-title
+                        a(data-toggle="collapse" href="#cp")
+                            | Care Plans
+                div.container(id="cp", style="width:auto")
+                    div.panel-group
+                        div.panel.panel-default
+                            carePlanChart([patient]='patient', *ngIf='passThrough')
+div(style="float:right; width: 825px")
+    div.btn-group(style="height: 50px")
+        button.btn.btn-default((click)='setWhole()' style="width: 75px")
+            | All
+        button.btn.btn-default((click)='setTwentyFiveYears()' style="width: 75px")
+            | 25 Years
+        button.btn.btn-default((click)='setTenYears()' style="width: 75px")
+            | 10 Years
+        button.btn.btn-default((click)='setFiveYears()' style="width: 75px")
+            | 5 Years
+        button.btn.btn-default((click)='setTwoYears()' style="width: 75px")
+            | 2 Years
+        button.btn.btn-default((click)='setOneYear()' style="width: 75px")
+            | 1 Year
+        button.btn.btn-default((click)='setSixMonths()' style="width: 75px")
+            | 6 Months
+        button.btn.btn-default((click)='setThreeMonths()' style="width: 75px")
+            | 3 Months
+        button.btn.btn-default((click)='setOneMonth()' style="width: 75px")
+            | 1 Month
+        button.btn.btn-default((click)='setTwoWeeks()' style="width: 75px")
+            | 2 Weeks
+        button.btn.btn-default(data-toggle="modal", [attr.data-target]="'#specify_popup'", style="width: 75px") 
+            | Specify
+    div(style="height: 500px; width: 825px; overflow-y:auto")
+        canvas(id="canvas", width="800", [height] = "this.chartService.canvasHeight" )
+div(style="clear: both")
 
 #specify_popup.modal.fade(tabindex='-1', role='dialog')
     .modal-lg.modal-dialog(role='document')

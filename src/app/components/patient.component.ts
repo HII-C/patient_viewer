@@ -1,7 +1,4 @@
-import { Component, Compiler, EventEmitter, Output } from '@angular/core';
-import { FhirService } from '../services/fhir.service';
-import { SmartService } from '../services/smart.service';
-import { PatientService } from '../services/patient.service';
+import { Component, Input, Output } from '@angular/core';
 import { DoctorService } from '../services/doctor.service';
 import { Patient } from '../models/patient.model';
 import { Server } from '../models/server.model';
@@ -14,49 +11,20 @@ import { CookieService } from 'angular2-cookie/core';
   templateUrl: '/patient.html'
 })
 export class PatientComponent {
-  selected: Patient;
+  @Input() patient: Patient;
   server: Server;
   selectedCondition: Condition;
   advancedSearch = false;
   graphConfig: any;
-  @Output() patientSelected: EventEmitter<Patient> = new EventEmitter();
 
   // For options: https://github.com/BTMorton/angular2-grid
 
-  constructor(private fhirService: FhirService, private patientService: PatientService, private compiler: Compiler, private http: Http, private smartService: SmartService, private cookieService: CookieService, private doctorService: DoctorService) {
-    this.compiler.clearCache();
-    this.fhirService.setUrl(this.cookieService.get('fhirBaseUrl'));
-
-    if (this.fhirService.token) {
-      // Access token is already available.
-      this.select(this.patientService.patient);
-    }
-    else {
-      // Retrieve the access token.
-      this.smartService.authenticate().subscribe(data => {
-        this.fhirService.setToken(data.access_token);
-        this.select(data.patient);
-      });
-    }
+  constructor(private http: Http,
+              private cookieService: CookieService,
+              private doctorService: DoctorService) {
 
     this.graphConfig = this.cookieService.getObject("graphConfig");
     // this.cookieService.remove("graphConfig");
-  }
-
-  select(id) {
-    // Select a patient with the given ID.
-
-    this.patientService.get(id).subscribe(d => {
-      this.selected = <Patient>d; //.entry['resource'];
-
-      for (let id of d.identifier) {
-        if (id.type && id.type.coding[0].code == "MR") {
-          this.selected.mrn = id.value;
-        }
-      }
-
-      this.patientSelected.emit(this.selected);
-    });
   }
 
   genderString(patient: Patient) {

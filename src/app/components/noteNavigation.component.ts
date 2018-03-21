@@ -9,7 +9,7 @@ import {Component} from '@angular/core';
 export class NoteNavigationComponent {
 
     toggleSideNote() {
-        document.getElementById("sideNote").style.width = "32%";
+        document.getElementById("sideNote").style.width = "33%";
     }
 
     closeSideNote() {
@@ -23,7 +23,7 @@ export class NoteNavigationComponent {
     }
 
     toggleProgressNote() {
-        document.getElementById("sideNote").style.width = "32%";
+        document.getElementById("sideNote").style.width = "33%";
         document.getElementById("progressNote").style.width = "34%";
     }
 

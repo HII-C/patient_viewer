@@ -35,8 +35,6 @@ import { NoteNavigationComponent } from './app/components/noteNavigation.compone
 import { ObservationScratchPad } from './app/components/observationsScratchPad.component'
 import { AccordionRecursion } from './app/components/accordionRecursion.component';
 import { ConditionsDisplay } from './app/components/conditionsDisplay.component';
-import { CarePlanDisplay } from './app/components/carePlanDisplay.component';
-import { NoteNavigationComponent } from '/.app/components/noteNavigation.component';
 // SERVICE IMPORTS
 import { ClientService } from './app/services/client.service';
 import { EncounterService } from './app/services/encounter.service';
@@ -140,7 +138,6 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
     NewCondition,
     ContextMenuComponent,
     NoteNavigationComponent,
-    SideNoteComponent,
   ],   // components and directives
   providers: [
     appRoutingProviders,

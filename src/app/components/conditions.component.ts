@@ -94,7 +94,7 @@ export class ConditionsComponent extends BaseColumn {
       });
     }
 
-    //Task: Display text in header
+    //Task: Display allergy text in header
     if (this.patient) {
       this.conditionService.loadAllergies(this.patient, true).subscribe(allergies => {
         for (let e of allergies.entry) {

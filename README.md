@@ -16,6 +16,11 @@ Assuming you already have node installed via `brew install node` or similar, beg
 
 If you do not have `npm` installed and `brew install node` does not work as expected, you may need to [follow the instructions here](https://brew.sh/) to install the `brew` package manager.
 
+## Development Guidelines
+- Avoid using libraries like jQuery. Also avoid using any other approach to accessing the DOM directly (ie, `document.getElementById(..)`).
+- Avoid leaving `console.log(..)` statements in the code when pushing to the repository. You can use them while developing locally but it can cause clutter in the repository.
+- Write a brief comment above each component and method that you write giving a brief overview of the functionality. If some code is particularly complex, place comments within the body of the method too.
+
 ## Running the Application
 To launch in development mode, run the following terminal command from the `patient_viewer` folder:
 

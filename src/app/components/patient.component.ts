@@ -5,6 +5,7 @@ import { Server } from '../models/server.model';
 import { Condition } from '../models/condition.model';
 import { Http, Headers } from '@angular/http';
 import { CookieService } from 'angular2-cookie/core';
+import { HomeComponent } from '../components/home.component';
 
 @Component({
   selector: 'patient',
@@ -20,8 +21,9 @@ export class PatientComponent {
   // For options: https://github.com/BTMorton/angular2-grid
 
   constructor(private http: Http,
-              private cookieService: CookieService,
-              private doctorService: DoctorService) {
+    private cookieService: CookieService,
+    private doctorService: DoctorService,
+    private homeComponent: HomeComponent) {
 
     this.graphConfig = this.cookieService.getObject("graphConfig");
     // this.cookieService.remove("graphConfig");

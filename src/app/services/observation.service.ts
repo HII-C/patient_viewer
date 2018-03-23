@@ -19,6 +19,8 @@ export class ObservationService {
   private path = '/Observation';
 
   constructor(private fhirService: FhirService, private http: Http) {
+    // these are the codes of the observations; 
+    // groupList is used to categorize where in temp this is stored
     this.groupList = {
       "1-1": ["8302-2", "3141-9", "2710-2"],
       "1-2": [],
@@ -31,6 +33,7 @@ export class ObservationService {
       "2-2-3": ["2823-3"]
     };
 
+    // categories of the observations; found using groupList
     this.temp = {
       "categories": [
         {
@@ -121,6 +124,9 @@ export class ObservationService {
     this.categorizedObservations = this.temp;
   }
 
+  // ================================== DATA RETRIEVAL ========================
+
+  // gets the observation patient data from the fhir service
   index(patient: Patient): Observable<any> {
     var url = this.fhirService.getUrl() + this.path + "?patient=" + patient.id;
     return this.http.get(url, this.fhirService.options(true)).map(res => res.json());
@@ -130,6 +136,9 @@ export class ObservationService {
     return this.http.get(url, this.fhirService.options(true)).map(res => res.json());
   }
 
+  // ================================ DATA CLEANING ===============================
+
+  // gets the category number from the id lookup table
   getKey(value) {
     for (let x in this.groupList) {
       for (let y of this.groupList[x]) {
@@ -162,6 +171,8 @@ export class ObservationService {
   }
 
   populateCategories(obsToFilter) {
+    console.log(obsToFilter);
+
     let totalcount = 0;
     let count = 0;
     for (let i = 0; i < obsToFilter.length; i++) {
@@ -205,9 +216,4 @@ export class ObservationService {
     //console.log("returning("+JSON.stringify(obj)+") "+totalcount);
     return totalcount;
   }
-
-  // get(id): Observable<any> {
-  //     var url = this.fhirService.getUrl() + this.path + '/' + id;
-  //     return this.http.get(url, this.fhirService.options()).map(res => res.json());
-  // }
 }

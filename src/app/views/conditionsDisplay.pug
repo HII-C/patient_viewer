@@ -1,0 +1,24 @@
+div
+    table.table.table-condensed.table-striped(style = "margin-left: 20px")
+        thead
+            tr
+                th
+                    | 
+                th
+                    | Description
+                th
+                    | Status
+                th
+                    | Onset
+        tbody
+            tr("*ngFor"='let c of conditions', [class.selected]='c.selected', (click)='selectCondition(c)', (contextmenu)='menu.show(c, $event)', id='t{{conditions.indexOf(c)}}')
+                td
+                    input("*ngIf"="!c.isParent", [checked] = 'checkClicked(c)' type='checkbox',id='c{{conditions.indexOf(c)}}', value='{{conditions.indexOf(c)}}', (change)='checkCondition($event.target.checked, c)')
+                td
+                    button.btn.btn-default("*ngIf"="c.isParent", (click)='expand(c.parent)') ... 
+                    span("*ngIf"="!c.isParent") {{c['code']['text']}}
+                td("*ngIf"="!c.isParent") {{c.clinicalStatus}}
+                td("*ngIf"="!c.isParent") {{c.relativeDateTime | amTimeAgo:true}}
+
+    
+contextMenu(#menu='')

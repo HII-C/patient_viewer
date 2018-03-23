@@ -1,23 +1,23 @@
 .row.patient-content
-	.col-md-4("*ngIf"='selected')
-		img.img-rounded("*ngIf"='selected.gender === "female"', src='/images/textures/female.png', width="60px", height="60px")
-		img.img-rounded("*ngIf"='selected.gender === "male"', src='/images/textures/male.png', width="60px", height="60px")
+	.col-md-4("*ngIf"='patient')
+		img.img-rounded("*ngIf"='patient.gender === "female"', src='/images/textures/female.png', width="60px", height="60px")
+		img.img-rounded("*ngIf"='patient.gender === "male"', src='/images/textures/male.png', width="60px", height="60px")
 	.col-md-8
 		div.text-center
 			span#patient
-				.details("*ngIf"='selected')
+				.details("*ngIf"='patient')
 					.identifier
 						b
-							span("*ngIf"='selected.name && selected.name[0].given') {{selected.name[0].given[0]}}
+							span("*ngIf"='patient.name && patient.name[0].given') {{patient.name[0].given[0]}}
 							| &nbsp;
-							span("*ngIf"='selected.name && selected.name[0].family') {{selected.name[0].family[0]}}
+							span("*ngIf"='patient.name && patient.name[0].family') {{patient.name[0].family[0]}}
 						div
-							| Born: {{selected.birthDate | amDateFormat:'MM/DD/YYYY'}} ({{-1 * (selected.birthDate | amDifference:today:'years':false)}}yr)
+							| Born: {{patient.birthDate | amDateFormat:'MM/DD/YYYY'}} ({{-1 * (patient.birthDate | amDifference:today:'years':false)}}yr)
 						div 
-							| Gender: {{selected.gender}}, 	
-							span("*ngIf"='selected.mrn') MRN: {{selected.mrn}}
+							| Gender: {{patient.gender}}, 	
+							span("*ngIf"='patient.mrn') MRN: {{patient.mrn}}
 						div 
-							| Allergy info placeholder
+							| Allergies: {{homeComponent.allergyString}}
 					
 				// May be re-added eventually, but does not do anything currently.
 				//#advanced_search
@@ -59,4 +59,4 @@
 								span.glyphicon.glyphicon-fire
 								|  Provider
 							select#server_select.form-control((change)='selectServerForUrl($event.target.value)')
-								option("*ngFor"='let s of servers', "[value]"='s.url', [selected]='server && (s.url == server.url)') {{s.name}}
+								option("*ngFor"='let s of servers', "[value]"='s.url', [patient]='server && (s.url == server.url)') {{s.name}}

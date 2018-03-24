@@ -60,7 +60,7 @@ export class PatientComponent {
                       this.allergyArray.push(e.resource.code.text);
                   }
 
-                  //construct displayed allergyString
+                  //construct displayed allergy string
                   if (this.allergyArray.length == 1) { //singular allergy
                       this.allergy = entries[0].resource.code.text;
                   }

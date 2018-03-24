@@ -3,7 +3,6 @@ import {CookieService} from 'angular2-cookie/core';
 import {PatientService} from '../services/patient.service';
 import {SmartService} from '../services/smart.service';
 import {FhirService} from '../services/fhir.service';
-import {PatientComponent} from './patient.component';
 import {Patient} from '../models/patient.model';
 import {ConditionService} from '../services/condition.service';
 
@@ -13,8 +12,6 @@ import {ConditionService} from '../services/condition.service';
 })
 export class HomeComponent {
     selected: Patient = null;
-    allergyArray: Array<String> = [];
-    allergyString: String = "";
 
     constructor(private fhirService: FhirService,
                 private patientService: PatientService,
@@ -47,30 +44,6 @@ export class HomeComponent {
                 if (id.type && id.type.coding[0].code == "MR") {
                     this.selected.mrn = id.value;
                 }
-            }
-
-            if (this.selected) {
-                this.conditionService.loadAllergies(this.selected, true).subscribe(allergies => {
-                    if (allergies.entry) {
-                        //add allergy strings to allergyArray
-                        let entries = allergies.entry;
-                        for (let e of entries) {
-                            this.allergyArray.push(e.resource.code.text);
-                        }
-
-                        //construct displayed allergyString
-                        if (this.allergyArray.length == 1) { //singular allergy
-                            this.allergyString = entries[0].resource.code.text;
-                        }
-
-                        else { //multiple allergies
-                            this.allergyString = "multiple";
-                        }
-                    }
-                    else { //no allergies
-                        this.allergyString = "none";
-                    }
-                });
             }
         });
     }

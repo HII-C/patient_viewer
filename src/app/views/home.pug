@@ -1,6 +1,6 @@
 .row.header-row
   .col-md-3
-    patient((patientSelected)="selectPatient($event)")
+    patient([patient]='selected', *ngIf='selected')
   .col-md-2
     toolbar
   .col-md-7

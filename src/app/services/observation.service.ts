@@ -126,19 +126,23 @@ export class ObservationService {
 
   // ================================== DATA RETRIEVAL ========================
 
-  // gets the observation patient data from the fhir service
+  // Gets the initial data for the patient upon ngOnChanges call
   index(patient: Patient): Observable<any> {
     var url = this.fhirService.getUrl() + this.path + "?patient=" + patient.id;
     return this.http.get(url, this.fhirService.options(true)).map(res => res.json());
   }
 
+  // Gets the data for the nested data link calls
   indexNext(url: string): Observable<any> {
     return this.http.get(url, this.fhirService.options(true)).map(res => res.json());
   }
 
   // ================================ DATA CLEANING ===============================
 
-  // gets the category number from the id lookup table
+  /**
+   * Description: given a certain observation ID, returns the position mapping of that
+   * ID contained within the groupList
+   */
   getKey(value) {
     for (let x in this.groupList) {
       for (let y of this.groupList[x]) {
@@ -151,15 +155,26 @@ export class ObservationService {
     return "3";
   }
 
+  /**
+   * Description: The observations received from the server contains many duplicates. This (inefficient) method
+   * ensures that there are no duplicates in the condensed observations list of the data.
+   * 
+   * ** NOTE: THIS SHOULD BE MOVED TO THE BACKEND! LEADS TO A LARGE SLOWDOWN OF THE LOADING FOR THE FRONT END APPLICATION!
+   */
   filterCategory(observations: Array<Observation>) {
     for (let obs of observations) {
       if (!this.containsObject(obs)) {
+        // Adds the grouping of the data (where it should be localized in the observations)
         obs.grouping = this.getKey(obs['code']['coding'][0]['code']);
         this.condensedObservations.push(obs);
       }
     }
   }
 
+  /**
+   * Description: Just a O(n) searching method to check if a certain observation already exists in the condensedObservations. 
+   * Somebody didn't learn about hashmaps in CSE 310!
+   */
   containsObject(obj) {
     for (let obs of this.condensedObservations) {
       if (obs['code']['coding'][0]['code'] == obj['code']['coding'][0]['code']) {
@@ -170,13 +185,19 @@ export class ObservationService {
     return false;
   }
 
+
   populateCategories(obsToFilter) {
+    console.log("Obs filter: ");
     console.log(obsToFilter);
 
     let totalcount = 0;
     let count = 0;
     for (let i = 0; i < obsToFilter.length; i++) {
       if (obsToFilter[i].data) {
+
+        /**
+         * Depending on what grouping was assigned to a observation, add it to the relevant category
+         */
         for (let obs of this.condensedObservations) {
           if (obs.grouping == obsToFilter[i].id) {
             count++;

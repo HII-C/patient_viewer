@@ -1,3 +1,4 @@
-div
-    .hover-textbox([style.position]="'fixed'", [style.display]="visible ? 'block' : 'none'", [style.left]='left', [style.top]='top')
-        | {{allAllergies2}}
+ul.dropdown-menu([style.position]="'fixed'", [style.display]="visible ? 'block' : 'none'", [style.left]='left', [style.top]='top')
+  li("*ngFor"="let item of items")
+    a(href="#", (click)='handleItemClick($event)')
+      | {{ item }}

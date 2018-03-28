@@ -16,8 +16,9 @@
 						div 
 							| Gender: {{patient.gender}}, 	
 							span("*ngIf"='patient.mrn') MRN: {{patient.mrn}}
-						div((mouseenter)='hover.show(allergyArray, $event)', (mouseleave)='hover.hide(allergyArray, $event)')
-							| Allergies: {{allergy}}
+						div
+							| Allergies: 
+							span((mouseenter)='hover.show(allergyArray, $event)', (mouseleave)='hover.hide($event)') {{allergy}}
 
 
 	allergyHover(#hover='')

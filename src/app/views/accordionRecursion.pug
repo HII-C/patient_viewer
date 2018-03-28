@@ -10,10 +10,10 @@ div("*ngIf" = "loadFinished")
                 div("*ngIf" = "columnNum == 0")
                     conditionsDisplay([conditions] = "cat.data")
                 div("*ngIf" = "columnNum == 1")
-                    div observations
-                div("*ngIf" = "columnNum == 2")
+                    observationsDisplay([observations] = "cat.data")
+                div("*ngIf" = "columnNum == 2")     
                     careplanDisplay([carePlans] = "cat.data")
-            div("*ngIf" = "cat.subheadings")
-                accordionRecursion([levelData] = "subs", [columnNum] = "columnNum", [levelNum] = "levelNum + 1")
+        div(*ngIf = "cat.subheadings")
+            accordionRecursion([levelData] = "cat.subs", [columnNum] = "columnNum", [levelNum] = "levelNum + 1", [firstIteration] = 0)
 
 

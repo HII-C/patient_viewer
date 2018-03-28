@@ -16,9 +16,12 @@
 						div 
 							| Gender: {{patient.gender}}, 	
 							span("*ngIf"='patient.mrn') MRN: {{patient.mrn}}
-						div 
+						div((mouseenter)='hover.show(allergyArray, $event)', (mouseleave)='hover.hide(allergyArray, $event)')
 							| Allergies: {{allergy}}
-					
+
+
+	allergyHover(#hover='')
+
 				// May be re-added eventually, but does not do anything currently.
 				//#advanced_search
 					a("(click)"="advancedSearch = !advancedSearch" href="#")

@@ -13,6 +13,7 @@ import { TimelineComponent } from './app/components/timeline.component';
 import { TimelinePopupComponent } from './app/components/timeline_popup.component';
 import { ObservationsComponent } from './app/components/observations.component';
 import { CarePlanComponent } from './app/components/carePlan.component';
+import { AllergyHoverComponent } from "./app/components/allergyHover.component";
 // import {ActionListComponent} from './app/components/actionList.component';
 import { CalendarComponent } from './app/components/calendar.component';
 import { DoctorNoteComponent } from './app/components/doctorNote.component';
@@ -106,6 +107,7 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
 
     AccordionRecursion,
 
+
     // OBSERVATIONS COLUMN
     ObservationsComponent,
     ObservationScratchPad,
@@ -138,6 +140,7 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
     NewCondition,
     ContextMenuComponent,
     NoteNavigationComponent,
+    AllergyHoverComponent
   ],   // components and directives
   providers: [
     appRoutingProviders,

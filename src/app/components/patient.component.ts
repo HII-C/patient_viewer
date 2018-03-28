@@ -1,4 +1,4 @@
-import { Component, Input, Output } from '@angular/core';
+import {Component, Injectable, Input, Output, ViewChild} from '@angular/core';
 import { DoctorService } from '../services/doctor.service';
 import { ConditionService } from "../services/condition.service";
 import { Patient } from '../models/patient.model';
@@ -7,7 +7,11 @@ import { Condition } from '../models/condition.model';
 import { Http, Headers } from '@angular/http';
 import { CookieService } from 'angular2-cookie/core';
 import { HomeComponent } from '../components/home.component';
+import { AllergyHoverComponent } from '../components/allergyHover.component';
+import {ContextMenuComponent} from "./contextMenu.component";
 
+
+@Injectable()
 @Component({
   selector: 'patient',
   templateUrl: '/patient.html'
@@ -18,8 +22,13 @@ export class PatientComponent {
   selectedCondition: Condition;
   advancedSearch = false;
   graphConfig: any;
-  allergyArray: Array<String> = [];
-  allergy: String = "";
+
+  //allergy details
+  allergyArray: Array<string> = [];
+  allergy: string = '';
+  allAllergies: string = '';
+
+  @ViewChild('hover') hover: AllergyHoverComponent;
 
   // For options: https://github.com/BTMorton/angular2-grid
 
@@ -67,6 +76,10 @@ export class PatientComponent {
 
                   else { //multiple allergies
                       this.allergy = "multiple";
+                      for (let a of this.allergyArray) {
+                          this.allAllergies += a + ", ";
+                          console.log(this.allAllergies);
+                      }
                   }
               }
               else { //no allergies
@@ -74,5 +87,14 @@ export class PatientComponent {
               }
           });
       }
+  }
+
+  mouseEnter() {
+      console.log("mouse entered");
+
+  }
+
+  mouseLeave() {
+      console.log("mouse left");
   }
 }

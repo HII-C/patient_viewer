@@ -31,6 +31,9 @@ export class AccordionRecursion {
     // This is the current level of recursion (used for the display)
     @Input() levelNum: number;
 
+    // for testing purposes
+    @Input() firstIteration: number;
+
     // Parsed data according to the above data schema 
     parsedData: any;
     loadFinished: boolean = false;
@@ -44,13 +47,20 @@ export class AccordionRecursion {
     }
 
     // When the component is first initialized
-    ngOnInit(){
-        // reconstruct the data for now
-        if (this.columnNum == 0)
-            this.reconstructData(this.levelData);
-        else if (this.columnNum == 2)
-            this.reconstructDataFindings(this.levelData);
-        // this.parsedData = this.levelData;
+    ngOnChanges(){
+        if (this.firstIteration == 1){
+            // reconstruct the data for now
+            if (this.columnNum == 0)
+                this.reconstructData(this.levelData);
+            else if (this.columnNum == 1){
+                this.reconstructDataObservations(this.levelData);
+            }
+            else if (this.columnNum == 2)
+                this.reconstructDataFindings(this.levelData);
+        } else {
+            this.parsedData = this.levelData;
+        }
+
         this.loadFinished = true;
     }
 
@@ -95,6 +105,23 @@ export class AccordionRecursion {
     ];
 
     this.parsedData = reconstructedObject;
+    }
+
+    reconstructDataObservations(arrData: any){
+        var reconstructedObject = [
+        {
+            category: "Vitals",
+            subheadings: true,
+            subs: [{
+                category: "Weight",
+                subheadings: false,
+                subs: null,
+                data: arrData
+            }],
+            data: null
+        }];
+
+        this.parsedData = reconstructedObject;
     }
 
     reconstructDataFindings(arrData: any) {

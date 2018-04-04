@@ -192,6 +192,8 @@ export class ObservationService {
 
     let totalcount = 0;
     let count = 0;
+
+    // Another n^2 fucking algorithm!
     for (let i = 0; i < obsToFilter.length; i++) {
       if (obsToFilter[i].data) {
 

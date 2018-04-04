@@ -120,6 +120,8 @@ export class ChartTimelineComponent {
     startDate: number;
     endDate: number;
 
+    chartData: any[];
+
 // ranges in ms
     static readonly twentyFiveYearsMS: number = 788923150000;
     static readonly tenYearsMS: number = 315569260000;
@@ -133,21 +135,36 @@ export class ChartTimelineComponent {
 
 
     update() {
-
-        this.render('canvas', this.chartService.dataDef);
+        this.showTrendsChart();
+        // this.render('canvas', this.chartService.dataDef);
     }
+
+    showTrendsChart() {
+      this.data = this.chartService.dataDef;
+      this.chartData = [];
+
+      for (let point of this.data.dataPoints[0].data) {
+        this.chartData.push({
+          name: point.x,
+          value: point.y
+        });
+      }
+    }
+
     render(canvasId, dataObj) {
         this.maxYValue = 0;
         this.count = 0;
         var margin = { top: 0, left: 0, right: 0, bottom: 0 };
         var overallMax, overallMin;
         this.data = this.chartService.dataDef;
+        console.log("DATA!");
         console.log(JSON.stringify(this.data));
         for (var i = 0; i < this.data.dataPoints.length; i++)
         {
             this.newData[i] = JSON.parse(JSON.stringify(this.data.dataPoints[i].data.map(this.makeDate)));
             this.newData[i].sort((a, b) => {return a.x - b.x});
         }
+
         this.getMaxDataYValue();
         var canvas = <HTMLCanvasElement> document.getElementById(canvasId);
         this.chartHeight = 100; //canvas.getAttribute('height'); //100

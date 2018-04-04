@@ -1,4 +1,4 @@
-import {Component, Injectable, Input, Output, ViewChild} from '@angular/core';
+import { Component, Injectable, Input, Output, ViewChild } from '@angular/core';
 import { DoctorService } from '../services/doctor.service';
 import { ConditionService } from "../services/condition.service";
 import { Patient } from '../models/patient.model';
@@ -7,94 +7,95 @@ import { Condition } from '../models/condition.model';
 import { Http, Headers } from '@angular/http';
 import { CookieService } from 'angular2-cookie/core';
 import { HomeComponent } from '../components/home.component';
-import { AllergyHoverComponent } from '../components/allergyHover.component';
-import {ContextMenuComponent} from "./contextMenu.component";
+import { ContextMenuComponent } from "./contextMenu.component";
+import { HoverBoxComponent } from './hoverBox.component';
 
 
 @Injectable()
 @Component({
-  selector: 'patient',
-  templateUrl: '/patient.html'
+    selector: 'patient',
+    templateUrl: '/patient.html'
 })
 export class PatientComponent {
-  @Input() patient: Patient;
-  server: Server;
-  selectedCondition: Condition;
-  advancedSearch = false;
-  graphConfig: any;
+    @Input() patient: Patient;
+    server: Server;
+    selectedCondition: Condition;
+    advancedSearch = false;
+    graphConfig: any;
 
-  //allergy details
-  allergyArray: Array<string> = [];
-  allergy: string = '';
-  allAllergies: string = '';
+    //allergy details
+    allergies: Array<string> = [];
+    allergy: string = '';
 
-  @ViewChild('hover') hover: AllergyHoverComponent;
+    @ViewChild('hover') hover: HoverBoxComponent;
 
-  // For options: https://github.com/BTMorton/angular2-grid
+    // For options: https://github.com/BTMorton/angular2-grid
 
-  constructor(private http: Http,
-    private cookieService: CookieService,
-    private doctorService: DoctorService,
-    private homeComponent: HomeComponent,
-    private conditionService: ConditionService) {
+    constructor(private http: Http,
+        private cookieService: CookieService,
+        private doctorService: DoctorService,
+        private homeComponent: HomeComponent,
+        private conditionService: ConditionService) {
 
-    this.graphConfig = this.cookieService.getObject("graphConfig");
-    // this.cookieService.remove("graphConfig");
-  }
-
-  genderString(patient: Patient) {
-    var s = 'Unknown';
-    switch (patient.gender) {
-      case 'female':
-        s = 'Female';
-        break;
-      case 'male':
-        s = 'Male';
-        break;
+        this.graphConfig = this.cookieService.getObject("graphConfig");
+        // this.cookieService.remove("graphConfig");
     }
-    return s;
-  }
 
-  selectCondition(condition) {
-    this.selectedCondition = condition;
-  }
+    genderString(patient: Patient) {
+        var s = 'Unknown';
+        switch (patient.gender) {
+            case 'female':
+                s = 'Female';
+                break;
+            case 'male':
+                s = 'Male';
+                break;
+        }
+        return s;
+    }
 
-  ngOnChanges() {
-      if (this.patient) {
-          this.conditionService.loadAllergies(this.patient, true).subscribe(allergies => {
-              if (allergies.entry) {
-                  //add allergy strings to allergyArray
-                  let entries = allergies.entry;
-                  for (let e of entries) {
-                      this.allergyArray.push(e.resource.code.text);
-                  }
+    selectCondition(condition) {
+        this.selectedCondition = condition;
+    }
 
-                  //construct displayed allergy string
-                  if (this.allergyArray.length == 1) { //singular allergy
-                      this.allergy = entries[0].resource.code.text;
-                  }
+    ngOnChanges() {
+        if (this.patient) {
+            this.conditionService.loadAllergies(this.patient, true).subscribe(allergies => {
+                if (allergies.entry) { 
+                    //add allergy strings to allergies
+                    let entries = allergies.entry;
+                    for (let e of entries) {
+                        this.allergies.push(e.resource.code.text);
+                    }
 
-                  else { //multiple allergies
-                      this.allergy = "multiple";
-                      for (let a of this.allergyArray) {
-                          this.allAllergies += a + ", ";
-                          console.log(this.allAllergies);
-                      }
-                  }
-              }
-              else { //no allergies
-                  this.allergy = "none";
-              }
-          });
-      }
-  }
+                    //construct displayed allergy string
+                    if (this.allergies.length == 1) { //singular allergy
+                        this.allergy = entries[0].resource.code.text;
+                    }
 
-  mouseEnter() {
-      console.log("mouse entered");
+                    else { //multiple allergies
+                        this.allergy = "multiple";
+                    }
+                }
+                else { //no allergies
+                    this.allergy = "none";
+                }
+            });
 
-  }
 
-  mouseLeave() {
-      console.log("mouse left");
-  }
+        }
+    }
+
+    ngAfterViewInit() {
+        // Add allergies to the hover box
+        for (let allergy of this.allergies) {
+            this.hover.addItem(allergy);
+        }
+    }
+
+    showAllergyHover(event) {
+        if (this.allergies.length > 1) {
+            this.hover.show(this.allergies, event);
+        }
+    }
 }

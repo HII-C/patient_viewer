@@ -1,3 +1,4 @@
 ul.dropdown-menu([style.position]="'fixed'", [style.display]="visible ? 'block' : 'none'", [style.left]='left', [style.top]='top')
   li("*ngFor"="let item of items") 
-    | {{item}}
+    a(href="#", (click)='$event.preventDefault()')
+        | {{item}}

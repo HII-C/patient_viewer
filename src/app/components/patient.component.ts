@@ -61,7 +61,7 @@ export class PatientComponent {
     ngOnChanges() {
         if (this.patient) {
             this.conditionService.loadAllergies(this.patient, true).subscribe(allergies => {
-                if (allergies.entry) {
+                if (allergies.entry) { 
                     //add allergy strings to allergies
                     let entries = allergies.entry;
                     for (let e of entries) {
@@ -93,12 +93,9 @@ export class PatientComponent {
         }
     }
 
-    mouseEnter() {
-        console.log("mouse entered");
-
-    }
-
-    mouseLeave() {
-        console.log("mouse left");
+    showAllergyHover(event) {
+        if (this.allergies.length > 1) {
+            this.hover.show(this.allergies, event);
+        }
     }
 }

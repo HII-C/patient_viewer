@@ -60,6 +60,7 @@ import { ToolBarService } from './app/services/toolbar.service';
 
 
 import { MomentModule } from 'angular2-moment';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 
 enableProdMode();
@@ -95,7 +96,7 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
     HttpModule,
     MomentModule,
     ChartsModule,
-    // NgxChartsModule,
+    NgxChartsModule,
     BrowserAnimationsModule,
     CalendarModule.forRoot(),
     NguiAutoCompleteModule

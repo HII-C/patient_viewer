@@ -1,3 +1,4 @@
+// Represents a single chart in the historical trends tool.
 export class Chart {
   labelFont: string;
   dataPointFont: string;

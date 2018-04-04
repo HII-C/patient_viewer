@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { ObservationService } from '../services/observation.service';
-import { ChartTimelineService } from '../services/chartTimeline.service';
+import { HistoricalTrendsService } from '../services/historicalTrends.service';
 import { Observation } from '../models/observation.model';
 
 
@@ -14,7 +14,8 @@ export class ObservationRecursiveChart {
   graphData: Array<any> = [];
   lastIndex: number;
 
-  constructor(private observationService: ObservationService, private chartService: ChartTimelineService) { }
+  constructor(private observationService: ObservationService,
+              private trendsService: HistoricalTrendsService) { }
 
   getData() {
     return this.obs;
@@ -24,8 +25,10 @@ export class ObservationRecursiveChart {
     return this.level;
   }
 
+  //
   checked(obs: any, event, position, data) {
-    obs.isSelected = !obs.isSelected
+    obs.isSelected = !obs.isSelected;
+
     if (event.shiftKey) {
       let upper, lower;
       if (position < this.lastIndex) {
@@ -67,6 +70,6 @@ export class ObservationRecursiveChart {
     }
 
     console.log("checked", obs.isSelected, obs.code);
-    this.chartService.setData(this.graphData);
+    this.trendsService.setData(this.graphData);
   }
 }

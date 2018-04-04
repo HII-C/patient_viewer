@@ -3,7 +3,7 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
 
 import { Patient } from '../models/patient.model';
 import { DoctorService } from '../services/doctor.service';
-import { ChartTimelineService } from '../services/chartTimeline.service';
+import { HistoricalTrendsService } from '../services/historicalTrends.service';
 import { ToolBarService } from '../services/toolbar.service';
 
 @Component({
@@ -23,14 +23,17 @@ export class ToolbarComponent {
   @Input() patient: Patient;
   nav2: boolean = false;
 
-  constructor(private doctorService: DoctorService, private chartService: ChartTimelineService, private elRef: ElementRef, private toolbarService: ToolBarService) { }
+  constructor(private doctorService: DoctorService,
+              private trendsService: HistoricalTrendsService,
+              private elRef: ElementRef,
+              private toolbarService: ToolBarService) { }
 
   switchNav() {
     this.nav2 = !this.nav2;
   }
 
   openGraph() {
-    this.chartService.buttonClicked(true);
+    this.trendsService.buttonClicked(true);
   }
 
   updatePosition(ref: ElementRef) {

@@ -6,7 +6,7 @@ import { Subject } from 'rxjs/Subject';
 
 @Injectable()
 @Component({})
-export class ChartTimelineService {
+export class HistoricalTrendsService {
   dataDef: Chart;
   test: Chart;
   canvasHeight: number;

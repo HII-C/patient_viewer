@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 import { ObservationService } from '../services/observation.service';
-import { ChartTimelineService } from '../services/chartTimeline.service';
+import { HistoricalTrendsService } from '../services/historicalTrends.service';
 import { ScratchPadService } from '../services/scratchPad.service';
 
 import { Observation } from '../models/observation.model';
@@ -16,7 +16,9 @@ export class ObservationRecursive {
   graphData: Array<any> = [];
   lastIndex: number;
 
-  constructor(private observationService: ObservationService, private chartService: ChartTimelineService, private scratchpadService: ScratchPadService) { }
+  constructor(private observationService: ObservationService,
+              private trendsService: HistoricalTrendsService,
+              private scratchpadService: ScratchPadService) { }
 
   // ========================================= EVENT HANDLERS ==============================
 
@@ -61,7 +63,7 @@ export class ObservationRecursive {
     getData() {
       return this.obs;
     }
-  
+
     getLevel() {
       return this.level;
     }

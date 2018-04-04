@@ -6,7 +6,7 @@ import { FhirService } from '../services/fhir.service';
 import { ObservationService } from '../services/observation.service';
 import { MapService } from '../services/map.service';
 import { DoctorService } from '../services/doctor.service';
-import { ChartTimelineService } from '../services/chartTimeline.service';
+import { HistoricalTrendsService } from '../services/historicalTrends.service';
 import { ScratchPadService } from '../services/scratchPad.service';
 
 import { Observation } from '../models/observation.model';
@@ -30,9 +30,12 @@ export class ObservationsComponent extends BaseColumn{
   @Output() observationReturned: EventEmitter<Array<any>> = new EventEmitter();
   mappings: { [key: string]: Array<string> } = {};
 
-  constructor(private fhirService: FhirService, private observationService: ObservationService,
+  constructor(private fhirService: FhirService,
+    private observationService: ObservationService,
     private mapService: MapService, private doctorService: DoctorService,
-    private chartService: ChartTimelineService, private http: Http, private scratchPadService: ScratchPadService) {
+    private trendsService: HistoricalTrendsService, 
+    private http: Http,
+    private scratchPadService: ScratchPadService) {
       super();
       this.mappings = MapService.STATIC_MAPPINGS;
   }
@@ -45,7 +48,7 @@ export class ObservationsComponent extends BaseColumn{
   loadFinished() {
     this.observationService.observations = this.observationService.observations.reverse();
     console.log("Loaded " + this.observationService.observations.length + " observations.");
-    
+
     /*
     * Data cleaning - initially sorts by the code then sorts by the effective time
     */
@@ -107,7 +110,7 @@ export class ObservationsComponent extends BaseColumn{
            * The data comes in parts, so we must keep on loading the data from the next link until that link is empty,
            * at which point we know that all the data has been loaded at that point.
         */
-        isLast = true; 
+        isLast = true;
         for (let item of data.link) {
           if (item.relation == "next") {
             isLast = false;
@@ -130,7 +133,7 @@ export class ObservationsComponent extends BaseColumn{
   ngOnChanges() {
     // If the patient is loaded:
     if (this.patient) {
-      /** 
+      /**
        * Then retrieve the data from the server and subscribe to the data so that we know
        * whenever that data is finished from being retrieved
        * **/
@@ -140,7 +143,7 @@ export class ObservationsComponent extends BaseColumn{
           this.observationService.filterCategory(this.observationService.observations);
 
           let nextLink = null;
-          
+
           // get the first link for the first iteration of loaddata
           for (let i of data.link) {
             if (i.relation == "next") {

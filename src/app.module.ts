@@ -13,6 +13,7 @@ import { TimelineComponent } from './app/components/timeline.component';
 import { TimelinePopupComponent } from './app/components/timeline_popup.component';
 import { ObservationsComponent } from './app/components/observations.component';
 import { CarePlanComponent } from './app/components/carePlan.component';
+import { LoadingAnimation } from './app/components/loadingAnimation.component';
 // import {ActionListComponent} from './app/components/actionList.component';
 import { CalendarComponent } from './app/components/calendar.component';
 import { DoctorNoteComponent } from './app/components/doctorNote.component';
@@ -121,6 +122,7 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
 
     TimelineComponent,
     TimelinePopupComponent,
+    LoadingAnimation,
     FormBuilder,
     // ActionListComponent,
     AccountComponent,

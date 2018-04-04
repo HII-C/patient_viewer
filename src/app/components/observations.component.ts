@@ -26,9 +26,13 @@ export class ObservationsComponent extends BaseColumn{
   selected: Observation;
   test: Observation;
   observations: Array<Observation> = [];
+
   @Input() patient: Patient;
   @Output() observationReturned: EventEmitter<Array<any>> = new EventEmitter();
+
   mappings: { [key: string]: Array<string> } = {};
+  
+  condensedObservationsLoadFinished: boolean = false;
 
   constructor(private fhirService: FhirService, private observationService: ObservationService,
     private mapService: MapService, private doctorService: DoctorService,
@@ -44,8 +48,9 @@ export class ObservationsComponent extends BaseColumn{
    */
   loadFinished() {
     this.observationService.observations = this.observationService.observations.reverse();
-    console.log("Loaded " + this.observationService.observations.length + " observations.");
-    
+    console.log("Loaded " + this.observationService.condensedObservations.length + " observations.");
+    this.condensedObservationsLoadFinished = true;
+
     /*
     * Data cleaning - initially sorts by the code then sorts by the effective time
     */
@@ -77,10 +82,11 @@ export class ObservationsComponent extends BaseColumn{
       ob.relativeDateTime = moment(newDate).toISOString();
     }
 
-    this.observationService.populateCategories(this.observationService.temp.categories);
-    this.observationService.categorizedObservations = this.observationService.temp;
-
-    console.log(this.observationService.categorizedObservations);
+    //this.observationService.populateCategories(this.observationService.temp.categories);
+    //this.observationService.categorizedObservations = this.observationService.temp;
+    
+    // The condensed observations should be the final set of data -- add it to the scratchpadservice
+    this.scratchPadService.initObservations(this.observationService.condensedObservations);
 
     this.observationReturned.emit(this.observationService.observations);
   }
@@ -161,22 +167,6 @@ export class ObservationsComponent extends BaseColumn{
         }
       });
 
-    }
-  }
-
-  updateHighlighted(condition: Condition) {
-
-    let response = this.mapService.load("XYZ");
-    for (let obs of this.observationService.observations) {
-      obs['highlighted'] = false;
-    }
-    let key = condition.code.coding[0].code;
-    if (this.mappings[key] != null) {
-      for (let obs of this.observationService.observations) {
-        if (this.mappings[key].indexOf(obs.code['coding'][0]['code']) > -1) {
-          obs['highlighted'] = true;
-        }
-      }
     }
   }
 

@@ -19,7 +19,7 @@ div#conditions([style.height.px]="columnHeight")
 			| {{columnState == "default" ? "Conditions List" : "Scratch Pad"}}
 		
 		div("*ngIf" = 'columnState == "default" && loaded')
-			accordionRecursion([levelData] = 'conditions', [columnNum] = 0, [levelNum] = 0)
+			accordionRecursion([levelData] = 'conditions', [columnNum] = 0, [levelNum] = 0, [firstIteration] = 1)
 		div("*ngIf" = "!loaded")
 			loading-animation
 

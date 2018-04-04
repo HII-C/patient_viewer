@@ -36,6 +36,8 @@ import { NoteNavigationComponent } from './app/components/noteNavigation.compone
 import { ObservationScratchPad } from './app/components/observationsScratchPad.component'
 import { AccordionRecursion } from './app/components/accordionRecursion.component';
 import { ConditionsDisplay } from './app/components/conditionsDisplay.component';
+import { ObservationsDisplay } from './app/components/observationsDisplay.component';
+
 // SERVICE IMPORTS
 import { ClientService } from './app/services/client.service';
 import { EncounterService } from './app/services/encounter.service';
@@ -59,6 +61,7 @@ import { ToolBarService } from './app/services/toolbar.service';
 
 
 import { MomentModule } from 'angular2-moment';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 
 enableProdMode();
@@ -94,7 +97,7 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
     HttpModule,
     MomentModule,
     ChartsModule,
-    // NgxChartsModule,
+    NgxChartsModule,
     BrowserAnimationsModule,
     CalendarModule.forRoot(),
     NguiAutoCompleteModule
@@ -110,6 +113,7 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
     // OBSERVATIONS COLUMN
     ObservationsComponent,
     ObservationScratchPad,
+    ObservationsDisplay,
 
     // CONDITIONS COLUMN
     ConditionsComponent,

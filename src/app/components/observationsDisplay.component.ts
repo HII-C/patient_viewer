@@ -27,17 +27,13 @@ export class ObservationsDisplay {
 
     @ViewChild('menu') menu: ContextMenuComponent;
 
-    
     // ===============================================================================================================================================
     // ================================================================== EVENT METHODS ==============================================================
     // ==================================================================---------------==============================================================
 
     constructor(private scratchPadService: ScratchPadService){}
 
-    ngOnChanges() {
-        console.log("observations received");
-        console.log(this.observations);
-    }
+    ngOnChanges() {}
 
     ngOnInit() {}
 
@@ -75,29 +71,28 @@ export class ObservationsDisplay {
     
     //whenver a line is selected
     selectObservation(observation: Observation) {
-        /*
-        this.selected = condition;
+        this.selected = observation;
         this.observationSelected.emit(this.selected);
-        for (let c of this.scratchPadService.totalConditions) {
-            c['selected'] = (c.id == this.selected.id);
+
+        console.log(this.scratchPadService.totalObservations);
+
+        for (let o of this.scratchPadService.totalObservations) {
+            o['selected'] = (o.id == this.selected.id);
         }
-        */
     }
 
     // check if the element has already been selected (n^2 time lol)
     checkClicked(observation: Observation) {
-        /*
-        if (this.scratchPadService.checkedMapConditions.get(observation)){
+        if (this.scratchPadService.checkedMapObservations.get(observation)){
             return true;
         }
-        */
 
         return false;
     }
 
     // WHENEVER A CHECKBOX IS CLICKED OR UNCLICKED, IT REGISTERS IT IN THE SCRATCHPADSERVICE (not actually the scratch pad yet)
     checkObservation(checked: boolean, checkedObservation: Observation) {
-        //this.scratchPadService.checkCondition(checked, checkedCondition);
+        this.scratchPadService.checkObservation(checked, checkedObservation);
     }
 
     expand(parent: string) {

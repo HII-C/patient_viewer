@@ -1,55 +1,65 @@
-import {Component, Input, ElementRef, Injectable} from '@angular/core';
+import { Component, Input, ElementRef, Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/fromEvent';
 
 @Component({
-    selector: 'hoverBox',
-    templateUrl: '/hoverBox.html'
+  selector: 'hoverBox',
+  templateUrl: '/hoverBox.html'
 })
 
 @Injectable()
 
 export class HoverBoxComponent {
-    // // The data passed into the menu from wherever it was triggered.
-    //allergies doesn't need this. we can import data directly into this component
-    items: Array<any> = null;
-    //
-    visible: boolean = false;
-    top: string = '0px';
-    left: string = '0px';
+  // The data passed into the hover box from wherever it was triggered.
+  items: Array<any> = null;
 
-    constructor(private ref: ElementRef) { }
+  // Whether the hover box is currently visible.
+  visible: boolean = false;
 
-    public handleItemClick(event) {
+  // Where the hover box is displayed on the screen.
+  top: string = '0px';
+  left: string = '0px';
+
+  // Used to track whether the hover box is waiting to be shown.
+  timeoutHandle: any = null;
+
+  // Time (in ms) before the hover box appears.
+  DISPLAY_DELAY: number = 800;
+
+  constructor() { }
+
+  public show(items, event) {
+    // The hover box is already queued to display, no need to display again.
+    if (this.timeoutHandle != null) {
+      return;
+    }
+
+    this.timeoutHandle = setTimeout(() => {
+      this.items = items;
+
+      // Set the location of the hover box to where the mouse is.
+      this.top = event.pageY + 'px';
+      this.left = event.pageX + 'px';
+
+      //display
+      this.visible = true;
+    }, this.DISPLAY_DELAY);
+  }
+
+  // Hide the menu.
+  private hide(event) {
+    if (event) {
       event.preventDefault();
     }
 
-    //REMOVE EXTRANEOUS CODE COPIED FROM CONTEXTMENU.COMPONENT.TS
-    // Show the menu.
-
-    public addItem(item) {
-        this.items = this.items.concat(item);
+    // Cancel the display of the hover box if it was previously queued.
+    if (this.timeoutHandle != null) {
+      clearTimeout(this.timeoutHandle);
+      this.timeoutHandle = null;
     }
 
-    public show(items, event) {
-        this.items = items;
-
-        // Set the location of the textbox to where the user clicked.
-        this.top = event.pageY + 'px';
-        this.left = event.pageX + 'px';
-
-        //display
-        this.visible = true;
-    }
-
-    // Hide the menu.
-    private hide(event) {
-        if (event) {
-            event.preventDefault();
-        }
-
-        // Hide the menu and reset the associated data.
-        this.visible = false;
-        this.items = null;
-    }
+    // Hide the menu and reset the associated data.
+    this.visible = false;
+    this.items = null;
+  }
 }

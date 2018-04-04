@@ -137,6 +137,9 @@ export class ChartTimelineComponent {
         this.render('canvas', this.chartService.dataDef);
     }
     render(canvasId, dataObj) {
+        console.log("DATA: ");
+        console.log(this.data);
+        
         this.maxYValue = 0;
         this.count = 0;
         var margin = { top: 0, left: 0, right: 0, bottom: 0 };

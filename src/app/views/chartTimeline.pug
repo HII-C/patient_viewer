@@ -58,6 +58,16 @@ div(style="float:right; width: 825px")
             | Specify
     div(style="height: 500px; width: 825px; overflow-y:auto")
         canvas(id="canvas", width="800", [height] = "this.chartService.canvasHeight" )
+    ngx-charts-bar-vertical(
+        [view]="[700, 400]",
+        [results]="[]",
+        [xAxis]="true",
+        [yAxis]="true",
+        [showXAxisLabel]="true",
+        [showYAxisLabel]="true",
+        [xAxisLabel]="'Country'",
+        [yAxisLabel]="'Population'",
+        (select)="onSelect($event)")
 div(style="clear: both")
 
 #specify_popup.modal.fade(tabindex='-1', role='dialog')

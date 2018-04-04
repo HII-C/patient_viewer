@@ -3,13 +3,13 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/fromEvent';
 
 @Component({
-    selector: 'allergyHover',
-    templateUrl: '/allergyHover.html'
+    selector: 'hoverBox',
+    templateUrl: '/hoverBox.html'
 })
 
 @Injectable()
 
-export class AllergyHoverComponent {
+export class HoverBoxComponent {
     // // The data passed into the menu from wherever it was triggered.
     //allergies doesn't need this. we can import data directly into this component
     items: Array<any> = null;
@@ -26,6 +26,11 @@ export class AllergyHoverComponent {
 
     //REMOVE EXTRANEOUS CODE COPIED FROM CONTEXTMENU.COMPONENT.TS
     // Show the menu.
+
+    public addItem(item) {
+        this.items = this.items.concat(item);
+    }
+
     public show(items, event) {
         this.items = items;
 
@@ -33,6 +38,7 @@ export class AllergyHoverComponent {
         this.top = event.pageY + 'px';
         this.left = event.pageX + 'px';
 
+        //display
         this.visible = true;
     }
 

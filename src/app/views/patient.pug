@@ -18,10 +18,10 @@
 							span("*ngIf"='patient.mrn') MRN: {{patient.mrn}}
 						div
 							| Allergies: 
-							span((mouseenter)='hover.show(allergyArray, $event)', (mouseleave)='hover.hide($event)') {{allergy}}
+							span("*ngIf"='' = (mouseenter)='hover.show(allergies, $event)', (mouseleave)='hover.hide($event)') {{allergy}}
 
 
-	allergyHover(#hover='')
+	hoverBox(#hover='')
 
 				// May be re-added eventually, but does not do anything currently.
 				//#advanced_search

@@ -27,10 +27,6 @@ export class HoverBoxComponent {
     //REMOVE EXTRANEOUS CODE COPIED FROM CONTEXTMENU.COMPONENT.TS
     // Show the menu.
 
-    public addItem(item) {
-        this.items = this.items.concat(item);
-    }
-
     public show(items, event) {
         this.items = items;
 

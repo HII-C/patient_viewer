@@ -86,13 +86,6 @@ export class PatientComponent {
         }
     }
 
-    ngAfterViewInit() {
-        // Add allergies to the hover box
-        for (let allergy of this.allergies) {
-            this.hover.addItem(allergy);
-        }
-    }
-
     showAllergyHover(event) {
         if (this.allergies.length > 1) {
             this.hover.show(this.allergies, event);

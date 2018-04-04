@@ -18,16 +18,24 @@ export class ScratchPadService {
   private addNewDataSource = new Subject<string>();
   addNewData$ = this.addNewDataSource.asObservable();
 
+  // Data fields for the three columns:
+  // total* is the entire list of data loaded from the server
+  // the conditions/observations/findings are the data that is selected
   totalConditions: Array<Condition>;
+  totalObservations: Array<Observation>;
 
   conditions: Array<Condition> = [];
   observations: Array<Observation> = [];
 
+   // cond/obs/find that are checked (but not yet added potentially) - need it to save state
+  checkedMapObservations: Map<Observation, boolean> = new Map();
+  checkedMapConditions: Map<Condition, boolean> = new Map();
+
   constructor(private observationService: ObservationService) { }
   
+  // ======================================================================
   // ========================== METHODS FOR CONDITIONS ====================
-
-  // MAP TO KEEP TRACK OF WHICH CONDITIONS ARE SELECTED (BUT NOT IN SCRATCH PAD)
+  // ======================================================================
 
   // initialize the totalConditions
   initConditions(inConditions: Array<Condition>){
@@ -35,7 +43,6 @@ export class ScratchPadService {
   }
 
   // Keep track of conditions that are currently checked in the list (conditions)
-  checkedMapConditions: Map<Condition, boolean> = new Map();
 
   checkCondition(checked: boolean, checkedCondition: Condition) {
     this.checkedMapConditions.set(checkedCondition, checked);
@@ -60,6 +67,8 @@ export class ScratchPadService {
     }
   }
 
+  // =================== FOR ADDING SELECTED DATA TO SCRATCH PAD ========
+
   // Add a condition to the scratch pad, and disallow duplicates.
   addCondition(condition: Condition) {
     if (this.conditions.indexOf(condition) == -1) {
@@ -81,18 +90,52 @@ export class ScratchPadService {
     return this.conditions;
   }
 
+  // ================================================================================  
   // ======================== METHODS FOR STORING CARE PLANS ========================
-  
+  // ================================================================================
+
+
+  // ================================================================================
   // ======================== METHODS FOR STORING OBSERVATIONS ======================
-  
-  // Add a observation to the scratch pad, and disallow duplicates.
+  // ================================================================================
+ 
+  // initialize total list of observations
+  initObservations(inObservations: Array<Observation>){
+    this.totalObservations = inObservations;
+  }
+
+  // whenever a list item is checked (or unchecked), then mark it on the map
+  checkObservation(checked: boolean, checkedObservation: Observation) {
+    this.checkedMapObservations.set(checkedObservation, checked);
+  }
+
+  // removes all checked items from the scratch pad
+  removeObservationsFromScratchPad() {
+    for (let o of this.totalObservations) {
+      if (this.checkedMapObservations.get(o)){
+        this.removeObservation(o);
+        this.checkedMapObservations.set(o, false);
+      }
+    }
+  }
+
+  // add all checekd items to the scratch pad
+  addObservationToScratchPad() {
+    for (let o of this.totalObservations){
+      if (this.checkedMapObservations.get(o)){
+        this.addObservation(o);
+      }
+    }
+  }
+
+  // Add a (single) observation to the scratch pad, and disallow duplicates.
   addObservation(observation: Observation) {
     if (this.observations.indexOf(observation) == -1) {
       this.observations.push(observation);
     }
   }
 
-  // Remove a given obseration from the scratch pad.
+  // Remove a (single) given obseration from the scratch pad.
   removeObservation(observation: Observation) {
     var index = this.observations.indexOf(observation);
 

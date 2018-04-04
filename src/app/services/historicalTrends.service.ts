@@ -64,42 +64,4 @@ export class HistoricalTrendsService {
       this.charts.delete(chartName);
     }
   }
-
-  /*setData(data) {
-    let chart = new Chart();
-    chart.data = [];
-    let chartTitle = '';
-    let numCharts = -1;
-
-    for (let point of data) {
-      if (!point.valueQuantity || !point.valueQuantity['value']) {
-        continue;
-      }
-
-      if (point.code['text'] != chartTitle) {
-        //if(numCharts>5) {break;} //temporary fix to prevent graph data overload
-        numCharts++;
-        chartTitle = point.code['text'];
-
-        chart.data.push({
-          x: new Date(point.relativeDateTime).getTime(),
-          y: point.valueQuantity['value']
-        });
-
-        chart.dataPoints[numCharts].title = o.code['text'];
-        chart.dataPoints[numCharts].code = '3';
-        chart.dataPoints[numCharts].dashedLines = true;
-        chart.dataPoints[numCharts].normalValues = { low: 100, high: 200 };
-      }
-
-      chart.dataPoints[numCharts].data.push({ y: 0, x: 0 });
-      chart.dataPoints[numCharts].data[count].y = point.valueQuantity['value'];
-      let newDate = new Date(o.relativeDateTime).getTime();
-      chart.dataPoints[numCharts].data[count].x = newDate;
-      count++;
-    }
-
-    this.dataDef = chart;
-    // this.canvasHeight = 101 * this.dataDef.dataPoints.length + 60;
-  } */
 }

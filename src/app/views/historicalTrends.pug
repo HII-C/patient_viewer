@@ -2,7 +2,6 @@ div(style="float: left; width: 350px")
     div
         h4 
             | Dashboard
-            button.btn.btn-default((click)='updateCharts()') Update
             button.btn.btn-default(routerLink='/') Back
         div(style="overflow-y:auto; height:650px")
             div.panel.panel-default
@@ -33,7 +32,7 @@ div(style="float: left; width: 350px")
                         div.panel.panel-default
                             carePlanChart([patient]='patient', *ngIf='passThrough')
 div(style="float:right; width: 825px")
-    div.btn-group(style="height: 50px")
+    div.btn-group(style="height: 50px; padding-top: 10px")
         button.btn.btn-default((click)='setWhole()' style="width: 75px")
             | All
         button.btn.btn-default((click)='setTwentyFiveYears()' style="width: 75px")
@@ -56,16 +55,17 @@ div(style="float:right; width: 825px")
             | 2 Weeks
         button.btn.btn-default(data-toggle="modal", [attr.data-target]="'#specify_popup'", style="width: 75px") 
             | Specify
-            
-    ngx-charts-bar-vertical(
-        [view]="[700, 400]",
-        [results]="chartData",
-        [xAxis]="true",
-        [yAxis]="true",
-        [showXAxisLabel]="true",
-        [showYAxisLabel]="true",
-        [xAxisLabel]="'X Axis'",
-        [yAxisLabel]="'Y Axis'")
+    
+    div("*ngFor" = "let chart of this.trendsService.charts.values()")
+      ngx-charts-bar-vertical(
+          [view]="[600, 200]",
+          [results]="chart.data",
+          [xAxis]="true",
+          [yAxis]="true",
+          [showXAxisLabel]="true",
+          [showYAxisLabel]="true",
+          [xAxisLabel]="'Date'",
+          [yAxisLabel]="chart.title")
         
 div(style="clear: both")
 

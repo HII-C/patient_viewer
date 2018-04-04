@@ -89,7 +89,7 @@ export class ObservationsComponent extends BaseColumn{
     this.observationService.categorizedObservations = this.observationService.temp;
 
     // The condensed observations should be the final set of data -- add it to the scratchpadservice
-    this.scratchPadService.initObservations(this.observationService.condensedObservations);
+    // this.scratchPadService.initObservations(this.observationService.condensedObservations);
 
     this.observationReturned.emit(this.observationService.observations);
   }

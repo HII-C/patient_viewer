@@ -7,6 +7,8 @@ import { Subject } from 'rxjs/Subject';
 @Injectable()
 @Component({})
 export class HistoricalTrendsService {
+  charts: Map<string, Chart> = new Map<string, Chart>();
+
   dataDef: Chart;
   test: Chart;
   canvasHeight: number;
@@ -19,47 +21,85 @@ export class HistoricalTrendsService {
     this.activateGraphSource.next(clicked);
   }
 
-  setData(data) {
-    let newData = new Chart();
-    newData.labelFont = "10pt Calibri";
-    newData.dataPointFont = '8pt Calibri';
-    newData.dataPoints = [];
-    let currentTitle = '';
-    let count = 0;
-    let numCharts = -1;
+  // Add a new chart displaying the contents of 'data' to the trends tool.
+  public addChart(chartName, data) {
+    // A chart already exists with the given name.
+    if (this.charts.has(chartName)) {
+      return;
+    }
 
-    for (let o of data) {
-      if (!o.valueQuantity || !o.valueQuantity['value']) {
+    if (data == null || data.length == 0) {
+      // Avoid creating an empty chart.
+      return;
+    }
+
+    console.log("Creating a chart for " + chartName);
+
+    let chart = new Chart();
+
+    // Get the title associated with the data point.
+    chart.title = data[0].code['text'];
+
+    for (let point of data) {
+      // Skip data points without a numeric value.
+      if (!point.valueQuantity || !point.valueQuantity['value']) {
         continue;
       }
 
-      if (o.code['text'] != currentTitle) {
-        //if(numCharts>5) {break;} //temporary fix to prevent graph data overload
-        numCharts++;
-        count = 0;
-        currentTitle = o.code['text'];
-        newData.dataPoints.push({
-          title: "",
-          code: "",
-          dashedLines: false,
-          normalValues: { low: 0, high: 0 },
-          data: []
-        });
+      // Add the data point to the chart.
+      chart.data.push({
+        name: new Date(point.relativeDateTime),
+        value: point.valueQuantity['value']
+      });
+    }
 
-        newData.dataPoints[numCharts].title = o.code['text'];
-        newData.dataPoints[numCharts].code = '3';
-        newData.dataPoints[numCharts].dashedLines = true;
-        newData.dataPoints[numCharts].normalValues = { low: 100, high: 200 };
+    // Add the newly created chart to the list of charts.
+    this.charts.set(chartName, chart);
+  }
+
+  // Remove the chart with the given name from the trends tool.
+  public removeChart(chartName) {
+    // First check if a chart exists with the given name.
+    if (this.charts.has(chartName)) {
+      this.charts.delete(chartName);
+    }
+  }
+
+  /*setData(data) {
+    let chart = new Chart();
+    chart.data = [];
+    let chartTitle = '';
+    let numCharts = -1;
+
+    for (let point of data) {
+      if (!point.valueQuantity || !point.valueQuantity['value']) {
+        continue;
       }
 
-      newData.dataPoints[numCharts].data.push({ y: 0, x: 0 });
-      newData.dataPoints[numCharts].data[count].y = o.valueQuantity['value'];
+      if (point.code['text'] != chartTitle) {
+        //if(numCharts>5) {break;} //temporary fix to prevent graph data overload
+        numCharts++;
+        chartTitle = point.code['text'];
+
+        chart.data.push({
+          x: new Date(point.relativeDateTime).getTime(),
+          y: point.valueQuantity['value']
+        });
+
+        chart.dataPoints[numCharts].title = o.code['text'];
+        chart.dataPoints[numCharts].code = '3';
+        chart.dataPoints[numCharts].dashedLines = true;
+        chart.dataPoints[numCharts].normalValues = { low: 100, high: 200 };
+      }
+
+      chart.dataPoints[numCharts].data.push({ y: 0, x: 0 });
+      chart.dataPoints[numCharts].data[count].y = point.valueQuantity['value'];
       let newDate = new Date(o.relativeDateTime).getTime();
-      newData.dataPoints[numCharts].data[count].x = newDate;
+      chart.dataPoints[numCharts].data[count].x = newDate;
       count++;
     }
 
-    this.dataDef = newData;
-    this.canvasHeight = 101 * this.dataDef.dataPoints.length + 60;
-  }
+    this.dataDef = chart;
+    // this.canvasHeight = 101 * this.dataDef.dataPoints.length + 60;
+  } */
 }

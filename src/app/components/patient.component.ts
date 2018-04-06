@@ -77,7 +77,6 @@ export class PatientComponent {
             this.allergy = "multiple";
           }
         }
-<<<<<<< HEAD
         else { //no allergies
           this.allergy = "none";
         }
@@ -89,14 +88,6 @@ export class PatientComponent {
     // Don't show hover box if there is only one allergy.
     if (this.allergies.length > 1) {
       this.hover.show(this.allergies, event);
-=======
-    }
-
-    showAllergyHover(event) {
-        if (this.allergies.length > 1) {
-            this.hover.show(this.allergies, event);
-        }
->>>>>>> d630cf874b230cafa262c229981be00ed8cb23fb
     }
   }
 }

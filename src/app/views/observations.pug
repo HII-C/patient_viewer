@@ -14,7 +14,7 @@ div#conditions([style.height.px]="columnHeight")
       div("*ngIf" = 'columnState == "default" && condensedObservationsLoadFinished')
         accordionRecursion([levelData] = 'this.observationService.condensedObservations', [columnNum] = 1, [levelNum] = 0, [firstIteration] = 1)
       div("*ngIf" = "!condensedObservationsLoadFinished")
-        p Not loaded!
+        loading-animation
 
     div.container("*ngIf"='columnState == "scratchpad"' style="width:auto")
       div.panel-group(id="obs")

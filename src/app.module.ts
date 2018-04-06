@@ -35,6 +35,8 @@ import { NoteNavigationComponent } from './app/components/noteNavigation.compone
 import { ObservationScratchPad } from './app/components/observationsScratchPad.component'
 import { AccordionRecursion } from './app/components/accordionRecursion.component';
 import { ConditionsDisplay } from './app/components/conditionsDisplay.component';
+
+import { HistoricalTrendsComponent } from './app/components/historicalTrends.component';
 import { ObservationsDisplay } from './app/components/observationsDisplay.component';
 
 // SERVICE IMPORTS
@@ -52,7 +54,7 @@ import { ObservationService } from './app/services/observation.service';
 import { MapService } from './app/services/map.service';
 import { DoctorService } from './app/services/doctor.service';
 import { SmartService } from './app/services/smart.service';
-import { ChartTimelineService } from './app/services/chartTimeline.service';
+import { HistoricalTrendsService } from './app/services/historicalTrends.service';
 import { CookieService } from 'angular2-cookie/core';
 import { ScratchPadService } from './app/services/scratchPad.service';
 import { UpdatingService } from './app/services/updating.service';
@@ -80,7 +82,7 @@ import { NguiAutoCompleteModule } from '@ngui/auto-complete';
 
 const appRoutes: Routes = [
   { path: 'account', component: AccountComponent },
-  { path: 'trends', component: ChartTimelineComponent },
+  { path: 'trends', component: HistoricalTrendsComponent },
   { path: '', component: HomeComponent },
   { path: '**', component: HomeComponent }
 ]
@@ -142,6 +144,7 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
     NewCondition,
     ContextMenuComponent,
     NoteNavigationComponent,
+    HistoricalTrendsComponent
   ],   // components and directives
   providers: [
     appRoutingProviders,
@@ -160,7 +163,7 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
     SmartService,
     CookieService,
     CarePlanService,
-    ChartTimelineService,
+    HistoricalTrendsService,
     ScratchPadService,
     UpdatingService,
     ToolBarService

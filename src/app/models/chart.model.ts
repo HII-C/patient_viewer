@@ -1,18 +1,16 @@
+// Represents a single chart in the historical trends tool.
 export class Chart {
-  labelFont: string;
-  dataPointFont: string;
-  dataPoints: {
-    title: string;
-    code: string;
-    dashedLines: boolean;
-    normalValues: {
-      low: number;
-      high: number;
-    };
-    data: {
-      y: number;
-      x: number;
-    }[];
+  title: string;
+  code: string;
+  dashedLines: boolean;
 
-  }[];
+  normalValues: {
+    low: number;
+    high: number;
+  };
+
+  data: {
+    value: number;
+    name: any;
+  }[] = [];
 }

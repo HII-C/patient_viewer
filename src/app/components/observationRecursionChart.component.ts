@@ -54,6 +54,7 @@ export class ObservationRecursiveChart {
 
       for (let o of this.observationService.observations) {
         if (o['code']['coding'][0]['code'] == obs.code) {
+          console.log(o);
           /* Load all data points associated with the selected
              observation to the trends tool. 'o' represents one
              of these data points.

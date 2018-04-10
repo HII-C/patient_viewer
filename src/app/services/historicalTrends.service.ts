@@ -33,8 +33,6 @@ export class HistoricalTrendsService {
       return;
     }
 
-    console.log("Creating a chart for " + chartName);
-
     let chart = new Chart();
 
     // Get the title associated with the data point.
@@ -52,6 +50,27 @@ export class HistoricalTrendsService {
         value: point.valueQuantity['value']
       });
     }
+
+    // Sort data points in order of date of occurrence.
+    chart.data = chart.data.sort((p1, p2) => p1.name - p2.name);
+
+    // Store the data points in the format expected by NGX-Charts for line charts.
+    chart.lineChartData = [{
+      name: chart.title,
+      series: chart.data
+    }];
+
+    // Add the normal range values for the chart (displayed as horizontal "reference" lines).
+    chart.normalValues = [
+      {
+        name: "Low",
+        value: 80 // TODO: These shouldn't be hardcoded.
+      },
+      {
+        name: "High",
+        value: 100 // TODO: These shouldn't be hardcoded.
+      }
+    ];
 
     // Add the newly created chart to the list of charts.
     this.charts.set(chartName, chart);

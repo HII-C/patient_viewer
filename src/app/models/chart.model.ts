@@ -4,13 +4,25 @@ export class Chart {
   code: string;
   dashedLines: boolean;
 
+  // Used to display horizontal "reference" lines in the NGX-Charts line chart.
+  // Generally an array of two elements (the low and high values).
   normalValues: {
-    low: number;
-    high: number;
-  };
+    name: string;
+    value: number;
+  }[];
 
+  // An array of data points associated with the chart.
   data: {
     value: number;
     name: any;
   }[] = [];
+
+  // Stores the chart in the format expected for line charts by NGX-Charts.
+  lineChartData: {
+    name: any;
+    series: {
+      value: number;
+      name: any;
+    }[];
+  }[];
 }

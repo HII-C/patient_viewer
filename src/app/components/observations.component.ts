@@ -106,7 +106,6 @@ export class ObservationsComponent extends BaseColumn{
     this.observationService.indexNext(url).subscribe(data => {
       // Check if the data is valid
       if (data.entry) {
-
         // Map the data onto a json array of observations and append that data to the running total of observations in the observations service
         let nextObs = <Array<Observation>>data.entry.map(r => r['resource']);
         this.observationService.observations = this.observationService.observations.concat(nextObs);

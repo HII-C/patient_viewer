@@ -1,18 +1,28 @@
+// Represents a single chart in the historical trends tool.
 export class Chart {
-  labelFont: string;
-  dataPointFont: string;
-  dataPoints: {
-    title: string;
-    code: string;
-    dashedLines: boolean;
-    normalValues: {
-      low: number;
-      high: number;
-    };
-    data: {
-      y: number;
-      x: number;
-    }[];
+  title: string;
+  code: string;
+  dashedLines: boolean;
 
+  // Used to display horizontal "reference" lines in the NGX-Charts line chart.
+  // Generally an array of two elements (the low and high values).
+  normalValues: {
+    name: string;
+    value: number;
+  }[];
+
+  // An array of data points associated with the chart.
+  data: {
+    value: number;
+    name: any;
+  }[] = [];
+
+  // Stores the chart in the format expected for line charts by NGX-Charts.
+  lineChartData: {
+    name: any;
+    series: {
+      value: number;
+      name: any;
+    }[];
   }[];
 }

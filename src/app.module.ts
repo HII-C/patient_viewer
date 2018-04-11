@@ -14,6 +14,7 @@ import { TimelinePopupComponent } from './app/components/timeline_popup.componen
 import { ObservationsComponent } from './app/components/observations.component';
 import { CarePlanComponent } from './app/components/carePlan.component';
 import { HoverBoxComponent } from "./app/components/hoverBox.component";
+import { LoadingAnimation } from './app/components/loadingAnimation.component';
 // import {ActionListComponent} from './app/components/actionList.component';
 import { CalendarComponent } from './app/components/calendar.component';
 import { DoctorNoteComponent } from './app/components/doctorNote.component';
@@ -36,6 +37,10 @@ import { NoteNavigationComponent } from './app/components/noteNavigation.compone
 import { ObservationScratchPad } from './app/components/observationsScratchPad.component'
 import { AccordionRecursion } from './app/components/accordionRecursion.component';
 import { ConditionsDisplay } from './app/components/conditionsDisplay.component';
+
+import { HistoricalTrendsComponent } from './app/components/historicalTrends.component';
+import { ObservationsDisplay } from './app/components/observationsDisplay.component';
+
 // SERVICE IMPORTS
 import { ClientService } from './app/services/client.service';
 import { EncounterService } from './app/services/encounter.service';
@@ -51,7 +56,7 @@ import { ObservationService } from './app/services/observation.service';
 import { MapService } from './app/services/map.service';
 import { DoctorService } from './app/services/doctor.service';
 import { SmartService } from './app/services/smart.service';
-import { ChartTimelineService } from './app/services/chartTimeline.service';
+import { HistoricalTrendsService } from './app/services/historicalTrends.service';
 import { CookieService } from 'angular2-cookie/core';
 import { ScratchPadService } from './app/services/scratchPad.service';
 import { UpdatingService } from './app/services/updating.service';
@@ -79,7 +84,7 @@ import { NguiAutoCompleteModule } from '@ngui/auto-complete';
 
 const appRoutes: Routes = [
   { path: 'account', component: AccountComponent },
-  { path: 'trends', component: ChartTimelineComponent },
+  { path: 'trends', component: HistoricalTrendsComponent },
   { path: '', component: HomeComponent },
   { path: '**', component: HomeComponent }
 ]
@@ -112,6 +117,7 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
     // OBSERVATIONS COLUMN
     ObservationsComponent,
     ObservationScratchPad,
+    ObservationsDisplay,
 
     // CONDITIONS COLUMN
     ConditionsComponent,
@@ -124,6 +130,7 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
 
     TimelineComponent,
     TimelinePopupComponent,
+    LoadingAnimation,
     FormBuilder,
     // ActionListComponent,
     AccountComponent,
@@ -142,6 +149,7 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
     ContextMenuComponent,
     NoteNavigationComponent,
     HoverBoxComponent
+    HistoricalTrendsComponent
   ],   // components and directives
   providers: [
     appRoutingProviders,
@@ -160,7 +168,7 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
     SmartService,
     CookieService,
     CarePlanService,
-    ChartTimelineService,
+    HistoricalTrendsService,
     ScratchPadService,
     UpdatingService,
     ToolBarService

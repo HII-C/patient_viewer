@@ -1,8 +1,8 @@
 .row.patient-content
-	.col-md-4("*ngIf"='patient')
+	.col-md-2("*ngIf"='patient')
 		img.img-rounded("*ngIf"='patient.gender === "female"', src='/images/textures/female.png', width="60px", height="60px")
 		img.img-rounded("*ngIf"='patient.gender === "male"', src='/images/textures/male.png', width="60px", height="60px")
-	.col-md-8
+	.col-md-5
 		div.text-center
 			span#patient
 				.details("*ngIf"='patient')
@@ -16,13 +16,21 @@
 						div 
 							| Gender: {{patient.gender}}, 	
 							span("*ngIf"='patient.mrn') MRN: {{patient.mrn}}
+	.col-md-5
+		div.text-center
+			span#patient
+				.details("*ngIf"='patient')
+					.identifier
 						div
-							| Allergies: 
-							span((mouseenter)='showAllergyHover($event)', (mouseleave)='hover.hide($event)') {{allergy}}
-
-
-	hoverBox(#hover='')
-
+							| Allergies:
+              span((mouseenter)='showAllergyHover($event)', (mouseleave)='hover.hide($event)') {{allergy}}
+						div
+							| Reason for Visit: Reason
+						div
+							| Last Encounter: MM/DD/YYYY
+              
+	hoverBox(#hover='')			
+  
 				// May be re-added eventually, but does not do anything currently.
 				//#advanced_search
 					a("(click)"="advancedSearch = !advancedSearch" href="#")

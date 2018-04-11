@@ -1,15 +1,24 @@
-.header.text-center
-  h2(style="display: inline-block")
-    | Observations
-  div(style="display: inline-block")
-    columnStateSwitcher([column]='this')
+div#conditions([style.height.px]="columnHeight")
+  .column-header
+    .header.text-center
+      h2(style="display: inline-block")
+        | Observations
+      div(style="display: inline-block")
+        columnStateSwitcher([column]='this')
 
-div.container("*ngIf"='columnState == "default"' style="width:auto")
-  div.panel-group(id="obs")
-    div.panel.panel-default("*ngIf"='this.observationService.categorizedObservations')
-      observationRecursion([obs]="this.observationService.categorizedObservations.categories",[level]=0)
+  .column-content
+    h5
+      | {{columnState == "default" ? "Observations List" : "Scratch Pad"}}
 
-div.container("*ngIf"='columnState == "scratchpad"' style="width:auto")
-  div.panel-group(id="obs")
-    div.panel.panel-default("*ngIf"='this.observationService.categorizedObservations' style = "padding: 10px")
-      observationScratchPad
+    div.container("*ngIf"='columnState == "default"' style="width:auto")
+      div("*ngIf" = 'columnState == "default" && condensedObservationsLoadFinished')
+        accordionRecursion([levelData] = 'this.observationService.condensedObservations', [columnNum] = 1, [levelNum] = 0, [firstIteration] = 1)
+      div("*ngIf" = "!condensedObservationsLoadFinished")
+        loading-animation
+
+    div.container("*ngIf"='columnState == "scratchpad"' style="width:auto")
+      div.panel-group(id="obs")
+        div.panel.panel-default("*ngIf"='this.observationService.categorizedObservations' style = "padding: 10px")
+          observationScratchPad
+
+  contextMenu(#menu='')

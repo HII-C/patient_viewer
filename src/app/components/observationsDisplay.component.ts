@@ -1,12 +1,12 @@
 /*
-    Description: This file defines the data display for the conditions component
+    Description: This file defines the data display for the observations component
     Date: 3/19/18
     Version: 1.0
     Creator: Steven Tran
 */
 import { Component, Input, Output, ViewChild, EventEmitter } from '@angular/core';
 
-import { CarePlan } from '../models/carePlan.model';
+import { Observation } from '../models/observation.model';
 
 import { ScratchPadService } from '../services/scratchPad.service';
 
@@ -14,25 +14,26 @@ import { ContextMenuComponent } from './contextMenu.component';
 
 
 @Component({
-    selector: 'careplanDisplay',
-    templateUrl: '/carePlanDisplay.html'
+    selector: 'observationsDisplay',
+    templateUrl: '/observationsDisplay.html'
 })
-export class CarePlanDisplay {
-    // The currently selected careplan in the list.
-    selected: CarePlan;
+export class ObservationsDisplay {
+    // The currently selected condition in the list.
+    selected: Observation;
 
     // This is the array of conditions to be displayed
-    @Input() carePlans: Array<CarePlan>;
-    @Output() careplanSelected: EventEmitter<CarePlan> = new EventEmitter();
+    @Input() observations: Array<Observation>;
+    @Output() observationSelected: EventEmitter<Observation> = new EventEmitter();
 
     @ViewChild('menu') menu: ContextMenuComponent;
-
 
     // ===============================================================================================================================================
     // ================================================================== EVENT METHODS ==============================================================
     // ==================================================================---------------==============================================================
 
     constructor(private scratchPadService: ScratchPadService){}
+
+    ngOnChanges() {}
 
     ngOnInit() {}
 
@@ -67,21 +68,22 @@ export class CarePlanDisplay {
     }
 
     // FOR MAINTAINING CHECK STATE AFTER LOSING FOCUS
-
-    // Refactor the code for care plans
-    /*
+    
     //whenver a line is selected
-    selectCondition(condition: Condition) {
-        this.selected = condition;
-        this.conditionSelected.emit(this.selected);
-        for (let c of this.scratchPadService.totalConditions) {
-            c['selected'] = (c.id == this.selected.id);
+    selectObservation(observation: Observation) {
+        this.selected = observation;
+        this.observationSelected.emit(this.selected);
+
+        console.log(this.scratchPadService.totalObservations);
+
+        for (let o of this.scratchPadService.totalObservations) {
+            o['selected'] = (o.id == this.selected.id);
         }
     }
 
     // check if the element has already been selected (n^2 time lol)
-    checkClicked(condition: Condition) {
-        if (this.scratchPadService.checkedMapConditions.get(condition)){
+    checkClicked(observation: Observation) {
+        if (this.scratchPadService.checkedMapObservations.get(observation)){
             return true;
         }
 
@@ -89,19 +91,20 @@ export class CarePlanDisplay {
     }
 
     // WHENEVER A CHECKBOX IS CLICKED OR UNCLICKED, IT REGISTERS IT IN THE SCRATCHPADSERVICE (not actually the scratch pad yet)
-    checkCondition(checked: boolean, checkedCondition: Condition) {
-        this.scratchPadService.checkCondition(checked, checkedCondition);
+    checkObservation(checked: boolean, checkedObservation: Observation) {
+        this.scratchPadService.checkObservation(checked, checkedObservation);
     }
 
     expand(parent: string) {
-        for (let c of this.carePlans) {
+        /** 
+        for (let c of this.conditions) {
             if (c.parent == parent) {
                 c.isVisible = true;
                 c.parent = "";
                 c.isParent = false;
             }
         }
+        */
     }
-    */
 
 }

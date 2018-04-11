@@ -3,7 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 
 import {Patient} from '../models/patient.model';
 import {DoctorService} from '../services/doctor.service';
-import {ChartTimelineService} from '../services/chartTimeline.service';
+import {HistoricalTrendsService} from '../services/historicalTrends.service';
 import {ObservationService} from '../services/observation.service';
 import {ConditionService} from '../services/condition.service';
 import {Condition} from '../models/condition.model';
@@ -34,12 +34,12 @@ declare var $:any; //Necessary in order to use jQuery to open popup.
 
 export class ChartTimelineComponent {
     constructor(private doctorService: DoctorService,
-        private chartService: ChartTimelineService, private observationService: ObservationService,
+        private trendsService: HistoricalTrendsService, private observationService: ObservationService,
         private conditionService: ConditionService, private mapService: MapService,
         private http:Http, private updatingService: UpdatingService, private fhirService: FhirService,
         private scratchPadService: ScratchPadService,
         private carePlanService: CarePlanService) {
-        this.subscription = this.chartService.activateGraph$.subscribe(clicked => {
+        this.subscription = this.trendsService.activateGraph$.subscribe(clicked => {
             this.update();
         });
 
@@ -120,6 +120,8 @@ export class ChartTimelineComponent {
     startDate: number;
     endDate: number;
 
+    chartData: any[];
+
 // ranges in ms
     static readonly twentyFiveYearsMS: number = 788923150000;
     static readonly tenYearsMS: number = 315569260000;
@@ -133,9 +135,22 @@ export class ChartTimelineComponent {
 
 
     update() {
-
-        this.render('canvas', this.chartService.dataDef);
+        this.showTrendsChart();
+        // this.render('canvas', this.trendsService.dataDef);
     }
+
+    showTrendsChart() {
+      this.data = this.trendsService.dataDef;
+      this.chartData = [];
+
+      for (let point of this.data.dataPoints[0].data) {
+        this.chartData.push({
+          name: point.x,
+          value: point.y
+        });
+      }
+    }
+
     render(canvasId, dataObj) {
         console.log("DATA: ");
         console.log(this.data);
@@ -144,13 +159,15 @@ export class ChartTimelineComponent {
         this.count = 0;
         var margin = { top: 0, left: 0, right: 0, bottom: 0 };
         var overallMax, overallMin;
-        this.data = this.chartService.dataDef;
+        this.data = this.trendsService.dataDef;
+        console.log("DATA!");
         console.log(JSON.stringify(this.data));
         for (var i = 0; i < this.data.dataPoints.length; i++)
         {
             this.newData[i] = JSON.parse(JSON.stringify(this.data.dataPoints[i].data.map(this.makeDate)));
             this.newData[i].sort((a, b) => {return a.x - b.x});
         }
+
         this.getMaxDataYValue();
         var canvas = <HTMLCanvasElement> document.getElementById(canvasId);
         this.chartHeight = 100; //canvas.getAttribute('height'); //100
@@ -161,7 +178,7 @@ export class ChartTimelineComponent {
         this.ctx.save();
         this.ctx.setTransform(1, 0, 0, 1, 0, 0);
         this.ctx.restore();
-        this.ctx.clearRect(0, 0, this.chartWidth, this.chartService.canvasHeight);
+        this.ctx.clearRect(0, 0, this.chartWidth, this.trendsService.canvasHeight);
 
         this.renderChart();
 
@@ -194,7 +211,7 @@ export class ChartTimelineComponent {
         this.ctx.save();
         this.ctx.setTransform(1, 0, 0, 1, 0, 0);
         this.ctx.restore();
-        this.ctx.clearRect(0, 0, this.chartWidth, this.chartService.canvasHeight);
+        this.ctx.clearRect(0, 0, this.chartWidth, this.trendsService.canvasHeight);
         this.update();
         console.log(this.whole);
     }
@@ -214,7 +231,7 @@ export class ChartTimelineComponent {
         this.ctx.save();
         this.ctx.setTransform(1, 0, 0, 1, 0, 0);
         this.ctx.restore();
-        this.ctx.clearRect(0, 0, this.chartWidth, this.chartService.canvasHeight);
+        this.ctx.clearRect(0, 0, this.chartWidth, this.trendsService.canvasHeight);
         this.update();
         console.log(this.twentyFiveYears);
     }
@@ -234,7 +251,7 @@ export class ChartTimelineComponent {
         this.ctx.save();
         this.ctx.setTransform(1, 0, 0, 1, 0, 0);
         this.ctx.restore();
-        this.ctx.clearRect(0, 0, this.chartWidth, this.chartService.canvasHeight);
+        this.ctx.clearRect(0, 0, this.chartWidth, this.trendsService.canvasHeight);
         this.update();
         console.log(this.tenYears);
     }
@@ -254,7 +271,7 @@ export class ChartTimelineComponent {
         this.ctx.save();
         this.ctx.setTransform(1, 0, 0, 1, 0, 0);
         this.ctx.restore();
-        this.ctx.clearRect(0, 0, this.chartWidth, this.chartService.canvasHeight);
+        this.ctx.clearRect(0, 0, this.chartWidth, this.trendsService.canvasHeight);
         this.update();
         console.log(this.fiveYears);
     }
@@ -1226,7 +1243,7 @@ export class ChartTimelineComponent {
             return -1;
         }
     })
-    //this.chartService.setData(this.observationService.observations);
+    //this.trendsService.setData(this.observationService.observations);
     //append broken data here
     this.observationService.observations.sort((n1, n2) => {
         if (n1.effectiveDateTime < n2.effectiveDateTime) {

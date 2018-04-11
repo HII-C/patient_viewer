@@ -56,18 +56,19 @@ div(style="float:right; width: 825px")
             | 2 Weeks
         button.btn.btn-default(data-toggle="modal", [attr.data-target]="'#specify_popup'", style="width: 75px") 
             | Specify
-    div(style="height: 500px; width: 825px; overflow-y:auto")
-        canvas(id="canvas", width="800", [height] = "this.chartService.canvasHeight" )
+    div(style="height: 0px; width: 0px; overflow-y:auto")
+        canvas(id="canvas", width="0", [height] = "0" )
+    
     ngx-charts-bar-vertical(
         [view]="[700, 400]",
-        [results]="[]",
+        [results]="chartData",
         [xAxis]="true",
         [yAxis]="true",
         [showXAxisLabel]="true",
         [showYAxisLabel]="true",
-        [xAxisLabel]="'Country'",
-        [yAxisLabel]="'Population'",
-        (select)="onSelect($event)")
+        [xAxisLabel]="'X Axis'",
+        [yAxisLabel]="'Y Axis'")
+
 div(style="clear: both")
 
 #specify_popup.modal.fade(tabindex='-1', role='dialog')

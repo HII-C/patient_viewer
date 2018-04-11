@@ -3,7 +3,7 @@
 		img.img-rounded("*ngIf"='patient.gender === "female"', src='/images/textures/female.png', width="60px", height="60px")
 		img.img-rounded("*ngIf"='patient.gender === "male"', src='/images/textures/male.png', width="60px", height="60px")
 	.col-md-5
-		div.text-center
+		div.text-left
 			span#patient
 				.details("*ngIf"='patient')
 					.identifier
@@ -16,7 +16,7 @@
 							span("*ngIf"='patient.mrn') MRN: {{patient.mrn}}, 
 							| {{-1 * (patient.birthDate | amDifference:today:'years':false)}}yr ({{patient.birthDate | amDateFormat:'MM/DD/YYYY'}})
 	.col-md-5
-		div.text-center
+		div.text-left
 			span#patient
 				.details("*ngIf"='patient')
 					.identifier

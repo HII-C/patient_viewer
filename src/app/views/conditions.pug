@@ -7,13 +7,6 @@ div#conditions([style.height.px]="columnHeight")
 			div(style="display: inline-block")
 				columnStateSwitcher([column]='this')
 				
-		.text-center
-			.btn-group
-				button.btn.btn-default.btn-sm([class.disabled]='columnState != "scratchpad"', (click)='scratchPadService.removeConditionsFromScratchPad()')
-					| Remove
-				button.btn.btn-default.btn-sm([class.disabled]='columnState != "default"', (click)='scratchPadService.addConditionsToScratchPad()')
-					| Add
-	
 	.column-content
 		h5
 			| {{columnState == "default" ? "Conditions List" : "Scratch Pad"}}

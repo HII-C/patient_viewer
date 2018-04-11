@@ -15,7 +15,7 @@
 			span(class="glyphicon glyphicon-link")
 		button.btn.btn-default(routerLink='/trends', routerLinkActive='active', (click)='openGraph()',title="Historical Trends")
 			span(class="glyphicon glyphicon-stats")
-		button.btn.btn-default(title="Filter Button") 
+		button.btn.btn-default(title="Filter Button", (click) = 'filterScratchPad()') 
 			span(class="glyphicon glyphicon-filter")
 				
 	.btn-group("*ngIf"="nav2")

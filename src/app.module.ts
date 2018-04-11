@@ -34,7 +34,6 @@ import { FormBuilder } from './app/components/form-builder.component'
 import { ContextMenuComponent } from './app/components/contextMenu.component';
 import { CarePlanDisplay } from './app/components/carePlanDisplay.component';
 import { NoteNavigationComponent } from './app/components/noteNavigation.component';
-import { ObservationScratchPad } from './app/components/observationsScratchPad.component'
 import { AccordionRecursion } from './app/components/accordionRecursion.component';
 import { ConditionsDisplay } from './app/components/conditionsDisplay.component';
 
@@ -116,7 +115,6 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
 
     // OBSERVATIONS COLUMN
     ObservationsComponent,
-    ObservationScratchPad,
     ObservationsDisplay,
 
     // CONDITIONS COLUMN

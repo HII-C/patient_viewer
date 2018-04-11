@@ -74,8 +74,6 @@ export class ObservationsDisplay {
         this.selected = observation;
         this.observationSelected.emit(this.selected);
 
-        console.log(this.scratchPadService.totalObservations);
-
         for (let o of this.scratchPadService.totalObservations) {
             o['selected'] = (o.id == this.selected.id);
         }

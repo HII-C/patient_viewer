@@ -19,6 +19,6 @@ div#conditions([style.height.px]="columnHeight")
     div.container("*ngIf"='columnState == "scratchpad"' style="width:auto")
       div.panel-group(id="obs")
         div.panel.panel-default("*ngIf"='this.observationService.categorizedObservations' style = "padding: 10px")
-          observationScratchPad
+          observationsDisplay([observations] = 'this.scratchPadService.getObservations()')
 
   contextMenu(#menu='')

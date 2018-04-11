@@ -14,7 +14,7 @@
 						div 
 							| {{patient.gender.charAt(0).toUpperCase()}}, 
 							span("*ngIf"='patient.mrn') MRN: {{patient.mrn}}, 
-							| {{-1 * (patient.birthDate | amDifference:today:'years':false)}}yr ({{patient.birthDate | amDateFormat:'MM/DD/YYYY'}})
+							| DOB: {{patient.birthDate | amDateFormat:'MM/DD/YYYY'}} ({{-1 * (patient.birthDate | amDifference:today:'years':false)}}yr)
 	.col-md-5
 		div.text-left
 			span#patient
@@ -25,8 +25,7 @@
 							span((mouseenter)='showAllergyHover($event)', (mouseleave)='hover.hide($event)') {{allergy}}
 						div
 							| Reason for Visit: Reason
-						div
-							| Last Encounter: MM/DD/YYYY
+
 hoverBox(#hover='')
 				// May be re-added eventually, but does not do anything currently.
 				//#advanced_search

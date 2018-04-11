@@ -22,18 +22,21 @@
 				.details("*ngIf"='patient')
 					.identifier
 						div
-							| Allergies: {{allergy}}
+							| Allergies:
+              span((mouseenter)='showAllergyHover($event)', (mouseleave)='hover.hide($event)') {{allergy}}
 						div
 							| Reason for Visit: Reason
 						div
 							| Last Encounter: MM/DD/YYYY
-					
+              
+	hoverBox(#hover='')			
+  
 				// May be re-added eventually, but does not do anything currently.
 				//#advanced_search
 					a("(click)"="advancedSearch = !advancedSearch" href="#")
 						span("*ngIf"="advancedSearch") basic
 						span("*ngIf"="!advancedSearch") advanced
-					form.form("*ngIf"="advancedSearch")
+					form.form("*ngIf"="advan	cedSearch")
 						.form-group
 							label  Search
 							input.form-control(type="search")

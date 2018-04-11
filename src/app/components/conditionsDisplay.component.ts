@@ -68,7 +68,7 @@ export class ConditionsDisplay {
 
     // FOR MAINTAINING CHECK STATE AFTER LOSING FOCUS
     
-    //whenver a line is selected
+    //whenever a line is selected
     selectCondition(condition: Condition) {
         this.selected = condition;
         this.conditionSelected.emit(this.selected);

@@ -23,14 +23,12 @@
 					.identifier
 						div
 							| Allergies:
-              span((mouseenter)='showAllergyHover($event)', (mouseleave)='hover.hide($event)') {{allergy}}
+							span((mouseenter)='showAllergyHover($event)', (mouseleave)='hover.hide($event)') {{allergy}}
 						div
 							| Reason for Visit: Reason
 						div
 							| Last Encounter: MM/DD/YYYY
-              
-	hoverBox(#hover='')			
-  
+hoverBox(#hover='')
 				// May be re-added eventually, but does not do anything currently.
 				//#advanced_search
 					a("(click)"="advancedSearch = !advancedSearch" href="#")

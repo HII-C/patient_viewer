@@ -74,7 +74,7 @@ export class PatientComponent {
           }
 
           else { //multiple allergies
-            this.allergy = "multiple";
+            this.allergy = "multiple...";
           }
         }
         else { //no allergies

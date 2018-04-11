@@ -23,7 +23,7 @@
 					.identifier
 						div
 							| Allergies:
-							span((mouseenter)='showAllergyHover($event)', (mouseleave)='hover.hide($event)') {{allergy}}
+							span.hover((mouseenter)='showAllergyHover($event)', (mouseleave)='hover.hide($event)') {{allergy}}
 						div
 							| Reason for Visit: Reason
 						div
@@ -34,7 +34,7 @@ hoverBox(#hover='')
 					a("(click)"="advancedSearch = !advancedSearch" href="#")
 						span("*ngIf"="advancedSearch") basic
 						span("*ngIf"="!advancedSearch") advanced
-					form.form("*ngIf"="advan	cedSearch")
+					form.form("*ngIf"="advancedSearch")
 						.form-group
 							label  Search
 							input.form-control(type="search")

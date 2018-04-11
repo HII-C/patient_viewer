@@ -71,55 +71,65 @@ export class AccordionRecursion {
 
     // NOTE: The current component uses this function to rebuild the data into correct structure, but in practice, this function should not be used
     // since the data should already in the correct model format (described above levelData)
-    reconstructDataConditions(arrData: any) {
-        console.log(arrData);
+    reconstructDataConditions(arrData: any) {  
+        var reconstructedObject = this.addCategoriesConditions(arrData);
+        this.parsedData = reconstructedObject;
+    }
 
-        var reconstructedObject = [{
-            category: "Chief Complaint",
-            subheadings: false,
-            subs: null,
-            data: arrData
-        }, 
-        {
-            category: "Active Problems",
-            subheadings: false,
-            subs: null,
-            data: arrData
-        },
-        {
-            category: "Inactive Problems",
-            subheadings: false,
-            subs: null,
-            data: arrData
-        },
-        {
-            category: "Allergies/Precautions",
-            subheadings: false,
-            subs: null,
-            data: arrData
-        },
-        {
-            category: "Preventions/Exposures",
-            subheadings: false,
-            subs: null,
-            data: arrData
-        },
-    ];
+    addCategoriesConditions(arrData: any){
+        // For conditions, there are guaranteed to be 5 different columns; for now, just filter by active/inactive
 
-    this.parsedData = reconstructedObject;
+        // data sieve
+        var dataFilter = 
+        {
+            'Chief Complaint': [],
+            'Active Problems': [],
+            'Inactive Problems': [],
+            'Allergies/Precautions' : [],
+            'Preventions/Exposures' : []
+        };
+
+        // Filter each condition into a category based on the data
+        for (var i = 0 ; i < arrData.length; i++){
+            if (arrData[i].clinicalStatus == "active"){
+                dataFilter['Active Problems'].push(arrData[i]);
+            } else if (arrData[i].clinicalStatus == "inactive"){
+                dataFilter['Inactive Problems'].push(arrData[i]);
+            }
+        }
+
+        // then reconstruct the object
+        var reconstructedObject = [];
+
+        // for each category
+        for (var key in dataFilter){
+            if (dataFilter.hasOwnProperty(key)){
+                var newObj = 
+                {
+                    category: key,
+                    subheadings: false,
+                    subs: null,
+                    data: dataFilter[key]
+                };
+
+                reconstructedObject.push(newObj);
+            }
+        }        
+
+        return reconstructedObject;
     }
 
     // ================================= RECONSTRUCT DATA OBSERVATIONS =========================
 
     reconstructDataObservations(arrData: any){
         // reconstruct then set the passed data
-        var reconstructedObject = this.addCategories(arrData);
+        var reconstructedObject = this.addCategoriesObservations(arrData);
         this.parsedData = reconstructedObject;
     }
 
     // Populate the Observations list with categories (Need to migrate this to the service later)
     // The categories are stored inside of the object already
-    addCategories(arrData: any){
+    addCategoriesObservations(arrData: any){
 
         // hash out duplicates using a javscript object
         var hash = {};

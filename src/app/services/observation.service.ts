@@ -187,9 +187,6 @@ export class ObservationService {
 
 
   populateCategories(obsToFilter) {
-    console.log("Obs filter: ");
-    console.log(obsToFilter);
-
     let totalcount = 0;
     let count = 0;
 

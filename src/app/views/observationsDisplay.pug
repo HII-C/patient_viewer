@@ -9,6 +9,8 @@ div
                 th
                     | Value
                 th
+                    | Unit
+                th
                     | Onset
         tbody
             tr("*ngFor"='let c of observations', [class.selected]='c.selected', (click)='selectObservation(c)', (contextmenu)='menu.show(c, $event)', id='t{{observations.indexOf(c)}}')
@@ -17,8 +19,8 @@ div
                 td
                     button.btn.btn-default("*ngIf"="c.isParent", (click)='expand(c.parent)') ... 
                     span("*ngIf"="!c.isParent") {{c['code']['text']}}
-                td("*ngIf"="!c.isParent") Placeholder
+                td("*ngIf"="!c.isParent") {{c['valueQuantity']['value']}}
+                td("*ngIf" = "!c.isParent") {{c['valueQuantity']['unit']}}
                 td("*ngIf"="!c.isParent") {{c.relativeDateTime | amTimeAgo:true}}
-
 
 contextMenu(#menu='')

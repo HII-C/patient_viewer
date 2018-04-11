@@ -47,7 +47,7 @@ export class HoverBoxComponent {
   }
 
   // Hide the menu.
-  private hide(event) {
+  public hide(event) {
     if (event) {
       event.preventDefault();
     }

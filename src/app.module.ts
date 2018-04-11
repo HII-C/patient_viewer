@@ -148,7 +148,7 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
     NewCondition,
     ContextMenuComponent,
     NoteNavigationComponent,
-    HoverBoxComponent
+    HoverBoxComponent,
     HistoricalTrendsComponent
   ],   // components and directives
   providers: [

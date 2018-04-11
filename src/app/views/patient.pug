@@ -11,11 +11,10 @@
 							span("*ngIf"='patient.name && patient.name[0].given') {{patient.name[0].given[0]}}
 							| &nbsp;
 							span("*ngIf"='patient.name && patient.name[0].family') {{patient.name[0].family[0]}}
-						div
-							| Born: {{patient.birthDate | amDateFormat:'MM/DD/YYYY'}} ({{-1 * (patient.birthDate | amDifference:today:'years':false)}}yr)
 						div 
-							| Gender: {{patient.gender}}, 	
-							span("*ngIf"='patient.mrn') MRN: {{patient.mrn}}
+							| {{patient.gender.charAt(0).toUpperCase()}}, 
+							span("*ngIf"='patient.mrn') MRN: {{patient.mrn}}, 
+							| {{-1 * (patient.birthDate | amDifference:today:'years':false)}}yr ({{patient.birthDate | amDateFormat:'MM/DD/YYYY'}})
 	.col-md-5
 		div.text-center
 			span#patient

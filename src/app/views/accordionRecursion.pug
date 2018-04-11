@@ -4,7 +4,7 @@ div("*ngIf" = "loadFinished")
             h4.panel-title([style.marginLeft.px] = "levelNum * 20")
                 a(data-toggle = 'collapse', href = "#collapse{{columnNum + '-' + levelNum + '-' + i}}")
                     span.glyphicon.glyphicon-triangle-bottom
-                    |   {{cat.category}}
+                    |   {{cat.category}} ({{cat.data.length}})
         div.panel-collapse.collapse([style.margin-left.px] = "(levelNum + 1) * 20" id = "collapse{{columnNum + '-' + levelNum + '-' + i}}")
             div("*ngIf" = "!cat.subheadings")
                 div("*ngIf" = "columnNum == 0")

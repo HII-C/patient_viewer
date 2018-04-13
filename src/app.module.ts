@@ -20,7 +20,10 @@ import { CalendarComponent } from './app/components/calendar.component';
 import { DoctorNoteComponent } from './app/components/doctorNote.component';
 import { AccountComponent } from './app/components/account.component';
 import { ToolbarComponent } from './app/components/toolbar.component';
-import { ChartTimelineComponent } from './app/components/chartTimeline.component';
+
+// Functionality being replicated in HistoricalTrendsComponent.
+// import { ChartTimelineComponent } from './app/components/chartTimeline.component';
+
 import { TripleListComponent } from './app/components/tripleList.component';
 import { ObservationRecursive } from './app/components/observationRecursion.component';
 import { AddObservation } from './app/components/addObservation.component';
@@ -135,7 +138,7 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
     DoctorNoteComponent,
     CalendarComponent,
     ToolbarComponent,
-    ChartTimelineComponent,
+    // ChartTimelineComponent,
     TripleListComponent,
     ObservationRecursive,
     AddObservation,

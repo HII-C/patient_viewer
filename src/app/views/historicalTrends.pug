@@ -55,20 +55,23 @@ div(style="float:left; padding-left: 50px")
         button.btn.btn-default(data-toggle="modal", [attr.data-target]="'#specify_popup'", style="width: 75px") 
             | Specify
     
-    div("*ngFor" = "let chart of this.trendsService.charts.values()")
+    div("*ngFor" = "let chart of this.trendsService.charts; let i = index")
       ngx-charts-line-chart(
           [view]="chartSize",
           [results]="chart.lineChartData",
-          [xAxis]="true",
+          [xAxis]="i == this.trendsService.charts.length - 1",
           [yAxis]="true",
-          [showXAxisLabel]="true",
+          [showXAxisLabel]="false",
           [showYAxisLabel]="true",
           [xAxisLabel]="'Date'",
           [yAxisLabel]="chart.title",
           [xScaleMin]="minDate",
           [xScaleMax]="maxDate",
+          [yScaleMin]="chart.yScaleMin",
+          [yScaleMax]="chart.yScaleMax",
           [referenceLines]="chart.normalValues",
-          [showRefLines]="true")
+          [showRefLines]="true",
+          [showGridLines]="false")
         
 div(style="clear: both")
 

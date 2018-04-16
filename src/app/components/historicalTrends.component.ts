@@ -10,7 +10,7 @@ import { HistoricalTrendsService } from '../services/historicalTrends.service';
 })
 export class HistoricalTrendsComponent {
   // Width and height of displayed charts.
-  private chartSize: number[] = [600, 300];
+  private chartSize: number[] = [800, 200];
 
   // The minimum and maximum dates for the x-axis of the displayed charts.
   private minDate: Date = null;

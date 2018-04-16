@@ -8,9 +8,6 @@ div#conditions([style.height.px]="columnHeight")
 				columnStateSwitcher([column]='this', [columnType]="'conditions'")
 				
 	.column-content
-		h5
-			| {{columnState == "default" ? "Conditions List" : "Scratch Pad"}}
-		
 		div("*ngIf" = 'columnState == "default" && loaded')
 			accordionRecursion([levelData] = 'conditions', [columnNum] = 0, [levelNum] = 0, [firstIteration] = 1)
 		div("*ngIf" = "!loaded")

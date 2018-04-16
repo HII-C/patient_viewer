@@ -135,7 +135,9 @@ export class AccordionRecursion {
         var hash = {};
 
         for (var i = 0 ; i < arrData.length; i++){
-            var currCategory = arrData[i].category[0].text;
+
+            if (arrData[i].category)
+                var currCategory = arrData[i].category[0].text;
 
             // ignore if this category has no valueQuantity field
             if (!arrData[i].valueQuantity)

@@ -3,5 +3,5 @@ div#carePlans(style="height: 500px; overflow-y: auto")
 		h2(style="display: inline-block")
 			| Care Plans
 		div(style="display: inline-block")
-			columnStateSwitcher([column]='this')
+			columnStateSwitcher([column]='this', [columnType]="'careplans'")
 	accordionRecursion([levelData] = 'carePlans', [columnNum] = 2, [levelNum] = 0, [firstIteration] = 1)

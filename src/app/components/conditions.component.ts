@@ -1,5 +1,5 @@
 /*
-  DESCRIPTION: TOP LEVEL OF THE CONDITIONS COLUMN: DOES NOT HANDLE (ANY) RENDERING; SIMPLY FOR RETRIEVING 
+  DESCRIPTION: TOP LEVEL OF THE CONDITIONS COLUMN: DOES NOT HANDLE (ANY) RENDERING; SIMPLY FOR RETRIEVING
   DATA FROM THE SERVER, WHICH IS PASSED DOWN
 
   Author: Steven Tran and Kaan Aksoy
@@ -95,12 +95,14 @@ export class ConditionsComponent extends BaseColumn {
       }
     });
 
-    var diff = new Date().getTime() - new Date(this.conditions[0].onsetDateTime).getTime();
+    // Scale dates to make them appear more recent for demos.
+    // 0.8 is an arbitrary value that produces realistic dates.
+    let diff = Math.floor(0.8 *
+      (new Date().getTime() - new Date(this.conditions[0].onsetDateTime).getTime()));
 
     for (let c of this.conditions) {
       c.isVisible = true;
-      var newDate = new Date(c.onsetDateTime).getTime() + diff;
-      c.relativeDateTime = new Date(newDate).toDateString();
+      let newDate = new Date(c.onsetDateTime).getTime() + diff;
       c.relativeDateTime = moment(newDate).toISOString();
     }
 

@@ -75,13 +75,14 @@ export class ObservationsComponent extends BaseColumn{
       }
     })
 
-    /**
-     * Then, with this sorted data, converts the date into a relative time format (e.g. 4 months ago rather than a set date December 4, 2017)
-     */
-    var diff = new Date().getTime() - new Date(this.observationService.observations[0].effectiveDateTime).getTime();
+    // Scale dates to make them appear more recent for demos.
+    // 0.8 is an arbitrary value that produces realistic dates.
+
+    var diff = Math.floor(0.80 *
+      (new Date().getTime() - new Date(this.observationService.observations[0].effectiveDateTime).getTime()));
+
     for (let ob of this.observationService.observations) {
-      var newDate = new Date(ob.effectiveDateTime).getTime() + diff;
-      ob.relativeDateTime = new Date(newDate).toDateString();
+      let newDate = new Date(ob.effectiveDateTime).getTime() + diff;
       ob.relativeDateTime = moment(newDate).toISOString();
     }
 

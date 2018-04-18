@@ -1,5 +1,5 @@
 /*
-    Description: This file defines the data display for the conditions component
+    Description: This file defines the data display for the careplans component
     Date: 3/19/18
     Version: 1.0
     Creator: Steven Tran
@@ -21,7 +21,7 @@ export class CarePlanDisplay {
     // The currently selected careplan in the list.
     selected: CarePlan;
 
-    // This is the array of conditions to be displayed
+    // This is the array of careplans to be displayed
     @Input() carePlans: Array<CarePlan>;
     @Output() careplanSelected: EventEmitter<CarePlan> = new EventEmitter();
 
@@ -40,7 +40,7 @@ export class CarePlanDisplay {
 
     // Can only access view child after the view has been initialized.
     ngAfterViewInit() {
-        // Add options to the context menu shown when right clicking conditions.
+        // Add options to the context menu shown when right clicking careplans.
         this.menu.addOption({
             'icon': 'glyphicon-pencil',
             'text': 'Add to Scratch Pad',
@@ -68,20 +68,17 @@ export class CarePlanDisplay {
 
     // FOR MAINTAINING CHECK STATE AFTER LOSING FOCUS
 
-    // Refactor the code for care plans
-    /*
     //whenver a line is selected
-    selectCondition(condition: Condition) {
-        this.selected = condition;
-        this.conditionSelected.emit(this.selected);
-        for (let c of this.scratchPadService.totalConditions) {
+    selectCarePlan(carePlan: CarePlan) {
+        this.selected = carePlan;
+        this.careplanSelected.emit(this.selected);
+        for (let c of this.scratchPadService.totalCareplans) {
             c['selected'] = (c.id == this.selected.id);
         }
     }
 
-    // check if the element has already been selected (n^2 time lol)
-    checkClicked(condition: Condition) {
-        if (this.scratchPadService.checkedMapConditions.get(condition)){
+    checkClicked(carePlan: CarePlan) {
+        if (this.scratchPadService.checkedMapCareplans.get(carePlan)){
             return true;
         }
 
@@ -89,11 +86,12 @@ export class CarePlanDisplay {
     }
 
     // WHENEVER A CHECKBOX IS CLICKED OR UNCLICKED, IT REGISTERS IT IN THE SCRATCHPADSERVICE (not actually the scratch pad yet)
-    checkCondition(checked: boolean, checkedCondition: Condition) {
-        this.scratchPadService.checkCondition(checked, checkedCondition);
+    checkCarePlan(checked: boolean, checkedCarePlan: CarePlan) {
+        this.scratchPadService.checkCarePlan(checked, checkedCarePlan);
     }
 
     expand(parent: string) {
+        /*
         for (let c of this.carePlans) {
             if (c.parent == parent) {
                 c.isVisible = true;
@@ -101,7 +99,8 @@ export class CarePlanDisplay {
                 c.isParent = false;
             }
         }
+        */
     }
-    */
+    
 
 }

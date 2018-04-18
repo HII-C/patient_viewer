@@ -19,7 +19,7 @@ div
                 td
                     button.btn.btn-default("*ngIf"="c.isParent", (click)='expand(c.parent)') ... 
                     span("*ngIf"="c['code']['text']") {{c['code']['text']}}
-                    span("*ngIf"="c['code']['coding'][0]['display']") {{c['code']['coding'][0]['display']}}
+                    span("*ngIf"="c['code']['coding'][0]['display'] && !c['code']['text']") {{c['code']['coding'][0]['display']}}
                 td("*ngIf"="!c.isParent") {{c['valueQuantity']['value']}}
                 td("*ngIf" = "!c.isParent") {{c['valueQuantity']['unit']}}
                 td("*ngIf"="!c.isParent") {{c.relativeDateTime | amTimeAgo:true}}

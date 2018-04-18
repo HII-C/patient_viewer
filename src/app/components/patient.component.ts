@@ -88,6 +88,8 @@ export class PatientComponent {
       this.encounterService.loadEncounters(this.patient).subscribe(res => {
         // Cast the array of encounters to the proper model (Encounter).
         let encounters = <Array<Encounter>> res;
+        console.log("ENCOUNTERS!");
+        console.log(encounters);
 
         for (let e of encounters) {
           let reasonText = e.getReason();

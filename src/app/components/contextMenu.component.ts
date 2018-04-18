@@ -66,6 +66,10 @@ export class ContextMenuComponent {
 
   // Handle executing actions tied to a clicked menu option.
   private handleOptionClick(option, event) {
+    if (event) {
+      event.preventDefault();
+    }
+
     if (option.exec) {
       // Execute the function tied to the clicked menu option.
       option.exec(this.data);

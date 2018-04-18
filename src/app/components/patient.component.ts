@@ -87,12 +87,10 @@ export class PatientComponent {
       // TODO: Display the reason for visit retrieved here onto the page.
       this.encounterService.loadEncounters(this.patient).subscribe(res => {
         // Cast the array of encounters to the proper model (Encounter).
-        let encounters = <Array<Encounter>> res;
-        console.log("ENCOUNTERS!");
-        console.log(encounters);
+        let encounters = <Array<Encounter>>res;
 
-        for (let e of encounters) {
-          let reasonText = e.getReason();
+        for (let enc of encounters) {
+          let reasonText = enc.getReason();
 
           // Only print if reasonText is not null.
           if (reasonText) {

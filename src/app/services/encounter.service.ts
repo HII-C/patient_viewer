@@ -16,6 +16,19 @@ export class EncounterService {
   loadEncounters(patient: Patient) {
     var url = this.fhirService.getUrl() + this.path + "?patient=" + patient.id;
     return this.http.get(url, this.fhirService.options(true))
-        .map(res => res.json()['entry'].map(e => <Encounter> e['resource']));
+      .map(res => res.json()['entry'].map(e => this.deserialize(e['resource'])));
+  }
+
+
+  // We cannot simply cast the JSON object to an Encounter, because this casted
+  // Encounter will not have the methods of the Encounter class.
+  private deserialize(input: any): Encounter {
+    var fixed: Encounter = new Encounter();
+
+    for (let prop in input) {
+      fixed[prop] = input[prop];
+    }
+
+    return fixed;
   }
 }

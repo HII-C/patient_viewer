@@ -18,8 +18,8 @@ export class Encounter {
       }[];
     }[];
 
-    // Get the reason for the encounter (if there is one). Otherwise, return null.
-    getReason() {
+    // Get the first reason for the encounter (if there is one). Otherwise, return null.
+    getReason() : string {
       // Check if there are any reasons. If not, return null.
       if (!this.reason) {
         return null;

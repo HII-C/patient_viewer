@@ -18,7 +18,8 @@ div
                     input("*ngIf"="!c.isParent", [checked] = 'checkClicked(c)' type='checkbox',id='c{{observations.indexOf(c)}}', value='{{observations.indexOf(c)}}', (change)='checkObservation($event.target.checked, c)')
                 td
                     button.btn.btn-default("*ngIf"="c.isParent", (click)='expand(c.parent)') ... 
-                    span("*ngIf"="!c.isParent") {{c['code']['text']}}
+                    span("*ngIf"="c['code']['text']") {{c['code']['text']}}
+                    span("*ngIf"="c['code']['coding'][0]['display']") {{c['code']['coding'][0]['display']}}
                 td("*ngIf"="!c.isParent") {{c['valueQuantity']['value']}}
                 td("*ngIf" = "!c.isParent") {{c['valueQuantity']['unit']}}
                 td("*ngIf"="!c.isParent") {{c.relativeDateTime | amTimeAgo:true}}

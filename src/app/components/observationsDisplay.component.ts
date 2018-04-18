@@ -33,7 +33,9 @@ export class ObservationsDisplay {
 
     constructor(private scratchPadService: ScratchPadService){}
 
-    ngOnChanges() {}
+    ngOnChanges() {
+        //console.log(this.observations);
+    }
 
     ngOnInit() {}
 

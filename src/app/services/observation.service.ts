@@ -18,6 +18,8 @@ export class ObservationService {
   selected: Array<Observation> = [];
   private path = '/Observation';
 
+  filterHash: any = {};
+
   constructor(private fhirService: FhirService, private http: Http) {
     // these are the codes of the observations; 
     // groupList is used to categorize where in temp this is stored
@@ -158,31 +160,20 @@ export class ObservationService {
   /**
    * Description: The observations received from the server contains many duplicates. This (inefficient) method
    * ensures that there are no duplicates in the condensed observations list of the data.
-   * 
-   * ** NOTE: THIS SHOULD BE MOVED TO THE BACKEND! LEADS TO A LARGE SLOWDOWN OF THE LOADING FOR THE FRONT END APPLICATION!
    */
   filterCategory(observations: Array<Observation>) {
-    for (let obs of observations) {
-      if (!this.containsObject(obs)) {
-        // Adds the grouping of the data (where it should be localized in the observations)
-        obs.grouping = this.getKey(obs['code']['coding'][0]['code']);
+
+    // do a pass and keep first instance
+    for (var obs of observations){
+      var code = obs['code']['coding'][0]['code'];
+
+      // if new entry, then add to filtered set
+      if (!this.filterHash[code]){
+        this.filterHash[code] = true;
+        obs.grouping = this.getKey(code);
         this.condensedObservations.push(obs);
       }
     }
-  }
-
-  /**
-   * Description: Just a O(n) searching method to check if a certain observation already exists in the condensedObservations. 
-   * Somebody didn't learn about hashmaps in CSE 310!
-   */
-  containsObject(obj) {
-    for (let obs of this.condensedObservations) {
-      if (obs['code']['coding'][0]['code'] == obj['code']['coding'][0]['code']) {
-        return true;
-      }
-    }
-
-    return false;
   }
 
 
@@ -190,7 +181,6 @@ export class ObservationService {
     let totalcount = 0;
     let count = 0;
 
-    // Another n^2 fucking algorithm!
     for (let i = 0; i < obsToFilter.length; i++) {
       if (obsToFilter[i].data) {
 

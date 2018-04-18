@@ -23,7 +23,8 @@
 					.identifier
 						div
 							| Allergies:
-							span.hover((mouseenter)='showAllergyHover($event)', (mouseleave)='hover.hide($event)') {{allergy}}
+							|
+							span([class.hover]="hoverStyling")((mouseenter)='showAllergyHover($event)', (mouseleave)='hover.hide($event)') {{allergy}}
 						div
 							| Reason for Visit: Reason
 						div

@@ -26,6 +26,7 @@ export class PatientComponent {
   //allergy details
   allergies: Array<string> = [];
   allergy: string = '';
+  hoverStyling: boolean = false;
 
   @ViewChild('hover') hover: HoverBoxComponent;
 
@@ -75,6 +76,8 @@ export class PatientComponent {
 
           else { //multiple allergies
             this.allergy = "multiple...";
+            this.hoverStyling = true;
+
           }
         }
         else { //no allergies

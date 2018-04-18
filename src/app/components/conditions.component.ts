@@ -7,6 +7,7 @@
 */
 
 import { Component, Input, Output, EventEmitter, Pipe, ViewChild } from '@angular/core';
+import { Subscription } from 'rxjs/Subscription';
 
 import { FhirService } from '../services/fhir.service';
 import { ConditionService } from '../services/condition.service';
@@ -24,7 +25,7 @@ declare var $: any; //Necessary in order to use jQuery to open popup.
 
 @Component({
   selector: 'conditions',
-  templateUrl: '/conditions.html'
+  templateUrl: '/conditions.html' 
 })
 export class ConditionsComponent extends BaseColumn {
   // The currently selected condition in the list.
@@ -41,6 +42,9 @@ export class ConditionsComponent extends BaseColumn {
   conditionGrouping: Array<any> = [];
   justCreated: boolean;
 
+  // for column switching
+  subscription: Subscription;
+
   @Input() patient: Patient;
   @Output() conditionSelected: EventEmitter<Condition> = new EventEmitter();
 
@@ -53,7 +57,14 @@ export class ConditionsComponent extends BaseColumn {
     this.justCreated = true;
     this.scratchPadConditions = this.getScratchPadConditions();
 
-    //testing allergies
+    this.subscription = scratchPadService.stateChange$.subscribe(
+      sPad => {
+        if (sPad)
+          this.columnState = "scratchpad";
+        else
+          this.columnState = "default";
+      }
+    );
   }
 
   ngOnChanges() {

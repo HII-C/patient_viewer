@@ -45,7 +45,7 @@ export class CarePlanDisplay {
             'icon': 'glyphicon-pencil',
             'text': 'Add to Scratch Pad',
             'exec': function(data) {
-                console.log(data);
+                this.scratchPadService.addCarePlan(data);
             }
         });
 

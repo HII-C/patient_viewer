@@ -1,4 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Subscription } from 'rxjs/Subscription';
 
 import { BaseColumn } from './baseColumn';
 
@@ -34,6 +35,9 @@ export class ObservationsComponent extends BaseColumn{
 
   condensedObservationsLoadFinished: boolean = false;
 
+  // for column switching
+  subscription: Subscription;
+
   constructor(private fhirService: FhirService,
     private observationService: ObservationService,
     private mapService: MapService, private doctorService: DoctorService,
@@ -42,6 +46,16 @@ export class ObservationsComponent extends BaseColumn{
     private scratchPadService: ScratchPadService) {
       super();
       this.mappings = MapService.STATIC_MAPPINGS;
+
+      // subscribe to scratch pad service for column switching
+      this.subscription = scratchPadService.stateChange$.subscribe(
+        sPad => {
+          if (sPad)
+            this.columnState = "scratchpad";
+          else
+            this.columnState = "default";
+        }
+      );
   }
 
   // ===================== FOR DATA RETRIEVAL FROM OBSERVATIONS SERVICE ============

@@ -48,7 +48,7 @@ export class ObservationsDisplay {
             'icon': 'glyphicon-pencil',
             'text': 'Add to Scratch Pad',
             'exec': function(data) {
-                console.log(data);
+                this.scratchPadService.addObservation(data);
             }
         });
 

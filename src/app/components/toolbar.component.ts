@@ -42,7 +42,13 @@ export class ToolbarComponent {
     this.scratchPadService.addConditionsToScratchPad();
     this.scratchPadService.addObservationToScratchPad();
 
-    // TODO: also switch the views to the scratch pad view
+    // also switch the views to the scratch pad view
+    this.scratchPadService.switchToScratchPad(true);
+  }
+
+  // reset to default (not scratchPad)
+  resetToDefaultView() {
+    this.scratchPadService.switchToScratchPad(false);
   }
 
   openGraph() {

@@ -1,3 +1,3 @@
 export class CarePlan {
-    id: String,
+    id: String
 }

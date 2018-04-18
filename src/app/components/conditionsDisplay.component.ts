@@ -45,7 +45,8 @@ export class ConditionsDisplay {
             'icon': 'glyphicon-pencil',
             'text': 'Add to Scratch Pad',
             'exec': function(data) {
-                console.log(data);
+                console.log("what the fuck");
+                this.scratchPadService.addCondition(data);
             }
         });
 

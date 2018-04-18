@@ -1,7 +1,7 @@
 #toolbar((onDrag)="updatePosition($event)",(onDragStop)="updatePosition($event)")
 	//- div("*ngIf"="!nav2", [@fadeIn]="'in'")
 	.btn-group("*ngIf"="!nav2")
-		button.btn.btn-default(title="Contacts")
+		button.btn.btn-default(title="Contacts", (click) = 'resetToDefaultView()')
 			span(class="glyphicon glyphicon-earphone")
 		button.btn.btn-default((click)='switchNav()',title="Home")
 			span(class="glyphicon glyphicon-home")

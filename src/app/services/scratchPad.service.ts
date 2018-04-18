@@ -1,5 +1,6 @@
 import { Injectable, Component } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
+import {Observable} from 'rxjs/Observable';
  
 // MODELS
 import { Condition } from '../models/condition.model';
@@ -34,8 +35,23 @@ export class ScratchPadService {
   checkedMapConditions: Map<Condition, boolean> = new Map();
   checkedMapCareplans: Map<CarePlan, boolean> = new Map();
 
-  constructor(private observationService: ObservationService) { }
+  // SCRATCH PAD STATE (COLUMN)
+  stateSource = new Subject<boolean>();
+  stateChange$ = this.stateSource.asObservable();
+
+  constructor(private observationService: ObservationService) { 
+
+  }
   
+  // =====================================================================
+  // --------------- FOR CHANGING TO SCRATCH PAD STATE -------------------
+  // =====================================================================
+
+  // switch to scratch pad
+  switchToScratchPad(switchState: boolean){
+    this.stateSource.next(switchState);
+  }
+
   // ======================================================================
   // ========================== METHODS FOR CONDITIONS ====================
   // ======================================================================
@@ -74,6 +90,7 @@ export class ScratchPadService {
 
   // Add a condition to the scratch pad, and disallow duplicates.
   addCondition(condition: Condition) {
+    
     if (this.conditions.indexOf(condition) == -1) {
       this.conditions.push(condition);
     }

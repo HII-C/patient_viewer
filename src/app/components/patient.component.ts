@@ -27,6 +27,7 @@ export class PatientComponent {
   //allergy details
   allergies: Array<string> = [];
   allergy: string = '';
+  reason: string = '';
 
   @ViewChild('hover') hover: HoverBoxComponent;
 
@@ -95,6 +96,7 @@ export class PatientComponent {
           // Only print if reasonText is not null.
           if (reasonText) {
             console.log(reasonText);
+            this.reason = reasonText;
           }
         }
       });

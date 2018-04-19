@@ -1,8 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import * as moment from 'moment';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/fromEvent';
 
 import { ObservationService } from '../services/observation.service';
 import { HistoricalTrendsService } from '../services/historicalTrends.service';
+import { ContextMenuComponent } from './contextMenu.component';
 
 @Component({
   selector: 'historicalTrends',
@@ -16,8 +19,38 @@ export class HistoricalTrendsComponent {
   private minDate: Date = null;
   private maxDate: Date = null;
 
+  @ViewChild('menu') menu: ContextMenuComponent;
+
+  // Observable subscription to mouse movements.
+  mouseSubscription: any = null;
+
+  // Store the most recent mouse event to keep track of the mouse location.
+  mouseEvent: any = null;
+
   constructor(private trendsService: HistoricalTrendsService,
-              private observationService: ObservationService) { }
+    private observationService: ObservationService) {
+      // Track the location of the mouse (needed for context menu).
+      this.mouseSubscription = Observable.fromEvent(document, 'mousemove')
+        .subscribe((event) => {
+          this.mouseEvent = event;
+      });
+    }
+
+  // Can only access view child after the view has been initialized.
+  ngAfterViewInit() {
+    // NOTE: 'exec' functions must be bound to 'this' to access scratchPadService.
+    // This is a strange behavior with scoping in Typescript/Javascript.
+
+    // Add option to the context menu shown when clicking data points.
+    this.menu.addOption({
+      'icon': 'glyphicon-list-alt',
+      'text': 'Add to Side Bar',
+      'exec': function(condition) {
+        console.log("Add to Side Bar");
+        // TODO: Implement Add to Side Bar functionality.
+      }.bind(this)
+    });
+  }
 
   // Set specific (user selected) min and max dates for the x-axis of displayed charts.
   setDateRange(form) {
@@ -45,5 +78,10 @@ export class HistoricalTrendsComponent {
   // as the minimum date on the x-axis of displayed charts.
   setMinMonthsAgo(months) {
     this.minDate = moment().subtract(months, 'months').toDate();
+  }
+
+  // Called when a data point is clicked on a chart.
+  onDataPointSelect(chartEvent) {
+    this.menu.show(null, this.mouseEvent);
   }
 }

@@ -7,7 +7,7 @@ div(style="float: left; width: 350px")
             div.panel.panel-default
                 div.panel-heading
                     h4.panel-title
-                        a(data-toggle="collapse" href="#c")
+                        a(data-toggle="collapse", href="#c", (click)="menu.show(null, $event)")
                             | Conditions
                 div.container(id="c", style="width:auto")
                     div.panel-group
@@ -71,8 +71,11 @@ div(style="float:left; padding-left: 50px")
           [yScaleMax]="chart.yScaleMax",
           [referenceLines]="chart.normalValues",
           [showRefLines]="true",
-          [showGridLines]="false")
-        
+          [showGridLines]="false",
+          (select)="onDataPointSelect($event)")
+
+contextMenu(#menu='')
+
 div(style="clear: both")
 
 #specify_popup.modal.fade(tabindex='-1', role='dialog')

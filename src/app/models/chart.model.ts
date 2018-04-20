@@ -4,13 +4,6 @@ export class Chart {
   code: string;
   dashedLines: boolean;
 
-  // Used to display horizontal "reference" lines in the NGX-Charts line chart.
-  // Generally an array of two elements (the low and high values).
-  normalValues: {
-    name: string;
-    value: number;
-  }[];
-
   // An array of data points associated with the chart.
   data: {
     value: number;
@@ -24,5 +17,16 @@ export class Chart {
       value: number;
       name: any;
     }[];
+  }[];
+
+  // The minimum and maximum Y-axis values to be displayed on the chart.
+  yScaleMin: number;
+  yScaleMax: number;
+
+  // Used to display horizontal "reference" lines in the NGX-Charts line chart.
+  // Generally an array of two elements (the low and high values).
+  normalValues: {
+    name: string;
+    value: number;
   }[];
 }

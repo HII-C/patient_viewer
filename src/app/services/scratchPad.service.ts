@@ -1,5 +1,6 @@
 import { Injectable, Component } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
+import {Observable} from 'rxjs/Observable';
  
 // MODELS
 import { Condition } from '../models/condition.model';
@@ -23,16 +24,34 @@ export class ScratchPadService {
   // the conditions/observations/findings are the data that is selected
   totalConditions: Array<Condition>;
   totalObservations: Array<Observation>;
+  totalCareplans: Array<CarePlan>;
 
   conditions: Array<Condition> = [];
   observations: Array<Observation> = [];
+  careplans: Array<CarePlan> = [];
 
    // cond/obs/find that are checked (but not yet added potentially) - need it to save state
   checkedMapObservations: Map<Observation, boolean> = new Map();
   checkedMapConditions: Map<Condition, boolean> = new Map();
+  checkedMapCareplans: Map<CarePlan, boolean> = new Map();
 
-  constructor(private observationService: ObservationService) { }
+  // SCRATCH PAD STATE (COLUMN)
+  stateSource = new Subject<boolean>();
+  stateChange$ = this.stateSource.asObservable();
+
+  constructor(private observationService: ObservationService) { 
+
+  }
   
+  // =====================================================================
+  // --------------- FOR CHANGING TO SCRATCH PAD STATE -------------------
+  // =====================================================================
+
+  // switch to scratch pad
+  switchToScratchPad(switchState: boolean){
+    this.stateSource.next(switchState);
+  }
+
   // ======================================================================
   // ========================== METHODS FOR CONDITIONS ====================
   // ======================================================================
@@ -71,6 +90,7 @@ export class ScratchPadService {
 
   // Add a condition to the scratch pad, and disallow duplicates.
   addCondition(condition: Condition) {
+    
     if (this.conditions.indexOf(condition) == -1) {
       this.conditions.push(condition);
     }
@@ -94,6 +114,55 @@ export class ScratchPadService {
   // ======================== METHODS FOR STORING CARE PLANS ========================
   // ================================================================================
 
+  // initialize total list of care plans
+  initCarePlans(inCarePlans: Array<CarePlan>){
+    this.totalCareplans = inCarePlans;
+  }
+
+  // whenever a list item is checked (or unchecked), then mark it on the map
+  checkCarePlan(checked: boolean, checkedCarePlan: CarePlan) {
+    this.checkedMapCareplans.set(checkedCarePlan, checked);
+  }
+
+  // removes all checked items from the scratch pad
+  removeCarePlanFromScratchPad() {
+    for (let o of this.totalCareplans) {
+      if (this.checkedMapCareplans.get(o)){
+        this.removeCarePlan(o);
+        this.checkedMapCareplans.set(o, false);
+      }
+    }
+  }
+
+  // add all checekd items to the scratch pad
+  addCareplanToScratchPad() {
+    for (let o of this.totalCareplans){
+      if (this.checkedMapCareplans.get(o)){
+        this.addCarePlan(o);
+      }
+    }
+  }
+
+  // Add a (single) care plan to the scratch pad, and disallow duplicates.
+  addCarePlan(carePlan: CarePlan) {
+    if (this.careplans.indexOf(carePlan) == -1) {
+      this.careplans.push(carePlan);
+    }
+  }
+
+  // Remove a (single) given care plan from the scratch pad.
+  removeCarePlan(carePlan: CarePlan) {
+    var index = this.careplans.indexOf(carePlan);
+
+    if (index != -1) {
+      this.careplans.splice(index, 1);
+    }
+  }
+
+  // Return the care plan currently in the scratch pad.
+  getCarePlans() {
+    return this.careplans;
+  }
 
   // ================================================================================
   // ======================== METHODS FOR STORING OBSERVATIONS ======================

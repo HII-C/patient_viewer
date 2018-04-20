@@ -1,4 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Subscription } from 'rxjs/Subscription';
 
 import { BaseColumn } from './baseColumn';
 
@@ -34,6 +35,9 @@ export class ObservationsComponent extends BaseColumn{
 
   condensedObservationsLoadFinished: boolean = false;
 
+  // for column switching
+  subscription: Subscription;
+
   constructor(private fhirService: FhirService,
     private observationService: ObservationService,
     private mapService: MapService, private doctorService: DoctorService,
@@ -42,6 +46,16 @@ export class ObservationsComponent extends BaseColumn{
     private scratchPadService: ScratchPadService) {
       super();
       this.mappings = MapService.STATIC_MAPPINGS;
+
+      // subscribe to scratch pad service for column switching
+      this.subscription = scratchPadService.stateChange$.subscribe(
+        sPad => {
+          if (sPad)
+            this.columnState = "scratchpad";
+          else
+            this.columnState = "default";
+        }
+      );
   }
 
   // ===================== FOR DATA RETRIEVAL FROM OBSERVATIONS SERVICE ============
@@ -75,13 +89,14 @@ export class ObservationsComponent extends BaseColumn{
       }
     })
 
-    /**
-     * Then, with this sorted data, converts the date into a relative time format (e.g. 4 months ago rather than a set date December 4, 2017)
-     */
-    var diff = new Date().getTime() - new Date(this.observationService.observations[0].effectiveDateTime).getTime();
+    // Scale dates to make them appear more recent for demos.
+    // 0.8 is an arbitrary value that produces realistic dates.
+
+    var diff = Math.floor(0.80 *
+      (new Date().getTime() - new Date(this.observationService.observations[0].effectiveDateTime).getTime()));
+
     for (let ob of this.observationService.observations) {
-      var newDate = new Date(ob.effectiveDateTime).getTime() + diff;
-      ob.relativeDateTime = new Date(newDate).toDateString();
+      let newDate = new Date(ob.effectiveDateTime).getTime() + diff;
       ob.relativeDateTime = moment(newDate).toISOString();
     }
 
@@ -89,9 +104,9 @@ export class ObservationsComponent extends BaseColumn{
     this.observationService.categorizedObservations = this.observationService.temp;
 
     // The condensed observations should be the final set of data -- add it to the scratchpadservice
-    // this.scratchPadService.initObservations(this.observationService.condensedObservations);
+    this.scratchPadService.initObservations(this.observationService.condensedObservations);
 
-    this.observationReturned.emit(this.observationService.observations);
+    this.observationReturned.emit(this.observationService.categorizedObservations);
   }
 
   /**

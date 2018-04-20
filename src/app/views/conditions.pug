@@ -5,19 +5,9 @@ div#conditions([style.height.px]="columnHeight")
 			h2(style="display: inline-block")
 				| Conditions
 			div(style="display: inline-block")
-				columnStateSwitcher([column]='this')
+				columnStateSwitcher([column]='this', [columnType]="'conditions'")
 				
-		.text-center
-			.btn-group
-				button.btn.btn-default.btn-sm([class.disabled]='columnState != "scratchpad"', (click)='scratchPadService.removeConditionsFromScratchPad()')
-					| Remove
-				button.btn.btn-default.btn-sm([class.disabled]='columnState != "default"', (click)='scratchPadService.addConditionsToScratchPad()')
-					| Add
-	
 	.column-content
-		h5
-			| {{columnState == "default" ? "Conditions List" : "Scratch Pad"}}
-		
 		div("*ngIf" = 'columnState == "default" && loaded')
 			accordionRecursion([levelData] = 'conditions', [columnNum] = 0, [levelNum] = 0, [firstIteration] = 1)
 		div("*ngIf" = "!loaded")

@@ -1,6 +1,8 @@
+// TODO: This component is out of date and will be removed later.
+
 div(style="float: left; width: 350px")
     div
-        h4 
+        h4
             | Dashboard
             button.btn.btn-default((click)='update()') Update
             button.btn.btn-default(routerLink='/') Back
@@ -54,11 +56,11 @@ div(style="float:right; width: 825px")
             | 1 Month
         button.btn.btn-default((click)='setTwoWeeks()' style="width: 75px")
             | 2 Weeks
-        button.btn.btn-default(data-toggle="modal", [attr.data-target]="'#specify_popup'", style="width: 75px") 
+        button.btn.btn-default(data-toggle="modal", [attr.data-target]="'#specify_popup'", style="width: 75px")
             | Specify
     div(style="height: 0px; width: 0px; overflow-y:auto")
         canvas(id="canvas", width="0", [height] = "0" )
-    
+
     ngx-charts-bar-vertical(
         [view]="[700, 400]",
         [results]="chartData",

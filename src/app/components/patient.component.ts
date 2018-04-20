@@ -1,15 +1,16 @@
 import { Component, Injectable, Input, Output, ViewChild } from '@angular/core';
 import { DoctorService } from '../services/doctor.service';
-import { ConditionService } from "../services/condition.service";
+import { ConditionService } from '../services/condition.service';
+import { EncounterService } from '../services/encounter.service';
+import { Encounter } from '../models/encounter.model';
 import { Patient } from '../models/patient.model';
 import { Server } from '../models/server.model';
 import { Condition } from '../models/condition.model';
 import { Http, Headers } from '@angular/http';
 import { CookieService } from 'angular2-cookie/core';
 import { HomeComponent } from '../components/home.component';
-import { ContextMenuComponent } from "./contextMenu.component";
+import { ContextMenuComponent } from './contextMenu.component';
 import { HoverBoxComponent } from './hoverBox.component';
-
 
 @Injectable()
 @Component({
@@ -27,6 +28,7 @@ export class PatientComponent {
   allergies: Array<string> = [];
   allergy: string = '';
   hoverStyling: boolean = false;
+  reason: string = '';
 
   @ViewChild('hover') hover: HoverBoxComponent;
 
@@ -36,7 +38,8 @@ export class PatientComponent {
     private cookieService: CookieService,
     private doctorService: DoctorService,
     private homeComponent: HomeComponent,
-    private conditionService: ConditionService) {
+    private conditionService: ConditionService,
+    private encounterService: EncounterService) {
 
     this.graphConfig = this.cookieService.getObject("graphConfig");
     // this.cookieService.remove("graphConfig");
@@ -82,6 +85,22 @@ export class PatientComponent {
         }
         else { //no allergies
           this.allergy = "none";
+        }
+      });
+
+      // TODO: Display the reason for visit retrieved here onto the page.
+      this.encounterService.loadEncounters(this.patient).subscribe(res => {
+        // Cast the array of encounters to the proper model (Encounter).
+        let encounters = <Array<Encounter>>res;
+
+        for (let enc of encounters) {
+          let reasonText = enc.getReason();
+
+          // Only print if reasonText is not null.
+          if (reasonText) {
+            console.log(reasonText);
+            this.reason = reasonText;
+          }
         }
       });
     }

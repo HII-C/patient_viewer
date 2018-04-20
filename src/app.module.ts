@@ -20,7 +20,10 @@ import { CalendarComponent } from './app/components/calendar.component';
 import { DoctorNoteComponent } from './app/components/doctorNote.component';
 import { AccountComponent } from './app/components/account.component';
 import { ToolbarComponent } from './app/components/toolbar.component';
-import { ChartTimelineComponent } from './app/components/chartTimeline.component';
+
+// Functionality being replicated in HistoricalTrendsComponent.
+// import { ChartTimelineComponent } from './app/components/chartTimeline.component';
+
 import { TripleListComponent } from './app/components/tripleList.component';
 import { ObservationRecursive } from './app/components/observationRecursion.component';
 import { AddObservation } from './app/components/addObservation.component';
@@ -34,7 +37,6 @@ import { FormBuilder } from './app/components/form-builder.component'
 import { ContextMenuComponent } from './app/components/contextMenu.component';
 import { CarePlanDisplay } from './app/components/carePlanDisplay.component';
 import { NoteNavigationComponent } from './app/components/noteNavigation.component';
-import { ObservationScratchPad } from './app/components/observationsScratchPad.component'
 import { AccordionRecursion } from './app/components/accordionRecursion.component';
 import { ConditionsDisplay } from './app/components/conditionsDisplay.component';
 
@@ -116,7 +118,6 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
 
     // OBSERVATIONS COLUMN
     ObservationsComponent,
-    ObservationScratchPad,
     ObservationsDisplay,
 
     // CONDITIONS COLUMN
@@ -137,7 +138,7 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
     DoctorNoteComponent,
     CalendarComponent,
     ToolbarComponent,
-    ChartTimelineComponent,
+    // ChartTimelineComponent,
     TripleListComponent,
     ObservationRecursive,
     AddObservation,

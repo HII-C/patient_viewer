@@ -1,3 +1,5 @@
+// TODO: This component is out of date and will be removed later.
+
 import {Component, Input, Output, EventEmitter, Pipe} from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 
@@ -143,18 +145,19 @@ export class ChartTimelineComponent {
       this.data = this.trendsService.dataDef;
       this.chartData = [];
 
-      for (let point of this.data.dataPoints[0].data) {
+      // TODO: Convert code to work with new chart model.
+      /*for (let point of this.data.dataPoints[0].data) {
         this.chartData.push({
           name: point.x,
           value: point.y
         });
-      }
+      }*/
     }
 
     render(canvasId, dataObj) {
         console.log("DATA: ");
         console.log(this.data);
-        
+
         this.maxYValue = 0;
         this.count = 0;
         var margin = { top: 0, left: 0, right: 0, bottom: 0 };
@@ -162,11 +165,13 @@ export class ChartTimelineComponent {
         this.data = this.trendsService.dataDef;
         console.log("DATA!");
         console.log(JSON.stringify(this.data));
-        for (var i = 0; i < this.data.dataPoints.length; i++)
+
+        // TODO: Convert code to work with new chart model.
+        /*for (var i = 0; i < this.data.dataPoints.length; i++)
         {
             this.newData[i] = JSON.parse(JSON.stringify(this.data.dataPoints[i].data.map(this.makeDate)));
             this.newData[i].sort((a, b) => {return a.x - b.x});
-        }
+        }*/
 
         this.getMaxDataYValue();
         var canvas = <HTMLCanvasElement> document.getElementById(canvasId);

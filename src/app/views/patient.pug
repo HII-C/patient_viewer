@@ -3,7 +3,7 @@
 		img.img-rounded("*ngIf"='patient.gender === "female"', src='/images/textures/female.png', width="60px", height="60px")
 		img.img-rounded("*ngIf"='patient.gender === "male"', src='/images/textures/male.png', width="60px", height="60px")
 	.col-md-5
-		div.text-center
+		div.text-left
 			span#patient
 				.details("*ngIf"='patient')
 					.identifier
@@ -11,13 +11,13 @@
 							span("*ngIf"='patient.name && patient.name[0].given') {{patient.name[0].given[0]}}
 							| &nbsp;
 							span("*ngIf"='patient.name && patient.name[0].family') {{patient.name[0].family[0]}}
-						div
-							| Born: {{patient.birthDate | amDateFormat:'MM/DD/YYYY'}} ({{-1 * (patient.birthDate | amDifference:today:'years':false)}}yr)
 						div 
-							| Gender: {{patient.gender}}, 	
-							span("*ngIf"='patient.mrn') MRN: {{patient.mrn}}
+							| {{patient.gender.charAt(0).toUpperCase()}}, 
+							span("*ngIf"='patient.mrn') MRN: {{patient.mrn}}, 
+						div
+							| DOB: {{patient.birthDate | amDateFormat:'MM/DD/YYYY'}} ({{-1 * (patient.birthDate | amDifference:today:'years':false)}}yr)
 	.col-md-5
-		div.text-center
+		div.text-left
 			span#patient
 				.details("*ngIf"='patient')
 					.identifier
@@ -26,9 +26,8 @@
 							|
 							span([class.hover]="hoverStyling")((mouseenter)='showAllergyHover($event)', (mouseleave)='hover.hide($event)') {{allergy}}
 						div
-							| Reason for Visit: Reason
-						div
-							| Last Encounter: MM/DD/YYYY
+							| Reason for Visit: {{reason}}
+
 hoverBox(#hover='')
 				// May be re-added eventually, but does not do anything currently.
 				//#advanced_search

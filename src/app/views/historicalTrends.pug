@@ -7,7 +7,7 @@ div(style="float: left; width: 350px")
             div.panel.panel-default
                 div.panel-heading
                     h4.panel-title
-                        a(data-toggle="collapse" href="#c")
+                        a(data-toggle="collapse", href="#c", (click)="menu.show(null, $event)")
                             | Conditions
                 div.container(id="c", style="width:auto")
                     div.panel-group
@@ -55,21 +55,27 @@ div(style="float:left; padding-left: 50px")
         button.btn.btn-default(data-toggle="modal", [attr.data-target]="'#specify_popup'", style="width: 75px") 
             | Specify
     
-    div("*ngFor" = "let chart of this.trendsService.charts.values()")
+    div("*ngFor" = "let chart of this.trendsService.charts; let i = index")
       ngx-charts-line-chart(
           [view]="chartSize",
           [results]="chart.lineChartData",
-          [xAxis]="true",
+          [xAxis]="i == this.trendsService.charts.length - 1",
           [yAxis]="true",
-          [showXAxisLabel]="true",
+          [showXAxisLabel]="false",
           [showYAxisLabel]="true",
           [xAxisLabel]="'Date'",
           [yAxisLabel]="chart.title",
           [xScaleMin]="minDate",
           [xScaleMax]="maxDate",
+          [yScaleMin]="chart.yScaleMin",
+          [yScaleMax]="chart.yScaleMax",
           [referenceLines]="chart.normalValues",
-          [showRefLines]="true")
-        
+          [showRefLines]="true",
+          [showGridLines]="false",
+          (select)="onDataPointSelect($event)")
+
+contextMenu(#menu='')
+
 div(style="clear: both")
 
 #specify_popup.modal.fade(tabindex='-1', role='dialog')

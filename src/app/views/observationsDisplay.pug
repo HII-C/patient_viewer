@@ -9,6 +9,8 @@ div
                 th
                     | Value
                 th
+                    | Unit
+                th
                     | Onset
         tbody
             tr("*ngFor"='let c of observations', [class.selected]='c.selected', (click)='selectObservation(c)', (contextmenu)='menu.show(c, $event)', id='t{{observations.indexOf(c)}}')
@@ -16,9 +18,10 @@ div
                     input("*ngIf"="!c.isParent", [checked] = 'checkClicked(c)' type='checkbox',id='c{{observations.indexOf(c)}}', value='{{observations.indexOf(c)}}', (change)='checkObservation($event.target.checked, c)')
                 td
                     button.btn.btn-default("*ngIf"="c.isParent", (click)='expand(c.parent)') ... 
-                    span("*ngIf"="!c.isParent") {{c['code']['text']}}
-                td("*ngIf"="!c.isParent") Placeholder
+                    span("*ngIf"="c['code']['text']") {{c['code']['text']}}
+                    span("*ngIf"="c['code']['coding'][0]['display'] && !c['code']['text']") {{c['code']['coding'][0]['display']}}
+                td("*ngIf"="!c.isParent") {{c['valueQuantity']['value']}}
+                td("*ngIf" = "!c.isParent") {{c['valueQuantity']['unit']}}
                 td("*ngIf"="!c.isParent") {{c.relativeDateTime | amTimeAgo:true}}
-
 
 contextMenu(#menu='')

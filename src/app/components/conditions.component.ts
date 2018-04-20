@@ -1,5 +1,5 @@
 /*
-  DESCRIPTION: TOP LEVEL OF THE CONDITIONS COLUMN: DOES NOT HANDLE (ANY) RENDERING; SIMPLY FOR RETRIEVING 
+  DESCRIPTION: TOP LEVEL OF THE CONDITIONS COLUMN: DOES NOT HANDLE (ANY) RENDERING; SIMPLY FOR RETRIEVING
   DATA FROM THE SERVER, WHICH IS PASSED DOWN
 
   Author: Steven Tran and Kaan Aksoy
@@ -7,6 +7,7 @@
 */
 
 import { Component, Input, Output, EventEmitter, Pipe, ViewChild } from '@angular/core';
+import { Subscription } from 'rxjs/Subscription';
 
 import { FhirService } from '../services/fhir.service';
 import { ConditionService } from '../services/condition.service';
@@ -24,7 +25,7 @@ declare var $: any; //Necessary in order to use jQuery to open popup.
 
 @Component({
   selector: 'conditions',
-  templateUrl: '/conditions.html'
+  templateUrl: '/conditions.html' 
 })
 export class ConditionsComponent extends BaseColumn {
   // The currently selected condition in the list.
@@ -41,6 +42,9 @@ export class ConditionsComponent extends BaseColumn {
   conditionGrouping: Array<any> = [];
   justCreated: boolean;
 
+  // for column switching
+  subscription: Subscription;
+
   @Input() patient: Patient;
   @Output() conditionSelected: EventEmitter<Condition> = new EventEmitter();
 
@@ -53,7 +57,14 @@ export class ConditionsComponent extends BaseColumn {
     this.justCreated = true;
     this.scratchPadConditions = this.getScratchPadConditions();
 
-    //testing allergies
+    this.subscription = scratchPadService.stateChange$.subscribe(
+      sPad => {
+        if (sPad)
+          this.columnState = "scratchpad";
+        else
+          this.columnState = "default";
+      }
+    );
   }
 
   ngOnChanges() {
@@ -95,12 +106,14 @@ export class ConditionsComponent extends BaseColumn {
       }
     });
 
-    var diff = new Date().getTime() - new Date(this.conditions[0].onsetDateTime).getTime();
+    // Scale dates to make them appear more recent for demos.
+    // 0.8 is an arbitrary value that produces realistic dates.
+    let diff = Math.floor(0.8 *
+      (new Date().getTime() - new Date(this.conditions[0].onsetDateTime).getTime()));
 
     for (let c of this.conditions) {
       c.isVisible = true;
-      var newDate = new Date(c.onsetDateTime).getTime() + diff;
-      c.relativeDateTime = new Date(newDate).toDateString();
+      let newDate = new Date(c.onsetDateTime).getTime() + diff;
       c.relativeDateTime = moment(newDate).toISOString();
     }
 

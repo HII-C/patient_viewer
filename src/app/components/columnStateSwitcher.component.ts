@@ -12,24 +12,39 @@ import { BaseColumn } from './baseColumn';
 })
 export class ColumnStateSwitcherComponent {
   @Input() column: BaseColumn;
+  // The type of the column in which the switcher is used.
+  // For example, 'conditions', 'observations', or 'careplans'.
+  @Input() columnType: string;
 
   constructor (private scratchPadService: ScratchPadService) { }
 
+  // Switch back to the default view of the column.
   switchToDefault() {
     if (this.column != null) {
-      this.column.columnState = "default";
+      this.column.columnState = 'default';
       this.column.showDefault();
     }
   }
 
+  // Switch to the scratch pad view of the column.
   switchToScratchPad() {
     if (this.column != null) {
-      this.column.columnState = "scratchpad";
+      this.column.columnState = 'scratchpad';
       this.column.showScratchPad();
     }
   }
 
+  // Return the number of elements in the scratch pad of the column.
   getScratchPadCount() {
-    return this.scratchPadService.getConditions().length;
+    if (this.columnType == 'conditions') {
+      return this.scratchPadService.conditions.length;
+    } else if (this.columnType == 'observations') {
+      return this.scratchPadService.observations.length;
+    } else if (this.columnType == 'careplans') {
+      // TODO: Implement once scratch pad is finished for careplans.
+      return 0;
+    }
+
+    return 0;
   }
 }

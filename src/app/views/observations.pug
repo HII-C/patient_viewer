@@ -4,21 +4,16 @@ div#conditions([style.height.px]="columnHeight")
       h2(style="display: inline-block")
         | Observations
       div(style="display: inline-block")
-        columnStateSwitcher([column]='this')
+        columnStateSwitcher([column]='this', [columnType]="'observations'")
 
   .column-content
-    h5
-      | {{columnState == "default" ? "Observations List" : "Scratch Pad"}}
-
     div.container("*ngIf"='columnState == "default"' style="width:auto")
       div("*ngIf" = 'columnState == "default" && condensedObservationsLoadFinished')
         accordionRecursion([levelData] = 'this.observationService.condensedObservations', [columnNum] = 1, [levelNum] = 0, [firstIteration] = 1)
-      div("*ngIf" = "!condensedObservationsLoadFinished")
+      div("*ngIf" = '!condensedObservationsLoadFinished')
         loading-animation
 
     div.container("*ngIf"='columnState == "scratchpad"' style="width:auto")
-      div.panel-group(id="obs")
-        div.panel.panel-default("*ngIf"='this.observationService.categorizedObservations' style = "padding: 10px")
-          observationScratchPad
+      observationsDisplay([observations] = 'this.scratchPadService.getObservations()')
 
   contextMenu(#menu='')

@@ -20,6 +20,12 @@ export class ContextMenuComponent {
   // Observable subscription to document clicks.
   clickSubscription: any = null;
 
+  // Prevents a glitch in contexts where the menu is opened by a left click.
+  // Without this delay on being able to close the menu, the menu would close
+  // the moment it opened.
+  CLOSEABLE_DELAY: number = 100;
+  closeable: boolean = false;
+
   constructor(private ref: ElementRef) { }
 
   /*
@@ -40,7 +46,10 @@ export class ContextMenuComponent {
   private handleDocClick(event) {
     // Hide the menu if the user clicks outside of it.
     if (!this.ref.nativeElement.contains(event.target)) {
-      this.hide(null);
+      // Only hide the menu if it is currently closeable.
+      if (this.closeable) {
+          this.hide(null);
+      }
     }
   }
 
@@ -52,7 +61,13 @@ export class ContextMenuComponent {
     this.top = event.pageY + 'px';
     this.left = event.pageX + 'px';
 
-    // Disable the standard right click behavior.
+    this.visible = true;
+    this.closeable = false;
+
+    // Allow the menu to be closed only after an interval has elapsed.
+    setTimeout(() => { this.closeable = true; }, this.CLOSEABLE_DELAY);
+
+    // Disable the standard click behavior.
     event.preventDefault();
 
     // Subscribe to document click events.
@@ -60,12 +75,14 @@ export class ContextMenuComponent {
       .subscribe((event) => {
         this.handleDocClick(event);
     });
-
-    this.visible = true;
   }
 
   // Handle executing actions tied to a clicked menu option.
   private handleOptionClick(option, event) {
+    if (event) {
+      event.preventDefault();
+    }
+
     if (option.exec) {
       // Execute the function tied to the clicked menu option.
       option.exec(this.data);
@@ -82,8 +99,10 @@ export class ContextMenuComponent {
     }
 
     // Unsubscribe from document click events.
-    this.clickSubscription.unsubscribe();
-    this.clickSubscription = null;
+    if (this.clickSubscription) {
+      this.clickSubscription.unsubscribe();
+      this.clickSubscription = null;
+    }
 
     // Hide the menu and reset the associated data.
     this.visible = false;

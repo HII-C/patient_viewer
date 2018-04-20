@@ -14,97 +14,100 @@ import { ContextMenuComponent } from './contextMenu.component';
 
 
 @Component({
-    selector: 'observationsDisplay',
-    templateUrl: '/observationsDisplay.html'
+  selector: 'observationsDisplay',
+  templateUrl: '/observationsDisplay.html'
 })
 export class ObservationsDisplay {
-    // The currently selected condition in the list.
-    selected: Observation;
+  // The currently selected condition in the list.
+  selected: Observation;
 
-    // This is the array of conditions to be displayed
-    @Input() observations: Array<Observation>;
-    @Output() observationSelected: EventEmitter<Observation> = new EventEmitter();
+  // This is the array of conditions to be displayed
+  @Input() observations: Array<Observation>;
+  @Output() observationSelected: EventEmitter<Observation> = new EventEmitter();
 
-    @ViewChild('menu') menu: ContextMenuComponent;
+  @ViewChild('menu') menu: ContextMenuComponent;
 
-    // ===============================================================================================================================================
-    // ================================================================== EVENT METHODS ==============================================================
-    // ==================================================================---------------==============================================================
+  // ===============================================================================================================================================
+  // ================================================================== EVENT METHODS ==============================================================
+  // ==================================================================---------------==============================================================
 
-    constructor(private scratchPadService: ScratchPadService){}
+  constructor(private scratchPadService: ScratchPadService) { }
 
-    ngOnChanges() {}
+  ngOnChanges() {
+    //console.log(this.observations);
+  }
 
-    ngOnInit() {}
+  ngOnInit() { }
 
-    //=================================================================== CONTEXT MENU ==============================================================
+  //=================================================================== CONTEXT MENU ==============================================================
 
-    // Can only access view child after the view has been initialized.
-    ngAfterViewInit() {
-        // Add options to the context menu shown when right clicking conditions.
-        this.menu.addOption({
-            'icon': 'glyphicon-pencil',
-            'text': 'Add to Scratch Pad',
-            'exec': function(data) {
-                console.log(data);
-            }
-        });
-
+  // Can only access view child after the view has been initialized.
+  ngAfterViewInit() {
+    // NOTE: 'exec' functions must be bound to 'this' to access scratchPadService.
+    // This is a strange behavior with scoping in Typescript/Javascript.
+    
+    // Add options to the context menu shown when right clicking conditions.
     this.menu.addOption({
-        'icon': 'glyphicon-stats',
-        'text': 'Add to Trend Tool',
-        'exec': function(data) {
-            console.log(data);
-        }
+      'icon': 'glyphicon-pencil',
+      'text': 'Add to Scratch Pad',
+      'exec': function(obs) {
+        this.scratchPadService.addObservation(obs);
+      }.bind(this)
     });
 
     this.menu.addOption({
-        'icon': 'glyphicon-random',
-            'text': 'Open Association Tool',
-            'exec': function(data) {
-                console.log(data);
-            }
-        });
+      'icon': 'glyphicon-stats',
+      'text': 'Add to Trend Tool',
+      'exec': function(obs) {
+        console.log(obs);
+      }.bind(this)
+    });
+
+    this.menu.addOption({
+      'icon': 'glyphicon-random',
+      'text': 'Open Association Tool',
+      'exec': function(obs) {
+        console.log(obs);
+      }.bind(this)
+    });
+  }
+
+  // FOR MAINTAINING CHECK STATE AFTER LOSING FOCUS
+
+  //whenver a line is selected
+  selectObservation(observation: Observation) {
+    this.selected = observation;
+    this.observationSelected.emit(this.selected);
+
+    for (let o of this.scratchPadService.totalObservations) {
+      o['selected'] = (o.id == this.selected.id);
+    }
+  }
+
+  // check if the element has already been selected (n^2 time lol)
+  checkClicked(observation: Observation) {
+    if (this.scratchPadService.checkedMapObservations.get(observation)) {
+      return true;
     }
 
-    // FOR MAINTAINING CHECK STATE AFTER LOSING FOCUS
-    
-    //whenver a line is selected
-    selectObservation(observation: Observation) {
-        this.selected = observation;
-        this.observationSelected.emit(this.selected);
+    return false;
+  }
 
-        console.log(this.scratchPadService.totalObservations);
+  // WHENEVER A CHECKBOX IS CLICKED OR UNCLICKED, IT REGISTERS IT IN THE SCRATCHPADSERVICE (not actually the scratch pad yet)
+  checkObservation(checked: boolean, checkedObservation: Observation) {
+    this.scratchPadService.checkObservation(checked, checkedObservation);
+  }
 
-        for (let o of this.scratchPadService.totalObservations) {
-            o['selected'] = (o.id == this.selected.id);
+  expand(parent: string) {
+    /**
+    for (let c of this.conditions) {
+        if (c.parent == parent) {
+            c.isVisible = true;
+            c.parent = "";
+            c.isParent = false;
         }
     }
-
-    // check if the element has already been selected (n^2 time lol)
-    checkClicked(observation: Observation) {
-        if (this.scratchPadService.checkedMapObservations.get(observation)){
-            return true;
-        }
-
-        return false;
-    }
-
-    // WHENEVER A CHECKBOX IS CLICKED OR UNCLICKED, IT REGISTERS IT IN THE SCRATCHPADSERVICE (not actually the scratch pad yet)
-    checkObservation(checked: boolean, checkedObservation: Observation) {
-        this.scratchPadService.checkObservation(checked, checkedObservation);
-    }
-
-    expand(parent: string) {
-        /** 
-        for (let c of this.conditions) {
-            if (c.parent == parent) {
-                c.isVisible = true;
-                c.parent = "";
-                c.isParent = false;
-            }
-        }
-        */
-    }
+    */
+  }
 
 }

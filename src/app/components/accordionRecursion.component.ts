@@ -51,7 +51,7 @@ export class AccordionRecursion {
         if (this.firstIteration == 1){
             // reconstruct the data for now
             if (this.columnNum == 0)
-                this.reconstructData(this.levelData);
+                this.reconstructDataConditions(this.levelData);
             else if (this.columnNum == 1){
                 this.reconstructDataObservations(this.levelData);
             }
@@ -71,58 +71,109 @@ export class AccordionRecursion {
 
     // NOTE: The current component uses this function to rebuild the data into correct structure, but in practice, this function should not be used
     // since the data should already in the correct model format (described above levelData)
-    reconstructData(arrData: any) {
-        var reconstructedObject = [{
-            category: "Chief Complaint",
-            subheadings: false,
-            subs: null,
-            data: arrData
-        }, 
-        {
-            category: "Active Problems",
-            subheadings: false,
-            subs: null,
-            data: arrData
-        },
-        {
-            category: "Inactive Problems",
-            subheadings: false,
-            subs: null,
-            data: arrData
-        },
-        {
-            category: "Allergies/Precautions",
-            subheadings: false,
-            subs: null,
-            data: arrData
-        },
-        {
-            category: "Preventions/Exposures",
-            subheadings: false,
-            subs: null,
-            data: arrData
-        },
-    ];
-
-    this.parsedData = reconstructedObject;
-    }
-
-    reconstructDataObservations(arrData: any){
-        var reconstructedObject = [
-        {
-            category: "Vitals",
-            subheadings: true,
-            subs: [{
-                category: "Weight",
-                subheadings: false,
-                subs: null,
-                data: arrData
-            }],
-            data: null
-        }];
-
+    reconstructDataConditions(arrData: any) {  
+        var reconstructedObject = this.addCategoriesConditions(arrData);
         this.parsedData = reconstructedObject;
     }
+
+    addCategoriesConditions(arrData: any){
+        // For conditions, there are guaranteed to be 5 different columns; for now, just filter by active/inactive
+
+        // data sieve
+        var dataFilter = 
+        {
+            'Chief Complaint': [],
+            'Active Problems': [],
+            'Inactive Problems': [],
+            'Allergies/Precautions' : [],
+            'Preventions/Exposures' : []
+        };
+
+        // Filter each condition into a category based on the data
+        for (var i = 0 ; i < arrData.length; i++){
+            if (arrData[i].clinicalStatus == "active"){
+                dataFilter['Active Problems'].push(arrData[i]);
+            } else if (arrData[i].clinicalStatus == "inactive"){
+                dataFilter['Inactive Problems'].push(arrData[i]);
+            }
+        }
+
+        // then reconstruct the object
+        var reconstructedObject = [];
+
+        // for each category
+        for (var key in dataFilter){
+            if (dataFilter.hasOwnProperty(key)){
+                var newObj = 
+                {
+                    category: key,
+                    subheadings: false,
+                    subs: null,
+                    data: dataFilter[key]
+                };
+
+                reconstructedObject.push(newObj);
+            }
+        }        
+
+        return reconstructedObject;
+    }
+
+    // ================================= RECONSTRUCT DATA OBSERVATIONS =========================
+
+    reconstructDataObservations(arrData: any){
+        // reconstruct then set the passed data
+        var reconstructedObject = this.addCategoriesObservations(arrData);
+        this.parsedData = reconstructedObject;
+    }
+
+    // Populate the Observations list with categories (Need to migrate this to the service later)
+    // The categories are stored inside of the object already
+    addCategoriesObservations(arrData: any){
+
+        // hash out duplicates using a javscript object
+        var hash = {};
+
+        for (var i = 0 ; i < arrData.length; i++){
+
+            if (arrData[i].category)
+                var currCategory = arrData[i].category[0].text;
+
+            // ignore if this category has no valueQuantity field
+            if (!arrData[i].valueQuantity)
+                continue;
+
+            // only push new if not in hashset
+            if (!hash[currCategory]){
+                hash[currCategory] = [];
+                hash[currCategory].push(arrData[i]);
+            } else {
+                hash[currCategory].push(arrData[i]);
+            }
+        }
+
+        // then reconstruct the object
+        var reconstructedObject = [];
+
+        // for each category
+        for (var key in hash){
+            if (hash.hasOwnProperty(key)){
+                var newObj = 
+                {
+                    category: key,
+                    subheadings: false,
+                    subs: null,
+                    data: hash[key]
+                };
+
+                reconstructedObject.push(newObj);
+            }
+        }        
+
+        return reconstructedObject;
+    }
+
+    // ================================ RECONSTRUCT DATA FINDINGS ======================
 
     reconstructDataFindings(arrData: any) {
         var reconstructedObject = [{

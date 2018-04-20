@@ -2,9 +2,11 @@ import { Component, Input, ElementRef } from '@angular/core';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 
 import { Patient } from '../models/patient.model';
+
 import { DoctorService } from '../services/doctor.service';
 import { HistoricalTrendsService } from '../services/historicalTrends.service';
 import { ToolBarService } from '../services/toolbar.service';
+import { ScratchPadService } from '../services/scratchPad.service';
 
 @Component({
   selector: 'toolbar',
@@ -26,10 +28,27 @@ export class ToolbarComponent {
   constructor(private doctorService: DoctorService,
               private trendsService: HistoricalTrendsService,
               private elRef: ElementRef,
-              private toolbarService: ToolBarService) { }
+              private toolbarService: ToolBarService,
+              private scratchPadService: ScratchPadService) { }
 
   switchNav() {
     this.nav2 = !this.nav2;
+  }
+
+  // whenver the user presses the filter button
+  filterScratchPad() {
+    
+    // Call the filtering method in the service
+    this.scratchPadService.addConditionsToScratchPad();
+    this.scratchPadService.addObservationToScratchPad();
+
+    // also switch the views to the scratch pad view
+    this.scratchPadService.switchToScratchPad(true);
+  }
+
+  // reset to default (not scratchPad)
+  resetToDefaultView() {
+    this.scratchPadService.switchToScratchPad(false);
   }
 
   openGraph() {

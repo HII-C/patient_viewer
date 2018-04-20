@@ -106,4 +106,8 @@ export class ConditionsDisplay {
   printmsg(condition: Condition) {
       console.log(condition);
   }
+
+  getDate(c: Condition) {
+    return (new Date(c.onsetDateTime)).toDateString().substring(3);
+  }
 }

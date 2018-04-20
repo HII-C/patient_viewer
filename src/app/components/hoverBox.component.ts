@@ -62,4 +62,12 @@ export class HoverBoxComponent {
     this.visible = false;
     this.items = null;
   }
+
+  public typeOf(x) {
+    return typeof x;
+  }
+
+  public isDate(x) {
+    return x instanceof Date;
+  }
 }

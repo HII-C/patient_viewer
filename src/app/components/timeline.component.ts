@@ -25,6 +25,7 @@ export class TimelineComponent {
           this.timeline = <Array<Timeline>>data.entry.map(r => r['resource']);
           this.timeline = this.timeline.reverse();
           console.log("Loaded " + this.timeline.length + " timelines.");
+          console.log(this.timeline);
         } else {
           this.timeline = new Array<Timeline>();
           console.log("No timelines for patient.");

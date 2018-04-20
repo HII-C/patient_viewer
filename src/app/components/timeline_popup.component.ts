@@ -6,6 +6,7 @@ import { Patient } from '../models/patient.model';
 import { HoverBoxComponent } from '../components/hoverBox.component';
 
 declare var $: any; //Necessary in order to use jQuery to open popup.
+var isDaniel: boolean = false; //for showcase purposes only
 
 @Component({
   selector: 'timeline-popup',
@@ -20,11 +21,17 @@ export class TimelinePopupComponent {
     this.condition = timelineItem;
     $('#timeline_popup').modal({});
   }
-
+  @Input() patient: Patient; //for showcase purposes
   @ViewChild('hover1') hover1: HoverBoxComponent;
   @ViewChild('hover2') hover2: HoverBoxComponent;
 
+  //display up to 3 timeline events within a single timeline node
   open(t1, t2, t3, event) {
+    //for showcase only
+    if (isDaniel) {
+      this.hover1.show(["August 10", "Followup with Dr. Jones", "Diabetes followup"], event);
+      return;
+    }
     if (t1 != null) {
       // document.getElementById('c1').innerHTML = '<h2>' + t1.code['text'] + '</h2>\n<p>' + t1.clinicalStatus + '</p>\n<p>' + new Date(t1.onsetDateTime).toDateString() + '</p>';
       // document.getElementById('c1').style.display = 'inline-block';
@@ -59,5 +66,12 @@ export class TimelinePopupComponent {
     this.hover1.hide(event);
     this.hover2.hide(event);
     
+  }
+
+  //for showcase purposes
+  ngOnInit() {
+    if (this.patient.name["0"].family === "Adams") {
+      isDaniel = true;
+    }
   }
 }

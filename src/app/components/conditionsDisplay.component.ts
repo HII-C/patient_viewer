@@ -103,5 +103,7 @@ export class ConditionsDisplay {
       }
     }
   }
-
+  printmsg(condition: Condition) {
+      console.log(condition);
+  }
 }

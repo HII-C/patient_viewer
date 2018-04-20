@@ -29,9 +29,10 @@ export class TimelinePopupComponent {
   open(t1, t2, t3, event) {
     //for showcase only
     if (isDaniel) {
-      this.hover1.show(["August 10", "Followup with Dr. Jones", "Diabetes followup"], event);
+      this.hover1.show(["11m", "Followup with Dr. Jones", "Diabetes followup"], event);
       return;
     }
+
     if (t1 != null) {
       // document.getElementById('c1').innerHTML = '<h2>' + t1.code['text'] + '</h2>\n<p>' + t1.clinicalStatus + '</p>\n<p>' + new Date(t1.onsetDateTime).toDateString() + '</p>';
       // document.getElementById('c1').style.display = 'inline-block';

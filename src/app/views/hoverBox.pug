@@ -4,4 +4,9 @@ ul.dropdown-menu([style.position]="'fixed'",
                  [style.top]='top')
   li("*ngFor"="let item of items") 
     a(href="#", (click)='$event.preventDefault()')
-        | {{item}}
+        span("*ngIf"="isMonth(item); else itemTemplate")
+         | {{item}}
+         | &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;
+
+         span.glyphicon.glyphicon-list-alt
+        ng-template(#itemTemplate = '') {{item}}

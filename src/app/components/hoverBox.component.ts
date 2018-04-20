@@ -70,4 +70,8 @@ export class HoverBoxComponent {
   public isDate(x) {
     return x instanceof Date;
   }
+
+  public isMonth(x) {
+    return x.includes("11m");
+  }
 }

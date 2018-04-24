@@ -107,7 +107,9 @@ export class ConditionsDisplay {
       console.log(condition);
   }
 
-  getDate(c: Condition) {
-    return (new Date(c.onsetDateTime)).toDateString().substring(3);
+  getDateString(c: Condition) {
+    let d = new Date(c.onsetDateTime);
+    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    return months[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
   }
 }

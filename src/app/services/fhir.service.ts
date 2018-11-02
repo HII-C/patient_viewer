@@ -5,6 +5,8 @@ import { SmartService } from '../services/smart.service';
 @Injectable()
 export class FhirService {
 
+  constructor() {}
+
   private base: string;
   public token: string;
 

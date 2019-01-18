@@ -16,6 +16,8 @@ Assuming you already have node installed via `brew install node` or similar, beg
 
 If you do not have `npm` installed and `brew install node` does not work as expected, you may need to [follow the instructions here](https://brew.sh/) to install the `brew` package manager.
 
+You may need to downgrade `npm` and `node` to earlier versions for the setup to work. The setup was tested specifically for `node v8.15.0` and `npm v6.4.1`.
+
 ## Development Guidelines
 ### Do's: 
 - Prefer to use `let` rather than `var` for declaring variables. The scoping for variables declared with `var` is unintuitive and can result in strange bugs.

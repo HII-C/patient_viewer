@@ -17,18 +17,11 @@ export class CarePlanChartComponent {
 
   ngOnChanges() {
     this.selected = null;
+
     if (this.patient) {
-      this.carePlanService.index(this.patient, true).subscribe(data => {
-        if (data.entry) {
-          this.carePlans = <Array<CarePlan>>data.entry.map(r => r['resource']);
-          console.log(this.carePlans[0]);
-          this.carePlans = this.carePlans.reverse();
-          console.log("Loaded " + this.carePlans.length + " carePlans.");
-        }
-        else {
-          this.carePlans = new Array<CarePlan>();
-          console.log("No carePlans for patient.");
-        }
+      this.carePlanService.getCarePlans(this.patient).subscribe(carePlans => {
+        this.carePlans = carePlans;
+        console.log("Loaded " + carePlans.length + " care plans.");
       });
     }
   }

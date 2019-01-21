@@ -42,10 +42,11 @@ export class CarePlanComponent extends BaseColumn {
 
   ngOnChanges() {
     this.selected = null;
-    
+
     if (this.patient) {
       this.carePlanService.getCarePlans(this.patient).subscribe(carePlans => {
         this.carePlans = carePlans;
+        this.carePlanLoadFinished = true;
         console.log("Loaded " + carePlans.length + " care plans.");
       });
     }

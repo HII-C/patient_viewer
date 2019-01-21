@@ -16,7 +16,7 @@ export class CarePlanService {
 
   // Retrieve care plans for a given patient
   getCarePlans(patient: Patient): Observable<any> {
-    var url = this.fhirService.getUrl() + this.path + "?patient=" + patient.id;
+    let url = this.fhirService.getUrl() + this.path + "?patient=" + patient.id;
 
     return this.http.get(url, this.fhirService.options(true)).map(res => {
       let json = res.json();

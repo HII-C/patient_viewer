@@ -8,7 +8,9 @@ import { Patient } from '../models/patient.model';
 @Injectable()
 export class PatientService {
   private path = '/Patient';
-  public patient;
+
+  // The id of the currently set patient
+  public patientId : number;
 
   constructor(private fhirService: FhirService, private http: Http) { }
 
@@ -18,10 +20,14 @@ export class PatientService {
     return this.http.get(url, this.fhirService.options(withAuth)).map(res => res.json());
   }
 
-  // Retrieve a patient by its id
-  loadPatient(patientId): Observable<Patient> {
-    var url = this.fhirService.getUrl() + this.path + '/' + patientId;
-    this.patient = patientId;
+  // Set the id of the patient
+  setPatientId(patientId) {
+    this.patientId = patientId;
+  }
+
+  // Retrieve the patient with the id previously set using setPatientId()
+  loadPatient(): Observable<Patient> {
+    var url = this.fhirService.getUrl() + this.path + '/' + this.patientId;
 
     let options = this.fhirService.options(true);
     options.headers.append('Pragma', 'no-cache');

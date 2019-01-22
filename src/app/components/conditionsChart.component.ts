@@ -7,6 +7,7 @@ import { UpdatingService } from '../services/updating.service';
 import { Condition } from '../models/condition.model';
 import { Patient } from '../models/patient.model';
 import * as moment from 'moment';
+import { PatientService } from '../services/patient.service';
 
 @Component({
   selector: 'conditionsChart',
@@ -20,12 +21,28 @@ export class ConditionsChartComponent {
   conditionGrouping: Array<any> = [];
   conditionGroupingName: Array<any> = ["Active", "Inactive"];
   textInputForEdit: String;
+
   @Input() patient: Patient;
 
   @Output() conditionSelected: EventEmitter<Condition> = new EventEmitter();
 
-  constructor(private fhirService: FhirService, private conditionService: ConditionService, private doctorService: DoctorService, private scratchPadService: ScratchPadService, private updatingService: UpdatingService) {
-    // this.gridItemConfiguration.draggable = this.doctorService.configMode;
+  constructor(
+    private fhirService: FhirService,
+    private conditionService: ConditionService,
+    private doctorService: DoctorService,
+    private scratchPadService: ScratchPadService,
+    private updatingService: UpdatingService
+  ) { }
+
+  ngOnChanges() {
+    this.selected = null;
+
+    if (this.patient) {
+      this.conditionService.loadConditions(this.patient).subscribe(conditions => {
+        this.conditions = conditions;
+        this.loadFinished();
+      });
+    }
   }
 
   selectCondition(condition: Condition) {
@@ -64,6 +81,7 @@ export class ConditionsChartComponent {
     }
     console.log("sort");
   }
+
   loadFinished() {
     this.conditions = this.conditions.reverse();
     console.log("Loaded " + this.conditions.length + " conditions.");
@@ -78,10 +96,6 @@ export class ConditionsChartComponent {
     })
     var diff = new Date().getTime() - new Date(this.conditions[0].onsetDateTime).getTime();
 
-
-
-
-
     for (let c of this.conditions) {
       c.isVisible = true;
       var newDate = new Date(c.onsetDateTime).getTime() + diff;
@@ -94,52 +108,6 @@ export class ConditionsChartComponent {
     }
     this.conditionService.conditions = this.conditions;
     this.groupConditions();
-  }
-
-  loadData(url) {
-    let isLast = false;
-    this.conditionService.indexNext(url).subscribe(data => {
-      if (data.entry) {
-        let nextCon = <Array<Condition>>data.entry.map(r => r['resource']);
-
-        this.conditions = this.conditions.concat(nextCon);
-        isLast = true;
-        for (let i of data.link) {
-          if (i.relation == "next") {
-            isLast = false;
-            this.loadData(i.url);
-          }
-        }
-        if (isLast) {
-          this.loadFinished();
-        }
-      }
-    });
-  }
-
-  ngOnChanges() {
-    this.selected = null;
-    if (this.patient) {
-      this.conditionService.index(this.patient, true).subscribe(data => {
-        if (data.entry) {
-
-
-          let nextLink = null;
-          this.conditions = <Array<Condition>>data.entry.map(r => r['resource']);
-          for (let i of data.link) {
-            if (i.relation == "next") {
-              nextLink = i.url;
-            }
-          }
-          if (nextLink) { this.loadData(nextLink); }
-          else { this.loadFinished(); }
-
-        } else {
-          this.conditions = new Array<Condition>();
-          console.log("No conditions for patient.");
-        }
-      });
-    }
   }
 
   // Method for basic toggling, using JSON functions to toggle internal Angular2 module OnChanges for UI reactivity

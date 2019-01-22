@@ -19,7 +19,7 @@ export class CarePlanChartComponent {
     this.selected = null;
 
     if (this.patient) {
-      this.carePlanService.getCarePlans(this.patient).subscribe(carePlans => {
+      this.carePlanService.loadCarePlans(this.patient).subscribe(carePlans => {
         this.carePlans = carePlans;
         console.log("Loaded " + carePlans.length + " care plans.");
       });

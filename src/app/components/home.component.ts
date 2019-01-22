@@ -25,7 +25,7 @@ export class HomeComponent {
 
         if (this.fhirService.token) {
             // Access token is already available.
-            this.selectPatientById(this.patientService.patient);
+            this.selectPatientById(this.patientService.patientId);
         } else {
             // Retrieve the access token and patient.
             this.smartService.authenticate().subscribe(data => {
@@ -36,8 +36,9 @@ export class HomeComponent {
     }
 
     // Select a patient with the given ID
-    selectPatientById(id) { 
-        this.patientService.loadPatient(id).subscribe(patient => {
+    selectPatientById(id) {
+        this.patientService.setPatientId(id);
+        this.patientService.loadPatient().subscribe(patient => {
             this.selected = patient;
         });
     }

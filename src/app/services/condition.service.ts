@@ -19,17 +19,6 @@ export class ConditionService {
 
   constructor(private fhirService: FhirService, private http: Http) { }
 
-  // Deprecated: This method will likely be deleted.
-  index(patient: Patient, authParam: boolean): Observable<any> {
-    var url = this.fhirService.getUrl() + this.path + "?patient=" + patient.id;
-    return this.http.get(url, this.fhirService.options(authParam)).map(res => res.json());
-  }
-
-  // Deprecated: This method will likely be deleted.
-  indexNext(url: string): Observable<any> {
-    return this.http.get(url, this.fhirService.options(true)).map(res => res.json());
-  }
-
   // https://stackoverflow.com/questions/45594609/which-operator-to-chain-observables-conditionally
   // Because the conditions are paginated in the API, we must continually
   // load the next page until no pages remain. This is achieved through
@@ -46,9 +35,9 @@ export class ConditionService {
 
         let nextUrl = null;
 
-        for(let l of data.link) {
+        for (let l of data.link) {
           // Check if there is another page to load.
-          if(l.relation == "next") {
+          if (l.relation == "next") {
             nextUrl = l.url;
           }
         }
@@ -63,16 +52,15 @@ export class ConditionService {
       });
   }
 
+  // Retrieve conditions for a given patient
   loadConditions(patient: Patient) {
     var url = this.fhirService.getUrl() + this.path + "?patient=" + patient.id;
     return this.loadConditionsPage(url);
   }
 
-  //Task: Display Allergies in Patient Demographics
-  //get request
-  //make a models
-  loadAllergies(patient: Patient, authParam: boolean): Observable<any> {
+  // Retrieve allergies for a given patient
+  loadAllergies(patient: Patient): Observable<any> {
     var url = this.fhirService.getUrl() + "/AllergyIntolerance" + "?patient=" + patient.id;
-    return this.http.get(url, this.fhirService.options(authParam)).map(res => res.json());
+    return this.http.get(url, this.fhirService.options(true)).map(res => res.json());
   }
 }

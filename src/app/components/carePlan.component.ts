@@ -44,7 +44,7 @@ export class CarePlanComponent extends BaseColumn {
     this.selected = null;
 
     if (this.patient) {
-      this.carePlanService.getCarePlans(this.patient).subscribe(carePlans => {
+      this.carePlanService.loadCarePlans(this.patient).subscribe(carePlans => {
         this.carePlans = carePlans;
         this.carePlanLoadFinished = true;
         console.log("Loaded " + carePlans.length + " care plans.");

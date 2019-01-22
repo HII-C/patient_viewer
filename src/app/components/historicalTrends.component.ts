@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, Input} from '@angular/core';
 import * as moment from 'moment';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/fromEvent';
@@ -6,6 +6,9 @@ import 'rxjs/add/observable/fromEvent';
 import { ObservationService } from '../services/observation.service';
 import { HistoricalTrendsService } from '../services/historicalTrends.service';
 import { ContextMenuComponent } from './contextMenu.component';
+import { PatientService } from '../services/patient.service';
+import { Patient } from '../models/patient.model';
+import { pairs } from 'rxjs/observable/pairs';
 
 @Component({
   selector: 'historicalTrends',
@@ -19,6 +22,9 @@ export class HistoricalTrendsComponent {
   private minDate: Date = null;
   private maxDate: Date = null;
 
+  // Reference to the current patient.
+  private patient: Patient;
+
   @ViewChild('menu') menu: ContextMenuComponent;
 
   // Observable subscription to mouse movements.
@@ -27,13 +33,20 @@ export class HistoricalTrendsComponent {
   // Store the most recent mouse event to keep track of the mouse location.
   mouseEvent: any = null;
 
-  constructor(private trendsService: HistoricalTrendsService,
-    private observationService: ObservationService) {
+  constructor(
+    private trendsService: HistoricalTrendsService,
+    private observationService: ObservationService,
+    private patientService: PatientService
+  ) {
       // Track the location of the mouse (needed for context menu).
       this.mouseSubscription = Observable.fromEvent(document, 'mousemove')
         .subscribe((event) => {
           this.mouseEvent = event;
       });
+
+      this.patientService.loadPatient().subscribe(patient => {
+        this.patient = patient;
+      })
     }
 
   // Can only access view child after the view has been initialized.

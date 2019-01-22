@@ -64,7 +64,7 @@ export class PatientComponent {
 
   ngOnChanges() {
     if (this.patient) {
-      this.conditionService.loadAllergies(this.patient, true).subscribe(allergies => {
+      this.conditionService.loadAllergies(this.patient).subscribe(allergies => {
         if (allergies.entry) {
           //add allergy strings to allergies
           let entries = allergies.entry;

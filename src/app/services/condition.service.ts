@@ -23,7 +23,7 @@ export class ConditionService {
   // Because the conditions are paginated in the API, we must continually
   // load the next page until no pages remain. This is achieved through
   // concatMap and Observable.concat, as discussed above.
-  loadConditionsPage(url: string) {
+  loadConditionsPage(url: string): Observable<Array<Condition>> {
     return this.http.get(url, this.fhirService.options(true))
       .map(res => res.json())
       .concatMap(data => {
@@ -53,7 +53,7 @@ export class ConditionService {
   }
 
   // Retrieve conditions for a given patient
-  loadConditions(patient: Patient) {
+  loadConditions(patient: Patient): Observable<Array<Condition>> {
     var url = this.fhirService.getUrl() + this.path + "?patient=" + patient.id;
     return this.loadConditionsPage(url);
   }

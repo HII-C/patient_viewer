@@ -35,16 +35,10 @@ export class HomeComponent {
         }
     }
 
-    selectPatientById(id) {
-        // Select a patient with the given ID.
-        this.patientService.get(id).subscribe(d => {
-            this.selected = <Patient>d; //.entry['resource'];
-
-            for (let id of d.identifier) {
-                if (id.type && id.type.coding[0].code == "MR") {
-                    this.selected.mrn = id.value;
-                }
-            }
+    // Select a patient with the given ID
+    selectPatientById(id) { 
+        this.patientService.loadPatient(id).subscribe(patient => {
+            this.selected = patient;
         });
     }
 }

@@ -10,6 +10,7 @@ import 'rxjs/add/operator/concat';
 import { FhirService } from './fhir.service';
 import { Patient } from '../models/patient.model';
 import { Condition } from '../models/condition.model';
+import { AllergyIntolerance } from '../models/allergyIntolerance.model';
 
 @Injectable()
 @Component({})
@@ -59,8 +60,16 @@ export class ConditionService {
   }
 
   // Retrieve allergies for a given patient
-  loadAllergies(patient: Patient): Observable<any> {
+  loadAllergies(patient: Patient): Observable<Array<AllergyIntolerance>> {
     var url = this.fhirService.getUrl() + "/AllergyIntolerance" + "?patient=" + patient.id;
-    return this.http.get(url, this.fhirService.options(true)).map(res => res.json());
+    return this.http.get(url, this.fhirService.options(true)).map(res => {
+      let json = res.json();
+
+      if (json.entry) {
+        return <Array<AllergyIntolerance>> json.entry.map(r => r['resource']);
+      } else {
+        return new Array<AllergyIntolerance>();
+      }
+    });
   }
 }

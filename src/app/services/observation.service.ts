@@ -131,12 +131,16 @@ export class ObservationService {
   // Gets the initial data for the patient upon ngOnChanges call
   index(patient: Patient): Observable<any> {
     var url = this.fhirService.getUrl() + this.path + "?patient=" + patient.id;
-    return this.http.get(url, this.fhirService.options(true)).map(res => res.json());
+    return this.http.get(url, this.fhirService.options(true)).map(res => {
+      return <Observation> res.json();
+    });
   }
 
   // Gets the data for the nested data link calls
   indexNext(url: string): Observable<any> {
-    return this.http.get(url, this.fhirService.options(true)).map(res => res.json());
+    return this.http.get(url, this.fhirService.options(true)).map(res => {
+      return <Observation> res.json();
+    });
   }
 
   // ================================ DATA CLEANING ===============================

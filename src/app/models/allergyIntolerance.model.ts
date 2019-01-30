@@ -1,4 +1,6 @@
 export class AllergyIntolerance {
     id: string;
-    text: string;
+    code: {
+        text: string;
+    };
 }

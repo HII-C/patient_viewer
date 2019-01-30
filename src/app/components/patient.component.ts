@@ -11,6 +11,7 @@ import { CookieService } from 'angular2-cookie/core';
 import { HomeComponent } from '../components/home.component';
 import { ContextMenuComponent } from './contextMenu.component';
 import { HoverBoxComponent } from './hoverBox.component';
+import { AllergyIntolerance } from '../models/allergyIntolerance.model';
 
 @Injectable()
 @Component({
@@ -65,16 +66,13 @@ export class PatientComponent {
   ngOnChanges() {
     if (this.patient) {
       this.conditionService.loadAllergies(this.patient).subscribe(allergies => {
-        if (allergies.entry) {
+        if (allergies) {
           //add allergy strings to allergies
-          let entries = allergies.entry;
-          for (let e of entries) {
-            this.allergies.push(e.resource.code.text);
-          }
+          this.allergies = allergies.map(allergy => allergy.code.text);
 
           //construct displayed allergy string
           if (this.allergies.length == 1) { //singular allergy
-            this.allergy = entries[0].resource.code.text;
+            this.allergy = this.allergies[0];
           }
 
           else { //multiple allergies

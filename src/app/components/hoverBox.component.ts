@@ -36,12 +36,22 @@ export class HoverBoxComponent {
       return;
     }
 
+    
     this.timeoutHandle = setTimeout(() => {
       this.items = items;
 
       // Set the location of the hover box to where the mouse is.
-      var topOffset = parseInt(event.pageY) + this.topOffset;
-      var leftOffset = parseInt(event.pageX) + this.leftOffset;
+      var topOffset = 0;
+      var leftOffset = 0;
+      // Code used to test moving the hover box away from the edge of the screen. 
+      // TODO: do not hardcode pixels, find information of the pixel box
+       
+      if (window.innerWidth - event.pageX < 300) {
+        leftOffset = window.innerWidth - 300 ;
+      } else {
+        leftOffset = parseInt(event.pageX) + this.leftOffset;  
+      }
+      topOffset = parseInt(event.pageY) + this.topOffset;
       this.top = topOffset + "px";
       this.left = leftOffset +  "px";
 

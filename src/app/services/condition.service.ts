@@ -16,6 +16,7 @@ import { Condition } from '../models/condition.model';
 export class ConditionService {
   private path = '/Condition';
   conditions: Array<Condition> = [];
+  conditionsCache = {};
 
   constructor(private fhirService: FhirService, private http: Http) { }
 
@@ -60,7 +61,17 @@ export class ConditionService {
 
   // Retrieve allergies for a given patient
   loadAllergies(patient: Patient): Observable<any> {
-    var url = this.fhirService.getUrl() + "/AllergyIntolerance" + "?patient=" + patient.id;
-    return this.http.get(url, this.fhirService.options(true)).map(res => res.json());
+    // if conditions cache does not contain 
+    if (this.conditionsCache[patient.id] == null) {
+      var url = this.fhirService.getUrl() + "/AllergyIntolerance" + "?patient=" + patient.id;
+
+      this.conditionsCache[patient.id] = this.http.get(url, this.fhirService.options(true)).map(res => res.json());
+    } 
+    return this.conditionsCache[patient.id];
+    
+    
   }
+
+  // TODO: Cache API calls into data structures that last for the duration of a session 
+
 }

@@ -8,9 +8,9 @@ div#conditions([style.height.px]="columnHeight")
 
   .column-content
     div.container("*ngIf"='columnState == "default"' style="width:auto")
-      div("*ngIf" = 'columnState == "default" && condensedObservationsLoadFinished')
+      div("*ngIf" = 'columnState == "default" && this.observationService.condensedObservationsLoadFinished')
         accordionRecursion([levelData] = 'this.observationService.condensedObservations', [columnNum] = 1, [levelNum] = 0, [firstIteration] = 1)
-      div("*ngIf" = '!condensedObservationsLoadFinished')
+      div("*ngIf" = '!this.observationService.condensedObservationsLoadFinished')
         loading-animation
 
     div.container("*ngIf"='columnState == "scratchpad"' style="width:auto")

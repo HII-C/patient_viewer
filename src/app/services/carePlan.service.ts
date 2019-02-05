@@ -22,7 +22,7 @@ export class CarePlanService {
       let json = res.json();
 
       if (json.entry) {
-        return <Array<CarePlan>>json.entry.map(r => r['resource']);
+        return <Array<CarePlan>> json.entry.map(r => r['resource']);
       } else {
         // The patient has no care plans, so return an empty array
         return new Array<CarePlan>();

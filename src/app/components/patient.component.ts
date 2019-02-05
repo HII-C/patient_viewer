@@ -84,7 +84,6 @@ export class PatientComponent {
         else { //multiple allergies
           this.allergy = "multiple...";
           this.hoverStyling = true;
-
         }
       }
       else { //no allergies

@@ -70,7 +70,7 @@ export class PatientComponent {
     }
   }
 
-  loadAllergies(): void {
+  private loadAllergies(): void {
     this.conditionService.loadAllergies(this.patient).subscribe(allergies => {
       if (allergies) {
         //add allergy strings to allergies
@@ -93,7 +93,7 @@ export class PatientComponent {
     });
   }
 
-  loadEncounters(): void {
+  private loadEncounters(): void {
     // TODO: Display the reason for visit retrieved here onto the page.
     this.encounterService.loadEncounters(this.patient).subscribe(res => {
       // Cast the array of encounters to the proper model (Encounter).
@@ -104,7 +104,6 @@ export class PatientComponent {
 
         // Only print if reasonText is not null.
         if (reasonText) {
-          console.log(reasonText);
           this.reason = reasonText;
         }
       }

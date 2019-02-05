@@ -83,7 +83,6 @@ export class ObservationsComponent extends BaseColumn{
           this.observationService.filterCategory(this.observationService.observations);
 
           let nextLink = null;
-          console.log(data);
           // get the first link for the first iteration of loaddata
           for (let i of data.link) {
             if (i.relation == "next") {

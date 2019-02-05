@@ -17,6 +17,7 @@ import { AllergyIntolerance } from '../models/allergyIntolerance.model';
 export class ConditionService {
   private path = '/Condition';
   conditions: Array<Condition> = [];
+  conditionsCache = {};
 
   constructor(private fhirService: FhirService, private http: Http) { }
 
@@ -72,4 +73,7 @@ export class ConditionService {
       }
     });
   }
+
+  // TODO: Cache API calls into data structures that last for the duration of a session 
+
 }

@@ -19,12 +19,14 @@ export class HoverBoxComponent {
   // Where the hover box is displayed on the screen.
   top: string = '0px';
   left: string = '0px';
+  topOffset: number = 18;
+  leftOffset: number = 18;
 
   // Used to track whether the hover box is waiting to be shown.
   timeoutHandle: any = null;
 
   // Time (in ms) before the hover box appears.
-  DISPLAY_DELAY: number = 800;
+  DISPLAY_DELAY: number = 200;
 
   constructor() { }
 
@@ -34,12 +36,24 @@ export class HoverBoxComponent {
       return;
     }
 
+    
     this.timeoutHandle = setTimeout(() => {
       this.items = items;
 
       // Set the location of the hover box to where the mouse is.
-      this.top = event.pageY + 'px';
-      this.left = event.pageX + 'px';
+      var topOffset = 0;
+      var leftOffset = 0;
+      // Code used to test moving the hover box away from the edge of the screen. 
+      // TODO: do not hardcode pixels, find information of the pixel box
+       
+      if (window.innerWidth - event.pageX < 300) {
+        leftOffset = window.innerWidth - 300 ;
+      } else {
+        leftOffset = parseInt(event.pageX) + this.leftOffset;  
+      }
+      topOffset = parseInt(event.pageY) + this.topOffset;
+      this.top = topOffset + "px";
+      this.left = leftOffset +  "px";
 
       //display
       this.visible = true;

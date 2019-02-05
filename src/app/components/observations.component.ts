@@ -29,18 +29,19 @@ export class ObservationsComponent extends BaseColumn{
   observations: Array<Observation> = [];
 
   @Input() patient: Patient;
-  @Output() observationReturned: EventEmitter<Array<any>> = new EventEmitter();
+  //@Output() observationReturned: EventEmitter<Array<any>> = new EventEmitter();
 
   mappings: { [key: string]: Array<string> } = {};
 
-  condensedObservationsLoadFinished: boolean = false;
+  
 
   // for column switching
   subscription: Subscription;
 
   constructor(private fhirService: FhirService,
     private observationService: ObservationService,
-    private mapService: MapService, private doctorService: DoctorService,
+    private mapService: MapService,
+    private doctorService: DoctorService,
     private trendsService: HistoricalTrendsService,
     private http: Http,
     private scratchPadService: ScratchPadService) {
@@ -60,91 +61,10 @@ export class ObservationsComponent extends BaseColumn{
 
   // ===================== FOR DATA RETRIEVAL FROM OBSERVATIONS SERVICE ============
 
-  /**
-   * Description: Now all the observations (should) be finished loading and are stored in the observationsservice!
-   */
-  loadFinished() {
-    this.observationService.observations = this.observationService.observations.reverse();
-    console.log("Loaded " + this.observationService.condensedObservations.length + " observations.");
-    this.condensedObservationsLoadFinished = true;
+  
+  
 
-    /*
-    * Data cleaning - initially sorts by the code then sorts by the effective time
-    */
-    this.observationService.observations.sort((n1, n2) => {
-      if (n1['code']['coding'][0]['code'] < n2['code']['coding'][0]['code']) {
-        return 1;
-      }
-      if (n1['code']['coding'][0]['code'] > n2['code']['coding'][0]['code']) {
-        return -1;
-      }
-    })
 
-    this.observationService.observations.sort((n1, n2) => {
-      if (n1.effectiveDateTime < n2.effectiveDateTime) {
-        return 1;
-      }
-      if (n1.effectiveDateTime > n2.effectiveDateTime) {
-        return -1;
-      }
-    })
-
-    // Scale dates to make them appear more recent for demos.
-    // 0.8 is an arbitrary value that produces realistic dates.
-
-    var diff = Math.floor(0.80 *
-      (new Date().getTime() - new Date(this.observationService.observations[0].effectiveDateTime).getTime()));
-
-    for (let ob of this.observationService.observations) {
-      let newDate = new Date(ob.effectiveDateTime).getTime() + diff;
-      ob.relativeDateTime = moment(newDate).toISOString();
-    }
-
-    this.observationService.populateCategories(this.observationService.temp.categories);
-    this.observationService.categorizedObservations = this.observationService.temp;
-
-    // The condensed observations should be the final set of data -- add it to the scratchpadservice
-    this.scratchPadService.initObservations(this.observationService.condensedObservations);
-
-    this.observationReturned.emit(this.observationService.categorizedObservations);
-  }
-
-  /**
-   * Description: loads the data for the current data link that the program is currently at. Essentially
-   */
-  loadData(url) {
-    let isLast = false;
-
-    /**
-     * Make the request for the url, and handle the data in the subsequent callback
-     */
-    this.observationService.indexNext(url).subscribe(data => {
-      // Check if the data is valid
-      if (data.entry) {
-        // Map the data onto a json array of observations and append that data to the running total of observations in the observations service
-        let nextObs = <Array<Observation>>data.entry.map(r => r['resource']);
-        this.observationService.observations = this.observationService.observations.concat(nextObs);
-        this.observationService.filterCategory(nextObs);
-
-        /**
-           * The data comes in parts, so we must keep on loading the data from the next link until that link is empty,
-           * at which point we know that all the data has been loaded at that point.
-        */
-        isLast = true;
-        for (let item of data.link) {
-          if (item.relation == "next") {
-            isLast = false;
-            this.loadData(item.url);
-          }
-        }
-
-        // Base Case - if there are no more links, then stop the recursion!
-        if (isLast) {
-          this.loadFinished();
-        }
-      }
-    });
-  }
 
   /**
    * Description: This method is called whenever the patient data is passed as input to the application. Handles
@@ -159,11 +79,10 @@ export class ObservationsComponent extends BaseColumn{
        * **/
       this.observationService.index(this.patient).subscribe(data => {
         if (data.entry) {
-          this.observationService.observations = <Array<Observation>>data.entry.map(r => r['resource']);
+          this.observationService.observations = <Array<Observation>> data.entry.map(r => r['resource']);
           this.observationService.filterCategory(this.observationService.observations);
 
           let nextLink = null;
-
           // get the first link for the first iteration of loaddata
           for (let i of data.link) {
             if (i.relation == "next") {
@@ -172,8 +91,11 @@ export class ObservationsComponent extends BaseColumn{
           }
 
           // keep on loading data depending on the link; if the link is empty, then we stop
-          if (nextLink) { this.loadData(nextLink); }
-          else { this.loadFinished(); }
+          if (nextLink) { this.observationService.loadData(nextLink); }
+          else {
+            this.observationService.loadFinished();
+            this.scratchPadService.initObservations(this.observationService.condensedObservations);
+          }
 
         } else {
           /**

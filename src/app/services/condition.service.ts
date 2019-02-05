@@ -10,6 +10,7 @@ import 'rxjs/add/operator/concat';
 import { FhirService } from './fhir.service';
 import { Patient } from '../models/patient.model';
 import { Condition } from '../models/condition.model';
+import { AllergyIntolerance } from '../models/allergyIntolerance.model';
 
 @Injectable()
 @Component({})
@@ -60,16 +61,17 @@ export class ConditionService {
   }
 
   // Retrieve allergies for a given patient
-  loadAllergies(patient: Patient): Observable<any> {
-    // if conditions cache does not contain 
-    if (this.conditionsCache[patient.id] == null) {
-      var url = this.fhirService.getUrl() + "/AllergyIntolerance" + "?patient=" + patient.id;
+  loadAllergies(patient: Patient): Observable<Array<AllergyIntolerance>> {
+    var url = this.fhirService.getUrl() + "/AllergyIntolerance" + "?patient=" + patient.id;
+    return this.http.get(url, this.fhirService.options(true)).map(res => {
+      let json = res.json();
 
-      this.conditionsCache[patient.id] = this.http.get(url, this.fhirService.options(true)).map(res => res.json());
-    } 
-    return this.conditionsCache[patient.id];
-    
-    
+      if (json.entry) {
+        return <Array<AllergyIntolerance>> json.entry.map(r => r['resource']);
+      } else {
+        return new Array<AllergyIntolerance>();
+      }
+    });
   }
 
   // TODO: Cache API calls into data structures that last for the duration of a session 

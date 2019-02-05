@@ -4,7 +4,7 @@ import {Observable} from 'rxjs/Observable';
  
 // MODELS
 import { Condition } from '../models/condition.model';
-import { CarePlan } from '../models/careplan.model';
+import { CarePlan } from '../models/carePlan.model';
 import { Observation } from '../models/observation.model';
 
 // SERVICES

@@ -65,43 +65,50 @@ export class PatientComponent {
 
   ngOnChanges() {
     if (this.patient) {
-      this.conditionService.loadAllergies(this.patient).subscribe(allergies => {
-        if (allergies) {
-          //add allergy strings to allergies
-          this.allergies = allergies.map(allergy => allergy.code.text);
-
-          //construct displayed allergy string
-          if (this.allergies.length == 1) { //singular allergy
-            this.allergy = this.allergies[0];
-          }
-
-          else { //multiple allergies
-            this.allergy = "multiple...";
-            this.hoverStyling = true;
-
-          }
-        }
-        else { //no allergies
-          this.allergy = "none";
-        }
-      });
-
-      // TODO: Display the reason for visit retrieved here onto the page.
-      this.encounterService.loadEncounters(this.patient).subscribe(res => {
-        // Cast the array of encounters to the proper model (Encounter).
-        let encounters = <Array<Encounter>>res;
-
-        for (let enc of encounters) {
-          let reasonText = enc.getReason();
-
-          // Only print if reasonText is not null.
-          if (reasonText) {
-            console.log(reasonText);
-            this.reason = reasonText;
-          }
-        }
-      });
+      this.loadAllergies();
+      this.loadEncounters();
     }
+  }
+
+  loadAllergies(): void {
+    this.conditionService.loadAllergies(this.patient).subscribe(allergies => {
+      if (allergies) {
+        //add allergy strings to allergies
+        this.allergies = allergies.map(allergy => allergy.code.text);
+
+        //construct displayed allergy string
+        if (this.allergies.length == 1) { //singular allergy
+          this.allergy = this.allergies[0];
+        }
+
+        else { //multiple allergies
+          this.allergy = "multiple...";
+          this.hoverStyling = true;
+
+        }
+      }
+      else { //no allergies
+        this.allergy = "none";
+      }
+    });
+  }
+
+  loadEncounters(): void {
+    // TODO: Display the reason for visit retrieved here onto the page.
+    this.encounterService.loadEncounters(this.patient).subscribe(res => {
+      // Cast the array of encounters to the proper model (Encounter).
+      let encounters = <Array<Encounter>>res;
+
+      for (let enc of encounters) {
+        let reasonText = enc.getReason();
+
+        // Only print if reasonText is not null.
+        if (reasonText) {
+          console.log(reasonText);
+          this.reason = reasonText;
+        }
+      }
+    });
   }
 
   showAllergyHover(event) {

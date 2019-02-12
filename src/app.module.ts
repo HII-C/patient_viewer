@@ -62,6 +62,7 @@ import { CookieService } from 'angular2-cookie/core';
 import { ScratchPadService } from './app/services/scratchPad.service';
 import { UpdatingService } from './app/services/updating.service';
 import { ToolBarService } from './app/services/toolbar.service';
+import { AssociationsService } from './app/services/associations.service';
 
 
 import { MomentModule } from 'angular2-moment';
@@ -170,7 +171,8 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
     HistoricalTrendsService,
     ScratchPadService,
     UpdatingService,
-    ToolBarService
+    ToolBarService,
+    AssociationsService
   ],                    // services
   bootstrap: [AppComponent]     // root component
 })

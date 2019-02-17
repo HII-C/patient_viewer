@@ -35,10 +35,9 @@ To launch in development mode, run the following terminal command from the `pati
 	grunt --force # to serve the project and automatically recompile on file changes
 
 Then, do the following:
-- In Chrome, enable the CORS extension (the extension should appear green in the top right of the browser).
 - Visit [HSPC Sandbox](https://sandbox.hspconsortium.org/), select the "HII-C" sandbox, choose the "Apps" option from the left menu, click on the "HII-C Confidential" app, and then click "Launch" on the right.
 - Select the patient `Adams, Daniel X` in the popup. This should open the Patient Viewer application.
-- Once you are done running Patient Viewer, make sure to terminate the `grunt --force` command in the terminal. Additionally, disable the CORS extension (it should appear red in the top right of the browser).
+- Once you are done running Patient Viewer, make sure to terminate the `grunt --force` command in the terminal.
 
 ## Building for Production (Tech Team Only)
 

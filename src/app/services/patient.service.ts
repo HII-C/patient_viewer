@@ -30,10 +30,16 @@ export class PatientService {
     var url = this.fhirService.getUrl() + this.path + '/' + this.patientId;
 
     let options = this.fhirService.options(true);
+
+    // The following headers were removed because they are not
+    // allowed by the Access-Control-Allow-Headers header set
+    // in the preflight response by HSPC Sandbox.
+    /*
     options.headers.append('Pragma', 'no-cache');
     options.headers.append('Cache-Control', 'no-store');
     options.headers.append('Cache-Control', 'no-cache');
     options.headers.append('Cache-Control', 'must-revalidate');
+    */
 
     return this.http.get(url, options).map(res => res.json()).map(json => {
       let patient = <Patient>json;

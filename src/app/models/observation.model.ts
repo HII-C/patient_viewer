@@ -1,4 +1,6 @@
-export class Observation {
+import { Associable } from './associable.model';
+
+export class Observation implements Associable {
 	id: string;
 	status: string;
 	effectiveDateTime: string;

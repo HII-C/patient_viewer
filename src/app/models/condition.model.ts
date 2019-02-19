@@ -1,4 +1,6 @@
-export class Condition {
+import { Associable } from './associable.model';
+
+export class Condition implements Associable {
     id: string;
     onsetDateTime: string;
     relativeDateTime: string;

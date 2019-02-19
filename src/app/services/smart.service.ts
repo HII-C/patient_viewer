@@ -79,7 +79,7 @@ export class SmartService {
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
 
     return this.http.post("https://mongo-proxy.herokuapp.com/token",
-      body, { headers: headers }).map(response => response.json());
+      body, { headers: headers }).map(res => res.json());
   }
 
   requestAuth() {

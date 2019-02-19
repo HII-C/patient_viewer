@@ -192,17 +192,8 @@ export class ObservationService {
     this.condensedObservationsLoadFinished = true;
 
     /*
-    * Data cleaning - initially sorts by the code then sorts by the effective time
+    * Data cleaning - sorts by the effective time
     */
-    this.observations.sort((n1, n2) => {
-      if (n1['code']['coding'][0]['code'] < n2['code']['coding'][0]['code']) {
-        return 1;
-      }
-      if (n1['code']['coding'][0]['code'] > n2['code']['coding'][0]['code']) {
-        return -1;
-      }
-    })
-
     this.observations.sort((n1, n2) => {
       return n1.effectiveDateTime < n2.effectiveDateTime ? 1 : -1;
     })

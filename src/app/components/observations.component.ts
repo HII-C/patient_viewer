@@ -33,8 +33,6 @@ export class ObservationsComponent extends BaseColumn{
 
   mappings: { [key: string]: Array<string> } = {};
 
-  
-
   // for column switching
   subscription: Subscription;
 
@@ -61,11 +59,6 @@ export class ObservationsComponent extends BaseColumn{
 
   // ===================== FOR DATA RETRIEVAL FROM OBSERVATIONS SERVICE ============
 
-  
-  
-
-
-
   /**
    * Description: This method is called whenever the patient data is passed as input to the application. Handles
    * the initial subscription to the observation service and continual loading of the data links.
@@ -73,54 +66,8 @@ export class ObservationsComponent extends BaseColumn{
   ngOnChanges() {
     // If the patient is loaded:
     if (this.patient) {
-      /**
-       * Then retrieve the data from the server and subscribe to the data so that we know
-       * whenever that data is finished from being retrieved
-       * **/
-      this.observationService.index(this.patient).subscribe(data => {
-        if (data.entry) {
-          this.observationService.observations = <Array<Observation>> data.entry.map(r => r['resource']);
-          this.observationService.filterCategory(this.observationService.observations);
-
-          let nextLink = null;
-          // get the first link for the first iteration of loaddata
-          for (let i of data.link) {
-            if (i.relation == "next") {
-              nextLink = i.url;
-            }
-          }
-
-          // keep on loading data depending on the link; if the link is empty, then we stop
-          if (nextLink) { this.observationService.loadData(nextLink); }
-          else {
-            this.observationService.loadFinished();
-            this.scratchPadService.initObservations(this.observationService.condensedObservations);
-          }
-
-        } else {
-          /**
-           * If on that first subscription, the data is empty, then there are no observations for the patient
-           */
-          this.observationService.observations = new Array<Observation>();
-          console.log("No observations for patient.");
-        }
-      });
-
+      let url = this.fhirService.getUrl() + "/Observation?patient=" + this.patient.id;
+      this.observationService.loadData(url);    
     }
-  }
-
-  // ====================== SCRATCH PAD FUNCTIONALITY =============================
-
-  getScratchPadObservations() {
-    return this.scratchPadService.getObservations();
-  }
-
-  // OVERRIDDEN FROM BASECOLUMN:
-  showDefault() {
-
-  }
-
-  showScratchPad(){
-    console.log(this.getScratchPadObservations());
   }
 }

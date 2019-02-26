@@ -8,7 +8,6 @@ import { CarePlan } from '../models/carePlan.model';
 import { Observation } from '../models/observation.model';
 
 // SERVICES
-import { ObservationService } from '../services/observation.service';
 
 @Injectable()
 @Component({})
@@ -39,7 +38,7 @@ export class ScratchPadService {
   stateSource = new Subject<boolean>();
   stateChange$ = this.stateSource.asObservable();
 
-  constructor(private observationService: ObservationService) { 
+  constructor() { 
 
   }
   
@@ -221,6 +220,7 @@ export class ScratchPadService {
   // ============================== OTHER METHODS ===============================
 
   // Old method likely to be removed.
+  /*
   addData(location: string) {
     switch (location) {
       case "observation":
@@ -233,5 +233,5 @@ export class ScratchPadService {
     }
     //this.updatedCondSP.next(clicked);
   }
-  
+  */
 }

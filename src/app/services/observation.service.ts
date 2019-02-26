@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import { FhirService } from './fhir.service';
 import { Patient } from '../models/patient.model';
 import { Observation } from '../models/observation.model';
-
+import { ScratchPadService } from '../services/scratchPad.service';
 import * as moment from 'moment';
 
 @Injectable()
@@ -23,7 +23,7 @@ export class ObservationService {
 
   filterHash: any = {};
 
-  constructor(private fhirService: FhirService, private http: Http) {
+  constructor(private fhirService: FhirService, private http: Http, private scratchPadService: ScratchPadService) {
     // these are the codes of the observations; 
     // groupList is used to categorize where in temp this is stored
     this.groupList = {
@@ -131,35 +131,24 @@ export class ObservationService {
 
   // ================================== DATA RETRIEVAL ========================
 
-  // Gets the initial data for the patient upon ngOnChanges call
-  index(patient: Patient): Observable<any> {
-    var url = this.fhirService.getUrl() + this.path + "?patient=" + patient.id;
-    return this.http.get(url, this.fhirService.options(true)).map(res => {
-      return <Observation> res.json();
-    });
+  /** Gets the data for the recursive data link calls   */
+  getObservations(url: string): Observable<any> {
+    return this.http.get(url, this.fhirService.options(true)).map(res => <Observation>res.json());
   }
 
-  // Gets the data for the nested data link calls
-  indexNext(url: string): Observable<any> {
-    return this.http.get(url, this.fhirService.options(true)).map(res => {
-      return <Observation> res.json();
-    });
-  }
-
-    /**
-   * Description: loads the data for the current data link that the program is currently at. Essentially
-   */
-  loadData(url) {
-    let isLast = false;
-
+/**
+ * Loads observation data, which is paginated, by recursively loading data pages.
+ */
+  loadData(url): void {
     /**
      * Make the request for the url, and handle the data in the subsequent callback
      */
-    this.indexNext(url).subscribe(data => {
+    this.getObservations(url).subscribe(data => {
       // Check if the data is valid
       if (data.entry) {
         // Map the data onto a json array of observations and append that data to the running total of observations in the observations service
         let nextObs = <Array<Observation>> data.entry.map(r => r['resource']);
+        console.log(nextObs);
         this.observations = this.observations.concat(nextObs);
         this.filterCategory(nextObs);
 
@@ -167,26 +156,25 @@ export class ObservationService {
            * The data comes in parts, so we must keep on loading the data from the next link until that link is empty,
            * at which point we know that all the data has been loaded at that point.
         */
-        isLast = true;
-        for (let item of data.link) {
-          if (item.relation == "next") {
-            isLast = false;
-            this.loadData(item.url);
-          }
+        let nextLink: Array<any> = data.link.filter(link => link.relation == "next");
+        if (nextLink.length > 0) { //recursive case - there is still more data to load from link with relation "next"
+          this.loadData(nextLink[0].url);
         }
-
-        // Base Case - if there are no more links, then stop the recursion!
-        if (isLast) {
-          this.loadFinished();
-        }
+        else {
+          this.onLoadComplete(); //base case - no link with relation "next" found, thus no more data to load
+        }  
+      }
+      else {
+        console.log("No observations for patient.");
+        this.observations = new Array<Observation>();
       }
     });
   }
 
   /**
-   * Description: Now all the observations (should) be finished loading and are stored in the observationsservice!
+   * Description: Clean observations now that they should be finished loading and are stored in the observationService!
    */
-  loadFinished() {
+  onLoadComplete() {
     this.observations = this.observations.reverse();
     console.log("Loaded " + this.condensedObservations.length + " observations.");
     this.condensedObservationsLoadFinished = true;
@@ -200,7 +188,6 @@ export class ObservationService {
 
     // Scale dates to make them appear more recent for demos.
     // 0.8 is an arbitrary value that produces realistic dates.
-
     var diff = Math.floor(0.80 *
       (new Date().getTime() - new Date(this.observations[0].effectiveDateTime).getTime()));
 
@@ -213,7 +200,7 @@ export class ObservationService {
     this.categorizedObservations = this.temp;
 
     // The condensed observations should be the final set of data -- add it to the scratchpadservice
-    
+    this.scratchPadService.initObservations(this.condensedObservations);
 
     //this.observationReturned.emit(this.observationService.categorizedObservations);
   }
@@ -243,18 +230,17 @@ export class ObservationService {
   filterCategory(observations: Array<Observation>) {
 
     // do a pass and keep first instance
-    for (var obs of observations){
-      var code = obs['code']['coding'][0]['code'];
+    for (let obs of observations) {
+      let code = obs['code']['coding'][0]['code'];
 
       // if new entry, then add to filtered set
-      if (!this.filterHash[code]){
+      if (!this.filterHash[code]) {
         this.filterHash[code] = true;
         obs.grouping = this.getKey(code);
         this.condensedObservations.push(obs);
       }
     }
   }
-
 
   populateCategories(obsToFilter) {
     let totalcount = 0;
@@ -304,5 +290,20 @@ export class ObservationService {
     }
     //console.log("returning("+JSON.stringify(obj)+") "+totalcount);
     return totalcount;
+  }
+
+  // ====================== SCRATCH PAD FUNCTIONALITY =============================
+
+  getScratchPadObservations() {
+    return this.scratchPadService.getObservations();
+  }
+
+  // OVERRIDDEN FROM BASECOLUMN:
+  showDefault() {
+
+  }
+
+  showScratchPad() {
+    console.log(this.getScratchPadObservations());
   }
 }

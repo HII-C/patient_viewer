@@ -148,7 +148,6 @@ export class ObservationService {
       if (data.entry) {
         // Map the data onto a json array of observations and append that data to the running total of observations in the observations service
         let nextObs = <Array<Observation>> data.entry.map(r => r['resource']);
-        console.log(nextObs);
         this.observations = this.observations.concat(nextObs);
         this.filterCategory(nextObs);
 

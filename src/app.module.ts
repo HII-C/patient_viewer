@@ -20,6 +20,14 @@ import { DoctorNoteComponent } from './app/components/doctorNote.component';
 import { AccountComponent } from './app/components/account.component';
 import { ToolbarComponent } from './app/components/toolbar.component';
 
+// CHARTS IMPORT ** TEST **
+import { ComboChartComponent } from './app/components/charts/combochart.component'
+import { DashboardComponent } from './app/components/dashboard.component';
+import { GoogleComboChartService } from './app/Services/google-combo-chart.service';
+import { GooglePieChartService } from './app/Services/google-pie-chart.service';
+import { PieChartComponent } from './app/components/Charts/piechart.component';
+import { AppRoutingModule } from './app/app-routing.module';
+
 // Functionality being replicated in HistoricalTrendsComponent.
 // import { ChartTimelineComponent } from './app/components/chartTimeline.component';
 
@@ -105,7 +113,8 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
     NgxChartsModule,
     BrowserAnimationsModule,
     CalendarModule.forRoot(),
-    NguiAutoCompleteModule
+    NguiAutoCompleteModule,
+    AppRoutingModule
   ],
   declarations: [
     AppComponent,
@@ -149,7 +158,13 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
     ContextMenuComponent,
     NoteNavigationComponent,
     HoverBoxComponent,
-    HistoricalTrendsComponent
+    HistoricalTrendsComponent,
+
+    // CHARTS ** TEST ** 
+
+    DashboardComponent,
+    ComboChartComponent,
+    PieChartComponent
   ],   // components and directives
   providers: [
     appRoutingProviders,
@@ -172,7 +187,9 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
     ScratchPadService,
     UpdatingService,
     ToolBarService,
-    AssociationsService
+    AssociationsService,
+    GoogleComboChartService, 
+    GooglePieChartService
   ],                    // services
   bootstrap: [AppComponent]     // root component
 })

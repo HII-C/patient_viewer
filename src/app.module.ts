@@ -20,14 +20,6 @@ import { DoctorNoteComponent } from './app/components/doctorNote.component';
 import { AccountComponent } from './app/components/account.component';
 import { ToolbarComponent } from './app/components/toolbar.component';
 
-// CHARTS IMPORT ** TEST **
-import { ComboChartComponent } from './app/components/charts/combochart.component'
-import { DashboardComponent } from './app/components/dashboard.component';
-import { GoogleComboChartService } from './app/Services/google-combo-chart.service';
-import { GooglePieChartService } from './app/Services/google-pie-chart.service';
-import { PieChartComponent } from './app/components/Charts/piechart.component';
-import { AppRoutingModule } from './app/app-routing.module';
-
 // Functionality being replicated in HistoricalTrendsComponent.
 // import { ChartTimelineComponent } from './app/components/chartTimeline.component';
 
@@ -48,6 +40,7 @@ import { AccordionRecursion } from './app/components/accordionRecursion.componen
 import { ConditionsDisplay } from './app/components/conditionsDisplay.component';
 
 import { HistoricalTrendsComponent } from './app/components/historicalTrends.component';
+import { TimelineChartComponent } from './app/components/timelineChart.component';
 import { ObservationsDisplay } from './app/components/observationsDisplay.component';
 
 // SERVICE IMPORTS
@@ -71,7 +64,7 @@ import { ScratchPadService } from './app/services/scratchPad.service';
 import { UpdatingService } from './app/services/updating.service';
 import { ToolBarService } from './app/services/toolbar.service';
 import { AssociationsService } from './app/services/associations.service';
-
+import { GoogleChartService } from './app/services/googleChart.service';
 
 import { MomentModule } from 'angular2-moment';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
@@ -114,7 +107,6 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
     BrowserAnimationsModule,
     CalendarModule.forRoot(),
     NguiAutoCompleteModule,
-    AppRoutingModule
   ],
   declarations: [
     AppComponent,
@@ -159,12 +151,7 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
     NoteNavigationComponent,
     HoverBoxComponent,
     HistoricalTrendsComponent,
-
-    // CHARTS ** TEST ** 
-
-    DashboardComponent,
-    ComboChartComponent,
-    PieChartComponent
+    TimelineChartComponent
   ],   // components and directives
   providers: [
     appRoutingProviders,
@@ -188,8 +175,7 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
     UpdatingService,
     ToolBarService,
     AssociationsService,
-    GoogleComboChartService, 
-    GooglePieChartService
+    GoogleChartService
   ],                    // services
   bootstrap: [AppComponent]     // root component
 })

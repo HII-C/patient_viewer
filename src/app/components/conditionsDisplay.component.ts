@@ -48,7 +48,12 @@ export class ConditionsDisplay {
       'icon': 'glyphicon-pencil',
       'text': 'Add to Scratch Pad',
       'exec': function(condition) {
-        this.scratchPadService.addCondition(condition);
+        // For each condition, if the condition is checked, add the condition to the scratch pad.
+        this.scratchPadService.checkedMapConditions.forEach((isChecked, condition, map) => {
+          if (isChecked) {
+            this.scratchPadService.addCondition(condition);
+          }
+        });
       }.bind(this)
     });
 

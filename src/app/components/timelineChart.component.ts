@@ -17,4 +17,9 @@ export class TimelineChartComponent implements OnInit {
     ngOnInit(): void {
         this.googleChartService.buildTimeline(this.elementId); 
     }
+
+    public updateChart(): void {
+      console.log("working");
+      this.googleChartService.buildSecondTimeline(this.elementId);
+    }
 }

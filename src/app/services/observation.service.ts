@@ -144,9 +144,8 @@ export class ObservationService {
      * Make the request for the url, and handle the data in the subsequent callback
      */
     this.getObservations(url).subscribe(data => {
-      // Check if the data is valid
-      if (data.entry) {
-        // Map the data onto a json array of observations and append that data to the running total of observations in the observations service
+      if (data.entry) { // Check if the data is valid
+        // Map the data onto a json array of observations and append that data to the running total of observations
         let nextObs = <Array<Observation>> data.entry.map(r => r['resource']);
         this.observations = this.observations.concat(nextObs);
         this.filterCategory(nextObs);
@@ -241,48 +240,47 @@ export class ObservationService {
     }
   }
 
-  populateCategories(obsToFilter) {
-    let totalcount = 0;
-    let count = 0;
+  populateCategories(obsToFilter): number {
+    let totalcount: number = 0;
+    let count: number = 0;
 
     for (let i = 0; i < obsToFilter.length; i++) {
-      if (obsToFilter[i].data) {
+      let x = obsToFilter[i];
+      if (x.data) {
 
         /**
          * Depending on what grouping was assigned to a observation, add it to the relevant category
          */
         for (let obs of this.condensedObservations) {
-          if (obs.grouping == obsToFilter[i].id) {
+          if (obs.grouping == x.id) {
             count++;
             // This is a crappy solution, want sometime more robust in the future - Austin Michne
-            if (obs.valueQuantity) {
-              obsToFilter[i].data.push({ "name": obs['code']['coding'][0]['display'], "date": obs.effectiveDateTime, "code": obs['code']['coding'][0]['code'], "value": obs.valueQuantity['value'] });
-            }
-            else {
-              obsToFilter[i].data.push({ "name": obs['code']['coding'][0]['display'], "date": obs.effectiveDateTime, "code": obs['code']['coding'][0]['code'] });
-            }
+            let measurement = { "name": obs['code']['coding'][0]['display'], "date": obs.effectiveDateTime, "code": obs['code']['coding'][0]['code'] };
 
-            // obsToFilter[i].data.push(obs);
+            if (obs.valueQuantity) {
+              measurement["value"] = obs.valueQuantity['value'];
+            }
+            x.data.push(measurement);
+            // x.data.push(obs);
           }
         }
       }
-      if (obsToFilter[i].data == "") {
+      if (x.data == "") {
         obsToFilter.splice(i, 1);
       }
-      else if (obsToFilter[i].data) {
-        obsToFilter[i].count += count;
+      else if (x.data) {
+        x.count += count;
         totalcount += count;
         count = 0;
         continue;
       }
-
-      else if (typeof obsToFilter[i] === 'object') {
+      else if (typeof x === 'object') {
         totalcount += count;
 
-        let newcount = this.populateCategories(obsToFilter[i].child);
-        obsToFilter[i].count += newcount;
+        let newcount = this.populateCategories(x.child);
+        x.count += newcount;
 
-        if (obsToFilter[i].child == "") {
+        if (x.child == "") {
           obsToFilter.splice(i, 1);
         }
       }

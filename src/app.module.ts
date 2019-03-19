@@ -40,6 +40,7 @@ import { AccordionRecursion } from './app/components/accordionRecursion.componen
 import { ConditionsDisplay } from './app/components/conditionsDisplay.component';
 
 import { HistoricalTrendsComponent } from './app/components/historicalTrends.component';
+import { TimelineChartComponent } from './app/components/timelineChart.component';
 import { ObservationsDisplay } from './app/components/observationsDisplay.component';
 
 // SERVICE IMPORTS
@@ -63,7 +64,7 @@ import { ScratchPadService } from './app/services/scratchPad.service';
 import { UpdatingService } from './app/services/updating.service';
 import { ToolBarService } from './app/services/toolbar.service';
 import { AssociationsService } from './app/services/associations.service';
-
+import { GoogleChartService } from './app/services/googleChart.service';
 
 import { MomentModule } from 'angular2-moment';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
@@ -105,7 +106,7 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
     NgxChartsModule,
     BrowserAnimationsModule,
     CalendarModule.forRoot(),
-    NguiAutoCompleteModule
+    NguiAutoCompleteModule,
   ],
   declarations: [
     AppComponent,
@@ -149,7 +150,8 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
     ContextMenuComponent,
     NoteNavigationComponent,
     HoverBoxComponent,
-    HistoricalTrendsComponent
+    HistoricalTrendsComponent,
+    TimelineChartComponent
   ],   // components and directives
   providers: [
     appRoutingProviders,
@@ -172,7 +174,8 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
     ScratchPadService,
     UpdatingService,
     ToolBarService,
-    AssociationsService
+    AssociationsService,
+    GoogleChartService
   ],                    // services
   bootstrap: [AppComponent]     // root component
 })

@@ -7,7 +7,6 @@
 
 import { Component, Input, Output } from '@angular/core';
 
-
 @Component({
     selector: 'accordionRecursion',
     templateUrl: '/accordionRecursion.html'
@@ -25,7 +24,7 @@ export class AccordionRecursion {
     */
     @Input() levelData: any;
 
-    // This is the state of the column: it controls how the data is displayed inside of the according
+    // This is the type of the column (conditions: 0, observations: 1, or care plans: 2)
     @Input() columnNum: number;
 
     // This is the current level of recursion (used for the display)
@@ -42,9 +41,7 @@ export class AccordionRecursion {
 // ================================================================== EVENT METHODS ==============================================================
 // ==================================================================---------------==============================================================
 
-    constructor() {
-        
-    }
+    constructor() { }
 
     // When the component is first initialized
     ngOnChanges(){
@@ -63,7 +60,6 @@ export class AccordionRecursion {
 
         this.loadFinished = true;
     }
-
 
 // ===============================================================================================================================================
 // ================================================================== UTILITY METHODS ==============================================================
@@ -157,16 +153,13 @@ export class AccordionRecursion {
 
         // for each category
         for (var key in hash){
-            if (hash.hasOwnProperty(key)){
-                var newObj = 
-                {
+            if (hash.hasOwnProperty(key)) {
+                reconstructedObject.push({
                     category: key,
                     subheadings: false,
                     subs: null,
                     data: hash[key]
-                };
-
-                reconstructedObject.push(newObj);
+                });
             }
         }        
 

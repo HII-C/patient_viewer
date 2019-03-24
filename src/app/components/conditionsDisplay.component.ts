@@ -21,9 +21,15 @@ export class ConditionsDisplay {
   // The currently selected condition in the list.
   selected: Condition;
 
+  // Whether the checkbox for checking all conditions is currently checked or not.
+  checkAllChecked: boolean = false;
+
   // This is the array of conditions to be displayed
   @Input() conditions: Array<Condition>;
   @Output() conditionSelected: EventEmitter<Condition> = new EventEmitter();
+
+  // Whether this display of conditions is within the scratch pad.
+  @Input() scratchPadMode: boolean = false;
 
   @ViewChild('menu') menu: ContextMenuComponent;
 
@@ -74,29 +80,36 @@ export class ConditionsDisplay {
     });
   }
 
-  // FOR MAINTAINING CHECK STATE AFTER LOSING FOCUS
-
-  //whenever a line is selected
+  // Selects an individual condition (which causes it to be highlighted).
+  // This is NOT the same as checking a condition.
   selectCondition(condition: Condition) {
     this.selected = condition;
     this.conditionSelected.emit(this.selected);
+
     for (let c of this.scratchPadService.totalConditions) {
       c['selected'] = (c.id == this.selected.id);
     }
   }
 
-  // check if the element has already been selected (n^2 time lol)
-  checkClicked(condition: Condition) {
-    if (this.scratchPadService.checkedMapConditions.get(condition)) {
-      return true;
-    }
-
-    return false;
+  // Determine whether a condition is currently checked.
+  isConditionChecked(condition: Condition) {
+    return this.scratchPadService.checkedMapConditions.get(condition) || false;
   }
 
-  // WHENEVER A CHECKBOX IS CLICKED OR UNCLICKED, IT REGISTERS IT IN THE SCRATCHPADSERVICE (not actually the scratch pad yet)
-  checkCondition(checked: boolean, checkedCondition: Condition) {
+  // Check or uncheck all conditions.
+  checkAllConditions(checked) {
+    this.checkAllChecked = checked;
+    for (let c of this.conditions) {
+        this.scratchPadService.checkCondition(checked, c);
+    }
+  }
+  
+  // Check or uncheck an individual condition
+  checkCondition(checkedCondition: Condition, checked: boolean) {
     this.scratchPadService.checkCondition(checked, checkedCondition);
+
+    // When an individual condition is checked, the "check all" checkbox should be unchecked.
+    this.checkAllChecked = false;
   }
 
   expand(parent: string) {

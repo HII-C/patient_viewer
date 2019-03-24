@@ -14,7 +14,7 @@ div#conditions([style.height.px]="columnHeight")
 			loading-animation
 
 		div("*ngIf" = 'columnState == "scratchpad"')
-			conditionsDisplay([conditions] = "getScratchPadConditions()")
+			conditionsDisplay([conditions] = "getScratchPadConditions()", [scratchPadMode] = "true")
 
 	#condition-popover(style="display: none")
 		| Testing condition popover

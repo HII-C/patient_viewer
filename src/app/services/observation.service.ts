@@ -12,7 +12,6 @@ import * as moment from 'moment';
 @Component({})
 export class ObservationService {
   condensedObservations: Array<Observation> = [];
-  temp: any;
   categorizedObservations: any;
   groupList: any;
   count: number = 0;
@@ -39,7 +38,7 @@ export class ObservationService {
     };
 
     // categories of the observations; found using groupList
-    this.temp = {
+    this.categorizedObservations = {
       "categories": [
         {
           "display": "Vitals",
@@ -92,6 +91,8 @@ export class ObservationService {
             },
             {
               "display": "Body Systems",
+              "count": 0,
+              "id": "2-2",
               "child": [
                 {
                   "display": "Eyes",
@@ -111,9 +112,7 @@ export class ObservationService {
                   "count": 0,
                   "id": "2-2-3"
                 }
-              ],
-              "count": 0,
-              "id": "2-2"
+              ]
             }
           ]
         },
@@ -125,8 +124,6 @@ export class ObservationService {
         }
       ]
     };
-
-    this.categorizedObservations = this.temp;
   }
 
   // ================================== DATA RETRIEVAL ========================
@@ -136,9 +133,9 @@ export class ObservationService {
     return this.http.get(url, this.fhirService.options(true)).map(res => <Observation>res.json());
   }
 
-/**
- * Loads observation data, which is paginated, by recursively loading data pages.
- */
+  /**
+   * Loads observation data, which is paginated, by recursively loading data pages.
+   */
   loadData(url): void {
     /**
      * Make the request for the url, and handle the data in the subsequent callback
@@ -146,7 +143,7 @@ export class ObservationService {
     this.getObservations(url).subscribe(data => {
       if (data.entry) { // Check if the data is valid
         // Map the data onto a json array of observations and append that data to the running total of observations
-        let nextObs = <Array<Observation>> data.entry.map(r => r['resource']);
+        let nextObs = <Array<Observation>>data.entry.map(r => r['resource']);
         this.observations = this.observations.concat(nextObs);
         this.filterCategory(nextObs);
 
@@ -160,7 +157,7 @@ export class ObservationService {
         }
         else {
           this.onLoadComplete(); //base case - no link with relation "next" found, thus no more data to load
-        }  
+        }
       }
       else {
         console.log("No observations for patient.");
@@ -194,12 +191,10 @@ export class ObservationService {
       ob.relativeDateTime = moment(newDate).toISOString();
     }
 
-    this.populateCategories(this.temp.categories);
-    this.categorizedObservations = this.temp;
-
+    this.populateCategories(this.categorizedObservations.categories);
     // The condensed observations should be the final set of data -- add it to the scratchpadservice
     this.scratchPadService.initObservations(this.condensedObservations);
-
+    
     //this.observationReturned.emit(this.observationService.categorizedObservations);
   }
 
@@ -216,7 +211,7 @@ export class ObservationService {
       }
     }
 
-    return "3";
+    return "3"; //"Other"
   }
 
   /**
@@ -238,49 +233,48 @@ export class ObservationService {
     }
   }
 
-  populateCategories(obsToFilter): number {
+  populateCategories(categories): number {
     let totalCount: number = 0;
     let count: number = 0;
 
-    for (let i = 0; i < obsToFilter.length; i++) {
-      let x = obsToFilter[i];
-      if (x.data) {
-
+    for (let i: number = 0; i < categories.length; i++) {
+      let category = categories[i];
+      if (category.hasOwnProperty('data')) {
         /**
          * Depending on what grouping was assigned to a observation, add it to the relevant category
          */
         for (let obs of this.condensedObservations) {
-          if (obs.grouping == x.id) {
+          if (obs.grouping == category.id) {
             count++;
             // This is a crappy solution, want sometime more robust in the future - Austin Michne
-            let measurement = { "name": obs['code']['coding'][0]['display'], "date": obs.effectiveDateTime, "code": obs['code']['coding'][0]['code'] };
+            let measurement = { "name": obs['code']['coding'][0]['display'], "code": obs['code']['coding'][0]['code'], "date": obs.effectiveDateTime };
 
-            if (obs.valueQuantity) {
-              measurement["value"] = obs.valueQuantity['value'];
+            if (obs.hasOwnProperty("valueQuantity")) {
+              measurement["value"] = obs["valueQuantity"]["value"];
             }
-            x.data.push(measurement);
+            category.data.push(measurement);
             // x.data.push(obs);
           }
         }
       }
-      if (x.data == "") {
-        obsToFilter.splice(i, 1);
-      }
-      else if (x.data) {
-        console.log(x.data);
-        x.count += count;
-        totalCount += count;
-        count = 0;
-        continue;
-      }
-      else if (typeof x === 'object') {
-        totalCount += count;
 
-        let newcount = this.populateCategories(x.child);
-        x.count += newcount;
+      if (category.hasOwnProperty('data')) {
+        if (category.data.length > 0) {
+          category.count += count;
+          totalCount += count;
+          count = 0;
+        }
+        else {
+          categories.splice(i, 1);
+        }
+      }
+      else if (category.hasOwnProperty('child')) {
+        let childCount: number = this.populateCategories(category.child);
+        category.count += childCount;
+        totalCount += childCount;
 
-        if (x.child == "") {
-          obsToFilter.splice(i, 1);
+        if (category.child.length == 0) {
+          categories.splice(i, 1);
         }
       }
     }

@@ -211,10 +211,8 @@ export class ObservationService {
    */
   getKey(value) {
     for (let x in this.groupList) {
-      for (let y of this.groupList[x]) {
-        if (value == y) {
-          return x;
-        }
+      if (this.groupList[x].includes(value)) {
+        return x;
       }
     }
 
@@ -241,7 +239,7 @@ export class ObservationService {
   }
 
   populateCategories(obsToFilter): number {
-    let totalcount: number = 0;
+    let totalCount: number = 0;
     let count: number = 0;
 
     for (let i = 0; i < obsToFilter.length; i++) {
@@ -269,13 +267,14 @@ export class ObservationService {
         obsToFilter.splice(i, 1);
       }
       else if (x.data) {
+        console.log(x.data);
         x.count += count;
-        totalcount += count;
+        totalCount += count;
         count = 0;
         continue;
       }
       else if (typeof x === 'object') {
-        totalcount += count;
+        totalCount += count;
 
         let newcount = this.populateCategories(x.child);
         x.count += newcount;
@@ -286,7 +285,7 @@ export class ObservationService {
       }
     }
     //console.log("returning("+JSON.stringify(obj)+") "+totalcount);
-    return totalcount;
+    return totalCount;
   }
 
   // ====================== SCRATCH PAD FUNCTIONALITY =============================

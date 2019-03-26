@@ -20,6 +20,6 @@ export class TimelineChartComponent implements OnInit {
 
     public updateChart(): void {
       console.log("working");
-      this.googleChartService.buildSecondTimeline(this.elementId);
+      this.googleChartService.buildTimelineModel(this.elementId, null);
     }
 }

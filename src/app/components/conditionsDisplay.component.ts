@@ -10,6 +10,8 @@ import { Condition } from '../models/condition.model';
 
 import { ScratchPadService } from '../services/scratchPad.service';
 
+import { ConditionService } from '../services/condition.service';
+
 import { ContextMenuComponent } from './contextMenu.component';
 
 
@@ -38,7 +40,7 @@ export class ConditionsDisplay {
   // ================================================================== EVENT METHODS ==============================================================
   // ==================================================================---------------==============================================================
 
-  constructor(private scratchPadService: ScratchPadService) { }
+  constructor(private scratchPadService: ScratchPadService, private conditionService: ConditionService) { }
 
   ngOnInit() { }
 
@@ -50,18 +52,35 @@ export class ConditionsDisplay {
     // This is a strange behavior with scoping in Typescript/Javascript.
 
     // Add options to the context menu shown when right clicking conditions.
-    this.menu.addOption({
-      'icon': 'glyphicon-pencil',
-      'text': 'Add to Scratch Pad',
-      'exec': function(condition) {
-        // For each condition, if the condition is checked, add the condition to the scratch pad.
-        this.scratchPadService.checkedMapConditions.forEach((isChecked, condition) => {
-          if (isChecked) {
-            this.scratchPadService.addCondition(condition);
-          }
-        });
-      }.bind(this)
-    });
+    if (this.conditionService.getColumnState() == "scratchpad") {
+      // Add 'Remove from Scratch Pad' option.
+      this.menu.addOption({
+        'icon': 'glyphicon-pencil',
+        'text': 'Remove from Scratch Pad',
+        'exec': function(condition) {
+          // For each condition, if the condition is checked, add the condition to the scratch pad.
+          this.scratchPadService.checkedMapConditions.forEach((isChecked, condition) => {
+            if (isChecked) {
+              this.scratchPadService.removeCondition(condition);
+            }
+          });
+        }.bind(this)
+      });
+    } else {
+      // Add 'Add to Scratch Pad' option.
+      this.menu.addOption({
+        'icon': 'glyphicon-pencil',
+        'text': 'Add to Scratch Pad',
+        'exec': function(condition) {
+          // For each condition, if the condition is checked, add the condition to the scratch pad.
+          this.scratchPadService.checkedMapConditions.forEach((isChecked, condition) => {
+            if (isChecked) {
+              this.scratchPadService.addCondition(condition);
+            }
+          });
+        }.bind(this)
+      });
+    }
 
     this.menu.addOption({
       'icon': 'glyphicon-stats',

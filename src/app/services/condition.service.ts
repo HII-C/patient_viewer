@@ -18,6 +18,7 @@ export class ConditionService {
   private path = '/Condition';
   conditions: Array<Condition> = [];
   conditionsCache = {};
+  columnState: String;
 
   constructor(private fhirService: FhirService, private http: Http) { }
 
@@ -74,6 +75,15 @@ export class ConditionService {
     });
   }
 
-  // TODO: Cache API calls into data structures that last for the duration of a session 
+  // Gets the state of the conditions column (default or scratch pad)
+  getColumnState(): String {
+    return this.columnState;
+  }
 
+  // Let the service know that the column state has changed
+  setColumnState(newColumnState: String): void {
+    this.columnState = newColumnState;
+  }
+
+  // TODO: Cache API calls into data structures that last for the duration of a session 
 }

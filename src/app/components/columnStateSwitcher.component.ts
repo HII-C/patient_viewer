@@ -22,6 +22,7 @@ export class ColumnStateSwitcherComponent {
   switchToDefault() {
     if (this.column != null) {
       this.column.columnState = 'default';
+      this.column.updateService(); // Update the service to store correct column state
       this.column.showDefault();
     }
   }
@@ -30,6 +31,7 @@ export class ColumnStateSwitcherComponent {
   switchToScratchPad() {
     if (this.column != null) {
       this.column.columnState = 'scratchpad';
+      this.column.updateService(); // Update the service to store correct column state
       this.column.showScratchPad();
     }
   }

@@ -120,6 +120,11 @@ export class ConditionsComponent extends BaseColumn {
     this.scratchPadService.initConditions(this.conditions);
 
   }
+  
+  // Update the service to store correct column state
+  updateService(): void {
+    this.conditionService.setColumnState(this.columnState);
+  }
 
   // ===============================================================================================================================================
   // ======================================================== GETTERS AND SETTERS===================================================================

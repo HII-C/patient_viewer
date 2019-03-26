@@ -28,6 +28,7 @@ export class BaseColumn {
   // Can be overriden in the child class to handle switching between states.
   showDefault() { }
   showScratchPad() { }
+  updateService() { }
 
   // The current height (in pixels) of the column.
   columnHeight: number;

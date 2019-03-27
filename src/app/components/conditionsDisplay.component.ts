@@ -52,7 +52,7 @@ export class ConditionsDisplay {
     // This is a strange behavior with scoping in Typescript/Javascript.
 
     // Add options to the context menu shown when right clicking conditions.
-    if (this.conditionService.getColumnState() == "scratchpad") {
+    if (this.conditionService.getColumnState() === "scratchpad") {
       // Add 'Remove from Scratch Pad' option.
       this.menu.addOption({
         'icon': 'glyphicon-pencil',

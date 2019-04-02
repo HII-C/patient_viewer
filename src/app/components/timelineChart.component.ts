@@ -15,11 +15,11 @@ export class TimelineChartComponent implements OnInit {
     constructor(private googleChartService: GoogleChartService) { }
 
     ngOnInit(): void {
-        this.googleChartService.buildTimeline(this.elementId); 
+        this.googleChartService.buildLineChart(this.elementId, null); 
     }
 
     public updateChart(): void {
       console.log("working");
-      this.googleChartService.buildTimelineModel(this.elementId, null);
+      // this.googleChartService.buildTimelineModel(this.elementId, null);
     }
 }

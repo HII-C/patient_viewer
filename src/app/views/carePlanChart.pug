@@ -6,10 +6,8 @@ table.table.table-condensed.table-striped
 			th
 				| Description
 	tbody
-		tr("*ngFor"='let cP of carePlans', id='t{{carePlans.indexOf(cP)}}') 
+		tr("*ngFor"='let cP of carePlans') 
 			td
-				input(type='checkbox',id='cP{{carePlans.indexOf(cP)}}', value='{{cP["activity"][0]["detail"]["code"]["coding"][0]["display"]}}')
+				input(type='checkbox', (change)='check(cP, $event)')
 			td
-				span {{cP["activity"][0]['detail']['code']['coding'][0]['display']}}
-			//- td {{cP.clinicalStatus}}
-			//- td {{cP.onsetDateTime}}
+				span {{cP['title']}}

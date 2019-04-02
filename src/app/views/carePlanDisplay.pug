@@ -4,13 +4,17 @@ table.table.table-condensed.table-striped
             th
             th
                 | Description
+            th
+                | Start
+            th
+                | End
     tbody
         tr("*ngFor"='let cP of carePlans', [class.selected] = 'cP.selected', (click)= 'selectedCarePlan(cP)', (contextmenu) = 'menu.show(c, $event)', id='t{{carePlans.indexOf(cP)}}') 
             td
-                input(type='checkbox',id='cP{{carePlans.indexOf(cP)}}', [checked] = 'checkClicked(cP)' value='{{cP["activity"][0]["detail"]["code"]["coding"][0]["display"]}}')
+                input(type='checkbox', id='cP{{carePlans.indexOf(cP)}}', [checked] = 'checkClicked(cP)')
             td
-                span {{cP["activity"][0]['detail']['code']['coding'][0]['display']}}
-            //- td {{cP.clinicalStatus}}
-            //- td {{cP.onsetDateTime}}
+                span {{cP['title']}}
+            td {{cP.period.start}}
+            td {{cP.period.end}}
 
 contextMenu(#menu='')

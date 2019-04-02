@@ -119,40 +119,39 @@ export class AccordionRecursion {
 
     reconstructDataObservations(arrData: any){
         // reconstruct then set the passed data
-        var reconstructedObject = this.addCategoriesObservations(arrData);
-        this.parsedData = reconstructedObject;
+        this.parsedData = this.addCategoriesObservations(arrData);
     }
 
     // Populate the Observations list with categories (Need to migrate this to the service later)
     // The categories are stored inside of the object already
     addCategoriesObservations(arrData: any){
-
+        console.log(arrData);
         // hash out duplicates using a javscript object
-        var hash = {};
+        let hash = {};
 
-        for (var i = 0 ; i < arrData.length; i++){
-
-            if (arrData[i].category)
-                var currCategory = arrData[i].category[0].text;
-
+        for (let i = 0 ; i < arrData.length; i++){
             // ignore if this category has no valueQuantity field
-            if (!arrData[i].valueQuantity)
+            if (!arrData[i].hasOwnProperty("valueQuantity")) {
                 continue;
+            }
+
+            if (arrData[i].hasOwnProperty("category")) {
+                var currCategory = arrData[i].category[0].text;
+            }
 
             // only push new if not in hashset
+            console.log(currCategory);
             if (!hash[currCategory]){
                 hash[currCategory] = [];
-                hash[currCategory].push(arrData[i]);
-            } else {
-                hash[currCategory].push(arrData[i]);
             }
+            hash[currCategory].push(arrData[i]);
         }
 
         // then reconstruct the object
-        var reconstructedObject = [];
+        let reconstructedObject = [];
 
         // for each category
-        for (var key in hash){
+        for (let key in hash){
             if (hash.hasOwnProperty(key)) {
                 reconstructedObject.push({
                     category: key,

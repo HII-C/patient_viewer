@@ -65,7 +65,7 @@ export class ObservationRecursiveChart {
       this.observationService.selected.push(obs);
 
       // Create a new chart in the trends tool for the selected observation.
-      this.trendsService.addChart(obs.code, dataPoints);
+      this.trendsService.addObservationChart(obs.code, dataPoints);
     } else {
       // If the observation is deselected, delete its chart from the trends tool.
       this.trendsService.removeChart(obs.code);

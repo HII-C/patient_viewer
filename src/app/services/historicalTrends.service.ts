@@ -3,12 +3,14 @@ import { Observable } from 'rxjs/Observable';
 import { Chart } from '../models/chart.model';
 import { Observation } from '../models/observation.model';
 import { Subject } from 'rxjs/Subject';
+import { CarePlan } from '../models/carePlan.model';
 
 @Injectable()
 @Component({})
 export class HistoricalTrendsService {
   // Maps the name of a chart to the chart object itself.
   chartsMap: Map<string, Chart> = new Map<string, Chart>();
+  
   // Store all the charts currently being displayed.
   charts: Array<Chart> = [];
 
@@ -24,8 +26,8 @@ export class HistoricalTrendsService {
     this.activateGraphSource.next(clicked);
   }
 
-  // Add a new chart displaying the contents of 'data' to the trends tool.
-  public addChart(chartName, data) {
+  // Add a new chart displaying a specific observation in the trends tool.
+  public addObservationChart(chartName, data) {
     // A chart already exists with the given name.
     if (this.chartsMap.has(chartName)) {
       return;
@@ -84,6 +86,38 @@ export class HistoricalTrendsService {
     ];
 
     // Add the newly created chart to the list of charts.
+    this.chartsMap.set(chartName, chart);
+    this.charts = Array.from(this.chartsMap.values());
+  }
+
+  public addMedicationChart(chartName, carePlan: CarePlan) {
+    // A chart already exists with the given name.
+    if (this.chartsMap.has(chartName)) {
+      return;
+    }
+
+    let chart = new Chart();
+    chart.title = chartName;
+
+    chart.data.push({
+      name: new Date(carePlan.period.start),
+      value: carePlan.activity[0].detail.dailyAmount.value
+    });
+
+    chart.data.push({
+      name: new Date(carePlan.period.end),
+      value: carePlan.activity[0].detail.dailyAmount.value
+    });
+
+    // Sort data points in order of date of occurrence.
+    chart.data = chart.data.sort((p1, p2) => p1.name - p2.name);
+
+    // Store the data points in the format expected by NGX-Charts for line charts.
+    chart.lineChartData = [{
+      name: chart.title,
+      series: chart.data
+    }];
+
     this.chartsMap.set(chartName, chart);
     this.charts = Array.from(this.chartsMap.values());
   }

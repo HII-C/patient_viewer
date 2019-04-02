@@ -9,6 +9,9 @@ import { ContextMenuComponent } from './contextMenu.component';
 import { PatientService } from '../services/patient.service';
 import { Patient } from '../models/patient.model';
 import { pairs } from 'rxjs/observable/pairs';
+import { CarePlanService } from '../services/carePlan.service';
+import { CarePlan } from '../models/carePlan.model';
+import { Medication } from '../models/medication.model';
 
 @Component({
   selector: 'historicalTrends',
@@ -24,6 +27,8 @@ export class HistoricalTrendsComponent {
 
   // Reference to the current patient.
   private patient: Patient;
+  private carePlans: Array<CarePlan>;
+  private medications: Array<Medication>;
 
   @ViewChild('menu') menu: ContextMenuComponent;
 
@@ -36,7 +41,8 @@ export class HistoricalTrendsComponent {
   constructor(
     private trendsService: HistoricalTrendsService,
     private observationService: ObservationService,
-    private patientService: PatientService
+    private patientService: PatientService,
+    private carePlanService: CarePlanService
   ) {
       // Track the location of the mouse (needed for context menu).
       this.mouseSubscription = Observable.fromEvent(document, 'mousemove')
@@ -47,6 +53,19 @@ export class HistoricalTrendsComponent {
       this.patientService.loadPatient().subscribe(patient => {
         this.patient = patient;
       })
+
+      // get all careplans for patient
+      this.carePlanService.loadCarePlans(this.patient).subscribe(carePlans => {
+        this.carePlans = this.carePlans.concat(carePlans);
+        this.carePlans.forEach((carePlan) => {
+
+        })
+
+      });
+
+
+      // for each careplan
+        // get medications from patient
     }
 
   // Can only access view child after the view has been initialized.

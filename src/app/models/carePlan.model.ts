@@ -6,6 +6,7 @@ export class CarePlan implements Associable {
     status: string;
     description: string;
 
+
     period: {
         start: Date;
         end: Date;
@@ -18,6 +19,24 @@ export class CarePlan implements Associable {
                 value: number;
                 system: string;
                 code: string;
+            }
+            product: {
+                productCodableConcept: {
+                    coding: {
+                        // URI
+                        system: string;
+                        version: string;
+                        code: string;
+                        display: string;
+                        userSelected: boolean;
+                    }[],
+                    text: string;
+                }
+                productReference: {
+                    reference: string;
+                    type: string;
+                    display: string;
+                }
             }
         }
     }[];

@@ -28,7 +28,7 @@ import { ObservationRecursive } from './app/components/observationRecursion.comp
 import { AddObservation } from './app/components/addObservation.component';
 import { Favorites } from './app/components/favorites.component';
 import { ObservationRecursiveChart } from './app/components/observationRecursionChart.component';
-import { CarePlanChartComponent } from './app/components/carePlanChart.component';
+import { MedicationsComponent } from './app/components/medications.component';
 import { ConditionsChartComponent } from './app/components/conditionsChart.component';
 import { ColumnStateSwitcherComponent } from './app/components/columnStateSwitcher.component';
 import { NewCondition } from './app/components/newCondition.component';
@@ -128,7 +128,7 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
     // CAREPLAN COLUMN
     CarePlanComponent,
     CarePlanDisplay,
-    CarePlanChartComponent,
+    MedicationsComponent,
 
     TimelineComponent,
     TimelinePopupComponent,

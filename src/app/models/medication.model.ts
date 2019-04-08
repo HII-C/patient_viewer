@@ -1,13 +1,17 @@
+// Not a model from the FHIR standard
 export class Medication {
     name: string;
-    startDate: Date;
-    endDate: Date;
-    dosageAmt: number;
-    constructor(name: string, startDate: Date, endDate: Date, dosageAmt: number) {
-        this.name = name;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.dosageAmt = dosageAmt;
-    }
+    dosageUnits: string;
+
+    periods: {
+        start: Date;
+        end: Date;
+        dosage: number;
+    }[];
     
+    constructor(name: string, dosageUnits: string) {
+        this.periods = [];
+        this.name = name;
+        this.dosageUnits = dosageUnits;
+    }
 }

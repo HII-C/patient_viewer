@@ -4,6 +4,7 @@ import { Chart } from '../models/chart.model';
 import { Observation } from '../models/observation.model';
 import { Subject } from 'rxjs/Subject';
 import { CarePlan } from '../models/carePlan.model';
+import { Medication } from '../models/medication.model';
 
 @Injectable()
 @Component({})
@@ -90,25 +91,50 @@ export class HistoricalTrendsService {
     this.charts = Array.from(this.chartsMap.values());
   }
 
-  public addMedicationChart(chartName, carePlan: CarePlan) {
-    // A chart already exists with the given name.
-    if (this.chartsMap.has(chartName)) {
+  public addMedicationChart(medication: Medication) {
+    // A chart already exists for the given medication.
+    if (this.chartsMap.has(medication.name)) {
       return;
     }
 
     let chart = new Chart();
-    chart.title = chartName;
+    chart.title = medication.name + ' (' + medication.dosageUnits + ')';
 
-    chart.data.push({
-      name: new Date(carePlan.period.start),
-      value: carePlan.activity[0].detail.dailyAmount.value
-    });
+    // Add every period the medication was taken to the chart.
+    for (let i = 0; i < medication.periods.length; i++) {
+      let curr = medication.periods[i];
+      // Get the previous and next periods (if they exist).
+      let prior = i > 0 ? medication.periods[i - 1] : null;
+      let next = i < medication.periods.length - 1 ? medication.periods[i + 1] : null;
+      
+      // Add 0 dosages for periods when the medication is not being taken.
+      if (prior != null && prior.end.getTime() != curr.start.getTime()) {
+        chart.data.push({
+          name: curr.start,
+          value: 0
+        });
+      }
 
-    chart.data.push({
-      name: new Date(carePlan.period.end),
-      value: carePlan.activity[0].detail.dailyAmount.value
-    });
+      // Add the start and end points for every period.
+      chart.data.push({
+        name: curr.start,
+        value: curr.dosage
+      });
 
+      chart.data.push({
+        name: curr.end,
+        value: curr.dosage
+      });
+
+      // Add 0 dosages for periods when the medication is not being taken.
+      if (next != null && next.start.getTime() != curr.end.getTime()) {
+        chart.data.push({
+          name: curr.end,
+          value: 0
+        });
+      }
+    }
+    
     // Sort data points in order of date of occurrence.
     chart.data = chart.data.sort((p1, p2) => p1.name - p2.name);
 
@@ -118,7 +144,7 @@ export class HistoricalTrendsService {
       series: chart.data
     }];
 
-    this.chartsMap.set(chartName, chart);
+    this.chartsMap.set(medication.name, chart);
     this.charts = Array.from(this.chartsMap.values());
   }
 

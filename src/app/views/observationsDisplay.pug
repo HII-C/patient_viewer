@@ -3,7 +3,7 @@ div
         thead
             tr
                 th
-                    | 
+                    input("*ngIf"='!scratchPadMode', type='checkbox', [checked]='isAllChecked', (change)='checkAllObservations($event.target.checked)')
                 th
                     | Observation
                 th

@@ -7,9 +7,9 @@ div(style="float: left; width: 350px")
             div.panel.panel-default
                 div.panel-heading
                     h4.panel-title
-                        a(data-toggle="collapse", href="#c", (click)="menu.show(null, $event)")
+                        a(data-toggle="collapse", href="#c")
                             | Conditions
-                div.container(id="c", style="width:auto")
+                div.container.collapse(id="c", style="width:auto")
                     div.panel-group
                         div.panel.panel-default
                             conditionsChart([patient]='patient')
@@ -18,7 +18,7 @@ div(style="float: left; width: 350px")
                     h4.panel-title
                         a(data-toggle="collapse" href="#o")
                             | Findings List
-                div.container(id="o", style="width:auto")
+                div.container.collapse(id="o", style="width:auto")
                     div.panel-group(id="obs")
                         div.panel.panel-default("*ngIf"='this.observationService.categorizedObservations')
                             observationRecursionChart([obs]="this.observationService.categorizedObservations.categories",[level]=0)
@@ -27,7 +27,7 @@ div(style="float: left; width: 350px")
                     h4.panel-title
                         a(data-toggle="collapse" href="#cp")
                             | Medications
-                div.container(id="cp", style="width:auto")
+                div.container.collapse(id="cp", style="width:auto")
                     div.panel-group
                         div.panel.panel-default
                             medications([patient]='patient')

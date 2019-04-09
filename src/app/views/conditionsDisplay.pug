@@ -1,10 +1,9 @@
 div
-    input("*ngIf"='!scratchPadMode', type='checkbox', [checked]='checkAllChecked', (change)='checkAllConditions($event.target.checked)')
     table.table.table-condensed.table-striped(style = "margin-left: 20px")
         thead
             tr
                 th
-                    | 
+                    input("*ngIf"='!scratchPadMode', type='checkbox', [checked]='checkAllChecked', (change)='checkAllConditions($event.target.checked)') 
                 th
                     | Description
                 th

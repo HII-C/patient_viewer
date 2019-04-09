@@ -21,6 +21,9 @@ export class ObservationsDisplay {
   // The currently selected condition in the list.
   selected: Observation;
 
+  //Whether the checkbox for checking all observations are currently checked
+  isAllChecked : boolean = false;
+
   // This is the array of conditions to be displayed
   @Input() observations: Array<Observation>;
   @Output() observationSelected: EventEmitter<Observation> = new EventEmitter();
@@ -97,7 +100,15 @@ export class ObservationsDisplay {
   checkObservation(checked: boolean, checkedObservation: Observation) {
     this.scratchPadService.checkObservation(checked, checkedObservation);
   }
+  
+  //Check or uncheck all observations
+  checkAllObservations(checked){
+    this.isAllChecked = checked;
+    for (let c of this.observations){
+      this.scratchPadService.checkObservation(checked, c);
+    }
 
+  }
   expand(parent: string) {
     /**
     for (let c of this.conditions) {

@@ -134,15 +134,19 @@ export class AccordionRecursion {
             if (!observation.hasOwnProperty("valueQuantity")) {
                 continue;
             }
-
+            let currCategory: string;
             if (observation.hasOwnProperty("category")) {
-                var currCategory = observation.category[0].text;
+                currCategory = observation.category[0].text;
             }
+            else {
+                currCategory = "Other";
+            }
+
             if (!hash.hasOwnProperty(currCategory)) {
                 hash[currCategory] = [];
             }
             // only push new if not in hashset
-            hash[currCategory].push(observation);   
+            hash[currCategory].push(observation);
         }
         // then reconstruct the object
         let reconstructedObject = [];
@@ -156,6 +160,8 @@ export class AccordionRecursion {
                 data: hash[key]
             });
         }
+
+        console.log(reconstructedObject);
 
         return reconstructedObject;
     }

@@ -21,6 +21,9 @@ export class CarePlanDisplay {
   // The currently selected careplan in the list.
   selected: CarePlan;
 
+  // Whether the checkbox for checking all conditions is currently checked or not.
+  isAllChecked: boolean = false;
+
   // This is the array of careplans to be displayed
   @Input() carePlans: Array<CarePlan>;
   @Output() careplanSelected: EventEmitter<CarePlan> = new EventEmitter();
@@ -105,5 +108,12 @@ export class CarePlanDisplay {
     */
   }
 
+  // Check or uncheck all conditions.
+  checkAllCarePlans(checked: boolean) {
+    this.isAllChecked = checked;
+    for (let carePlan of this.carePlans) {
+        this.scratchPadService.checkCarePlan(checked, carePlan);
+    }
+  }
 
 }

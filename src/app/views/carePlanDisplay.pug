@@ -2,6 +2,7 @@ table.table.table-condensed.table-striped
     thead
         tr
             th
+                input("*ngIf"='!scratchPadMode', type='checkbox', [checked]='isAllChecked', (change)='checkAllCarePlans($event.target.checked)') 
             th
                 | Description
             th

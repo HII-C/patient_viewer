@@ -24,7 +24,7 @@ export class ConditionsDisplay {
   selected: Condition;
 
   // Whether the checkbox for checking all conditions is currently checked or not.
-  checkAllChecked: boolean = false;
+  isAllChecked: boolean = false;
 
   // This is the array of conditions to be displayed
   @Input() conditions: Array<Condition>;
@@ -116,10 +116,10 @@ export class ConditionsDisplay {
   }
 
   // Check or uncheck all conditions.
-  checkAllConditions(checked) {
-    this.checkAllChecked = checked;
-    for (let c of this.conditions) {
-        this.scratchPadService.checkCondition(checked, c);
+  checkAllConditions(checked: boolean) {
+    this.isAllChecked = checked;
+    for (let condition of this.conditions) {
+        this.scratchPadService.checkCondition(checked, condition);
     }
   }
   
@@ -128,7 +128,7 @@ export class ConditionsDisplay {
     this.scratchPadService.checkCondition(checked, checkedCondition);
 
     // When an individual condition is checked, the "check all" checkbox should be unchecked.
-    this.checkAllChecked = false;
+    this.isAllChecked = false;
   }
 
   expand(parent: string) {

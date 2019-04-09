@@ -24,7 +24,7 @@ export class ObservationService {
 
   constructor(private fhirService: FhirService, private http: Http, private scratchPadService: ScratchPadService) {
     // these are the codes of the observations; 
-    // groupList is used to categorize where in temp this is stored
+    // groupList is used to categorize where in categorizedObservations this is stored
     this.groupList = {
       "1-1": ["8302-2", "3141-9", "2710-2"],
       "1-2": [],

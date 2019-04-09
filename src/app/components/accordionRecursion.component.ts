@@ -37,19 +37,19 @@ export class AccordionRecursion {
     parsedData: any;
     loadFinished: boolean = false;
 
-// ===============================================================================================================================================
-// ================================================================== EVENT METHODS ==============================================================
-// ==================================================================---------------==============================================================
+    // ===============================================================================================================================================
+    // ================================================================== EVENT METHODS ==============================================================
+    // ==================================================================---------------==============================================================
 
     constructor() { }
 
     // When the component is first initialized
-    ngOnChanges(){
-        if (this.firstIteration == 1){
+    ngOnChanges() {
+        if (this.firstIteration == 1) {
             // reconstruct the data for now
             if (this.columnNum == 0)
                 this.reconstructDataConditions(this.levelData);
-            else if (this.columnNum == 1){
+            else if (this.columnNum == 1) {
                 this.reconstructDataObservations(this.levelData);
             }
             else if (this.columnNum == 2)
@@ -61,35 +61,35 @@ export class AccordionRecursion {
         this.loadFinished = true;
     }
 
-// ===============================================================================================================================================
-// ================================================================== UTILITY METHODS ==============================================================
-// ==================================================================---------------==============================================================
+    // ===============================================================================================================================================
+    // ================================================================== UTILITY METHODS ==============================================================
+    // ==================================================================---------------==============================================================
 
     // NOTE: The current component uses this function to rebuild the data into correct structure, but in practice, this function should not be used
     // since the data should already in the correct model format (described above levelData)
-    reconstructDataConditions(arrData: any) {  
+    reconstructDataConditions(arrData: any) {
         var reconstructedObject = this.addCategoriesConditions(arrData);
         this.parsedData = reconstructedObject;
     }
 
-    addCategoriesConditions(arrData: any){
+    addCategoriesConditions(arrData: any) {
         // For conditions, there are guaranteed to be 5 different columns; for now, just filter by active/inactive
 
         // data sieve
-        var dataFilter = 
+        var dataFilter =
         {
             'Chief Complaint': [],
             'Active Problems': [],
             'Inactive Problems': [],
-            'Allergies/Precautions' : [],
-            'Preventions/Exposures' : []
+            'Allergies/Precautions': [],
+            'Preventions/Exposures': []
         };
 
         // Filter each condition into a category based on the data
-        for (var i = 0 ; i < arrData.length; i++){
-            if (arrData[i].clinicalStatus == "active"){
+        for (var i = 0; i < arrData.length; i++) {
+            if (arrData[i].clinicalStatus == "active") {
                 dataFilter['Active Problems'].push(arrData[i]);
-            } else if (arrData[i].clinicalStatus == "inactive"){
+            } else if (arrData[i].clinicalStatus == "inactive") {
                 dataFilter['Inactive Problems'].push(arrData[i]);
             }
         }
@@ -98,9 +98,9 @@ export class AccordionRecursion {
         var reconstructedObject = [];
 
         // for each category
-        for (var key in dataFilter){
-            if (dataFilter.hasOwnProperty(key)){
-                var newObj = 
+        for (var key in dataFilter) {
+            if (dataFilter.hasOwnProperty(key)) {
+                var newObj =
                 {
                     category: key,
                     subheadings: false,
@@ -110,57 +110,52 @@ export class AccordionRecursion {
 
                 reconstructedObject.push(newObj);
             }
-        }        
+        }
 
         return reconstructedObject;
     }
 
     // ================================= RECONSTRUCT DATA OBSERVATIONS =========================
 
-    reconstructDataObservations(arrData: any){
+    reconstructDataObservations(arrData: any) {
         // reconstruct then set the passed data
         this.parsedData = this.addCategoriesObservations(arrData);
     }
 
     // Populate the Observations list with categories (Need to migrate this to the service later)
     // The categories are stored inside of the object already
-    addCategoriesObservations(arrData: any){
+    addCategoriesObservations(arrData: any) {
         console.log(arrData);
         // hash out duplicates using a javscript object
         let hash = {};
 
-        for (let i = 0 ; i < arrData.length; i++){
+        for (let observation of arrData) {
             // ignore if this category has no valueQuantity field
-            if (!arrData[i].hasOwnProperty("valueQuantity")) {
+            if (!observation.hasOwnProperty("valueQuantity")) {
                 continue;
             }
 
-            if (arrData[i].hasOwnProperty("category")) {
-                var currCategory = arrData[i].category[0].text;
+            if (observation.hasOwnProperty("category")) {
+                var currCategory = observation.category[0].text;
             }
-
-            // only push new if not in hashset
-            console.log(currCategory);
-            if (!hash[currCategory]){
+            if (!hash.hasOwnProperty(currCategory)) {
                 hash[currCategory] = [];
             }
-            hash[currCategory].push(arrData[i]);
+            // only push new if not in hashset
+            hash[currCategory].push(observation);   
         }
-
         // then reconstruct the object
         let reconstructedObject = [];
 
         // for each category
-        for (let key in hash){
-            if (hash.hasOwnProperty(key)) {
-                reconstructedObject.push({
-                    category: key,
-                    subheadings: false,
-                    subs: null,
-                    data: hash[key]
-                });
-            }
-        }        
+        for (let key of Object.keys(hash)) {
+            reconstructedObject.push({
+                category: key,
+                subheadings: false,
+                subs: null,
+                data: hash[key]
+            });
+        }
 
         return reconstructedObject;
     }
@@ -173,7 +168,7 @@ export class AccordionRecursion {
             subheadings: false,
             subs: null,
             data: arrData
-        }, 
+        },
         {
             category: "Procedures",
             subheadings: false,
@@ -198,8 +193,8 @@ export class AccordionRecursion {
             subs: null,
             data: arrData
         },
-    ];
+        ];
 
-    this.parsedData = reconstructedObject;
+        this.parsedData = reconstructedObject;
     }
 }

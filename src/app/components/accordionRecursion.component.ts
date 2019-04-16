@@ -125,6 +125,7 @@ export class AccordionRecursion {
     // Populate the Observations list with categories (Need to migrate this to the service later)
     // The categories are stored inside of the object already
     addCategoriesObservations(arrData: any) {
+        console.log(arrData);
         // hash out duplicates using a javscript object
         let hash = {};
 

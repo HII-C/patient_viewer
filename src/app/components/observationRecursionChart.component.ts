@@ -16,11 +16,11 @@ export class ObservationRecursiveChart {
   constructor(private observationService: ObservationService,
     private trendsService: HistoricalTrendsService) { }
 
-  getData() {
+  getData(): Array<Observation> {
     return this.obs;
   }
 
-  getLevel() {
+  getLevel(): number {
     return this.level;
   }
 

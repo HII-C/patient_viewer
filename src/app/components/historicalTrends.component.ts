@@ -77,20 +77,36 @@ export class HistoricalTrendsComponent {
   }
 
   // Reset the min and max dates for the x-axis of displayed charts (so all data is shown).
-  resetMinDate() {
+  resetDateRange() {
     this.minDate = null;
     this.maxDate = null;
+
+    // Choose the earliest date of all charts, and the latest date of all charts.
+    for (let chart of this.trendsService.charts) {
+      let [chartMinDate, chartMaxDate] = this.trendsService.getDateRange(chart);
+
+      if (this.minDate == null || chartMinDate.getTime() < this.minDate.getTime()) {
+        this.minDate = chartMinDate;
+      }
+
+      if (this.maxDate == null || chartMaxDate.getTime() > this.maxDate.getTime()) {
+        this.maxDate = chartMaxDate;
+      }
+    }
   }
+
   // Subtracts the given number of years from today's date, and sets the result
   // as the minimum date on the x-axis of displayed charts.
-  setMinYearsAgo(years) {
+  setDateRangeYears(years) {
     this.minDate = moment().subtract(years, 'years').toDate();
+    this.maxDate = moment().toDate();
   }
 
   // Subtracts the given number of months from today's date, and sets the result
   // as the minimum date on the x-axis of displayed charts.
-  setMinMonthsAgo(months) {
+  setDateRangeMonths(months) {
     this.minDate = moment().subtract(months, 'months').toDate();
+    this.maxDate = moment().toDate();
   }
 
   // Called when a data point is clicked on a chart.

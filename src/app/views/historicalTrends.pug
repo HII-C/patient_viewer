@@ -34,23 +34,23 @@ div(style="float: left; width: 350px")
                               
 div(style="float:left; padding-left: 50px")
     div.btn-group(style="height: 50px; padding-top: 10px; padding-bottom: 10px")
-        button.btn.btn-default((click)='resetMinDate()' style="width: 75px")
-            | All
-        button.btn.btn-default((click)='setMinYearsAgo(25)' style="width: 75px")
+        button.btn.btn-default((click)='resetDateRange()' style="width: 75px")
+            | Fit All
+        button.btn.btn-default((click)='setDateRangeYears(25)' style="width: 75px")
             | 25 Years
-        button.btn.btn-default((click)='setMinYearsAgo(10)' style="width: 75px")
+        button.btn.btn-default((click)='setDateRangeYears(10)' style="width: 75px")
             | 10 Years
-        button.btn.btn-default((click)='setMinYearsAgo(5)' style="width: 75px")
+        button.btn.btn-default((click)='setDateRangeYears(5)' style="width: 75px")
             | 5 Years
-        button.btn.btn-default((click)='setMinYearsAgo(2)' style="width: 75px")
+        button.btn.btn-default((click)='setDateRangeYears(2)' style="width: 75px")
             | 2 Years
-        button.btn.btn-default((click)='setMinYearsAgo(1)' style="width: 75px")
+        button.btn.btn-default((click)='setDateRangeYears(1)' style="width: 75px")
             | 1 Year
-        button.btn.btn-default((click)='setMinMonthsAgo(6)' style="width: 75px")
+        button.btn.btn-default((click)='setDateRangeMonths(6)' style="width: 75px")
             | 6 Months
-        button.btn.btn-default((click)='setMinMonthsAgo(3)' style="width: 75px")
+        button.btn.btn-default((click)='setDateRangeMonths(3)' style="width: 75px")
             | 3 Months
-        button.btn.btn-default((click)='setMinMonthsAgo(1)' style="width: 75px")
+        button.btn.btn-default((click)='setDateRangeMonths(1)' style="width: 75px")
             | 1 Month
         button.btn.btn-default(data-toggle="modal", [attr.data-target]="'#specify_popup'", style="width: 75px") 
             | Specify

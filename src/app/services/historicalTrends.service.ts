@@ -68,7 +68,7 @@ export class HistoricalTrendsService {
 
     // Set the min and max y-axis values for the chart, providing a small buffer
     // of extra space.
-    let [max, min] = this.getMinMaxValues(chart);
+    let [max, min] = this.getValueRange(chart);
     let buffer = (max - min) * 0.2;
 
     chart.yScaleMin = min - buffer;
@@ -158,7 +158,7 @@ export class HistoricalTrendsService {
   }
 
   // Get the smallest and largest values from a given chart.
-  private getMinMaxValues(chart: Chart) {
+  private getValueRange(chart: Chart) {
     // If the data provided is empty, return [0, 0].
     if (!chart.data || chart.data.length == 0) {
       return [0, 0];
@@ -173,5 +173,27 @@ export class HistoricalTrendsService {
     }
 
     return [min, max];
+  }
+
+  // Get the earliest and latest dates associated with any point in a chart.
+  public getDateRange(chart: Chart) {
+    // If the data provided is empty, return today's date.
+    if (!chart.data || chart.data.length == 0) {
+      return [new Date(), new Date()];
+    }
+    
+    let minDate: Date = chart.data[0].name;
+    let maxDate: Date = chart.data[0].name;
+
+    for (let point of chart.data) {
+      if (point.name.getTime() < minDate.getTime()) {
+        minDate = point.name;
+      }
+      if (point.name.getTime() > maxDate.getTime()) {
+        maxDate = point.name;
+      }
+    }
+
+    return [minDate, maxDate];
   }
 }

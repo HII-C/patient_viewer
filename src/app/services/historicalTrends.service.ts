@@ -15,17 +15,7 @@ export class HistoricalTrendsService {
   // Store all the charts currently being displayed.
   charts: Array<Chart> = [];
 
-  dataDef: Chart;
-  test: Chart;
-  canvasHeight: number;
-  private activateGraphSource = new Subject<boolean>();
-  activateGraph$ = this.activateGraphSource.asObservable();
-
   constructor() { }
-
-  buttonClicked(clicked: boolean) {
-    this.activateGraphSource.next(clicked);
-  }
 
   // Add a new chart displaying a specific observation in the trends tool.
   public addObservationChart(chartName, data) {

@@ -51,10 +51,6 @@ export class ToolbarComponent {
     this.scratchPadService.switchToScratchPad(false);
   }
 
-  openGraph() {
-    this.trendsService.buttonClicked(true);
-  }
-
   updatePosition(ref: ElementRef) {
     let left = this.elRef.nativeElement.querySelector('div').style.left;
     let top = this.elRef.nativeElement.querySelector('div').style.top;

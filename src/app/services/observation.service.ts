@@ -286,7 +286,6 @@ export class ObservationService {
   // Sort the Observations list (arrData) into categories, which are returned inside
   // a single object that conforms to accordion data format
   addCategoriesObservations(observations: Array<Observation>): any {
-    console.log(observations);
     // hash out duplicates using a javscript object
     let hash = {};
 

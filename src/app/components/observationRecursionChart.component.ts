@@ -17,6 +17,9 @@ export class ObservationRecursiveChart {
     private trendsService: HistoricalTrendsService) { }
 
   getData(): Array<Observation> {
+    console.log("data in observation chart is:");
+    console.log(this.obs);
+    console.log(this.level);
     return this.obs;
   }
 
@@ -25,11 +28,11 @@ export class ObservationRecursiveChart {
   }
 
   // Called when an observation is either checked or unchecked.
-  checked(obs: any, event, position, data) {
-    obs.isSelected = !obs.isSelected;
+  checked(changedObs: any, event, position: number, data) {
+    changedObs.isSelected = !changedObs.isSelected;
 
     if (event.shiftKey) {
-      let upper, lower;
+      let upper: number, lower: number;
       if (position < this.lastIndex) {
         upper = this.lastIndex;
         lower = position;
@@ -39,7 +42,7 @@ export class ObservationRecursiveChart {
         lower = this.lastIndex;
       }
       for (let i = lower; i <= upper; i++) {
-        if (data[i].isSelected != true) {
+        if (!data[i].isSelected) {
           this.observationService.selected.push(data[i]);
         }
         data[i].isSelected = true;
@@ -48,12 +51,12 @@ export class ObservationRecursiveChart {
 
     this.lastIndex = position;
 
-    if (obs.isSelected) {
+    if (changedObs.isSelected) {
       // Data points to be added to the chart for this observation in the trends tool.
       let dataPoints = [];
 
       for (let o of this.observationService.observations) {
-        if (o['code']['coding'][0]['code'] == obs.code) {
+        if (o['code']['coding'][0]['code'] == changedObs.code) {
           /* Load all data points associated with the selected
              observation to the trends tool. 'o' represents one
              of these data points.
@@ -62,17 +65,17 @@ export class ObservationRecursiveChart {
         }
       }
 
-      this.observationService.selected.push(obs);
+      this.observationService.selected.push(changedObs);
 
       // Create a new chart in the trends tool for the selected observation.
-      this.trendsService.addObservationChart(obs.code, dataPoints);
+      this.trendsService.addObservationChart(changedObs.code, dataPoints);
     } else {
       // If the observation is deselected, delete its chart from the trends tool.
-      this.trendsService.removeChart(obs.code);
+      this.trendsService.removeChart(changedObs.code);
 
       // Indicate that the observation has been unselected
       // by deleting it from the 'selected' array.
-      let index = this.observationService.selected.indexOf(obs);
+      let index = this.observationService.selected.indexOf(changedObs);
       this.observationService.selected.splice(index, 1);
     }
   }

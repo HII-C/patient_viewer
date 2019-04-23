@@ -6,6 +6,7 @@
 */
 
 import { Component, Input, Output } from '@angular/core';
+import { ObservationService } from '../services/observation.service';
 
 @Component({
     selector: 'accordionRecursion',
@@ -41,7 +42,7 @@ export class AccordionRecursion {
     // ================================================================== EVENT METHODS ==============================================================
     // ==================================================================---------------==============================================================
 
-    constructor() { }
+    constructor(private observationService: ObservationService) { }
 
     // When the component is first initialized
     ngOnChanges() {
@@ -68,7 +69,7 @@ export class AccordionRecursion {
     // NOTE: The current component uses this function to rebuild the data into correct structure, but in practice, this function should not be used
     // since the data should already in the correct model format (described above levelData)
     reconstructDataConditions(arrData: any) {
-        this.parsedData = this.addCategoriesConditions(arrData);;
+        this.parsedData = this.addCategoriesConditions(arrData);
     }
 
     addCategoriesConditions(arrData: any) {
@@ -118,50 +119,10 @@ export class AccordionRecursion {
 
     reconstructDataObservations(arrData: any) {
         // reconstruct then set the passed data
-        this.parsedData = this.addCategoriesObservations(arrData);
+        this.parsedData = this.observationService.addCategoriesObservations(arrData);
     }
 
-    // Sort the Observations list (arrData) into categories conforming to accordion data format (Need to migrate this to the service later)
-    // The categories are stored inside of the object already
-    addCategoriesObservations(arrData: any): any {
-        console.log(arrData);
-        // hash out duplicates using a javscript object
-        let hash = {};
-
-        for (let observation of arrData) {
-            // ignore if this category has no valueQuantity field
-            if (observation.hasOwnProperty("valueQuantity")) {
-                let currCategory: string;
-                if (observation.hasOwnProperty("category")) {
-                    currCategory = observation.category[0].text;
-                }
-                else {
-                    currCategory = "Other";
-                }
-
-                if (!hash.hasOwnProperty(currCategory)) {
-                    hash[currCategory] = [];
-                }
-                // only push new if not in hashset
-                hash[currCategory].push(observation);
-            }
-        }
-        // then reconstruct the object
-        let reconstructedObject = [];
-
-        // for each category
-        for (let key of Object.keys(hash)) {
-            reconstructedObject.push({
-                category: key,
-                subheadings: false,
-                subs: null,
-                data: hash[key]
-            });
-        }
-
-        return reconstructedObject;
-    }
-
+    
     // ================================ RECONSTRUCT DATA FINDINGS ======================
 
     reconstructDataFindings(arrData: any) {

@@ -194,7 +194,7 @@ export class ObservationService {
     this.populateCategories(this.categorizedObservations.categories);
     // The condensed observations should be the final set of data -- add it to the scratchpadservice
     this.scratchPadService.initObservations(this.condensedObservations);
-    
+
     //this.observationReturned.emit(this.observationService.categorizedObservations);
   }
 
@@ -280,6 +280,42 @@ export class ObservationService {
     }
     //console.log("returning("+JSON.stringify(obj)+") "+totalcount);
     return totalCount;
+  }
+
+
+  // Sort the Observations list (arrData) into categories, which are returned inside
+  // a single object that conforms to accordion data format
+  addCategoriesObservations(observations: Array<Observation>): any {
+    console.log(observations);
+    // hash out duplicates using a javscript object
+    let hash = {};
+
+    for (let observation of observations) {
+      // ignore if this category has no valueQuantity field
+      if (observation.hasOwnProperty("valueQuantity")) {
+        let currCategory: string = observation.hasOwnProperty("valueQuantity") ? observation.category[0].text : "Other";
+
+        if (!hash.hasOwnProperty(currCategory)) {
+          hash[currCategory] = [];
+        }
+        // only push new if not in hashset
+        hash[currCategory].push(observation);
+      }
+    }
+    // then reconstruct the object
+    let reconstructedObject = [];
+
+    // for each category
+    for (let ctgry of Object.keys(hash)) {
+      reconstructedObject.push({
+        category: ctgry,
+        subheadings: false,
+        subs: null,
+        data: hash[ctgry]
+      });
+    }
+
+    return reconstructedObject;
   }
 
   // ====================== SCRATCH PAD FUNCTIONALITY =============================

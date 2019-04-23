@@ -68,8 +68,7 @@ export class AccordionRecursion {
     // NOTE: The current component uses this function to rebuild the data into correct structure, but in practice, this function should not be used
     // since the data should already in the correct model format (described above levelData)
     reconstructDataConditions(arrData: any) {
-        var reconstructedObject = this.addCategoriesConditions(arrData);
-        this.parsedData = reconstructedObject;
+        this.parsedData = this.addCategoriesConditions(arrData);;
     }
 
     addCategoriesConditions(arrData: any) {
@@ -122,31 +121,30 @@ export class AccordionRecursion {
         this.parsedData = this.addCategoriesObservations(arrData);
     }
 
-    // Populate the Observations list with categories (Need to migrate this to the service later)
+    // Sort the Observations list (arrData) into categories conforming to accordion data format (Need to migrate this to the service later)
     // The categories are stored inside of the object already
-    addCategoriesObservations(arrData: any) {
+    addCategoriesObservations(arrData: any): any {
         console.log(arrData);
         // hash out duplicates using a javscript object
         let hash = {};
 
         for (let observation of arrData) {
             // ignore if this category has no valueQuantity field
-            if (!observation.hasOwnProperty("valueQuantity")) {
-                continue;
-            }
-            let currCategory: string;
-            if (observation.hasOwnProperty("category")) {
-                currCategory = observation.category[0].text;
-            }
-            else {
-                currCategory = "Other";
-            }
+            if (observation.hasOwnProperty("valueQuantity")) {
+                let currCategory: string;
+                if (observation.hasOwnProperty("category")) {
+                    currCategory = observation.category[0].text;
+                }
+                else {
+                    currCategory = "Other";
+                }
 
-            if (!hash.hasOwnProperty(currCategory)) {
-                hash[currCategory] = [];
+                if (!hash.hasOwnProperty(currCategory)) {
+                    hash[currCategory] = [];
+                }
+                // only push new if not in hashset
+                hash[currCategory].push(observation);
             }
-            // only push new if not in hashset
-            hash[currCategory].push(observation);
         }
         // then reconstruct the object
         let reconstructedObject = [];
@@ -161,15 +159,13 @@ export class AccordionRecursion {
             });
         }
 
-        console.log(reconstructedObject);
-
         return reconstructedObject;
     }
 
     // ================================ RECONSTRUCT DATA FINDINGS ======================
 
     reconstructDataFindings(arrData: any) {
-        var reconstructedObject = [{
+        let reconstructedObject = [{
             category: "Medication",
             subheadings: false,
             subs: null,

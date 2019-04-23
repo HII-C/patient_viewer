@@ -17,9 +17,6 @@ export class ObservationRecursiveChart {
     private trendsService: HistoricalTrendsService) { }
 
   getData(): Array<Observation> {
-    console.log("data in observation chart is:");
-    console.log(this.obs);
-    console.log(this.level);
     return this.obs;
   }
 

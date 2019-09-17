@@ -13,7 +13,7 @@ import * as moment from 'moment';
 export class ObservationService {
   condensedObservations: Array<Observation> = [];
   categorizedObservations: any;
-  groupList: any;
+  groupMap: any;
   count: number = 0;
   observations: Array<Observation> = [];
   selected: Array<Observation> = [];
@@ -25,7 +25,7 @@ export class ObservationService {
   constructor(private fhirService: FhirService, private http: Http, private scratchPadService: ScratchPadService) {
     // these are the codes of the observations; 
     // groupList is used to categorize where in categorizedObservations this is stored
-    this.groupList = {
+    this.groupMap = {
       "1-1": ["8302-2", "3141-9", "2710-2"],
       "1-2": [],
       "1-3": [],
@@ -202,11 +202,11 @@ export class ObservationService {
 
   /**
    * Description: given a certain observation ID, returns the position mapping of that
-   * ID contained within the groupList
+   * ID contained within the groupMap
    */
   getKey(value) {
-    for (let x in this.groupList) {
-      if (this.groupList[x].includes(value)) {
+    for (let x in this.groupMap) {
+      if (this.groupMap[x].includes(value)) {
         return x;
       }
     }
@@ -256,9 +256,7 @@ export class ObservationService {
             // x.data.push(obs);
           }
         }
-      }
 
-      if (category.hasOwnProperty('data')) {
         if (category.data.length > 0) {
           category.count += count;
           totalCount += count;
@@ -278,7 +276,6 @@ export class ObservationService {
         }
       }
     }
-    //console.log("returning("+JSON.stringify(obj)+") "+totalcount);
     return totalCount;
   }
 
@@ -290,16 +287,16 @@ export class ObservationService {
     let hash = {};
 
     for (let observation of observations) {
-      // ignore if this category has no valueQuantity field
-      if (observation.hasOwnProperty("valueQuantity")) {
-        let currCategory: string = observation.hasOwnProperty("valueQuantity") ? observation.category[0].text : "Other";
+      let currCategory: string;
+      if (observation.hasOwnProperty("valueQuantity") && observation.hasOwnProperty("category")) {
+        let currCategory = observation.category[0].text;
 
         if (!hash.hasOwnProperty(currCategory)) {
           hash[currCategory] = [];
         }
         // only push new if not in hashset
         hash[currCategory].push(observation);
-      }
+      }      
     }
     // then reconstruct the object
     let reconstructedObject = [];

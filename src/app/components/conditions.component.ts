@@ -52,7 +52,12 @@ export class ConditionsComponent extends BaseColumn {
   // ================================================================== EVENT METHODS ==============================================================
   // ==================================================================---------------==============================================================
 
-  constructor(private fhirService: FhirService, private conditionService: ConditionService, private doctorService: DoctorService, private scratchPadService: ScratchPadService) {
+  constructor(
+    private fhirService: FhirService,
+    private conditionService: ConditionService,
+    private doctorService: DoctorService,
+    private scratchPadService: ScratchPadService
+  ) {
     super();
     this.justCreated = true;
     this.scratchPadConditions = this.getScratchPadConditions();

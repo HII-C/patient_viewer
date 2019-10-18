@@ -20,7 +20,7 @@ export class ObservationService {
   private path = '/Observation';
   condensedObservationsLoadFinished: boolean = false;
 
-  filterHash: any = {};
+  filterSet = new Set<string>();
 
   constructor(private fhirService: FhirService, private http: Http, private scratchPadService: ScratchPadService) {
     // these are the codes of the observations; 
@@ -174,22 +174,11 @@ export class ObservationService {
     console.log("Loaded " + this.condensedObservations.length + " observations.");
     this.condensedObservationsLoadFinished = true;
 
-    /*
-    * Data cleaning - sorts by the effective time
-    */
     this.observations.sort((n1, n2) => {
       return n1.effectiveDateTime < n2.effectiveDateTime ? 1 : -1;
     })
 
-    // Scale dates to make them appear more recent for demos.
-    // 0.8 is an arbitrary value that produces realistic dates.
-    var diff = Math.floor(0.80 *
-      (new Date().getTime() - new Date(this.observations[0].effectiveDateTime).getTime()));
-
-    for (let ob of this.observations) {
-      let newDate = new Date(ob.effectiveDateTime).getTime() + diff;
-      ob.relativeDateTime = moment(newDate).toISOString();
-    }
+    this.scaleDates();
 
     this.populateCategories(this.categorizedObservations.categories);
     // The condensed observations should be the final set of data -- add it to the scratchpadservice
@@ -198,6 +187,16 @@ export class ObservationService {
     //this.observationReturned.emit(this.observationService.categorizedObservations);
   }
 
+  scaleDates(): void {
+    let RECENCY_MULTIPLIER = 0.80;
+    let timeSinceObservation = new Date().getTime() - new Date(this.observations[0].effectiveDateTime).getTime();
+    let scaledTimeSinceObservation = Math.floor(RECENCY_MULTIPLIER * timeSinceObservation);
+
+    for (let ob of this.observations) {
+      let relativeDateTime = new Date(ob.effectiveDateTime).getTime() + scaledTimeSinceObservation;
+      ob.relativeDateTime = moment(relativeDateTime).toISOString();
+    }
+  }
   // ================================ DATA CLEANING ===============================
 
   /**
@@ -222,13 +221,12 @@ export class ObservationService {
 
     // do a pass and keep first instance
     for (let obs of observations) {
-      let code = obs['code']['coding'][0]['code'];
-
+      let code: string = obs['code']['coding'][0]['code'];
       // if new entry, then add to filtered set
-      if (!this.filterHash[code]) {
-        this.filterHash[code] = true;
+      if (!this.filterSet.has(code)) {
         obs.grouping = this.getKey(code);
         this.condensedObservations.push(obs);
+        this.filterSet.add(code);
       }
     }
   }
@@ -253,7 +251,6 @@ export class ObservationService {
               measurement["value"] = obs["valueQuantity"]["value"];
             }
             category.data.push(measurement);
-            // x.data.push(obs);
           }
         }
 

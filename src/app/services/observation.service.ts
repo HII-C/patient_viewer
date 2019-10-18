@@ -11,14 +11,14 @@ import * as moment from 'moment';
 @Injectable()
 @Component({})
 export class ObservationService {
-  condensedObservations: Array<Observation> = [];
+  uniqueObservations: Array<Observation> = [];
   categorizedObservations: any;
-  groupMap: any;
-  count: number = 0;
+  groupMap: {[x: string]: Array<String>};
+  count = 0;
   observations: Array<Observation> = [];
   selected: Array<Observation> = [];
   private path = '/Observation';
-  condensedObservationsLoadFinished: boolean = false;
+  uniqueObservationsLoadFinished = false;
 
   filterSet = new Set<string>();
 
@@ -128,35 +128,30 @@ export class ObservationService {
 
   // ================================== DATA RETRIEVAL ========================
 
-  /** Gets the data for the recursive data link calls   */
-  getObservations(url: string): Observable<any> {
+  retrieveObservations(url: string): Observable<any> {
     return this.http.get(url, this.fhirService.options(true)).map(res => <Observation>res.json());
   }
 
   /**
    * Loads observation data, which is paginated, by recursively loading data pages.
    */
-  loadData(url): void {
+  loadData(url: string): void {
     /**
      * Make the request for the url, and handle the data in the subsequent callback
      */
-    this.getObservations(url).subscribe(data => {
-      if (data.entry) { // Check if the data is valid
-        // Map the data onto a json array of observations and append that data to the running total of observations
-        let nextObs = <Array<Observation>>data.entry.map(r => r['resource']);
-        this.observations = this.observations.concat(nextObs);
-        this.filterCategory(nextObs);
+    this.retrieveObservations(url).subscribe((data: { [x: string]: any }) => {
+      if (data.hasOwnProperty('entry')) {
+        let nextObservations: Array<Observation> = data['entry'].map((r: { [x: string]: any }) => r['resource']);
+        this.observations = this.observations.concat(nextObservations);
+        this.extractNewObservations(nextObservations);
 
-        /**
-           * The data comes in parts, so we must keep on loading the data from the next link until that link is empty,
-           * at which point we know that all the data has been loaded at that point.
-        */
-        let nextLink: Array<any> = data.link.filter(link => link.relation == "next");
-        if (nextLink.length > 0) { //recursive case - there is still more data to load from link with relation "next"
-          this.loadData(nextLink[0].url);
+        let nextLinks: Array<{[x: string]: string}> = data['link'].filter((link: {[x: string]: string}) => link['relation'] == 'next');
+        if (nextLinks.length > 0) {
+          let nextUrl = nextLinks[0]['url'];
+          this.loadData(nextUrl);
         }
         else {
-          this.onLoadComplete(); //base case - no link with relation "next" found, thus no more data to load
+          this.onLoadComplete();
         }
       }
       else {
@@ -166,13 +161,10 @@ export class ObservationService {
     });
   }
 
-  /**
-   * Description: Clean observations now that they should be finished loading and are stored in the observationService!
-   */
   onLoadComplete() {
     this.observations = this.observations.reverse();
-    console.log("Loaded " + this.condensedObservations.length + " observations.");
-    this.condensedObservationsLoadFinished = true;
+    console.log("Loaded " + this.uniqueObservations.length + " observations.");
+    this.uniqueObservationsLoadFinished = true;
 
     this.observations.sort((n1, n2) => {
       return n1.effectiveDateTime < n2.effectiveDateTime ? 1 : -1;
@@ -182,7 +174,7 @@ export class ObservationService {
 
     this.populateCategories(this.categorizedObservations.categories);
     // The condensed observations should be the final set of data -- add it to the scratchpadservice
-    this.scratchPadService.initObservations(this.condensedObservations);
+    this.scratchPadService.initObservations(this.uniqueObservations);
 
     //this.observationReturned.emit(this.observationService.categorizedObservations);
   }
@@ -203,68 +195,64 @@ export class ObservationService {
    * Description: given a certain observation ID, returns the position mapping of that
    * ID contained within the groupMap
    */
-  getKey(value) {
+  getKey(value: string): string {
     for (let x in this.groupMap) {
-      if (this.groupMap[x].includes(value)) {
+      if (this.groupMap[x].indexOf(value) !== -1) {
         return x;
       }
     }
 
-    return "3"; //"Other"
+    let OTHER_GROUPING = '3';
+    return OTHER_GROUPING;
   }
 
-  /**
-   * Description: The observations received from the server contains many duplicates. This (inefficient) method
-   * ensures that there are no duplicates in the condensed observations list of the data.
-   */
-  filterCategory(observations: Array<Observation>) {
-
-    // do a pass and keep first instance
-    for (let obs of observations) {
-      let code: string = obs['code']['coding'][0]['code'];
-      // if new entry, then add to filtered set
+  extractNewObservations(observations: Array<Observation>): void {
+    for (let observation of observations) {
+      let code: string = observation['code']['coding'][0]['code'];
       if (!this.filterSet.has(code)) {
-        obs.grouping = this.getKey(code);
-        this.condensedObservations.push(obs);
+        observation.grouping = this.getKey(code);
+        this.uniqueObservations.push(observation);
+        
         this.filterSet.add(code);
       }
     }
   }
 
-  populateCategories(categories): number {
-    let totalCount: number = 0;
-    let count: number = 0;
+  populateCategories(categories: Array<{[x: string]: any}>): number {
+    let totalCount = 0;
+    let categoryCount = 0;
 
-    for (let i: number = 0; i < categories.length; i++) {
+    for (let i = 0; i < categories.length; i++) {
       let category = categories[i];
+      //console.log(category);
       if (category.hasOwnProperty('data')) {
         /**
          * Depending on what grouping was assigned to a observation, add it to the relevant category
          */
-        for (let obs of this.condensedObservations) {
-          if (obs.grouping == category.id) {
-            count++;
+        for (let obs of this.uniqueObservations) {
+          if (obs.grouping == category['id']) {
+            categoryCount++;
             // This is a crappy solution, want sometime more robust in the future - Austin Michne
             let measurement = { "name": obs['code']['coding'][0]['display'], "code": obs['code']['coding'][0]['code'], "date": obs.effectiveDateTime };
 
             if (obs.hasOwnProperty("valueQuantity")) {
               measurement["value"] = obs["valueQuantity"]["value"];
             }
-            category.data.push(measurement);
+            category['data'].push(measurement);
           }
         }
 
-        if (category.data.length > 0) {
-          category.count += count;
-          totalCount += count;
-          count = 0;
+        if (category['data'].length > 0) {
+          category['count'] += categoryCount;
+          totalCount += categoryCount;
+          categoryCount = 0;
         }
         else {
           categories.splice(i, 1);
         }
       }
       else if (category.hasOwnProperty('child')) {
-        let childCount: number = this.populateCategories(category.child);
+        let childCount = this.populateCategories(category['child']);
         category.count += childCount;
         totalCount += childCount;
 
@@ -279,32 +267,27 @@ export class ObservationService {
 
   // Sort the Observations list (arrData) into categories, which are returned inside
   // a single object that conforms to accordion data format
-  addCategoriesObservations(observations: Array<Observation>): any {
-    // hash out duplicates using a javscript object
-    let hash = {};
+  addCategoriesObservations(observations: Array<Observation>): Array<{[x: string]: any}> {
+    let observationsByCategory: {[x: string]: Array<Observation>} = {};
 
     for (let observation of observations) {
-      let currCategory: string;
-      if (observation.hasOwnProperty("valueQuantity") && observation.hasOwnProperty("category")) {
-        let currCategory = observation.category[0].text;
+      if (observation.hasOwnProperty('valueQuantity') && observation.hasOwnProperty('category')) {
+        let observationCategory = observation.category[0].text;
 
-        if (!hash.hasOwnProperty(currCategory)) {
-          hash[currCategory] = [];
+        if (!observationsByCategory.hasOwnProperty(observationCategory)) {
+          observationsByCategory[observationCategory] = [];
         }
-        // only push new if not in hashset
-        hash[currCategory].push(observation);
-      }      
+        observationsByCategory[observationCategory].push(observation);
+      }
     }
-    // then reconstruct the object
-    let reconstructedObject = [];
+    let reconstructedObject: Array<{[x: string]: any}> = [];
 
-    // for each category
-    for (let ctgry of Object.keys(hash)) {
+    for (let ctgry of Object.keys(observationsByCategory)) {
       reconstructedObject.push({
         category: ctgry,
         subheadings: false,
         subs: null,
-        data: hash[ctgry]
+        data: observationsByCategory[ctgry]
       });
     }
 

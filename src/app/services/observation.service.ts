@@ -220,44 +220,35 @@ export class ObservationService {
 
   populateCategories(categories: Array<{[x: string]: any}>): number {
     let totalCount = 0;
-    let categoryCount = 0;
-
     for (let i = 0; i < categories.length; i++) {
       let category = categories[i];
       //console.log(category);
       if (category.hasOwnProperty('data')) {
-        /**
-         * Depending on what grouping was assigned to a observation, add it to the relevant category
-         */
+        //Depending on what grouping was assigned to a observation, add it to the relevant category
         for (let obs of this.uniqueObservations) {
           if (obs.grouping == category['id']) {
-            categoryCount++;
             // This is a crappy solution, want sometime more robust in the future - Austin Michne
             let measurement = { "name": obs['code']['coding'][0]['display'], "code": obs['code']['coding'][0]['code'], "date": obs.effectiveDateTime };
-
             if (obs.hasOwnProperty("valueQuantity")) {
               measurement["value"] = obs["valueQuantity"]["value"];
             }
+
             category['data'].push(measurement);
           }
         }
-
-        if (category['data'].length > 0) {
-          category['count'] += categoryCount;
-          totalCount += categoryCount;
-          categoryCount = 0;
-        }
-        else {
-          categories.splice(i, 1);
+        category['count'] = category['data'].length;
+        totalCount += category['count'];
+        if (category['count'] == 0) {
+          categories.splice(i--, 1);          
         }
       }
       else if (category.hasOwnProperty('child')) {
-        let childCount = this.populateCategories(category['child']);
-        category.count += childCount;
-        totalCount += childCount;
-
-        if (category.child.length == 0) {
-          categories.splice(i, 1);
+        if (category['child'].length == 0) {
+          categories.splice(i--, 1);
+        }
+        else {
+          category['count'] = this.populateCategories(category['child']);
+          totalCount += category['count'];
         }
       }
     }

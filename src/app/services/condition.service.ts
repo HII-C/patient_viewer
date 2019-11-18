@@ -8,6 +8,7 @@ import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/concat';
 
 import { FhirService } from './fhir.service';
+import { ScratchPadService } from '../services/scratchPad.service';
 import { Patient } from '../models/patient.model';
 import { Condition } from '../models/condition.model';
 import { AllergyIntolerance } from '../models/allergyIntolerance.model';
@@ -20,7 +21,11 @@ export class ConditionService {
   conditionsCache = {};
   columnState: String;
 
-  constructor(private fhirService: FhirService, private http: Http) { }
+  constructor(
+    private fhirService: FhirService,
+    private scratchPadService: ScratchPadService,
+    private http: Http
+  ) { }
 
   // https://stackoverflow.com/questions/45594609/which-operator-to-chain-observables-conditionally
   // Because the conditions are paginated in the API, we must continually
@@ -59,6 +64,12 @@ export class ConditionService {
   loadConditions(patient: Patient): Observable<Array<Condition>> {
     var url = this.fhirService.getUrl() + this.path + "?patient=" + patient.id;
     return this.loadConditionsPage(url);
+  }
+
+  getCheckedConditions() {
+    return this.conditions.filter(c => {
+      return this.scratchPadService.checkedMapConditions.get(c);
+    });
   }
 
   // Retrieve allergies for a given patient

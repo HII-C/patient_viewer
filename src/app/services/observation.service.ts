@@ -179,6 +179,12 @@ export class ObservationService {
     //this.observationReturned.emit(this.observationService.categorizedObservations);
   }
 
+  getCheckedObservations() {
+    return this.observations.filter(c => {
+      return this.scratchPadService.checkedMapObservations.get(c);
+    });
+  }
+
   scaleDates(): void {
     let RECENCY_MULTIPLIER = 0.80;
     let timeSinceObservation = new Date().getTime() - new Date(this.observations[0].effectiveDateTime).getTime();

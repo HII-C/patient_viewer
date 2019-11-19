@@ -8,6 +8,7 @@ import { HistoricalTrendsService } from '../services/historicalTrends.service';
 import { ToolBarService } from '../services/toolbar.service';
 import { ScratchPadService } from '../services/scratchPad.service';
 import { ConditionService } from '../services/condition.service';
+import { ObservationService} from '../services/observation.service';
 import { AssociationService } from '../services/association.service';
 
 @Component({
@@ -27,13 +28,16 @@ export class ToolbarComponent {
   @Input() patient: Patient;
   nav2: boolean = false;
 
-  constructor(private doctorService: DoctorService,
-              private trendsService: HistoricalTrendsService,
-              private conditionService: ConditionService,
-              private associationService: AssociationService,
-              private toolbarService: ToolBarService,
-              private scratchPadService: ScratchPadService,
-              private elRef: ElementRef) { }
+  constructor(
+    private associationService: AssociationService,
+    private conditionService: ConditionService,
+    private doctorService: DoctorService,
+    private observationService: ObservationService,
+    private scratchPadService: ScratchPadService,
+    private toolbarService: ToolBarService,
+    private trendsService: HistoricalTrendsService,
+    private elRef: ElementRef
+  ) { }
 
   switchNav() {
     this.nav2 = !this.nav2;
@@ -41,7 +45,8 @@ export class ToolbarComponent {
 
   runAssociationsTool() {
     let checkedConditions = this.conditionService.getCheckedConditions();
-    this.associationService.runAssociationsTool(checkedConditions, []);
+    let checkedObservations = this.observationService.getCheckedObservations();
+    this.associationService.runAssociationsTool(checkedConditions, checkedObservations);
   }
 
   // whenver the user presses the filter button

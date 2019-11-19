@@ -4,6 +4,7 @@ import 'rxjs/add/operator/map';
 import { Patient } from '../models/patient.model';
 import { Encounter } from '../models/encounter.model';
 import { FhirService } from './fhir.service';
+import { Observable } from 'rxjs';
 
 @Injectable()
 @Component({})
@@ -13,7 +14,7 @@ export class EncounterService {
   constructor(private fhirService: FhirService, private http: Http) { }
 
   // TODO: Currently only retrieves 10 encounters. Need to add pagination support.
-  loadEncounters(patient: Patient) {
+  loadEncounters(patient: Patient): Observable<Array<Encounter>> {
     var url = this.fhirService.getUrl() + this.path + "?patient=" + patient.id;
     return this.http.get(url, this.fhirService.options(true))
       .map(res => res.json()['entry'].map(e => this.deserialize(e['resource'])));

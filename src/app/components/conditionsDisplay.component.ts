@@ -121,7 +121,7 @@ export class ConditionsDisplay {
 
   // Determine whether a condition is currently associated (based on associations tool)
   isConditionAssociated(condition: Condition) {
-    return this.associationService.associatedConditions.get(condition) || false;
+    return this.associationService.associatedMapConditions.get(condition) || false;
   }
 
   // Check or uncheck all conditions.

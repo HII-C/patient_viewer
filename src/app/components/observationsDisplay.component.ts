@@ -19,6 +19,9 @@ import { ContextMenuComponent } from './contextMenu.component';
   templateUrl: '/observationsDisplay.html'
 })
 export class ObservationsDisplay {
+  // Trick to allow access to static methods of Observation class in pug template
+  Observation = Observation;
+
   // The currently selected condition in the list.
   selected: Observation;
 
@@ -86,7 +89,7 @@ export class ObservationsDisplay {
 
   // FOR MAINTAINING CHECK STATE AFTER LOSING FOCUS
 
-  //whenver a line is selected
+  // Whenever a line is selected
   selectObservation(observation: Observation) {
     this.selected = observation;
     this.observationSelected.emit(this.selected);
@@ -96,13 +99,9 @@ export class ObservationsDisplay {
     }
   }
 
-  // check if the element has already been selected (n^2 time lol)
-  checkClicked(observation: Observation) {
-    if (this.scratchPadService.checkedMapObservations.get(observation)) {
-      return true;
-    }
-
-    return false;
+  // Determine whether an observation is currently checked.
+  isObservationChecked(observation: Observation) {
+    return this.scratchPadService.checkedMapObservations.get(observation) || false;
   }
 
   // WHENEVER A CHECKBOX IS CLICKED OR UNCLICKED, IT REGISTERS IT IN THE SCRATCHPADSERVICE (not actually the scratch pad yet)

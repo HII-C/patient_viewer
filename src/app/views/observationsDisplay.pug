@@ -16,14 +16,13 @@ div
             tr("*ngFor"='let o of observations', [class.selected]='o.selected', (click)='selectObservation(o)', (contextmenu)='menu.show(o, $event)', id='t{{observations.indexOf(o)}}',
              (mouseover)="hover.show([o['code']['coding'][0]['display']], $event)", (mouseleave)='hover.hide($event)')
                 td
-                    input("*ngIf"="!o.isParent", [checked] = 'checkClicked(o)' type='checkbox',id='o{{observations.indexOf(o)}}', value='{{observations.indexOf(o)}}', (change)='checkObservation($event.target.checked, o)')
+                    input("*ngIf"="!o.isParent", type='checkbox', [checked] = 'isObservationChecked(o)', id='o{{observations.indexOf(o)}}', (change)='checkObservation($event.target.checked, o)')
                 td
                     button.btn.btn-default("*ngIf"="o.isParent", (click)='expand(o.parent)') ... 
-                    span("*ngIf"="o['code']['text']") {{o['code']['text']}}
-                    span("*ngIf"="o['code']['coding'][0]['display'] && !o['code']['text']") {{o['code']['coding'][0]['display']}}
+                    span {{Observation.getText(o)}}
                     span("*ngIf"="isObservationAssociated(o)", class="glyphicon glyphicon-fire", style="padding-left: 5px")
-                td("*ngIf"="!o.isParent") {{o['valueQuantity']['value']}}
-                td("*ngIf" = "!o.isParent") {{o['valueQuantity']['unit']}}
+                td("*ngIf"="!o.isParent") {{Observation.getValue(o)}}
+                td("*ngIf" = "!o.isParent") {{Observation.getUnits(o)}}
                 td("*ngIf"="!o.isParent") {{o.relativeDateTime | amTimeAgo:true}}
 
 contextMenu(#menu='')

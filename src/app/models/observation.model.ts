@@ -13,4 +13,20 @@ export class Observation implements Associable {
 	// This should be populated with the normal ranges, but isn't for whatever reason.
 	referenceRange: Object;
 	grouping: string;
+
+	// Get the value of an observation
+	static getValue(o: Observation) {
+		return o['valueQuantity']['value'];
+	}
+
+	// Get the units for an observation
+	static getUnits(o: Observation) {
+		return o['valueQuantity']['unit'];
+	}
+
+	// Get the text for an observation
+	static getText(o: Observation) {
+		// If the text is empty, use the display.
+		return o['code']['text'] || o['code']['coding'][0]['display']
+	}
 }

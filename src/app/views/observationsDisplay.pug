@@ -21,6 +21,7 @@ div
                     button.btn.btn-default("*ngIf"="c.isParent", (click)='expand(c.parent)') ... 
                     span("*ngIf"="c['code']['text']") {{c['code']['text']}}
                     span("*ngIf"="c['code']['coding'][0]['display'] && !c['code']['text']") {{c['code']['coding'][0]['display']}}
+                    span("*ngIf"="isObservationAssociated(c)", class="glyphicon glyphicon-fire", style="padding-left: 5px")
                 td("*ngIf"="!c.isParent") {{c['valueQuantity']['value']}}
                 td("*ngIf" = "!c.isParent") {{c['valueQuantity']['unit']}}
                 td("*ngIf"="!c.isParent") {{c.relativeDateTime | amTimeAgo:true}}

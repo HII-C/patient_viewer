@@ -9,6 +9,7 @@ import { Component, Input, Output, ViewChild, EventEmitter } from '@angular/core
 import { Observation } from '../models/observation.model';
 
 import { ScratchPadService } from '../services/scratchPad.service';
+import { AssociationService } from '../services/association.service';
 
 import { ContextMenuComponent } from './contextMenu.component';
 
@@ -34,7 +35,10 @@ export class ObservationsDisplay {
   // ================================================================== EVENT METHODS ==============================================================
   // ==================================================================---------------==============================================================
 
-  constructor(private scratchPadService: ScratchPadService) { }
+  constructor(
+    private associationService: AssociationService, 
+    private scratchPadService: ScratchPadService
+  ) { }
 
   ngOnChanges() {
     //console.log(this.observations);
@@ -107,8 +111,13 @@ export class ObservationsDisplay {
     for (let c of this.observations){
       this.scratchPadService.checkObservation(checked, c);
     }
-
   }
+
+  // Determine whether an observation is currently associated (based on associations tool)
+  isObservationAssociated(observation: Observation) {
+    return this.associationService.associatedMapObservations.get(observation) || false;
+  }
+
   expand(parent: string) {
     /**
     for (let c of this.conditions) {
@@ -120,5 +129,4 @@ export class ObservationsDisplay {
     }
     */
   }
-
 }

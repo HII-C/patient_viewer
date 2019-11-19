@@ -20,9 +20,6 @@ import { ContextMenuComponent } from './contextMenu.component';
   templateUrl: '/conditionsDisplay.html'
 })
 export class ConditionsDisplay {
-  // The currently selected condition in the list.
-  selected: Condition;
-
   // Whether the checkbox for checking all conditions is currently checked or not.
   isAllChecked: boolean = false;
 
@@ -106,12 +103,19 @@ export class ConditionsDisplay {
   // Selects an individual condition (which causes it to be highlighted).
   // This is NOT the same as checking a condition.
   selectCondition(condition: Condition) {
-    this.selected = condition;
-    this.conditionSelected.emit(this.selected);
+    this.conditionService.selectedCondition = condition;
+  }
 
-    for (let c of this.scratchPadService.totalConditions) {
-      c['selected'] = (c.id == this.selected.id);
-    }
+  // Check or uncheck an individual condition
+  checkCondition(checkedCondition: Condition, checked: boolean) {
+    this.scratchPadService.checkCondition(checked, checkedCondition);
+  
+    // When an individual condition is checked, the "check all" checkbox should be unchecked.
+    this.isAllChecked = false;
+  }
+
+  isConditionSelected(condition: Condition) {
+    return condition == this.conditionService.selectedCondition;
   }
 
   // Determine whether a condition is currently checked.
@@ -130,14 +134,6 @@ export class ConditionsDisplay {
     for (let condition of this.conditions) {
         this.scratchPadService.checkCondition(checked, condition);
     }
-  }
-  
-  // Check or uncheck an individual condition
-  checkCondition(checkedCondition: Condition, checked: boolean) {
-    this.scratchPadService.checkCondition(checked, checkedCondition);
-
-    // When an individual condition is checked, the "check all" checkbox should be unchecked.
-    this.isAllChecked = false;
   }
 
   expand(parent: string) {

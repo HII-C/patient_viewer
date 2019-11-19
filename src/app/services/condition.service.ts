@@ -17,7 +17,11 @@ import { AllergyIntolerance } from '../models/allergyIntolerance.model';
 @Component({})
 export class ConditionService {
   private path = '/Condition';
+
   conditions: Array<Condition> = [];
+  // The currently selected (highlighted) condition 
+  selectedCondition: Condition = null;
+
   conditionsCache = {};
   columnState: String;
 

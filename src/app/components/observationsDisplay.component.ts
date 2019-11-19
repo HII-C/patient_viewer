@@ -53,12 +53,17 @@ export class ObservationsDisplay {
     // NOTE: 'exec' functions must be bound to 'this' to access scratchPadService.
     // This is a strange behavior with scoping in Typescript/Javascript.
     
-    // Add options to the context menu shown when right clicking conditions.
+    // Add options to the context menu shown when right clicking observations.
     this.menu.addOption({
       'icon': 'glyphicon-pencil',
       'text': 'Add to Scratch Pad',
       'exec': function(obs) {
-        this.scratchPadService.addObservation(obs);
+        // Add every checked observation to the scratch pad
+        this.scratchPadService.checkedMapObservations.forEach((isChecked, observation) => {
+          if (isChecked) {
+            this.scratchPadService.addObservation(observation);
+          }
+        });
       }.bind(this)
     });
 

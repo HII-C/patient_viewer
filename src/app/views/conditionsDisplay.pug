@@ -18,7 +18,8 @@ div
                     input("*ngIf"="!c.isParent", [checked] = 'isConditionChecked(c)' type='checkbox', id='c{{conditions.indexOf(c)}}', value='{{conditions.indexOf(c)}}', (change)='checkCondition(c, $event.target.checked)')
                 td
                     button.btn.btn-default("*ngIf"="c.isParent", (click)='expand(c.parent)') ... 
-                    span("*ngIf"="!c.isParent") {{c['code']['text']}}
+                    span("*ngIf"="!c.isParent") {{c['code']['text']}} 
+                    span("*ngIf"="isConditionAssociated(c)", class="glyphicon glyphicon-fire")
                 td("*ngIf"="!c.isParent") {{c.clinicalStatus}}
                 td("*ngIf"="!c.isParent") {{c.relativeDateTime | amTimeAgo:true}}
 

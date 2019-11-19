@@ -8,14 +8,51 @@ import { Observation } from '../models/observation.model';
 
 @Injectable()
 export class AssociationService {
-    // TODO: Replace with actual endpoint
-    private path = '/Associations';
+    private path = 'http://ec2-52-10-29-181.us-west-2.compute.amazonaws.com/get_items';
+
+    associatedConditions: Map<Condition, boolean> = new Map();
+    associatedObservations: Map<Observation, boolean> = new Map();
 
     constructor(
         private http: Http,
         private conditionService: ConditionService,
         private observationService: ObservationService
     ) {}
+
+    runAssociationsTool(checkedConditions: Array<Condition>, checkedObservations: Array<Observation>) {
+        //Clear prior associations
+        this.associatedConditions.clear();
+        this.associatedObservations.clear();
+
+        this.getAssociations(checkedConditions, checkedObservations).subscribe(associations => {
+            // TODO: Actually use the API response for associations
+            for (let c of checkedConditions) {
+                // Highlight associated conditions
+                this.associatedConditions.set(c, true);
+            }
+        });
+    }
+
+    private getAssociations(
+        checkedConditions: Array<Condition>, 
+        checkedObservations: Array<Observation>,
+        ) {
+        // Extract relevant fields from checked conditions and observations
+        let checkedConditionsInfo = checkedConditions.map(this.extractConditionInfo);
+        let checkedObservationsInfo = checkedObservations.map(this.extractObservationInfo);
+
+        // Extract relevant fields from all conditions and observations
+        let conditionsInfo = this.conditionService.conditions.map(this.extractConditionInfo);
+        let observationsInfo = this.observationService.observations.map(this.extractObservationInfo);
+
+        // Call associations API endpoint
+        return this.http.post(this.path, {
+            selectedConditions: checkedConditionsInfo,
+            selectedObservations: checkedObservationsInfo,
+            conditions: conditionsInfo,
+            observations: observationsInfo,
+        }).map(res => res.json());
+    }
 
     // Extract the code, coding system, and onset datetime from a condition
     private extractConditionInfo(condition: Condition) {
@@ -33,28 +70,5 @@ export class AssociationService {
             system: observation['code']['coding'][0]['system'],
             effectiveDateTime: observation['effectiveDateTime'],
         };
-    }
-
-    getAssociations(
-        selectedConditions: Array<Condition>, 
-        selectedObservations: Array<Observation>,
-        ) {
-        // Extract relevant fields from selected conditions and observations
-        let selectedConditionsInfo = selectedConditions.map(this.extractConditionInfo);
-        let selectedObservationsInfo = selectedObservations.map(this.extractObservationInfo);
-
-        // Extract relevant fields from all conditions and observations
-        let conditionsInfo = this.conditionService.conditions.map(this.extractConditionInfo);
-        let observationsInfo = this.observationService.observations.map(this.extractObservationInfo);
-
-        // Call associations API endpoint
-        return this.http.get(this.path, {
-            params: {
-                selectedConditions: selectedConditionsInfo,
-                selectedObservations: selectedObservationsInfo,
-                conditions: conditionsInfo,
-                observations: observationsInfo,
-            }
-        }).map(res => res.json());
     }
 }

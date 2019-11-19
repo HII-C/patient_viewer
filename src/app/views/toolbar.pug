@@ -9,7 +9,7 @@
 			span(class="glyphicon glyphicon-star")
 		button.btn.btn-default(routerLink='/account', routerLinkActive='active',title="Settings")
 			span(class="glyphicon glyphicon-cog")
-		button.btn.btn-default(title="Association Tool")
+		button.btn.btn-default(title="Association Tool", (click) = 'runAssociationsTool()')
 			span(class="glyphicon glyphicon-link")
 		button.btn.btn-default(routerLink='/trends', routerLinkActive='active', title="Historical Trends")
 			span(class="glyphicon glyphicon-stats")

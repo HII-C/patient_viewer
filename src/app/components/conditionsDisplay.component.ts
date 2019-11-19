@@ -9,8 +9,8 @@ import { Component, Input, Output, ViewChild, EventEmitter } from '@angular/core
 import { Condition } from '../models/condition.model';
 
 import { ScratchPadService } from '../services/scratchPad.service';
-
 import { ConditionService } from '../services/condition.service';
+import { AssociationService } from '../services/association.service';
 
 import { ContextMenuComponent } from './contextMenu.component';
 
@@ -40,7 +40,11 @@ export class ConditionsDisplay {
   // ================================================================== EVENT METHODS ==============================================================
   // ==================================================================---------------==============================================================
 
-  constructor(private scratchPadService: ScratchPadService, private conditionService: ConditionService) { }
+  constructor(
+    private scratchPadService: ScratchPadService,
+    private conditionService: ConditionService,
+    private associationService: AssociationService
+  ) { }
 
   ngOnInit() { }
 
@@ -113,6 +117,11 @@ export class ConditionsDisplay {
   // Determine whether a condition is currently checked.
   isConditionChecked(condition: Condition) {
     return this.scratchPadService.checkedMapConditions.get(condition) || false;
+  }
+
+  // Determine whether a condition is currently associated (based on associations tool)
+  isConditionAssociated(condition: Condition) {
+    return this.associationService.associatedConditions.get(condition) || false;
   }
 
   // Check or uncheck all conditions.

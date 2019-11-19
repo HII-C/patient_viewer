@@ -7,6 +7,8 @@ import { DoctorService } from '../services/doctor.service';
 import { HistoricalTrendsService } from '../services/historicalTrends.service';
 import { ToolBarService } from '../services/toolbar.service';
 import { ScratchPadService } from '../services/scratchPad.service';
+import { ConditionService } from '../services/condition.service';
+import { AssociationService } from '../services/association.service';
 
 @Component({
   selector: 'toolbar',
@@ -27,12 +29,19 @@ export class ToolbarComponent {
 
   constructor(private doctorService: DoctorService,
               private trendsService: HistoricalTrendsService,
-              private elRef: ElementRef,
+              private conditionService: ConditionService,
+              private associationService: AssociationService,
               private toolbarService: ToolBarService,
-              private scratchPadService: ScratchPadService) { }
+              private scratchPadService: ScratchPadService,
+              private elRef: ElementRef) { }
 
   switchNav() {
     this.nav2 = !this.nav2;
+  }
+
+  runAssociationsTool() {
+    let checkedConditions = this.conditionService.getCheckedConditions();
+    this.associationService.runAssociationsTool(checkedConditions, []);
   }
 
   // whenver the user presses the filter button

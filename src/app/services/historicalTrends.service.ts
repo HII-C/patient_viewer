@@ -58,7 +58,7 @@ export class HistoricalTrendsService {
 
     // Set the min and max y-axis values for the chart, providing a small buffer
     // of extra space.
-    let [max, min] = this.getValueRange(chart);
+    let [min, max] = this.getValueRange(chart);
     let buffer = (max - min) * 0.2;
 
     chart.yScaleMin = min - buffer;

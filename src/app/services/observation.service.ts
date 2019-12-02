@@ -3,8 +3,7 @@ import { Http, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
 import { FhirService } from './fhir.service';
-import { Patient } from '../models/patient.model';
-import { Observation } from '../models/observation.model';
+import { Observation, ObservationBundle, Link } from '../models/observation.model';
 import { ScratchPadService } from '../services/scratchPad.service';
 import * as moment from 'moment';
 
@@ -13,11 +12,10 @@ import * as moment from 'moment';
 export class ObservationService {
   uniqueObservations: Array<Observation> = [];
   categorizedObservations: any;
-  groupMap: {[x: string]: Array<String>};
+  groupMap: { [x: string]: Array<String> };
   count = 0;
   observations: Array<Observation> = [];
   selected: Array<Observation> = [];
-  private path = '/Observation';
   uniqueObservationsLoadFinished = false;
 
   filterSet = new Set<string>();
@@ -127,38 +125,35 @@ export class ObservationService {
   }
 
   // ================================== DATA RETRIEVAL ========================
-
-  retrieveObservations(url: string): Observable<any> {
-    return this.http.get(url, this.fhirService.options(true)).map(res => <Observation>res.json());
+  loadDataPage(url: string): void {
+    this.retrieveObservations(url).subscribe((bundle) => {
+      this.handleBundle(bundle);
+    });
   }
 
-  /**
-   * Loads observation data, which is paginated, by recursively loading data pages.
-   */
-  loadData(url: string): void {
-    /**
-     * Make the request for the url, and handle the data in the subsequent callback
-     */
-    this.retrieveObservations(url).subscribe((data: { [x: string]: any }) => {
-      if (data.hasOwnProperty('entry')) {
-        let nextObservations: Array<Observation> = data['entry'].map((r: { [x: string]: any }) => r['resource']);
-        this.observations = this.observations.concat(nextObservations);
-        this.extractNewObservations(nextObservations);
+  handleBundle(bundle: ObservationBundle): void {
+    if (bundle.hasOwnProperty('entry')) {
+      let nextObservations: Array<Observation> = bundle.entry.map((e: { [x: string]: any }) => e['resource']);
+      this.observations = this.observations.concat(nextObservations);
+      this.extractNewObservations(nextObservations);
 
-        let nextLinks: Array<{[x: string]: string}> = data['link'].filter((link: {[x: string]: string}) => link['relation'] == 'next');
-        if (nextLinks.length > 0) {
-          let nextUrl = nextLinks[0]['url'];
-          this.loadData(nextUrl);
-        }
-        else {
-          this.onLoadComplete();
-        }
+      let nextLinks = bundle.link.filter((link) => link.relation == 'next');
+      if (nextLinks.length > 0) {
+        let nextPageUrl = nextLinks[0]['url'];
+        this.loadDataPage(nextPageUrl);
       }
       else {
-        console.log("No observations for patient.");
-        this.observations = new Array<Observation>();
+        this.onLoadComplete();
       }
-    });
+    }
+    else {
+      console.log("No observations for patient.");
+      this.observations = new Array<Observation>();
+    }
+  }
+
+  retrieveObservations(url: string): Observable<ObservationBundle> {
+    return this.http.get(url, this.fhirService.options(true)).map(res => <ObservationBundle>res.json());
   }
 
   onLoadComplete() {
@@ -180,9 +175,7 @@ export class ObservationService {
   }
 
   getCheckedObservations() {
-    return this.observations.filter(c => {
-      return this.scratchPadService.checkedMapObservations.get(c);
-    });
+    return this.observations.filter(o => this.scratchPadService.checkedMapObservations.get(o));
   }
 
   scaleDates(): void {
@@ -195,15 +188,28 @@ export class ObservationService {
       ob.relativeDateTime = moment(relativeDateTime).toISOString();
     }
   }
+
   // ================================ DATA CLEANING ===============================
 
+  extractNewObservations(observations: Array<Observation>): void {
+    for (let observation of observations) {
+      let code: string = observation['code']['coding'][0]['code'];
+      if (!this.filterSet.has(code)) {
+        observation.grouping = this.getGrouping(code);
+        this.uniqueObservations.push(observation);
+
+        this.filterSet.add(code);
+      }
+    }
+  }
+
   /**
-   * Description: given a certain observation ID, returns the position mapping of that
+  * Given a certain observation ID, returns the position mapping of that
    * ID contained within the groupMap
    */
-  getKey(value: string): string {
+  getGrouping(code: string): string {
     for (let x in this.groupMap) {
-      if (this.groupMap[x].indexOf(value) !== -1) {
+      if (this.groupMap[x].indexOf(code) !== -1) {
         return x;
       }
     }
@@ -212,29 +218,16 @@ export class ObservationService {
     return OTHER_GROUPING;
   }
 
-  extractNewObservations(observations: Array<Observation>): void {
-    for (let observation of observations) {
-      let code: string = observation['code']['coding'][0]['code'];
-      if (!this.filterSet.has(code)) {
-        observation.grouping = this.getKey(code);
-        this.uniqueObservations.push(observation);
-        
-        this.filterSet.add(code);
-      }
-    }
-  }
-
-  populateCategories(categories: Array<{[x: string]: any}>): number {
+  populateCategories(categories: Array<{ [x: string]: any }>): number {
     let totalCount = 0;
     for (let i = 0; i < categories.length; i++) {
       let category = categories[i];
-      //console.log(category);
       if (category.hasOwnProperty('data')) {
         //Depending on what grouping was assigned to a observation, add it to the relevant category
         for (let obs of this.uniqueObservations) {
           if (obs.grouping == category['id']) {
             // This is a crappy solution, want sometime more robust in the future - Austin Michne
-            let measurement = { "name": obs['code']['coding'][0]['display'], "code": obs['code']['coding'][0]['code'], "date": obs.effectiveDateTime };
+            let measurement = { "name": Observation.getText(obs), "code": obs['code']['coding'][0]['code'], "date": obs.effectiveDateTime };
             if (obs.hasOwnProperty("valueQuantity")) {
               measurement["value"] = obs["valueQuantity"]["value"];
             }
@@ -245,7 +238,7 @@ export class ObservationService {
         category['count'] = category['data'].length;
         totalCount += category['count'];
         if (category['count'] == 0) {
-          categories.splice(i--, 1);          
+          categories.splice(i--, 1);
         }
       }
       else if (category.hasOwnProperty('child')) {
@@ -264,8 +257,8 @@ export class ObservationService {
 
   // Sort the Observations list (arrData) into categories, which are returned inside
   // a single object that conforms to accordion data format
-  addCategoriesObservations(observations: Array<Observation>): Array<{[x: string]: any}> {
-    let observationsByCategory: {[x: string]: Array<Observation>} = {};
+  addCategoriesObservations(observations: Array<Observation>): Array<{ [x: string]: any }> {
+    let observationsByCategory: { [x: string]: Array<Observation> } = {};
 
     for (let observation of observations) {
       if (observation.hasOwnProperty('valueQuantity') && observation.hasOwnProperty('category')) {
@@ -277,8 +270,8 @@ export class ObservationService {
         observationsByCategory[observationCategory].push(observation);
       }
     }
-    let reconstructedObject: Array<{[x: string]: any}> = [];
 
+    let reconstructedObject: Array<{ [x: string]: any }> = [];
     for (let ctgry of Object.keys(observationsByCategory)) {
       reconstructedObject.push({
         category: ctgry,

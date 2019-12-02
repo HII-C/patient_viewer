@@ -5,8 +5,8 @@ export class Observation implements Associable {
 	status: string;
 	effectiveDateTime: string;
 	relativeDateTime: string;
-	category: Object;
-	code: Object;
+	category: Array<any>;
+	code: Array<any>;
 	valueQuantity: Object;
 	valueCodeableConcept: Object;
 
@@ -27,6 +27,21 @@ export class Observation implements Associable {
 	// Get the text for an observation
 	static getText(o: Observation) {
 		// If the text is empty, use the display.
-		return o['code']['text'] || o['code']['coding'][0]['display']
+		return o['code']['text'] || o['code']['coding'][0]['display'];
 	}
+
+	getCode() {
+		return this['code']['coding'][0]['code'];
+	}
+}
+
+//https://www.hl7.org/fhir/bundle.html
+export class ObservationBundle {
+	entry: Array<any>;
+	link: Array<Link>;
+}
+
+export class Link {
+	relation: string;
+	url: string;
 }

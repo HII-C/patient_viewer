@@ -64,10 +64,9 @@ export class ObservationsComponent extends BaseColumn{
    * the initial subscription to the observation service and continual loading of the data links.
    **/
   ngOnChanges() {
-    // If the patient is loaded:
-    if (this.patient) {
+    if (this.patient) { //If the patient is loaded
       let url = this.fhirService.getUrl() + "/Observation?patient=" + this.patient.id;
-      this.observationService.loadData(url);    
+      this.observationService.loadDataPage(url);    
     }
   }
 }

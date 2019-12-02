@@ -41,4 +41,8 @@ export class Encounter {
   }
   getStartDate(): Date { return new Date(this.period.start)}
   getEndDate(): Date { return new Date(this.period.end)}
+
+  getLogValue(): any {
+    return Math.log(this.getStartDate().getTime())
+  }
 };

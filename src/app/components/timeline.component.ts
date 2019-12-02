@@ -24,6 +24,8 @@ export class TimelineComponent {
         this.encounters = encounters;
         console.log('Loaded ' + this.encounters.length + ' encounters.');
         console.log(this.encounters);
+        encounters.forEach(enc =>  console.log('Log Val: ' + enc.getLogValue()))
+        
       });
     }
   }

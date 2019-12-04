@@ -41,26 +41,18 @@ export class ConditionService {
       .concatMap(data => {
         let conditions = [];
 
-        if (data['entry']) {
-          conditions = <Array<Condition>>data.entry.map(r => r['resource']);
+        if (data.hasOwnProperty('entry')) {
+          conditions = <Array<Condition>>data.entry.map((r: { [x: string]: any; }) => r['resource']);
         }
 
-        let nextUrl = null;
-
-        for (let l of data.link) {
+        for (let link of data.link) {
           // Check if there is another page to load.
-          if (l.relation == "next") {
-            nextUrl = l.url;
+          if (link.relation == "next") {
+            let nextUrl = link.url;
+            return Observable.of(conditions).concat(this.loadConditionsPage(nextUrl));
           }
         }
-
-        if (nextUrl) {
-          // If there is another page, we need to trigger another request.
-          return Observable.of(conditions).concat(this.loadConditionsPage(nextUrl));
-        } else {
-          // If no page is left, we are done.
-          return Observable.of(conditions);
-        }
+        return Observable.of(conditions);
       });
   }
 
@@ -78,13 +70,13 @@ export class ConditionService {
 
   // Retrieve allergies for a given patient
   loadAllergies(patient: Patient): Observable<Array<AllergyIntolerance>> {
-    var url = this.fhirService.getUrl() + "/AllergyIntolerance" + "?patient=" + patient.id;
+    let url = this.fhirService.getUrl() + "/AllergyIntolerance" + "?patient=" + patient.id;
     return this.http.get(url, this.fhirService.options(true)).map(res => {
       let json = res.json();
-
-      if (json.entry) {
-        return <Array<AllergyIntolerance>> json.entry.map(r => r['resource']);
-      } else {
+      if (json.hasOwnProperty('entry')) {
+        return json['entry'].map(r => r['resource']);
+      }
+      else {
         return new Array<AllergyIntolerance>();
       }
     });

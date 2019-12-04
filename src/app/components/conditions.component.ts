@@ -75,7 +75,6 @@ export class ConditionsComponent extends BaseColumn {
   ngOnChanges() {
     // Triggered if a new patient is selected (not even implemented yet).
     this.selected = null;
-    // Clear the old conditions.
     this.conditions = [];
 
     if (this.patient) {
@@ -99,16 +98,16 @@ export class ConditionsComponent extends BaseColumn {
     // Scale dates to make them appear more recent for demos.
     // 0.8 is an arbitrary value that produces realistic dates.
     if (this.conditions.length > 0) {
-      let diff = Math.floor(0.8 *
-        (new Date().getTime() - new Date(this.conditions[0].onsetDateTime).getTime()));
+      let RECENCY_MULTIPLIER = 0.8;
+      let timeSinceConditionOnset = new Date().getTime() - new Date(this.conditions[0].onsetDateTime).getTime();
+      let scaledTimeSinceConditionOnset = Math.floor(RECENCY_MULTIPLIER * timeSinceConditionOnset);
 
       for (let condition of this.conditions) {
         condition.isVisible = true;
-        let newDate = new Date(condition.onsetDateTime).getTime() + diff;
-        condition.relativeDateTime = moment(newDate).toISOString();
+        let relativeDateTime = new Date(condition.onsetDateTime).getTime() + scaledTimeSinceConditionOnset;
+        condition.relativeDateTime = moment(relativeDateTime).toISOString();
       }
     }
-
 
     if (!this.viewToggle) {
       this.conditions = this.doctorService.assignVisible(this.conditions);
@@ -121,7 +120,6 @@ export class ConditionsComponent extends BaseColumn {
 
     // initialize the scratchPadService totalConditions with all the stuff
     this.scratchPadService.initConditions(this.conditions);
-
   }
 
   // Update the service to store correct column state

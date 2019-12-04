@@ -17,7 +17,7 @@ export class DoctorService {
     // Needs to have a clean list, or it will push doubles/triples, or more
 
     // Use "let of" to generate enumerated list, allows for pass by value iteration
-    var count = 0;
+    let count = 0;
     for (let c of list) {
       // Right now the logic only excludes one code, for testing purposes
       // thisModel is a undefined data model, depending on if we want to leave the service with the data we need to create a static model, but
@@ -46,14 +46,6 @@ export class DoctorService {
   }
 
   addGraphConfig(list: Array<string>) {
-    for (let j of this.graphConfig) {
-      if (list != j) {
-        continue;
-      }
-      else {
-        break;
-      }
-    }
     this.graphConfig.push(list);
     this.cookieService.putObject("graphConfig", this.graphConfig);
   }

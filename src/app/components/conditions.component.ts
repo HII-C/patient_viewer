@@ -25,7 +25,7 @@ declare var $: any; //Necessary in order to use jQuery to open popup.
 
 @Component({
   selector: 'conditions',
-  templateUrl: '/conditions.html' 
+  templateUrl: '/conditions.html'
 })
 export class ConditionsComponent extends BaseColumn {
   // The currently selected condition in the list.
@@ -81,38 +81,36 @@ export class ConditionsComponent extends BaseColumn {
     if (this.patient) {
       this.conditionService.loadConditions(this.patient).subscribe(conditions => {
         this.conditions = this.conditions.concat(conditions);
-        this.loadFinished();
+        this.onLoadComplete();
       });
     }
   }
 
   // Called when all conditions have been loaded.
-  loadFinished() {
+  onLoadComplete() {
     this.conditions = this.conditions.reverse();
 
     console.log("Loaded " + this.conditions.length + " conditions.");
 
     this.conditions.sort((n1, n2) => {
-      if (n1.onsetDateTime < n2.onsetDateTime) {
-        return 1;
-      }
-      if (n1.onsetDateTime > n2.onsetDateTime) {
-        return -1;
-      }
+      return n2.onsetDateTime.localeCompare(n1.onsetDateTime);
     });
 
     // Scale dates to make them appear more recent for demos.
     // 0.8 is an arbitrary value that produces realistic dates.
-    let diff = Math.floor(0.8 *
-      (new Date().getTime() - new Date(this.conditions[0].onsetDateTime).getTime()));
+    if (this.conditions.length > 0) {
+      let diff = Math.floor(0.8 *
+        (new Date().getTime() - new Date(this.conditions[0].onsetDateTime).getTime()));
 
-    for (let c of this.conditions) {
-      c.isVisible = true;
-      let newDate = new Date(c.onsetDateTime).getTime() + diff;
-      c.relativeDateTime = moment(newDate).toISOString();
+      for (let condition of this.conditions) {
+        condition.isVisible = true;
+        let newDate = new Date(condition.onsetDateTime).getTime() + diff;
+        condition.relativeDateTime = moment(newDate).toISOString();
+      }
     }
 
-    if (this.viewToggle == false) {
+
+    if (!this.viewToggle) {
       this.conditions = this.doctorService.assignVisible(this.conditions);
     }
 
@@ -121,11 +119,11 @@ export class ConditionsComponent extends BaseColumn {
     // for rendering elements only after page is loaded (there probably is a better way)
     this.loaded = true;
 
-    // initialize the scratchPadService totalConditions with all the shit
+    // initialize the scratchPadService totalConditions with all the stuff
     this.scratchPadService.initConditions(this.conditions);
 
   }
-  
+
   // Update the service to store correct column state
   updateService(): void {
     this.conditionService.setColumnState(this.columnState);

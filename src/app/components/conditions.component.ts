@@ -87,12 +87,10 @@ export class ConditionsComponent extends BaseColumn {
 
   // Called when all conditions have been loaded.
   onLoadComplete() {
-    this.conditions = this.conditions.reverse();
-
     console.log("Loaded " + this.conditions.length + " conditions.");
 
-    this.conditions.sort((n1, n2) => {
-      return n2.onsetDateTime.localeCompare(n1.onsetDateTime);
+    this.conditions.sort((c1, c2) => {
+      return c2.onsetDateTime.localeCompare(c1.onsetDateTime);
     });
 
     // Scale dates to make them appear more recent for demos.

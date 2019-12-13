@@ -81,7 +81,7 @@
     "install": "^0.8.2",
     "lite-server": "^2.2.2",
     "load-grunt-tasks": "^3.5.2",
-    "npm": "^3.10.9",
+    "npm": "^6.13.4",
     "source-map-loader": "^0.1.5",
     "ts-loader": "^1.2.1",
     "typescript": "^2.0.3",

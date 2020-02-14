@@ -1,0 +1,14 @@
+
+<div class="timeline">
+  <div class="horizTimeLine" *ngIf="patient">
+    <div class="div" style="width:100%; height:12px; background-color:#bfbfbf;">
+      <div class="div" style="float:left; width:95%;">
+        <div class="node" *ngFor="let e of encounters; let i = index" style="margin-left: 5%;"></div>
+      </div>
+    </div>
+  </div>
+  <div class="displayBox" id="c1" hidden="hidden"></div>
+  <div class="displayBox" id="c2" hidden="hidden"></div>
+  <div class="displayBox" id="c3" hidden="hidden"></div>
+</div>
+<timeline-popup [patient]="patient" #popup=""></timeline-popup>

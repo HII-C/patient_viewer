@@ -1,0 +1,17 @@
+
+<table class="table table-condensed table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let m of medications"> 
+      <td>
+        <input type="checkbox" (change)="check(m, $event)"/>
+      </td>
+      <td><span>{{m.name}}</span></td>
+    </tr>
+  </tbody>
+</table>

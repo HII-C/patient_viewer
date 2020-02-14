@@ -1,5 +1,0 @@
-ul.dropdown-menu([style.position]="'fixed'", [style.display]="visible ? 'block' : 'none'", [style.left]='left', [style.top]='top', style="z-index: 1201;")
-  li("*ngFor"="let option of options")
-    a(href="#", (click)='handleOptionClick(option, $event)')
-      i.glyphicon("*ngIf"="option.icon", [ngClass]="option.icon", style="padding-right: 5px")
-      | {{ option.text }}

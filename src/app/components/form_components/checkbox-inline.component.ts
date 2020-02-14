@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
 	selector: "checkbox-inline",
-	templateUrl: "form_views/checkbox-inline.html"
+	templateUrl: "./checkbox-inline.html"
 })
 
 export class CheckboxInline{

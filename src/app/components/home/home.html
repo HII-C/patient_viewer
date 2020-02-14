@@ -1,0 +1,18 @@
+
+<div class="row header-row">
+  <div class="col-md-3">
+    <patient [patient]="selected" *ngIf="selected"></patient>
+  </div>
+  <div class="col-md-2">
+    <toolbar></toolbar>
+  </div>
+  <div class="col-md-7">
+    <timelines [patient]="selected" *ngIf="selected"></timelines>
+  </div>
+</div>
+<div class="triple-list-container">
+  <triplelist [patient]="selected" *ngIf="selected"></triplelist>
+</div>
+<favorites></favorites>
+<addObservation></addObservation>
+<newCondition></newCondition>

@@ -1,0 +1,19 @@
+
+<div class="form-group">
+  <label class="col-form-label">{{inputData.data.name}} : {{inputData.data.status}}</label>
+  <div class="row">
+    <div class="col-sm-8">
+      <input class="form-control" [(ngModel)]="description"/>
+    </div>
+    <div class="col-sm-4">
+      <form>
+        <label class="radio-inline">
+          <input type="radio" name="formRadio" [checked]="inputData.data.status === 'active'" [value]="Active" (change)="onRadioChanged('active')"/>Active
+        </label>
+        <label class="radio-inline">
+          <input type="radio" name="formRadio" [checked]="inputData.data.status === 'inactive'" [value]="Inactive" (change)="onRadioChanged('inactive')"/>Inactive
+        </label>
+      </form>
+    </div>
+  </div>
+</div>

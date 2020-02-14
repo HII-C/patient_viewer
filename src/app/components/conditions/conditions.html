@@ -1,0 +1,24 @@
+
+<div id="conditions" [style.height.px]="columnHeight">
+  <div class="column-header">
+    <div class="header text-center">
+      <h2 style="display: inline-block;">Conditions</h2>
+      <div style="display: inline-block;">
+        <columnStateSwitcher [column]="this" [columnType]="'conditions'"></columnStateSwitcher>
+      </div>
+    </div>
+  </div>
+  <div class="column-content">
+    <div *ngIf="columnState == &quot;default&quot; &amp;&amp; loaded">
+      <accordionRecursion [levelData]="conditions" [columnNum]="0" [levelNum]="0" [firstIteration]="1"></accordionRecursion>
+    </div>
+    <div *ngIf="!loaded">
+      <loading-animation></loading-animation>
+    </div>
+    <div *ngIf="columnState == &quot;scratchpad&quot;">
+      <conditionsDisplay [conditions]="getScratchPadConditions()" [scratchPadMode]="true"></conditionsDisplay>
+    </div>
+  </div>
+  <div id="condition-popover" style="display: none;">Testing condition popover</div>
+  <contextMenu #menu=""></contextMenu>
+</div>

@@ -1,0 +1,24 @@
+
+<div id="carePlans" style="height: 500px; overflow-y: auto;">
+  <div class="column-header">
+    <div class="header text-center">
+      <h2 style="display: inline-block;">Care Plans</h2>
+      <div style="display: inline-block;">
+        <columnStateSwitcher [column]="this" [columnType]="'careplans'"></columnStateSwitcher>
+      </div>
+    </div>
+  </div>
+  <div class="column-content">
+    <div class="container" *ngIf="columnState == &quot;default&quot;" style="width:auto;">
+      <div *ngIf="columnState == &quot;default&quot; &amp;&amp; carePlanLoadFinished">
+        <accordionRecursion [levelData]="carePlans" [columnNum]="2" [levelNum]="0" [firstIteration]="1"></accordionRecursion>
+      </div>
+      <div *ngIf="!carePlanLoadFinished">
+        <loading-animation></loading-animation>
+      </div>
+    </div>
+    <div class="container" *ngIf="columnState == &quot;scratchpad&quot;" style="width:auto;">
+      <careplanDisplay [carePlans]="getScratchPadCarePlans()"></careplanDisplay>
+    </div>
+  </div>
+</div>

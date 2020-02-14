@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base href="/">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width initial-scale=1.0">
+    <title>PatientViewer</title>
+    <meta content="Patient record viewer for FHIR servers." name="description">
+    <meta name="author" content="Preston Lee">
+    <link rel="stylesheet" href="/css/theme.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/calendar.css">
+    <link rel="stylesheet" href="/css/timeline.css">
+    <link rel="stylesheet" href="/css/ribbons.css">
+    <script src="vendor.bundle.js" defer></script>
+    <script src="main.bundle.js" defer></script>
+  </head>
+  <body class="#{yield(:body_class)}">
+    <body>
+      <app></app>
+    </body>
+    <head>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.bundle.min.js"></script>
+      <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    </head>
+  </body>
+</html>

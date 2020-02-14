@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 
 @Component({
 	selector: "normal-box-1",
-	templateUrl: "form_views/normal-box-1.html"
+	templateUrl: "./normal-box-1.html"
 })
 
 export class NormalBox1{

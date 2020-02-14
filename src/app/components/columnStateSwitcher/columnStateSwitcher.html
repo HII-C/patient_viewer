@@ -1,0 +1,7 @@
+
+<div class="text-center column-state-switcher">
+  <div class="btn-group">
+    <button class="btn btn-default btn-xs" title="Default" [class.active]="column.columnState == &quot;default&quot;" (click)="switchToDefault()"><span class="glyphicon glyphicon-home"></span></button>
+    <button class="btn btn-default btn-xs" title="Scratch Pad" [class.active]="column.columnState == &quot;scratchpad&quot;" (click)="switchToScratchPad()"><span class="glyphicon glyphicon-eye-open"></span><span class="badge column-state-badge">{{ getScratchPadCount() }}</span></button>
+  </div>
+</div>

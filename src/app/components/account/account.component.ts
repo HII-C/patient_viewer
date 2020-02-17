@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { DoctorService } from '../services/doctor.service';
+import { DoctorService } from 'app/services/doctor.service';
 
 @Component({
   selector: 'account',

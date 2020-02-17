@@ -1,17 +1,18 @@
 import { Component, Injectable, Input, Output, ViewChild } from '@angular/core';
-import { DoctorService } from '../services/doctor.service';
-import { ConditionService } from '../services/condition.service';
-import { EncounterService } from '../services/encounter.service';
-import { Encounter } from '../models/encounter.model';
-import { Patient } from '../models/patient.model';
-import { Server } from '../models/server.model';
-import { Condition } from '../models/condition.model';
-import { Http, Headers } from '@angular/http';
+import { Http } from '@angular/http';
+
+import { DoctorService } from 'app/services/doctor.service';
+import { ConditionService } from 'app/services/condition.service';
+import { EncounterService } from 'app/services/encounter.service';
 import { CookieService } from 'angular2-cookie/core';
-import { HomeComponent } from '../components/home.component';
-import { ContextMenuComponent } from './contextMenu.component';
-import { HoverBoxComponent } from './hoverBox.component';
-import { AllergyIntolerance } from '../models/allergyIntolerance.model';
+
+import { HomeComponent } from 'app/components/home/home.component';
+import { HoverBoxComponent } from 'app/components/hoverBox/hoverBox.component';
+
+import { Encounter } from 'app/models/encounter.model';
+import { Patient } from 'app/models/patient.model';
+import { Server } from 'app/models/server.model';
+import { Condition } from 'app/models/condition.model';
 
 @Injectable()
 @Component({

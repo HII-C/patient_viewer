@@ -1,7 +1,8 @@
 import { Component, Input } from '@angular/core';
-import { EncounterService } from '../services/encounter.service';
-import { Encounter } from '../models/encounter.model';
-import { Patient } from '../models/patient.model';
+
+import { EncounterService } from 'app/services/encounter.service';
+import { Encounter } from 'app/models/encounter.model';
+import { Patient } from 'app/models/patient.model';
 
 @Component({
   selector: 'timelines',

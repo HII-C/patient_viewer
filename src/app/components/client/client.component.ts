@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { HealthCreekService } from '../services/healthcreek.service';
+import { HealthCreekService } from 'app/services/healthcreek.service';
 
 @Component({
   selector: 'clients',

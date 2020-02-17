@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChildren, Input, Output, EventEmitter} from '@angular/core';
-import { Form } from '../models/form.model';
+import { Form } from 'app/models/form.model';
 
 @Component({
   selector: 'form-builder',

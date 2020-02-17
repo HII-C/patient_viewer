@@ -3,12 +3,11 @@ import * as moment from 'moment';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/fromEvent';
 
-import { ObservationService } from '../services/observation.service';
-import { HistoricalTrendsService } from '../services/historicalTrends.service';
-import { ContextMenuComponent } from './contextMenu.component';
-import { PatientService } from '../services/patient.service';
-import { Patient } from '../models/patient.model';
-import { pairs } from 'rxjs/observable/pairs';
+import { ObservationService } from 'app/services/observation.service';
+import { HistoricalTrendsService } from 'app/services/historicalTrends.service';
+import { ContextMenuComponent } from 'app/components/contextMenu/contextMenu.component';
+import { PatientService } from 'app/services/patient.service';
+import { Patient } from 'app/models/patient.model';
 
 @Component({
   selector: 'historicalTrends',

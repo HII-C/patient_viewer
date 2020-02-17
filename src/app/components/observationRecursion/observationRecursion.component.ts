@@ -1,10 +1,8 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
-import { ObservationService } from '../services/observation.service';
-import { HistoricalTrendsService } from '../services/historicalTrends.service';
-import { ScratchPadService } from '../services/scratchPad.service';
-
-import { Observation } from '../models/observation.model';
+import { ObservationService } from 'app/services/observation.service';
+import { HistoricalTrendsService } from 'app/services/historicalTrends.service';
+import { ScratchPadService } from 'app/services/scratchPad.service';
 
 @Component({
   selector: 'observationRecursion',

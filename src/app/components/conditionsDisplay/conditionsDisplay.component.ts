@@ -6,13 +6,13 @@
 */
 import { Component, Input, Output, ViewChild, EventEmitter } from '@angular/core';
 
-import { Condition } from 'app/models/condition.model';
+import { Condition } from '../models/condition.model';
 
-import { ScratchPadService } from 'app/services/scratchPad.service';
-import { ConditionService } from 'app/services/condition.service';
-import { AssociationService } from 'app/services/association.service';
+import { ScratchPadService } from '../services/scratchPad.service';
+import { ConditionService } from '../services/condition.service';
+import { AssociationService } from '../services/association.service';
 
-import { ContextMenuComponent } from 'app/components/contextMenu/contextMenu.component';
+import { ContextMenuComponent } from './contextMenu.component';
 
 
 @Component({

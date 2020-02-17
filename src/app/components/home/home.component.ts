@@ -1,10 +1,10 @@
 import {Component, Compiler} from '@angular/core';
 import {CookieService} from 'angular2-cookie/core';
-import {PatientService} from 'app/services/patient.service';
-import {SmartService} from 'app/services/smart.service';
-import {FhirService} from 'app/services/fhir.service';
-import {Patient} from 'app/models/patient.model';
-import {ConditionService} from 'app/services/condition.service';
+import {PatientService} from '../services/patient.service';
+import {SmartService} from '../services/smart.service';
+import {FhirService} from '../services/fhir.service';
+import {Patient} from '../models/patient.model';
+import {ConditionService} from '../services/condition.service';
 
 @Component({
     selector: 'home',

@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import { GoogleChartService } from 'app/services/googleChart.service';
+import { GoogleChartService } from '../services/googleChart.service';
+import { TimelineChartConfig } from '../models/timelineChartConfig.model';
 
 declare var google: any;
 

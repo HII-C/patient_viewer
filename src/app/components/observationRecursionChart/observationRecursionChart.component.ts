@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { ObservationService } from 'app/services/observation.service';
-import { HistoricalTrendsService } from 'app/services/historicalTrends.service';
-import { Observation } from 'app/models/observation.model';
+import { ObservationService } from '../services/observation.service';
+import { HistoricalTrendsService } from '../services/historicalTrends.service';
+import { Observation } from '../models/observation.model';
 
 
 @Component({

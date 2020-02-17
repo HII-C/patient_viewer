@@ -9,14 +9,16 @@
 import { Component, Input, Output, EventEmitter, Pipe, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 
-import { FhirService } from 'app/services/fhir.service';
-import { ConditionService } from 'app/services/condition.service';
-import { DoctorService } from 'app/services/doctor.service';
-import { ScratchPadService } from 'app/services/scratchPad.service';
+import { FhirService } from '../services/fhir.service';
+import { ConditionService } from '../services/condition.service';
+import { DoctorService } from '../services/doctor.service';
+import { ScratchPadService } from '../services/scratchPad.service';
 
-import { Condition } from 'app/models/condition.model';
-import { Patient } from 'app/models/patient.model';
-import { BaseColumn } from 'app/components/baseColumn';
+import { Condition } from '../models/condition.model';
+import { Patient } from '../models/patient.model';
+import { BaseColumn } from './baseColumn';
+
+import { ContextMenuComponent } from './contextMenu.component';
 
 import * as moment from 'moment';
 declare var $: any; //Necessary in order to use jQuery to open popup.

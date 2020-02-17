@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
-import { CarePlanService } from 'app/services/carePlan.service';
-import { Patient } from 'app/models/patient.model';
-import { HistoricalTrendsService } from 'app/services/historicalTrends.service';
-import { Medication } from 'app/models/medication.model';
+import { CarePlanService } from '../services/carePlan.service';
+import { Patient } from '../models/patient.model';
+import { HistoricalTrendsService } from '../services/historicalTrends.service';
+import { Medication } from '../models/medication.model';
 
 @Component({
   selector: 'medications',

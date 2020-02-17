@@ -35,26 +35,9 @@ module.exports = function(grunt) {
             }
         },
 
-        pug: {
-            build: {
-                options: {
-                    pretty: true
-                },
-                files: [{
-                    cwd: "src/app/views",
-                    src: "**/*.pug",
-                    dest: "build",
-                    expand: true,
-                    ext: ".html"
-                }]
-            }
-        },
-
         copy: {
             build: {
-                options: {
-
-                },
+                options: { },
                 files: [{
                     cwd: 'node_modules/bootstrap/fonts',
                     src: "*",
@@ -65,6 +48,12 @@ module.exports = function(grunt) {
                     src: '**/*',
                     dest: 'build/images/',
                     expand: true
+                }, {
+                    cwd: 'src/app/components/',
+                    src: '**/*.html',
+                    dest: 'build/',
+                    expand: true,
+                    flatten: true
                 }]
             }
         },
@@ -151,9 +140,9 @@ module.exports = function(grunt) {
                 files: ['src/**/*.sass'],
                 tasks: ['sass'],
             },
-            pug: {
-                files: ['src/**/*.pug'],
-                tasks: ['pug'],
+            copy: {
+                files: ['src/**/*.html'],
+                tasks: ['copy'],
             },
             webpack: {
                 files: ['src/**/*.ts'],
@@ -172,7 +161,7 @@ module.exports = function(grunt) {
                     base: 'build',
                     // open: true,
                     keepalive: true
-                        // livereload: true
+                    // livereload: true
                 }
             }
         },
@@ -182,9 +171,8 @@ module.exports = function(grunt) {
             options: {
                 logConcurrentOutput: true
             },
-            build: ['watch:sass', 'watch:pug', 'watch:webpack', 'connect']
+            build: ['watch:sass', 'watch:copy', 'watch:webpack', 'connect']
         },
-
     };
 
     return config;

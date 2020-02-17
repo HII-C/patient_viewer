@@ -6,12 +6,11 @@
 */
 import { Component, Input, Output, ViewChild, EventEmitter } from '@angular/core';
 
-import { CarePlan } from '../models/carePlan.model';
+import { ScratchPadService } from '../../services/scratchPad.service';
 
-import { ScratchPadService } from '../services/scratchPad.service';
+import { ContextMenuComponent } from '../contextMenu/contextMenu.component';
 
-import { ContextMenuComponent } from './contextMenu.component';
-
+import { CarePlan } from '../../models/carePlan.model';
 
 @Component({
   selector: 'careplanDisplay',

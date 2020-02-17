@@ -1,6 +1,7 @@
-import { Component, Input, Output, EventEmitter, Pipe } from '@angular/core';
-import { ScratchPadService } from '../services/scratchPad.service';
-import { BaseColumn } from './baseColumn';
+import { Component, Input } from '@angular/core';
+
+import { ScratchPadService } from '../../services/scratchPad.service';
+import { BaseColumn } from '../baseColumn';
 
 /**
  * Allows for switching between the three states of each column.

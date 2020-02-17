@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
-import { DoctorService } from '../services/doctor.service';
+import { Component } from '@angular/core';
+
+import { DoctorService } from '../../services/doctor.service';
 
 @Component({
   selector: 'account',

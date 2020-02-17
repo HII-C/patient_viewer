@@ -1,14 +1,15 @@
-import { Component, ViewChild, Input} from '@angular/core';
-import * as moment from 'moment';
+import { Component, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/fromEvent';
+import * as moment from 'moment';
 
-import { ObservationService } from '../services/observation.service';
-import { HistoricalTrendsService } from '../services/historicalTrends.service';
-import { ContextMenuComponent } from './contextMenu.component';
-import { PatientService } from '../services/patient.service';
-import { Patient } from '../models/patient.model';
-import { pairs } from 'rxjs/observable/pairs';
+import { ObservationService } from '../../services/observation.service';
+import { HistoricalTrendsService } from '../../services/historicalTrends.service';
+import { PatientService } from '../../services/patient.service';
+
+import { ContextMenuComponent } from '../contextMenu/contextMenu.component';
+
+import { Patient } from '../../models/patient.model';
 
 @Component({
   selector: 'historicalTrends',

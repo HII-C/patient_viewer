@@ -1,12 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'loading-animation',
   templateUrl: './loadingAnimation.html'
-  // styleUrls: ['./heroes.component.css']
 })
 export class LoadingAnimation {
-
   constructor() { }
-
 }

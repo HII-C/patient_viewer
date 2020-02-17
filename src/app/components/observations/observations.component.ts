@@ -1,23 +1,17 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Http } from '@angular/http';
 import { Subscription } from 'rxjs/Subscription';
 
-import { BaseColumn } from './baseColumn';
+import { FhirService } from '../../services/fhir.service';
+import { ObservationService } from '../../services/observation.service';
+import { MapService } from '../../services/map.service';
+import { DoctorService } from '../../services/doctor.service';
+import { HistoricalTrendsService } from '../../services/historicalTrends.service';
+import { ScratchPadService } from '../../services/scratchPad.service';
 
-import { FhirService } from '../services/fhir.service';
-import { ObservationService } from '../services/observation.service';
-import { MapService } from '../services/map.service';
-import { DoctorService } from '../services/doctor.service';
-import { HistoricalTrendsService } from '../services/historicalTrends.service';
-import { ScratchPadService } from '../services/scratchPad.service';
-
-import { Observation } from '../models/observation.model';
-import { Patient } from '../models/patient.model';
-import { Condition } from '../models/condition.model';
-import { Observable } from 'rxjs/Observable';
-import { ObservationRecursive } from './observationRecursion.component';
-import { Http, Headers, RequestOptions, Response } from '@angular/http';
-
-import * as moment from 'moment';
+import { Observation } from '../../models/observation.model';
+import { Patient } from '../../models/patient.model';
+import { BaseColumn } from '../baseColumn';
 
 @Component({
   selector: 'observations',

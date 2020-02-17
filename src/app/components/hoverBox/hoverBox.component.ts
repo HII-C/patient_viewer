@@ -1,5 +1,4 @@
-import { Component, Input, ElementRef, Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Component, Injectable } from '@angular/core';
 import 'rxjs/add/observable/fromEvent';
 
 @Component({

@@ -6,21 +6,19 @@
   Version: 1.2 (3/19/18)
 */
 
-import { Component, Input, Output, EventEmitter, Pipe, ViewChild } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
-
-import { FhirService } from '../services/fhir.service';
-import { ConditionService } from '../services/condition.service';
-import { DoctorService } from '../services/doctor.service';
-import { ScratchPadService } from '../services/scratchPad.service';
-
-import { Condition } from '../models/condition.model';
-import { Patient } from '../models/patient.model';
-import { BaseColumn } from './baseColumn';
-
-import { ContextMenuComponent } from './contextMenu.component';
-
 import * as moment from 'moment';
+
+import { FhirService } from '../../services/fhir.service';
+import { ConditionService } from '../../services/condition.service';
+import { DoctorService } from '../../services/doctor.service';
+import { ScratchPadService } from '../../services/scratchPad.service';
+
+import { Condition } from '../../models/condition.model';
+import { Patient } from '../../models/patient.model';
+import { BaseColumn } from '../baseColumn';
+
 declare var $: any; //Necessary in order to use jQuery to open popup.
 
 @Component({

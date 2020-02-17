@@ -1,7 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
-import { HoverBoxComponent } from '../components/hoverBox.component';
-import { Encounter } from '../models/encounter.model';
 import { DatePipe } from '@angular/common';
+
+import { HoverBoxComponent } from '../../components/hoverBox/hoverBox.component';
+
+import { Encounter } from '../../models/encounter.model';
 
 @Component({
   selector: 'timeline-popup',

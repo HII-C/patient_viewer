@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { startOfDay } from 'date-fns';
 
 @Component({
   selector: 'calendar',

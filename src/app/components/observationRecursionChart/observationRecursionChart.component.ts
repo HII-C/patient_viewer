@@ -1,8 +1,9 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { ObservationService } from '../services/observation.service';
-import { HistoricalTrendsService } from '../services/historicalTrends.service';
-import { Observation } from '../models/observation.model';
+import { Component, Input } from '@angular/core';
 
+import { ObservationService } from '../../services/observation.service';
+import { HistoricalTrendsService } from '../../services/historicalTrends.service';
+
+import { Observation } from '../../models/observation.model';
 
 @Component({
   selector: 'observationRecursionChart',

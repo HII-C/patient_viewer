@@ -1,13 +1,14 @@
-import { Component, Input, Output, EventEmitter, Pipe } from '@angular/core';
-import { FhirService } from '../services/fhir.service';
-import { ConditionService } from '../services/condition.service';
-import { DoctorService } from '../services/doctor.service';
-import { ScratchPadService } from '../services/scratchPad.service';
-import { UpdatingService } from '../services/updating.service';
-import { Condition } from '../models/condition.model';
-import { Patient } from '../models/patient.model';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import * as moment from 'moment';
-import { PatientService } from '../services/patient.service';
+
+import { FhirService } from '../../services/fhir.service';
+import { ConditionService } from '../../services/condition.service';
+import { DoctorService } from '../../services/doctor.service';
+import { ScratchPadService } from '../../services/scratchPad.service';
+import { UpdatingService } from '../../services/updating.service';
+
+import { Condition } from '../../models/condition.model';
+import { Patient } from '../../models/patient.model';
 
 @Component({
   selector: 'conditionsChart',

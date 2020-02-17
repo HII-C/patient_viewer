@@ -1,15 +1,14 @@
 import { Component, Input, ElementRef } from '@angular/core';
-import { trigger, state, style, animate, transition } from '@angular/animations';
 
-import { Patient } from '../models/patient.model';
+import { DoctorService } from '../../services/doctor.service';
+import { HistoricalTrendsService } from '../../services/historicalTrends.service';
+import { ToolBarService } from '../../services/toolbar.service';
+import { ScratchPadService } from '../../services/scratchPad.service';
+import { ConditionService } from '../../services/condition.service';
+import { ObservationService} from '../../services/observation.service';
+import { AssociationService } from '../../services/association.service';
 
-import { DoctorService } from '../services/doctor.service';
-import { HistoricalTrendsService } from '../services/historicalTrends.service';
-import { ToolBarService } from '../services/toolbar.service';
-import { ScratchPadService } from '../services/scratchPad.service';
-import { ConditionService } from '../services/condition.service';
-import { ObservationService} from '../services/observation.service';
-import { AssociationService } from '../services/association.service';
+import { Patient } from '../../models/patient.model';
 
 @Component({
   selector: 'toolbar',

@@ -1,8 +1,9 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { DoctorService } from '../services/doctor.service';
-import { Patient } from '../models/patient.model';
-import { ObservationService } from '../services/observation.service';
 
+import { ObservationService } from '../../services/observation.service';
+import { DoctorService } from '../../services/doctor.service';
+
+import { Patient } from '../../models/patient.model';
 
 @Component({
   selector: 'triplelist',

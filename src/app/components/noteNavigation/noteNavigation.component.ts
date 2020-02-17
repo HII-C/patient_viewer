@@ -1,9 +1,8 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'noteNavigation',
   templateUrl: './noteNavigation.html',
-
 })
 
 export class NoteNavigationComponent {

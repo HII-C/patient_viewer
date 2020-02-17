@@ -6,13 +6,12 @@
 */
 import { Component, Input, Output, ViewChild, EventEmitter } from '@angular/core';
 
-import { Observation } from '../models/observation.model';
+import { ScratchPadService } from '../../services/scratchPad.service';
+import { AssociationService } from '../../services/association.service';
 
-import { ScratchPadService } from '../services/scratchPad.service';
-import { AssociationService } from '../services/association.service';
+import { ContextMenuComponent } from '../contextMenu/contextMenu.component';
 
-import { ContextMenuComponent } from './contextMenu.component';
-
+import { Observation } from '../../models/observation.model';
 
 @Component({
   selector: 'observationsDisplay',

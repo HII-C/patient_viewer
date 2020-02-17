@@ -1,13 +1,13 @@
 import { Component, Input } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 
-import { FhirService } from '../services/fhir.service';
-import { CarePlanService } from '../services/carePlan.service';
-import { ScratchPadService } from '../services/scratchPad.service';
+import { FhirService } from '../../services/fhir.service';
+import { CarePlanService } from '../../services/carePlan.service';
+import { ScratchPadService } from '../../services/scratchPad.service';
 
-import { CarePlan } from '../models/carePlan.model';
-import { Patient } from '../models/patient.model';
-import { BaseColumn } from './baseColumn';
+import { CarePlan } from '../../models/carePlan.model';
+import { Patient } from '../../models/patient.model';
+import { BaseColumn } from '../baseColumn';
 
 @Component({
   selector: 'carePlan',

@@ -1,6 +1,7 @@
-import { Component, Compiler, ElementRef } from '@angular/core';
-import { DoctorService } from '../services/doctor.service';
-import { ToolBarService } from '../services/toolbar.service';
+import { Component, ElementRef } from '@angular/core';
+
+import { DoctorService } from '../../services/doctor.service';
+import { ToolBarService } from '../../services/toolbar.service';
 
 @Component({
   selector: 'favorites',

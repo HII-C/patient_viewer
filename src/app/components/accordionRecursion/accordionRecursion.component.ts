@@ -6,7 +6,7 @@
 */
 
 import { Component, Input, Output } from '@angular/core';
-import { ObservationService } from '../services/observation.service';
+import { ObservationService } from '../../services/observation.service';
 
 @Component({
     selector: 'accordionRecursion',

@@ -8,7 +8,7 @@ import { Patient } from '../models/patient.model';
 
 @Injectable()
 export class PatientService {
-  private path = '/Patient';
+  private readonly path = '/Patient';
 
   // The id of the currently set patient
   public patientId: number;
@@ -17,12 +17,6 @@ export class PatientService {
     private http: HttpClient,
     private fhirService: FhirService
   ) { }
-
-  // Responsible for initial authentication when the application is starting
-  index(): Observable<any> {
-    var url = this.fhirService.getUrl() + this.path;
-    return this.http.get(url, this.fhirService.getRequestOptions(false));
-  }
 
   // Set the id of the patient
   setPatientId(patientId) {
@@ -45,9 +39,5 @@ export class PatientService {
       }
       return patient;
     });
-  }
-
-  setPath(newPath) {
-    this.path = newPath;
   }
 }

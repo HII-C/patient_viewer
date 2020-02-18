@@ -34,10 +34,10 @@ export class SmartService {
       this.launch = this.findGetParameter("launch");
 
       this.fhirService.setUrl(this.fhirBaseUrl);
-      this.patientService.setPath("/metadata");
 
-      this.patientService.index().subscribe(data => {
-        var smartExtension = data.rest[0].security.extension.filter(e => {
+      const url = this.fhirService.getUrl() + '/metadata';
+      this.http.get(url, this.fhirService.getRequestOptions(false)).subscribe(data => {
+        var smartExtension = data['rest'][0].security.extension.filter(e => {
           return (e.url === "http://fhir-registry.smarthealthit.org/StructureDefinition/oauth-uris");
         });
 

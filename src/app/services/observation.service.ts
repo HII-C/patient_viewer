@@ -1,11 +1,12 @@
 import { Component, Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import 'rxjs/add/operator/map';
-import { Observable } from 'rxjs/Observable';
-import { FhirService } from './fhir.service';
-import { Observation, ObservationBundle, Link } from '../models/observation.model';
-import { ScratchPadService } from '../services/scratchPad.service';
 import * as moment from 'moment';
+
+import { FhirService } from './fhir.service';
+import { ScratchPadService } from '../services/scratchPad.service';
+
+import { Observation, ObservationBundle } from '../models/observation.model';
 
 @Injectable()
 @Component({})

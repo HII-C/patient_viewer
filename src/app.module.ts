@@ -40,7 +40,6 @@ import { FhirService } from './app/services/fhir.service';
 import { PatientService } from './app/services/patient.service';
 import { ConditionService } from './app/services/condition.service';
 import { CarePlanService } from './app/services/carePlan.service';
-import { TimelineService } from './app/services/timeline.service';
 import { ObservationService } from './app/services/observation.service';
 import { MapService } from './app/services/map.service';
 import { DoctorService } from './app/services/doctor.service';
@@ -140,7 +139,6 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
     PatientService,
     ObservationService,
     ConditionService,
-    TimelineService,
     MapService,
     DoctorService,
     SmartService,

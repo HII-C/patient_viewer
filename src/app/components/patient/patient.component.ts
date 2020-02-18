@@ -34,8 +34,6 @@ export class PatientComponent {
 
   @ViewChild('hover') hover: HoverBoxComponent;
 
-  // For options: https://github.com/BTMorton/angular2-grid
-
   constructor(private http: Http,
     private cookieService: CookieService,
     private doctorService: DoctorService,

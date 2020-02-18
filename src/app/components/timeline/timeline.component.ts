@@ -13,7 +13,6 @@ export class TimelineComponent {
   encounters: Array<Encounter> = [];
   @Input() patient: Patient;
 
-  // For options: https://github.com/BTMorton/angular2-grid
   constructor(private encounterService: EncounterService) { }
 
   ngOnChanges(): void {

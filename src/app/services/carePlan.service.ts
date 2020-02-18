@@ -1,9 +1,10 @@
 import { Component, Injectable } from '@angular/core';
-import { Http, Headers } from '@angular/http';
+import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
 
 import { FhirService } from './fhir.service';
+
 import { Patient } from '../models/patient.model';
 import { CarePlan } from '../models/carePlan.model';
 import { Medication } from '../models/medication.model';
@@ -23,7 +24,7 @@ export class CarePlanService {
       let json = res.json();
 
       if (json.entry) {
-        return <Array<CarePlan>> json.entry.map(r => r['resource']);
+        return <Array<CarePlan>>json.entry.map(r => r['resource']);
       } else {
         // The patient has no care plans, so return an empty array
         return new Array<CarePlan>();

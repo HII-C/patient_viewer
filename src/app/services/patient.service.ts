@@ -1,7 +1,8 @@
-import { Component, Injectable } from '@angular/core';
-import { Http, Headers } from '@angular/http';
+import { Injectable } from '@angular/core';
+import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
+
 import { FhirService } from './fhir.service';
 import { Patient } from '../models/patient.model';
 

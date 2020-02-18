@@ -1,6 +1,7 @@
 import { Component, Injectable } from '@angular/core';
-import { Condition } from '../models/condition.model';
+
 import { CookieService } from 'angular2-cookie/core';
+import { Condition } from '../models/condition.model';
 
 @Injectable()
 @Component({})

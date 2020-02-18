@@ -1,9 +1,6 @@
 import { Component, Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+
 import { Chart } from '../models/chart.model';
-import { Observation } from '../models/observation.model';
-import { Subject } from 'rxjs/Subject';
-import { CarePlan } from '../models/carePlan.model';
 import { Medication } from '../models/medication.model';
 
 @Injectable()

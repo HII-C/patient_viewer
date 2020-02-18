@@ -1,5 +1,5 @@
 import { Component, Injectable } from '@angular/core';
-import { Http, Headers } from '@angular/http';
+import { Http } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
@@ -9,6 +9,7 @@ import 'rxjs/add/operator/concat';
 
 import { FhirService } from './fhir.service';
 import { ScratchPadService } from '../services/scratchPad.service';
+
 import { Patient } from '../models/patient.model';
 import { Condition } from '../models/condition.model';
 import { AllergyIntolerance } from '../models/allergyIntolerance.model';

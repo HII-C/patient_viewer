@@ -1,6 +1,5 @@
 import { Injectable, Component } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
-import {Observable} from 'rxjs/Observable';
  
 // MODELS
 import { Condition } from '../models/condition.model';

@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { ConditionService } from './condition.service';
 import { ObservationService } from './observation.service';
+
 import { Condition } from '../models/condition.model';
 import { Observation } from '../models/observation.model';
 
@@ -20,7 +21,7 @@ export class AssociationService {
         private http: HttpClient,
         private conditionService: ConditionService,
         private observationService: ObservationService
-    ) {}
+    ) { }
 
     runAssociationsTool(checkedConditions: Array<Condition>, checkedObservations: Array<Observation>) {
         let conditions = this.conditionService.conditions;
@@ -61,7 +62,7 @@ export class AssociationService {
     }
 
     private getAssociations(
-        checkedConditions: Array<Condition>, 
+        checkedConditions: Array<Condition>,
         checkedObservations: Array<Observation>,
         conditions: Array<Condition>,
         observations: Array<Observation>,

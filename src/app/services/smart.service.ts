@@ -1,4 +1,4 @@
-import { Component, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { CookieService } from 'angular2-cookie/core';
 import { FhirService } from '../services/fhir.service';

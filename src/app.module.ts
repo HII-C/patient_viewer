@@ -3,7 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 
 // COMPONENT IMPORTS
 import { AppComponent } from './app/components/app/app.component';
-import { ClientComponent } from './app/components/client/client.component';
 import { HomeComponent } from './app/components/home/home.component';
 import { PatientComponent } from './app/components/patient/patient.component';
 import { ConditionsComponent } from './app/components/conditions/conditions.component';
@@ -36,13 +35,9 @@ import { HistoricalTrendsComponent } from './app/components/historicalTrends/his
 import { ObservationsDisplay } from './app/components/observationsDisplay/observationsDisplay.component';
 
 // SERVICE IMPORTS
-import { ClientService } from './app/services/client.service';
 import { EncounterService } from './app/services/encounter.service';
 import { FhirService } from './app/services/fhir.service';
-import { HealthCreekService } from './app/services/healthcreek.service';
 import { PatientService } from './app/services/patient.service';
-import { SearchService } from './app/services/search.service';
-import { UserService } from './app/services/user.service';
 import { ConditionService } from './app/services/condition.service';
 import { CarePlanService } from './app/services/carePlan.service';
 import { TimelineService } from './app/services/timeline.service';
@@ -100,7 +95,6 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
   ],
   declarations: [ // Components and Directives
     AppComponent,
-    ClientComponent,
     HomeComponent,
     PatientComponent,
     AccordionRecursion,
@@ -141,15 +135,11 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
   ],
   providers: [ // Services
     appRoutingProviders,
-    ClientService,
     EncounterService,
     FhirService,
-    HealthCreekService,
     PatientService,
-    SearchService,
     ObservationService,
     ConditionService,
-    UserService,
     TimelineService,
     MapService,
     DoctorService,

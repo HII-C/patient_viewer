@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { CookieService } from 'angular2-cookie/core';
+import { CookieService } from 'ngx-cookie-service';
 import { Condition } from '../models/condition.model';
 
 @Injectable()
@@ -45,6 +45,6 @@ export class DoctorService {
 
   addGraphConfig(list: Array<string>) {
     this.graphConfig.push(list);
-    this.cookieService.putObject("graphConfig", this.graphConfig);
+    this.cookieService.set('graphConfig', JSON.stringify(this.graphConfig));
   }
 }

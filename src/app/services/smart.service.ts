@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { CookieService } from 'angular2-cookie/core';
+import { CookieService } from 'ngx-cookie-service';
 import { FhirService } from '../services/fhir.service';
 import { PatientService } from '../services/patient.service';
 import { Md5 } from 'ts-md5/dist/md5';
@@ -55,8 +55,8 @@ export class SmartService {
         this.tokenUrl = tok;
         this.authorizeUrl = auth;
 
-        this.cookieService.put('tokenUrl', this.tokenUrl);
-        this.cookieService.put('fhirBaseUrl', this.fhirBaseUrl);
+        this.cookieService.set('tokenUrl', this.tokenUrl);
+        this.cookieService.set('fhirBaseUrl', this.fhirBaseUrl);
 
         this.requestAuth();
       });
@@ -89,7 +89,7 @@ export class SmartService {
     //TODO Fix hashing method - not sure best way to do it
 
     this.state = (Md5.hashStr("testing Hasing")).toString();
-    this.cookieService.put('state', this.state);
+    this.cookieService.set('state', this.state);
 
     var request = this.authorizeUrl + "?response_type=code"
       + "&client_id=" + this.clientId

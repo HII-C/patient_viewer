@@ -15,4 +15,4 @@ import '@angular/platform-browser';
 import '@angular/router';
 
 // Cookies
-import 'angular2-cookie/core'
+import 'ngx-cookie-service';

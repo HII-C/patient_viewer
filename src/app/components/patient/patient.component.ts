@@ -4,7 +4,7 @@ import { Http } from '@angular/http';
 import { DoctorService } from '../../services/doctor.service';
 import { ConditionService } from '../../services/condition.service';
 import { EncounterService } from '../../services/encounter.service';
-import { CookieService } from 'angular2-cookie/core';
+import { CookieService } from 'ngx-cookie-service';
 
 import { HomeComponent } from '../../components/home/home.component';
 import { HoverBoxComponent } from '../hoverBox/hoverBox.component';
@@ -40,9 +40,7 @@ export class PatientComponent {
     private homeComponent: HomeComponent,
     private conditionService: ConditionService,
     private encounterService: EncounterService) {
-
-    this.graphConfig = this.cookieService.getObject("graphConfig");
-    // this.cookieService.remove("graphConfig");
+    this.graphConfig = JSON.parse(this.cookieService.get('graphConfig')  || '{}');
   }
 
   genderString(patient: Patient) {

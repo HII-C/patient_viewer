@@ -34,6 +34,7 @@ import { HistoricalTrendsComponent } from './app/components/historicalTrends/his
 import { ObservationsDisplay } from './app/components/observationsDisplay/observationsDisplay.component';
 
 // SERVICE IMPORTS
+import { CookieService } from 'ngx-cookie-service';
 import { EncounterService } from './app/services/encounter.service';
 import { FhirService } from './app/services/fhir.service';
 import { PatientService } from './app/services/patient.service';
@@ -44,7 +45,6 @@ import { MapService } from './app/services/map.service';
 import { DoctorService } from './app/services/doctor.service';
 import { SmartService } from './app/services/smart.service';
 import { HistoricalTrendsService } from './app/services/historicalTrends.service';
-import { CookieService } from 'angular2-cookie/core';
 import { ScratchPadService } from './app/services/scratchPad.service';
 import { UpdatingService } from './app/services/updating.service';
 import { ToolBarService } from './app/services/toolbar.service';
@@ -130,6 +130,7 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
   ],
   providers: [ // Services
     appRoutingProviders,
+    CookieService,
     EncounterService,
     FhirService,
     PatientService,
@@ -138,7 +139,6 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
     MapService,
     DoctorService,
     SmartService,
-    CookieService,
     CarePlanService,
     HistoricalTrendsService,
     ScratchPadService,

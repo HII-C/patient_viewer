@@ -1,12 +1,12 @@
 import { Component, Compiler } from '@angular/core';
 
-import {CookieService} from 'angular2-cookie/core';
-import {PatientService} from '../../services/patient.service';
-import {SmartService} from '../../services/smart.service';
-import {FhirService} from '../../services/fhir.service';
-import {ConditionService} from '../../services/condition.service';
+import { CookieService } from 'ngx-cookie-service';
+import { PatientService } from '../../services/patient.service';
+import { SmartService } from '../../services/smart.service';
+import { FhirService } from '../../services/fhir.service';
+import { ConditionService } from '../../services/condition.service';
 
-import {Patient} from '../../models/patient.model';
+import { Patient } from '../../models/patient.model';
 
 @Component({
     selector: 'home',
@@ -16,11 +16,11 @@ export class HomeComponent {
     selected: Patient = null;
 
     constructor(private fhirService: FhirService,
-                private patientService: PatientService,
-                private cookieService: CookieService,
-                private smartService: SmartService,
-                private conditionService: ConditionService,
-                private compiler: Compiler) {
+        private patientService: PatientService,
+        private cookieService: CookieService,
+        private smartService: SmartService,
+        private conditionService: ConditionService,
+        private compiler: Compiler) {
 
         this.compiler.clearCache();
         this.fhirService.setUrl(this.cookieService.get('fhirBaseUrl'));

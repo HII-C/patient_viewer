@@ -1,4 +1,4 @@
-import { Component, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
@@ -11,7 +11,6 @@ import { Medication } from '../models/medication.model';
 import { Bundle } from '../models/bundle.model';
 
 @Injectable()
-@Component({})
 export class CarePlanService {
   private path = '/CarePlan';
 

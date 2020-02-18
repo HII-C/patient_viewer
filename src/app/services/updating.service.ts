@@ -1,9 +1,8 @@
-import { Component, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { ConditionService } from './condition.service';
 import * as _ from "lodash";
 
 @Injectable()
-@Component({})
 export class UpdatingService {
   constructor(private conditionService: ConditionService) { }
 

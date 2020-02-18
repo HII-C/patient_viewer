@@ -1,4 +1,4 @@
-import { Component, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
@@ -15,7 +15,6 @@ import { Condition } from '../models/condition.model';
 import { AllergyIntolerance } from '../models/allergyIntolerance.model';
 
 @Injectable()
-@Component({})
 export class ConditionService {
   private path = '/Condition';
 

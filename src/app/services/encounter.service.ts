@@ -1,4 +1,4 @@
-import { Component, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
@@ -10,7 +10,6 @@ import { Encounter } from '../models/encounter.model';
 
 
 @Injectable()
-@Component({})
 export class EncounterService {
   private path = '/Encounter';
 

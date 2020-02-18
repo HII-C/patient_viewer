@@ -22,7 +22,7 @@ export class ObservationService {
 
   constructor(
     private fhirService: FhirService,
-    private http: HttpClient, 
+    private http: HttpClient,
     private scratchPadService: ScratchPadService
   ) {
     // these are the codes of the observations; 
@@ -128,27 +128,22 @@ export class ObservationService {
     };
   }
 
-  retrieveObservations(url: string): Observable<HttpResponse<ObservationBundle>> {
-    return this.http.get<ObservationBundle>(url, this.fhirService.getHeaders());
-  }
-  
   loadObservationsPage(url: string): void {
-    this.retrieveObservations(url).subscribe((res) => {
-      this.handleBundle(res.body);
-    });
+    this.http.get<ObservationBundle>(url, this.fhirService.getRequestOptions())
+      .subscribe((bundle) => {
+        this.handleObservationBundle(bundle);
+      });
   }
 
-  handleBundle(bundle: ObservationBundle): void {
+  handleObservationBundle(bundle: ObservationBundle): void {
     if (bundle) {
-      let nextObservations = bundle.entry.map(e => e['resource']);
+      let nextObservations = bundle.entry.map(e => e.resource);
       this.observations = this.observations.concat(nextObservations);
-
       this.extractNewObservations(nextObservations);
 
-      let nextLinks = bundle.link.filter((link) => link.relation == 'next');
-      if (nextLinks.length > 0) {
-        let nextPageUrl = nextLinks[0].url;
-        this.loadObservationsPage(nextPageUrl);
+      let nextLink = bundle.link.find(link => link.relation == 'next');
+      if (nextLink) {
+        this.loadObservationsPage(nextLink.url);
       } else {
         this.onLoadComplete();
       }
@@ -190,8 +185,6 @@ export class ObservationService {
       ob.relativeDateTime = moment(relativeDateTime).toISOString();
     }
   }
-
-  // ================================ DATA CLEANING ===============================
 
   extractNewObservations(observations: Array<Observation>): void {
     for (let observation of observations) {
@@ -255,7 +248,6 @@ export class ObservationService {
     }
     return totalCount;
   }
-
 
   // Sort the Observations list (arrData) into categories, which are returned inside
   // a single object that conforms to accordion data format

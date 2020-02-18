@@ -5,7 +5,7 @@ import { RequestOptions, Headers } from '@angular/http';
 @Injectable()
 export class FhirService {
 
-  constructor() {}
+  constructor() { }
 
   private base: string;
   public token: string;
@@ -23,13 +23,13 @@ export class FhirService {
   }
 
   getRequestOptions(withAuth: boolean = true): { headers: HttpHeaders } {
-    const headers = new HttpHeaders({
-      'Accept': 'application/json'
-    });
-    if (withAuth) {
-      headers.append('Authorization', 'Bearer ' + this.token);
-    }
-    return { headers: headers };
+    return {
+      headers:
+        new HttpHeaders({
+          'Accept': 'application/json',
+          'Authorization': 'Bearer ' + this.token
+        })
+    };
   }
 
   // Remove eventually

@@ -37,7 +37,7 @@ export class Observation implements Associable {
 
 //https://www.hl7.org/fhir/bundle.html
 export class ObservationBundle {
-	entry: Array<any>;
+	entry: Array<{ resource: Observation }>;
 	link: Array<Link>;
 }
 

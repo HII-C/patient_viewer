@@ -60,7 +60,7 @@ export class ObservationsComponent extends BaseColumn{
   ngOnChanges() {
     if (this.patient) { //If the patient is loaded
       let url = this.fhirService.getUrl() + "/Observation?patient=" + this.patient.id;
-      this.observationService.loadDataPage(url);    
+      this.observationService.loadObservationsPage(url);    
     }
   }
 }

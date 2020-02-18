@@ -75,18 +75,18 @@ export class PatientComponent {
         //add allergy strings to allergies
         this.allergies = allergies.map(allergy => allergy.code.text);
 
-        //construct displayed allergy string
-        if (this.allergies.length == 1) { //singular allergy
+        // Construct displayed allergy string
+        if (this.allergies.length == 0) {
+          this.allergy = "None";
+        } else if (this.allergies.length == 1) {
           this.allergy = this.allergies[0];
-        }
-
-        else { //multiple allergies
-          this.allergy = "multiple...";
+        } else {
+          this.allergy = "Multiple...";
           this.hoverStyling = true;
         }
       }
       else { //no allergies
-        this.allergy = "none";
+        this.allergy = "None";
       }
     });
   }

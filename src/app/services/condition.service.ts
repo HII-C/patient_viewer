@@ -40,7 +40,7 @@ export class ConditionService {
     return this.http.get<Bundle>(url, this.fhirService.getRequestOptions())
       .concatMap(bundle => {
         const conditions = <Array<Condition>>bundle.entry.map(r => r.resource);
-        
+
         let nextLink = bundle.link.find(link => link.relation == 'next');
         if (nextLink) {
           return Observable.of(conditions).concat(this.loadConditionsPage(nextLink.url));
@@ -65,15 +65,15 @@ export class ConditionService {
   // Retrieve allergies for a given patient
   loadAllergies(patient: Patient): Observable<Array<AllergyIntolerance>> {
     let url = this.fhirService.getUrl() + "/AllergyIntolerance" + "?patient=" + patient.id;
-    return this.http.get(url, this.fhirService.options(true)).map(res => {
-      let json = res.json();
-      if (json.hasOwnProperty('entry')) {
-        return json['entry'].map(r => r['resource']);
-      }
-      else {
-        return new Array<AllergyIntolerance>();
-      }
-    });
+    return this.http.get<Bundle>(url, this.fhirService.getRequestOptions())
+      .map(bundle => {
+        if (bundle.entry) {
+          return <Array<AllergyIntolerance>>bundle.entry.map(r => r.resource);
+        } else {
+          // The patient has no allergies
+          return new Array<AllergyIntolerance>();
+        }
+      });
   }
 
   // Gets the state of the conditions column (default or scratch pad)

@@ -25,7 +25,7 @@ export class CarePlanService {
 
     return this.http.get<Bundle>(url, this.fhirService.getRequestOptions())
       .map(bundle => {
-        if (bundle) {
+        if (bundle.entry) {
           return <Array<CarePlan>>bundle.entry.map(r => r.resource);
         } else {
           // The patient has no care plans, so return an empty array

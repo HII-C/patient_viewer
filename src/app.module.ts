@@ -72,7 +72,6 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { Md5 } from 'ts-md5/dist/md5';
 import { CalendarModule } from 'angular-calendar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -95,7 +94,6 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
     FormsModule,
     HttpModule,
     MomentModule,
-    ChartsModule,
     NgxChartsModule,
     BrowserAnimationsModule,
     CalendarModule.forRoot(),

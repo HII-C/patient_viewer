@@ -1,5 +1,5 @@
 import { Component, Injectable } from '@angular/core';
-import { Http, Headers } from '@angular/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
 import { FhirService } from './fhir.service';
@@ -20,7 +20,11 @@ export class ObservationService {
 
   filterSet = new Set<string>();
 
-  constructor(private fhirService: FhirService, private http: Http, private scratchPadService: ScratchPadService) {
+  constructor(
+    private fhirService: FhirService,
+    private http: HttpClient, 
+    private scratchPadService: ScratchPadService
+  ) {
     // these are the codes of the observations; 
     // groupList is used to categorize where in categorizedObservations this is stored
     this.groupMap = {
@@ -124,36 +128,34 @@ export class ObservationService {
     };
   }
 
-  // ================================== DATA RETRIEVAL ========================
-  loadDataPage(url: string): void {
-    this.retrieveObservations(url).subscribe((bundle) => {
-      this.handleBundle(bundle);
+  retrieveObservations(url: string): Observable<HttpResponse<ObservationBundle>> {
+    return this.http.get<ObservationBundle>(url, this.fhirService.getHeaders());
+  }
+  
+  loadObservationsPage(url: string): void {
+    this.retrieveObservations(url).subscribe((res) => {
+      this.handleBundle(res.body);
     });
   }
 
   handleBundle(bundle: ObservationBundle): void {
-    if (bundle.hasOwnProperty('entry')) {
-      let nextObservations: Array<Observation> = bundle.entry.map((e: { [x: string]: any }) => e['resource']);
+    if (bundle) {
+      let nextObservations = bundle.entry.map(e => e['resource']);
       this.observations = this.observations.concat(nextObservations);
+
       this.extractNewObservations(nextObservations);
 
       let nextLinks = bundle.link.filter((link) => link.relation == 'next');
       if (nextLinks.length > 0) {
-        let nextPageUrl = nextLinks[0]['url'];
-        this.loadDataPage(nextPageUrl);
-      }
-      else {
+        let nextPageUrl = nextLinks[0].url;
+        this.loadObservationsPage(nextPageUrl);
+      } else {
         this.onLoadComplete();
       }
-    }
-    else {
+    } else {
       console.log("No observations for patient.");
       this.observations = new Array<Observation>();
     }
-  }
-
-  retrieveObservations(url: string): Observable<ObservationBundle> {
-    return this.http.get(url, this.fhirService.options(true)).map(res => <ObservationBundle>res.json());
   }
 
   onLoadComplete() {

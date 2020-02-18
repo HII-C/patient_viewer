@@ -1,8 +1,6 @@
 import { ModuleWithProviders, enableProdMode } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { FormCreatorModule } from './app/modules/form.module';
-
 // COMPONENT IMPORTS
 import { AppComponent } from './app/components/app/app.component';
 import { ClientComponent } from './app/components/client/client.component';
@@ -72,10 +70,12 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { Md5 } from 'ts-md5/dist/md5';
 import { CalendarModule } from 'angular-calendar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NguiAutoCompleteModule } from '@ngui/auto-complete';
+import { FormCreatorModule } from './app/modules/form.module';
 
 const appRoutes: Routes = [
   { path: 'account', component: AccountComponent },
@@ -93,6 +93,7 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
     routing,
     FormsModule,
     HttpModule,
+    HttpClientModule,
     MomentModule,
     NgxChartsModule,
     BrowserAnimationsModule,

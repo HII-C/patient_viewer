@@ -1,4 +1,5 @@
 export class Encounter {
+  
   id: string;
   status: string;
 
@@ -12,6 +13,7 @@ export class Encounter {
     div: string;
   }
 
+  position:string;
   // Reasons for the encounter.
   reason: {
     text: string;

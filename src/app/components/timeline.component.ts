@@ -24,7 +24,10 @@ export class TimelineComponent {
         this.encounters = this.encounters.concat(encounters);
         console.log('Loaded ' + this.encounters.length + ' encounters.');
         console.log(this.encounters);
-        encounters.forEach(enc =>  console.log('Log Val: ' + enc.getLogValue()))
+
+        encounters.forEach(enc => enc.position = enc.getLogValue()/5 + "%")
+        encounters.forEach(enc =>  console.log('Log Val pos: ' + enc.getStartDate()))
+        
       });
     }
   }

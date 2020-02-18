@@ -36,7 +36,7 @@ export class SmartService {
       this.fhirService.setUrl(this.fhirBaseUrl);
       this.patientService.setPath("/metadata");
 
-      this.patientService.index(false).subscribe(data => {
+      this.patientService.index().subscribe(data => {
         var smartExtension = data.rest[0].security.extension.filter(e => {
           return (e.url === "http://fhir-registry.smarthealthit.org/StructureDefinition/oauth-uris");
         });

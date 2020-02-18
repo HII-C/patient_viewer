@@ -23,13 +23,11 @@ export class FhirService {
   }
 
   getRequestOptions(withAuth: boolean = true): { headers: HttpHeaders } {
-    return {
-      headers:
-        new HttpHeaders({
-          'Accept': 'application/json',
-          'Authorization': 'Bearer ' + this.token
-        })
-    };
+    let headers = new HttpHeaders({'Accept': 'application/json'});
+    if (withAuth) {
+      headers = headers.append('Authorization', 'Bearer ' + this.token);
+    }
+    return { headers: headers };
   }
 
   // Remove eventually

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
 
@@ -11,14 +11,17 @@ export class PatientService {
   private path = '/Patient';
 
   // The id of the currently set patient
-  public patientId : number;
+  public patientId: number;
 
-  constructor(private fhirService: FhirService, private http: Http) { }
+  constructor(
+    private http: HttpClient,
+    private fhirService: FhirService
+  ) { }
 
   // Responsible for initial authentication when the application is starting
-  index(withAuth): Observable<any> {
+  index(): Observable<any> {
     var url = this.fhirService.getUrl() + this.path;
-    return this.http.get(url, this.fhirService.options(withAuth)).map(res => res.json());
+    return this.http.get(url, this.fhirService.getRequestOptions(false));
   }
 
   // Set the id of the patient
@@ -29,28 +32,17 @@ export class PatientService {
   // Retrieve the patient with the id previously set using setPatientId()
   loadPatient(): Observable<Patient> {
     var url = this.fhirService.getUrl() + this.path + '/' + this.patientId;
+    let options = this.fhirService.getRequestOptions(true);
 
-    let options = this.fhirService.options(true);
+    return this.http.get(url, options).map(res => {
+      let patient = <Patient>res;
 
-    // The following headers were removed because they are not
-    // allowed by the Access-Control-Allow-Headers header set
-    // in the preflight response by HSPC Sandbox.
-    /*
-    options.headers.append('Pragma', 'no-cache');
-    options.headers.append('Cache-Control', 'no-store');
-    options.headers.append('Cache-Control', 'no-cache');
-    options.headers.append('Cache-Control', 'must-revalidate');
-    */
-
-    return this.http.get(url, options).map(res => res.json()).map(json => {
-      let patient = <Patient>json;
-
-      for (let id of json.identifier) {
+      // Assign patient MRN
+      for (let id of res['identifier']) {
         if (id.type && id.type.coding[0].code == "MR") {
           patient.mrn = id.value;
         }
       }
-
       return patient;
     });
   }

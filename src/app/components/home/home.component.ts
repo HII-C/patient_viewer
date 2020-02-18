@@ -31,8 +31,8 @@ export class HomeComponent {
         } else {
             // Retrieve the access token and patient.
             this.smartService.authenticate().subscribe(data => {
-                this.fhirService.setToken(data.access_token);
-                this.selectPatientById(data.patient);
+                this.fhirService.setToken(data['access_token']);
+                this.selectPatientById(data['patient']);
             });
         }
     }

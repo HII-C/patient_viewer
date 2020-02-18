@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
@@ -10,6 +10,7 @@ import 'rxjs/add/operator/concat';
 import { FhirService } from './fhir.service';
 import { ScratchPadService } from '../services/scratchPad.service';
 
+import { Bundle } from '../models/bundle.model';
 import { Patient } from '../models/patient.model';
 import { Condition } from '../models/condition.model';
 import { AllergyIntolerance } from '../models/allergyIntolerance.model';
@@ -26,9 +27,9 @@ export class ConditionService {
   columnState: String;
 
   constructor(
+    private http: HttpClient,
     private fhirService: FhirService,
     private scratchPadService: ScratchPadService,
-    private http: Http
   ) { }
 
   // https://stackoverflow.com/questions/45594609/which-operator-to-chain-observables-conditionally
@@ -36,23 +37,16 @@ export class ConditionService {
   // load the next page until no pages remain. This is achieved through
   // concatMap and Observable.concat, as discussed above.
   loadConditionsPage(url: string): Observable<Array<Condition>> {
-    return this.http.get(url, this.fhirService.options(true))
-      .map(res => res.json())
-      .concatMap(data => {
-        let conditions = [];
-
-        if (data.hasOwnProperty('entry')) {
-          conditions = <Array<Condition>>data.entry.map((r: { [x: string]: any; }) => r['resource']);
+    return this.http.get<Bundle>(url, this.fhirService.getRequestOptions())
+      .concatMap(bundle => {
+        const conditions = <Array<Condition>>bundle.entry.map(r => r.resource);
+        
+        let nextLink = bundle.link.find(link => link.relation == 'next');
+        if (nextLink) {
+          return Observable.of(conditions).concat(this.loadConditionsPage(nextLink.url));
+        } else {
+          return Observable.of(conditions);
         }
-
-        for (let link of data.link) {
-          // Check if there is another page to load.
-          if (link.relation == "next") {
-            let nextUrl = link.url;
-            return Observable.of(conditions).concat(this.loadConditionsPage(nextUrl));
-          }
-        }
-        return Observable.of(conditions);
       });
   }
 

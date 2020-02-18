@@ -12,7 +12,6 @@ import { ObservationsComponent } from './app/components/observations/observation
 import { CarePlanComponent } from './app/components/carePlan/carePlan.component';
 import { HoverBoxComponent } from "./app/components/hoverBox/hoverBox.component";
 import { LoadingAnimation } from './app/components/loadingAnimation/loadingAnimation.component';
-import { CalendarComponent } from './app/components/calendar/calendar.component';
 import { DoctorNoteComponent } from './app/components/doctorNote/doctorNote.component';
 import { AccountComponent } from './app/components/account/account.component';
 import { ToolbarComponent } from './app/components/toolbar/toolbar.component';
@@ -64,7 +63,6 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { Md5 } from 'ts-md5/dist/md5';
-import { CalendarModule } from 'angular-calendar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NguiAutoCompleteModule } from '@ngui/auto-complete';
 import { FormCreatorModule } from './app/modules/form.module';
@@ -89,7 +87,6 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
     MomentModule,
     NgxChartsModule,
     BrowserAnimationsModule,
-    CalendarModule.forRoot(),
     NguiAutoCompleteModule,
   ],
   declarations: [ // Components and Directives
@@ -117,7 +114,6 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
     FormBuilder,
     AccountComponent,
     DoctorNoteComponent,
-    CalendarComponent,
     ToolbarComponent,
     TripleListComponent,
     ObservationRecursive,

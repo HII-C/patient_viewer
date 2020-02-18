@@ -29,7 +29,6 @@
     "bootstrap": "^3.3.7",
     "concurrently": "^3.4.0",
     "core-js": "^2.5.4",
-    "date-fns": "^1.28.5",
     "grunt-contrib-clean": "^1.1.0",
     "grunt-contrib-compress": "^1.4.1",
     "grunt-contrib-uglify": "^2.3.0",

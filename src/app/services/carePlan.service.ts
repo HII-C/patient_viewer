@@ -1,5 +1,5 @@
 import { Component, Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
 
@@ -8,28 +8,31 @@ import { FhirService } from './fhir.service';
 import { Patient } from '../models/patient.model';
 import { CarePlan } from '../models/carePlan.model';
 import { Medication } from '../models/medication.model';
+import { Bundle } from '../models/bundle.model';
 
 @Injectable()
 @Component({})
 export class CarePlanService {
   private path = '/CarePlan';
 
-  constructor(private fhirService: FhirService, private http: Http) { }
+  constructor(
+    private fhirService: FhirService,
+    private http: HttpClient
+  ) { }
 
   // Retrieve care plans for a given patient
   loadCarePlans(patient: Patient): Observable<Array<CarePlan>> {
     let url = this.fhirService.getUrl() + this.path + "?patient=" + patient.id;
 
-    return this.http.get(url, this.fhirService.options(true)).map(res => {
-      let json = res.json();
-
-      if (json.entry) {
-        return <Array<CarePlan>>json.entry.map(r => r['resource']);
-      } else {
-        // The patient has no care plans, so return an empty array
-        return new Array<CarePlan>();
-      }
-    });
+    return this.http.get<Bundle>(url, this.fhirService.getRequestOptions())
+      .map(bundle => {
+        if (bundle) {
+          return <Array<CarePlan>>bundle.entry.map(r => r.resource);
+        } else {
+          // The patient has no care plans, so return an empty array
+          return new Array<CarePlan>();
+        }
+      });
   }
 
   // Retrieve medications for a given patient.

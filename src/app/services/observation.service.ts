@@ -6,7 +6,8 @@ import * as moment from 'moment';
 import { FhirService } from './fhir.service';
 import { ScratchPadService } from '../services/scratchPad.service';
 
-import { Observation, ObservationBundle } from '../models/observation.model';
+import { Observation } from '../models/observation.model';
+import { Bundle } from '../models/bundle.model';
 
 @Injectable()
 @Component({})
@@ -130,15 +131,15 @@ export class ObservationService {
   }
 
   loadObservationsPage(url: string): void {
-    this.http.get<ObservationBundle>(url, this.fhirService.getRequestOptions())
+    this.http.get<Bundle>(url, this.fhirService.getRequestOptions())
       .subscribe((bundle) => {
         this.handleObservationBundle(bundle);
       });
   }
 
-  handleObservationBundle(bundle: ObservationBundle): void {
+  handleObservationBundle(bundle: Bundle): void {
     if (bundle) {
-      let nextObservations = bundle.entry.map(e => e.resource);
+      let nextObservations = <Array<Observation>>bundle.entry.map(e => e.resource);
       this.observations = this.observations.concat(nextObservations);
       this.extractNewObservations(nextObservations);
 

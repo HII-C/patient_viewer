@@ -34,14 +34,3 @@ export class Observation implements Associable {
 		return this['code']['coding'][0]['code'];
 	}
 }
-
-//https://www.hl7.org/fhir/bundle.html
-export class ObservationBundle {
-	entry: Array<{ resource: Observation }>;
-	link: Array<Link>;
-}
-
-export class Link {
-	relation: string;
-	url: string;
-}

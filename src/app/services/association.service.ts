@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 
 import { ConditionService } from './condition.service';
 import { ObservationService } from './observation.service';
@@ -8,6 +8,7 @@ import { Observation } from '../models/observation.model';
 
 @Injectable()
 export class AssociationService {
+    // TODO: This endpoint is currently unavailable
     private path = 'http://ec2-52-10-29-181.us-west-2.compute.amazonaws.com/get_items';
 
     // Maps for tracking which conditions and observations
@@ -16,7 +17,7 @@ export class AssociationService {
     associatedMapObservations: Map<Observation, boolean> = new Map();
 
     constructor(
-        private http: Http,
+        private http: HttpClient,
         private conditionService: ConditionService,
         private observationService: ObservationService
     ) {}
@@ -36,8 +37,8 @@ export class AssociationService {
             this.associatedMapObservations.clear();
 
             // Extract associations API response
-            let associatedConditions = res.selectedConditions;
-            let associatedObservations = res.selectedObservations;
+            let associatedConditions = res['selectedConditions'];
+            let associatedObservations = res['selectedObservations'];
 
             // Mark associated conditions as such
             for (let a of associatedConditions) {
@@ -79,7 +80,7 @@ export class AssociationService {
             selectedObservations: checkedObservationsInfo,
             conditions: conditionsInfo,
             observations: observationsInfo,
-        }).map(res => res.json());
+        });
     }
 
     // Extract the code, coding system, and onset datetime from a condition

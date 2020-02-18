@@ -33,7 +33,6 @@ import { NoteNavigationComponent } from './app/components/noteNavigation/noteNav
 import { AccordionRecursion } from './app/components/accordionRecursion/accordionRecursion.component';
 import { ConditionsDisplay } from './app/components/conditionsDisplay/conditionsDisplay.component';
 import { HistoricalTrendsComponent } from './app/components/historicalTrends/historicalTrends.component';
-import { TimelineChartComponent } from './app/components/timelineChart/timelineChart.component';
 import { ObservationsDisplay } from './app/components/observationsDisplay/observationsDisplay.component';
 
 // SERVICE IMPORTS
@@ -57,7 +56,6 @@ import { ScratchPadService } from './app/services/scratchPad.service';
 import { UpdatingService } from './app/services/updating.service';
 import { ToolBarService } from './app/services/toolbar.service';
 import { AssociationService } from './app/services/association.service';
-import { GoogleChartService } from './app/services/googleChart.service';
 
 import { MomentModule } from 'angular2-moment';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
@@ -128,7 +126,6 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
     DoctorNoteComponent,
     CalendarComponent,
     ToolbarComponent,
-    // ChartTimelineComponent,
     TripleListComponent,
     ObservationRecursive,
     AddObservation,
@@ -141,7 +138,6 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
     NoteNavigationComponent,
     HoverBoxComponent,
     HistoricalTrendsComponent,
-    TimelineChartComponent
   ],
   providers: [ // Services
     appRoutingProviders,
@@ -165,7 +161,6 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
     UpdatingService,
     ToolBarService,
     AssociationService,
-    GoogleChartService
   ],
   bootstrap: [AppComponent] // Root Component
 })

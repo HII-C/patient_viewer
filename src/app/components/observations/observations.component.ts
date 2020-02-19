@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Http } from '@angular/http';
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from 'rxjs';
 
 import { FhirService } from '../../services/fhir.service';
 import { ObservationService } from '../../services/observation.service';

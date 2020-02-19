@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/fromEvent';
+import { fromEvent } from 'rxjs';
+
 import * as moment from 'moment';
 
 import { ObservationService } from '../../services/observation.service';
@@ -40,7 +40,7 @@ export class HistoricalTrendsComponent {
     private patientService: PatientService
   ) {
       // Track the location of the mouse (needed for context menu).
-      this.mouseSubscription = Observable.fromEvent(document, 'mousemove')
+      this.mouseSubscription = fromEvent(document, 'mousemove')
         .subscribe((event) => {
           this.mouseEvent = event;
       });

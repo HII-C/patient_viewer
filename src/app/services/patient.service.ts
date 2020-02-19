@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import 'rxjs/add/operator/map';
-import { Observable } from 'rxjs/Observable';
+
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { FhirService } from './fhir.service';
 import { Patient } from '../models/patient.model';
@@ -28,7 +29,7 @@ export class PatientService {
     var url = this.fhirService.getUrl() + this.path + '/' + this.patientId;
     let options = this.fhirService.getRequestOptions(true);
 
-    return this.http.get(url, options).map(res => {
+    return this.http.get(url, options).pipe(map(res => {
       let patient = <Patient>res;
 
       // Assign patient MRN
@@ -38,6 +39,6 @@ export class PatientService {
         }
       }
       return patient;
-    });
+    }));
   }
 }

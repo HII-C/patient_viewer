@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import 'rxjs/add/operator/map';
+import { map } from 'rxjs/operators';
 
 import { FhirService } from './fhir.service';
 
@@ -22,7 +22,7 @@ export class EncounterService {
   loadEncounters(patient: Patient): Observable<Array<Encounter>> {
     var url = this.fhirService.getUrl() + this.path + "?patient=" + patient.id;
     return this.http.get(url, this.fhirService.getRequestOptions())
-      .map(res => res['entry'].map(e => this.deserialize(e['resource'])));
+      .pipe(map(res => res['entry'].map(e => this.deserialize(e['resource']))));
   }
 
   // We cannot simply cast the JSON object to an Encounter, because this casted

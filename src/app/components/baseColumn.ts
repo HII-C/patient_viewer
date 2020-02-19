@@ -1,6 +1,5 @@
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/fromEvent';
-import 'rxjs/add/operator/debounceTime';
+import { fromEvent } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 
 /*
 Super class of all three columns in the application. Provides
@@ -13,8 +12,8 @@ export class BaseColumn {
     this.columnHeight = window.innerHeight - this.HEIGHT_OFFSET;
 
     // Resize the column on each window resize event.
-    Observable.fromEvent(window, 'resize')
-      .debounceTime(100) // Debounce to prevent excessive resizing.
+    fromEvent(window, 'resize')
+      .pipe(debounceTime(100)) // Debounce to prevent excessive resizing.
       .subscribe((event) => {
         this.handleResize(event);
     });

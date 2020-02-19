@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import 'rxjs/add/operator/map';
-import { Observable } from 'rxjs/Observable';
+
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { FhirService } from './fhir.service';
 
@@ -24,20 +25,20 @@ export class CarePlanService {
     let url = this.fhirService.getUrl() + this.path + "?patient=" + patient.id;
 
     return this.http.get<Bundle>(url, this.fhirService.getRequestOptions())
-      .map(bundle => {
+      .pipe(map(bundle => {
         if (bundle.entry) {
           return <Array<CarePlan>>bundle.entry.map(r => r.resource);
         } else {
           // The patient has no care plans, so return an empty array
           return new Array<CarePlan>();
         }
-      });
+      }));
   }
 
   // Retrieve medications for a given patient.
   // If a given medication is taken over multiple periods, it is merged into one.
   loadMedications(patient: Patient): Observable<Array<Medication>> {
-    return this.loadCarePlans(patient).map(carePlans => {
+    return this.loadCarePlans(patient).pipe(map(carePlans => {
       let medicationMap: Map<string, Medication> = new Map();
 
       for (let cp of carePlans) {
@@ -57,6 +58,6 @@ export class CarePlanService {
       }
 
       return Array.from(medicationMap.values());
-    });
+    }));
   }
 }

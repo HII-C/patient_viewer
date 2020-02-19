@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import 'rxjs/add/operator/map';
+
 import * as moment from 'moment';
 
 import { FhirService } from './fhir.service';

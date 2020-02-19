@@ -1,6 +1,5 @@
 import { Component, ElementRef } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/fromEvent';
+import { fromEvent } from 'rxjs';
 
 @Component({
   selector: 'contextMenu',
@@ -71,7 +70,7 @@ export class ContextMenuComponent {
     event.preventDefault();
 
     // Subscribe to document click events.
-    this.clickSubscription = Observable.fromEvent(document, 'click')
+    this.clickSubscription = fromEvent(document, 'click')
       .subscribe((event) => {
         this.handleDocClick(event);
     });

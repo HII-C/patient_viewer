@@ -1,5 +1,5 @@
 import { Component, Injectable } from '@angular/core';
-import 'rxjs/add/observable/fromEvent';
+
 
 @Component({
   selector: 'hoverBox',

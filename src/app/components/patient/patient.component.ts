@@ -1,5 +1,4 @@
 import { Component, Injectable, Input, Output, ViewChild } from '@angular/core';
-import { Http } from '@angular/http';
 
 import { DoctorService } from '../../services/doctor.service';
 import { ConditionService } from '../../services/condition.service';
@@ -34,13 +33,14 @@ export class PatientComponent {
 
   @ViewChild('hover') hover: HoverBoxComponent;
 
-  constructor(private http: Http,
+  constructor(
     private cookieService: CookieService,
     private doctorService: DoctorService,
     private homeComponent: HomeComponent,
     private conditionService: ConditionService,
-    private encounterService: EncounterService) {
-    this.graphConfig = JSON.parse(this.cookieService.get('graphConfig')  || '{}');
+    private encounterService: EncounterService
+  ) {
+    this.graphConfig = JSON.parse(this.cookieService.get('graphConfig') || '{}');
   }
 
   genderString(patient: Patient) {

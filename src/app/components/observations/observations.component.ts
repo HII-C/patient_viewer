@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { Http } from '@angular/http';
 import { Subscription } from 'rxjs';
 
 import { FhirService } from '../../services/fhir.service';
@@ -30,13 +29,14 @@ export class ObservationsComponent extends BaseColumn{
   // for column switching
   subscription: Subscription;
 
-  constructor(private fhirService: FhirService,
+  constructor(
+    private fhirService: FhirService,
     private observationService: ObservationService,
     private mapService: MapService,
     private doctorService: DoctorService,
     private trendsService: HistoricalTrendsService,
-    private http: Http,
-    private scratchPadService: ScratchPadService) {
+    private scratchPadService: ScratchPadService
+  ) {
       super();
       this.mappings = MapService.STATIC_MAPPINGS;
 

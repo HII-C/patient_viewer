@@ -50,7 +50,7 @@ import { UpdatingService } from './app/services/updating.service';
 import { ToolBarService } from './app/services/toolbar.service';
 import { AssociationService } from './app/services/association.service';
 
-import { MomentModule } from 'angular2-moment';
+import { MomentModule } from 'ngx-moment';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 
@@ -60,11 +60,9 @@ enableProdMode();
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { Md5 } from 'ts-md5/dist/md5';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NguiAutoCompleteModule } from '@ngui/auto-complete';
 import { FormCreatorModule } from './app/modules/form.module';
 
 const appRoutes: Routes = [
@@ -82,12 +80,10 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
     BrowserModule,
     routing,
     FormsModule,
-    HttpModule,
     HttpClientModule,
     MomentModule,
     NgxChartsModule,
     BrowserAnimationsModule,
-    NguiAutoCompleteModule,
   ],
   declarations: [ // Components and Directives
     AppComponent,

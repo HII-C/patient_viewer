@@ -1,13 +1,9 @@
-import { Component, Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Injectable } from '@angular/core';
+
 import { Chart } from '../models/chart.model';
-import { Observation } from '../models/observation.model';
-import { Subject } from 'rxjs/Subject';
-import { CarePlan } from '../models/carePlan.model';
 import { Medication } from '../models/medication.model';
 
 @Injectable()
-@Component({})
 export class HistoricalTrendsService {
   // Maps the name of a chart to the chart object itself.
   chartsMap: Map<string, Chart> = new Map<string, Chart>();

@@ -1,0 +1,21 @@
+
+<div class="modal fade" id="timeline_popup" *ngIf="condition" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <h4 class="modal-title" style="border-bottom: none;">Encounter from {{condition.onsetDateTime | amTimeAgo}}</h4>
+      </div>
+      <div class="modal-body">
+        <p>{{condition.code.coding[0].display}}</p>
+        <p><b>Code System:</b><a href="{{condition.code.coding[0].system}}">{{condition.code.coding[0].system}}</a></p>
+        <p><b>Code:</b> {{condition.code.coding[0].code}}</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-default" type="button" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<hoverBox #hover1=""></hoverBox>
+<hoverBox #hover2=""></hoverBox>

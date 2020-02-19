@@ -1,14 +1,15 @@
-import { Component, Injectable } from '@angular/core';
-import { Http, Headers } from '@angular/http';
-import 'rxjs/add/operator/map';
-import { Observable } from 'rxjs/Observable';
-import { FhirService } from './fhir.service';
-import { Observation, ObservationBundle, Link } from '../models/observation.model';
-import { ScratchPadService } from '../services/scratchPad.service';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+
 import * as moment from 'moment';
 
+import { FhirService } from './fhir.service';
+import { ScratchPadService } from '../services/scratchPad.service';
+
+import { Observation } from '../models/observation.model';
+import { Bundle } from '../models/bundle.model';
+
 @Injectable()
-@Component({})
 export class ObservationService {
   uniqueObservations: Array<Observation> = [];
   categorizedObservations: any;
@@ -20,7 +21,11 @@ export class ObservationService {
 
   filterSet = new Set<string>();
 
-  constructor(private fhirService: FhirService, private http: Http, private scratchPadService: ScratchPadService) {
+  constructor(
+    private fhirService: FhirService,
+    private http: HttpClient,
+    private scratchPadService: ScratchPadService
+  ) {
     // these are the codes of the observations; 
     // groupList is used to categorize where in categorizedObservations this is stored
     this.groupMap = {
@@ -124,36 +129,29 @@ export class ObservationService {
     };
   }
 
-  // ================================== DATA RETRIEVAL ========================
-  loadDataPage(url: string): void {
-    this.retrieveObservations(url).subscribe((bundle) => {
-      this.handleBundle(bundle);
-    });
+  loadObservationsPage(url: string): void {
+    this.http.get<Bundle>(url, this.fhirService.getRequestOptions())
+      .subscribe((bundle) => {
+        this.handleObservationBundle(bundle);
+      });
   }
 
-  handleBundle(bundle: ObservationBundle): void {
-    if (bundle.hasOwnProperty('entry')) {
-      let nextObservations: Array<Observation> = bundle.entry.map((e: { [x: string]: any }) => e['resource']);
+  handleObservationBundle(bundle: Bundle): void {
+    if (bundle) {
+      let nextObservations = <Array<Observation>>bundle.entry.map(e => e.resource);
       this.observations = this.observations.concat(nextObservations);
       this.extractNewObservations(nextObservations);
 
-      let nextLinks = bundle.link.filter((link) => link.relation == 'next');
-      if (nextLinks.length > 0) {
-        let nextPageUrl = nextLinks[0]['url'];
-        this.loadDataPage(nextPageUrl);
-      }
-      else {
+      let nextLink = bundle.link.find(link => link.relation == 'next');
+      if (nextLink) {
+        this.loadObservationsPage(nextLink.url);
+      } else {
         this.onLoadComplete();
       }
-    }
-    else {
+    } else {
       console.log("No observations for patient.");
       this.observations = new Array<Observation>();
     }
-  }
-
-  retrieveObservations(url: string): Observable<ObservationBundle> {
-    return this.http.get(url, this.fhirService.options(true)).map(res => <ObservationBundle>res.json());
   }
 
   onLoadComplete() {
@@ -188,8 +186,6 @@ export class ObservationService {
       ob.relativeDateTime = moment(relativeDateTime).toISOString();
     }
   }
-
-  // ================================ DATA CLEANING ===============================
 
   extractNewObservations(observations: Array<Observation>): void {
     for (let observation of observations) {
@@ -253,7 +249,6 @@ export class ObservationService {
     }
     return totalCount;
   }
-
 
   // Sort the Observations list (arrData) into categories, which are returned inside
   // a single object that conforms to accordion data format

@@ -1,40 +1,44 @@
-import { Component, Injectable } from '@angular/core';
-import { Http, Headers } from '@angular/http';
-import 'rxjs/add/operator/map';
-import { Observable } from 'rxjs/Observable';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { FhirService } from './fhir.service';
+
 import { Patient } from '../models/patient.model';
 import { CarePlan } from '../models/carePlan.model';
 import { Medication } from '../models/medication.model';
+import { Bundle } from '../models/bundle.model';
 
 @Injectable()
-@Component({})
 export class CarePlanService {
   private path = '/CarePlan';
 
-  constructor(private fhirService: FhirService, private http: Http) { }
+  constructor(
+    private fhirService: FhirService,
+    private http: HttpClient
+  ) { }
 
   // Retrieve care plans for a given patient
   loadCarePlans(patient: Patient): Observable<Array<CarePlan>> {
     let url = this.fhirService.getUrl() + this.path + "?patient=" + patient.id;
 
-    return this.http.get(url, this.fhirService.options(true)).map(res => {
-      let json = res.json();
-
-      if (json.entry) {
-        return <Array<CarePlan>> json.entry.map(r => r['resource']);
-      } else {
-        // The patient has no care plans, so return an empty array
-        return new Array<CarePlan>();
-      }
-    });
+    return this.http.get<Bundle>(url, this.fhirService.getRequestOptions())
+      .pipe(map(bundle => {
+        if (bundle.entry) {
+          return <Array<CarePlan>>bundle.entry.map(r => r.resource);
+        } else {
+          // The patient has no care plans, so return an empty array
+          return new Array<CarePlan>();
+        }
+      }));
   }
 
   // Retrieve medications for a given patient.
   // If a given medication is taken over multiple periods, it is merged into one.
   loadMedications(patient: Patient): Observable<Array<Medication>> {
-    return this.loadCarePlans(patient).map(carePlans => {
+    return this.loadCarePlans(patient).pipe(map(carePlans => {
       let medicationMap: Map<string, Medication> = new Map();
 
       for (let cp of carePlans) {
@@ -54,6 +58,6 @@ export class CarePlanService {
       }
 
       return Array.from(medicationMap.values());
-    });
+    }));
   }
 }

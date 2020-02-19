@@ -1,22 +1,27 @@
-import { Component, Injectable } from '@angular/core';
-import { Http, Headers, RequestOptions } from '@angular/http';
-import { CookieService } from 'angular2-cookie/core';
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { CookieService } from 'ngx-cookie-service';
 import { FhirService } from '../services/fhir.service';
 import { PatientService } from '../services/patient.service';
 import { Md5 } from 'ts-md5/dist/md5';
 
 @Injectable()
 export class SmartService {
-  constructor(private fhirService: FhirService, private patientService: PatientService, private http: Http, private cookieService: CookieService) { }
+  constructor(
+    private http: HttpClient,
+    private cookieService: CookieService,
+    private fhirService: FhirService,
+    private patientService: PatientService
+  ) { }
+
+  readonly clientId: string = "2c304df8-711d-4de9-afbe-330c01a5ca8e";
+  readonly scope: string = "launch patient/*.* openid profile";
+  readonly redirectUri: string = "http://localhost:9000";
 
   fhirBaseUrl: string;
   authorizeUrl: string;
   tokenUrl: string;
-  clientId: string = "2c304df8-711d-4de9-afbe-330c01a5ca8e";
   launch: string;
-  scope: string = "launch patient/*.* openid profile";
-  // redirectUri: string = "http://patient-viewer.healthcreek.org";
-  redirectUri: string = "http://localhost:9000";
   state: string;
   aud: string;
 
@@ -25,22 +30,21 @@ export class SmartService {
 
     if (this.fhirBaseUrl) {
       // Occurs when arriving to the site for the first time.
-
       this.aud = this.fhirBaseUrl;
       this.launch = this.findGetParameter("launch");
 
       this.fhirService.setUrl(this.fhirBaseUrl);
-      this.patientService.setPath("/metadata");
 
-      this.patientService.index(false).subscribe(data => {
-        var smartExtension = data.rest[0].security.extension.filter(function(e) {
+      const url = this.fhirService.getUrl() + '/metadata';
+      this.http.get(url, this.fhirService.getRequestOptions(false)).subscribe(data => {
+        var smartExtension = data['rest'][0].security.extension.filter(e => {
           return (e.url === "http://fhir-registry.smarthealthit.org/StructureDefinition/oauth-uris");
         });
 
         var auth;
         var tok;
 
-        smartExtension[0].extension.forEach(function(arg, index, array) {
+        smartExtension[0].extension.forEach(arg => {
           if (arg.url === "authorize") {
             auth = arg.valueUri;
           } else if (arg.url === "token") {
@@ -51,18 +55,16 @@ export class SmartService {
         this.tokenUrl = tok;
         this.authorizeUrl = auth;
 
-        this.cookieService.put('tokenUrl', this.tokenUrl);
-        this.cookieService.put('fhirBaseUrl', this.fhirBaseUrl);
+        this.cookieService.set('tokenUrl', this.tokenUrl);
+        this.cookieService.set('fhirBaseUrl', this.fhirBaseUrl);
 
         this.requestAuth();
       });
     } else {
       // Occurs when arriving to the site after the redirect.
-
       if (this.cookieService.get('state') == this.findGetParameter('state')) {
         return this.getToken();
-      }
-      else {
+      } else {
         console.log('Stop cross-site scripting please, thanks');
       }
     }
@@ -75,18 +77,19 @@ export class SmartService {
       + '&redirect_uri=' + encodeURI(this.redirectUri)
       + '&token_url=' + this.cookieService.get('tokenUrl');
 
-    var headers = new Headers();
-    headers.append('Content-Type', 'application/x-www-form-urlencoded');
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/x-www-form-urlencoded'
+    });
 
     return this.http.post("https://mongo-proxy.herokuapp.com/token",
-      body, { headers: headers }).map(res => res.json());
+      body, { headers: headers });
   }
 
   requestAuth() {
     //TODO Fix hashing method - not sure best way to do it
 
     this.state = (Md5.hashStr("testing Hasing")).toString();
-    this.cookieService.put('state', this.state);
+    this.cookieService.set('state', this.state);
 
     var request = this.authorizeUrl + "?response_type=code"
       + "&client_id=" + this.clientId
@@ -101,10 +104,10 @@ export class SmartService {
   }
 
   findGetParameter(parameterName) {
-    var result = null,
-      tmp = [];
+    let result = null;
+    let tmp = [];
 
-    location.search.substr(1).split("&").forEach(function(item) {
+    location.search.substr(1).split("&").forEach(item => {
       tmp = item.split("=");
       if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
     });

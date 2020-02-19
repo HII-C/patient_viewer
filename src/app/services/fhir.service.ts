@@ -1,11 +1,10 @@
-import { Component, Injectable } from '@angular/core';
-import { Headers, RequestOptions } from '@angular/http';
-import { SmartService } from '../services/smart.service';
+import { Injectable } from '@angular/core';
+import { HttpHeaders } from '@angular/common/http';
 
 @Injectable()
 export class FhirService {
 
-  constructor() {}
+  constructor() { }
 
   private base: string;
   public token: string;
@@ -22,14 +21,11 @@ export class FhirService {
     this.token = newToken;
   }
 
-  options(auth): RequestOptions {
-    let headers = new Headers();
-    headers.append('Accept', 'application/json');
-
-    if (auth) {
-      headers.append('Authorization', 'Bearer ' + this.token);
+  getRequestOptions(withAuth: boolean = true): { headers: HttpHeaders } {
+    let headers = new HttpHeaders({'Accept': 'application/json'});
+    if (withAuth) {
+      headers = headers.append('Authorization', 'Bearer ' + this.token);
     }
-
-    return new RequestOptions({ headers: headers });
+    return { headers: headers };
   }
 }

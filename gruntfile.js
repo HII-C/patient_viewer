@@ -1,5 +1,4 @@
 module.exports = function(grunt) {
-
     'use strict';
 
     // Load all grunt tasks in package.json
@@ -31,8 +30,6 @@ module.exports = function(grunt) {
 		'copy',
         'sass',
         'concat',
-		'pug',
 		'webpack'
     ]);
-
 };

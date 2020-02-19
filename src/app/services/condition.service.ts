@@ -1,20 +1,18 @@
-import { Component, Injectable } from '@angular/core';
-import { Http, Headers } from '@angular/http';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/concatMap'
-import 'rxjs/add/observable/of';
-import 'rxjs/add/operator/concat';
+import { Observable, of, concat } from 'rxjs';
+import { map, concatMap } from 'rxjs/operators';
 
 import { FhirService } from './fhir.service';
 import { ScratchPadService } from '../services/scratchPad.service';
+
+import { Bundle } from '../models/bundle.model';
 import { Patient } from '../models/patient.model';
 import { Condition } from '../models/condition.model';
 import { AllergyIntolerance } from '../models/allergyIntolerance.model';
 
 @Injectable()
-@Component({})
 export class ConditionService {
   private path = '/Condition';
 
@@ -26,9 +24,9 @@ export class ConditionService {
   columnState: String;
 
   constructor(
+    private http: HttpClient,
     private fhirService: FhirService,
     private scratchPadService: ScratchPadService,
-    private http: Http
   ) { }
 
   // https://stackoverflow.com/questions/45594609/which-operator-to-chain-observables-conditionally
@@ -36,24 +34,17 @@ export class ConditionService {
   // load the next page until no pages remain. This is achieved through
   // concatMap and Observable.concat, as discussed above.
   loadConditionsPage(url: string): Observable<Array<Condition>> {
-    return this.http.get(url, this.fhirService.options(true))
-      .map(res => res.json())
-      .concatMap(data => {
-        let conditions = [];
+    return this.http.get<Bundle>(url, this.fhirService.getRequestOptions())
+      .pipe(concatMap(bundle => {
+        const conditions = <Array<Condition>>bundle.entry.map(r => r.resource);
 
-        if (data.hasOwnProperty('entry')) {
-          conditions = <Array<Condition>>data.entry.map((r: { [x: string]: any; }) => r['resource']);
+        let nextLink = bundle.link.find(link => link.relation == 'next');
+        if (nextLink) {
+          return concat(of(conditions), this.loadConditionsPage(nextLink.url));
+        } else {
+          return of(conditions);
         }
-
-        for (let link of data.link) {
-          // Check if there is another page to load.
-          if (link.relation == "next") {
-            let nextUrl = link.url;
-            return Observable.of(conditions).concat(this.loadConditionsPage(nextUrl));
-          }
-        }
-        return Observable.of(conditions);
-      });
+      }));
   }
 
   // Retrieve conditions for a given patient
@@ -71,15 +62,15 @@ export class ConditionService {
   // Retrieve allergies for a given patient
   loadAllergies(patient: Patient): Observable<Array<AllergyIntolerance>> {
     let url = this.fhirService.getUrl() + "/AllergyIntolerance" + "?patient=" + patient.id;
-    return this.http.get(url, this.fhirService.options(true)).map(res => {
-      let json = res.json();
-      if (json.hasOwnProperty('entry')) {
-        return json['entry'].map(r => r['resource']);
-      }
-      else {
-        return new Array<AllergyIntolerance>();
-      }
-    });
+    return this.http.get<Bundle>(url, this.fhirService.getRequestOptions())
+      .pipe(map(bundle => {
+        if (bundle.entry) {
+          return <Array<AllergyIntolerance>>bundle.entry.map(r => r.resource);
+        } else {
+          // The patient has no allergies
+          return new Array<AllergyIntolerance>();
+        }
+      }));
   }
 
   // Gets the state of the conditions column (default or scratch pad)

@@ -1,0 +1,13 @@
+
+<div class="row">
+  <div class="col-md-4 col-lg-4">
+    <conditions [patient]="patient" *ngIf="passThrough"></conditions>
+  </div>
+  <div class="col-md-4 col-lg-4">
+    <observations [patient]="patient" #obs="" *ngIf="passThrough"></observations>
+  </div>
+  <div class="col-md-4 col-lg-4">
+    <carePlan [patient]="patient" *ngIf="passThrough"></carePlan>
+  </div>
+</div>
+<noteNavigation></noteNavigation>

@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 
 @Component({
 	selector: "select-list-single",
-	templateUrl: "form_views/select-list-single.html"
+	templateUrl: "./select-list-single.html"
 })
 
 export class SelectListSingle{

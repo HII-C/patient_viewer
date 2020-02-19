@@ -1,0 +1,11 @@
+
+<div class="form-group">
+  <label class="form_label"> {{inputData.data.name}} </label><br/>
+  <div class="checkbox_container" *ngFor="let entry of inputData.data.checkbox; let i = index">
+    <label class="checkbox-inline">
+      <input class="checkbox" type="checkbox" [(ngModel)]="checkboxData[i]" [value]="entry.description"/>
+      <p> {{entry.description}} </p>
+    </label>
+    <div></div>
+  </div>
+</div>

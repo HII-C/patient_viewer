@@ -1,9 +1,9 @@
-import { Component, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
+
+import { CookieService } from 'ngx-cookie-service';
 import { Condition } from '../models/condition.model';
-import { CookieService } from 'angular2-cookie/core';
 
 @Injectable()
-@Component({})
 export class DoctorService {
   filter: Array<String> = [];
   configMode: boolean = true;
@@ -29,12 +29,10 @@ export class DoctorService {
             c.isVisible = true;
             count++;
             break;
-          }
-          else {
+          } else {
             c.isVisible = false;
           }
         }
-
       }
       else {
         c.isVisible = false;
@@ -47,7 +45,6 @@ export class DoctorService {
 
   addGraphConfig(list: Array<string>) {
     this.graphConfig.push(list);
-    this.cookieService.putObject("graphConfig", this.graphConfig);
+    this.cookieService.set('graphConfig', JSON.stringify(this.graphConfig));
   }
-
 }

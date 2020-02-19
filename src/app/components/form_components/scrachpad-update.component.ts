@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 
 @Component({
 	selector: "scratchpad-update",
-	templateUrl: "form_views/scrachpad-update.html"
+	templateUrl: "./scrachpad-update.html"
 })
 
 export class ScratchPadUpdate{

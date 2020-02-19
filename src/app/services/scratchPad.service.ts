@@ -1,6 +1,5 @@
-import { Injectable, Component } from '@angular/core';
-import { Subject } from 'rxjs/Subject';
-import {Observable} from 'rxjs/Observable';
+import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
  
 // MODELS
 import { Condition } from '../models/condition.model';
@@ -10,7 +9,6 @@ import { Observation } from '../models/observation.model';
 // SERVICES
 
 @Injectable()
-@Component({})
 export class ScratchPadService {
   // Old fields that will likely be removed:
   toAddToCondSpArray: Array<Condition> = [];

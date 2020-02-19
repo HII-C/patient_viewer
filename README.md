@@ -4,7 +4,7 @@ Front-end project for context-driven clinical transactions.
 
 ## Preparing the Application
 
-This is an [AngularJS 2](https://angular.io) project using `grunt` as the build system, [pug](https://pugjs.org/api/getting-started.html) for HTML templates, [SASS](http://sass-lang.com) for CSS and [Bootstrap](http://getbootstrap.com/) for layout. `npm` is the package manager. 
+This is an [Angular 7](https://angular.io) project using `grunt` as the build system, [SASS](http://sass-lang.com) for CSS, and [Bootstrap](http://getbootstrap.com/) for layout. `npm` is the package manager. 
 
 Assuming you already have node installed via `brew install node` or similar, begin by running the following commands in the terminal:
 	
@@ -14,9 +14,7 @@ Assuming you already have node installed via `brew install node` or similar, beg
 	npm install # to install project development dependencies
 	typings install # to install TypeScript declarations
 
-If you do not have `npm` installed and `brew install node` does not work as expected, you may need to [follow the instructions here](https://brew.sh/) to install the `brew` package manager.
-
-You may need to downgrade `npm` and `node` to earlier versions for the setup to work. The setup was tested specifically for `node v7.10.1` and `npm v4.2.0`. You may download `npm v6.4.0` (which works as well) [here](https://nodejs.org/download/release/v6.4.0/)
+If you do not have `npm` installed and `brew install node` does not work as expected, you may need to [follow the instructions here](https://brew.sh/) to install the `brew` package manager. The project was tested specifically with node version `10.19.0`.
 
 ## Development Guidelines
 ### Do's: 

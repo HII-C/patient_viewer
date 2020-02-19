@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, of, concat } from 'rxjs';
+import { concatMap } from 'rxjs/operators';
 
 import { FhirService } from './fhir.service';
 
+import { Bundle } from '../models/bundle.model';
 import { Patient } from '../models/patient.model';
 import { Encounter } from '../models/encounter.model';
 
@@ -18,11 +19,26 @@ export class EncounterService {
     private fhirService: FhirService
   ) { }
 
-  // TODO: Currently only retrieves 10 encounters. Need to add pagination support.
-  loadEncounters(patient: Patient): Observable<Array<Encounter>> {
-    var url = this.fhirService.getUrl() + this.path + "?patient=" + patient.id;
-    return this.http.get(url, this.fhirService.getRequestOptions())
-      .pipe(map(res => res['entry'].map(e => this.deserialize(e['resource']))));
+  private loadEncountersPage(url: string): Observable<Array<Encounter>> {
+    return this.http.get<Bundle>(url, this.fhirService.getRequestOptions())
+      .pipe(concatMap(bundle => {
+        let encounters: Array<Encounter> = [];
+        if (bundle.entry) {
+          encounters = bundle.entry.map(e => this.deserialize(e['resource']));
+        }
+
+        let nextLink = bundle.link.find(link => link.relation == 'next');
+        if (nextLink) {
+          return concat(of(encounters), this.loadEncountersPage(nextLink.url));
+        } else {
+          return of(encounters);
+        }
+      }));
+  }
+
+  public loadEncounters(patient: Patient): Observable<Array<Encounter>> {
+    const url = this.fhirService.getUrl() + this.path + "?patient=" + patient.id;
+    return this.loadEncountersPage(url);
   }
 
   // We cannot simply cast the JSON object to an Encounter, because this casted

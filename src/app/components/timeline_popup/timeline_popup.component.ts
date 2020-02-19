@@ -11,7 +11,7 @@ import { Encounter } from '../../models/encounter.model';
 })
 
 export class TimelinePopupComponent {
-  @ViewChild('hoverBox') hoverBox: HoverBoxComponent;
+  @ViewChild('hoverBox', { static: false }) hoverBox: HoverBoxComponent;
    datePipe: DatePipe = new DatePipe('en-US');
   open(encounter: Encounter, event: MouseEvent): void {
    

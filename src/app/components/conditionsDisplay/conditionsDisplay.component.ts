@@ -29,7 +29,7 @@ export class ConditionsDisplay {
   // Whether this display of conditions is within the scratch pad.
   @Input() scratchPadMode: boolean = false;
 
-  @ViewChild('menu') menu: ContextMenuComponent;
+  @ViewChild('menu', { static: false }) menu: ContextMenuComponent;
 
 
   // ===============================================================================================================================================

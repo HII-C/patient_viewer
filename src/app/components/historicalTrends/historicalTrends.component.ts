@@ -26,7 +26,7 @@ export class HistoricalTrendsComponent {
   // Reference to the current patient.
   private patient: Patient;
 
-  @ViewChild('menu') menu: ContextMenuComponent;
+  @ViewChild('menu', { static: false }) menu: ContextMenuComponent;
 
   // Observable subscription to mouse movements.
   mouseSubscription: any = null;

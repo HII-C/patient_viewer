@@ -27,7 +27,7 @@ export class CarePlanDisplay {
   @Input() carePlans: Array<CarePlan>;
   @Output() careplanSelected: EventEmitter<CarePlan> = new EventEmitter();
 
-  @ViewChild('menu') menu: ContextMenuComponent;
+  @ViewChild('menu', { static: false }) menu !: ContextMenuComponent;
 
 
   // ===============================================================================================================================================
@@ -49,7 +49,7 @@ export class CarePlanDisplay {
     this.menu.addOption({
       'icon': 'glyphicon-pencil',
       'text': 'Add to Scratch Pad',
-      'exec': function(plan) {
+      'exec': function (plan) {
         this.scratchPadService.addCarePlan(plan);
       }.bind(this)
     });
@@ -57,7 +57,7 @@ export class CarePlanDisplay {
     this.menu.addOption({
       'icon': 'glyphicon-stats',
       'text': 'Add to Trend Tool',
-      'exec': function(plan) {
+      'exec': function (plan) {
         console.log(plan);
       }.bind(this)
     });
@@ -65,7 +65,7 @@ export class CarePlanDisplay {
     this.menu.addOption({
       'icon': 'glyphicon-random',
       'text': 'Open Association Tool',
-      'exec': function(plan) {
+      'exec': function (plan) {
         console.log(plan);
       }.bind(this)
     });
@@ -111,7 +111,7 @@ export class CarePlanDisplay {
   checkAllCarePlans(checked: boolean) {
     this.isAllChecked = checked;
     for (let carePlan of this.carePlans) {
-        this.scratchPadService.checkCarePlan(checked, carePlan);
+      this.scratchPadService.checkCarePlan(checked, carePlan);
     }
   }
 

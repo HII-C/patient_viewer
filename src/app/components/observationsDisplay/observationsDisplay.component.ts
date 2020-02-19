@@ -31,7 +31,7 @@ export class ObservationsDisplay {
   @Input() observations: Array<Observation>;
   @Output() observationSelected: EventEmitter<Observation> = new EventEmitter();
 
-  @ViewChild('menu') menu: ContextMenuComponent;
+  @ViewChild('menu', { static: false }) menu: ContextMenuComponent;
 
   // ===============================================================================================================================================
   // ================================================================== EVENT METHODS ==============================================================

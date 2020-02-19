@@ -31,7 +31,7 @@ export class PatientComponent {
   hoverStyling: boolean = false;
   reason: string = '';
 
-  @ViewChild('hover') hover: HoverBoxComponent;
+  @ViewChild('hover', { static: false }) hover: HoverBoxComponent;
 
   constructor(
     private cookieService: CookieService,

@@ -6,8 +6,7 @@
   "repository": "git@github.com:hii-c/patient_viewer.git",
   "author": "ASU HII-C",
   "scripts": {
-    "start": "grunt",
-    "postinstall": "typings install"
+    "start": "grunt"
   },
   "dependencies": {
     "@angular/animations": "^8.2.14",
@@ -25,7 +24,6 @@
     "angular2-router-loader": "^0.3.5",
     "bootstrap": "^3.3.7",
     "concurrently": "^3.4.0",
-    "core-js": "^2.5.4",
     "grunt-contrib-clean": "^1.1.0",
     "grunt-contrib-compress": "^1.4.1",
     "grunt-contrib-uglify": "^2.3.0",
@@ -52,7 +50,6 @@
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.900.0",
     "@angular/compiler-cli": "^9.0.0",
-    "@types/core-js": "^0.9.43",
     "angular2-router-loader": "^0.3.4",
     "concurrently": "^3.0.0",
     "grunt": "^1.0.1",

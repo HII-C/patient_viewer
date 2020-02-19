@@ -18,10 +18,7 @@
     "compileOnSave": false,
     "exclude": [
         "node_modules",
-        "bower_components",
-        "typings/globals",
-        "typings/index.d.ts",
-        "typings/core-js"
+        "bower_components"
     ],
     "filesGlob": [
         "src/**/*.ts"

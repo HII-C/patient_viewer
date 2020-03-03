@@ -17,18 +17,7 @@ export class TimelinePopupComponent {
    
     let details: Array<string> = [
       'Date: ' + this.datePipe.transform(encounter.getStartDate(),'MM-dd-yyyy').toString(),
-        let left = this.elRef.nativeElement.querySelector('div').style.left;
-        let top = this.elRef.nativeElement.querySelector('div').style.top;
-    
-        this.timeline.leftPosition = (parseInt(left.replace(/px/, "")) + 150) + "px";
-        this.timeline.topPosition = (parseInt(top.replace(/px/, "")) + 100) + "px";
-    }
       'Reason: ' + (encounter.getReason() || 'None')
-      let left = this.elRef.nativeElement.querySelector('div').style.left;
-        let top = this.elRef.nativeElement.querySelector('div').style.top;
-    
-        this.timeline.leftPosition = (parseInt(left.replace(/px/, "")) + 150) + "px";
-        this.timeline.topPosition = (parseInt(top.replace(/px/, "")) + 100) + "px";
     ];
     this.hoverBox.show(details, event);
   }

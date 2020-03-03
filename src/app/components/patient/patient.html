@@ -6,9 +6,9 @@
         <div class="details" *ngIf="patient">
           <div class="identifier"><b><span *ngIf="patient.name &amp;&amp; patient.name[0].given">{{patient.name[0].given[0]}}</span>&nbsp;<span *ngIf="patient.name &amp;&amp; patient.name[0].family">{{patient.name[0].family[0]}}</span></b>
             <div>
-               {{patient.gender.charAt(0).toUpperCase()}}, <span *ngIf="patient.mrn">MRN: {{patient.mrn}}, </span></div>
-            <div>DOB: {{patient.birthDate | amDateFormat:'MM/DD/YYYY'}} ({{-1 * (patient.birthDate | amDifference:today:'years':false)}}yr)</div>
-          </div>
+               {{patient.gender.charAt(0).toUpperCase()}}, <span *ngIf="patient.mrn"><b>MRN:</b> {{patient.mrn}}, </span></div>
+            <div><b>DOB:</b> {{patient.birthDate | amDateFormat:'MM/DD/YYYY'}} ({{-1 * (patient.birthDate | amDifference:today:'years':false)}}yr)</div>
+		  </div>
         </div></span></div>
   </div>
   <div class="col-md-5">

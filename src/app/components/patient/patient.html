@@ -16,10 +16,10 @@
         <div class="details" *ngIf="patient">
           <div class="identifier">
             <div>
-              Allergies:
+				<b>Allergies:</b>
               <span [class.hover]="hoverStyling" (mouseenter)="showAllergyHover($event)" (mouseleave)="hover.hide($event)">{{allergy}}</span>
             </div>
-            <div>Reason for Visit: {{reason}}</div>
+            <div><b>Reason for Visit:</b> {{reason}}</div>
           </div>
         </div></span></div>
   </div>

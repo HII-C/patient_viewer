@@ -1,5 +1,7 @@
 # Patient Viewer
 
+[![Documentation](https://i.imgur.com/49Z2ZHF.png)](https://hii-c.github.io/patient_viewer/)
+
 Front-end project for context-driven clinical transactions.
 
 ## Preparing the Application

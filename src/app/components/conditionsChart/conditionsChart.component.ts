@@ -156,27 +156,6 @@ export class ConditionsChartComponent {
     }
   }
 
-  collapse() {
-    let index = 0;
-    let parent = "";
-    for (let c of this.conditions) {
-      if (c.isSelected == true) {
-        if (index == 0) {
-          c.isParent = true;
-          parent = c.id;
-        }
-        else {
-          c.isVisible = false;
-
-        }
-        c.parent = parent;
-        index++;
-      }
-      c.isSelected = false;
-    }
-
-  }
-
   groupConditions() {
     for (let c of this.conditions) {
       if (c.clinicalStatus == "active") {

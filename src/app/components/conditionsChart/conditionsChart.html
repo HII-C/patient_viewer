@@ -32,29 +32,6 @@
             </td>
             <td *ngIf="!cSub.isParent">{{cSub.clinicalStatus}}</td>
             <td *ngIf="!cSub.isParent">{{cSub.relativeDateTime}}</td>
-            <td>
-              <button class="btn btn-default" data-toggle="modal" [attr.data-target]="'#editFieldc' + conditions.indexOf(cSub)"></button>
-              <div class="modal fade" id="editFieldc{{conditions.indexOf(cSub)}}" role="dialog">
-                <div class="modal-dialog" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                    </div>
-                    <div class="modal-body">
-                      <p>
-                        <input type="text" name="textInputForEdit" [(ngModel)]="textInputForEdit"/>
-                      </p>
-                      <button class="btn btn-default" (click)="updateEntry(conditionService.conditions.indexOf(cSub), &quot;['code']['coding'][0]['code']&quot;)"></button>
-                      <p><b>Code System:</b><a href="{{cSub.code.coding[0].system}}">{{cSub.code.coding[0].system}}</a></p>
-                      <p><b>Code:</b> {{cSub.code.coding[0].code}}</p>
-                    </div>
-                    <div class="modal-footer">
-                      <button class="btn btn-default" type="button" data-dismiss="modal">Close</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </td>
           </ng-container>
         </tr>
       </tbody>

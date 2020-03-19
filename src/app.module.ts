@@ -46,7 +46,6 @@ import { DoctorService } from './app/services/doctor.service';
 import { SmartService } from './app/services/smart.service';
 import { HistoricalTrendsService } from './app/services/historicalTrends.service';
 import { ScratchPadService } from './app/services/scratchPad.service';
-import { UpdatingService } from './app/services/updating.service';
 import { ToolBarService } from './app/services/toolbar.service';
 import { AssociationService } from './app/services/association.service';
 
@@ -138,7 +137,6 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
     CarePlanService,
     HistoricalTrendsService,
     ScratchPadService,
-    UpdatingService,
     ToolBarService,
     AssociationService,
   ],

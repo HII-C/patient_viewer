@@ -1,11 +1,9 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import * as moment from 'moment';
 
-import { FhirService } from '../../services/fhir.service';
 import { ConditionService } from '../../services/condition.service';
 import { DoctorService } from '../../services/doctor.service';
 import { ScratchPadService } from '../../services/scratchPad.service';
-import { UpdatingService } from '../../services/updating.service';
 
 import { Condition } from '../../models/condition.model';
 import { Patient } from '../../models/patient.model';
@@ -28,11 +26,9 @@ export class ConditionsChartComponent {
   @Output() conditionSelected: EventEmitter<Condition> = new EventEmitter();
 
   constructor(
-    private fhirService: FhirService,
     private conditionService: ConditionService,
     private doctorService: DoctorService,
     private scratchPadService: ScratchPadService,
-    private updatingService: UpdatingService
   ) { }
 
   ngOnChanges() {
@@ -247,13 +243,5 @@ export class ConditionsChartComponent {
     else {
       console.log("This table already exists");
     }
-  }
-
-  updateEntry(index: number, dataLocation: string) {
-    let conditionToUpdate = this.conditionService.conditions[index];
-    console.log(this.textInputForEdit);
-    this.updatingService.updateEntry(conditionToUpdate, this.textInputForEdit, dataLocation, index);
-    this.conditions[index] = this.conditionService.conditions[index];
-    console.log(this.conditions[index]);
   }
 }

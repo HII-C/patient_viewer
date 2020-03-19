@@ -4,7 +4,12 @@
     <thead>
       <tr>
         <th>
-          <input *ngIf="!scratchPadMode" type="checkbox" [checked]="isAllChecked" (change)="checkAllConditions($event.target.checked)"/>
+          <input 
+            *ngIf="!scratchPadMode"
+            type="checkbox"
+            [checked]="isAllChecked"
+            (change)="checkAllConditions($event.target.checked)"
+          />
         </th>
         <th>Description</th>
         <th>Status</th>
@@ -12,7 +17,14 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let c of conditions" [class.selected]="isConditionSelected(c)" (click)="selectCondition(c)" (contextmenu)="menu.show(c, $event)" id="t{{conditions.indexOf(c)}}" (mouseover)="hover.show([getDateString(c), c.clinicalStatus, &quot;Last change: May 19, 2013&quot;], $event)" (mouseleave)="hover.hide($event)"> 
+      <tr *ngFor="let c of conditions" 
+        [class.selected]="isConditionSelected(c)" 
+        (click)="selectCondition(c)" 
+        (contextmenu)="menu.show(c, $event)" 
+        id="t{{conditions.indexOf(c)}}" 
+        (mouseover)="hover.show([getDateString(c), c.clinicalStatus, &quot;Last change: May 19, 2013&quot;], $event)" 
+        (mouseleave)="hover.hide($event)"
+      > 
         <td>
           <input *ngIf="!c.isParent" [checked]="isConditionChecked(c)" type="checkbox" id="c{{conditions.indexOf(c)}}" value="{{conditions.indexOf(c)}}" (change)="checkCondition(c, $event.target.checked)"/>
         </td>
@@ -25,5 +37,5 @@
     </tbody>
   </table>
 </div>
-<contextMenu #menu=""></contextMenu>
-<hoverBox #hover=""></hoverBox>
+<contextMenu #menu></contextMenu>
+<hoverBox #hover></hoverBox>

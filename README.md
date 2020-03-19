@@ -12,11 +12,15 @@ Assuming you already have node installed via `brew install node` or similar, beg
 	
 	git clone https://github.com/HII-C/patient_viewer.git
 	cd patient_viewer
-	npm install -g grunt typings
+	npm install -g grunt
 	npm install # to install project development dependencies
-	typings install # to install TypeScript declarations
 
-If you do not have `npm` installed and `brew install node` does not work as expected, you may need to [follow the instructions here](https://brew.sh/) to install the `brew` package manager. The project was tested specifically with node version `10.19.0`.
+If you do not have `npm` installed, do the following:
+- __Mac__: `brew install node` in Terminal
+- __Windows__: [Instructions](https://www.guru99.com/download-install-node-js.html)
+- __Linux__: [Instructions](https://linuxize.com/post/how-to-install-node-js-on-ubuntu-18.04/)
+
+The project was tested specifically with node version `10.19.0`.
 
 ## Development Guidelines
 ### Do's: 
@@ -35,8 +39,8 @@ To launch in development mode, run the following terminal command from the `pati
 	grunt --force # to serve the project and automatically recompile on file changes
 
 Then, do the following:
-- Visit [HSPC Sandbox](https://sandbox.hspconsortium.org/), select the "HII-C" sandbox, choose the "Apps" option from the left menu, click on the "HII-C Confidential" app, and then click "Launch" on the right.
-- Select the patient `Adams, Daniel X` in the popup. This should open the Patient Viewer application.
+- Visit [HSPC Sandbox](https://sandbox.hspconsortium.org/), select the "HII-C" sandbox, choose the "Apps" option from the left menu, click on the "HII-C Confidential [USE THIS]" app, and then click "Launch". 
+- Select the persona "John Smith", and patient `Adams, Daniel X` in the popup. This should open the Patient Viewer application.
 - Once you are done running Patient Viewer, make sure to terminate the `grunt --force` command in the terminal.
 
 ## Building for Production (Tech Team Only)

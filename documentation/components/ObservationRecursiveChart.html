@@ -1,0 +1,709 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>healthcreek-ui documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">healthcreek-ui documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li>Components</li>
+  <li>ObservationRecursiveChart</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li >
+            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/components/observationRecursionChart/observationRecursionChart.component.ts</code>
+</p>
+
+
+
+
+
+<section>
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>observationRecursionChart</code></td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./observationsChart.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#lastIndex">lastIndex</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#checked">checked</a>
+                            </li>
+                            <li>
+                                <a href="#getData">getData</a>
+                            </li>
+                            <li>
+                                <a href="#getLevel">getLevel</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Inputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#level">level</a>
+                            </li>
+                            <li>
+                                <a href="#obs">obs</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(observationService: <a href="../injectables/ObservationService.html">ObservationService</a>, trendsService: <a href="../injectables/HistoricalTrendsService.html">HistoricalTrendsService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/components/observationRecursionChart/observationRecursionChart.component.ts:15</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>observationService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ObservationService.html" target="_self" >ObservationService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>trendsService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/HistoricalTrendsService.html" target="_self" >HistoricalTrendsService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+    <section>
+    <h3 id="inputs">Inputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="level"></a>
+                        <b>level</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/components/observationRecursionChart/observationRecursionChart.component.ts:14</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="obs"></a>
+                        <b>obs</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/Observation.html" target="_self" >Array&lt;Observation&gt;</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/components/observationRecursionChart/observationRecursionChart.component.ts:13</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+    <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="checked"></a>
+                    <span class="name">
+                        <b>
+                            checked
+                        </b>
+                        <a href="#checked"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>checked(changedObs: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, event, position: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, data)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="29"
+                            class="link-to-prism">src/app/components/observationRecursionChart/observationRecursionChart.component.ts:29</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>changedObs</td>
+                                    <td>
+                                                <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>event</td>
+                                    <td>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>position</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>data</td>
+                                    <td>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getData"></a>
+                    <span class="name">
+                        <b>
+                            getData
+                        </b>
+                        <a href="#getData"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getData()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="20"
+                            class="link-to-prism">src/app/components/observationRecursionChart/observationRecursionChart.component.ts:20</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../classes/Observation.html" target="_self" >Array&lt;Observation&gt;</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getLevel"></a>
+                    <span class="name">
+                        <b>
+                            getLevel
+                        </b>
+                        <a href="#getLevel"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getLevel()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="24"
+                            class="link-to-prism">src/app/components/observationRecursionChart/observationRecursionChart.component.ts:24</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section>
+    
+        <h3 id="inputs">
+            Properties
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="lastIndex"></a>
+                        <span class="name">
+                            <b>
+                            lastIndex</b>
+                            <a href="#lastIndex"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/components/observationRecursionChart/observationRecursionChart.component.ts:15</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, Input } from &#x27;@angular/core&#x27;;
+
+import { ObservationService } from &#x27;../../services/observation.service&#x27;;
+import { HistoricalTrendsService } from &#x27;../../services/historicalTrends.service&#x27;;
+
+import { Observation } from &#x27;../../models/observation.model&#x27;;
+
+@Component({
+  selector: &#x27;observationRecursionChart&#x27;,
+  templateUrl: &#x27;./observationsChart.html&#x27;
+})
+export class ObservationRecursiveChart {
+  @Input() obs: Array&lt;Observation&gt;;
+  @Input() level: number;
+  lastIndex: number;
+
+  constructor(private observationService: ObservationService,
+    private trendsService: HistoricalTrendsService) { }
+
+  getData(): Array&lt;Observation&gt; {
+    return this.obs;
+  }
+
+  getLevel(): number {
+    return this.level;
+  }
+
+  // Called when an observation is either checked or unchecked.
+  checked(changedObs: any, event, position: number, data) {
+    changedObs.isSelected &#x3D; !changedObs.isSelected;
+
+    if (event.shiftKey) {
+      let upper: number, lower: number;
+      if (position &lt; this.lastIndex) {
+        upper &#x3D; this.lastIndex;
+        lower &#x3D; position;
+      }
+      else {
+        upper &#x3D; position;
+        lower &#x3D; this.lastIndex;
+      }
+      for (let i &#x3D; lower; i &lt;&#x3D; upper; i++) {
+        if (!data[i].isSelected) {
+          this.observationService.selected.push(data[i]);
+        }
+        data[i].isSelected &#x3D; true;
+      }
+    }
+
+    this.lastIndex &#x3D; position;
+
+    if (changedObs.isSelected) {
+      // Data points to be added to the chart for this observation in the trends tool.
+      let dataPoints &#x3D; [];
+
+      for (let o of this.observationService.observations) {
+        if (o[&#x27;code&#x27;][&#x27;coding&#x27;][0][&#x27;code&#x27;] &#x3D;&#x3D; changedObs.code) {
+          /* Load all data points associated with the selected
+             observation to the trends tool. &#x27;o&#x27; represents one
+             of these data points.
+          */
+          dataPoints.push(o);
+        }
+      }
+
+      this.observationService.selected.push(changedObs);
+
+      // Create a new chart in the trends tool for the selected observation.
+      this.trendsService.addObservationChart(changedObs.code, dataPoints);
+    } else {
+      // If the observation is deselected, delete its chart from the trends tool.
+      this.trendsService.removeChart(changedObs.code);
+
+      // Indicate that the observation has been unselected
+      // by deleting it from the &#x27;selected&#x27; array.
+      let index &#x3D; this.observationService.selected.indexOf(changedObs);
+      this.observationService.selected.splice(index, 1);
+    }
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-templateData">
+        <pre class="line-numbers"><code class="language-html">
+&lt;div *ngFor&#x3D;&quot;let cat of getData()&quot;&gt;
+  &lt;div class&#x3D;&quot;panel-heading&quot;&gt;
+    &lt;h4 class&#x3D;&quot;panel-title&quot; [style.marginLeft.px]&#x3D;&quot;getLevel()*20&quot;&gt;&lt;a data-toggle&#x3D;&quot;collapse&quot; href&#x3D;&quot;#collapseC{{cat.id}}&quot;&gt;&lt;span class&#x3D;&quot;glyphicon glyphicon-triangle-bottom&quot;&gt;&lt;/span&gt;{{cat.display}} ({{cat.count}})&lt;/a&gt;&lt;/h4&gt;
+  &lt;/div&gt;
+  &lt;div class&#x3D;&quot;panel-collapse collapse&quot; id&#x3D;&quot;collapseC{{cat.id}}&quot;&gt;
+    &lt;table class&#x3D;&quot;table table-condensed table-striped&quot; *ngIf&#x3D;&quot;cat.data&quot; style&#x3D;&quot;width:auto;&quot; [style.marginLeft.px]&#x3D;&quot;(getLevel()+1)*20&quot;&gt;
+      &lt;tbody&gt;
+        &lt;tr *ngFor&#x3D;&quot;let o of cat.data&quot; [class.selected]&#x3D;&quot;o.highlighted&quot;&gt;
+          &lt;td&gt;
+            &lt;input type&#x3D;&quot;checkbox&quot; id&#x3D;&quot;c{{o.code}}&quot; value&#x3D;&quot;{{o.code}}&quot; [checked]&#x3D;&quot;o.isSelected&quot; (change)&#x3D;&quot;checked(o,$event,cat.data.indexOf(o),cat.data)&quot;/&gt;
+          &lt;/td&gt;
+          &lt;td (click)&#x3D;&quot;checked(o,$event,cat.data.indexOf(o),cat.data)&quot;&gt;&lt;span&gt;{{o.name}}&lt;/span&gt;&lt;/td&gt;
+          &lt;td (click)&#x3D;&quot;checked(o,$event,cat.data.indexOf(o),cat.data)&quot;&gt;&lt;span&gt;{{o.date | amTimeAgo}}&lt;/span&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+      &lt;/tbody&gt;
+    &lt;/table&gt;
+    &lt;observationRecursionChart *ngIf&#x3D;&quot;cat.child&quot; [obs]&#x3D;&quot;cat.child&quot; [level]&#x3D;&quot;getLevel()+1&quot;&gt;&lt;/observationRecursionChart&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="c-tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div *ngFor="let cat of getData()">  <div class="panel-heading">    <h4 class="panel-title" [style.marginLeft.px]="getLevel()*20"><a data-toggle="collapse" href="#collapseC{{cat.id}}"><span class="glyphicon glyphicon-triangle-bottom"></span>{{cat.display}} ({{cat.count}})</a></h4>  </div>  <div class="panel-collapse collapse" id="collapseC{{cat.id}}">    <table class="table table-condensed table-striped" *ngIf="cat.data" style="width:auto;" [style.marginLeft.px]="(getLevel()+1)*20">      <tbody>        <tr *ngFor="let o of cat.data" [class.selected]="o.highlighted">          <td>            <input type="checkbox" id="c{{o.code}}" value="{{o.code}}" [checked]="o.isSelected" (change)="checked(o,$event,cat.data.indexOf(o),cat.data)"/>          </td>          <td (click)="checked(o,$event,cat.data.indexOf(o),cat.data)"><span>{{o.name}}</span></td>          <td (click)="checked(o,$event,cat.data.indexOf(o),cat.data)"><span>{{o.date | amTimeAgo}}</span></td>        </tr>      </tbody>    </table>    <observationRecursionChart *ngIf="cat.child" [obs]="cat.child" [level]="getLevel()+1"></observationRecursionChart>  </div></div></div>'
+    var COMPONENTS = [{'name': 'AccordionRecursion', 'selector': 'accordionRecursion'},{'name': 'AccountComponent', 'selector': 'account'},{'name': 'AddObservation', 'selector': 'addObservation'},{'name': 'AppComponent', 'selector': 'app'},{'name': 'CarePlanComponent', 'selector': 'carePlan'},{'name': 'CarePlanDisplay', 'selector': 'careplanDisplay'},{'name': 'CheckboxInline', 'selector': 'checkbox-inline'},{'name': 'ColumnStateSwitcherComponent', 'selector': 'columnStateSwitcher'},{'name': 'ConditionsChartComponent', 'selector': 'conditionsChart'},{'name': 'ConditionsComponent', 'selector': 'conditions'},{'name': 'ConditionsDisplay', 'selector': 'conditionsDisplay'},{'name': 'ContextMenuComponent', 'selector': 'contextMenu'},{'name': 'DoctorNoteComponent', 'selector': 'doctorNote'},{'name': 'Favorites', 'selector': 'favorites'},{'name': 'FormBuilder', 'selector': 'form-builder'},{'name': 'HistoricalTrendsComponent', 'selector': 'historicalTrends'},{'name': 'HomeComponent', 'selector': 'home'},{'name': 'HoverBoxComponent', 'selector': 'hoverBox'},{'name': 'LoadingAnimation', 'selector': 'loading-animation'},{'name': 'MedicationsComponent', 'selector': 'medications'},{'name': 'NewCondition', 'selector': 'newCondition'},{'name': 'NormalBox1', 'selector': 'normal-box-1'},{'name': 'NormalBox2', 'selector': 'normal-box-2'},{'name': 'NoteNavigationComponent', 'selector': 'noteNavigation'},{'name': 'ObservationRecursive', 'selector': 'observationRecursion'},{'name': 'ObservationRecursiveChart', 'selector': 'observationRecursionChart'},{'name': 'ObservationsComponent', 'selector': 'observations'},{'name': 'ObservationsDisplay', 'selector': 'observationsDisplay'},{'name': 'PatientComponent', 'selector': 'patient'},{'name': 'ScratchPadUpdate', 'selector': 'scratchpad-update'},{'name': 'SelectListSingle', 'selector': 'select-list-single'},{'name': 'TimelineComponent', 'selector': 'timelines'},{'name': 'TimelinePopupComponent', 'selector': 'timeline-popup'},{'name': 'ToolbarComponent', 'selector': 'toolbar'},{'name': 'TripleListComponent', 'selector': 'triplelist'}];
+    var DIRECTIVES = [{'name': 'AutoGrowDirective', 'selector': '[autoGrow]'},{'name': 'HighlightDirective', 'selector': '[highlight]'}];
+    var ACTUAL_COMPONENT = {'name': 'ObservationRecursiveChart'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+                   
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'ObservationRecursiveChart.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

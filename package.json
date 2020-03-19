@@ -6,7 +6,8 @@
   "repository": "git@github.com:hii-c/patient_viewer.git",
   "author": "ASU HII-C",
   "scripts": {
-    "start": "grunt"
+    "start": "grunt",
+    "compodoc": "npx compodoc -p tsconfig.json"
   },
   "dependencies": {
     "@angular/animations": "^8.2.14",
@@ -42,6 +43,7 @@
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.900.0",
     "@angular/compiler-cli": "^9.0.0",
+    "@compodoc/compodoc": "^1.1.11",
     "angular2-router-loader": "^0.3.4",
     "concurrently": "^3.0.0",
     "grunt": "^1.0.1",

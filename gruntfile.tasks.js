@@ -71,36 +71,20 @@ module.exports = function(grunt) {
 
         webpack: {
             build: {
+                mode: 'development',
                 entry: {
                     'main': './src/main.ts',
                     'vendor': './src/vendor.ts'
                 },
                 output: {
-                    path: './build/',
-                    publicPath: "/",
+                    path: __dirname + '/build',
+                    publicPath: '/',
                     filename: '[name].bundle.js',
-                    chunkFilename: "[id].bundle.js",
-                    sourceMapFilename: "[name].bundle.js.map"
+                    chunkFilename: '[id].bundle.js',
+                    sourceMapFilename: '[name].bundle.js.map'
                 },
                 plugins: [
-                    new webpack.optimize.CommonsChunkPlugin({
-                        names: ['vendor'],
-                        minChunks: Infinity
-                    }),
-                    new webpack.optimize.DedupePlugin(),
-                    // new webpack.optimize.UglifyJsPlugin({
-                    //     beautify: false,
-                    //     mangle: {
-                    //         screw_ie8: true,
-                    //         keep_fnames: true
-                    //     },
-                    //     compress: {
-                    //         screw_ie8: true,
-                    //         warnings: false
-                    //     },
-                    //     comments: false
-                    // }),
-                    new webpack.ResolverPlugin(new webpack.ResolverPlugin.DirectoryDescriptionFilePlugin('bower.json', ['main'])),
+                    // Required for Bootstrap
                     new webpack.ProvidePlugin({
                         $: "jquery",
                         jquery: "jquery",
@@ -109,17 +93,19 @@ module.exports = function(grunt) {
                     })
                 ],
                 resolve: {
-                    extensions: ['', '.ts', '.js']
+                    extensions: ['.ts', '.js']
                 },
                 module: {
-                    preLoaders: [{
-                        loader: "source-map-loader"
-                    }],
-                    loaders: [{
-                        test: /\.ts$/,
-                        loaders: ['ts-loader', 'angular2-router-loader']
-                    }],
-                    noParse: [path.join('node_modules', '@angular', 'bower_components')]
+                    rules: [
+                        {
+                            loader: "source-map-loader",
+                            enforce: "pre"
+                        },
+                        {
+                            test: /\.ts$/,
+                            loaders: ['ts-loader', 'angular2-router-loader']
+                        },
+                    ],
                 },
                 devServer: {
                     historyApiFallback: true

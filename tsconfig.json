@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-    "importHelpers": true,
+        "importHelpers": true,
         "target": "es6",
         "module": "commonjs",
         "moduleResolution": "node",
@@ -16,10 +16,7 @@
         ]
     },
     "compileOnSave": false,
-    "exclude": [
-        "node_modules",
-        "bower_components"
-    ],
+    "exclude": ["node_modules"],
     "filesGlob": [
         "src/**/*.ts"
     ]

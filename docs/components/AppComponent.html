@@ -61,6 +61,13 @@
     <code>src/app/components/app/app.component.ts</code>
 </p>
 
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>The root component for the entire application.</p>
+
+    </p>
 
 
 
@@ -116,7 +123,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="7" class="link-to-prism">src/app/components/app/app.component.ts:7</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/app/components/app/app.component.ts:10</a></div>
                             </td>
                         </tr>
 
@@ -136,6 +143,9 @@
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component } from &#x27;@angular/core&#x27;;
 
+/**
+ * The root component for the entire application.
+ */
 @Component({
   selector: &#x27;app&#x27;,
   templateUrl: &#x27;./app.html&#x27;
@@ -151,13 +161,23 @@ export class AppComponent {
 &lt;nav class&#x3D;&quot;navbar navbar-default navbar-fixed-top&quot;&gt;
   &lt;div class&#x3D;&quot;container-fluid&quot;&gt;
     &lt;div class&#x3D;&quot;navbar-header&quot;&gt;
-      &lt;button class&#x3D;&quot;navbar-toggle collapsed&quot; type&#x3D;&quot;button&quot; data-toggle&#x3D;&quot;collapse&quot; data-target&#x3D;&quot;#main-navbar-collapse&quot; aria-expanded&#x3D;&quot;false&quot;&gt;&lt;span class&#x3D;&quot;sr-only&quot;&gt;Toggle navigation&lt;/span&gt;&lt;span class&#x3D;&quot;icon-bar&quot;&gt; &lt;/span&gt;&lt;span class&#x3D;&quot;icon-bar&quot;&gt; &lt;/span&gt;&lt;span class&#x3D;&quot;icon-bar&quot;&gt; &lt;/span&gt;&lt;/button&gt;
+      &lt;button class&#x3D;&quot;navbar-toggle collapsed&quot; 
+              type&#x3D;&quot;button&quot; 
+              data-toggle&#x3D;&quot;collapse&quot; 
+              data-target&#x3D;&quot;#main-navbar-collapse&quot; 
+              aria-expanded&#x3D;&quot;false&quot;&gt;
+          &lt;span class&#x3D;&quot;sr-only&quot;&gt;
+            Toggle navigation
+          &lt;/span&gt;
+          &lt;span class&#x3D;&quot;icon-bar&quot;&gt;&lt;/span&gt;
+          &lt;span class&#x3D;&quot;icon-bar&quot;&gt;&lt;/span&gt;
+          &lt;span class&#x3D;&quot;icon-bar&quot;&gt; &lt;/span&gt;
+        &lt;/button&gt;
     &lt;/div&gt;
     &lt;div class&#x3D;&quot;collapse navbar-collapse&quot; id&#x3D;&quot;main-navbar-collapse&quot;&gt;
       &lt;ul class&#x3D;&quot;nav navbar-nav navbar-right&quot;&gt;
         &lt;li&gt;&lt;a id&#x3D;&quot;home_link&quot; routerLink&#x3D;&quot;/&quot; routerLinkActive&#x3D;&quot;active&quot;&gt;&lt;span class&#x3D;&quot;glyphicon glyphicon-home&quot;&gt;&lt;/span&gt; Home&lt;/a&gt;&lt;/li&gt;
         &lt;li&gt;&lt;a id&#x3D;&quot;account_link&quot; routerLink&#x3D;&quot;/account&quot; routerLinkActive&#x3D;&quot;active&quot;&gt;&lt;span class&#x3D;&quot;glyphicon glyphicon-user&quot;&gt;&lt;/span&gt; Account&lt;/a&gt;&lt;/li&gt;
-        &lt;li&gt;&lt;a id&#x3D;&quot;sign_out_link&quot; href&#x3D;&quot;todo&quot;&gt;&lt;span class&#x3D;&quot;glyphicon glyphicon-log-out&quot;&gt;&lt;/span&gt; Sign Out&lt;/a&gt;&lt;/li&gt;
       &lt;/ul&gt;
     &lt;/div&gt;
   &lt;/div&gt;
@@ -191,7 +211,7 @@ export class AppComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><nav class="navbar navbar-default navbar-fixed-top">  <div class="container-fluid">    <div class="navbar-header">      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar-collapse" aria-expanded="false"><span class="sr-only">Toggle navigation</span><span class="icon-bar"> </span><span class="icon-bar"> </span><span class="icon-bar"> </span></button>    </div>    <div class="collapse navbar-collapse" id="main-navbar-collapse">      <ul class="nav navbar-nav navbar-right">        <li><a id="home_link" routerLink="/" routerLinkActive="active"><span class="glyphicon glyphicon-home"></span> Home</a></li>        <li><a id="account_link" routerLink="/account" routerLinkActive="active"><span class="glyphicon glyphicon-user"></span> Account</a></li>        <li><a id="sign_out_link" href="todo"><span class="glyphicon glyphicon-log-out"></span> Sign Out</a></li>      </ul>    </div>  </div></nav><router-outlet></router-outlet></div>'
+        var COMPONENT_TEMPLATE = '<div><nav class="navbar navbar-default navbar-fixed-top">  <div class="container-fluid">    <div class="navbar-header">      <button class="navbar-toggle collapsed"               type="button"               data-toggle="collapse"               data-target="#main-navbar-collapse"               aria-expanded="false">          <span class="sr-only">            Toggle navigation          </span>          <span class="icon-bar"></span>          <span class="icon-bar"></span>          <span class="icon-bar"> </span>        </button>    </div>    <div class="collapse navbar-collapse" id="main-navbar-collapse">      <ul class="nav navbar-nav navbar-right">        <li><a id="home_link" routerLink="/" routerLinkActive="active"><span class="glyphicon glyphicon-home"></span> Home</a></li>        <li><a id="account_link" routerLink="/account" routerLinkActive="active"><span class="glyphicon glyphicon-user"></span> Account</a></li>      </ul>    </div>  </div></nav><router-outlet></router-outlet></div>'
     var COMPONENTS = [{'name': 'AccordionRecursion', 'selector': 'accordionRecursion'},{'name': 'AccountComponent', 'selector': 'account'},{'name': 'AddObservation', 'selector': 'addObservation'},{'name': 'AppComponent', 'selector': 'app'},{'name': 'CarePlanComponent', 'selector': 'carePlan'},{'name': 'CarePlanDisplay', 'selector': 'careplanDisplay'},{'name': 'CheckboxInline', 'selector': 'checkbox-inline'},{'name': 'ColumnStateSwitcherComponent', 'selector': 'columnStateSwitcher'},{'name': 'ConditionsChartComponent', 'selector': 'conditionsChart'},{'name': 'ConditionsComponent', 'selector': 'conditions'},{'name': 'ConditionsDisplay', 'selector': 'conditionsDisplay'},{'name': 'ContextMenuComponent', 'selector': 'contextMenu'},{'name': 'FormBuilder', 'selector': 'form-builder'},{'name': 'HistoricalTrendsComponent', 'selector': 'historicalTrends'},{'name': 'HomeComponent', 'selector': 'home'},{'name': 'HoverBoxComponent', 'selector': 'hoverBox'},{'name': 'LoadingAnimation', 'selector': 'loading-animation'},{'name': 'MedicationsComponent', 'selector': 'medications'},{'name': 'NewCondition', 'selector': 'newCondition'},{'name': 'NormalBox1', 'selector': 'normal-box-1'},{'name': 'NormalBox2', 'selector': 'normal-box-2'},{'name': 'NoteNavigationComponent', 'selector': 'noteNavigation'},{'name': 'ObservationRecursive', 'selector': 'observationRecursion'},{'name': 'ObservationRecursiveChart', 'selector': 'observationRecursionChart'},{'name': 'ObservationsComponent', 'selector': 'observations'},{'name': 'ObservationsDisplay', 'selector': 'observationsDisplay'},{'name': 'PatientComponent', 'selector': 'patient'},{'name': 'ScratchPadUpdate', 'selector': 'scratchpad-update'},{'name': 'SelectListSingle', 'selector': 'select-list-single'},{'name': 'TimelineComponent', 'selector': 'timelines'},{'name': 'TimelinePopupComponent', 'selector': 'timeline-popup'},{'name': 'ToolbarComponent', 'selector': 'toolbar'},{'name': 'TripleListComponent', 'selector': 'triplelist'}];
     var DIRECTIVES = [{'name': 'AutoGrowDirective', 'selector': '[autoGrow]'},{'name': 'HighlightDirective', 'selector': '[highlight]'}];
     var ACTUAL_COMPONENT = {'name': 'AppComponent'};

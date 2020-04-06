@@ -1,26 +1,19 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
-
-import { ObservationService } from '../../services/observation.service';
-import { DoctorService } from '../../services/doctor.service';
-
+import { Component, Input } from '@angular/core';
 import { Patient } from '../../models/patient.model';
 
+/**
+ * A component that displays the triple list of 
+ * conditions, observations, and careplans. It provides 
+ * the patient data to these individual lists.
+ */
 @Component({
   selector: 'triplelist',
   templateUrl: './tripleList.html'
 })
 
 export class TripleListComponent {
+  /** The patient whose data will appear in the three lists. */
   @Input() patient: Patient;
-  @Output() passThrough: EventEmitter<Patient> = new EventEmitter();
-  obsCount: number = 0;
-
-  constructor(private doctorService: DoctorService, private observationService: ObservationService) {
-    this.passThrough.emit(this.patient);
-  }
-
-  updateTotal(event) {
-    console.log("total:" + event);
-    this.obsCount = event;
-  }
+  
+  constructor() { }
 }

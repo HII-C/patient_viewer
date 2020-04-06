@@ -65,7 +65,7 @@
         <h3>Description</h3>
     </p>
     <p class="comment">
-        <p>Allows for switching between the three states of each column.
+        <p>Component for switching between the three states of each column.
 The three possible states are: Default, Note Pad, and Scratch Pad.</p>
 
     </p>
@@ -174,7 +174,7 @@ The three possible states are: Default, Note Pad, and Scratch Pad.</p>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/components/columnStateSwitcher/columnStateSwitcher.component.ts:18</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/components/columnStateSwitcher/columnStateSwitcher.component.ts:22</a></div>
                             </td>
                         </tr>
 
@@ -230,7 +230,7 @@ The three possible states are: Default, Note Pad, and Scratch Pad.</p>
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/components/columnStateSwitcher/columnStateSwitcher.component.ts:15</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/components/columnStateSwitcher/columnStateSwitcher.component.ts:16</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -251,9 +251,16 @@ The three possible states are: Default, Note Pad, and Scratch Pad.</p>
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/components/columnStateSwitcher/columnStateSwitcher.component.ts:18</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/components/columnStateSwitcher/columnStateSwitcher.component.ts:22</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>The type of the column in which the switcher is used.
+For example, &#39;conditions&#39;, &#39;observations&#39;, or &#39;careplans&#39;.</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
 </section>
@@ -287,17 +294,20 @@ The three possible states are: Default, Note Pad, and Scratch Pad.</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="41"
-                            class="link-to-prism">src/app/components/columnStateSwitcher/columnStateSwitcher.component.ts:41</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="53"
+                            class="link-to-prism">src/app/components/columnStateSwitcher/columnStateSwitcher.component.ts:53</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Retrieve the number of items in the column&#39;s scratch pad. This 
+number is displayed in the switcher component.</p>
+</div>
 
                     <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                        <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
 
                     </div>
                 </td>
@@ -326,14 +336,16 @@ The three possible states are: Default, Note Pad, and Scratch Pad.</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="23"
-                            class="link-to-prism">src/app/components/columnStateSwitcher/columnStateSwitcher.component.ts:23</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="29"
+                            class="link-to-prism">src/app/components/columnStateSwitcher/columnStateSwitcher.component.ts:29</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Switch to the default view of the column.</p>
+</div>
 
                     <div class="io-description">
                         <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -365,14 +377,16 @@ The three possible states are: Default, Note Pad, and Scratch Pad.</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="32"
-                            class="link-to-prism">src/app/components/columnStateSwitcher/columnStateSwitcher.component.ts:32</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="40"
+                            class="link-to-prism">src/app/components/columnStateSwitcher/columnStateSwitcher.component.ts:40</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Switch to the scratch pad view of the column.</p>
+</div>
 
                     <div class="io-description">
                         <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -393,23 +407,29 @@ The three possible states are: Default, Note Pad, and Scratch Pad.</p>
 import { ScratchPadService } from &#x27;../../services/scratchPad.service&#x27;;
 import { BaseColumn } from &#x27;../baseColumn&#x27;;
 
-/**
- * Allows for switching between the three states of each column.
- * The three possible states are: Default, Note Pad, and Scratch Pad.
- */
+
+ /**
+  * Component for switching between the three states of each column.
+  * The three possible states are: Default, Note Pad, and Scratch Pad.
+  */
 @Component({
   selector: &#x27;columnStateSwitcher&#x27;,
   templateUrl: &#x27;./columnStateSwitcher.html&#x27;
 })
 export class ColumnStateSwitcherComponent {
   @Input() column: BaseColumn;
-  // The type of the column in which the switcher is used.
-  // For example, &#x27;conditions&#x27;, &#x27;observations&#x27;, or &#x27;careplans&#x27;.
+
+  /**
+   * The type of the column in which the switcher is used.
+   * For example, &#x27;conditions&#x27;, &#x27;observations&#x27;, or &#x27;careplans&#x27;.
+   */
   @Input() columnType: string;
 
   constructor (private scratchPadService: ScratchPadService) { }
 
-  // Switch back to the default view of the column.
+  /**
+   * Switch to the default view of the column.
+   */
   switchToDefault() {
     if (this.column !&#x3D; null) {
       this.column.columnState &#x3D; &#x27;default&#x27;;
@@ -418,17 +438,23 @@ export class ColumnStateSwitcherComponent {
     }
   }
 
-  // Switch to the scratch pad view of the column.
+  /**
+   * Switch to the scratch pad view of the column.
+   */
   switchToScratchPad() {
     if (this.column !&#x3D; null) {
       this.column.columnState &#x3D; &#x27;scratchpad&#x27;;
-      this.column.updateService(); // Update the service to store correct column state
+      // Update the service to store correct column state
+      this.column.updateService(); 
       this.column.showScratchPad();
     }
   }
 
-  // Return the number of elements in the scratch pad of the column.
-  getScratchPadCount() {
+  /**
+   * Retrieve the number of items in the column&#x27;s scratch pad. This 
+   * number is displayed in the switcher component.
+   */
+  getScratchPadCount(): number {
     if (this.columnType &#x3D;&#x3D; &#x27;conditions&#x27;) {
       return this.scratchPadService.conditions.length;
     } else if (this.columnType &#x3D;&#x3D; &#x27;observations&#x27;) {
@@ -437,7 +463,6 @@ export class ColumnStateSwitcherComponent {
       // TODO: Implement once scratch pad is finished for careplans.
       return 0;
     }
-
     return 0;
   }
 }
@@ -445,11 +470,21 @@ export class ColumnStateSwitcherComponent {
     </div>
 
     <div class="tab-pane fade " id="c-templateData">
-        <pre class="line-numbers"><code class="language-html">
-&lt;div class&#x3D;&quot;text-center column-state-switcher&quot;&gt;
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;text-center column-state-switcher&quot;&gt;
   &lt;div class&#x3D;&quot;btn-group&quot;&gt;
-    &lt;button class&#x3D;&quot;btn btn-default btn-xs&quot; title&#x3D;&quot;Default&quot; [class.active]&#x3D;&quot;column.columnState &#x3D;&#x3D; &amp;quot;default&amp;quot;&quot; (click)&#x3D;&quot;switchToDefault()&quot;&gt;&lt;span class&#x3D;&quot;glyphicon glyphicon-home&quot;&gt;&lt;/span&gt;&lt;/button&gt;
-    &lt;button class&#x3D;&quot;btn btn-default btn-xs&quot; title&#x3D;&quot;Scratch Pad&quot; [class.active]&#x3D;&quot;column.columnState &#x3D;&#x3D; &amp;quot;scratchpad&amp;quot;&quot; (click)&#x3D;&quot;switchToScratchPad()&quot;&gt;&lt;span class&#x3D;&quot;glyphicon glyphicon-eye-open&quot;&gt;&lt;/span&gt;&lt;span class&#x3D;&quot;badge column-state-badge&quot;&gt;{{ getScratchPadCount() }}&lt;/span&gt;&lt;/button&gt;
+    &lt;button class&#x3D;&quot;btn btn-default btn-xs&quot; 
+            title&#x3D;&quot;Default&quot; 
+            [class.active]&#x3D;&quot;column.columnState &#x3D;&#x3D; &#x27;default&#x27;&quot; 
+            (click)&#x3D;&quot;switchToDefault()&quot;&gt;
+      &lt;span class&#x3D;&quot;glyphicon glyphicon-home&quot;&gt;&lt;/span&gt;
+    &lt;/button&gt;
+    &lt;button class&#x3D;&quot;btn btn-default btn-xs&quot; 
+            title&#x3D;&quot;Scratch Pad&quot; 
+            [class.active]&#x3D;&quot;column.columnState &#x3D;&#x3D; &#x27;scratchpad&#x27;&quot; 
+            (click)&#x3D;&quot;switchToScratchPad()&quot;&gt;
+      &lt;span class&#x3D;&quot;glyphicon glyphicon-eye-open&quot;&gt;&lt;/span&gt;
+      &lt;span class&#x3D;&quot;badge column-state-badge&quot;&gt;{{ getScratchPadCount() }}&lt;/span&gt;
+    &lt;/button&gt;
   &lt;/div&gt;
 &lt;/div&gt;</code></pre>
     </div>
@@ -480,7 +515,7 @@ export class ColumnStateSwitcherComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="text-center column-state-switcher">  <div class="btn-group">    <button class="btn btn-default btn-xs" title="Default" [class.active]="column.columnState == &quot;default&quot;" (click)="switchToDefault()"><span class="glyphicon glyphicon-home"></span></button>    <button class="btn btn-default btn-xs" title="Scratch Pad" [class.active]="column.columnState == &quot;scratchpad&quot;" (click)="switchToScratchPad()"><span class="glyphicon glyphicon-eye-open"></span><span class="badge column-state-badge">{{ getScratchPadCount() }}</span></button>  </div></div></div>'
+        var COMPONENT_TEMPLATE = '<div><div class="text-center column-state-switcher">  <div class="btn-group">    <button class="btn btn-default btn-xs"             title="Default"             [class.active]="column.columnState == \'default\'"             (click)="switchToDefault()">      <span class="glyphicon glyphicon-home"></span>    </button>    <button class="btn btn-default btn-xs"             title="Scratch Pad"             [class.active]="column.columnState == \'scratchpad\'"             (click)="switchToScratchPad()">      <span class="glyphicon glyphicon-eye-open"></span>      <span class="badge column-state-badge">{{ getScratchPadCount() }}</span>    </button>  </div></div></div>'
     var COMPONENTS = [{'name': 'AccordionRecursion', 'selector': 'accordionRecursion'},{'name': 'AccountComponent', 'selector': 'account'},{'name': 'AddObservation', 'selector': 'addObservation'},{'name': 'AppComponent', 'selector': 'app'},{'name': 'CarePlanComponent', 'selector': 'carePlan'},{'name': 'CarePlanDisplay', 'selector': 'careplanDisplay'},{'name': 'CheckboxInline', 'selector': 'checkbox-inline'},{'name': 'ColumnStateSwitcherComponent', 'selector': 'columnStateSwitcher'},{'name': 'ConditionsChartComponent', 'selector': 'conditionsChart'},{'name': 'ConditionsComponent', 'selector': 'conditions'},{'name': 'ConditionsDisplay', 'selector': 'conditionsDisplay'},{'name': 'ContextMenuComponent', 'selector': 'contextMenu'},{'name': 'DoctorNoteComponent', 'selector': 'doctorNote'},{'name': 'Favorites', 'selector': 'favorites'},{'name': 'FormBuilder', 'selector': 'form-builder'},{'name': 'HistoricalTrendsComponent', 'selector': 'historicalTrends'},{'name': 'HomeComponent', 'selector': 'home'},{'name': 'HoverBoxComponent', 'selector': 'hoverBox'},{'name': 'LoadingAnimation', 'selector': 'loading-animation'},{'name': 'MedicationsComponent', 'selector': 'medications'},{'name': 'NewCondition', 'selector': 'newCondition'},{'name': 'NormalBox1', 'selector': 'normal-box-1'},{'name': 'NormalBox2', 'selector': 'normal-box-2'},{'name': 'NoteNavigationComponent', 'selector': 'noteNavigation'},{'name': 'ObservationRecursive', 'selector': 'observationRecursion'},{'name': 'ObservationRecursiveChart', 'selector': 'observationRecursionChart'},{'name': 'ObservationsComponent', 'selector': 'observations'},{'name': 'ObservationsDisplay', 'selector': 'observationsDisplay'},{'name': 'PatientComponent', 'selector': 'patient'},{'name': 'ScratchPadUpdate', 'selector': 'scratchpad-update'},{'name': 'SelectListSingle', 'selector': 'select-list-single'},{'name': 'TimelineComponent', 'selector': 'timelines'},{'name': 'TimelinePopupComponent', 'selector': 'timeline-popup'},{'name': 'ToolbarComponent', 'selector': 'toolbar'},{'name': 'TripleListComponent', 'selector': 'triplelist'}];
     var DIRECTIVES = [{'name': 'AutoGrowDirective', 'selector': '[autoGrow]'},{'name': 'HighlightDirective', 'selector': '[highlight]'}];
     var ACTUAL_COMPONENT = {'name': 'ColumnStateSwitcherComponent'};

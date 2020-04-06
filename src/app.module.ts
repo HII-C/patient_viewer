@@ -12,7 +12,6 @@ import { ObservationsComponent } from './app/components/observations/observation
 import { CarePlanComponent } from './app/components/carePlan/carePlan.component';
 import { HoverBoxComponent } from "./app/components/hoverBox/hoverBox.component";
 import { LoadingAnimation } from './app/components/loadingAnimation/loadingAnimation.component';
-import { DoctorNoteComponent } from './app/components/doctorNote/doctorNote.component';
 import { AccountComponent } from './app/components/account/account.component';
 import { ToolbarComponent } from './app/components/toolbar/toolbar.component';
 import { TripleListComponent } from './app/components/tripleList/tripleList.component';
@@ -107,7 +106,6 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
     LoadingAnimation,
     FormBuilder,
     AccountComponent,
-    DoctorNoteComponent,
     ToolbarComponent,
     TripleListComponent,
     ObservationRecursive,

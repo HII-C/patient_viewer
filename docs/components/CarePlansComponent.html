@@ -35,7 +35,7 @@
 
 <ol class="breadcrumb">
   <li>Components</li>
-  <li>ConditionsComponent</li>
+  <li>CarePlansComponent</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -58,9 +58,18 @@
     <h3>File</h3>
 </p>
 <p class="comment">
-    <code>src/app/components/conditions/conditions.component.ts</code>
+    <code>src/app/components/carePlans/carePlans.component.ts</code>
 </p>
 
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Component representing the list of a patient&#39;s 
+care plans. It is a part of the triple list 
+view.</p>
+
+    </p>
 
     <p class="comment">
         <h3>Extends</h3>
@@ -88,7 +97,7 @@
 
             <tr>
                 <td class="col-md-3">selector</td>
-                <td class="col-md-9"><code>conditions</code></td>
+                <td class="col-md-9"><code>carePlans</code></td>
             </tr>
 
 
@@ -96,7 +105,7 @@
 
             <tr>
                 <td class="col-md-3">templateUrl</td>
-                <td class="col-md-9"><code>./conditions.html</code></td>
+                <td class="col-md-9"><code>./carePlans.html</code></td>
             </tr>
 
 
@@ -123,28 +132,16 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#conditionGrouping">conditionGrouping</a>
+                                <a href="#carePlanLoadFinished">carePlanLoadFinished</a>
                             </li>
                             <li>
-                                <a href="#conditions">conditions</a>
+                                <a href="#carePlans">carePlans</a>
                             </li>
                             <li>
-                                <a href="#justCreated">justCreated</a>
-                            </li>
-                            <li>
-                                <a href="#loaded">loaded</a>
-                            </li>
-                            <li>
-                                <a href="#scratchPadConditions">scratchPadConditions</a>
+                                <a href="#columnStateSubscription">columnStateSubscription</a>
                             </li>
                             <li>
                                 <a href="#selected">selected</a>
-                            </li>
-                            <li>
-                                <a href="#subscription">subscription</a>
-                            </li>
-                            <li>
-                                <a href="#viewToggle">viewToggle</a>
                             </li>
                             <li>
                                 <a href="#columnHeight">columnHeight</a>
@@ -168,16 +165,10 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#getScratchPadConditions">getScratchPadConditions</a>
+                                <a href="#getScratchPadCarePlans">getScratchPadCarePlans</a>
                             </li>
                             <li>
                                 <a href="#ngOnChanges">ngOnChanges</a>
-                            </li>
-                            <li>
-                                <a href="#onLoadComplete">onLoadComplete</a>
-                            </li>
-                            <li>
-                                <a href="#updateService">updateService</a>
                             </li>
                             <li>
                                 <a href="#handleResize">handleResize</a>
@@ -210,20 +201,6 @@
                     </td>
                 </tr>
 
-                <tr>
-                    <td class="col-md-4">
-                        <h6><b>Outputs</b></h6>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <ul class="index-list">
-                            <li>
-                                <a href="#conditionSelected">conditionSelected</a>
-                            </li>
-                        </ul>
-                    </td>
-                </tr>
 
 
 
@@ -237,12 +214,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(fhirService: <a href="../injectables/FhirService.html">FhirService</a>, conditionService: <a href="../injectables/ConditionService.html">ConditionService</a>, doctorService: <a href="../injectables/DoctorService.html">DoctorService</a>, scratchPadService: <a href="../injectables/ScratchPadService.html">ScratchPadService</a>)</code>
+<code>constructor(fhirService: <a href="../injectables/FhirService.html">FhirService</a>, carePlanService: <a href="../injectables/CarePlanService.html">CarePlanService</a>, scratchPadService: <a href="../injectables/ScratchPadService.html">ScratchPadService</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/components/conditions/conditions.component.ts:47</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/components/carePlans/carePlans.component.ts:38</a></div>
                             </td>
                         </tr>
 
@@ -272,22 +249,10 @@
                                                     
                                                 </tr>
                                                 <tr>
-                                                        <td>conditionService</td>
+                                                        <td>carePlanService</td>
                                                   
                                                         <td>
-                                                                        <code><a href="../injectables/ConditionService.html" target="_self" >ConditionService</a></code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                                <tr>
-                                                        <td>doctorService</td>
-                                                  
-                                                        <td>
-                                                                        <code><a href="../injectables/DoctorService.html" target="_self" >DoctorService</a></code>
+                                                                        <code><a href="../injectables/CarePlanService.html" target="_self" >CarePlanService</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -334,36 +299,19 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/components/conditions/conditions.component.ts:46</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/components/carePlans/carePlans.component.ts:38</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>The patient whose care plans are displayed. </p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
 </section>
-    <section>
-    <h3 id="outputs">Outputs</h3>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="conditionSelected"></a>
-                        <b>conditionSelected</b>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="../classes/Condition.html" target="_self" >EventEmitter&lt;Condition&gt;</a></code>
 
-                    </td>
-                </tr>
-                        <tr>
-                            <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/components/conditions/conditions.component.ts:47</a></div>
-                            </td>
-                        </tr>
-            </tbody>
-        </table>
-</section>
 
 
     <section>
@@ -375,32 +323,35 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="getScratchPadConditions"></a>
+                    <a name="getScratchPadCarePlans"></a>
                     <span class="name">
                         <b>
-                            getScratchPadConditions
+                            getScratchPadCarePlans
                         </b>
-                        <a href="#getScratchPadConditions"><span class="icon ion-ios-link"></span></a>
+                        <a href="#getScratchPadCarePlans"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>getScratchPadConditions()</code>
+<code>getScratchPadCarePlans()</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="131"
-                            class="link-to-prism">src/app/components/conditions/conditions.component.ts:131</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="72"
+                            class="link-to-prism">src/app/components/carePlans/carePlans.component.ts:72</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Get care plans currently in the scratch pad for display 
+in the list.</p>
+</div>
 
                     <div class="io-description">
                         <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
@@ -432,92 +383,16 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="73"
-                            class="link-to-prism">src/app/components/conditions/conditions.component.ts:73</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="57"
+                            class="link-to-prism">src/app/components/carePlans/carePlans.component.ts:57</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="onLoadComplete"></a>
-                    <span class="name">
-                        <b>
-                            onLoadComplete
-                        </b>
-                        <a href="#onLoadComplete"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>onLoadComplete()</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="87"
-                            class="link-to-prism">src/app/components/conditions/conditions.component.ts:87</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="updateService"></a>
-                    <span class="name">
-                        <b>
-                            updateService
-                        </b>
-                        <a href="#updateService"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>updateService()</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="122"
-                            class="link-to-prism">src/app/components/conditions/conditions.component.ts:122</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
+                    <div class="io-description"><p>Reload care plans when the patient is changed. </p>
+</div>
 
                     <div class="io-description">
                         <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -744,102 +619,11 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="conditionGrouping"></a>
+                        <a name="carePlanLoadFinished"></a>
                         <span class="name">
                             <b>
-                            conditionGrouping</b>
-                            <a href="#conditionGrouping"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Type : </i>    <code>Array&lt;any&gt;</code>
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Default value : </i><code>[]</code>
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/components/conditions/conditions.component.ts:40</a></div>
-                            </td>
-                        </tr>
-
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="conditions"></a>
-                        <span class="name">
-                            <b>
-                            conditions</b>
-                            <a href="#conditions"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Type : </i>        <code><a href="../classes/Condition.html" target="_self" >Array&lt;Condition&gt;</a></code>
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Default value : </i><code>[]</code>
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/components/conditions/conditions.component.ts:33</a></div>
-                            </td>
-                        </tr>
-
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="justCreated"></a>
-                        <span class="name">
-                            <b>
-                            justCreated</b>
-                            <a href="#justCreated"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
-
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/components/conditions/conditions.component.ts:41</a></div>
-                            </td>
-                        </tr>
-
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="loaded"></a>
-                        <span class="name">
-                            <b>
-                            loaded</b>
-                            <a href="#loaded"><span class="icon ion-ios-link"></span></a>
+                            carePlanLoadFinished</b>
+                            <a href="#carePlanLoadFinished"><span class="icon ion-ios-link"></span></a>
                         </span>
                     </td>
                 </tr>
@@ -856,10 +640,16 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/components/conditions/conditions.component.ts:37</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/components/carePlans/carePlans.component.ts:29</a></div>
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Whether or not care plans have loaded yet. </p>
+</div>
+                    </td>
+                </tr>
 
             </tbody>
         </table>
@@ -867,31 +657,66 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="scratchPadConditions"></a>
+                        <a name="carePlans"></a>
                         <span class="name">
                             <b>
-                            scratchPadConditions</b>
-                            <a href="#scratchPadConditions"><span class="icon ion-ios-link"></span></a>
+                            carePlans</b>
+                            <a href="#carePlans"><span class="icon ion-ios-link"></span></a>
                         </span>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                            <i>Type : </i>        <code><a href="../classes/CarePlan.html" target="_self" >Array&lt;CarePlan&gt;</a></code>
 
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Default value : </i><code>[]</code>
                         </td>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/components/conditions/conditions.component.ts:34</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/components/carePlans/carePlans.component.ts:26</a></div>
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>The care plans being displayed in the list. </p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="columnStateSubscription"></a>
+                        <span class="name">
+                            <b>
+                            columnStateSubscription</b>
+                            <a href="#columnStateSubscription"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>Subscription</code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/components/carePlans/carePlans.component.ts:35</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Subscription that detects when the user opens 
+the scratch pad (eg, from the toolbar).</p>
+</div>
+                    </td>
+                </tr>
 
             </tbody>
         </table>
@@ -909,75 +734,22 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Type : </i>        <code><a href="../classes/Condition.html" target="_self" >Condition</a></code>
+                            <i>Type : </i>        <code><a href="../classes/CarePlan.html" target="_self" >CarePlan</a></code>
 
                         </td>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/components/conditions/conditions.component.ts:30</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/components/carePlans/carePlans.component.ts:23</a></div>
                             </td>
                         </tr>
 
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="subscription"></a>
-                        <span class="name">
-                            <b>
-                            subscription</b>
-                            <a href="#subscription"><span class="icon ion-ios-link"></span></a>
-                        </span>
+                        <div class="io-description"><p>The care plan currently selected by the user. </p>
+</div>
                     </td>
                 </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Type : </i>    <code>Subscription</code>
-
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/components/conditions/conditions.component.ts:44</a></div>
-                            </td>
-                        </tr>
-
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="viewToggle"></a>
-                        <span class="name">
-                            <b>
-                            viewToggle</b>
-                            <a href="#viewToggle"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Default value : </i><code>false</code>
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/components/conditions/conditions.component.ts:39</a></div>
-                            </td>
-                        </tr>
-
 
             </tbody>
         </table>
@@ -1099,130 +871,79 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, Input, Output, EventEmitter } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, Input } from &#x27;@angular/core&#x27;;
 import { Subscription } from &#x27;rxjs&#x27;;
-import * as moment from &#x27;moment&#x27;;
 
 import { FhirService } from &#x27;../../services/fhir.service&#x27;;
-import { ConditionService } from &#x27;../../services/condition.service&#x27;;
-import { DoctorService } from &#x27;../../services/doctor.service&#x27;;
+import { CarePlanService } from &#x27;../../services/carePlan.service&#x27;;
 import { ScratchPadService } from &#x27;../../services/scratchPad.service&#x27;;
 
-import { Condition } from &#x27;../../models/condition.model&#x27;;
+import { CarePlan } from &#x27;../../models/carePlan.model&#x27;;
 import { Patient } from &#x27;../../models/patient.model&#x27;;
 import { BaseColumn } from &#x27;../baseColumn&#x27;;
 
-declare var $: any; //Necessary in order to use jQuery to open popup.
-
+/**
+ * Component representing the list of a patient&#x27;s 
+ * care plans. It is a part of the triple list 
+ * view.
+ */
 @Component({
-  selector: &#x27;conditions&#x27;,
-  templateUrl: &#x27;./conditions.html&#x27;
+  selector: &#x27;carePlans&#x27;,
+  templateUrl: &#x27;./carePlans.html&#x27;
 })
-export class ConditionsComponent extends BaseColumn {
-  // The currently selected condition in the list.
-  selected: Condition;
+export class CarePlansComponent extends BaseColumn {
+  /** The care plan currently selected by the user. */
+  selected: CarePlan;
+  
+  /** The care plans being displayed in the list. */
+  carePlans: Array&lt;CarePlan&gt;;
+  
+  /** Whether or not care plans have loaded yet. */
+  carePlanLoadFinished: boolean &#x3D; false;
 
-  // The list of conditions being displayed.
-  conditions: Array&lt;Condition&gt; &#x3D; [];
-  scratchPadConditions: any &#x3D; [];
+  /** 
+   * Subscription that detects when the user opens 
+   * the scratch pad (eg, from the toolbar).
+  */
+  columnStateSubscription: Subscription;
 
-  // for checking whenever the page is loaded
-  loaded: boolean &#x3D; false;
-
-  viewToggle: boolean &#x3D; false;
-  conditionGrouping: Array&lt;any&gt; &#x3D; [];
-  justCreated: boolean;
-
-  // for column switching
-  subscription: Subscription;
-
+  /** The patient whose care plans are displayed. */
   @Input() patient: Patient;
-  @Output() conditionSelected: EventEmitter&lt;Condition&gt; &#x3D; new EventEmitter();
-
-  // &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
-  // &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; EVENT METHODS &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
-  // &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;---------------&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
 
   constructor(
-    private fhirService: FhirService,
-    private conditionService: ConditionService,
-    private doctorService: DoctorService,
+    private fhirService: FhirService, 
+    private carePlanService: CarePlanService, 
     private scratchPadService: ScratchPadService
   ) {
     super();
-    this.justCreated &#x3D; true;
-    this.scratchPadConditions &#x3D; this.getScratchPadConditions();
 
-    this.subscription &#x3D; scratchPadService.stateChange$.subscribe(
+    // Switch between scratch pad and default based on user&#x27;s
+    // selection in the toolbar.
+    this.columnStateSubscription &#x3D; scratchPadService.stateChange$.subscribe(
       sPad &#x3D;&gt; {
-        if (sPad)
-          this.columnState &#x3D; &quot;scratchpad&quot;;
-        else
-          this.columnState &#x3D; &quot;default&quot;;
+        this.columnState &#x3D; sPad ? &#x27;scratchpad&#x27; : &#x27;default&#x27;;
       }
     );
   }
 
+  /** Reload care plans when the patient is changed. */
   ngOnChanges() {
-    // Triggered if a new patient is selected (not even implemented yet).
     this.selected &#x3D; null;
-    this.conditions &#x3D; [];
-
     if (this.patient) {
-      this.conditionService.loadConditions(this.patient).subscribe(conditions &#x3D;&gt; {
-        this.conditions &#x3D; this.conditions.concat(conditions);
-        this.onLoadComplete();
+      this.carePlanService.loadCarePlans(this.patient).subscribe(carePlans &#x3D;&gt; {
+        this.carePlans &#x3D; carePlans;
+        this.carePlanLoadFinished &#x3D; true;
+        console.log(&quot;Loaded &quot; + carePlans.length + &quot; care plans.&quot;);
       });
     }
   }
 
-  // Called when all conditions have been loaded.
-  onLoadComplete() {
-    console.log(&quot;Loaded &quot; + this.conditions.length + &quot; conditions.&quot;);
-
-    this.conditions.sort((c1, c2) &#x3D;&gt; {
-      return c2.onsetDateTime.localeCompare(c1.onsetDateTime);
-    });
-
-    // Scale dates to make them appear more recent for demos.
-    // 0.8 is an arbitrary value that produces realistic dates.
-    if (this.conditions.length &gt; 0) {
-      let RECENCY_MULTIPLIER &#x3D; 0.8;
-      let timeSinceConditionOnset &#x3D; new Date().getTime() - new Date(this.conditions[0].onsetDateTime).getTime();
-      let scaledTimeSinceConditionOnset &#x3D; Math.floor(RECENCY_MULTIPLIER * timeSinceConditionOnset);
-
-      for (let condition of this.conditions) {
-        condition.isVisible &#x3D; true;
-        let relativeDateTime &#x3D; new Date(condition.onsetDateTime).getTime() + scaledTimeSinceConditionOnset;
-        condition.relativeDateTime &#x3D; moment(relativeDateTime).toISOString();
-      }
-    }
-
-    if (!this.viewToggle) {
-      this.conditions &#x3D; this.doctorService.assignVisible(this.conditions);
-    }
-
-    this.conditionService.conditions &#x3D; this.conditions;
-
-    // for rendering elements only after page is loaded (there probably is a better way)
-    this.loaded &#x3D; true;
-
-    // initialize the scratchPadService totalConditions with all the stuff
-    this.scratchPadService.initConditions(this.conditions);
-  }
-
-  // Update the service to store correct column state
-  updateService(): void {
-    this.conditionService.setColumnState(this.columnState);
-  }
-
-  // &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
-  // &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; GETTERS AND SETTERS&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
-  // &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
-
-  // retrieves the selected conditions from the scratch pad
-  getScratchPadConditions() {
-    return this.scratchPadService.getConditions();
+  /**
+   * Get care plans currently in the scratch pad for display 
+   * in the list.
+   */
+  getScratchPadCarePlans() {
+    return this.scratchPadService.getCarePlans();
   }
 }
 </code></pre>
@@ -1230,28 +951,28 @@ export class ConditionsComponent extends BaseColumn {
 
     <div class="tab-pane fade " id="c-templateData">
         <pre class="line-numbers"><code class="language-html">
-&lt;div id&#x3D;&quot;conditions&quot; [style.height.px]&#x3D;&quot;columnHeight&quot;&gt;
+&lt;div id&#x3D;&quot;carePlans&quot; style&#x3D;&quot;height: 500px; overflow-y: auto;&quot;&gt;
   &lt;div class&#x3D;&quot;column-header&quot;&gt;
     &lt;div class&#x3D;&quot;header text-center&quot;&gt;
-      &lt;h2 style&#x3D;&quot;display: inline-block;&quot;&gt;Conditions&lt;/h2&gt;
+      &lt;h2 style&#x3D;&quot;display: inline-block;&quot;&gt;Care Plans&lt;/h2&gt;
       &lt;div style&#x3D;&quot;display: inline-block;&quot;&gt;
-        &lt;columnStateSwitcher [column]&#x3D;&quot;this&quot; [columnType]&#x3D;&quot;&#x27;conditions&#x27;&quot;&gt;&lt;/columnStateSwitcher&gt;
+        &lt;columnStateSwitcher [column]&#x3D;&quot;this&quot; [columnType]&#x3D;&quot;&#x27;careplans&#x27;&quot;&gt;&lt;/columnStateSwitcher&gt;
       &lt;/div&gt;
     &lt;/div&gt;
   &lt;/div&gt;
   &lt;div class&#x3D;&quot;column-content&quot;&gt;
-    &lt;div *ngIf&#x3D;&quot;columnState &#x3D;&#x3D; &amp;quot;default&amp;quot; &amp;amp;&amp;amp; loaded&quot;&gt;
-      &lt;accordionRecursion [levelData]&#x3D;&quot;conditions&quot; [columnNum]&#x3D;&quot;0&quot; [levelNum]&#x3D;&quot;0&quot; [firstIteration]&#x3D;&quot;1&quot;&gt;&lt;/accordionRecursion&gt;
+    &lt;div class&#x3D;&quot;container&quot; *ngIf&#x3D;&quot;columnState &#x3D;&#x3D; &amp;quot;default&amp;quot;&quot; style&#x3D;&quot;width:auto;&quot;&gt;
+      &lt;div *ngIf&#x3D;&quot;columnState &#x3D;&#x3D; &amp;quot;default&amp;quot; &amp;amp;&amp;amp; carePlanLoadFinished&quot;&gt;
+        &lt;accordionRecursion [levelData]&#x3D;&quot;carePlans&quot; [columnNum]&#x3D;&quot;2&quot; [levelNum]&#x3D;&quot;0&quot; [firstIteration]&#x3D;&quot;1&quot;&gt;&lt;/accordionRecursion&gt;
+      &lt;/div&gt;
+      &lt;div *ngIf&#x3D;&quot;!carePlanLoadFinished&quot;&gt;
+        &lt;loading-animation&gt;&lt;/loading-animation&gt;
+      &lt;/div&gt;
     &lt;/div&gt;
-    &lt;div *ngIf&#x3D;&quot;!loaded&quot;&gt;
-      &lt;loading-animation&gt;&lt;/loading-animation&gt;
-    &lt;/div&gt;
-    &lt;div *ngIf&#x3D;&quot;columnState &#x3D;&#x3D; &amp;quot;scratchpad&amp;quot;&quot;&gt;
-      &lt;conditionsDisplay [conditions]&#x3D;&quot;getScratchPadConditions()&quot; [scratchPadMode]&#x3D;&quot;true&quot;&gt;&lt;/conditionsDisplay&gt;
+    &lt;div class&#x3D;&quot;container&quot; *ngIf&#x3D;&quot;columnState &#x3D;&#x3D; &amp;quot;scratchpad&amp;quot;&quot; style&#x3D;&quot;width:auto;&quot;&gt;
+      &lt;careplanDisplay [carePlans]&#x3D;&quot;getScratchPadCarePlans()&quot;&gt;&lt;/careplanDisplay&gt;
     &lt;/div&gt;
   &lt;/div&gt;
-  &lt;div id&#x3D;&quot;condition-popover&quot; style&#x3D;&quot;display: none;&quot;&gt;Testing condition popover&lt;/div&gt;
-  &lt;contextMenu #menu&#x3D;&quot;&quot;&gt;&lt;/contextMenu&gt;
 &lt;/div&gt;</code></pre>
     </div>
 
@@ -1281,10 +1002,10 @@ export class ConditionsComponent extends BaseColumn {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div id="conditions" [style.height.px]="columnHeight">  <div class="column-header">    <div class="header text-center">      <h2 style="display: inline-block;">Conditions</h2>      <div style="display: inline-block;">        <columnStateSwitcher [column]="this" [columnType]="\'conditions\'"></columnStateSwitcher>      </div>    </div>  </div>  <div class="column-content">    <div *ngIf="columnState == &quot;default&quot; &amp;&amp; loaded">      <accordionRecursion [levelData]="conditions" [columnNum]="0" [levelNum]="0" [firstIteration]="1"></accordionRecursion>    </div>    <div *ngIf="!loaded">      <loading-animation></loading-animation>    </div>    <div *ngIf="columnState == &quot;scratchpad&quot;">      <conditionsDisplay [conditions]="getScratchPadConditions()" [scratchPadMode]="true"></conditionsDisplay>    </div>  </div>  <div id="condition-popover" style="display: none;">Testing condition popover</div>  <contextMenu #menu=""></contextMenu></div></div>'
+        var COMPONENT_TEMPLATE = '<div><div id="carePlans" style="height: 500px; overflow-y: auto;">  <div class="column-header">    <div class="header text-center">      <h2 style="display: inline-block;">Care Plans</h2>      <div style="display: inline-block;">        <columnStateSwitcher [column]="this" [columnType]="\'careplans\'"></columnStateSwitcher>      </div>    </div>  </div>  <div class="column-content">    <div class="container" *ngIf="columnState == &quot;default&quot;" style="width:auto;">      <div *ngIf="columnState == &quot;default&quot; &amp;&amp; carePlanLoadFinished">        <accordionRecursion [levelData]="carePlans" [columnNum]="2" [levelNum]="0" [firstIteration]="1"></accordionRecursion>      </div>      <div *ngIf="!carePlanLoadFinished">        <loading-animation></loading-animation>      </div>    </div>    <div class="container" *ngIf="columnState == &quot;scratchpad&quot;" style="width:auto;">      <careplanDisplay [carePlans]="getScratchPadCarePlans()"></careplanDisplay>    </div>  </div></div></div>'
     var COMPONENTS = [{'name': 'AccordionRecursion', 'selector': 'accordionRecursion'},{'name': 'AccountComponent', 'selector': 'account'},{'name': 'AddObservation', 'selector': 'addObservation'},{'name': 'AppComponent', 'selector': 'app'},{'name': 'CarePlanDisplay', 'selector': 'careplanDisplay'},{'name': 'CarePlansComponent', 'selector': 'carePlans'},{'name': 'CheckboxInline', 'selector': 'checkbox-inline'},{'name': 'ColumnStateSwitcherComponent', 'selector': 'columnStateSwitcher'},{'name': 'ConditionsChartComponent', 'selector': 'conditionsChart'},{'name': 'ConditionsComponent', 'selector': 'conditions'},{'name': 'ConditionsDisplay', 'selector': 'conditionsDisplay'},{'name': 'ContextMenuComponent', 'selector': 'contextMenu'},{'name': 'FormBuilder', 'selector': 'form-builder'},{'name': 'HistoricalTrendsComponent', 'selector': 'historicalTrends'},{'name': 'HomeComponent', 'selector': 'home'},{'name': 'HoverBoxComponent', 'selector': 'hoverBox'},{'name': 'LoadingAnimation', 'selector': 'loading-animation'},{'name': 'MedicationsComponent', 'selector': 'medications'},{'name': 'NewCondition', 'selector': 'newCondition'},{'name': 'NormalBox1', 'selector': 'normal-box-1'},{'name': 'NormalBox2', 'selector': 'normal-box-2'},{'name': 'NoteNavigationComponent', 'selector': 'noteNavigation'},{'name': 'ObservationRecursive', 'selector': 'observationRecursion'},{'name': 'ObservationRecursiveChart', 'selector': 'observationRecursionChart'},{'name': 'ObservationsComponent', 'selector': 'observations'},{'name': 'ObservationsDisplay', 'selector': 'observationsDisplay'},{'name': 'PatientComponent', 'selector': 'patient'},{'name': 'ScratchPadUpdate', 'selector': 'scratchpad-update'},{'name': 'SelectListSingle', 'selector': 'select-list-single'},{'name': 'TimelineComponent', 'selector': 'timelines'},{'name': 'TimelinePopupComponent', 'selector': 'timeline-popup'},{'name': 'ToolbarComponent', 'selector': 'toolbar'},{'name': 'TripleListComponent', 'selector': 'triplelist'}];
     var DIRECTIVES = [{'name': 'AutoGrowDirective', 'selector': '[autoGrow]'},{'name': 'HighlightDirective', 'selector': '[highlight]'}];
-    var ACTUAL_COMPONENT = {'name': 'ConditionsComponent'};
+    var ACTUAL_COMPONENT = {'name': 'CarePlansComponent'};
 </script>
 <script src="../js/tree.js"></script>
 
@@ -1319,7 +1040,7 @@ export class ConditionsComponent extends BaseColumn {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
-            var COMPODOC_CURRENT_PAGE_URL = 'ConditionsComponent.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'CarePlansComponent.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

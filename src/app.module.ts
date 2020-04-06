@@ -9,7 +9,7 @@ import { ConditionsComponent } from './app/components/conditions/conditions.comp
 import { TimelineComponent } from './app/components/timeline/timeline.component';
 import { TimelinePopupComponent } from './app/components/timeline_popup/timeline_popup.component';
 import { ObservationsComponent } from './app/components/observations/observations.component';
-import { CarePlanComponent } from './app/components/carePlan/carePlan.component';
+import { CarePlansComponent } from './app/components/carePlans/carePlans.component';
 import { HoverBoxComponent } from "./app/components/hoverBox/hoverBox.component";
 import { LoadingAnimation } from './app/components/loadingAnimation/loadingAnimation.component';
 import { AccountComponent } from './app/components/account/account.component';
@@ -97,7 +97,7 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
     ConditionsDisplay,
 
     // CAREPLAN COLUMN
-    CarePlanComponent,
+    CarePlansComponent,
     CarePlanDisplay,
     MedicationsComponent,
 

@@ -14,7 +14,7 @@
         <accordionRecursion [levelData]="carePlans" [columnNum]="2" [levelNum]="0" [firstIteration]="1"></accordionRecursion>
       </div>
       <div *ngIf="!carePlanLoadFinished">
-        <loading-animation></loading-animation>
+        <loadingAnimation></loadingAnimation>
       </div>
     </div>
     <div class="container" *ngIf="columnState == &quot;scratchpad&quot;" style="width:auto;">

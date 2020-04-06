@@ -13,7 +13,7 @@
       <accordionRecursion [levelData]="conditions" [columnNum]="0" [levelNum]="0" [firstIteration]="1"></accordionRecursion>
     </div>
     <div *ngIf="!loaded">
-      <loading-animation></loading-animation>
+      <loadingAnimation></loadingAnimation>
     </div>
     <div *ngIf="columnState == &quot;scratchpad&quot;">
       <conditionsDisplay [conditions]="getScratchPadConditions()" [scratchPadMode]="true"></conditionsDisplay>

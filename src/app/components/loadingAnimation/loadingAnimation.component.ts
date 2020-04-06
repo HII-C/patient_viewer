@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
 
+/**
+ * A simple component displaying a loading animation.
+ */
 @Component({
-  selector: 'loading-animation',
+  selector: 'loadingAnimation',
   templateUrl: './loadingAnimation.html'
 })
 export class LoadingAnimation {

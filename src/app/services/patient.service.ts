@@ -12,7 +12,7 @@ export class PatientService {
   private readonly path = '/Patient';
 
   // The id of the currently set patient
-  public patientId: number;
+  public patientId: string;
 
   constructor(
     private http: HttpClient,

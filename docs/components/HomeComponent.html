@@ -61,6 +61,15 @@
     <code>src/app/components/home/home.component.ts</code>
 </p>
 
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>High-level component that wraps the components showing 
+patient information, the toolbar, the timeline, and the 
+triple list (conditions, observations, and care plans).</p>
+
+    </p>
 
 
 
@@ -132,6 +141,7 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                    <span class="modifier">Public</span>
                                 <a href="#selectPatientById">selectPatientById</a>
                             </li>
                         </ul>
@@ -152,12 +162,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(fhirService: <a href="../injectables/FhirService.html">FhirService</a>, patientService: <a href="../injectables/PatientService.html">PatientService</a>, cookieService: CookieService, smartService: <a href="../injectables/SmartService.html">SmartService</a>, conditionService: <a href="../injectables/ConditionService.html">ConditionService</a>, compiler: <a href="https://angular.io/api/core/Compiler" target="_blank">Compiler</a>)</code>
+<code>constructor(fhirService: <a href="../injectables/FhirService.html">FhirService</a>, patientService: <a href="../injectables/PatientService.html">PatientService</a>, cookieService: CookieService, smartService: <a href="../injectables/SmartService.html">SmartService</a>, compiler: <a href="https://angular.io/api/core/Compiler" target="_blank">Compiler</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/components/home/home.component.ts:16</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="21" class="link-to-prism">src/app/components/home/home.component.ts:21</a></div>
                             </td>
                         </tr>
 
@@ -223,18 +233,6 @@
                                                     
                                                 </tr>
                                                 <tr>
-                                                        <td>conditionService</td>
-                                                  
-                                                        <td>
-                                                                        <code><a href="../injectables/ConditionService.html" target="_self" >ConditionService</a></code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                                <tr>
                                                         <td>compiler</td>
                                                   
                                                         <td>
@@ -271,6 +269,7 @@
                     <a name="selectPatientById"></a>
                     <span class="name">
                         <b>
+                            <span class="modifier">Public</span>
                             selectPatientById
                         </b>
                         <a href="#selectPatientById"><span class="icon ion-ios-link"></span></a>
@@ -279,21 +278,24 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>selectPatientById(id)</code>
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>selectPatientById(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="41"
-                            class="link-to-prism">src/app/components/home/home.component.ts:41</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="50"
+                            class="link-to-prism">src/app/components/home/home.component.ts:50</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Select a patient to display.</p>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -301,18 +303,27 @@
                             <thead>
                                 <tr>
                                     <td>Name</td>
+                                    <td>Type</td>
                                     <td>Optional</td>
+                                    <td>Description</td>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     <td>id</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
 
                                     <td>
                                         No
                                     </td>
 
 
+                                    <td>
+                                        <p>The id of the selected patient.</p>
+
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -361,10 +372,16 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/components/home/home.component.ts:16</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="21" class="link-to-prism">src/app/components/home/home.component.ts:21</a></div>
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>The patient that is being displayed. </p>
+</div>
+                    </td>
+                </tr>
 
             </tbody>
         </table>
@@ -380,27 +397,33 @@ import { CookieService } from &#x27;ngx-cookie-service&#x27;;
 import { PatientService } from &#x27;../../services/patient.service&#x27;;
 import { SmartService } from &#x27;../../services/smart.service&#x27;;
 import { FhirService } from &#x27;../../services/fhir.service&#x27;;
-import { ConditionService } from &#x27;../../services/condition.service&#x27;;
 
 import { Patient } from &#x27;../../models/patient.model&#x27;;
 
+/**
+ * High-level component that wraps the components showing 
+ * patient information, the toolbar, the timeline, and the 
+ * triple list (conditions, observations, and care plans).
+ */
 @Component({
     selector: &#x27;home&#x27;,
     templateUrl: &#x27;./home.html&#x27;
 })
 export class HomeComponent {
+    /** The patient that is being displayed. */
     selected: Patient &#x3D; null;
 
-    constructor(private fhirService: FhirService,
+    constructor(
+        private fhirService: FhirService,
         private patientService: PatientService,
         private cookieService: CookieService,
         private smartService: SmartService,
-        private conditionService: ConditionService,
-        private compiler: Compiler) {
-
+        private compiler: Compiler
+    ) {
         this.compiler.clearCache();
         this.fhirService.setUrl(this.cookieService.get(&#x27;fhirBaseUrl&#x27;));
 
+        // Retrieve patient data from sandbox.
         if (this.fhirService.token) {
             // Access token is already available.
             this.selectPatientById(this.patientService.patientId);
@@ -413,15 +436,17 @@ export class HomeComponent {
         }
     }
 
-    // Select a patient with the given ID
-    selectPatientById(id) {
+    /**
+     * Select a patient to display.
+     * @param id The id of the selected patient.
+     */
+    public selectPatientById(id: string) {
         this.patientService.setPatientId(id);
         this.patientService.loadPatient().subscribe(patient &#x3D;&gt; {
             this.selected &#x3D; patient;
         });
     }
-}
-</code></pre>
+}</code></pre>
     </div>
 
     <div class="tab-pane fade " id="c-templateData">

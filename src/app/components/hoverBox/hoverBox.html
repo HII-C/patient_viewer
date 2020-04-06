@@ -1,7 +1,17 @@
 
-<ul class="dropdown-menu" [style.position]="'fixed'" [style.display]="visible ? 'block' : 'none'" [style.left]="left" [style.top]="top">
-  <li *ngFor="let item of items"> <a href="#" (click)="$event.preventDefault()"><span *ngIf="isMonth(item); else itemTemplate">
+<ul class="dropdown-menu" 
+    [style.position]="'fixed'" 
+    [style.display]="visible ? 'block' : 'none'" 
+    [style.left]="left" 
+    [style.top]="top">
+  <li *ngFor="let item of items">
+    <a href="#" (click)="$event.preventDefault()">
+      <span *ngIf="isMonth(item); else itemTemplate">
         {{item}}
-        &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;<span class="glyphicon glyphicon-list-alt"></span></span>
-      <ng-template #itemTemplate="">{{item}}</ng-template></a></li>
+        &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;
+        <span class="glyphicon glyphicon-list-alt"></span>
+      </span>
+      <ng-template #itemTemplate="">{{item}}</ng-template>
+    </a>
+  </li>
 </ul>

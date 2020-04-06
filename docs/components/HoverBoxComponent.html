@@ -61,6 +61,14 @@
     <code>src/app/components/hoverBox/hoverBox.component.ts</code>
 </p>
 
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>A component for displaying a hover box containing 
+custom information. </p>
+
+    </p>
 
 
 
@@ -157,20 +165,16 @@
                                 <a href="#hide">hide</a>
                             </li>
                             <li>
-                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Private</span>
                                 <a href="#isDate">isDate</a>
                             </li>
                             <li>
-                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Private</span>
                                 <a href="#isMonth">isMonth</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
                                 <a href="#show">show</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Public</span>
-                                <a href="#typeOf">typeOf</a>
                             </li>
                         </ul>
                     </td>
@@ -195,7 +199,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/components/hoverBox/hoverBox.component.ts:28</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/components/hoverBox/hoverBox.component.ts:27</a></div>
                             </td>
                         </tr>
 
@@ -236,14 +240,16 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="63"
-                            class="link-to-prism">src/app/components/hoverBox/hoverBox.component.ts:63</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="69"
+                            class="link-to-prism">src/app/components/hoverBox/hoverBox.component.ts:69</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Hide the hover box.</p>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -287,7 +293,7 @@
                     <a name="isDate"></a>
                     <span class="name">
                         <b>
-                            <span class="modifier">Public</span>
+                            <span class="modifier">Private</span>
                             isDate
                         </b>
                         <a href="#isDate"><span class="icon ion-ios-link"></span></a>
@@ -304,14 +310,17 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="83"
-                            class="link-to-prism">src/app/components/hoverBox/hoverBox.component.ts:83</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="89"
+                            class="link-to-prism">src/app/components/hoverBox/hoverBox.component.ts:89</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Check whether <code>x</code> is a date to display it in a custom 
+format.</p>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -355,7 +364,7 @@
                     <a name="isMonth"></a>
                     <span class="name">
                         <b>
-                            <span class="modifier">Public</span>
+                            <span class="modifier">Private</span>
                             isMonth
                         </b>
                         <a href="#isMonth"><span class="icon ion-ios-link"></span></a>
@@ -372,14 +381,17 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="87"
-                            class="link-to-prism">src/app/components/hoverBox/hoverBox.component.ts:87</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="97"
+                            class="link-to-prism">src/app/components/hoverBox/hoverBox.component.ts:97</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Check whether <code>x</code> is a month to display it in a custom 
+format.</p>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -433,21 +445,23 @@
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>show(items, event)</code>
+                    <code>show(items: Array<any>, event)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="32"
-                            class="link-to-prism">src/app/components/hoverBox/hoverBox.component.ts:32</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="37"
+                            class="link-to-prism">src/app/components/hoverBox/hoverBox.component.ts:37</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Show the hover box with multiple items.</p>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -455,27 +469,42 @@
                             <thead>
                                 <tr>
                                     <td>Name</td>
+                                    <td>Type</td>
                                     <td>Optional</td>
+                                    <td>Description</td>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     <td>items</td>
+                                    <td>
+                                            <code>Array&lt;any&gt;</code>
+                                    </td>
 
                                     <td>
                                         No
                                     </td>
 
 
+                                    <td>
+                                        <p>The items to display in the hover box.</p>
+
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>event</td>
+                                    <td>
+                                    </td>
 
                                     <td>
                                         No
                                     </td>
 
 
+                                    <td>
+                                        <p>The click event that triggered showing the hover box.</p>
+
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -484,74 +513,6 @@
                     </div>
                     <div class="io-description">
                         <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                    </div>
-                    <div class="io-description">
-                        
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="typeOf"></a>
-                    <span class="name">
-                        <b>
-                            <span class="modifier">Public</span>
-                            typeOf
-                        </b>
-                        <a href="#typeOf"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                    <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>typeOf(x)</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="79"
-                            class="link-to-prism">src/app/components/hoverBox/hoverBox.component.ts:79</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                    <div class="io-description">
-                        <b>Parameters :</b>
-                        <table class="params">
-                            <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Optional</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>x</td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>    <code>&quot;string&quot; | &quot;number&quot; | &quot;boolean&quot; | &quot;symbol&quot; | &quot;undefined&quot; | &quot;object&quot; | &quot;function&quot;</code>
 
                     </div>
                     <div class="io-description">
@@ -592,10 +553,16 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/components/hoverBox/hoverBox.component.ts:28</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/components/hoverBox/hoverBox.component.ts:27</a></div>
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Time (in ms) following a hover before the hover box appears. </p>
+</div>
+                    </td>
+                </tr>
 
             </tbody>
         </table>
@@ -628,6 +595,12 @@
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>The data passed into the hover box from wherever it was triggered. </p>
+</div>
+                    </td>
+                </tr>
 
             </tbody>
         </table>
@@ -656,7 +629,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/components/hoverBox/hoverBox.component.ts:20</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/components/hoverBox/hoverBox.component.ts:19</a></div>
                             </td>
                         </tr>
 
@@ -688,7 +661,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/components/hoverBox/hoverBox.component.ts:22</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="21" class="link-to-prism">src/app/components/hoverBox/hoverBox.component.ts:21</a></div>
                             </td>
                         </tr>
 
@@ -720,10 +693,16 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/components/hoverBox/hoverBox.component.ts:25</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/components/hoverBox/hoverBox.component.ts:24</a></div>
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Used to track whether the hover box is waiting to be shown. </p>
+</div>
+                    </td>
+                </tr>
 
             </tbody>
         </table>
@@ -752,7 +731,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/components/hoverBox/hoverBox.component.ts:19</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/components/hoverBox/hoverBox.component.ts:18</a></div>
                             </td>
                         </tr>
 
@@ -784,7 +763,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="21" class="link-to-prism">src/app/components/hoverBox/hoverBox.component.ts:21</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/components/hoverBox/hoverBox.component.ts:20</a></div>
                             </td>
                         </tr>
 
@@ -820,6 +799,12 @@
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Whether the hover box is currently visible or not. </p>
+</div>
+                    </td>
+                </tr>
 
             </tbody>
         </table>
@@ -831,42 +816,46 @@
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, Injectable } from &#x27;@angular/core&#x27;;
 
-
+/**
+ * A component for displaying a hover box containing 
+ * custom information. 
+ */
 @Component({
   selector: &#x27;hoverBox&#x27;,
   templateUrl: &#x27;./hoverBox.html&#x27;
 })
-
-@Injectable()
-
 export class HoverBoxComponent {
-  // The data passed into the hover box from wherever it was triggered.
+  /** The data passed into the hover box from wherever it was triggered. */
   items: Array&lt;any&gt; &#x3D; null;
 
-  // Whether the hover box is currently visible.
+  /** Whether the hover box is currently visible or not. */
   visible: boolean &#x3D; false;
 
-  // Where the hover box is displayed on the screen.
   top: string &#x3D; &#x27;0px&#x27;;
   left: string &#x3D; &#x27;0px&#x27;;
   topOffset: number &#x3D; 18;
   leftOffset: number &#x3D; 18;
 
-  // Used to track whether the hover box is waiting to be shown.
+  /** Used to track whether the hover box is waiting to be shown. */
   timeoutHandle: any &#x3D; null;
 
-  // Time (in ms) before the hover box appears.
+  /** Time (in ms) following a hover before the hover box appears. */
   DISPLAY_DELAY: number &#x3D; 200;
 
   constructor() { }
 
-  public show(items, event) {
+  /**
+   * Show the hover box with multiple items.
+   * 
+   * @param items The items to display in the hover box.
+   * @param event The click event that triggered showing the hover box.
+   */
+  public show(items: Array&lt;any&gt;, event) {
     // The hover box is already queued to display, no need to display again.
     if (this.timeoutHandle !&#x3D; null) {
       return;
     }
 
-    
     this.timeoutHandle &#x3D; setTimeout(() &#x3D;&gt; {
       this.items &#x3D; items;
 
@@ -890,7 +879,9 @@ export class HoverBoxComponent {
     }, this.DISPLAY_DELAY);
   }
 
-  // Hide the menu.
+  /**
+   * Hide the hover box.
+   */
   public hide(event) {
     if (event) {
       event.preventDefault();
@@ -907,15 +898,19 @@ export class HoverBoxComponent {
     this.items &#x3D; null;
   }
 
-  public typeOf(x) {
-    return typeof x;
-  }
-
-  public isDate(x) {
+  /**
+   * Check whether &#x60;x&#x60; is a date to display it in a custom 
+   * format.
+   */
+  private isDate(x) {
     return x instanceof Date;
   }
 
-  public isMonth(x) {
+  /**
+   * Check whether &#x60;x&#x60; is a month to display it in a custom 
+   * format.
+   */
+  private isMonth(x) {
     return x.includes(&quot;11m&quot;);
   }
 }</code></pre>
@@ -923,11 +918,21 @@ export class HoverBoxComponent {
 
     <div class="tab-pane fade " id="c-templateData">
         <pre class="line-numbers"><code class="language-html">
-&lt;ul class&#x3D;&quot;dropdown-menu&quot; [style.position]&#x3D;&quot;&#x27;fixed&#x27;&quot; [style.display]&#x3D;&quot;visible ? &#x27;block&#x27; : &#x27;none&#x27;&quot; [style.left]&#x3D;&quot;left&quot; [style.top]&#x3D;&quot;top&quot;&gt;
-  &lt;li *ngFor&#x3D;&quot;let item of items&quot;&gt; &lt;a href&#x3D;&quot;#&quot; (click)&#x3D;&quot;$event.preventDefault()&quot;&gt;&lt;span *ngIf&#x3D;&quot;isMonth(item); else itemTemplate&quot;&gt;
+&lt;ul class&#x3D;&quot;dropdown-menu&quot; 
+    [style.position]&#x3D;&quot;&#x27;fixed&#x27;&quot; 
+    [style.display]&#x3D;&quot;visible ? &#x27;block&#x27; : &#x27;none&#x27;&quot; 
+    [style.left]&#x3D;&quot;left&quot; 
+    [style.top]&#x3D;&quot;top&quot;&gt;
+  &lt;li *ngFor&#x3D;&quot;let item of items&quot;&gt;
+    &lt;a href&#x3D;&quot;#&quot; (click)&#x3D;&quot;$event.preventDefault()&quot;&gt;
+      &lt;span *ngIf&#x3D;&quot;isMonth(item); else itemTemplate&quot;&gt;
         {{item}}
-        &amp;emsp; &amp;emsp; &amp;emsp; &amp;emsp; &amp;emsp; &amp;emsp; &amp;emsp;&lt;span class&#x3D;&quot;glyphicon glyphicon-list-alt&quot;&gt;&lt;/span&gt;&lt;/span&gt;
-      &lt;ng-template #itemTemplate&#x3D;&quot;&quot;&gt;{{item}}&lt;/ng-template&gt;&lt;/a&gt;&lt;/li&gt;
+        &amp;emsp; &amp;emsp; &amp;emsp; &amp;emsp; &amp;emsp; &amp;emsp; &amp;emsp;
+        &lt;span class&#x3D;&quot;glyphicon glyphicon-list-alt&quot;&gt;&lt;/span&gt;
+      &lt;/span&gt;
+      &lt;ng-template #itemTemplate&#x3D;&quot;&quot;&gt;{{item}}&lt;/ng-template&gt;
+    &lt;/a&gt;
+  &lt;/li&gt;
 &lt;/ul&gt;</code></pre>
     </div>
 
@@ -957,7 +962,7 @@ export class HoverBoxComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><ul class="dropdown-menu" [style.position]="\'fixed\'" [style.display]="visible ? \'block\' : \'none\'" [style.left]="left" [style.top]="top">  <li *ngFor="let item of items"> <a href="#" (click)="$event.preventDefault()"><span *ngIf="isMonth(item); else itemTemplate">        {{item}}        &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;<span class="glyphicon glyphicon-list-alt"></span></span>      <ng-template #itemTemplate="">{{item}}</ng-template></a></li></ul></div>'
+        var COMPONENT_TEMPLATE = '<div><ul class="dropdown-menu"     [style.position]="\'fixed\'"     [style.display]="visible ? \'block\' : \'none\'"     [style.left]="left"     [style.top]="top">  <li *ngFor="let item of items">    <a href="#" (click)="$event.preventDefault()">      <span *ngIf="isMonth(item); else itemTemplate">        {{item}}        &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;        <span class="glyphicon glyphicon-list-alt"></span>      </span>      <ng-template #itemTemplate="">{{item}}</ng-template>    </a>  </li></ul></div>'
     var COMPONENTS = [{'name': 'AccordionRecursion', 'selector': 'accordionRecursion'},{'name': 'AccountComponent', 'selector': 'account'},{'name': 'AddObservation', 'selector': 'addObservation'},{'name': 'AppComponent', 'selector': 'app'},{'name': 'CarePlanComponent', 'selector': 'carePlan'},{'name': 'CarePlanDisplay', 'selector': 'careplanDisplay'},{'name': 'CheckboxInline', 'selector': 'checkbox-inline'},{'name': 'ColumnStateSwitcherComponent', 'selector': 'columnStateSwitcher'},{'name': 'ConditionsChartComponent', 'selector': 'conditionsChart'},{'name': 'ConditionsComponent', 'selector': 'conditions'},{'name': 'ConditionsDisplay', 'selector': 'conditionsDisplay'},{'name': 'ContextMenuComponent', 'selector': 'contextMenu'},{'name': 'DoctorNoteComponent', 'selector': 'doctorNote'},{'name': 'Favorites', 'selector': 'favorites'},{'name': 'FormBuilder', 'selector': 'form-builder'},{'name': 'HistoricalTrendsComponent', 'selector': 'historicalTrends'},{'name': 'HomeComponent', 'selector': 'home'},{'name': 'HoverBoxComponent', 'selector': 'hoverBox'},{'name': 'LoadingAnimation', 'selector': 'loading-animation'},{'name': 'MedicationsComponent', 'selector': 'medications'},{'name': 'NewCondition', 'selector': 'newCondition'},{'name': 'NormalBox1', 'selector': 'normal-box-1'},{'name': 'NormalBox2', 'selector': 'normal-box-2'},{'name': 'NoteNavigationComponent', 'selector': 'noteNavigation'},{'name': 'ObservationRecursive', 'selector': 'observationRecursion'},{'name': 'ObservationRecursiveChart', 'selector': 'observationRecursionChart'},{'name': 'ObservationsComponent', 'selector': 'observations'},{'name': 'ObservationsDisplay', 'selector': 'observationsDisplay'},{'name': 'PatientComponent', 'selector': 'patient'},{'name': 'ScratchPadUpdate', 'selector': 'scratchpad-update'},{'name': 'SelectListSingle', 'selector': 'select-list-single'},{'name': 'TimelineComponent', 'selector': 'timelines'},{'name': 'TimelinePopupComponent', 'selector': 'timeline-popup'},{'name': 'ToolbarComponent', 'selector': 'toolbar'},{'name': 'TripleListComponent', 'selector': 'triplelist'}];
     var DIRECTIVES = [{'name': 'AutoGrowDirective', 'selector': '[autoGrow]'},{'name': 'HighlightDirective', 'selector': '[highlight]'}];
     var ACTUAL_COMPONENT = {'name': 'HoverBoxComponent'};

@@ -1,41 +1,45 @@
 import { Component, Injectable } from '@angular/core';
 
-
+/**
+ * A component for displaying a hover box containing 
+ * custom information. 
+ */
 @Component({
   selector: 'hoverBox',
   templateUrl: './hoverBox.html'
 })
-
-@Injectable()
-
 export class HoverBoxComponent {
-  // The data passed into the hover box from wherever it was triggered.
+  /** The data passed into the hover box from wherever it was triggered. */
   items: Array<any> = null;
 
-  // Whether the hover box is currently visible.
+  /** Whether the hover box is currently visible or not. */
   visible: boolean = false;
 
-  // Where the hover box is displayed on the screen.
   top: string = '0px';
   left: string = '0px';
   topOffset: number = 18;
   leftOffset: number = 18;
 
-  // Used to track whether the hover box is waiting to be shown.
+  /** Used to track whether the hover box is waiting to be shown. */
   timeoutHandle: any = null;
 
-  // Time (in ms) before the hover box appears.
+  /** Time (in ms) following a hover before the hover box appears. */
   DISPLAY_DELAY: number = 200;
 
   constructor() { }
 
-  public show(items, event) {
+  /**
+   * Show the hover box with multiple items.
+   * 
+   * @param items The items to display in the hover box.
+   * @param event The click event that triggered showing the hover box.
+   */
+  public show(items: Array<any>, event) {
     // The hover box is already queued to display, no need to display again.
     if (this.timeoutHandle != null) {
       return;
     }
 
-    
     this.timeoutHandle = setTimeout(() => {
       this.items = items;
 
@@ -59,7 +63,9 @@ export class HoverBoxComponent {
     }, this.DISPLAY_DELAY);
   }
 
-  // Hide the menu.
+  /**
+   * Hide the hover box.
+   */
   public hide(event) {
     if (event) {
       event.preventDefault();
@@ -76,15 +82,19 @@ export class HoverBoxComponent {
     this.items = null;
   }
 
-  public typeOf(x) {
-    return typeof x;
-  }
-
-  public isDate(x) {
+  /**
+   * Check whether `x` is a date to display it in a custom 
+   * format.
+   */
+  private isDate(x) {
     return x instanceof Date;
   }
 
-  public isMonth(x) {
+  /**
+   * Check whether `x` is a month to display it in a custom 
+   * format.
+   */
+  private isMonth(x) {
     return x.includes("11m");
   }
 }

@@ -6,7 +6,7 @@ Front-end project for context-driven clinical transactions.
 
 ## Preparing the Application
 
-This is an [Angular 7](https://angular.io) project using `grunt` as the build system, [SASS](http://sass-lang.com) for CSS, and [Bootstrap](http://getbootstrap.com/) for layout. `npm` is the package manager. 
+This is an [Angular 8](https://angular.io) project using `grunt` as the build system, [SASS](http://sass-lang.com) for CSS, and [Bootstrap](http://getbootstrap.com/) for layout. `npm` is the package manager. 
 
 Assuming you already have node installed via `brew install node` or similar, begin by running the following commands in the terminal:
 	

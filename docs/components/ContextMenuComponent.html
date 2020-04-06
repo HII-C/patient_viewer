@@ -67,22 +67,25 @@
     <p class="comment">
         <p>A reusable context menu component.</p>
 <p>Example Usage:</p>
-<p>```</p>
-<ul>
-<li>this.menu.addOption({</li>
-<li>&#39;icon&#39;: &#39;glyphicon-stats&#39;, // icon to display</li>
-<li>&#39;text&#39;: &#39;Add to Trend Tool&#39;, // text to display</li>
-<li>&#39;exec&#39;: function(data) { // what to execute upon click</li>
-<li>console.log(data);</li>
-<li>}</li>
-<li>});</li>
-<li>```</li>
-</ul>
 
     </p>
 
 
 
+    <p class="comment">
+        <h3>Example</h3>
+    </p>
+    <div class="io-description">
+                <div>
+                    <pre class="line-numbers"><code class="language-html">this.menu.addOption({
+  'icon': 'glyphicon-stats', // icon to display
+  'text': 'Add to Trend Tool', // text to display
+  'exec': function(data) { // what to execute upon click
+      console.log(data);
+  }
+});</code></pre>
+                </div>
+    </div>
 
 <section>
     <h3>Metadata</h3>
@@ -967,15 +970,15 @@ import { fromEvent } from &#x27;rxjs&#x27;;
  * A reusable context menu component.
  * 
  * Example Usage:
- * &#x60;&#x60;&#x60;
+ * 
+ * @example
  * this.menu.addOption({
- *   &#x27;icon&#x27;: &#x27;glyphicon-stats&#x27;, // icon to display
- *   &#x27;text&#x27;: &#x27;Add to Trend Tool&#x27;, // text to display
- *   &#x27;exec&#x27;: function(data) { // what to execute upon click
- *    console.log(data);
- *   }
+ *              &#x27;icon&#x27;: &#x27;glyphicon-stats&#x27;, // icon to display
+ *              &#x27;text&#x27;: &#x27;Add to Trend Tool&#x27;, // text to display
+ *              &#x27;exec&#x27;: function(data) { // what to execute upon click
+ *                  console.log(data);
+ *              }
  * });
- * &#x60;&#x60;&#x60;
  */
 @Component({
   selector: &#x27;contextMenu&#x27;,

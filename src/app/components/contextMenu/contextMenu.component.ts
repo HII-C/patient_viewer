@@ -6,15 +6,15 @@ import { fromEvent } from 'rxjs';
  * A reusable context menu component.
  * 
  * Example Usage:
- * ```
+ * 
+ * @example
  * this.menu.addOption({
- *   'icon': 'glyphicon-stats', // icon to display
- *   'text': 'Add to Trend Tool', // text to display
- *   'exec': function(data) { // what to execute upon click
- *    console.log(data);
- *   }
+ *              'icon': 'glyphicon-stats', // icon to display
+ *              'text': 'Add to Trend Tool', // text to display
+ *              'exec': function(data) { // what to execute upon click
+ *                  console.log(data);
+ *              }
  * });
- * ```
  */
 @Component({
   selector: 'contextMenu',

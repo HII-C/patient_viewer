@@ -16,7 +16,6 @@ import { AccountComponent } from './app/components/account/account.component';
 import { ToolbarComponent } from './app/components/toolbar/toolbar.component';
 import { TripleListComponent } from './app/components/tripleList/tripleList.component';
 import { ObservationRecursive } from './app/components/observationRecursion/observationRecursion.component';
-import { AddObservation } from './app/components/addObservation/addObservation.component';
 import { ObservationRecursiveChart } from './app/components/observationRecursionChart/observationRecursionChart.component';
 import { MedicationsComponent } from './app/components/medications/medications.component';
 import { ConditionsChartComponent } from './app/components/conditionsChart/conditionsChart.component';
@@ -109,7 +108,6 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
     ToolbarComponent,
     TripleListComponent,
     ObservationRecursive,
-    AddObservation,
     ObservationRecursiveChart,
     ConditionsChartComponent,
     ColumnStateSwitcherComponent,

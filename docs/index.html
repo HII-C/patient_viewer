@@ -31,15 +31,29 @@
                    <div class="content-data">
 
 <h1 id="patient-viewer">Patient Viewer</h1>
+<p><a href="https://hii-c.github.io/patient_viewer/"><img src="https://i.imgur.com/49Z2ZHF.png" alt="Documentation" class="img-responsive"></a></p>
 <p>Front-end project for context-driven clinical transactions.</p>
 <h2 id="preparing-the-application">Preparing the Application</h2>
-<p>This is an <a href="https://angular.io">Angular 7</a> project using <code>grunt</code> as the build system, <a href="http://sass-lang.com">SASS</a> for CSS, and <a href="http://getbootstrap.com/">Bootstrap</a> for layout. <code>npm</code> is the package manager. </p>
+<p>This is an <a href="https://angular.io">Angular 8</a> project using <code>grunt</code> as the build system, <a href="http://sass-lang.com">SASS</a> for CSS, and <a href="http://getbootstrap.com/">Bootstrap</a> for layout. <code>npm</code> is the package manager. </p>
 <p>Assuming you already have node installed via <code>brew install node</code> or similar, begin by running the following commands in the terminal:</p>
 <div><pre class="line-numbers"><code class="language-none">git clone https://github.com/HII-C/patient_viewer.git
 cd patient_viewer
-npm install -g grunt typings
-npm install # to install project development dependencies
-typings install # to install TypeScript declarations</code></pre></div><p>If you do not have <code>npm</code> installed and <code>brew install node</code> does not work as expected, you may need to <a href="https://brew.sh/">follow the instructions here</a> to install the <code>brew</code> package manager. The project was tested specifically with node version <code>10.19.0</code>.</p>
+npm install -g grunt
+npm install # to install project development dependencies</code></pre></div><p>If you do not have <code>npm</code> installed, do the following:</p>
+<ul>
+<li><strong>Mac</strong>: <code>brew install node</code> in Terminal</li>
+<li><strong>Windows</strong>: <a href="https://www.guru99.com/download-install-node-js.html">Instructions</a></li>
+<li><strong>Linux</strong>: <a href="https://linuxize.com/post/how-to-install-node-js-on-ubuntu-18.04/">Instructions</a></li>
+</ul>
+<p>The project was tested specifically with node version <code>10.19.0</code>.</p>
+<h2 id="running-the-application">Running the Application</h2>
+<p>To launch in development mode, run the following terminal command from the <code>patient_viewer</code> folder:</p>
+<div><pre class="line-numbers"><code class="language-none">grunt --force # to serve the project and automatically recompile on file changes</code></pre></div><p>Then, do the following:</p>
+<ul>
+<li>Visit <a href="https://sandbox.hspconsortium.org/">HSPC Sandbox</a>, select the &quot;HII-C&quot; sandbox, choose the &quot;Apps&quot; option from the left menu, click on the &quot;HII-C Confidential [USE THIS]&quot; app, and then click &quot;Launch&quot;. </li>
+<li>Select the persona &quot;John Smith&quot;, and patient <code>Adams, Daniel X</code> in the popup. This should open the Patient Viewer application.</li>
+<li>Once you are done running Patient Viewer, make sure to terminate the <code>grunt --force</code> command in the terminal.</li>
+</ul>
 <h2 id="development-guidelines">Development Guidelines</h2>
 <h3 id="dos">Do&#39;s:</h3>
 <ul>
@@ -53,21 +67,6 @@ typings install # to install TypeScript declarations</code></pre></div><p>If you
 <li>Write a brief comment above each component and method that you write giving a brief overview of the functionality. If some code is particularly complex, place comments within the body of the method too.</li>
 <li>Avoid writing components that are very similar to one another. Instead, create a generic component that supports all use cases through an interface (examples are <code>contextMenu.component.ts</code> and <code>hoverBox.component.ts</code>).</li>
 </ul>
-<h2 id="running-the-application">Running the Application</h2>
-<p>To launch in development mode, run the following terminal command from the <code>patient_viewer</code> folder:</p>
-<div><pre class="line-numbers"><code class="language-none">grunt --force # to serve the project and automatically recompile on file changes</code></pre></div><p>Then, do the following:</p>
-<ul>
-<li>Visit <a href="https://sandbox.hspconsortium.org/">HSPC Sandbox</a>, select the &quot;HII-C&quot; sandbox, choose the &quot;Apps&quot; option from the left menu, click on the &quot;HII-C Confidential&quot; app, and then click &quot;Launch&quot; on the right.</li>
-<li>Select the patient <code>Adams, Daniel X</code> in the popup. This should open the Patient Viewer application.</li>
-<li>Once you are done running Patient Viewer, make sure to terminate the <code>grunt --force</code> command in the terminal.</li>
-</ul>
-<h2 id="building-for-production-tech-team-only">Building for Production (Tech Team Only)</h2>
-<p>First, build:</p>
-<div><pre class="line-numbers"><code class="language-none">grunt clean # to remove all existing compiled files
-grunt build # to build your local copy with any local changes</code></pre></div><p>Then, assuming you&#39;ve already familiar with <a href="https://www.docker.com">Docker</a> awesomeness and have it installed, plop the build into a wicked-fast <a href="http://nginx.org">nginx</a> web server container using the including Dockerfile with:</p>
-<div><pre class="line-numbers"><code class="language-none">docker build -t p3000/healthcreek-ui:latest . # though you probably want your own repo and tag strings :)</code></pre></div><h2 id="production-deployment-tech-team-only">Production Deployment (Tech Team Only)</h2>
-<p>Extremely easy in your existing Dockerized hosting environment. Just:</p>
-<div><pre class="line-numbers"><code class="language-none">docker run -d -p 9000:80 --restart unless-stopped p3000/healthcreek-ui:latest # or any official tag</code></pre></div><p>And you&#39;re done. No environment variables or further configuration are needed. Jedi&#39;s may use your existing Kubernetes, Open Shift etc installations as you see fit. :)</p>
 <h1 id="license">License</h1>
 <p><a href="https://www.apache.org/licenses/LICENSE-2.0">Apache 2.0</a></p>
 

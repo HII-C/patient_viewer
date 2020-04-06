@@ -1,7 +1,6 @@
 import { Component, Input, ElementRef } from '@angular/core';
 
 import { DoctorService } from '../../services/doctor.service';
-import { HistoricalTrendsService } from '../../services/historicalTrends.service';
 import { ToolBarService } from '../../services/toolbar.service';
 import { ScratchPadService } from '../../services/scratchPad.service';
 import { ConditionService } from '../../services/condition.service';
@@ -10,22 +9,22 @@ import { AssociationService } from '../../services/association.service';
 
 import { Patient } from '../../models/patient.model';
 
+/** 
+ * A component representing the toolbar at the top of 
+ * the application.
+ */
 @Component({
   selector: 'toolbar',
   templateUrl: './toolbar.html'
-  // animations: [
-  // 	trigger('fadeIn', [
-  // 		state('in', style({ opacity: '1' })),
-  // 		transition('void => *', [
-  // 			style({ opacity: '0' }),
-  // 			animate('800ms ease-in')
-  // 		])
-  // 	])
-  // ]
 })
 export class ToolbarComponent {
+  /** The patient currently displayed by the application. */
   @Input() patient: Patient;
-  nav2: boolean = false;
+  
+  /** 
+   * Tracks whether the toolbar is currently in its 1st or 2nd view. 
+   */
+  private nav2: boolean = false;
 
   constructor(
     private associationService: AssociationService,
@@ -34,23 +33,32 @@ export class ToolbarComponent {
     private observationService: ObservationService,
     private scratchPadService: ScratchPadService,
     private toolbarService: ToolBarService,
-    private trendsService: HistoricalTrendsService,
     private elRef: ElementRef
   ) { }
-
+  
+  /**
+   * Switches between the 1st and 2nd views of the 
+   * toolbar.
+   */
   switchNav() {
     this.nav2 = !this.nav2;
   }
 
+  /**
+   * Run the associations tool.
+   */
   runAssociationsTool() {
     let checkedConditions = this.conditionService.getCheckedConditions();
     let checkedObservations = this.observationService.getCheckedObservations();
     this.associationService.runAssociationsTool(checkedConditions, checkedObservations);
   }
 
-  // whenver the user presses the filter button
+  /**
+   * Adds the currently selected conditions and observations to the 
+   * scratch pad, and opens up the scratch pad view of the triple 
+   * lists.
+   */
   filterScratchPad() {
-    
     // Call the filtering method in the service
     this.scratchPadService.addConditionsToScratchPad();
     this.scratchPadService.addObservationToScratchPad();
@@ -59,16 +67,10 @@ export class ToolbarComponent {
     this.scratchPadService.switchToScratchPad(true);
   }
 
-  // reset to default (not scratchPad)
+  /**
+   * Reset triple lists to their default view (not the scratch pad).
+   */
   resetToDefaultView() {
     this.scratchPadService.switchToScratchPad(false);
-  }
-
-  updatePosition(ref: ElementRef) {
-    let left = this.elRef.nativeElement.querySelector('div').style.left;
-    let top = this.elRef.nativeElement.querySelector('div').style.top;
-
-    this.toolbarService.leftPosition = (parseInt(left.replace(/px/, "")) + 150) + "px";
-    this.toolbarService.topPosition = (parseInt(top.replace(/px/, "")) + 100) + "px";
   }
 }

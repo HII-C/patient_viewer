@@ -1,6 +1,7 @@
 module.exports = function(grunt) {
     var webpack = require('webpack');
     var path = require('path');
+    var sass = require('node-sass');
 
     // Store location settings
     // var settings = grunt.file.readJSON('gruntfile.settings.json');
@@ -23,6 +24,7 @@ module.exports = function(grunt) {
         sass: {
             build: {
                 options: {
+                    implementation: sass,
                     sourceMap: true
                 },
                 files: [{

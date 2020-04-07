@@ -56,7 +56,7 @@
     "lite-server": "^2.2.2",
     "load-grunt-tasks": "^5.1.0",
     "node-sass": "^4.13.1",
-    "npm": "^3.10.9",
+    "npm": "^6.13.4",
     "source-map-loader": "^0.2.4",
     "ts-loader": "^6.2.1",
     "typescript": "^2.0.3",

@@ -26,7 +26,7 @@ export class ObservationsComponent extends BaseColumn{
 
   mappings: { [key: string]: Array<string> } = {};
 
-  // for column switching
+  /** For column switching */
   subscription: Subscription;
 
   constructor(

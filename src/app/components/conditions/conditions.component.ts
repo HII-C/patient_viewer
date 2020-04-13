@@ -19,28 +19,34 @@ import { Condition } from '../../models/condition.model';
 import { Patient } from '../../models/patient.model';
 import { BaseColumn } from '../baseColumn';
 
-declare var $: any; //Necessary in order to use jQuery to open popup.
+/** Necessary in order to use jQuery to open popup. */
+declare var $: any;
 
+/**
+ * Component that represents the top level of the Conditions column
+ * in the application. Does not handle rendering; simply retrieves
+ * data from server and passes it down.
+ */
 @Component({
   selector: 'conditions',
   templateUrl: './conditions.html'
 })
 export class ConditionsComponent extends BaseColumn {
-  // The currently selected condition in the list.
+  /** The currently selected condition in the list. */
   selected: Condition;
 
-  // The list of conditions being displayed.
+  /** The list of conditions being displayed. */
   conditions: Array<Condition> = [];
   scratchPadConditions: any = [];
 
-  // for checking whenever the page is loaded
+  /** For checking whenever the page is loaded */
   loaded: boolean = false;
 
   viewToggle: boolean = false;
   conditionGrouping: Array<any> = [];
   justCreated: boolean;
 
-  // for column switching
+  /** For column switching */
   subscription: Subscription;
 
   @Input() patient: Patient;
@@ -83,7 +89,9 @@ export class ConditionsComponent extends BaseColumn {
     }
   }
 
-  // Called when all conditions have been loaded.
+  /**
+   * Called when all conditions have been loaded.
+   */
   onLoadComplete() {
     console.log("Loaded " + this.conditions.length + " conditions.");
 
@@ -118,7 +126,9 @@ export class ConditionsComponent extends BaseColumn {
     this.scratchPadService.initConditions(this.conditions);
   }
 
-  // Update the service to store correct column state
+  /**
+   * Update the service to store correct column state
+   */
   updateService(): void {
     this.conditionService.setColumnState(this.columnState);
   }
@@ -127,7 +137,9 @@ export class ConditionsComponent extends BaseColumn {
   // ======================================================== GETTERS AND SETTERS===================================================================
   // ===============================================================================================================================================
 
-  // retrieves the selected conditions from the scratch pad
+  /**
+   * Retrieves the selected conditions from the scratch pad
+   */
   getScratchPadConditions() {
     return this.scratchPadService.getConditions();
   }

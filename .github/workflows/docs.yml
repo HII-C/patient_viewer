@@ -1,6 +1,9 @@
-name: Generate Docs
+name: Deploy Docs
 
-on: [push]
+on:
+  push:
+    branches:
+      - master
 
 jobs:
   build:
@@ -12,38 +15,18 @@ jobs:
         node-version: [12.x]
 
     steps:
-    - name: Checkout gh-pages branch
-      uses: actions/checkout@v1
-      with:
-        ref: 'gh-pages'
-    
     - name: Checkout master branch
-      uses: actions/checkout@v1
-      with:
-        ref: 'master'
+      uses: actions/checkout@v2
 
     - uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
       
     - run: npm install
+    - run: npm run docs
 
-    - name: Commit docs
-      run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "Docs Generator"
-
-        git checkout gh-pages
-        git checkout master -- .
-        git rm --cached -r .
-
-        npm run docs
-
-        git add docs/*
-        git commit -m "Update docs"
-      
-    - name: Push docs to gh-pages
-      uses: ad-m/github-push-action@master
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        branch: 'gh-pages'
+    - name: Deploy docs to gh-pages branch
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs

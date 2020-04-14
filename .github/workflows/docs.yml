@@ -21,7 +21,6 @@ jobs:
 
     - name: Commit docs
       run: |
-        git branch
         git config --local user.email "action@github.com"
         git config --local user.name "Docs Generator"
 

@@ -12,7 +12,16 @@ jobs:
         node-version: [12.x]
 
     steps:
-    - uses: actions/checkout@v2.1.0
+    - name: Checkout gh-pages branch
+      uses: actions/checkout@v1
+      with:
+        ref: 'gh-pages'
+    
+    - name: Checkout master branch
+      uses: actions/checkout@v1
+      with:
+        ref: 'master'
+
     - uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
@@ -37,4 +46,4 @@ jobs:
       uses: ad-m/github-push-action@master
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        branch: gh-pages
+        branch: 'gh-pages'

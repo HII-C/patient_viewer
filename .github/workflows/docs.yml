@@ -12,7 +12,7 @@ jobs:
         node-version: [12.x]
 
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2.1.0
     - uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
@@ -21,6 +21,7 @@ jobs:
 
     - name: Commit docs
       run: |
+        git branch
         git config --local user.email "action@github.com"
         git config --local user.name "Docs Generator"
 

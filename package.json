@@ -7,7 +7,7 @@
   "author": "ASU HII-C",
   "scripts": {
     "start": "grunt",
-    "compodoc": "npx compodoc -p tsconfig.json -d docs"
+    "docs": "npx compodoc -p tsconfig.json -d docs"
   },
   "dependencies": {
     "@angular/animations": "^8.2.14",

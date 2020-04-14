@@ -3,8 +3,7 @@ name: Deploy Docs
 on: [push]
 
 jobs:
-  build:
-
+  deploy:
     runs-on: ubuntu-latest
 
     strategy:
@@ -23,7 +22,7 @@ jobs:
     - run: npm run docs
 
     - name: Deploy docs to gh-pages branch
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./docs
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./docs

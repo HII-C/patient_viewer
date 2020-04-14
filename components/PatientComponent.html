@@ -1,0 +1,1189 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>healthcreek-ui documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">healthcreek-ui documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li>Components</li>
+  <li>PatientComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li >
+            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/components/patient/patient.component.ts</code>
+</p>
+
+
+
+
+
+<section>
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>patient</code></td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./patient.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#advancedSearch">advancedSearch</a>
+                            </li>
+                            <li>
+                                <a href="#allergies">allergies</a>
+                            </li>
+                            <li>
+                                <a href="#allergy">allergy</a>
+                            </li>
+                            <li>
+                                <a href="#graphConfig">graphConfig</a>
+                            </li>
+                            <li>
+                                <a href="#hover">hover</a>
+                            </li>
+                            <li>
+                                <a href="#hoverStyling">hoverStyling</a>
+                            </li>
+                            <li>
+                                <a href="#reason">reason</a>
+                            </li>
+                            <li>
+                                <a href="#selectedCondition">selectedCondition</a>
+                            </li>
+                            <li>
+                                <a href="#server">server</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#genderString">genderString</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#loadAllergies">loadAllergies</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#loadEncounters">loadEncounters</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnChanges">ngOnChanges</a>
+                            </li>
+                            <li>
+                                <a href="#selectCondition">selectCondition</a>
+                            </li>
+                            <li>
+                                <a href="#showAllergyHover">showAllergyHover</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(cookieService: CookieService, doctorService: <a href="../injectables/DoctorService.html">DoctorService</a>, homeComponent: <a href="../components/HomeComponent.html">HomeComponent</a>, conditionService: <a href="../injectables/ConditionService.html">ConditionService</a>, encounterService: <a href="../injectables/EncounterService.html">EncounterService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/components/patient/patient.component.ts:34</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>cookieService</td>
+                                                  
+                                                        <td>
+                                                                    <code>CookieService</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>doctorService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/DoctorService.html" target="_self" >DoctorService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>homeComponent</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../components/HomeComponent.html" target="_self" >HomeComponent</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>conditionService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ConditionService.html" target="_self" >ConditionService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>encounterService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/EncounterService.html" target="_self" >EncounterService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="genderString"></a>
+                    <span class="name">
+                        <b>
+                            genderString
+                        </b>
+                        <a href="#genderString"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>genderString(patient: <a href="../classes/Patient.html">Patient</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="46"
+                            class="link-to-prism">src/app/components/patient/patient.component.ts:46</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>patient</td>
+                                    <td>
+                                                <code><a href="../classes/Patient.html" target="_self" >Patient</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadAllergies"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Private</span>
+                            loadAllergies
+                        </b>
+                        <a href="#loadAllergies"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>loadAllergies()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="70"
+                            class="link-to-prism">src/app/components/patient/patient.component.ts:70</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadEncounters"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Private</span>
+                            loadEncounters
+                        </b>
+                        <a href="#loadEncounters"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>loadEncounters()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="92"
+                            class="link-to-prism">src/app/components/patient/patient.component.ts:92</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnChanges"></a>
+                    <span class="name">
+                        <b>
+                            ngOnChanges
+                        </b>
+                        <a href="#ngOnChanges"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnChanges()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="63"
+                            class="link-to-prism">src/app/components/patient/patient.component.ts:63</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="selectCondition"></a>
+                    <span class="name">
+                        <b>
+                            selectCondition
+                        </b>
+                        <a href="#selectCondition"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>selectCondition(condition)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="59"
+                            class="link-to-prism">src/app/components/patient/patient.component.ts:59</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>condition</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showAllergyHover"></a>
+                    <span class="name">
+                        <b>
+                            showAllergyHover
+                        </b>
+                        <a href="#showAllergyHover"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>showAllergyHover(event)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="109"
+                            class="link-to-prism">src/app/components/patient/patient.component.ts:109</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>event</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section>
+    
+        <h3 id="inputs">
+            Properties
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="advancedSearch"></a>
+                        <span class="name">
+                            <b>
+                            advancedSearch</b>
+                            <a href="#advancedSearch"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>false</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/components/patient/patient.component.ts:25</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="allergies"></a>
+                        <span class="name">
+                            <b>
+                            allergies</b>
+                            <a href="#allergies"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>Array&lt;string&gt;</code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>[]</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/components/patient/patient.component.ts:29</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="allergy"></a>
+                        <span class="name">
+                            <b>
+                            allergy</b>
+                            <a href="#allergy"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>&#x27;&#x27;</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/components/patient/patient.component.ts:30</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="graphConfig"></a>
+                        <span class="name">
+                            <b>
+                            graphConfig</b>
+                            <a href="#graphConfig"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/components/patient/patient.component.ts:26</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="hover"></a>
+                        <span class="name">
+                            <b>
+                            hover</b>
+                            <a href="#hover"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="../components/HoverBoxComponent.html" target="_self" >HoverBoxComponent</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <b>Decorators : </b>
+                            <br />
+                            <code>
+                                @ViewChild(&#x27;hover&#x27;, {static: false})<br />
+                            </code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/components/patient/patient.component.ts:34</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="hoverStyling"></a>
+                        <span class="name">
+                            <b>
+                            hoverStyling</b>
+                            <a href="#hoverStyling"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>false</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/components/patient/patient.component.ts:31</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="reason"></a>
+                        <span class="name">
+                            <b>
+                            reason</b>
+                            <a href="#reason"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>&#x27;&#x27;</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/components/patient/patient.component.ts:32</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="selectedCondition"></a>
+                        <span class="name">
+                            <b>
+                            selectedCondition</b>
+                            <a href="#selectedCondition"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="../classes/Condition.html" target="_self" >Condition</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/components/patient/patient.component.ts:24</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="server"></a>
+                        <span class="name">
+                            <b>
+                            server</b>
+                            <a href="#server"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="../classes/Server.html" target="_self" >Server</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/components/patient/patient.component.ts:23</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, Injectable, Input, Output, ViewChild } from &#x27;@angular/core&#x27;;
+
+import { DoctorService } from &#x27;../../services/doctor.service&#x27;;
+import { ConditionService } from &#x27;../../services/condition.service&#x27;;
+import { EncounterService } from &#x27;../../services/encounter.service&#x27;;
+import { CookieService } from &#x27;ngx-cookie-service&#x27;;
+
+import { HomeComponent } from &#x27;../../components/home/home.component&#x27;;
+import { HoverBoxComponent } from &#x27;../hoverBox/hoverBox.component&#x27;;
+
+import { Encounter } from &#x27;../../models/encounter.model&#x27;;
+import { Patient } from &#x27;../../models/patient.model&#x27;;
+import { Server } from &#x27;../../models/server.model&#x27;;
+import { Condition } from &#x27;../../models/condition.model&#x27;;
+
+@Injectable()
+@Component({
+  selector: &#x27;patient&#x27;,
+  templateUrl: &#x27;./patient.html&#x27;
+})
+export class PatientComponent {
+  @Input() patient: Patient;
+  server: Server;
+  selectedCondition: Condition;
+  advancedSearch &#x3D; false;
+  graphConfig: any;
+
+  //allergy details
+  allergies: Array&lt;string&gt; &#x3D; [];
+  allergy: string &#x3D; &#x27;&#x27;;
+  hoverStyling: boolean &#x3D; false;
+  reason: string &#x3D; &#x27;&#x27;;
+
+  @ViewChild(&#x27;hover&#x27;, { static: false }) hover: HoverBoxComponent;
+
+  constructor(
+    private cookieService: CookieService,
+    private doctorService: DoctorService,
+    private homeComponent: HomeComponent,
+    private conditionService: ConditionService,
+    private encounterService: EncounterService
+  ) {
+    this.graphConfig &#x3D; JSON.parse(this.cookieService.get(&#x27;graphConfig&#x27;) || &#x27;{}&#x27;);
+  }
+
+  genderString(patient: Patient) {
+    var s &#x3D; &#x27;Unknown&#x27;;
+    switch (patient.gender) {
+      case &#x27;female&#x27;:
+        s &#x3D; &#x27;Female&#x27;;
+        break;
+      case &#x27;male&#x27;:
+        s &#x3D; &#x27;Male&#x27;;
+        break;
+    }
+    return s;
+  }
+
+  selectCondition(condition) {
+    this.selectedCondition &#x3D; condition;
+  }
+
+  ngOnChanges() {
+    if (this.patient) {
+      this.loadAllergies();
+      this.loadEncounters();
+    }
+  }
+
+  private loadAllergies(): void {
+    this.conditionService.loadAllergies(this.patient).subscribe(allergies &#x3D;&gt; {
+      if (allergies) {
+        //add allergy strings to allergies
+        this.allergies &#x3D; allergies.map(allergy &#x3D;&gt; allergy.code.text);
+
+        // Construct displayed allergy string
+        if (this.allergies.length &#x3D;&#x3D; 0) {
+          this.allergy &#x3D; &quot;None&quot;;
+        } else if (this.allergies.length &#x3D;&#x3D; 1) {
+          this.allergy &#x3D; this.allergies[0];
+        } else {
+          this.allergy &#x3D; &quot;Multiple...&quot;;
+          this.hoverStyling &#x3D; true;
+        }
+      }
+      else { //no allergies
+        this.allergy &#x3D; &quot;None&quot;;
+      }
+    });
+  }
+
+  private loadEncounters(): void {
+    // TODO: Display the reason for visit retrieved here onto the page.
+    this.encounterService.loadEncounters(this.patient).subscribe(res &#x3D;&gt; {
+      // Cast the array of encounters to the proper model (Encounter).
+      let encounters &#x3D; &lt;Array&lt;Encounter&gt;&gt;res;
+
+      for (let enc of encounters) {
+        let reasonText &#x3D; enc.getReason();
+
+        // Only print if reasonText is not null.
+        if (reasonText) {
+          this.reason &#x3D; reasonText;
+        }
+      }
+    });
+  }
+
+  showAllergyHover(event) {
+    // Don&#x27;t show hover box if there is only one allergy.
+    if (this.allergies.length &gt; 1) {
+      this.hover.show(this.allergies, event);
+    }
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-templateData">
+        <pre class="line-numbers"><code class="language-html">
+&lt;div class&#x3D;&quot;row patient-content&quot;&gt;
+  &lt;div class&#x3D;&quot;col-md-2&quot; *ngIf&#x3D;&quot;patient&quot;&gt;&lt;img class&#x3D;&quot;img-rounded&quot; *ngIf&#x3D;&quot;patient.gender &#x3D;&#x3D;&#x3D; &amp;quot;female&amp;quot;&quot; src&#x3D;&quot;/images/textures/female.png&quot; width&#x3D;&quot;60px&quot; height&#x3D;&quot;60px&quot;/&gt;&lt;img class&#x3D;&quot;img-rounded&quot; *ngIf&#x3D;&quot;patient.gender &#x3D;&#x3D;&#x3D; &amp;quot;male&amp;quot;&quot; src&#x3D;&quot;/images/textures/male.png&quot; width&#x3D;&quot;60px&quot; height&#x3D;&quot;60px&quot;/&gt;&lt;/div&gt;
+  &lt;div class&#x3D;&quot;col-md-5&quot;&gt;
+    &lt;div class&#x3D;&quot;text-left&quot;&gt;&lt;span id&#x3D;&quot;patient&quot;&gt;
+        &lt;div class&#x3D;&quot;details&quot; *ngIf&#x3D;&quot;patient&quot;&gt;
+          &lt;div class&#x3D;&quot;identifier&quot;&gt;&lt;b&gt;&lt;span *ngIf&#x3D;&quot;patient.name &amp;amp;&amp;amp; patient.name[0].given&quot;&gt;{{patient.name[0].given[0]}}&lt;/span&gt;&amp;nbsp;&lt;span *ngIf&#x3D;&quot;patient.name &amp;amp;&amp;amp; patient.name[0].family&quot;&gt;{{patient.name[0].family[0]}}&lt;/span&gt;&lt;/b&gt;
+            &lt;div&gt;
+               {{patient.gender.charAt(0).toUpperCase()}}, &lt;span *ngIf&#x3D;&quot;patient.mrn&quot;&gt;&lt;b&gt;MRN:&lt;/b&gt; {{patient.mrn}}, &lt;/span&gt;&lt;/div&gt;
+            &lt;div&gt;&lt;b&gt;DOB:&lt;/b&gt; {{patient.birthDate | amDateFormat:&#x27;MM/DD/YYYY&#x27;}} ({{-1 * (patient.birthDate | amDifference:today:&#x27;years&#x27;:false)}}yr)&lt;/div&gt;
+		  &lt;/div&gt;
+        &lt;/div&gt;&lt;/span&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class&#x3D;&quot;col-md-5&quot;&gt;
+    &lt;div class&#x3D;&quot;text-left&quot;&gt;&lt;span id&#x3D;&quot;patient&quot;&gt;
+        &lt;div class&#x3D;&quot;details&quot; *ngIf&#x3D;&quot;patient&quot;&gt;
+          &lt;div class&#x3D;&quot;identifier&quot;&gt;
+            &lt;div&gt;
+				&lt;b&gt;Allergies:&lt;/b&gt;
+              &lt;span [class.hover]&#x3D;&quot;hoverStyling&quot; (mouseenter)&#x3D;&quot;showAllergyHover($event)&quot; (mouseleave)&#x3D;&quot;hover.hide($event)&quot;&gt;{{allergy}}&lt;/span&gt;
+            &lt;/div&gt;
+            &lt;div&gt;&lt;b&gt;Reason for Visit:&lt;/b&gt; {{reason}}&lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;&lt;/span&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;hoverBox #hover&#x3D;&quot;&quot;&gt;
+  &lt;!-- May be re-added eventually, but does not do anything currently.--&gt;
+  &lt;!--#advanced_search
+  a(&quot;(click)&quot;&#x3D;&quot;advancedSearch &#x3D; !advancedSearch&quot; href&#x3D;&quot;#&quot;)
+  	span(&quot;*ngIf&quot;&#x3D;&quot;advancedSearch&quot;) basic
+  	span(&quot;*ngIf&quot;&#x3D;&quot;!advancedSearch&quot;) advanced
+  form.form(&quot;*ngIf&quot;&#x3D;&quot;advancedSearch&quot;)
+  	.form-group
+  		label  Search
+  		input.form-control(type&#x3D;&quot;search&quot;)
+  		select.form-control
+  			option  Search Options
+  			option  Could be patients?
+  			option  Or something like past images on this patient?
+  	.form-group
+  		label  Order Lab Test
+  		select.form-control
+  			option  Different types of labs
+  			option  Different types of labs
+  			option  Different types of labs
+  	.form-group
+  		label  Order Medication
+  		select.form-control
+  			option  Order Medication
+  	.form-group
+  		label  Schedule Follow-Up
+  		select.form-control
+  			option  Schedule Follow-Up
+  	.form-group
+  		label  Refer to Specialist
+  		select.form-control
+  			option  Refer to Specialist
+  	.form-group
+  		label  Order Procedure
+  		select.form-control
+  			option  Order Procedure
+  	.form-group
+  		label
+  			span.glyphicon.glyphicon-fire
+  			|  Provider
+  		select#server_select.form-control((change)&#x3D;&#x27;selectServerForUrl($event.target.value)&#x27;)
+  			option(&quot;*ngFor&quot;&#x3D;&#x27;let s of servers&#x27;, &quot;[value]&quot;&#x3D;&#x27;s.url&#x27;, [patient]&#x3D;&#x27;server &amp;&amp; (s.url &#x3D;&#x3D; server.url)&#x27;) {{s.name}}
+  --&gt;
+&lt;/hoverBox&gt;</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="c-tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="row patient-content">  <div class="col-md-2" *ngIf="patient"><img class="img-rounded" *ngIf="patient.gender === &quot;female&quot;" src="/images/textures/female.png" width="60px" height="60px"/><img class="img-rounded" *ngIf="patient.gender === &quot;male&quot;" src="/images/textures/male.png" width="60px" height="60px"/></div>  <div class="col-md-5">    <div class="text-left"><span id="patient">        <div class="details" *ngIf="patient">          <div class="identifier"><b><span *ngIf="patient.name &amp;&amp; patient.name[0].given">{{patient.name[0].given[0]}}</span>&nbsp;<span *ngIf="patient.name &amp;&amp; patient.name[0].family">{{patient.name[0].family[0]}}</span></b>            <div>               {{patient.gender.charAt(0).toUpperCase()}}, <span *ngIf="patient.mrn"><b>MRN:</b> {{patient.mrn}}, </span></div>            <div><b>DOB:</b> {{patient.birthDate | amDateFormat:\'MM/DD/YYYY\'}} ({{-1 * (patient.birthDate | amDifference:today:\'years\':false)}}yr)</div>		  </div>        </div></span></div>  </div>  <div class="col-md-5">    <div class="text-left"><span id="patient">        <div class="details" *ngIf="patient">          <div class="identifier">            <div>				<b>Allergies:</b>              <span [class.hover]="hoverStyling" (mouseenter)="showAllergyHover($event)" (mouseleave)="hover.hide($event)">{{allergy}}</span>            </div>            <div><b>Reason for Visit:</b> {{reason}}</div>          </div>        </div></span></div>  </div></div><hoverBox #hover="">  <!-- May be re-added eventually, but does not do anything currently.-->  <!--#advanced_search  a("(click)"="advancedSearch = !advancedSearch" href="#")  	span("*ngIf"="advancedSearch") basic  	span("*ngIf"="!advancedSearch") advanced  form.form("*ngIf"="advancedSearch")  	.form-group  		label  Search  		input.form-control(type="search")  		select.form-control  			option  Search Options  			option  Could be patients?  			option  Or something like past images on this patient?  	.form-group  		label  Order Lab Test  		select.form-control  			option  Different types of labs  			option  Different types of labs  			option  Different types of labs  	.form-group  		label  Order Medication  		select.form-control  			option  Order Medication  	.form-group  		label  Schedule Follow-Up  		select.form-control  			option  Schedule Follow-Up  	.form-group  		label  Refer to Specialist  		select.form-control  			option  Refer to Specialist  	.form-group  		label  Order Procedure  		select.form-control  			option  Order Procedure  	.form-group  		label  			span.glyphicon.glyphicon-fire  			|  Provider  		select#server_select.form-control((change)=\'selectServerForUrl($event.target.value)\')  			option("*ngFor"=\'let s of servers\', "[value]"=\'s.url\', [patient]=\'server && (s.url == server.url)\') {{s.name}}  --></hoverBox></div>'
+    var COMPONENTS = [{'name': 'AccordionRecursion', 'selector': 'accordionRecursion'},{'name': 'AccountComponent', 'selector': 'account'},{'name': 'AppComponent', 'selector': 'app'},{'name': 'CarePlanDisplay', 'selector': 'careplanDisplay'},{'name': 'CarePlansComponent', 'selector': 'carePlans'},{'name': 'CheckboxInline', 'selector': 'checkbox-inline'},{'name': 'ColumnStateSwitcherComponent', 'selector': 'columnStateSwitcher'},{'name': 'ConditionsChartComponent', 'selector': 'conditionsChart'},{'name': 'ConditionsComponent', 'selector': 'conditions'},{'name': 'ConditionsDisplay', 'selector': 'conditionsDisplay'},{'name': 'ContextMenuComponent', 'selector': 'contextMenu'},{'name': 'FormBuilder', 'selector': 'form-builder'},{'name': 'HistoricalTrendsComponent', 'selector': 'historicalTrends'},{'name': 'HomeComponent', 'selector': 'home'},{'name': 'HoverBoxComponent', 'selector': 'hoverBox'},{'name': 'LoadingAnimation', 'selector': 'loadingAnimation'},{'name': 'MedicationsComponent', 'selector': 'medications'},{'name': 'NewCondition', 'selector': 'newCondition'},{'name': 'NormalBox1', 'selector': 'normal-box-1'},{'name': 'NormalBox2', 'selector': 'normal-box-2'},{'name': 'NoteNavigationComponent', 'selector': 'noteNavigation'},{'name': 'ObservationRecursive', 'selector': 'observationRecursion'},{'name': 'ObservationRecursiveChart', 'selector': 'observationRecursionChart'},{'name': 'ObservationsComponent', 'selector': 'observations'},{'name': 'ObservationsDisplay', 'selector': 'observationsDisplay'},{'name': 'PatientComponent', 'selector': 'patient'},{'name': 'ScratchPadUpdate', 'selector': 'scratchpad-update'},{'name': 'SelectListSingle', 'selector': 'select-list-single'},{'name': 'TimelineComponent', 'selector': 'timelines'},{'name': 'TimelinePopupComponent', 'selector': 'timeline-popup'},{'name': 'ToolbarComponent', 'selector': 'toolbar'},{'name': 'TripleListComponent', 'selector': 'triplelist'}];
+    var DIRECTIVES = [{'name': 'AutoGrowDirective', 'selector': '[autoGrow]'},{'name': 'HighlightDirective', 'selector': '[highlight]'}];
+    var ACTUAL_COMPONENT = {'name': 'PatientComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+                   
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'PatientComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

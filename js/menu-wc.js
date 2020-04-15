@@ -55,13 +55,13 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="modules/AppModule.html" data-type="entity-link">AppModule</a>
                                     <li class="chapter inner">
                                         <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ?
-                                            'data-target="#components-links-module-AppModule-bc4b7c22886e2d165c8cdba76a292ce9"' : 'data-target="#xs-components-links-module-AppModule-bc4b7c22886e2d165c8cdba76a292ce9"' }>
+                                            'data-target="#components-links-module-AppModule-247c90497fc98b870685466f7bcb75eb"' : 'data-target="#xs-components-links-module-AppModule-247c90497fc98b870685466f7bcb75eb"' }>
                                             <span class="icon ion-md-cog"></span>
                                             <span>Components</span>
                                             <span class="icon ion-ios-arrow-down"></span>
                                         </div>
-                                        <ul class="links collapse" ${ isNormalMode ? 'id="components-links-module-AppModule-bc4b7c22886e2d165c8cdba76a292ce9"' :
-                                            'id="xs-components-links-module-AppModule-bc4b7c22886e2d165c8cdba76a292ce9"' }>
+                                        <ul class="links collapse" ${ isNormalMode ? 'id="components-links-module-AppModule-247c90497fc98b870685466f7bcb75eb"' :
+                                            'id="xs-components-links-module-AppModule-247c90497fc98b870685466f7bcb75eb"' }>
                                             <li class="link">
                                                 <a href="components/AccordionRecursion.html"
                                                     data-type="entity-link" data-context="sub-entity" data-context-id="modules">AccordionRecursion</a>
@@ -127,18 +127,6 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                                     data-type="entity-link" data-context="sub-entity" data-context-id="modules">MedicationsComponent</a>
                                             </li>
                                             <li class="link">
-                                                <a href="components/NewCondition.html"
-                                                    data-type="entity-link" data-context="sub-entity" data-context-id="modules">NewCondition</a>
-                                            </li>
-                                            <li class="link">
-                                                <a href="components/NoteNavigationComponent.html"
-                                                    data-type="entity-link" data-context="sub-entity" data-context-id="modules">NoteNavigationComponent</a>
-                                            </li>
-                                            <li class="link">
-                                                <a href="components/ObservationRecursive.html"
-                                                    data-type="entity-link" data-context="sub-entity" data-context-id="modules">ObservationRecursive</a>
-                                            </li>
-                                            <li class="link">
                                                 <a href="components/ObservationRecursiveChart.html"
                                                     data-type="entity-link" data-context="sub-entity" data-context-id="modules">ObservationRecursiveChart</a>
                                             </li>
@@ -174,13 +162,13 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                     </li>
                                 <li class="chapter inner">
                                     <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ?
-                                        'data-target="#injectables-links-module-AppModule-bc4b7c22886e2d165c8cdba76a292ce9"' : 'data-target="#xs-injectables-links-module-AppModule-bc4b7c22886e2d165c8cdba76a292ce9"' }>
+                                        'data-target="#injectables-links-module-AppModule-247c90497fc98b870685466f7bcb75eb"' : 'data-target="#xs-injectables-links-module-AppModule-247c90497fc98b870685466f7bcb75eb"' }>
                                         <span class="icon ion-md-arrow-round-down"></span>
                                         <span>Injectables</span>
                                         <span class="icon ion-ios-arrow-down"></span>
                                     </div>
-                                    <ul class="links collapse" ${ isNormalMode ? 'id="injectables-links-module-AppModule-bc4b7c22886e2d165c8cdba76a292ce9"' :
-                                        'id="xs-injectables-links-module-AppModule-bc4b7c22886e2d165c8cdba76a292ce9"' }>
+                                    <ul class="links collapse" ${ isNormalMode ? 'id="injectables-links-module-AppModule-247c90497fc98b870685466f7bcb75eb"' :
+                                        'id="xs-injectables-links-module-AppModule-247c90497fc98b870685466f7bcb75eb"' }>
                                         <li class="link">
                                             <a href="injectables/AssociationService.html"
                                                 data-type="entity-link" data-context="sub-entity" data-context-id="modules" }>AssociationService</a>

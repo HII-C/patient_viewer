@@ -15,16 +15,13 @@ import { LoadingAnimation } from './app/components/loadingAnimation/loadingAnima
 import { AccountComponent } from './app/components/account/account.component';
 import { ToolbarComponent } from './app/components/toolbar/toolbar.component';
 import { TripleListComponent } from './app/components/tripleList/tripleList.component';
-import { ObservationRecursive } from './app/components/observationRecursion/observationRecursion.component';
 import { ObservationRecursiveChart } from './app/components/observationRecursionChart/observationRecursionChart.component';
 import { MedicationsComponent } from './app/components/medications/medications.component';
 import { ConditionsChartComponent } from './app/components/conditionsChart/conditionsChart.component';
 import { ColumnStateSwitcherComponent } from './app/components/columnStateSwitcher/columnStateSwitcher.component';
-import { NewCondition } from './app/components/newCondition/newCondition.component';
 import { FormBuilder } from './app/components/form-builder/form-builder.component'
 import { ContextMenuComponent } from './app/components/contextMenu/contextMenu.component';
 import { CarePlanDisplay } from './app/components/carePlanDisplay/carePlanDisplay.component';
-import { NoteNavigationComponent } from './app/components/noteNavigation/noteNavigation.component';
 import { AccordionRecursion } from './app/components/accordionRecursion/accordionRecursion.component';
 import { ConditionsDisplay } from './app/components/conditionsDisplay/conditionsDisplay.component';
 import { HistoricalTrendsComponent } from './app/components/historicalTrends/historicalTrends.component';
@@ -107,13 +104,10 @@ const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
     AccountComponent,
     ToolbarComponent,
     TripleListComponent,
-    ObservationRecursive,
     ObservationRecursiveChart,
     ConditionsChartComponent,
     ColumnStateSwitcherComponent,
-    NewCondition,
     ContextMenuComponent,
-    NoteNavigationComponent,
     HoverBoxComponent,
     HistoricalTrendsComponent,
   ],

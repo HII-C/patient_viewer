@@ -13,44 +13,51 @@ import { ContextMenuComponent } from '../contextMenu/contextMenu.component';
 
 import { Observation } from '../../models/observation.model';
 
+/**
+ * Component for displaying observations within 
+ * the observations list of the triple list.
+ */
 @Component({
   selector: 'observationsDisplay',
   templateUrl: './observationsDisplay.html'
 })
 export class ObservationsDisplay {
-  // Trick to allow access to static methods of Observation class in pug template
+  /**
+   * Trick to allow access to static methods of Observation class in pug template
+   */
   Observation = Observation;
 
-  // The currently selected condition in the list.
+  /**
+   * The currently selected observation in the list.
+   */
   selected: Observation;
 
-  //Whether the checkbox for checking all observations are currently checked
+  /**
+   * Whether the checkbox for checking all observations are currently checked.
+   */
   isAllChecked : boolean = false;
 
-  // This is the array of conditions to be displayed
+  /**
+   * The array of observations to be displayed.
+   */
   @Input() observations: Array<Observation>;
+  
+  /**
+   * Emit an event whenever an observation is selected.
+   */
   @Output() observationSelected: EventEmitter<Observation> = new EventEmitter();
 
   @ViewChild('menu', { static: false }) menu: ContextMenuComponent;
-
-  // ===============================================================================================================================================
-  // ================================================================== EVENT METHODS ==============================================================
-  // ==================================================================---------------==============================================================
 
   constructor(
     private associationService: AssociationService, 
     private scratchPadService: ScratchPadService
   ) { }
 
-  ngOnChanges() {
-    //console.log(this.observations);
-  }
-
-  ngOnInit() { }
-
-  //=================================================================== CONTEXT MENU ==============================================================
-
-  // Can only access view child after the view has been initialized.
+  /**
+   * Setup the context menu with options. We can only access the view child after 
+   * the view has been initialized.
+   */
   ngAfterViewInit() {
     // NOTE: 'exec' functions must be bound to 'this' to access scratchPadService.
     // This is a strange behavior with scoping in Typescript/Javascript.
@@ -59,36 +66,37 @@ export class ObservationsDisplay {
     this.menu.addOption({
       'icon': 'glyphicon-pencil',
       'text': 'Add to Scratch Pad',
-      'exec': function(obs) {
+      'exec': (obs => {
         // Add every checked observation to the scratch pad
         this.scratchPadService.checkedMapObservations.forEach((isChecked, observation) => {
           if (isChecked) {
             this.scratchPadService.addObservation(observation);
           }
         });
-      }.bind(this)
+      }).bind(this)
     });
 
     this.menu.addOption({
       'icon': 'glyphicon-stats',
       'text': 'Add to Trend Tool',
-      'exec': function(obs) {
+      'exec': (obs => {
         console.log(obs);
-      }.bind(this)
+      }).bind(this)
     });
 
     this.menu.addOption({
       'icon': 'glyphicon-random',
       'text': 'Open Association Tool',
-      'exec': function(obs) {
+      'exec': (obs => {
         console.log(obs);
-      }.bind(this)
+      }).bind(this)
     });
   }
 
-  // FOR MAINTAINING CHECK STATE AFTER LOSING FOCUS
-
-  // Whenever a line is selected
+  /**
+   * Handle the selection of an observation.
+   * @param observation The selected observation.
+   */
   selectObservation(observation: Observation) {
     this.selected = observation;
     this.observationSelected.emit(this.selected);
@@ -98,17 +106,26 @@ export class ObservationsDisplay {
     }
   }
 
-  // Determine whether an observation is currently checked.
-  isObservationChecked(observation: Observation) {
+  /**
+   * Determine whether an observation is currently checked.
+   */
+  isObservationChecked(observation: Observation): boolean {
     return this.scratchPadService.checkedMapObservations.get(observation) || false;
   }
 
-  // WHENEVER A CHECKBOX IS CLICKED OR UNCLICKED, IT REGISTERS IT IN THE SCRATCHPADSERVICE (not actually the scratch pad yet)
+  /**
+   * Change the state of an observation to either checked or unchecked.
+   * @param checked Whether to set to checked or unchecked.
+   * @param checkedObservation The observation to adjust the state of.
+   */
   checkObservation(checked: boolean, checkedObservation: Observation) {
     this.scratchPadService.checkObservation(checked, checkedObservation);
   }
   
-  //Check or uncheck all observations
+  /**
+   * Either check or uncheck all observations.
+   * @param checked Whether to check or uncheck.
+   */
   checkAllObservations(checked){
     this.isAllChecked = checked;
     for (let c of this.observations){
@@ -116,8 +133,11 @@ export class ObservationsDisplay {
     }
   }
 
-  // Determine whether an observation is currently associated (based on associations tool)
-  isObservationAssociated(observation: Observation) {
+  /**
+   * Determine whether an observation is currently associated,
+   * based on the associations tool.
+   */
+  isObservationAssociated(observation: Observation): boolean {
     return this.associationService.associatedMapObservations.get(observation) || false;
   }
 

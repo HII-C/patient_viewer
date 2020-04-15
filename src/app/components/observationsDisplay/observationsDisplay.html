@@ -1,4 +1,3 @@
-
 <div>
   <table class="table table-condensed table-striped" style="margin-left: 20px;">
     <thead>
@@ -13,12 +12,30 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let o of observations" [class.selected]="o.selected" (click)="selectObservation(o)" (contextmenu)="menu.show(o, $event)" id="t{{observations.indexOf(o)}}" (mouseover)="hover.show([o['code']['coding'][0]['display']], $event)" (mouseleave)="hover.hide($event)">
+      <tr *ngFor="let o of observations"
+          [class.selected]="o.selected" 
+          (click)="selectObservation(o)" 
+          (contextmenu)="menu.show(o, $event)" 
+          id="t{{observations.indexOf(o)}}" 
+          (mouseover)="hover.show([o['code']['coding'][0]['display']], $event)" 
+          (mouseleave)="hover.hide($event)">
         <td>
-          <input *ngIf="!o.isParent" type="checkbox" [checked]="isObservationChecked(o)" id="o{{observations.indexOf(o)}}" (change)="checkObservation($event.target.checked, o)"/>
+          <input 
+              *ngIf="!o.isParent" 
+              type="checkbox"
+              [checked]="isObservationChecked(o)"
+              id="o{{observations.indexOf(o)}}"
+              (change)="checkObservation($event.target.checked, o)"/>
         </td>
         <td>
-          <button class="btn btn-default" *ngIf="o.isParent" (click)="expand(o.parent)">... </button><span>{{Observation.getText(o)}}</span><span class="glyphicon glyphicon-fire" *ngIf="isObservationAssociated(o)" style="padding-left: 5px;"></span>
+          <button 
+              class="btn btn-default" 
+              *ngIf="o.isParent" 
+              (click)="expand(o.parent)">
+            ...
+          </button>
+          <span>{{Observation.getText(o)}}</span>
+          <span class="glyphicon glyphicon-fire" *ngIf="isObservationAssociated(o)" style="padding-left: 5px;"></span>
         </td>
         <td *ngIf="!o.isParent">{{Observation.getValue(o)}}</td>
         <td *ngIf="!o.isParent">{{Observation.getUnits(o)}}</td>

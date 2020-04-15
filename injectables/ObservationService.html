@@ -111,9 +111,6 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#addCategoriesObservations">addCategoriesObservations</a>
-                            </li>
-                            <li>
                                 <a href="#extractNewObservations">extractNewObservations</a>
                             </li>
                             <li>
@@ -236,76 +233,6 @@
     <h3 id="methods">
         Methods
     </h3>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="addCategoriesObservations"></a>
-                    <span class="name">
-                        <b>
-                            addCategoriesObservations
-                        </b>
-                        <a href="#addCategoriesObservations"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>addCategoriesObservations(observations: <a href="../classes/Observation.html">Array<Observation></a>)</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="255"
-                            class="link-to-prism">src/app/services/observation.service.ts:255</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                    <div class="io-description">
-                        <b>Parameters :</b>
-                        <table class="params">
-                            <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Type</td>
-                                    <td>Optional</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>observations</td>
-                                    <td>
-                                                <code><a href="../classes/Observation.html" target="_self" >Array&lt;Observation&gt;</a></code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>    <code>Array&lt;literal type&gt;</code>
-
-                    </div>
-                    <div class="io-description">
-                        
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
     <table class="table table-sm table-bordered">
         <tbody>
             <tr>
@@ -510,8 +437,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="284"
-                            class="link-to-prism">src/app/services/observation.service.ts:284</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="255"
+                            class="link-to-prism">src/app/services/observation.service.ts:255</a></div>
                 </td>
             </tr>
 
@@ -837,8 +764,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="289"
-                            class="link-to-prism">src/app/services/observation.service.ts:289</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="260"
+                            class="link-to-prism">src/app/services/observation.service.ts:260</a></div>
                 </td>
             </tr>
 
@@ -876,8 +803,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="293"
-                            class="link-to-prism">src/app/services/observation.service.ts:293</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="264"
+                            class="link-to-prism">src/app/services/observation.service.ts:264</a></div>
                 </td>
             </tr>
 
@@ -1389,35 +1316,6 @@ export class ObservationService {
       }
     }
     return totalCount;
-  }
-
-  // Sort the Observations list (arrData) into categories, which are returned inside
-  // a single object that conforms to accordion data format
-  addCategoriesObservations(observations: Array&lt;Observation&gt;): Array&lt;{ [x: string]: any }&gt; {
-    let observationsByCategory: { [x: string]: Array&lt;Observation&gt; } &#x3D; {};
-
-    for (let observation of observations) {
-      if (observation.hasOwnProperty(&#x27;valueQuantity&#x27;) &amp;&amp; observation.hasOwnProperty(&#x27;category&#x27;)) {
-        let observationCategory &#x3D; observation.category[0].text;
-
-        if (!observationsByCategory.hasOwnProperty(observationCategory)) {
-          observationsByCategory[observationCategory] &#x3D; [];
-        }
-        observationsByCategory[observationCategory].push(observation);
-      }
-    }
-
-    let reconstructedObject: Array&lt;{ [x: string]: any }&gt; &#x3D; [];
-    for (let ctgry of Object.keys(observationsByCategory)) {
-      reconstructedObject.push({
-        category: ctgry,
-        subheadings: false,
-        subs: null,
-        data: observationsByCategory[ctgry]
-      });
-    }
-
-    return reconstructedObject;
   }
 
   // &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; SCRATCH PAD FUNCTIONALITY &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;

@@ -95,6 +95,9 @@ state the column is currently in (ie, scratch pad or default).</p>
                                 <a href="#columnState">columnState</a>
                             </li>
                             <li>
+                                <a href="#ColumnType">ColumnType</a>
+                            </li>
+                            <li>
                                 <a href="#HEIGHT_OFFSET">HEIGHT_OFFSET</a>
                             </li>
                         </ul>
@@ -144,7 +147,7 @@ state the column is currently in (ie, scratch pad or default).</p>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="9" class="link-to-prism">src/app/components/baseColumn.ts:9</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/components/baseColumn.ts:14</a></div>
                             </td>
                         </tr>
 
@@ -177,7 +180,7 @@ state the column is currently in (ie, scratch pad or default).</p>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/components/baseColumn.ts:46</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/components/baseColumn.ts:52</a></div>
                             </td>
                         </tr>
 
@@ -215,13 +218,45 @@ state the column is currently in (ie, scratch pad or default).</p>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/components/baseColumn.ts:52</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="58" class="link-to-prism">src/app/components/baseColumn.ts:58</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
                         <div class="io-description"><p>The current state (ie, scratch pad) of the column. </p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="ColumnType"></a>
+                        <span class="name">
+                            <b>
+                            ColumnType</b>
+                            <a href="#ColumnType"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>ColumnType</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/components/baseColumn.ts:14</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Makes the ColumnType enum accessible from the template.</p>
 </div>
                     </td>
                 </tr>
@@ -253,7 +288,7 @@ state the column is currently in (ie, scratch pad or default).</p>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/components/baseColumn.ts:49</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/components/baseColumn.ts:55</a></div>
                             </td>
                         </tr>
 
@@ -295,8 +330,8 @@ state the column is currently in (ie, scratch pad or default).</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="26"
-                            class="link-to-prism">src/app/components/baseColumn.ts:26</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="32"
+                            class="link-to-prism">src/app/components/baseColumn.ts:32</a></div>
                 </td>
             </tr>
 
@@ -368,8 +403,8 @@ state the column is currently in (ie, scratch pad or default).</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="33"
-                            class="link-to-prism">src/app/components/baseColumn.ts:33</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="39"
+                            class="link-to-prism">src/app/components/baseColumn.ts:39</a></div>
                 </td>
             </tr>
 
@@ -409,8 +444,8 @@ state the column is currently in (ie, scratch pad or default).</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="38"
-                            class="link-to-prism">src/app/components/baseColumn.ts:38</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="44"
+                            class="link-to-prism">src/app/components/baseColumn.ts:44</a></div>
                 </td>
             </tr>
 
@@ -450,8 +485,8 @@ state the column is currently in (ie, scratch pad or default).</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="43"
-                            class="link-to-prism">src/app/components/baseColumn.ts:43</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="49"
+                            class="link-to-prism">src/app/components/baseColumn.ts:49</a></div>
                 </td>
             </tr>
 
@@ -481,6 +516,7 @@ state the column is currently in (ie, scratch pad or default).</p>
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { fromEvent } from &#x27;rxjs&#x27;;
 import { debounceTime } from &#x27;rxjs/operators&#x27;;
+import { ColumnType } from &#x27;../utils/columnType.enum&#x27;;
 
 /**
  * Super class of all three columns in the application. Provides
@@ -488,6 +524,11 @@ import { debounceTime } from &#x27;rxjs/operators&#x27;;
  * state the column is currently in (ie, scratch pad or default).
  */
 export class BaseColumn {
+  /**
+   * Makes the ColumnType enum accessible from the template.
+   */
+  ColumnType &#x3D; ColumnType;
+
   constructor() {
     // Set the initial height of the column.
     this.columnHeight &#x3D; window.innerHeight - this.HEIGHT_OFFSET;

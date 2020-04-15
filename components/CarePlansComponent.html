@@ -150,6 +150,9 @@ view.</p>
                                 <a href="#columnState">columnState</a>
                             </li>
                             <li>
+                                <a href="#ColumnType">ColumnType</a>
+                            </li>
+                            <li>
                                 <a href="#HEIGHT_OFFSET">HEIGHT_OFFSET</a>
                             </li>
                         </ul>
@@ -430,7 +433,7 @@ in the list.</p>
             </tr>
             <tr>
                 <td class="col-md-4">
-                        <div class="io-line">Defined in         <code><a href="../classes/BaseColumn.html#source" target="_self" >BaseColumn:26</a></code>
+                        <div class="io-line">Defined in         <code><a href="../classes/BaseColumn.html#source" target="_self" >BaseColumn:32</a></code>
 </div>
                 </td>
             </tr>
@@ -509,7 +512,7 @@ in the list.</p>
             </tr>
             <tr>
                 <td class="col-md-4">
-                        <div class="io-line">Defined in         <code><a href="../classes/BaseColumn.html#source" target="_self" >BaseColumn:33</a></code>
+                        <div class="io-line">Defined in         <code><a href="../classes/BaseColumn.html#source" target="_self" >BaseColumn:39</a></code>
 </div>
                 </td>
             </tr>
@@ -556,7 +559,7 @@ in the list.</p>
             </tr>
             <tr>
                 <td class="col-md-4">
-                        <div class="io-line">Defined in         <code><a href="../classes/BaseColumn.html#source" target="_self" >BaseColumn:38</a></code>
+                        <div class="io-line">Defined in         <code><a href="../classes/BaseColumn.html#source" target="_self" >BaseColumn:44</a></code>
 </div>
                 </td>
             </tr>
@@ -603,7 +606,7 @@ in the list.</p>
             </tr>
             <tr>
                 <td class="col-md-4">
-                        <div class="io-line">Defined in         <code><a href="../classes/BaseColumn.html#source" target="_self" >BaseColumn:43</a></code>
+                        <div class="io-line">Defined in         <code><a href="../classes/BaseColumn.html#source" target="_self" >BaseColumn:49</a></code>
 </div>
                 </td>
             </tr>
@@ -792,7 +795,7 @@ the scratch pad (eg, from the toolbar).</p>
                             </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in         <code><a href="../classes/BaseColumn.html#source" target="_self" >BaseColumn:46</a></code>
+                                    <div class="io-line">Defined in         <code><a href="../classes/BaseColumn.html#source" target="_self" >BaseColumn:52</a></code>
 </div>
                             </td>
                         </tr>
@@ -837,7 +840,7 @@ the scratch pad (eg, from the toolbar).</p>
                             </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in         <code><a href="../classes/BaseColumn.html#source" target="_self" >BaseColumn:52</a></code>
+                                    <div class="io-line">Defined in         <code><a href="../classes/BaseColumn.html#source" target="_self" >BaseColumn:58</a></code>
 </div>
                             </td>
                         </tr>
@@ -845,6 +848,45 @@ the scratch pad (eg, from the toolbar).</p>
                 <tr>
                     <td class="col-md-4">
                         <div class="io-description"><p>The current state (ie, scratch pad) of the column. </p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="ColumnType"></a>
+                        <span class="name">
+                            <b>
+                            ColumnType</b>
+                            <a href="#ColumnType"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>ColumnType</code>
+                        </td>
+                    </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Inherited from         <code><a href="../classes/BaseColumn.html" target="_self" >BaseColumn</a></code>
+</div>
+                                </td>
+                            </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in         <code><a href="../classes/BaseColumn.html#source" target="_self" >BaseColumn:14</a></code>
+</div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Makes the ColumnType enum accessible from the template.</p>
 </div>
                     </td>
                 </tr>
@@ -882,7 +924,7 @@ the scratch pad (eg, from the toolbar).</p>
                             </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in         <code><a href="../classes/BaseColumn.html#source" target="_self" >BaseColumn:49</a></code>
+                                    <div class="io-line">Defined in         <code><a href="../classes/BaseColumn.html#source" target="_self" >BaseColumn:55</a></code>
 </div>
                             </td>
                         </tr>
@@ -994,7 +1036,11 @@ export class CarePlansComponent extends BaseColumn {
   &lt;div class&#x3D;&quot;column-content&quot;&gt;
     &lt;div class&#x3D;&quot;container&quot; *ngIf&#x3D;&quot;columnState &#x3D;&#x3D; &amp;quot;default&amp;quot;&quot; style&#x3D;&quot;width:auto;&quot;&gt;
       &lt;div *ngIf&#x3D;&quot;columnState &#x3D;&#x3D; &amp;quot;default&amp;quot; &amp;amp;&amp;amp; carePlanLoadFinished&quot;&gt;
-        &lt;accordionRecursion [levelData]&#x3D;&quot;carePlans&quot; [columnNum]&#x3D;&quot;2&quot; [levelNum]&#x3D;&quot;0&quot; [firstIteration]&#x3D;&quot;1&quot;&gt;&lt;/accordionRecursion&gt;
+        &lt;accordionRecursion
+          [items]&#x3D;&quot;carePlans&quot;
+          [columnType]&#x3D;&quot;ColumnType.CarePlans&quot;
+          [level]&#x3D;&quot;0&quot;&gt;
+        &lt;/accordionRecursion&gt;
       &lt;/div&gt;
       &lt;div *ngIf&#x3D;&quot;!carePlanLoadFinished&quot;&gt;
         &lt;loadingAnimation&gt;&lt;/loadingAnimation&gt;
@@ -1033,7 +1079,7 @@ export class CarePlansComponent extends BaseColumn {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div id="carePlans" style="height: 500px; overflow-y: auto;">  <div class="column-header">    <div class="header text-center">      <h2 style="display: inline-block;">Care Plans</h2>      <div style="display: inline-block;">        <columnStateSwitcher [column]="this" [columnType]="\'careplans\'"></columnStateSwitcher>      </div>    </div>  </div>  <div class="column-content">    <div class="container" *ngIf="columnState == &quot;default&quot;" style="width:auto;">      <div *ngIf="columnState == &quot;default&quot; &amp;&amp; carePlanLoadFinished">        <accordionRecursion [levelData]="carePlans" [columnNum]="2" [levelNum]="0" [firstIteration]="1"></accordionRecursion>      </div>      <div *ngIf="!carePlanLoadFinished">        <loadingAnimation></loadingAnimation>      </div>    </div>    <div class="container" *ngIf="columnState == &quot;scratchpad&quot;" style="width:auto;">      <careplanDisplay [carePlans]="getScratchPadCarePlans()"></careplanDisplay>    </div>  </div></div></div>'
+        var COMPONENT_TEMPLATE = '<div><div id="carePlans" style="height: 500px; overflow-y: auto;">  <div class="column-header">    <div class="header text-center">      <h2 style="display: inline-block;">Care Plans</h2>      <div style="display: inline-block;">        <columnStateSwitcher [column]="this" [columnType]="\'careplans\'"></columnStateSwitcher>      </div>    </div>  </div>  <div class="column-content">    <div class="container" *ngIf="columnState == &quot;default&quot;" style="width:auto;">      <div *ngIf="columnState == &quot;default&quot; &amp;&amp; carePlanLoadFinished">        <accordionRecursion          [items]="carePlans"          [columnType]="ColumnType.CarePlans"          [level]="0">        </accordionRecursion>      </div>      <div *ngIf="!carePlanLoadFinished">        <loadingAnimation></loadingAnimation>      </div>    </div>    <div class="container" *ngIf="columnState == &quot;scratchpad&quot;" style="width:auto;">      <careplanDisplay [carePlans]="getScratchPadCarePlans()"></careplanDisplay>    </div>  </div></div></div>'
     var COMPONENTS = [{'name': 'AccordionRecursion', 'selector': 'accordionRecursion'},{'name': 'AccountComponent', 'selector': 'account'},{'name': 'AppComponent', 'selector': 'app'},{'name': 'CarePlanDisplay', 'selector': 'careplanDisplay'},{'name': 'CarePlansComponent', 'selector': 'carePlans'},{'name': 'CheckboxInline', 'selector': 'checkbox-inline'},{'name': 'ColumnStateSwitcherComponent', 'selector': 'columnStateSwitcher'},{'name': 'ConditionsChartComponent', 'selector': 'conditionsChart'},{'name': 'ConditionsComponent', 'selector': 'conditions'},{'name': 'ConditionsDisplay', 'selector': 'conditionsDisplay'},{'name': 'ContextMenuComponent', 'selector': 'contextMenu'},{'name': 'FormBuilder', 'selector': 'form-builder'},{'name': 'HistoricalTrendsComponent', 'selector': 'historicalTrends'},{'name': 'HomeComponent', 'selector': 'home'},{'name': 'HoverBoxComponent', 'selector': 'hoverBox'},{'name': 'LoadingAnimation', 'selector': 'loadingAnimation'},{'name': 'MedicationsComponent', 'selector': 'medications'},{'name': 'NormalBox1', 'selector': 'normal-box-1'},{'name': 'NormalBox2', 'selector': 'normal-box-2'},{'name': 'ObservationRecursiveChart', 'selector': 'observationRecursionChart'},{'name': 'ObservationsComponent', 'selector': 'observations'},{'name': 'ObservationsDisplay', 'selector': 'observationsDisplay'},{'name': 'PatientComponent', 'selector': 'patient'},{'name': 'ScratchPadUpdate', 'selector': 'scratchpad-update'},{'name': 'SelectListSingle', 'selector': 'select-list-single'},{'name': 'TimelineComponent', 'selector': 'timelines'},{'name': 'TimelinePopupComponent', 'selector': 'timeline-popup'},{'name': 'ToolbarComponent', 'selector': 'toolbar'},{'name': 'TripleListComponent', 'selector': 'triplelist'}];
     var DIRECTIVES = [{'name': 'AutoGrowDirective', 'selector': '[autoGrow]'},{'name': 'HighlightDirective', 'selector': '[highlight]'}];
     var ACTUAL_COMPONENT = {'name': 'CarePlansComponent'};

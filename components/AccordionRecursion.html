@@ -117,10 +117,10 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#loadFinished">loadFinished</a>
+                                <a href="#ColumnType">ColumnType</a>
                             </li>
                             <li>
-                                <a href="#parsedData">parsedData</a>
+                                <a href="#loadFinished">loadFinished</a>
                             </li>
                         </ul>
                     </td>
@@ -135,19 +135,16 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#addCategoriesConditions">addCategoriesConditions</a>
+                                <a href="#createCarePlansNodes">createCarePlansNodes</a>
+                            </li>
+                            <li>
+                                <a href="#createConditionsNodes">createConditionsNodes</a>
+                            </li>
+                            <li>
+                                <a href="#createObservationsNodes">createObservationsNodes</a>
                             </li>
                             <li>
                                 <a href="#ngOnChanges">ngOnChanges</a>
-                            </li>
-                            <li>
-                                <a href="#reconstructDataConditions">reconstructDataConditions</a>
-                            </li>
-                            <li>
-                                <a href="#reconstructDataFindings">reconstructDataFindings</a>
-                            </li>
-                            <li>
-                                <a href="#reconstructDataObservations">reconstructDataObservations</a>
                             </li>
                         </ul>
                     </td>
@@ -162,16 +159,16 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#columnNum">columnNum</a>
+                                <a href="#columnType">columnType</a>
                             </li>
                             <li>
-                                <a href="#firstIteration">firstIteration</a>
+                                <a href="#items">items</a>
                             </li>
                             <li>
-                                <a href="#levelData">levelData</a>
+                                <a href="#level">level</a>
                             </li>
                             <li>
-                                <a href="#levelNum">levelNum</a>
+                                <a href="#levelNodes">levelNodes</a>
                             </li>
                         </ul>
                     </td>
@@ -195,7 +192,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/components/accordionRecursion/accordionRecursion.component.ts:39</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="88" class="link-to-prism">src/app/components/accordionRecursion/accordionRecursion.component.ts:88</a></div>
                             </td>
                         </tr>
 
@@ -239,8 +236,63 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="columnNum"></a>
-                        <b>columnNum</b>
+                        <a name="columnType"></a>
+                        <b>columnType</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../miscellaneous/enumerations.html#ColumnType" target="_self" >ColumnType</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="62" class="link-to-prism">src/app/components/accordionRecursion/accordionRecursion.component.ts:62</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>The type of column (conditions, observations, or careplans).</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="items"></a>
+                        <b>items</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Condition[] | Observation[] | CarePlan[]</code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="68" class="link-to-prism">src/app/components/accordionRecursion/accordionRecursion.component.ts:68</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>The list of items (conditions, observations, or careplans) 
+to display.</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="level"></a>
+                        <b>level</b>
                     </td>
                 </tr>
                 <tr>
@@ -251,72 +303,46 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/components/accordionRecursion/accordionRecursion.component.ts:29</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="75" class="link-to-prism">src/app/components/accordionRecursion/accordionRecursion.component.ts:75</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>The current level or depth. For example, 0 represents 
+the top level, and 1 represents directly below 
+top-level headings.</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
         <table class="table table-sm table-bordered">
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="firstIteration"></a>
-                        <b>firstIteration</b>
+                        <a name="levelNodes"></a>
+                        <b>levelNodes</b>
                     </td>
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                        <i>Type : </i>        <code><a href="../miscellaneous/typealiases.html#LevelNode" target="_self" >LevelNode[]</a></code>
 
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/components/accordionRecursion/accordionRecursion.component.ts:35</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="82" class="link-to-prism">src/app/components/accordionRecursion/accordionRecursion.component.ts:82</a></div>
                             </td>
                         </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="levelData"></a>
-                        <b>levelData</b>
+                        <div class="io-description"><p>Representation of the current level of the display in 
+the tree structure. This is either constructed internally, 
+or passed directly to the component.</p>
+</div>
                     </td>
                 </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
-
-                    </td>
-                </tr>
-                        <tr>
-                            <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/components/accordionRecursion/accordionRecursion.component.ts:26</a></div>
-                            </td>
-                        </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="levelNum"></a>
-                        <b>levelNum</b>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
-
-                    </td>
-                </tr>
-                        <tr>
-                            <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/components/accordionRecursion/accordionRecursion.component.ts:32</a></div>
-                            </td>
-                        </tr>
             </tbody>
         </table>
 </section>
@@ -332,32 +358,34 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="addCategoriesConditions"></a>
+                    <a name="createCarePlansNodes"></a>
                     <span class="name">
                         <b>
-                            addCategoriesConditions
+                            createCarePlansNodes
                         </b>
-                        <a href="#addCategoriesConditions"><span class="icon ion-ios-link"></span></a>
+                        <a href="#createCarePlansNodes"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>addCategoriesConditions(arrData: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+<code>createCarePlansNodes(carePlans: <a href="../classes/CarePlan.html">CarePlan[]</a>)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="75"
-                            class="link-to-prism">src/app/components/accordionRecursion/accordionRecursion.component.ts:75</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="186"
+                            class="link-to-prism">src/app/components/accordionRecursion/accordionRecursion.component.ts:186</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Create and populate the tree structure of careplan categories.</p>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -367,13 +395,14 @@
                                     <td>Name</td>
                                     <td>Type</td>
                                     <td>Optional</td>
+                                    <td>Description</td>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>arrData</td>
+                                    <td>carePlans</td>
                                     <td>
-                                                <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                                <code><a href="../classes/CarePlan.html" target="_self" >CarePlan[]</a></code>
                                     </td>
 
                                     <td>
@@ -381,6 +410,10 @@
                                     </td>
 
 
+                                    <td>
+                                        <p>The careplans that will be displayed.</p>
+
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -388,7 +421,161 @@
                     <div>
                     </div>
                     <div class="io-description">
-                        <b>Returns : </b>    <code>{}</code>
+                        <b>Returns : </b>        <code><a href="../miscellaneous/typealiases.html#LevelNode" target="_self" >LevelNode[]</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="createConditionsNodes"></a>
+                    <span class="name">
+                        <b>
+                            createConditionsNodes
+                        </b>
+                        <a href="#createConditionsNodes"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>createConditionsNodes(conditions: <a href="../classes/Condition.html">Condition[]</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="128"
+                            class="link-to-prism">src/app/components/accordionRecursion/accordionRecursion.component.ts:128</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Create and populate the tree structure of condition categories.</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>conditions</td>
+                                    <td>
+                                                <code><a href="../classes/Condition.html" target="_self" >Condition[]</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <p>The conditions that will be displayed.</p>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../miscellaneous/typealiases.html#LevelNode" target="_self" >LevelNode[]</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="createObservationsNodes"></a>
+                    <span class="name">
+                        <b>
+                            createObservationsNodes
+                        </b>
+                        <a href="#createObservationsNodes"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>createObservationsNodes(observations: <a href="../classes/Observation.html">Observation[]</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="156"
+                            class="link-to-prism">src/app/components/accordionRecursion/accordionRecursion.component.ts:156</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Create and populate the tree structure of observation categories.</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>observations</td>
+                                    <td>
+                                                <code><a href="../classes/Observation.html" target="_self" >Observation[]</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <p>The observations that will be displayed.</p>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../miscellaneous/typealiases.html#LevelNode" target="_self" >LevelNode[]</a></code>
 
                     </div>
                     <div class="io-description">
@@ -420,228 +607,21 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="48"
-                            class="link-to-prism">src/app/components/accordionRecursion/accordionRecursion.component.ts:48</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="96"
+                            class="link-to-prism">src/app/components/accordionRecursion/accordionRecursion.component.ts:96</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Handle changes to the items (conditions, observations, or 
+careplans) being displayed.</p>
+</div>
 
                     <div class="io-description">
                         <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="reconstructDataConditions"></a>
-                    <span class="name">
-                        <b>
-                            reconstructDataConditions
-                        </b>
-                        <a href="#reconstructDataConditions"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>reconstructDataConditions(arrData: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="71"
-                            class="link-to-prism">src/app/components/accordionRecursion/accordionRecursion.component.ts:71</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                    <div class="io-description">
-                        <b>Parameters :</b>
-                        <table class="params">
-                            <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Type</td>
-                                    <td>Optional</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>arrData</td>
-                                    <td>
-                                                <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                    </div>
-                    <div class="io-description">
-                        
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="reconstructDataFindings"></a>
-                    <span class="name">
-                        <b>
-                            reconstructDataFindings
-                        </b>
-                        <a href="#reconstructDataFindings"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>reconstructDataFindings(arrData: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="128"
-                            class="link-to-prism">src/app/components/accordionRecursion/accordionRecursion.component.ts:128</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                    <div class="io-description">
-                        <b>Parameters :</b>
-                        <table class="params">
-                            <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Type</td>
-                                    <td>Optional</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>arrData</td>
-                                    <td>
-                                                <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                    </div>
-                    <div class="io-description">
-                        
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="reconstructDataObservations"></a>
-                    <span class="name">
-                        <b>
-                            reconstructDataObservations
-                        </b>
-                        <a href="#reconstructDataObservations"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>reconstructDataObservations(arrData: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="120"
-                            class="link-to-prism">src/app/components/accordionRecursion/accordionRecursion.component.ts:120</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                    <div class="io-description">
-                        <b>Parameters :</b>
-                        <table class="params">
-                            <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Type</td>
-                                    <td>Optional</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>arrData</td>
-                                    <td>
-                                                <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                    </div>
-                    <div class="io-description">
-                        
                     </div>
                 </td>
             </tr>
@@ -653,6 +633,38 @@
         <h3 id="inputs">
             Properties
         </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="ColumnType"></a>
+                        <span class="name">
+                            <b>
+                            ColumnType</b>
+                            <a href="#ColumnType"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>ColumnType</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">src/app/components/accordionRecursion/accordionRecursion.component.ts:57</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Makes the ColumType enum accessible from the template.</p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
         <table class="table table-sm table-bordered">
             <tbody>
                 <tr>
@@ -678,37 +690,17 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/components/accordionRecursion/accordionRecursion.component.ts:39</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="88" class="link-to-prism">src/app/components/accordionRecursion/accordionRecursion.component.ts:88</a></div>
                             </td>
                         </tr>
 
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="parsedData"></a>
-                        <span class="name">
-                            <b>
-                            parsedData</b>
-                            <a href="#parsedData"><span class="icon ion-ios-link"></span></a>
-                        </span>
+                        <div class="io-description"><p>Whether the items (conditions, observations, or careplans) 
+have been loaded yet.</p>
+</div>
                     </td>
                 </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
-
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/components/accordionRecursion/accordionRecursion.component.ts:38</a></div>
-                            </td>
-                        </tr>
-
 
             </tbody>
         </table>
@@ -720,77 +712,133 @@
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, Input, Output } from &#x27;@angular/core&#x27;;
 import { ObservationService } from &#x27;../../services/observation.service&#x27;;
+import { ColumnType } from &#x27;../../utils/columnType.enum&#x27;;
+import { Condition } from &#x27;../../models/condition.model&#x27;;
+import { Observation } from &#x27;../../models/observation.model&#x27;;
+import { CarePlan } from &#x27;../../models/carePlan.model&#x27;;
+import { componentFactoryName } from &#x27;@angular/compiler&#x27;;
+
+/**
+ * A tree structure representing the structure of a column of 
+ * conditions, observations, or careplans. For example, a column 
+ * may contain several levels of headings before actual items 
+ * (like conditions) are displayed.
+ */
+type LevelNode &#x3D;  {
+    /**
+     * The title/heading of the category.
+     */
+    category: string,
+
+    /**
+     * Whether the current level is a leaf (meaning that it just 
+     * displays data), or is an inner node containing other children 
+     * levels. 
+     */
+    isLeaf: boolean,
+    
+    /**
+     * If &#x60;isLeaf&#x60; is false, this contains the children levels of the 
+     * node.
+     */
+    childLevels?: LevelNode[],
+
+    /**
+     * If &#x60;isLeaf&#x60; is true, this contains the items to be displayed.
+     */
+    items?: Condition[] | Observation[] | CarePlan[]
+};
+
+/**
+ * Hardcoded categories for the care plans column.
+ */
+const CARE_PLAN_CATEGORIES &#x3D; [
+    &#x27;Medication&#x27;, &#x27;Procedures&#x27;, 
+    &#x27;In-Progress Tests&#x27;, &#x27;Dietary Plan&#x27;, 
+    &#x27;Exercise Plan&#x27;
+];
 
 @Component({
     selector: &#x27;accordionRecursion&#x27;,
     templateUrl: &#x27;./accordionRecursion.html&#x27;
 })
 export class AccordionRecursion {
+    /**
+     * Makes the ColumType enum accessible from the template.
+     */
+    ColumnType &#x3D; ColumnType;
 
-    /* This component takes in the data at the current level of the accordion structure:
-    Note that the structure of the data should be as follows:
-        {[
-            category: string,
-            subheading: boolean,
-            subs: [array of the same 4 headings here] // null if subheadings is false
-            data: [array of the list of conditions for that level] // null if subheadings is true
-        ]}
-    */
-    @Input() levelData: any;
+    /**
+     * The type of column (conditions, observations, or careplans).
+     */
+    @Input() columnType: ColumnType;
 
-    // This is the type of the column (conditions: 0, observations: 1, or care plans: 2)
-    @Input() columnNum: number;
+    /**
+     * The list of items (conditions, observations, or careplans) 
+     * to display.
+     */
+    @Input() items?: Condition[] | Observation[] | CarePlan[];
 
-    // This is the current level of recursion (used for the display)
-    @Input() levelNum: number;
+    /**
+     * The current level or depth. For example, 0 represents 
+     * the top level, and 1 represents directly below 
+     * top-level headings.
+     */
+    @Input() level: number;
 
-    // for testing purposes
-    @Input() firstIteration: number;
+    /**
+     * Representation of the current level of the display in 
+     * the tree structure. This is either constructed internally, 
+     * or passed directly to the component.
+     */
+    @Input() levelNodes?: LevelNode[];
 
-    // Parsed data according to the above data schema 
-    parsedData: any;
+    /**
+     * Whether the items (conditions, observations, or careplans) 
+     * have been loaded yet.
+     */
     loadFinished: boolean &#x3D; false;
-
-    // &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
-    // &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; EVENT METHODS &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
-    // &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;---------------&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
 
     constructor(private observationService: ObservationService) { }
 
-    // When the component is first initialized
+    /**
+     * Handle changes to the items (conditions, observations, or 
+     * careplans) being displayed.
+     */
     ngOnChanges() {
-        if (this.firstIteration &#x3D;&#x3D; 1) {
-            // reconstruct the data for now
-            if (this.columnNum &#x3D;&#x3D; 0)
-                this.reconstructDataConditions(this.levelData);
-            else if (this.columnNum &#x3D;&#x3D; 1) {
-                this.reconstructDataObservations(this.levelData);
-            }
-            else if (this.columnNum &#x3D;&#x3D; 2)
-                this.reconstructDataFindings(this.levelData);
-        } else {
-            this.parsedData &#x3D; this.levelData;
+        // Only construct level nodes if items (conditions, careplans, 
+        // or observations) are passed to the component. Otherwise, 
+        // use the provided levelNodes.
+        if (!this.items) {
+            return;
         }
 
+        switch(this.columnType) {
+            case ColumnType.Conditions: {
+                this.levelNodes &#x3D; this.createConditionsNodes(&lt;Condition[]&gt;this.items);
+                break;
+            }
+            case ColumnType.Observations: {
+                console.log(&#x27;POPULATION OBSRVATIONS COLUMNS&#x27;);
+                this.levelNodes &#x3D; this.createObservationsNodes(&lt;Observation[]&gt;this.items);
+                console.log(this.levelNodes);
+                break;
+            }
+            case ColumnType.CarePlans: {
+                this.levelNodes &#x3D; this.createCarePlansNodes(&lt;CarePlan[]&gt;this.items);
+                break;
+            }
+        }
         this.loadFinished &#x3D; true;
     }
 
-    // &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
-    // &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; UTILITY METHODS &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
-    // &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;---------------&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
-
-    // NOTE: The current component uses this function to rebuild the data into correct structure, but in practice, this function should not be used
-    // since the data should already in the correct model format (described above levelData)
-    reconstructDataConditions(arrData: any) {
-        this.parsedData &#x3D; this.addCategoriesConditions(arrData);
-    }
-
-    addCategoriesConditions(arrData: any) {
-        // For conditions, there are guaranteed to be 5 different columns; for now, just filter by active/inactive
-
-        // data sieve
-        var dataFilter &#x3D;
-        {
+    /**
+     * Create and populate the tree structure of condition categories.
+     * 
+     * @param conditions The conditions that will be displayed.
+     */
+    createConditionsNodes(conditions: Condition[]): LevelNode[] {
+        let categories: { [key: string]: Condition[] } &#x3D; {
             &#x27;Chief Complaint&#x27;: [],
             &#x27;Active Problems&#x27;: [],
             &#x27;Inactive Problems&#x27;: [],
@@ -798,80 +846,65 @@ export class AccordionRecursion {
             &#x27;Preventions/Exposures&#x27;: []
         };
 
-        // Filter each condition into a category based on the data
-        for (var i &#x3D; 0; i &lt; arrData.length; i++) {
-            if (arrData[i].clinicalStatus &#x3D;&#x3D; &quot;active&quot;) {
-                dataFilter[&#x27;Active Problems&#x27;].push(arrData[i]);
-            } else if (arrData[i].clinicalStatus &#x3D;&#x3D; &quot;inactive&quot;) {
-                dataFilter[&#x27;Inactive Problems&#x27;].push(arrData[i]);
+        // Filter each condition into its respective category.
+        categories[&#x27;Active Problems&#x27;] &#x3D; conditions.filter(c &#x3D;&gt; c.clinicalStatus &#x3D;&#x3D;&#x3D; &#x27;active&#x27;);
+        categories[&#x27;Inactive Problems&#x27;] &#x3D; conditions.filter(c &#x3D;&gt; c.clinicalStatus &#x3D;&#x3D;&#x3D; &#x27;inactive&#x27;);
+        
+        // Create LevelNodes for each category.
+        return Object.keys(categories).map(cat &#x3D;&gt; {
+            return {
+                category: cat,
+                isLeaf: true,
+                items: categories[cat]
+            };
+        });
+    }
+
+    /**
+     * Create and populate the tree structure of observation categories.
+     * 
+     * @param observations The observations that will be displayed.
+     */
+    createObservationsNodes(observations: Observation[]): LevelNode[] {
+        let categories: { [x: string]: Observation[] } &#x3D; {};
+
+        for (let o of observations) {
+            // Check if the observation has data and a category.
+            if (o[&#x27;valueQuantity&#x27;] &amp;&amp; o[&#x27;category&#x27;]) {
+                let category &#x3D; o.category[0].text;
+                
+                // Add the observation to the matching category.
+                let observationsInCategory &#x3D; categories[category] || [];
+                observationsInCategory.push(o);
+                categories[category] &#x3D; observationsInCategory;
             }
         }
 
-        // then reconstruct the object
-        var reconstructedObject &#x3D; [];
-
-        // for each category
-        for (var key in dataFilter) {
-            if (dataFilter.hasOwnProperty(key)) {
-                var newObj &#x3D;
-                {
-                    category: key,
-                    subheadings: false,
-                    subs: null,
-                    data: dataFilter[key]
-                };
-
-                reconstructedObject.push(newObj);
-            }
-        }
-
-        return reconstructedObject;
+        // Create LevelNodes for each category.
+        return Object.keys(categories).map(cat &#x3D;&gt; {
+            return {
+                category: cat,
+                isLeaf: true,
+                items: categories[cat]
+            };
+        });
     }
 
-    // &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; RECONSTRUCT DATA OBSERVATIONS &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
+    /**
+     * Create and populate the tree structure of careplan categories.
+     * 
+     * @param carePlans The careplans that will be displayed.
+     */
+    createCarePlansNodes(carePlans: CarePlan[]): LevelNode[] {
+        // Create a LevelNode for each category
+        let levels: LevelNode[] &#x3D; CARE_PLAN_CATEGORIES.map(cat &#x3D;&gt; ({
+            category: cat,
+            isLeaf: true,
+        }));
 
-    reconstructDataObservations(arrData: any) {
-        // reconstruct then set the passed data
-        this.parsedData &#x3D; this.observationService.addCategoriesObservations(arrData);
-    }
-
-    
-    // &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; RECONSTRUCT DATA FINDINGS &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
-
-    reconstructDataFindings(arrData: any) {
-        let reconstructedObject &#x3D; [{
-            category: &quot;Medication&quot;,
-            subheadings: false,
-            subs: null,
-            data: arrData
-        },
-        {
-            category: &quot;Procedures&quot;,
-            subheadings: false,
-            subs: null,
-            data: arrData
-        },
-        {
-            category: &quot;In-Progress Tests&quot;,
-            subheadings: false,
-            subs: null,
-            data: arrData
-        },
-        {
-            category: &quot;Dietary Plan&quot;,
-            subheadings: false,
-            subs: null,
-            data: arrData
-        },
-        {
-            category: &quot;Exercise Plan&quot;,
-            subheadings: false,
-            subs: null,
-            data: arrData
-        },
-        ];
-
-        this.parsedData &#x3D; reconstructedObject;
+        // Hardcode all careplans to be placed in the first category.
+        levels[0].items &#x3D; carePlans;
+        return levels;
     }
 }</code></pre>
     </div>
@@ -879,25 +912,37 @@ export class AccordionRecursion {
     <div class="tab-pane fade " id="c-templateData">
         <pre class="line-numbers"><code class="language-html">
 &lt;div *ngIf&#x3D;&quot;loadFinished&quot;&gt;
-  &lt;div *ngFor&#x3D;&quot;let cat of parsedData; let i &#x3D; index&quot;&gt;
+  &lt;div *ngFor&#x3D;&quot;let categoryNode of levelNodes; let i &#x3D; index&quot;&gt;
     &lt;div class&#x3D;&quot;panel-heading&quot;&gt;
-      &lt;h4 class&#x3D;&quot;panel-title&quot; [style.marginLeft.px]&#x3D;&quot;levelNum * 20&quot;&gt;&lt;a data-toggle&#x3D;&quot;collapse&quot; href&#x3D;&quot;#collapse{{columnNum + &#x27;-&#x27; + levelNum + &#x27;-&#x27; + i}}&quot;&gt;&lt;span class&#x3D;&quot;glyphicon glyphicon-triangle-bottom&quot;&gt;&lt;/span&gt;  {{cat.category}} ({{cat.data?.length}})&lt;/a&gt;&lt;/h4&gt;
+      &lt;h4 class&#x3D;&quot;panel-title&quot; [style.marginLeft.px]&#x3D;&quot;level * 20&quot;&gt;
+        &lt;a data-toggle&#x3D;&quot;collapse&quot; href&#x3D;&quot;#collapse{{columnType + &#x27;-&#x27; + level + &#x27;-&#x27; + i}}&quot;&gt;
+          &lt;span class&#x3D;&quot;glyphicon glyphicon-triangle-bottom&quot;&gt;&lt;/span&gt;
+            {{categoryNode.category}} ({{categoryNode.items?.length || 0}})
+          &lt;/a&gt;
+        &lt;/h4&gt;
     &lt;/div&gt;
-    &lt;div class&#x3D;&quot;panel-collapse collapse&quot; [style.margin-left.px]&#x3D;&quot;(levelNum + 1) * 20&quot; id&#x3D;&quot;collapse{{columnNum + &#x27;-&#x27; + levelNum + &#x27;-&#x27; + i}}&quot;&gt;
-      &lt;div *ngIf&#x3D;&quot;!cat.subheadings&quot;&gt;
-        &lt;div *ngIf&#x3D;&quot;columnNum &#x3D;&#x3D; 0&quot;&gt;
-          &lt;conditionsDisplay [conditions]&#x3D;&quot;cat.data&quot;&gt;&lt;/conditionsDisplay&gt;
+    &lt;div 
+      class&#x3D;&quot;panel-collapse collapse&quot;
+      [style.margin-left.px]&#x3D;&quot;(level + 1) * 20&quot;
+      id&#x3D;&quot;collapse{{columnType + &#x27;-&#x27; + level + &#x27;-&#x27; + i}}&quot;&gt;
+      &lt;div *ngIf&#x3D;&quot;categoryNode.isLeaf&quot;&gt;
+        &lt;div *ngIf&#x3D;&quot;columnType &#x3D;&#x3D; ColumnType.Conditions&quot;&gt;
+          &lt;conditionsDisplay [conditions]&#x3D;&quot;categoryNode.items&quot;&gt;&lt;/conditionsDisplay&gt;
         &lt;/div&gt;
-        &lt;div *ngIf&#x3D;&quot;columnNum &#x3D;&#x3D; 1&quot;&gt;
-          &lt;observationsDisplay [observations]&#x3D;&quot;cat.data&quot;&gt;&lt;/observationsDisplay&gt;
+        &lt;div *ngIf&#x3D;&quot;columnType &#x3D;&#x3D; ColumnType.Observations&quot;&gt;
+          &lt;observationsDisplay [observations]&#x3D;&quot;categoryNode.items&quot;&gt;&lt;/observationsDisplay&gt;
         &lt;/div&gt;
-        &lt;div *ngIf&#x3D;&quot;columnNum &#x3D;&#x3D; 2&quot;&gt;    
-          &lt;careplanDisplay [carePlans]&#x3D;&quot;cat.data&quot;&gt;&lt;/careplanDisplay&gt;
+        &lt;div *ngIf&#x3D;&quot;columnType &#x3D;&#x3D; ColumnType.CarePlans&quot;&gt;    
+          &lt;careplanDisplay [carePlans]&#x3D;&quot;categoryNode.items&quot;&gt;&lt;/careplanDisplay&gt;
         &lt;/div&gt;
       &lt;/div&gt;
     &lt;/div&gt;
-    &lt;div *ngIf&#x3D;&quot;cat.subheadings&quot;&gt;
-      &lt;accordionRecursion [levelData]&#x3D;&quot;cat.subs&quot; [columnNum]&#x3D;&quot;columnNum&quot; [levelNum]&#x3D;&quot;levelNum + 1&quot; [firstIteration]&#x3D;&quot;0&quot;&gt;&lt;/accordionRecursion&gt;
+    &lt;div *ngIf&#x3D;&quot;!categoryNode.isLeaf&quot;&gt;
+      &lt;accordionRecursion
+        [levelNodes]&#x3D;&quot;categoryNode.childLevels&quot;
+        [columnType]&#x3D;&quot;columnType&quot;
+        [level]&#x3D;&quot;level + 1&quot;&gt;
+      &lt;/accordionRecursion&gt;
     &lt;/div&gt;
   &lt;/div&gt;
 &lt;/div&gt;</code></pre>
@@ -929,7 +974,7 @@ export class AccordionRecursion {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div *ngIf="loadFinished">  <div *ngFor="let cat of parsedData; let i = index">    <div class="panel-heading">      <h4 class="panel-title" [style.marginLeft.px]="levelNum * 20"><a data-toggle="collapse" href="#collapse{{columnNum + \'-\' + levelNum + \'-\' + i}}"><span class="glyphicon glyphicon-triangle-bottom"></span>  {{cat.category}} ({{cat.data?.length}})</a></h4>    </div>    <div class="panel-collapse collapse" [style.margin-left.px]="(levelNum + 1) * 20" id="collapse{{columnNum + \'-\' + levelNum + \'-\' + i}}">      <div *ngIf="!cat.subheadings">        <div *ngIf="columnNum == 0">          <conditionsDisplay [conditions]="cat.data"></conditionsDisplay>        </div>        <div *ngIf="columnNum == 1">          <observationsDisplay [observations]="cat.data"></observationsDisplay>        </div>        <div *ngIf="columnNum == 2">              <careplanDisplay [carePlans]="cat.data"></careplanDisplay>        </div>      </div>    </div>    <div *ngIf="cat.subheadings">      <accordionRecursion [levelData]="cat.subs" [columnNum]="columnNum" [levelNum]="levelNum + 1" [firstIteration]="0"></accordionRecursion>    </div>  </div></div></div>'
+        var COMPONENT_TEMPLATE = '<div><div *ngIf="loadFinished">  <div *ngFor="let categoryNode of levelNodes; let i = index">    <div class="panel-heading">      <h4 class="panel-title" [style.marginLeft.px]="level * 20">        <a data-toggle="collapse" href="#collapse{{columnType + \'-\' + level + \'-\' + i}}">          <span class="glyphicon glyphicon-triangle-bottom"></span>            {{categoryNode.category}} ({{categoryNode.items?.length || 0}})          </a>        </h4>    </div>    <div       class="panel-collapse collapse"      [style.margin-left.px]="(level + 1) * 20"      id="collapse{{columnType + \'-\' + level + \'-\' + i}}">      <div *ngIf="categoryNode.isLeaf">        <div *ngIf="columnType == ColumnType.Conditions">          <conditionsDisplay [conditions]="categoryNode.items"></conditionsDisplay>        </div>        <div *ngIf="columnType == ColumnType.Observations">          <observationsDisplay [observations]="categoryNode.items"></observationsDisplay>        </div>        <div *ngIf="columnType == ColumnType.CarePlans">              <careplanDisplay [carePlans]="categoryNode.items"></careplanDisplay>        </div>      </div>    </div>    <div *ngIf="!categoryNode.isLeaf">      <accordionRecursion        [levelNodes]="categoryNode.childLevels"        [columnType]="columnType"        [level]="level + 1">      </accordionRecursion>    </div>  </div></div></div>'
     var COMPONENTS = [{'name': 'AccordionRecursion', 'selector': 'accordionRecursion'},{'name': 'AccountComponent', 'selector': 'account'},{'name': 'AppComponent', 'selector': 'app'},{'name': 'CarePlanDisplay', 'selector': 'careplanDisplay'},{'name': 'CarePlansComponent', 'selector': 'carePlans'},{'name': 'CheckboxInline', 'selector': 'checkbox-inline'},{'name': 'ColumnStateSwitcherComponent', 'selector': 'columnStateSwitcher'},{'name': 'ConditionsChartComponent', 'selector': 'conditionsChart'},{'name': 'ConditionsComponent', 'selector': 'conditions'},{'name': 'ConditionsDisplay', 'selector': 'conditionsDisplay'},{'name': 'ContextMenuComponent', 'selector': 'contextMenu'},{'name': 'FormBuilder', 'selector': 'form-builder'},{'name': 'HistoricalTrendsComponent', 'selector': 'historicalTrends'},{'name': 'HomeComponent', 'selector': 'home'},{'name': 'HoverBoxComponent', 'selector': 'hoverBox'},{'name': 'LoadingAnimation', 'selector': 'loadingAnimation'},{'name': 'MedicationsComponent', 'selector': 'medications'},{'name': 'NormalBox1', 'selector': 'normal-box-1'},{'name': 'NormalBox2', 'selector': 'normal-box-2'},{'name': 'ObservationRecursiveChart', 'selector': 'observationRecursionChart'},{'name': 'ObservationsComponent', 'selector': 'observations'},{'name': 'ObservationsDisplay', 'selector': 'observationsDisplay'},{'name': 'PatientComponent', 'selector': 'patient'},{'name': 'ScratchPadUpdate', 'selector': 'scratchpad-update'},{'name': 'SelectListSingle', 'selector': 'select-list-single'},{'name': 'TimelineComponent', 'selector': 'timelines'},{'name': 'TimelinePopupComponent', 'selector': 'timeline-popup'},{'name': 'ToolbarComponent', 'selector': 'toolbar'},{'name': 'TripleListComponent', 'selector': 'triplelist'}];
     var DIRECTIVES = [{'name': 'AutoGrowDirective', 'selector': '[autoGrow]'},{'name': 'HighlightDirective', 'selector': '[highlight]'}];
     var ACTUAL_COMPONENT = {'name': 'AccordionRecursion'};

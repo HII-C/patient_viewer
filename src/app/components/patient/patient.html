@@ -1,13 +1,24 @@
 
 <div class="row patient-content">
-  <div class="col-md-2" *ngIf="patient"><img class="img-rounded" *ngIf="patient.gender === &quot;female&quot;" src="/images/textures/female.png" width="60px" height="60px"/><img class="img-rounded" *ngIf="patient.gender === &quot;male&quot;" src="/images/textures/male.png" width="60px" height="60px"/></div>
+	<div class="col-md-2" *ngIf="patient">
+		<img class="img-rounded" *ngIf="patient.gender === 'female'" src="/images/textures/female.png" width="60px" height="60px"/>
+		<img class="img-rounded" *ngIf="patient.gender === 'male'" src="/images/textures/male.png" width="60px" height="60px"/>
+	</div>
   <div class="col-md-5">
     <div class="text-left"><span id="patient">
         <div class="details" *ngIf="patient">
-          <div class="identifier"><b><span *ngIf="patient.name &amp;&amp; patient.name[0].given">{{patient.name[0].given[0]}}</span>&nbsp;<span *ngIf="patient.name &amp;&amp; patient.name[0].family">{{patient.name[0].family[0]}}</span></b>
+          <div class="identifier">
+						<b>
+							<span *ngIf="patient.name && patient.name[0].given">{{patient.name[0].given[0]}}</span>
+							&nbsp;
+							<span *ngIf="patient.name && patient.name[0].family">{{patient.name[0].family[0]}}</span>
+						</b>
             <div>
                {{patient.gender.charAt(0).toUpperCase()}}, <span *ngIf="patient.mrn"><b>MRN:</b> {{patient.mrn}}, </span></div>
-            <div><b>DOB:</b> {{patient.birthDate | amDateFormat:'MM/DD/YYYY'}} ({{-1 * (patient.birthDate | amDifference:today:'years':false)}}yr)</div>
+            <div>
+							<b>DOB:</b> 
+							{{patient.birthDate | amDateFormat:'MM/DD/YYYY'}} ({{-1 * (patient.birthDate | amDifference:today:'years':false)}}yr)
+						</div>
 		  </div>
         </div></span></div>
   </div>

@@ -22,7 +22,7 @@
         (click)="selectCondition(c)" 
         (contextmenu)="menu.show(c, $event)" 
         id="t{{conditions.indexOf(c)}}" 
-        (mouseover)="hover.show([getDateString(c), c.clinicalStatus, &quot;Last change: May 19, 2013&quot;], $event)" 
+        (mouseover)="hover.show([getDateString(c), c.clinicalStatus, 'Last change: May 19, 2013'], $event)" 
         (mouseleave)="hover.hide($event)"
       > 
         <td>

@@ -9,8 +9,8 @@
     </div>
   </div>
   <div class="column-content">
-    <div class="container" *ngIf="columnState == &quot;default&quot;" style="width:auto;">
-      <div *ngIf="columnState == &quot;default&quot; &amp;&amp; this.observationService.uniqueObservationsLoadFinished">
+    <div class="container" *ngIf="columnState == 'default'" style="width:auto;">
+      <div *ngIf="columnState == 'default' && this.observationService.uniqueObservationsLoadFinished">
         <accordionRecursion 
           [items]="this.observationService.uniqueObservations"
           [columnType]="ColumnType.Observations"
@@ -21,7 +21,7 @@
         <loadingAnimation></loadingAnimation>
       </div>
     </div>
-    <div class="container" *ngIf="columnState == &quot;scratchpad&quot;" style="width:auto;">
+    <div class="container" *ngIf="columnState == 'scratchpad'" style="width:auto;">
       <observationsDisplay [observations]="this.scratchPadService.getObservations()"></observationsDisplay>
     </div>
   </div>

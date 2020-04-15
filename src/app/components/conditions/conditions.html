@@ -9,7 +9,7 @@
     </div>
   </div>
   <div class="column-content">
-    <div *ngIf="columnState == &quot;default&quot; &amp;&amp; loaded">
+    <div *ngIf="columnState == 'default' && loaded">
       <accordionRecursion 
         [items]="conditions" 
         [columnType]="ColumnType.Conditions"
@@ -19,7 +19,7 @@
     <div *ngIf="!loaded">
       <loadingAnimation></loadingAnimation>
     </div>
-    <div *ngIf="columnState == &quot;scratchpad&quot;">
+    <div *ngIf="columnState == 'scratchpad'">
       <conditionsDisplay [conditions]="getScratchPadConditions()" [scratchPadMode]="true"></conditionsDisplay>
     </div>
   </div>

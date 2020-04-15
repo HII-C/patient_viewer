@@ -9,6 +9,7 @@ import { HistoricalTrendsService } from '../../services/historicalTrends.service
 import { ScratchPadService } from '../../services/scratchPad.service';
 
 import { Observation } from '../../models/observation.model';
+import { ColumnType } from '../../utils/columnType.enum';
 import { Patient } from '../../models/patient.model';
 import { BaseColumn } from '../baseColumn';
 
@@ -22,7 +23,6 @@ export class ObservationsComponent extends BaseColumn{
   observations: Array<Observation> = [];
 
   @Input() patient: Patient;
-  //@Output() observationReturned: EventEmitter<Array<any>> = new EventEmitter();
 
   mappings: { [key: string]: Array<string> } = {};
 

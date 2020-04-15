@@ -1,83 +1,132 @@
-/*
-    Description: This file creates the accordion substructure per the data
-    Date: 3/19/18
-    Version: 1.0
-    Creator: Steven Tran
-*/
-
 import { Component, Input, Output } from '@angular/core';
 import { ObservationService } from '../../services/observation.service';
+import { ColumnType } from '../../utils/columnType.enum';
+import { Condition } from '../../models/condition.model';
+import { Observation } from '../../models/observation.model';
+import { CarePlan } from '../../models/carePlan.model';
+import { componentFactoryName } from '@angular/compiler';
+
+/**
+ * A tree structure representing the structure of a column of 
+ * conditions, observations, or careplans. For example, a column 
+ * may contain several levels of headings before actual items 
+ * (like conditions) are displayed.
+ */
+type LevelNode =  {
+    /**
+     * The title/heading of the category.
+     */
+    category: string,
+
+    /**
+     * Whether the current level is a leaf (meaning that it just 
+     * displays data), or is an inner node containing other children 
+     * levels. 
+     */
+    isLeaf: boolean,
+    
+    /**
+     * If `isLeaf` is false, this contains the children levels of the 
+     * node.
+     */
+    childLevels?: LevelNode[],
+
+    /**
+     * If `isLeaf` is true, this contains the items to be displayed.
+     */
+    items?: Condition[] | Observation[] | CarePlan[]
+};
+
+/**
+ * Hardcoded categories for the care plans column.
+ */
+const CARE_PLAN_CATEGORIES = [
+    'Medication', 'Procedures', 
+    'In-Progress Tests', 'Dietary Plan', 
+    'Exercise Plan'
+];
 
 @Component({
     selector: 'accordionRecursion',
     templateUrl: './accordionRecursion.html'
 })
 export class AccordionRecursion {
+    /**
+     * Makes the ColumType enum accessible from the template.
+     */
+    ColumnType = ColumnType;
 
-    /* This component takes in the data at the current level of the accordion structure:
-    Note that the structure of the data should be as follows:
-        {[
-            category: string,
-            subheading: boolean,
-            subs: [array of the same 4 headings here] // null if subheadings is false
-            data: [array of the list of conditions for that level] // null if subheadings is true
-        ]}
-    */
-    @Input() levelData: any;
+    /**
+     * The type of column (conditions, observations, or careplans).
+     */
+    @Input() columnType: ColumnType;
 
-    // This is the type of the column (conditions: 0, observations: 1, or care plans: 2)
-    @Input() columnNum: number;
+    /**
+     * The list of items (conditions, observations, or careplans) 
+     * to display.
+     */
+    @Input() items?: Condition[] | Observation[] | CarePlan[];
 
-    // This is the current level of recursion (used for the display)
-    @Input() levelNum: number;
+    /**
+     * The current level or depth. For example, 0 represents 
+     * the top level, and 1 represents directly below 
+     * top-level headings.
+     */
+    @Input() level: number;
 
-    // for testing purposes
-    @Input() firstIteration: number;
+    /**
+     * Representation of the current level of the display in 
+     * the tree structure. This is either constructed internally, 
+     * or passed directly to the component.
+     */
+    @Input() levelNodes?: LevelNode[];
 
-    // Parsed data according to the above data schema 
-    parsedData: any;
+    /**
+     * Whether the items (conditions, observations, or careplans) 
+     * have been loaded yet.
+     */
     loadFinished: boolean = false;
-
-    // ===============================================================================================================================================
-    // ================================================================== EVENT METHODS ==============================================================
-    // ==================================================================---------------==============================================================
 
     constructor(private observationService: ObservationService) { }
 
-    // When the component is first initialized
+    /**
+     * Handle changes to the items (conditions, observations, or 
+     * careplans) being displayed.
+     */
     ngOnChanges() {
-        if (this.firstIteration == 1) {
-            // reconstruct the data for now
-            if (this.columnNum == 0)
-                this.reconstructDataConditions(this.levelData);
-            else if (this.columnNum == 1) {
-                this.reconstructDataObservations(this.levelData);
-            }
-            else if (this.columnNum == 2)
-                this.reconstructDataFindings(this.levelData);
-        } else {
-            this.parsedData = this.levelData;
+        // Only construct level nodes if items (conditions, careplans, 
+        // or observations) are passed to the component. Otherwise, 
+        // use the provided levelNodes.
+        if (!this.items) {
+            return;
         }
 
+        switch(this.columnType) {
+            case ColumnType.Conditions: {
+                this.levelNodes = this.createConditionsNodes(<Condition[]>this.items);
+                break;
+            }
+            case ColumnType.Observations: {
+                console.log('POPULATION OBSRVATIONS COLUMNS');
+                this.levelNodes = this.createObservationsNodes(<Observation[]>this.items);
+                console.log(this.levelNodes);
+                break;
+            }
+            case ColumnType.CarePlans: {
+                this.levelNodes = this.createCarePlansNodes(<CarePlan[]>this.items);
+                break;
+            }
+        }
         this.loadFinished = true;
     }
 
-    // ===============================================================================================================================================
-    // ================================================================== UTILITY METHODS ==============================================================
-    // ==================================================================---------------==============================================================
-
-    // NOTE: The current component uses this function to rebuild the data into correct structure, but in practice, this function should not be used
-    // since the data should already in the correct model format (described above levelData)
-    reconstructDataConditions(arrData: any) {
-        this.parsedData = this.addCategoriesConditions(arrData);
-    }
-
-    addCategoriesConditions(arrData: any) {
-        // For conditions, there are guaranteed to be 5 different columns; for now, just filter by active/inactive
-
-        // data sieve
-        var dataFilter =
-        {
+    /**
+     * Create and populate the tree structure of condition categories.
+     * 
+     * @param conditions The conditions that will be displayed.
+     */
+    createConditionsNodes(conditions: Condition[]): LevelNode[] {
+        let categories: { [key: string]: Condition[] } = {
             'Chief Complaint': [],
             'Active Problems': [],
             'Inactive Problems': [],
@@ -85,79 +134,64 @@ export class AccordionRecursion {
             'Preventions/Exposures': []
         };
 
-        // Filter each condition into a category based on the data
-        for (var i = 0; i < arrData.length; i++) {
-            if (arrData[i].clinicalStatus == "active") {
-                dataFilter['Active Problems'].push(arrData[i]);
-            } else if (arrData[i].clinicalStatus == "inactive") {
-                dataFilter['Inactive Problems'].push(arrData[i]);
+        // Filter each condition into its respective category.
+        categories['Active Problems'] = conditions.filter(c => c.clinicalStatus === 'active');
+        categories['Inactive Problems'] = conditions.filter(c => c.clinicalStatus === 'inactive');
+        
+        // Create LevelNodes for each category.
+        return Object.keys(categories).map(cat => {
+            return {
+                category: cat,
+                isLeaf: true,
+                items: categories[cat]
+            };
+        });
+    }
+
+    /**
+     * Create and populate the tree structure of observation categories.
+     * 
+     * @param observations The observations that will be displayed.
+     */
+    createObservationsNodes(observations: Observation[]): LevelNode[] {
+        let categories: { [x: string]: Observation[] } = {};
+
+        for (let o of observations) {
+            // Check if the observation has data and a category.
+            if (o['valueQuantity'] && o['category']) {
+                let category = o.category[0].text;
+                
+                // Add the observation to the matching category.
+                let observationsInCategory = categories[category] || [];
+                observationsInCategory.push(o);
+                categories[category] = observationsInCategory;
             }
         }
 
-        // then reconstruct the object
-        var reconstructedObject = [];
-
-        // for each category
-        for (var key in dataFilter) {
-            if (dataFilter.hasOwnProperty(key)) {
-                var newObj =
-                {
-                    category: key,
-                    subheadings: false,
-                    subs: null,
-                    data: dataFilter[key]
-                };
-
-                reconstructedObject.push(newObj);
-            }
-        }
-
-        return reconstructedObject;
+        // Create LevelNodes for each category.
+        return Object.keys(categories).map(cat => {
+            return {
+                category: cat,
+                isLeaf: true,
+                items: categories[cat]
+            };
+        });
     }
 
-    // ================================= RECONSTRUCT DATA OBSERVATIONS =========================
+    /**
+     * Create and populate the tree structure of careplan categories.
+     * 
+     * @param carePlans The careplans that will be displayed.
+     */
+    createCarePlansNodes(carePlans: CarePlan[]): LevelNode[] {
+        // Create a LevelNode for each category
+        let levels: LevelNode[] = CARE_PLAN_CATEGORIES.map(cat => ({
+            category: cat,
+            isLeaf: true,
+        }));
 
-    reconstructDataObservations(arrData: any) {
-        // reconstruct then set the passed data
-        this.parsedData = this.observationService.addCategoriesObservations(arrData);
-    }
-
-    
-    // ================================ RECONSTRUCT DATA FINDINGS ======================
-
-    reconstructDataFindings(arrData: any) {
-        let reconstructedObject = [{
-            category: "Medication",
-            subheadings: false,
-            subs: null,
-            data: arrData
-        },
-        {
-            category: "Procedures",
-            subheadings: false,
-            subs: null,
-            data: arrData
-        },
-        {
-            category: "In-Progress Tests",
-            subheadings: false,
-            subs: null,
-            data: arrData
-        },
-        {
-            category: "Dietary Plan",
-            subheadings: false,
-            subs: null,
-            data: arrData
-        },
-        {
-            category: "Exercise Plan",
-            subheadings: false,
-            subs: null,
-            data: arrData
-        },
-        ];
-
-        this.parsedData = reconstructedObject;
+        // Hardcode all careplans to be placed in the first category.
+        levels[0].items = carePlans;
+        return levels;
     }
 }

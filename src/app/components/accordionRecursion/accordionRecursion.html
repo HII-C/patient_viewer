@@ -1,24 +1,36 @@
 
 <div *ngIf="loadFinished">
-  <div *ngFor="let cat of parsedData; let i = index">
+  <div *ngFor="let categoryNode of levelNodes; let i = index">
     <div class="panel-heading">
-      <h4 class="panel-title" [style.marginLeft.px]="levelNum * 20"><a data-toggle="collapse" href="#collapse{{columnNum + '-' + levelNum + '-' + i}}"><span class="glyphicon glyphicon-triangle-bottom"></span>  {{cat.category}} ({{cat.data?.length}})</a></h4>
+      <h4 class="panel-title" [style.marginLeft.px]="level * 20">
+        <a data-toggle="collapse" href="#collapse{{columnType + '-' + level + '-' + i}}">
+          <span class="glyphicon glyphicon-triangle-bottom"></span>
+            {{categoryNode.category}} ({{categoryNode.items?.length || 0}})
+          </a>
+        </h4>
     </div>
-    <div class="panel-collapse collapse" [style.margin-left.px]="(levelNum + 1) * 20" id="collapse{{columnNum + '-' + levelNum + '-' + i}}">
-      <div *ngIf="!cat.subheadings">
-        <div *ngIf="columnNum == 0">
-          <conditionsDisplay [conditions]="cat.data"></conditionsDisplay>
+    <div 
+      class="panel-collapse collapse"
+      [style.margin-left.px]="(level + 1) * 20"
+      id="collapse{{columnType + '-' + level + '-' + i}}">
+      <div *ngIf="categoryNode.isLeaf">
+        <div *ngIf="columnType == ColumnType.Conditions">
+          <conditionsDisplay [conditions]="categoryNode.items"></conditionsDisplay>
         </div>
-        <div *ngIf="columnNum == 1">
-          <observationsDisplay [observations]="cat.data"></observationsDisplay>
+        <div *ngIf="columnType == ColumnType.Observations">
+          <observationsDisplay [observations]="categoryNode.items"></observationsDisplay>
         </div>
-        <div *ngIf="columnNum == 2">    
-          <careplanDisplay [carePlans]="cat.data"></careplanDisplay>
+        <div *ngIf="columnType == ColumnType.CarePlans">    
+          <careplanDisplay [carePlans]="categoryNode.items"></careplanDisplay>
         </div>
       </div>
     </div>
-    <div *ngIf="cat.subheadings">
-      <accordionRecursion [levelData]="cat.subs" [columnNum]="columnNum" [levelNum]="levelNum + 1" [firstIteration]="0"></accordionRecursion>
+    <div *ngIf="!categoryNode.isLeaf">
+      <accordionRecursion
+        [levelNodes]="categoryNode.childLevels"
+        [columnType]="columnType"
+        [level]="level + 1">
+      </accordionRecursion>
     </div>
   </div>
 </div>

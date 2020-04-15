@@ -250,35 +250,6 @@ export class ObservationService {
     return totalCount;
   }
 
-  // Sort the Observations list (arrData) into categories, which are returned inside
-  // a single object that conforms to accordion data format
-  addCategoriesObservations(observations: Array<Observation>): Array<{ [x: string]: any }> {
-    let observationsByCategory: { [x: string]: Array<Observation> } = {};
-
-    for (let observation of observations) {
-      if (observation.hasOwnProperty('valueQuantity') && observation.hasOwnProperty('category')) {
-        let observationCategory = observation.category[0].text;
-
-        if (!observationsByCategory.hasOwnProperty(observationCategory)) {
-          observationsByCategory[observationCategory] = [];
-        }
-        observationsByCategory[observationCategory].push(observation);
-      }
-    }
-
-    let reconstructedObject: Array<{ [x: string]: any }> = [];
-    for (let ctgry of Object.keys(observationsByCategory)) {
-      reconstructedObject.push({
-        category: ctgry,
-        subheadings: false,
-        subs: null,
-        data: observationsByCategory[ctgry]
-      });
-    }
-
-    return reconstructedObject;
-  }
-
   // ====================== SCRATCH PAD FUNCTIONALITY =============================
 
   getScratchPadObservations() {

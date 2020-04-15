@@ -11,7 +11,11 @@
   <div class="column-content">
     <div class="container" *ngIf="columnState == &quot;default&quot;" style="width:auto;">
       <div *ngIf="columnState == &quot;default&quot; &amp;&amp; this.observationService.uniqueObservationsLoadFinished">
-        <accordionRecursion [levelData]="this.observationService.uniqueObservations" [columnNum]="1" [levelNum]="0" [firstIteration]="1"></accordionRecursion>
+        <accordionRecursion 
+          [items]="this.observationService.uniqueObservations"
+          [columnType]="ColumnType.Observations"
+          [level]="0">
+        </accordionRecursion>
       </div>
       <div *ngIf="!this.observationService.uniqueObservationsLoadFinished">
         <loadingAnimation></loadingAnimation>

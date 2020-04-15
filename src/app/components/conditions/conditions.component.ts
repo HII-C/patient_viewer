@@ -1,11 +1,3 @@
-/*
-  DESCRIPTION: TOP LEVEL OF THE CONDITIONS COLUMN: DOES NOT HANDLE (ANY) RENDERING; SIMPLY FOR RETRIEVING
-  DATA FROM THE SERVER, WHICH IS PASSED DOWN
-
-  Author: Steven Tran and Kaan Aksoy
-  Version: 1.2 (3/19/18)
-*/
-
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Subscription } from 'rxjs';
 import * as moment from 'moment';

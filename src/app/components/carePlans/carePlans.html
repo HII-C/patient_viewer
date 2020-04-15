@@ -11,7 +11,11 @@
   <div class="column-content">
     <div class="container" *ngIf="columnState == &quot;default&quot;" style="width:auto;">
       <div *ngIf="columnState == &quot;default&quot; &amp;&amp; carePlanLoadFinished">
-        <accordionRecursion [levelData]="carePlans" [columnNum]="2" [levelNum]="0" [firstIteration]="1"></accordionRecursion>
+        <accordionRecursion
+          [items]="carePlans"
+          [columnType]="ColumnType.CarePlans"
+          [level]="0">
+        </accordionRecursion>
       </div>
       <div *ngIf="!carePlanLoadFinished">
         <loadingAnimation></loadingAnimation>

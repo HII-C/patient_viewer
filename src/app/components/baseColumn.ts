@@ -1,5 +1,6 @@
 import { fromEvent } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
+import { ColumnType } from '../utils/columnType.enum';
 
 /**
  * Super class of all three columns in the application. Provides
@@ -7,6 +8,11 @@ import { debounceTime } from 'rxjs/operators';
  * state the column is currently in (ie, scratch pad or default).
  */
 export class BaseColumn {
+  /**
+   * Makes the ColumnType enum accessible from the template.
+   */
+  ColumnType = ColumnType;
+
   constructor() {
     // Set the initial height of the column.
     this.columnHeight = window.innerHeight - this.HEIGHT_OFFSET;

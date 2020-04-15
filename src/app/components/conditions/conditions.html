@@ -10,7 +10,11 @@
   </div>
   <div class="column-content">
     <div *ngIf="columnState == &quot;default&quot; &amp;&amp; loaded">
-      <accordionRecursion [levelData]="conditions" [columnNum]="0" [levelNum]="0" [firstIteration]="1"></accordionRecursion>
+      <accordionRecursion 
+        [items]="conditions" 
+        [columnType]="ColumnType.Conditions"
+        [level]="0">
+      </accordionRecursion>
     </div>
     <div *ngIf="!loaded">
       <loadingAnimation></loadingAnimation>

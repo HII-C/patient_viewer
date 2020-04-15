@@ -1364,7 +1364,7 @@ export class ConditionsComponent extends BaseColumn {
     &lt;/div&gt;
   &lt;/div&gt;
   &lt;div class&#x3D;&quot;column-content&quot;&gt;
-    &lt;div *ngIf&#x3D;&quot;columnState &#x3D;&#x3D; &amp;quot;default&amp;quot; &amp;amp;&amp;amp; loaded&quot;&gt;
+    &lt;div *ngIf&#x3D;&quot;columnState &#x3D;&#x3D; &#x27;default&#x27; &amp;&amp; loaded&quot;&gt;
       &lt;accordionRecursion 
         [items]&#x3D;&quot;conditions&quot; 
         [columnType]&#x3D;&quot;ColumnType.Conditions&quot;
@@ -1374,7 +1374,7 @@ export class ConditionsComponent extends BaseColumn {
     &lt;div *ngIf&#x3D;&quot;!loaded&quot;&gt;
       &lt;loadingAnimation&gt;&lt;/loadingAnimation&gt;
     &lt;/div&gt;
-    &lt;div *ngIf&#x3D;&quot;columnState &#x3D;&#x3D; &amp;quot;scratchpad&amp;quot;&quot;&gt;
+    &lt;div *ngIf&#x3D;&quot;columnState &#x3D;&#x3D; &#x27;scratchpad&#x27;&quot;&gt;
       &lt;conditionsDisplay [conditions]&#x3D;&quot;getScratchPadConditions()&quot; [scratchPadMode]&#x3D;&quot;true&quot;&gt;&lt;/conditionsDisplay&gt;
     &lt;/div&gt;
   &lt;/div&gt;
@@ -1409,7 +1409,7 @@ export class ConditionsComponent extends BaseColumn {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div id="conditions" [style.height.px]="columnHeight">  <div class="column-header">    <div class="header text-center">      <h2 style="display: inline-block;">Conditions</h2>      <div style="display: inline-block;">        <columnStateSwitcher [column]="this" [columnType]="\'conditions\'"></columnStateSwitcher>      </div>    </div>  </div>  <div class="column-content">    <div *ngIf="columnState == &quot;default&quot; &amp;&amp; loaded">      <accordionRecursion         [items]="conditions"         [columnType]="ColumnType.Conditions"        [level]="0">      </accordionRecursion>    </div>    <div *ngIf="!loaded">      <loadingAnimation></loadingAnimation>    </div>    <div *ngIf="columnState == &quot;scratchpad&quot;">      <conditionsDisplay [conditions]="getScratchPadConditions()" [scratchPadMode]="true"></conditionsDisplay>    </div>  </div>  <div id="condition-popover" style="display: none;">Testing condition popover</div>  <contextMenu #menu=""></contextMenu></div></div>'
+        var COMPONENT_TEMPLATE = '<div><div id="conditions" [style.height.px]="columnHeight">  <div class="column-header">    <div class="header text-center">      <h2 style="display: inline-block;">Conditions</h2>      <div style="display: inline-block;">        <columnStateSwitcher [column]="this" [columnType]="\'conditions\'"></columnStateSwitcher>      </div>    </div>  </div>  <div class="column-content">    <div *ngIf="columnState == \'default\' && loaded">      <accordionRecursion         [items]="conditions"         [columnType]="ColumnType.Conditions"        [level]="0">      </accordionRecursion>    </div>    <div *ngIf="!loaded">      <loadingAnimation></loadingAnimation>    </div>    <div *ngIf="columnState == \'scratchpad\'">      <conditionsDisplay [conditions]="getScratchPadConditions()" [scratchPadMode]="true"></conditionsDisplay>    </div>  </div>  <div id="condition-popover" style="display: none;">Testing condition popover</div>  <contextMenu #menu=""></contextMenu></div></div>'
     var COMPONENTS = [{'name': 'AccordionRecursion', 'selector': 'accordionRecursion'},{'name': 'AccountComponent', 'selector': 'account'},{'name': 'AppComponent', 'selector': 'app'},{'name': 'CarePlanDisplay', 'selector': 'careplanDisplay'},{'name': 'CarePlansComponent', 'selector': 'carePlans'},{'name': 'CheckboxInline', 'selector': 'checkbox-inline'},{'name': 'ColumnStateSwitcherComponent', 'selector': 'columnStateSwitcher'},{'name': 'ConditionsChartComponent', 'selector': 'conditionsChart'},{'name': 'ConditionsComponent', 'selector': 'conditions'},{'name': 'ConditionsDisplay', 'selector': 'conditionsDisplay'},{'name': 'ContextMenuComponent', 'selector': 'contextMenu'},{'name': 'FormBuilder', 'selector': 'form-builder'},{'name': 'HistoricalTrendsComponent', 'selector': 'historicalTrends'},{'name': 'HomeComponent', 'selector': 'home'},{'name': 'HoverBoxComponent', 'selector': 'hoverBox'},{'name': 'LoadingAnimation', 'selector': 'loadingAnimation'},{'name': 'MedicationsComponent', 'selector': 'medications'},{'name': 'NormalBox1', 'selector': 'normal-box-1'},{'name': 'NormalBox2', 'selector': 'normal-box-2'},{'name': 'ObservationRecursiveChart', 'selector': 'observationRecursionChart'},{'name': 'ObservationsComponent', 'selector': 'observations'},{'name': 'ObservationsDisplay', 'selector': 'observationsDisplay'},{'name': 'PatientComponent', 'selector': 'patient'},{'name': 'ScratchPadUpdate', 'selector': 'scratchpad-update'},{'name': 'SelectListSingle', 'selector': 'select-list-single'},{'name': 'TimelineComponent', 'selector': 'timelines'},{'name': 'TimelinePopupComponent', 'selector': 'timeline-popup'},{'name': 'ToolbarComponent', 'selector': 'toolbar'},{'name': 'TripleListComponent', 'selector': 'triplelist'}];
     var DIRECTIVES = [{'name': 'AutoGrowDirective', 'selector': '[autoGrow]'},{'name': 'HighlightDirective', 'selector': '[highlight]'}];
     var ACTUAL_COMPONENT = {'name': 'ConditionsComponent'};

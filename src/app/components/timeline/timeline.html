@@ -2,22 +2,23 @@
   <div class="horizTimeLine" *ngIf="patient">
       <ul class="cd-timeline-navigation" style="list-style-type: none;">
         <li>
-          <a class = "prev"></a>
+          <a class = "prev" (click)="onScrollClick()" [ngClass]="{'inactive':prevLinkInactive}"></a>
           <!-- <a href="#" (click)="onScrollClick($event, false)" class="prev" [ngClass]="{'inactive':prevLinkInactive}">Prev</a> -->
         </li>
         <div class="div" style="width:95%; height:12px; background-color:#bfbfbf; margin-right: 2px;">
           <div class="div" style="float:left; width:80%;">
             <ng-container  *ngFor="let e of encounters; let i = index">
-            <div  class="node" style="margin-left: 5%;" *ngIf = "i<10"></div>
+            <div  class="node" style="margin-left: 5%;" *ngIf = " i > 0 && i < 10"></div>
             </ng-container>
           </div> 
         </div>
         <li>
-          <a class = "next"></a>
+          <a class = "next" (click)="onScrollClick()" [ngClass]="{'inactive':nextLinkInactive}"></a>
           <!-- <a href="#" (click)="onScrollClick($event, true)" class="next" [ngClass]="{'inactive':nextLinkInactive}">Next</a> -->
         </li>
       </ul>
   </div>
 </div>
+<timeline-popup #popup=""></timeline-popup>
 
 

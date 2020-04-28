@@ -32,10 +32,10 @@ export class TimelineComponent {
       });
     }
   }
-  private onScrollClick(forward: boolean): void{
-        if(forward){
+  private onScrollClick(): void{
+        // if(forward){
 
           console.log("hello");
-        }
+        // }
   }
 }

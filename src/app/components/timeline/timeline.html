@@ -8,7 +8,7 @@
         <div class="div" style="width:95%; height:12px; background-color:#bfbfbf; margin-right: 2px;">
           <div class="div" style="float:left; width:80%;">
             <ng-container  *ngFor="let e of encounters; let i = index">
-            <div  class="node" style="margin-left: 5%;" *ngIf = " i > 0 && i < 10"></div>
+            <div  class= "node" style="margin-left: 5%;" *ngIf = " i > 0 && i < 10" (mouseenter)="popup.open(i, $event)" (mouseleave)="popup.close($event)"></div>
             </ng-container>
           </div> 
         </div>
@@ -19,6 +19,6 @@
       </ul>
   </div>
 </div>
-<timeline-popup #popup=""></timeline-popup>
+<timeline-popup [patient] = "patient" #popup=""></timeline-popup>
 
 

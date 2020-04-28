@@ -138,6 +138,10 @@
                             <li>
                                 <a href="#ngOnChanges">ngOnChanges</a>
                             </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#onScrollClick">onScrollClick</a>
+                            </li>
                         </ul>
                     </td>
                 </tr>
@@ -325,6 +329,78 @@
             </tr>
         </tbody>
     </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onScrollClick"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Private</span>
+                            onScrollClick
+                        </b>
+                        <a href="#onScrollClick"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>onScrollClick(forward: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="35"
+                            class="link-to-prism">src/app/components/timeline/timeline.component.ts:35</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>forward</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </section>
     <section>
     
@@ -403,6 +479,12 @@ export class TimelineComponent {
       });
     }
   }
+  private onScrollClick(forward: boolean): void{
+        if(forward){
+
+          console.log(&quot;hello&quot;);
+        }
+  }
 }
 </code></pre>
     </div>
@@ -410,17 +492,28 @@ export class TimelineComponent {
     <div class="tab-pane fade " id="c-templateData">
         <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;timeline&quot;&gt;
   &lt;div class&#x3D;&quot;horizTimeLine&quot; *ngIf&#x3D;&quot;patient&quot;&gt;
-    &lt;div class&#x3D;&quot;div&quot; style&#x3D;&quot;width:100%; height:12px; background-color:#bfbfbf;&quot;&gt;
-      &lt;div class&#x3D;&quot;div&quot; style&#x3D;&quot;float:left; width:95%;&quot;&gt;
-        &lt;div class&#x3D;&quot;node&quot; *ngFor&#x3D;&quot;let e of encounters; let i &#x3D; index&quot; style&#x3D;&quot;margin-left: 5%;&quot;&gt;&lt;/div&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
+      &lt;ul class&#x3D;&quot;cd-timeline-navigation&quot; style&#x3D;&quot;list-style-type: none;&quot;&gt;
+        &lt;li&gt;
+          &lt;a class &#x3D; &quot;prev&quot;&gt;&lt;/a&gt;
+          &lt;!-- &lt;a href&#x3D;&quot;#&quot; (click)&#x3D;&quot;onScrollClick($event, false)&quot; class&#x3D;&quot;prev&quot; [ngClass]&#x3D;&quot;{&#x27;inactive&#x27;:prevLinkInactive}&quot;&gt;Prev&lt;/a&gt; --&gt;
+        &lt;/li&gt;
+        &lt;div class&#x3D;&quot;div&quot; style&#x3D;&quot;width:95%; height:12px; background-color:#bfbfbf; margin-right: 2px;&quot;&gt;
+          &lt;div class&#x3D;&quot;div&quot; style&#x3D;&quot;float:left; width:80%;&quot;&gt;
+            &lt;ng-container  *ngFor&#x3D;&quot;let e of encounters; let i &#x3D; index&quot;&gt;
+            &lt;div  class&#x3D;&quot;node&quot; style&#x3D;&quot;margin-left: 5%;&quot; *ngIf &#x3D; &quot;i&lt;10&quot;&gt;&lt;/div&gt;
+            &lt;/ng-container&gt;
+          &lt;/div&gt; 
+        &lt;/div&gt;
+        &lt;li&gt;
+          &lt;a class &#x3D; &quot;next&quot;&gt;&lt;/a&gt;
+          &lt;!-- &lt;a href&#x3D;&quot;#&quot; (click)&#x3D;&quot;onScrollClick($event, true)&quot; class&#x3D;&quot;next&quot; [ngClass]&#x3D;&quot;{&#x27;inactive&#x27;:nextLinkInactive}&quot;&gt;Next&lt;/a&gt; --&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
   &lt;/div&gt;
-  &lt;div class&#x3D;&quot;displayBox&quot; id&#x3D;&quot;c1&quot; hidden&#x3D;&quot;hidden&quot;&gt;&lt;/div&gt;
-  &lt;div class&#x3D;&quot;displayBox&quot; id&#x3D;&quot;c2&quot; hidden&#x3D;&quot;hidden&quot;&gt;&lt;/div&gt;
-  &lt;div class&#x3D;&quot;displayBox&quot; id&#x3D;&quot;c3&quot; hidden&#x3D;&quot;hidden&quot;&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;timeline-popup #popup&#x3D;&quot;&quot;&gt;&lt;/timeline-popup&gt;</code></pre>
+
+
+</code></pre>
     </div>
 
 
@@ -449,7 +542,7 @@ export class TimelineComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="timeline">  <div class="horizTimeLine" *ngIf="patient">    <div class="div" style="width:100%; height:12px; background-color:#bfbfbf;">      <div class="div" style="float:left; width:95%;">        <div class="node" *ngFor="let e of encounters; let i = index" style="margin-left: 5%;"></div>      </div>    </div>  </div>  <div class="displayBox" id="c1" hidden="hidden"></div>  <div class="displayBox" id="c2" hidden="hidden"></div>  <div class="displayBox" id="c3" hidden="hidden"></div></div><timeline-popup #popup=""></timeline-popup></div>'
+        var COMPONENT_TEMPLATE = '<div><div class="timeline">  <div class="horizTimeLine" *ngIf="patient">      <ul class="cd-timeline-navigation" style="list-style-type: none;">        <li>          <a class = "prev"></a>          <!-- <a href="#" (click)="onScrollClick($event, false)" class="prev" [ngClass]="{\'inactive\':prevLinkInactive}">Prev</a> -->        </li>        <div class="div" style="width:95%; height:12px; background-color:#bfbfbf; margin-right: 2px;">          <div class="div" style="float:left; width:80%;">            <ng-container  *ngFor="let e of encounters; let i = index">            <div  class="node" style="margin-left: 5%;" *ngIf = "i<10"></div>            </ng-container>          </div>         </div>        <li>          <a class = "next"></a>          <!-- <a href="#" (click)="onScrollClick($event, true)" class="next" [ngClass]="{\'inactive\':nextLinkInactive}">Next</a> -->        </li>      </ul>  </div></div></div>'
     var COMPONENTS = [{'name': 'AccordionRecursion', 'selector': 'accordionRecursion'},{'name': 'AccountComponent', 'selector': 'account'},{'name': 'AppComponent', 'selector': 'app'},{'name': 'CarePlanDisplay', 'selector': 'careplanDisplay'},{'name': 'CarePlansComponent', 'selector': 'carePlans'},{'name': 'CheckboxInline', 'selector': 'checkbox-inline'},{'name': 'ColumnStateSwitcherComponent', 'selector': 'columnStateSwitcher'},{'name': 'ConditionsChartComponent', 'selector': 'conditionsChart'},{'name': 'ConditionsComponent', 'selector': 'conditions'},{'name': 'ConditionsDisplay', 'selector': 'conditionsDisplay'},{'name': 'ContextMenuComponent', 'selector': 'contextMenu'},{'name': 'FormBuilder', 'selector': 'form-builder'},{'name': 'HistoricalTrendsComponent', 'selector': 'historicalTrends'},{'name': 'HomeComponent', 'selector': 'home'},{'name': 'HoverBoxComponent', 'selector': 'hoverBox'},{'name': 'LoadingAnimation', 'selector': 'loadingAnimation'},{'name': 'MedicationsComponent', 'selector': 'medications'},{'name': 'NormalBox1', 'selector': 'normal-box-1'},{'name': 'NormalBox2', 'selector': 'normal-box-2'},{'name': 'ObservationRecursiveChart', 'selector': 'observationRecursionChart'},{'name': 'ObservationsComponent', 'selector': 'observations'},{'name': 'ObservationsDisplay', 'selector': 'observationsDisplay'},{'name': 'PatientComponent', 'selector': 'patient'},{'name': 'ScratchPadUpdate', 'selector': 'scratchpad-update'},{'name': 'SelectListSingle', 'selector': 'select-list-single'},{'name': 'TimelineComponent', 'selector': 'timelines'},{'name': 'TimelinePopupComponent', 'selector': 'timeline-popup'},{'name': 'ToolbarComponent', 'selector': 'toolbar'},{'name': 'TripleListComponent', 'selector': 'triplelist'}];
     var DIRECTIVES = [{'name': 'AutoGrowDirective', 'selector': '[autoGrow]'},{'name': 'HighlightDirective', 'selector': '[highlight]'}];
     var ACTUAL_COMPONENT = {'name': 'TimelineComponent'};

@@ -1,13 +1,23 @@
 <div class="timeline">
   <div class="horizTimeLine" *ngIf="patient">
-    <div class="div" style="width:100%; height:12px; background-color:#bfbfbf;">
-      <div class="div" style="float:left; width:95%;">
-        <div class="node" *ngFor="let e of encounters; let i = index" style="margin-left: 5%;"></div>
-      </div>
-    </div>
+      <ul class="cd-timeline-navigation" style="list-style-type: none;">
+        <li>
+          <a class = "prev"></a>
+          <!-- <a href="#" (click)="onScrollClick($event, false)" class="prev" [ngClass]="{'inactive':prevLinkInactive}">Prev</a> -->
+        </li>
+        <div class="div" style="width:95%; height:12px; background-color:#bfbfbf; margin-right: 2px;">
+          <div class="div" style="float:left; width:80%;">
+            <ng-container  *ngFor="let e of encounters; let i = index">
+            <div  class="node" style="margin-left: 5%;" *ngIf = "i<10"></div>
+            </ng-container>
+          </div> 
+        </div>
+        <li>
+          <a class = "next"></a>
+          <!-- <a href="#" (click)="onScrollClick($event, true)" class="next" [ngClass]="{'inactive':nextLinkInactive}">Next</a> -->
+        </li>
+      </ul>
   </div>
-  <div class="displayBox" id="c1" hidden="hidden"></div>
-  <div class="displayBox" id="c2" hidden="hidden"></div>
-  <div class="displayBox" id="c3" hidden="hidden"></div>
 </div>
-<timeline-popup #popup=""></timeline-popup>
+
+

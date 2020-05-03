@@ -12,9 +12,9 @@ import { Encounter } from '../../models/encounter.model';
 
 export class TimelinePopupComponent {
   @ViewChild('hoverBox', { static: false }) hoverBox: HoverBoxComponent;
-   datePipe: DatePipe = new DatePipe('en-US');
-  open(encounter: Encounter, event: MouseEvent): void {
-   
+  datePipe: DatePipe = new DatePipe('en-US');
+
+  open(encounter: Encounter, event: MouseEvent): void { 
     let details: Array<string> = [
       'Date: ' + this.datePipe.transform(encounter.getStartDate(),'MM-dd-yyyy').toString(),
       'Reason: ' + (encounter.getReason() || 'None')

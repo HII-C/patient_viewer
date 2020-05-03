@@ -2,7 +2,11 @@
   <div class="horizTimeLine" *ngIf="patient">
     <div class="div" style="width:100%; height:12px; background-color:#bfbfbf;">
       <div class="div" style="float:left; width:95%;">
-        <div class="node" *ngFor="let e of encounters; let i = index" style="margin-left: 5%;"></div>
+        <div class="node" 
+            *ngFor="let e of encounters; let i = index" 
+            (mouseover)="popup.open(e, $event)"
+            (mouseleave)="popup.close($event)"
+            style="margin-left: 5%;"></div>
       </div>
     </div>
   </div>
@@ -10,4 +14,4 @@
   <div class="displayBox" id="c2" hidden="hidden"></div>
   <div class="displayBox" id="c3" hidden="hidden"></div>
 </div>
-<timeline-popup #popup=""></timeline-popup>
+<timeline-popup #popup></timeline-popup>

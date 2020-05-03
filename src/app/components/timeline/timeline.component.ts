@@ -1,9 +1,10 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 
 import { EncounterService } from '../../services/encounter.service';
 
 import { Encounter } from '../../models/encounter.model';
 import { Patient } from '../../models/patient.model';
+import { TimelinePopupComponent } from '../timeline_popup/timeline_popup.component';
 
 @Component({
   selector: 'timelines',
@@ -12,6 +13,7 @@ import { Patient } from '../../models/patient.model';
 export class TimelineComponent {
   encounters: Array<Encounter> = [];
   @Input() patient: Patient;
+  @ViewChild('popup', { static: false }) popup: TimelinePopupComponent;
 
   constructor(private encounterService: EncounterService) { }
 

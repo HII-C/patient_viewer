@@ -13,8 +13,7 @@ import { Patient } from '../../models/patient.model';
 })
 
 export class TimelinePopupComponent {
-  @ViewChild('hoverBox', { static: false }) hoverBox: HoverBoxComponent;
-  @Input() patient: Patient;
+  @ViewChild('hoverBox', { static: false }) hover1: HoverBoxComponent;
 
   constructor(private encounterService: EncounterService) { }
 
@@ -23,38 +22,20 @@ export class TimelinePopupComponent {
    e: Encounter;
    details : Array<String>;
 
-   ngOnChanges(){
-     this.loadEncounters();
-   }
    
   open(index : any, event: MouseEvent): void {
-    console.log('patient3',this.patient);
-    console.log("e is here like : ",this.encounters[index]);
+    console.log("e here is : ",this.encounters[index]);
+    console.log("hover", this.hover1);
     let details: Array<String>  = [
       'Date: ' + this.datePipe.transform(this.encounters[index].getStartDate(),'MM-dd-yyyy').toString(),
       'Reason: ' + (this.encounters[index].getReason() || 'None')
    ];
- 
-    this.hoverBox.show(details, event);
-     
+    this.hover1.show(details, event);
   }
 
   close(event: MouseEvent): void {
-    this.hoverBox.hide(event);
+    this.hover1.hide(event);
   }
 
-  private loadEncounters(){
-    if (this.patient) {
-      this.encounterService.loadEncounters(this.patient).subscribe(encounters => {
-        this.encounters = this.encounters.concat(encounters);
-        console.log('Loaded ' + this.encounters.length + ' encounters.');
-        console.log(this.encounters);
-
-        encounters.forEach(enc => enc.position = enc.getLogValue()/5 + "%")
-        encounters.forEach(enc =>  console.log('Log Val pos: ' + enc.getStartDate()))
-      });
-    }
-
-  }
 }
 

@@ -13,28 +13,26 @@ import { Patient } from '../../models/patient.model';
 })
 
 export class TimelinePopupComponent {
-  @ViewChild('hoverBox', { static: false }) hover1: HoverBoxComponent;
+  @ViewChild('hoverBox', { static: false }) hoverBox: HoverBoxComponent;
 
   constructor(private encounterService: EncounterService) { }
 
    datePipe: DatePipe = new DatePipe('en-US');
-   encounters: Array<Encounter> = [];
-   e: Encounter;
    details : Array<String>;
 
    
-  open(index : any, event: MouseEvent): void {
-    console.log("e here is : ",this.encounters[index]);
-    console.log("hover", this.hover1);
+  open(encounter : Encounter, event: MouseEvent): void {
+    //console.log("e here is : ",encounter);
+   // console.log("hover", this.hoverBox);
     let details: Array<String>  = [
-      'Date: ' + this.datePipe.transform(this.encounters[index].getStartDate(),'MM-dd-yyyy').toString(),
-      'Reason: ' + (this.encounters[index].getReason() || 'None')
+      'Date: ' + this.datePipe.transform(encounter.getStartDate(),'MM-dd-yyyy').toString(),
+      'Reason: ' + (encounter.getReason() || 'None')
    ];
-    this.hover1.show(details, event);
+    this.hoverBox.show(details, event);
   }
 
   close(event: MouseEvent): void {
-    this.hover1.hide(event);
+    this.hoverBox.hide(event);
   }
 
 }

@@ -4,7 +4,7 @@ import { EncounterService } from '../../services/encounter.service';
 
 import { Encounter } from '../../models/encounter.model';
 import { Patient } from '../../models/patient.model';
-import {TimelinePopupComponent} from '../timeline_popup/timeline_popup.component';
+import { TimelinePopupComponent } from '../timeline_popup/timeline_popup.component';
 
 @Component({
   selector: 'timelines',

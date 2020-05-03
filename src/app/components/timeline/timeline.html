@@ -1,5 +1,6 @@
 <div class="timeline">
   <div class="horizTimeLine" *ngIf="patient">
+
       <ul class="cd-timeline-navigation" style="list-style-type: none;">
         <li>
           <a class = "prev" (click)="onScrollClickLeft()" [ngClass]="{'inactive': startIndex == 0 ? true : false}"></a>
@@ -15,8 +16,7 @@
           <a class = "next" (click)="onScrollClickRight()" [ngClass]="{'inactive': endIndex > encountersLength ? true : false}"></a>
         </li>
       </ul>
+
   </div>
 </div>
 <timeline-popup #popup></timeline-popup>
-
-

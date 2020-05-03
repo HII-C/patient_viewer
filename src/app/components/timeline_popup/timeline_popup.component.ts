@@ -16,15 +16,13 @@ export class TimelinePopupComponent {
   @ViewChild('hoverBox', { static: false }) hoverBox: HoverBoxComponent;
 
   constructor(private encounterService: EncounterService) { }
-
    datePipe: DatePipe = new DatePipe('en-US');
-   details : Array<String>;
 
-   
   open(encounter : Encounter, event: MouseEvent): void {
     //console.log("e here is : ",encounter);
    // console.log("hover", this.hoverBox);
     let details: Array<String>  = [
+
       'Date: ' + this.datePipe.transform(encounter.getStartDate(),'MM-dd-yyyy').toString(),
       'Reason: ' + (encounter.getReason() || 'None')
    ];

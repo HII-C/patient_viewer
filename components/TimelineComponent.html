@@ -691,7 +691,7 @@ import { EncounterService } from &#x27;../../services/encounter.service&#x27;;
 
 import { Encounter } from &#x27;../../models/encounter.model&#x27;;
 import { Patient } from &#x27;../../models/patient.model&#x27;;
-import {TimelinePopupComponent} from &#x27;../timeline_popup/timeline_popup.component&#x27;;
+import { TimelinePopupComponent } from &#x27;../timeline_popup/timeline_popup.component&#x27;;
 
 @Component({
   selector: &#x27;timelines&#x27;,
@@ -763,6 +763,7 @@ export class TimelineComponent {
     <div class="tab-pane fade " id="c-templateData">
         <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;timeline&quot;&gt;
   &lt;div class&#x3D;&quot;horizTimeLine&quot; *ngIf&#x3D;&quot;patient&quot;&gt;
+
       &lt;ul class&#x3D;&quot;cd-timeline-navigation&quot; style&#x3D;&quot;list-style-type: none;&quot;&gt;
         &lt;li&gt;
           &lt;a class &#x3D; &quot;prev&quot; (click)&#x3D;&quot;onScrollClickLeft()&quot; [ngClass]&#x3D;&quot;{&#x27;inactive&#x27;: startIndex &#x3D;&#x3D; 0 ? true : false}&quot;&gt;&lt;/a&gt;
@@ -778,12 +779,10 @@ export class TimelineComponent {
           &lt;a class &#x3D; &quot;next&quot; (click)&#x3D;&quot;onScrollClickRight()&quot; [ngClass]&#x3D;&quot;{&#x27;inactive&#x27;: endIndex &gt; encountersLength ? true : false}&quot;&gt;&lt;/a&gt;
         &lt;/li&gt;
       &lt;/ul&gt;
+
   &lt;/div&gt;
 &lt;/div&gt;
-&lt;timeline-popup #popup&gt;&lt;/timeline-popup&gt;
-
-
-</code></pre>
+&lt;timeline-popup #popup&gt;&lt;/timeline-popup&gt;</code></pre>
     </div>
 
 
